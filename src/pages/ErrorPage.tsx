@@ -1,11 +1,11 @@
 import {FC} from "react";
 import {Link} from "react-router-dom";
-import {PageHeader} from "../components/modules/contact/PageHeader.tsx";
+import {TitleHeader} from "../components/modules/about/TitleHeader.tsx";
 
 export const ErrorPage:FC = () => {
   return (
     <>
-      <PageHeader text="404" title="404" />
+      <TitleHeader title="404" />
       <div className="error padding-top padding-bottom sec-bg-color2">
         <div className="container">
           <div className="error__wrapper">
