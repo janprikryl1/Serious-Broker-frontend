@@ -1,0 +1,14 @@
+import {FC} from 'react'
+import {TitleHeader} from "../components/modules/about/TitleHeader.tsx";
+import {AboutUs} from "../components/modules/about/AboutUs.tsx";
+import {Newsletter} from "../components/modules/index/Newsletter.tsx";
+
+export const About:FC = () => {
+    return (
+        <>
+            <TitleHeader title="About Us"/>
+            <AboutUs />
+            <Newsletter/>
+        </>
+    )
+}

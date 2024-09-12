@@ -1,0 +1,46 @@
+{
+  "name": "frontend-bakalarka",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "lint": "eslint .",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^6.6.0",
+    "@fortawesome/fontawesome-svg-core": "^6.6.0",
+    "@types/swiper": "^6.0.0",
+    "aos": "^2.3.4",
+    "bootstrap": "^5.3.3",
+    "fslightbox-react": "^1.7.6",
+    "react": "^18.3.1",
+    "react-bootstrap": "^2.10.4",
+    "react-countup": "^6.5.3",
+    "react-dom": "^18.3.1",
+    "react-image": "^4.1.0",
+    "react-responsive": "^10.0.0",
+    "react-router-dom": "^6.26.2",
+    "react-scroll-to-top": "^3.0.0",
+    "swiper": "^11.1.12",
+    "vite-plugin-php": "^1.0.65"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.9.0",
+    "@types/aos": "^3.0.7",
+    "@types/fslightbox-react": "^1.7.7",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react": "^4.3.1",
+    "eslint": "^9.9.0",
+    "eslint-plugin-react-hooks": "^5.1.0-rc.0",
+    "eslint-plugin-react-refresh": "^0.4.9",
+    "globals": "^15.9.0",
+    "sass-embedded": "^1.78.0",
+    "typescript": "^5.5.3",
+    "typescript-eslint": "^8.0.1",
+    "vite": "^5.4.1"
+  }
+}
