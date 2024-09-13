@@ -11,8 +11,7 @@
          @extend %mb-60;
 
          h3 {
-             @extend %text-capitalize,
-             %mb-40;
+             @extend %mb-40;
              max-inline-size: 15ch;
 
 
@@ -31,7 +30,9 @@
              @extend %d-flex,
              %align-i-center;
              gap: 24px;
-
+             a {
+                 color: $thm-brand-color;
+             }
          }
 
          &-thumb {

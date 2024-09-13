@@ -295,8 +295,7 @@
             }
 
             a {
-                @extend %text-regular,
-                %text-capitalize;
+                @extend %text-regular;
                 @include add-prefix(transition, $transition);
                 @include font-size(16px);
                 padding: 8px 16px;
@@ -330,8 +329,7 @@
                 }
 
                 a {
-                    @extend %text-regular,
-                    %text-capitalize;
+                    @extend %text-regular;
                     @include add-prefix(transition, $transition);
                     @include font-size(16px);
                     padding: 8px 16px;

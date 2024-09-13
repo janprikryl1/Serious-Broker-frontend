@@ -1,0 +1,23 @@
+.none {
+    text-decoration: none;
+}
+
+.cta__newsletter {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+}
+
+.cta__newsletter-inner {
+    max-width: 600px; /* Optional: control the width */
+    text-align: center; /* Center the text */
+}
+
+.cta-form__inner {
+    justify-content: center; /* Center the form elements */
+}
+
+.language-switch-btn {
+    padding: 14px;
+    border-radius: 10px;
+}

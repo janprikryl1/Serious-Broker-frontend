@@ -1,8 +1,11 @@
 import {FC} from "react";
 import { Link } from "react-router-dom";
 import CountUp from "react-countup";
+import {useTranslation} from "react-i18next";
 
 export const AboutUs: FC = () => {
+  const {t} = useTranslation();
+  
   return (
       <section className="about about--style1">
         <div className="container">
@@ -16,20 +19,15 @@ export const AboutUs: FC = () => {
                 >
                   <div className="about__thumb-inner">
                     <div className="about__thumb-image floating-content">
-                      <img
-                          className="dark"
-                          src="/images/about/1.png"
-                          alt="about-image"
-                      />
                       <div className="floating-content__top-left">
                         <div className="floating-content__item">
                           <h3>
                           <span className="purecounter">
                             <CountUp end={10} duration={10} />
                           </span>
-                            Years
+                            {"+ "}{t("Years")}
                           </h3>
-                          <p>Consulting Experience</p>
+                          <p>{t("Experience")}</p>
                         </div>
                       </div>
                       <div className="floating-content__bottom-right">
@@ -40,7 +38,7 @@ export const AboutUs: FC = () => {
                           </span>
                             K+
                           </h3>
-                          <p>Satisfied Customers</p>
+                          <p>{t("Coins")}</p>
                         </div>
                       </div>
                     </div>
@@ -55,23 +53,19 @@ export const AboutUs: FC = () => {
                 >
                   <div className="about__content-inner">
                     <h2>
-                      Meet <span>our company</span> unless miss the opportunity
+                      {t("Meet")} <span>Serious broker</span> {t("now")}!
                     </h2>
 
                     <p className="mb-0">
                       Hey there! So glad you stopped by to Meet Our Company. Don't
                       miss out on this opportunity to learn about what we do and
-                      the amazing team that makes it all happen! Our company is
-                      all about creating innovative solutions and providing
-                      top-notch services to our clients. From start to finish,
-                      we're dedicated to delivering results that exceed
-                      expectations.
+                      the amazing team that makes it all happen!
                     </p>
                     <Link
-                        to="/about"
+                        to="/contact"
                         className="trk-btn trk-btn--border trk-btn--primary"
                     >
-                      Explore More
+                      {t("Contact")}
                     </Link>
                   </div>
                 </div>

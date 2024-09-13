@@ -7,20 +7,20 @@
 //*** Custom variables for theme starthite
 //*-----------------------------------
 
-$thm-brand-color:#00D094;
-$thm-brand-color-dark:#00D094;
+$thm-brand-color: #ff9d00;
+$thm-brand-color-dark: #dd9f3a;
 
-$thm-secondary-color:#0A4FD5;
-$thm-secondary-color-dark:#00D094;
+$thm-secondary-color: #dd9f3a;
+$thm-secondary-color-dark:#dd9f3a;
 
 $thm-tertiary-color:#E0FAF2;
-$thm-tertiary-color-dark:#002A1E;
+$thm-tertiary-color-dark: #986d28;
 
 $thm-tertiary-color2:#F5F7FC;
-$thm-tertiary-color2-dark:#002A1E;
+$thm-tertiary-color2-dark: #fdc872;
 
 $thm-tertiary-color3:#F5F7FC;
-$thm-tertiary-color3-dark:#0E221E;
+$thm-tertiary-color3-dark: #986d28;
 
 
 $thm-tertiary-color4:#6084E0;
@@ -28,7 +28,7 @@ $thm-tertiary-color4-dark:#6084E0;
 
 
 $thm-body-color-light:#FFFFFF;
-$thm-body-color-dark:#00150F;
+$thm-body-color-dark: #393735;
 
 $thm-bg-color-light:#52eaf0;
 $thm-bg-color-dark:#32dd79;
@@ -67,7 +67,7 @@ $thm-bg-color-2-light:#F5F8FC;
 $thm-bg-color-2-dark:#2D2C2C;
 
 $thm-bg-color-3-light:#FFFFFF;
-$thm-bg-color-3-dark:#00150F;
+$thm-bg-color-3-dark: #393735;
 
 
 // todo for rpba
@@ -114,7 +114,7 @@ $thm-form-focus-dark: #366CD5;
 
 // other colors
 $thm-wh-color:#fff;
-$thm-wh-color-dark:#1B2D29;
+$thm-wh-color-dark: #2f3336;
 
 $thm-black-color:#000;
 $thm-black-color-dark:#fff;
@@ -146,8 +146,8 @@ $thm-danger-dark: #FF0000;
     --body-color:#{$thm-body-color-light};
 
 
-    --header-bg-color: #0e352a;
-    --header-bg-color2: #093d47;
+    --header-bg-color: #986d28;
+    --header-bg-color2: #efb85f;
 
     --border-color:#{$thm-border-color-light};
     --border-color-2: #E6EDFB;
@@ -160,7 +160,7 @@ $thm-danger-dark: #FF0000;
     --border-color-9: rgba(5, 0, 26, 0.12);
     --border-color-10: rgba(184, 182, 193, 0.12);
 
-    --feature-bg-color: #00150F;
+    --feature-bg-color: #393735;
 
 
 
@@ -177,7 +177,7 @@ $thm-danger-dark: #FF0000;
     --title-color-style2:#{$thm-title-color};
     --text-color:#{$thm-text-color};
     --text-color-light:#{$thm-text-color-light};
-    --text-color-2: rgba(255, 255, 255, 0.6);
+    --text-color-2: rgb(255, 255, 255);
     --text-color-3: rgba(255, 255, 255, 0.70);
 
     // background colors
@@ -238,12 +238,7 @@ $thm-danger-dark: #FF0000;
 
 
     --tag-bg-color: #EDFFFA;
-
-
-
-
-
-
+    
     // shape colors
     --bg-shape-color: #B8CFEB;
     --bg-shape-color-trans: rgba(255, 255, 255, 0.22);
@@ -252,7 +247,7 @@ $thm-danger-dark: #FF0000;
     --bg-shape-color-trans-2: rgba(255, 255, 255, 0.22);
 
 
-    --footer-bg-color: #00150F;
+    --footer-bg-color: #9e9e9f;
     --faq-img-bg-shadow: #16d466;
     --pagination-bg-color: #E0FAF2;
 
@@ -268,7 +263,7 @@ $thm-danger-dark: #FF0000;
     --arrow-icon-color: #0A4FD5;
     --header-border-color: #EBE9E1;
     --header-border-color2: rgba(255, 255, 255, 0.12);
-    --banner2-bg-color: #0e241d;
+    --banner2-bg-color: #986d28;
     --about-img-bg-shadow: #85F2D382;
     --cta-img-bg-shadow: #45554b;
 
@@ -424,7 +419,7 @@ $thm-danger-dark: #FF0000;
     --bg-shape-color-trans-2: rgba(255, 255, 255, 0.04);
 
 
-    --footer-bg-color: #00150F;
+    --footer-bg-color: #393735;
 
     --faq-img-bg-shadow: #16d4668f;
     --pagination-bg-color: #00150F;

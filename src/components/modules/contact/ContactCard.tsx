@@ -1,7 +1,26 @@
-import { Link } from "react-router-dom";
-import {FC} from "react";
+import { FC } from "react";
+import { useTranslation } from "react-i18next";
+import { LeftFloatingContactDetailsItem } from "./LeftFloatingContactDetailsItem.tsx";
+import { SocialLinkIcon } from "./SocialLinkIcon.tsx";
+import headerImage4 from "../../../utils/icons/contact/4.png";
 
-export const ContactCard:FC = () => {
+export const ContactCard: FC = () => {
+  const { t } = useTranslation();
+
+  const handleSendMessage = (event: React.FormEvent<HTMLFormElement>) => {
+    // Prevent default form submission
+    event.preventDefault();
+
+    const formData = new FormData(event.currentTarget);
+    const name = formData.get("name");
+    const email = formData.get("email");
+    const message = formData.get("message");
+
+    console.log(name, email, message);
+
+    // You can add logic here to send the data to a server or show a success message
+  };
+
   return (
       <div className="contact padding-top padding-bottom">
         <div className="container">
@@ -10,94 +29,48 @@ export const ContactCard:FC = () => {
               <div className="col-md-5">
                 <div className="contact__info" data-aos="fade-right" data-aos-duration="1000">
                   <div className="contact__social">
-                    <h3>let’s <span>{`get in touch `}</span> with us</h3>
+                    <h3>{t("Welcome")}, <span>{t("Send us message")}</span>.</h3>
                     <ul className="social">
-                      <li className="social__item">
-                        <Link to="#" className="social__link social__link--style4 active"><i className="fab fa-facebook-f"></i></Link>
-                      </li>
-                      <li className="social__item">
-                        <Link to="#" className="social__link social__link--style4"><i className="fab fa-instagram"></i></Link>
-                      </li>
-                      <li className="social__item">
-                        <Link to="#" className="social__link social__link--style4"><i className="fa-brands fa-linkedin-in"></i></Link>
-                      </li>
-                      <li className="social__item">
-                        <Link to="#" className="social__link social__link--style4"><i className="fab fa-youtube"></i></Link>
-                      </li>
-                      <li className="social__item">
-                        <Link to="#" className="social__link social__link--style4"><i className="fab fa-twitter"></i></Link>
-                      </li>
+                      <SocialLinkIcon href="#" icon="fab fa-facebook-f" />
+                      <SocialLinkIcon href="#" icon="fab fa-instagram" />
+                      <SocialLinkIcon href="#" icon="fa-brands fa-linkedin-in" />
+                      <SocialLinkIcon href="#" icon="fab fa-youtube" />
+                      <SocialLinkIcon href="#" icon="fab fa-twitter" />
                     </ul>
                   </div>
                   <div className="contact__details">
-                    <div className="contact__item" data-aos="fade-right" data-aos-duration="1000">
-                      <div className="contact__item-inner">
-                        <div className="contact__item-thumb">
-                          <span><img src="/images/contact/1.png" alt="contact-icon" className="dark" /></span>
-                        </div>
-                        <div className="contact__item-content">
-                          <p>
-                            <a href="tel:+447441448582">+44 744 144 8582</a>
-                          </p>
-                          <p>
-                            <a href="tel:+8801313941166">+880 131 394 1166</a>
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="contact__item" data-aos="fade-right" data-aos-duration="1100">
-                      <div className="contact__item-inner">
-                        <div className="contact__item-thumb">
-                          <span><img src="/images/contact/2.png" alt="contact-icon" className="dark" /></span>
-                        </div>
-                        <div className="contact__item-content">
-                          <p>
-                            <a href="mailto:mail@thetork.com" target="_blank" rel="noopener noreferrer">mail@thetork.com</a>
-                          </p>
-                          <p>
-                            <a href="mailto:support@thetork.com" target="_blank" rel="noopener noreferrer">support@thetork.com</a>
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="contact__item" data-aos="fade-right" data-aos-duration="1200">
-                      <div className="contact__item-inner">
-                        <div className="contact__item-thumb">
-                          <span><img src="/images/contact/3.png" alt="contact-icon" className="dark" /></span>
-                        </div>
-                        <div className="contact__item-content">
-                          <p>88 Sheridan Street</p>
-                          <p>534 Victoria Trail</p>
-                        </div>
-                      </div>
-                    </div>
+                    <LeftFloatingContactDetailsItem href="tel:+440" title="+420........." />
+                    <LeftFloatingContactDetailsItem href="mailto:pri0207@vsb.cz" title="pri0207@vsb.cz" />
+                    <LeftFloatingContactDetailsItem title="VŠB - Technická univerzita Ostrava" />
                   </div>
                 </div>
               </div>
               <div className="col-md-7">
                 <div className="contact__form">
-                  <form action="/" data-aos="fade-left" data-aos-duration="1000">
+                  <form onSubmit={handleSendMessage} data-aos="fade-left" data-aos-duration="1000">
                     <div className="row g-4">
-                      <div className="col-12">
-                        <div>
-                          <label htmlFor="name" className="form-label">Name</label>
-                          <input className="form-control" type="text" id="name" placeholder="Full Name" />
+                      <div className="input-group mb-3">
+                        <div className="input-group-prepend">
+                          <span className="input-group-text" id="name">{t("Name")}</span>
                         </div>
+                        <input className="form-control" type="text" id="name" name="name" placeholder={t("Full Name")} />
                       </div>
-                      <div className="col-12">
-                        <div>
-                          <label htmlFor="email" className="form-label">Email</label>
-                          <input className="form-control" type="email" id="email" placeholder="Email here" />
+                      <div className="input-group mb-3">
+                        <div className="input-group-prepend">
+                          <span className="input-group-text" id="email">Email</span>
                         </div>
+                        <input className="form-control" type="email" id="email" name="email" placeholder={t("Email here")} />
                       </div>
-                      <div className="col-12">
-                        <div>
-                          <label htmlFor="textarea" className="form-label">Message</label>
-                          <textarea cols={30} rows={5} className="form-control" id="textarea" placeholder="Enter Your Message"></textarea>
+                      <div className="input-group">
+                        <div className="input-group-prepend">
+                          <span className="input-group-text" style={{ height: "100%" }}>{t("Message")}</span>
                         </div>
+                        <textarea cols={30} rows={5} className="form-control" id="textarea" name="message" placeholder={t("Enter Your Message")}></textarea>
                       </div>
                     </div>
-                    <button type="submit" className="trk-btn trk-btn--border trk-btn--primary mt-4 d-block">contact us now</button>
+                    <button type="submit" className="trk-btn trk-btn--border trk-btn--primary mt-4 d-block">
+                      {t("Send")}
+                    </button>
                   </form>
                 </div>
               </div>
@@ -105,9 +78,13 @@ export const ContactCard:FC = () => {
           </div>
         </div>
         <div className="contact__shape">
-          <span className="contact__shape-item contact__shape-item--1"><img src="/images/contact/4.png" alt="shape-icon" /></span>
-          <span className="contact__shape-item contact__shape-item--2"> <span></span> </span>
+        <span className="contact__shape-item contact__shape-item--1">
+          <img src={headerImage4} alt="shape-icon" />
+        </span>
+          <span className="contact__shape-item contact__shape-item--2">
+          <span></span>
+        </span>
         </div>
       </div>
   );
-}
+};

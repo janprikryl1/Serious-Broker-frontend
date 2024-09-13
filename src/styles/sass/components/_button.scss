@@ -455,7 +455,7 @@
   &.active,
   &:hover {
 
-    // Home One
+    // Index One
     &.trk-btn--primary {
       color: $thm-title-color;
       transform: translateY(-3px);
@@ -623,7 +623,7 @@
     }
 
 
-    // Home Two
+    // Index Two
     &.trk-btn--primary2 {
 
       i,
@@ -645,8 +645,7 @@
 
 .text-btn {
   @extend %align-i-center,
-  %p-rel,
-  %text-capitalize;
+  %p-rel;
   @include add-prefix(transition, $transition);
   display: inline-flex;
   font-weight: 600;

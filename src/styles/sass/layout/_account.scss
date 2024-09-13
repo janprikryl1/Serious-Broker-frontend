@@ -112,11 +112,9 @@
 
     &-forgot {
       a {
-        @extend %text-semibold,
-        %text-capitalize;
+        @extend %text-semibold;
         @include font-size(16px);
         color: $secondary-color;
-        text-decoration: underline;
       }
     }
   }
@@ -211,7 +209,6 @@
       a{
         @extend %text-regular;
         color: $secondary-color;
-        text-decoration: underline;
 
         &.style2{
           @extend %text-regular;
@@ -230,7 +227,6 @@
 
       span {
         color: $secondary-color;
-        text-decoration: underline;
       }
     }
 

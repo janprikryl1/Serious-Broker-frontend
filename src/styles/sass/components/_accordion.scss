@@ -43,8 +43,7 @@
 
     &__button {
         @extend %w-100,
-        %text-medium,
-        %text-capitalize;
+        %text-medium;
         @extend %text-start;
         @extend %d-flex;
         @extend %justify-between;

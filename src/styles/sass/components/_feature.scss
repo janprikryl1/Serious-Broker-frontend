@@ -17,7 +17,6 @@
 
                     h6 {
                         @extend %mb-0,
-                        %text-capitalize,
                         %text-semibold;
                         @include font-size(18px);
                         color: $text-color;

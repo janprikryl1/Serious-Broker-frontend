@@ -39,7 +39,7 @@
     &__team{
         @extend %p-rel;
         h5{
-            @extend %text-capitalize, %text-medium;
+            @extend %text-medium;
         }
     }
 

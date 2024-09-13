@@ -20,7 +20,7 @@
 
     &__content {
         h2 {
-            @extend %text-capitalize, %mb-10;
+            @extend %mb-10;
 
             span {
                 color: $secondary-color;

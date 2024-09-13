@@ -31,7 +31,7 @@
 
     &__action {
         a {
-            @extend %text-capitalize, %text-medium;
+            @extend %text-medium;
             @include add-prefix(transition, $transition);
             font-family: $title-font;
             color: $text-color;

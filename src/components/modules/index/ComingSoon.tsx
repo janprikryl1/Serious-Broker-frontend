@@ -4,24 +4,31 @@ import {FC} from "react";
 import SwiperCore from "swiper";
 
 const partnerData = [
-  { img: "/images/partner/light/1.png", alt: "partner logo" },
-  { img: "/images/partner/light/2.png", alt: "partner logo" },
-  { img: "/images/partner/light/3.png", alt: "partner logo" },
-  { img: "/images/partner/light/4.png", alt: "partner logo" },
-  { img: "/images/partner/light/5.png", alt: "partner logo" },
-  { img: "/images/partner/light/1.png", alt: "partner logo" },
-  { img: "/images/partner/light/2.png", alt: "partner logo" },
-  { img: "/images/partner/light/3.png", alt: "partner logo" },
-  { img: "/images/partner/light/4.png", alt: "partner logo" },
-  { img: "/images/partner/light/5.png", alt: "partner logo" },
-  { img: "/images/partner/light/1.png", alt: "partner logo" },
-  { img: "/images/partner/light/2.png", alt: "partner logo" },
-  { img: "/images/partner/light/3.png", alt: "partner logo" },
-  { img: "/images/partner/light/4.png", alt: "partner logo" },
-  { img: "/images/partner/light/5.png", alt: "partner logo" },
+  "Coming soon", // English
+  "Již brzy", // Czech
+  "Prochainement", // French
+  "Demnächst", // German
+  "Próximamente", // Spanish
+  "Comming Soon", // Portuguese
+  "In arrivo", // Italian
+  "Netrukus", // Lithuanian
+  "Vēlāk", // Latvian
+  "Brzy k dispozici", // Slovak
+  "Κυκλοφορεί σύντομα", // Greek
+  "Ssoon uitgebracht", // Dutch
+  "Coming soon", // Danish
+  "Tulossa pian", // Finnish
+  "Coming soon", // Swedish
+  "Yakında geliyor", // Turkish
+  "Скоро в продаже", // Russian
+  "Hamarosan", // Hungarian
+  "فريباً", // Persian (Farsi)
+  "곧 출시", // Korean
+  "もうすぐ発売", // Japanese
 ];
 
-export const Partner:FC = () => {
+
+export const ComingSoon:FC = () => {
   SwiperCore.use([Autoplay, Navigation, Pagination]);
 
 
@@ -33,7 +40,7 @@ export const Partner:FC = () => {
   };
 
   return (
-      <div className="partner partner--gradient">
+      <div className="partner">
         <div className="container">
           <div className="partner__wrapper">
             <Swiper
@@ -51,7 +58,7 @@ export const Partner:FC = () => {
                     <div className="swiper-slide">
                       <div className="partner__item">
                         <div className="partner__item-inner">
-                          <img src={item.img} alt={item.alt} className="dark" />
+                          {item}
                         </div>
                       </div>
                     </div>

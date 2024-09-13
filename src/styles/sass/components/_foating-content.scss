@@ -74,7 +74,7 @@
             }
 
             p {
-                @extend %text-capitalize,
+                @extend
                 %text-bold,
                 %text-left;
                 max-inline-size: 18ch;

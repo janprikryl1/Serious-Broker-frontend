@@ -140,6 +140,8 @@
 
       img {
         max-width: 100%;
+        width: 40px;
+        margin-left: 2vw;
       }
     }
 
@@ -154,11 +156,16 @@
     }
   }
 
+  .logo {
+    filter: drop-shadow(0 0 1em $brand-color);
+  }
+
   .menu-area {
     @extend %d-flex;
     @extend %align-i-center;
 
     .header-btn {
+      margin-right: 20px;
       @include breakpoint(max-md) {
         display: none;
       }
@@ -813,8 +820,7 @@
   }
 
   h2 {
-    @extend %text-capitalize,
-    %mb-0;
+    @extend %mb-0;
 
     span {
       color: $secondary-color;
@@ -945,8 +951,7 @@
 
   &__content {
     h2 {
-      @extend %text-capitalize,
-      %mb-15;
+      @extend %mb-15;
       color: $bg-white;
 
       @include breakpoint(lg) {

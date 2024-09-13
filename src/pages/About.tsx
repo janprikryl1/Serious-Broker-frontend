@@ -6,7 +6,7 @@ import {Newsletter} from "../components/modules/index/Newsletter.tsx";
 export const About:FC = () => {
     return (
         <>
-            <TitleHeader title="About Us"/>
+            <TitleHeader title="About us"/>
             <AboutUs />
             <Newsletter/>
         </>

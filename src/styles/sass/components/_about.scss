@@ -89,8 +89,6 @@
 
         &-inner {
             h2 {
-                @extend %text-capitalize;
-
                 span {
                     color: $secondary-color;
                 }
@@ -120,8 +118,7 @@
                         flex: 1;
 
                         h5 {
-                            @extend %text-capitalize,
-                            %mb-0;
+                            @extend %mb-0;
                         }
                     }
 
@@ -130,7 +127,6 @@
                         gap: 15px;
 
                         h2 {
-                            @extend %text-capitalize;
                             margin-block-end: -10px;
 
                             span {
@@ -275,8 +271,6 @@
                 }
 
                 h2 {
-                    @extend %text-capitalize;
-
                     span{
                         color: $secondary-color;
                     }

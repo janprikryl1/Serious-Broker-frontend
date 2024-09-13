@@ -124,7 +124,6 @@
     &__content {
         h5 {
             @extend %text-semibold,
-            %text-capitalize,
             %text-clamp-1;
             @include add-prefix(transition, $transition);
 

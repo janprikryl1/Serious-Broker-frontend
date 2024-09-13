@@ -5,7 +5,7 @@ import {TitleHeader} from "../components/modules/about/TitleHeader.tsx";
 export const Contact:FC = () => {
   return (
     <>
-      <TitleHeader title="About Us"/>
+      <TitleHeader title="Contact"/>
       <ContactCard />
     </>
   );

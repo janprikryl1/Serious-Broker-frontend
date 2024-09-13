@@ -81,9 +81,7 @@
         @extend %mb-35;
 
         h3 {
-            @extend %text-capitalize;
             @extend %mb-10;
-
         }
 
         p {
@@ -98,8 +96,7 @@
 
         &-content {
             h5 {
-                @extend %text-medium,
-                %text-capitalize;
+                @extend %text-medium;
             }
         }
         &-thumb{
