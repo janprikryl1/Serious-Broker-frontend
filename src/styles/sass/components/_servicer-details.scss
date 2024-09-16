@@ -23,9 +23,6 @@
 
     &__faq{
         @extend %py-20, %px-20;
-        border-radius: 16px;
-        background-color: $tertiary-color3;
-        // background-color: #F5F7FC;
 
         @include breakpoint (md){
             padding-inline: 40px;

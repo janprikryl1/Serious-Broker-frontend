@@ -4,7 +4,7 @@ export const pricingData = [
         price: 0,
         features: [
             "Free articles",
-            "Graphs",
+            "graphs",
         ],
         animation: "fade-right",
     },
@@ -13,7 +13,7 @@ export const pricingData = [
         price: "paid",
         features: [
             "Free articles",
-            "Graphs",
+            "graphs",
             "Premium articles",
             "All graphs",
         ],
@@ -25,7 +25,7 @@ export const pricingData = [
         price: "paid",
         features: [
             "Free articles",
-            "Graphs",
+            "graphs",
             "Premium articles",
             "All graphs",
             "Trading assistance",

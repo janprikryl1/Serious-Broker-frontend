@@ -1,11 +1,10 @@
 import axios from "axios";
 import {backendUrl} from "../env.ts";
-import {
-    ArticleCreateProps,
-    ArticleDetailProps,
-    ArticleProps,
-    ArticleUpdateProps
-} from "../utils/types/article/ArticleProps";
+import {ArticleProps} from "../utils/types/article/ArticleProps";
+import {RecentArticleProps} from "../utils/types/article/RecentArticleProps.ts";
+import {ArticleDetailProps} from "../utils/types/article/ArticleDetailProps.ts";
+import {ArticleCreateProps} from "../utils/types/article/ArticleCreateProps.ts";
+import {ArticleUpdateProps} from "../utils/types/article/ArticleUpdateProps.ts";
 
 
 export const getArticleDetails = async (id: string) => {
@@ -31,6 +30,21 @@ export const getAllArticles = async () => {
         /*headers:{
             Authorization: `Bearer ${token}`,
         },*/
+    });
+
+    return await res;
+}
+
+export const getRecentArticles = async () => {
+    const res = axios.get<RecentArticleProps[]>(backendUrl+"/article/recent_articles.php");
+    return await res;
+}
+
+export const getSearchArticles = async (text: string) => {
+    const res = axios.get<ArticleProps[]>(backendUrl+"/article/search_articles.php",{
+        params:{
+            text: text,
+        },
     });
 
     return await res;

@@ -598,12 +598,15 @@ $danger: var(--danger-color);
 
 
 //Template Font family
+@font-face {
+    font-family: 'IBMPlexSans';
+    src: url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+    font-weight: 300; // Tvá váha písma
+    font-style: normal;
+}
 
-$title-font:'Anek Telugu',
-sans-serif;
-
-$text-font:'Open Sans',
-sans-serif;
+$title-font: 'Ubuntu Mono', sans-serif;
+$text-font: 'Ubuntu Mono', sans-serif;
 
 //Template font sizes
 $fs-base: 16px !default;

@@ -1,0 +1,65 @@
+import {FC, useEffect, useState} from "react";
+import {TitleHeader} from "../components/modules/about/TitleHeader.tsx";
+import glossaryOfTermsImage from "../utils/icons/glossaryOfTerms/glossary_of_terms.png";
+import {Faq} from "../components/modules/articles/dictionary/Faq.tsx";
+import {useTranslation} from "react-i18next";
+import {GlossaryItem} from "../components/modules/articles/dictionary/GlossaryItem.tsx";
+import {GlossaryType} from "../utils/types/GlossaryType.ts";
+import {getGlossary} from "../api/glossaryService.ts";
+
+export const Dictionary: FC = () => {
+    const {t} = useTranslation();
+    const [glossaries, setGlossaries] = useState<GlossaryType[]>([]);
+    
+    useEffect(() => {
+      const loadGlossary = async () => {
+        try {
+            const res = await getGlossary();
+            setGlossaries(res.data);
+        } catch (error) {
+          console.error(error);
+        }
+      };
+      loadGlossary();
+    }, []);
+    
+    return (
+        <>
+            <TitleHeader title="Glossary of terms"/>
+            <div className="padding-bottom">
+                <div className="container">
+                    <div className="service-details__wrapper">
+                        <div className="service-details__item">
+                            <div className="service-details__item-inner">
+                                <div
+                                    className="service-details__thumb mb-40"
+                                    data-aos="fade-up"
+                                    data-aos-duration="800"
+                                >
+                                    <div className="service-details__thumb-inner">
+                                        <img src={glossaryOfTermsImage} alt="service-icon"/>
+                                    </div>
+                                </div>
+                                <div
+                                    className="service-details__content"
+                                    data-aos="fade-up"
+                                    data-aos-duration="900"
+                                >
+                                    <h3 className="mb-15">
+                                        {t("About Crypto")}
+                                    </h3>
+                                    <p className="mb-0">{t("We are here to help you learn about cryptocurrencies and how they work. Whether you're a beginner or an experienced trader, we've got you covered. Our articles cover a wide range of topics, from the basics of cryptocurrencies to more advanced topics.")}</p>
+                                    
+                                    {glossaries.map((glossary) => (
+                                        <GlossaryItem glossary={glossary} key={glossary.id}/>
+                                    ))}
+                                </div>
+                                <Faq/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </>
+    );
+};

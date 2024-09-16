@@ -7,8 +7,8 @@ import Swal from "sweetalert2";
 import {useTranslation} from "react-i18next";
 import {ArticleProps} from "../utils/types/article/ArticleProps.ts";
 import {ArticlesSkeleton} from "../components/modules/articles/ArticlesSkeleton.tsx";
-
-
+import {CryptoCurrenciesLinkCard} from "../components/modules/articles/CryptoCurrenciesList/CryptoCurrenciesLinkCard.tsx";
+import {DictionaryLinkCard} from "../components/modules/articles/dictionary/DictionaryLinkCard.tsx";
 
 export const Articles:FC = () => {
     const {t} = useTranslation();
@@ -17,7 +17,7 @@ export const Articles:FC = () => {
     useEffect(()=>{
         const fetchArticles = async () => {
             try{
-                const response = await getAllArticles();console.log(response.data);
+                const response = await getAllArticles();
                 setArticles(response.data);
             } catch(error){
                 Swal.fire({
@@ -37,21 +37,23 @@ export const Articles:FC = () => {
             <div className="blog padding-top padding-bottom section-bg-color">
                 <div className="container">
                     <div className="blog__wrapper">
-                       <div className="row g-4">
-                           {articles ? (
-                               articles.map((item) => (
-                                   <div key={item.id} className="col-sm-6 col-lg-4">
-                                       <ArticleCard data={item} />
-                                   </div>
-                               ))
-                           ) : (
-                               <ArticlesSkeleton />
-                           )}
+                        <div className="row g-4">
+                            <DictionaryLinkCard />
+                            <CryptoCurrenciesLinkCard />
+                            {articles ? (
+                                articles.map((item) => (
+                                    <div key={item.id} className="col-sm-6 col-lg-4">
+                                        <ArticleCard data={item}/>
+                                </div>
+                            ))
+                            ) : (
+                                <ArticlesSkeleton/>
+                            )}
                         </div>
-                        <ArticlePagiation />
+                    <ArticlePagiation/>
                     </div>
                 </div>
-        </div>
-    </>
+            </div>
+        </>
     )
 }

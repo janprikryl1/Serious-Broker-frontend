@@ -16,7 +16,7 @@ export const ArticleCard:FC<Props> = ({data}) => {
                             <Link to={`/article/${data.id}`} className="none">{data.title}</Link>
                         </h5>
 
-                        <p className="mb-15">{data.description}</p>
+                        <p className="mb-15" style={{height: 100}}>{data.description}</p>
 
                         <div className="blog__writer">
                             <div className="blog__writer-designation">

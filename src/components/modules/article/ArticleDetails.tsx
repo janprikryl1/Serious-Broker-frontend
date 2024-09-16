@@ -1,27 +1,25 @@
 import {FC, useEffect, useState} from 'react';
 import {Comments} from "./Comments.tsx";
 import CommentForm from "./CommentForm.tsx";
-import {useParams} from "react-router-dom";
 import {useTranslation} from "react-i18next";
 import {animated, useSpring} from '@react-spring/web'
-import {ArticleContent, ArticleDetailProps} from "../../../utils/types/article/ArticleProps.ts";
-import {getArticleDetails} from "../../../api/articleService.ts";
-import Swal from "sweetalert2";
 import {Button} from "react-bootstrap";
 import {FaCheckCircle} from "react-icons/fa";
 import { TbHandFinger } from "react-icons/tb";
 import { v4 as uuidv4 } from 'uuid';
 import {ArticleSkeleton} from "./ArticleSkeleton.tsx";
+import {ArticleDetailProps} from "../../../utils/types/article/ArticleDetailProps.ts";
+import {ArticleContent} from "../../../utils/types/article/ArticleContent.ts";
 
+type Props = {
+    article: ArticleDetailProps;
+    data: ArticleContent;
+}
 
-export const ArticleDetails: FC = () => {
-    const {id} = useParams();
+export const ArticleDetails: FC<Props> = ({article, data}) => {
     const {t} = useTranslation();
-    const [article, setArticle] = useState<ArticleDetailProps>();
-    const [data, setData] = useState<ArticleContent>();
     const [category, setCategory] = useState(0);
     const [task, setTask] = useState(0);
-
 
     const handleIncreaseCategory = () => {
         if (category + 1 < data!.content.length) {
@@ -67,25 +65,7 @@ export const ArticleDetails: FC = () => {
         }
     }, [task]);
     
-    useEffect(() => {
-        if (!id) return;
-        const fetchArticle = async () => {
-            try {
-                const response = await getArticleDetails(id);
-                const arrayData = response.data[0];
-                setArticle(arrayData);
-                setData(JSON.parse(arrayData.content));
-            } catch (error) {
-                Swal.fire({
-                    icon: "error",
-                    title: t("Loading failed"),
-                    text: t("Please try again later"),
-                });
-                console.error("Error fetching user details:", error);
-            }
-        };
-        fetchArticle();
-    }, []);
+
     
     return (
         <div className="blog-details__item">
@@ -93,7 +73,9 @@ export const ArticleDetails: FC = () => {
             <div className="blog-details__item-inner">
                 <div key={uuidv4()}>
                     <h1>{data.title}</h1>
-                    <br/>
+                    <p>{article.description}</p>
+                    <i>{article.changed}</i>
+                    <br/><br/>
                     <p>{data.description}</p>
                     <br/>
                     {data.subjects.map((subject) => (

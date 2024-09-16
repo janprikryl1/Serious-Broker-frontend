@@ -18,6 +18,11 @@ import "./i18n";
 import {Index} from "./pages/Index.tsx";
 import {Articles} from "./pages/Articles.tsx";
 import {Article} from "./pages/Article.tsx";
+import {Assets} from "./pages/graphs/Assets.tsx";
+import {Recommendation} from "./pages/graphs/Recommendation.tsx";
+import {CryptoCurrenciesList} from "./pages/CryptoCurrenciesList.tsx";
+import {Dictionary} from "./pages/Dictionary.tsx";
+import {SearchArticles} from "./pages/SearchArticles.tsx";
 
 // Disable automatic CSS addition for Font Awesome
 config.autoAddCss = false;
@@ -37,6 +42,11 @@ function App() {
               <Route path={"/contact"} element={<Contact/>} />
               <Route path={"/articles"} element={<Articles/>} />
               <Route path={"/article/:id"} element={<Article/>} />
+              <Route path={"/search/:text"} element={<SearchArticles />} />
+              <Route path={"/assets"} element={<Assets/>} />
+              <Route path={"/recommendation"} element={<Recommendation/>} />
+              <Route path={"/dictionary"} element={<Dictionary/>} />
+              <Route path={"/crypto-currencies-list"} element={<CryptoCurrenciesList/>} />
               <Route path="*" element={<ErrorPage/>} />
           </Routes>
           <Footer />

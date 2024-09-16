@@ -12,7 +12,6 @@
             width: 30px;
             height: 30px;
             border-radius: 50%;
-            border: 1px solid $brand-color;
             background-position: center;
             background-size: inherit;
         }
@@ -31,7 +30,7 @@
 
         &.collapsed {
             &::after {
-                border: 1.5px solid $faq-item-btn-border-color;
+                border: none;
                 background-size: inherit;
             }
         }
@@ -48,12 +47,12 @@
         @extend %d-flex;
         @extend %justify-between;
         @include font-size(20px);
-        color: $brand-color;
         font-family: $title-font;
         border: none;
-
+        
         &-content {
             flex: 1;
+            color: $title-color;
         }
 
         &.collapsed {
@@ -61,8 +60,6 @@
 
             .accordion__button {
                 &-plusicon {
-                    border: 1.5px solid $faq-item-btn-border-color;
-
                     &::before {
                         background-color: $title-color;
                     }
@@ -107,16 +104,13 @@
                     padding-block-end: 8px;
                 }
 
-
-
                 &--style2 {
-                    background-color: $tertiary-color3;
+                    background-color: $header-border-color2;
                 }
             }
 
             &__header {
                 border-bottom: none;
-
                 &:focus {
                     outline: none;
                 }
@@ -154,8 +148,6 @@
                 }
 
                 &-plusicon {
-                    border: 1.5px solid $secondary-color;
-
                     &::before {
                         @include add-prefix(transform, translateY(-50%));
                         content: "";
@@ -242,6 +234,4 @@
             }
         }
     }
-
-
 }
