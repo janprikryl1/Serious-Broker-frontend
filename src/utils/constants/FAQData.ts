@@ -1,6 +1,6 @@
-import {FAQData} from "../types/FAQType.ts";
+import {FAQType} from "../types/FAQType.ts";
 
-export const serviceFaqData: FAQData[] = [
+export const serviceFaqData: FAQType[] = [
     {
         id: 1,
         question: "What's trading? How do I start?",

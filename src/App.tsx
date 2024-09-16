@@ -23,6 +23,7 @@ import {Recommendation} from "./pages/graphs/Recommendation.tsx";
 import {CryptoCurrenciesList} from "./pages/CryptoCurrenciesList.tsx";
 import {Dictionary} from "./pages/Dictionary.tsx";
 import {SearchArticles} from "./pages/SearchArticles.tsx";
+import {CryptoCurrencyDetail} from "./pages/CryptoCurrencyDetail.tsx";
 
 // Disable automatic CSS addition for Font Awesome
 config.autoAddCss = false;
@@ -46,7 +47,8 @@ function App() {
               <Route path={"/assets"} element={<Assets/>} />
               <Route path={"/recommendation"} element={<Recommendation/>} />
               <Route path={"/dictionary"} element={<Dictionary/>} />
-              <Route path={"/crypto-currencies-list"} element={<CryptoCurrenciesList/>} />
+              <Route path={"/crypto_currencies_list"} element={<CryptoCurrenciesList/>} />
+              <Route path="/cryptocurrency_detail/:id" element={<CryptoCurrencyDetail />} />
               <Route path="*" element={<ErrorPage/>} />
           </Routes>
           <Footer />

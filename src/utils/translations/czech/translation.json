@@ -51,7 +51,7 @@
     "We are working on the instructions": "Na návodu se pracuje",
     "Comments are not allowed": "Komentáře nejsou povoleny",
     "Crypto currencies list": "Seznam kryptoměn",
-    "Interactive view of currencies with filters and charts": "Interaktivní pohled na kryptoměny s filtry a grafy",
+    "Interactive view of currencies with filters and information": "Interaktivní pohled na kryptoměny s filtry a imformacemi",
     "Glossary of terms": "Slovníček pojmů",
     "Glossary of terms in the cryptocurrency world": "Slovníček pojmů v krypto světě",
     "What's trading? How do I start?": "Co je obchodování? Jak začít?",
@@ -67,6 +67,10 @@
     "Results for: ": "Výsledky pro: ",
     "About Crypto": "O Kryptu",
     "We are here to help you learn about cryptocurrencies and how they work. Whether you're a beginner or an experienced trader, we've got you covered. Our articles cover a wide range of topics, from the basics of cryptocurrencies to more advanced topics.": "Jsme zde, abychom vám pomohli se učit o kryptoměnách. Ať jste začátečník nebo pokročilý, najdete tady vše, co potřebujete. Naše články se zaměřují naší různé témata, od základních informací o kryptoměnách po pokročilejších témata.",
+    "Show categories": "Zobrazit kategorie",
+    "Total supply: ": "Celkový počet: ",
+    "coins": "mincí",
+    "Search": "Hledat",
     
     
     "Title": "Název",
