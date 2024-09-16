@@ -3,22 +3,37 @@ import { useTranslation } from "react-i18next";
 import { LeftFloatingContactDetailsItem } from "./LeftFloatingContactDetailsItem.tsx";
 import { SocialLinkIcon } from "./SocialLinkIcon.tsx";
 import headerImage4 from "../../../utils/icons/contact/4.png";
+import { addFeedback } from "../../../api/feedbackService.ts";
+import Swal from "sweetalert2";
 
 export const ContactCard: FC = () => {
   const { t } = useTranslation();
 
-  const handleSendMessage = (event: React.FormEvent<HTMLFormElement>) => {
-    // Prevent default form submission
+  const handleSendMessage = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
     const formData = new FormData(event.currentTarget);
-    const name = formData.get("name");
-    const email = formData.get("email");
-    const message = formData.get("message");
+    const name = (formData.get("name") ?? "").toString();
+    const email = (formData.get("email") ?? "").toString();
+    const message = (formData.get("message") ?? "").toString();
 
-    console.log(name, email, message);
-
-    // You can add logic here to send the data to a server or show a success message
+    try {
+      const response = await addFeedback({ name, email, message });
+      if (response.data.message === "Message created") {
+        Swal.fire({
+          icon: "success",
+          title: t("Success"),
+          text: t("Message sent."),
+        });
+        if (event.currentTarget) event.currentTarget.reset();
+      }
+    } catch (error) {
+      console.error(error);
+      Swal.fire({
+        icon: "error",
+        title: t("Failed"),
+        text: t("Please try again later"),
+      });
+    }
   };
 
   return (

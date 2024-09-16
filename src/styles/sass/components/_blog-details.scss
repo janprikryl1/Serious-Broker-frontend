@@ -125,7 +125,7 @@
     &__commentform {
         @extend %p-30,
         %mt-40;
-        background-color: $tertiary-color3;
+        background-color: $header-border-color;
         border-radius: 16px;
 
         @include breakpoint(lg) {

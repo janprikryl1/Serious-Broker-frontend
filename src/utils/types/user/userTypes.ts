@@ -1,0 +1,41 @@
+export type UserTypes = {
+    role: string;
+    status: string,
+    superior_id?: number,
+    nickname: string,
+    email: string,
+    firstname?: string,
+    surname?: string,
+    midlename?: string,
+    title_before?: string,
+    title_after?: string,
+    firm_name?: string,
+    firm_id?: string,
+    firm_vat?: string,
+    street?: string,
+    street_number?: string,
+    town?: string,
+    country: string,
+    changed: string,
+    created: string
+}
+
+export type MembershipTypes = {
+    id: number,
+    user_id: number,
+    type: string,
+    payment: string,
+    date_begin: string,
+    date_end: string,
+    renewal: string,
+    changed: string,
+    created: string
+}
+
+export type UserMembershipDetails = {
+    user: UserTypes,
+    membership: MembershipTypes
+}
+
+
+export type UserTypesWithMembership = UserTypes & MembershipTypes;

@@ -16,6 +16,8 @@ import {useEffect} from "react";
 import {Footer} from "./components/Footer.tsx";
 import "./i18n";
 import {Index} from "./pages/Index.tsx";
+import {Articles} from "./pages/Articles.tsx";
+import {Article} from "./pages/Article.tsx";
 
 // Disable automatic CSS addition for Font Awesome
 config.autoAddCss = false;
@@ -33,6 +35,8 @@ function App() {
               <Route path={"/"} element={<Index/>} />
               <Route path={"/about"} element={<About/>} />
               <Route path={"/contact"} element={<Contact/>} />
+              <Route path={"/articles"} element={<Articles/>} />
+              <Route path={"/article/:id"} element={<Article/>} />
               <Route path="*" element={<ErrorPage/>} />
           </Routes>
           <Footer />

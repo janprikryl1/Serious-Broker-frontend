@@ -97,11 +97,8 @@ export const Header: React.FC<Props> = ({headerClass = null}) => {
                         </div>
                         <div className="menu-area">
                             <ul id="menu" className={`menu menu--style1 ${menu ? 'active' : ''}`}>
-                                <li className="menu-item-has-children">
-                                    <Link to="/articles" onClick={toggleActive} className="none">{t("Articles")}</Link>
-                                    <ul className="submenu">
-                                        <li><Link to="/assets" className="none">Ukázka</Link></li>
-                                    </ul>
+                                <li style={{marginRight: "-10px"}}>
+                                    <Link to="/articles" className="none">{t("Articles")}</Link>
                                 </li>
                                 <li className="menu-item-has-children">
                                     <Link to="/graphs" onClick={toggleActive} className="none">{t("Graphs")}</Link>
