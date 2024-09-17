@@ -24,6 +24,7 @@ import {CryptoCurrenciesList} from "./pages/CryptoCurrenciesList.tsx";
 import {Dictionary} from "./pages/Dictionary.tsx";
 import {SearchArticles} from "./pages/SearchArticles.tsx";
 import {CryptoCurrencyDetail} from "./pages/CryptoCurrencyDetail.tsx";
+import {RecommendationDetails} from "./pages/graphs/RecommendationDetails.tsx";
 
 // Disable automatic CSS addition for Font Awesome
 config.autoAddCss = false;
@@ -36,24 +37,25 @@ function App() {
     
   return (
       <BrowserRouter>
-          <Header />
+          <Header/>
           <Routes>
-              <Route path={"/"} element={<Index/>} />
-              <Route path={"/about"} element={<About/>} />
-              <Route path={"/contact"} element={<Contact/>} />
-              <Route path={"/articles"} element={<Articles/>} />
-              <Route path={"/article/:id"} element={<Article/>} />
-              <Route path={"/search/:text"} element={<SearchArticles />} />
-              <Route path={"/assets"} element={<Assets/>} />
-              <Route path={"/recommendation"} element={<Recommendation/>} />
-              <Route path={"/dictionary"} element={<Dictionary/>} />
-              <Route path={"/crypto_currencies_list"} element={<CryptoCurrenciesList/>} />
-              <Route path="/cryptocurrency_detail/:id" element={<CryptoCurrencyDetail />} />
-              <Route path="*" element={<ErrorPage/>} />
+              <Route path="/" element={<Index/>}/>
+              <Route path="/about" element={<About/>}/>
+              <Route path="/contact" element={<Contact/>}/>
+              <Route path="/articles" element={<Articles/>}/>
+              <Route path="/article/:id" element={<Article/>}/>
+              <Route path="/search/:text" element={<SearchArticles/>}/>
+              <Route path="/assets" element={<Assets/>}/>
+              <Route path="/recommendation" element={<Recommendation/>}/>
+              <Route path="/dictionary" element={<Dictionary/>}/>
+              <Route path="/crypto_currencies_list" element={<CryptoCurrenciesList/>}/>
+              <Route path="/cryptocurrency_detail/:id" element={<CryptoCurrencyDetail/>}/>
+              <Route path="/graphs/recommendation/detail/:asset_label" element={<RecommendationDetails/>}/>
+              <Route path="*" element={<ErrorPage/>}/>
           </Routes>
-          <Footer />
+          <Footer/>
       </BrowserRouter>
-      )
+  )
 }
 
 export default App

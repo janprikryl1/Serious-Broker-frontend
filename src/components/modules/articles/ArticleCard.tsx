@@ -26,6 +26,5 @@ export const ArticleCard:FC<Props> = ({data}) => {
                     </div>
                 </div>
             </div>
-
     );
 };
