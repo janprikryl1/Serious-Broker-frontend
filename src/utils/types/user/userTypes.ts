@@ -1,4 +1,4 @@
-export type UserTypes = {
+export type UserType = {
     role: string;
     status: string,
     superior_id?: number,
@@ -33,9 +33,9 @@ export type MembershipTypes = {
 }
 
 export type UserMembershipDetails = {
-    user: UserTypes,
+    user: UserType,
     membership: MembershipTypes
 }
 
 
-export type UserTypesWithMembership = UserTypes & MembershipTypes;
+export type UserTypesWithMembership = UserType & MembershipTypes;

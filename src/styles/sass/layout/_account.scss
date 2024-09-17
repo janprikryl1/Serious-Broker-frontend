@@ -13,7 +13,7 @@
       @extend %p-20;
       max-inline-size: 800px;
       margin-inline: auto;
-      background-color: $account-bg-color;
+      background-color: $bg-color;
       border-radius: 4px;
 
       @include breakpoint(sm) {

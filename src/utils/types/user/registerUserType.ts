@@ -1,3 +1,5 @@
+import {UserType} from "./userTypes.ts";
+
 export type registerUserType = {
     email: string,
     password: string,
@@ -19,8 +21,6 @@ export type registerUserType = {
 export type registerUserTypeResponse = {
     status: string;
     message: string;
-    authorisation: {
-        token: string;
-        type: string;
-    }
+    token: string;
+    user: UserType;
 }

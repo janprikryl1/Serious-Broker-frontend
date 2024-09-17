@@ -9,7 +9,6 @@ import '@fortawesome/fontawesome-svg-core/styles.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-//import './styles/css/bootstrap.min.css';
 import './styles/css/swiper-bundle.min.css';
 import './styles/sass/style.scss';
 import {useEffect} from "react";
@@ -25,6 +24,10 @@ import {Dictionary} from "./pages/Dictionary.tsx";
 import {SearchArticles} from "./pages/SearchArticles.tsx";
 import {CryptoCurrencyDetail} from "./pages/CryptoCurrencyDetail.tsx";
 import {RecommendationDetails} from "./pages/graphs/RecommendationDetails.tsx";
+import {SignIn} from "./pages/SignIn.tsx";
+import {Register} from "./pages/Register.tsx";
+import {ProviderUser} from "./utils/providers/providerUser.tsx";
+import {Profile} from "./pages/Profile.tsx";
 
 // Disable automatic CSS addition for Font Awesome
 config.autoAddCss = false;
@@ -37,23 +40,28 @@ function App() {
     
   return (
       <BrowserRouter>
-          <Header/>
-          <Routes>
-              <Route path="/" element={<Index/>}/>
-              <Route path="/about" element={<About/>}/>
-              <Route path="/contact" element={<Contact/>}/>
-              <Route path="/articles" element={<Articles/>}/>
-              <Route path="/article/:id" element={<Article/>}/>
-              <Route path="/search/:text" element={<SearchArticles/>}/>
-              <Route path="/assets" element={<Assets/>}/>
-              <Route path="/recommendation" element={<Recommendation/>}/>
-              <Route path="/dictionary" element={<Dictionary/>}/>
-              <Route path="/crypto_currencies_list" element={<CryptoCurrenciesList/>}/>
-              <Route path="/cryptocurrency_detail/:id" element={<CryptoCurrencyDetail/>}/>
-              <Route path="/graphs/recommendation/detail/:asset_label" element={<RecommendationDetails/>}/>
-              <Route path="*" element={<ErrorPage/>}/>
-          </Routes>
-          <Footer/>
+          <ProviderUser>  
+            <Header/>
+              <Routes>
+                  <Route path="/" element={<Index/>}/>
+                  <Route path="/about" element={<About/>}/>
+                  <Route path="/contact" element={<Contact/>}/>
+                  <Route path="/articles" element={<Articles/>}/>
+                  <Route path="/article/:id" element={<Article/>}/>
+                  <Route path="/search/:text" element={<SearchArticles/>}/>
+                  <Route path="/assets" element={<Assets/>}/>
+                  <Route path="/recommendation" element={<Recommendation/>}/>
+                  <Route path="/dictionary" element={<Dictionary/>}/>
+                  <Route path="/crypto_currencies_list" element={<CryptoCurrenciesList/>}/>
+                  <Route path="/cryptocurrency_detail/:id" element={<CryptoCurrencyDetail/>}/>
+                  <Route path="/graphs/recommendation/detail/:asset_label" element={<RecommendationDetails/>}/>
+                  <Route path="/sign_in" element={<SignIn/>}/>
+                  <Route path="/register" element={<Register/>}/>
+                  <Route path="/profile" element={<Profile/>}/>
+                  <Route path="*" element={<ErrorPage/>}/>
+              </Routes>
+            <Footer/>
+          </ProviderUser>
       </BrowserRouter>
   )
 }
