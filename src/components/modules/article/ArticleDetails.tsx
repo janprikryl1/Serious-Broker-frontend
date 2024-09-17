@@ -1,6 +1,6 @@
 import {FC, useEffect, useState} from 'react';
 import {Comments} from "./Comments.tsx";
-import CommentForm from "./CommentForm.tsx";
+import {CommentForm} from "./CommentForm.tsx";
 import {useTranslation} from "react-i18next";
 import {animated, useSpring} from '@react-spring/web'
 import {Button} from "react-bootstrap";
@@ -10,6 +10,8 @@ import { v4 as uuidv4 } from 'uuid';
 import {ArticleSkeleton} from "./ArticleSkeleton.tsx";
 import {ArticleDetailProps} from "../../../utils/types/article/ArticleDetailProps.ts";
 import {ArticleContent} from "../../../utils/types/article/ArticleContent.ts";
+import {useUserContext} from "../../../utils/providers/providerUser.tsx";
+import {CommentType} from "../../../utils/types/CommentType.ts";
 
 type Props = {
     article: ArticleDetailProps;
@@ -18,8 +20,10 @@ type Props = {
 
 export const ArticleDetails: FC<Props> = ({article, data}) => {
     const {t} = useTranslation();
+    const {user} = useUserContext();
     const [category, setCategory] = useState(0);
     const [task, setTask] = useState(0);
+    const [comments, setComments] = useState<CommentType[]>();
 
     const handleIncreaseCategory = () => {
         if (category + 1 < data!.content.length) {
@@ -130,8 +134,8 @@ export const ArticleDetails: FC<Props> = ({article, data}) => {
                 </div>
                 {article?.allowComments ? (
                     <>
-                        <Comments/>
-                        <CommentForm/>
+                        <Comments articleId={article.id} setComments={setComments} comments={comments}/>
+                        {user && <CommentForm articleId={article.id} setComments={setComments}/>}
                     </>
                 ) : <p>{t("Komentáře nejsou povoleny")}</p>}
             </div>

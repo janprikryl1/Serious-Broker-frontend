@@ -6,7 +6,7 @@ import {Dropdown} from "react-bootstrap";
 
 export const SignInIcon:FC = () => {
     const {t} = useTranslation();
-    const {user} = useUserContext();
+    const {user, logout} = useUserContext();
     
     return (
         user ? (
@@ -15,8 +15,8 @@ export const SignInIcon:FC = () => {
                         {user.firstname} {user.surname}
                     </Dropdown.Toggle>
                     <Dropdown.Menu>
-                        <Dropdown.Item href="#/action-2">{t("Profile")}</Dropdown.Item>
-                        <Dropdown.Item href="#/action-1">{t("Logout")}</Dropdown.Item>
+                        <Dropdown.Item href="/profile">{t("Profile")}</Dropdown.Item>
+                        <Dropdown.Item onClick={logout}>{t("Logout")}</Dropdown.Item>
                     </Dropdown.Menu>
                 </Dropdown>
             )

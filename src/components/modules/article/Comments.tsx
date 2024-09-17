@@ -1,8 +1,29 @@
-import {FC} from "react";
+import {Dispatch, FC, SetStateAction, useEffect} from "react";
 import {useTranslation} from "react-i18next";
+import {CommentType} from "../../../utils/types/CommentType.ts";
+import {getArticleComments} from "../../../api/commentsService.ts";
+import {toCzechDateFormat} from "../../../utils/constants";
 
-export const Comments:FC = () => {
+type Props = {
+    articleId: number;
+    comments?: CommentType[];
+    setComments: Dispatch<SetStateAction<CommentType[] | undefined>>;
+}
+
+export const Comments:FC<Props> = ({articleId, comments, setComments}) => {
     const { t } = useTranslation();
+
+    useEffect(() => {
+        const getComments = async () => {
+            try {
+                const result = await getArticleComments(articleId);
+                setComments(result.data);
+            } catch (error) {
+                console.error(error);
+            }
+        }
+        getComments();
+    }, [articleId]);
     
     return (
         <div className="blog-details__comment" data-aos="fade-up" data-aos-duration="1000">
@@ -13,24 +34,27 @@ export const Comments:FC = () => {
                     </div>
                     <div className="sidebar__comment-body">
                         <ul>
-                            <li className="sidebar__comment-item">
-                                <div className="comment">
-                                    <div className="comment__inner">
-                                        <div className="comment__head">
-                                            <div className="comment__author">
-                                                <div className="comment__author-info">
-                                                    <h6 className="mb-0">Chris Scott <span>19 Dec 2024 , at 04:00 pm</span></h6>
+                            {comments !== undefined && comments.length > 0 ? comments.map((comment) => (
+                                <li className="sidebar__comment-item" key={comment.id}>
+                                    <div className="comment">
+                                        <div className="comment__inner">
+                                            <div className="comment__head">
+                                                <div className="comment__author">
+                                                    <div className="comment__author-info">
+                                                        <h6 className="mb-0">
+                                                            {comment.user} <span>{toCzechDateFormat(comment.created)}</span></h6>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className="comment__body">
+                                                <div className="comment__body-inner">
+                                                    <p className="mb-0">{comment.text}</p>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div className="comment__body">
-                                            <div className="comment__body-inner">
-                                                <p className="mb-0">Example comment</p>
-                                            </div>
-                                        </div>
                                     </div>
-                                </div>
-                            </li>
+                                </li>
+                            )) : <p>{t("No comments yet")}</p>}
                         </ul>
                     </div>
                 </div>
