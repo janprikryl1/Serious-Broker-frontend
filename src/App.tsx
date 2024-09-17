@@ -28,6 +28,7 @@ import {SignIn} from "./pages/SignIn.tsx";
 import {Register} from "./pages/Register.tsx";
 import {ProviderUser} from "./utils/providers/providerUser.tsx";
 import {Profile} from "./pages/Profile.tsx";
+import {Admin} from "./pages/admin/Admin.tsx";
 
 // Disable automatic CSS addition for Font Awesome
 config.autoAddCss = false;
@@ -58,6 +59,7 @@ function App() {
                   <Route path="/sign_in" element={<SignIn/>}/>
                   <Route path="/register" element={<Register/>}/>
                   <Route path="/profile" element={<Profile/>}/>
+                  <Route path="/admin" element={<Admin />}/>
                   <Route path="*" element={<ErrorPage/>}/>
               </Routes>
             <Footer/>

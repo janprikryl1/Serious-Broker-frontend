@@ -1,5 +1,4 @@
 import axios from "axios";
-
 import {loginType} from "../utils/types/user/loginType";
 import {registerUserType, registerUserTypeResponse} from "../utils/types/user/registerUserType";
 import {backendUrl} from "../env.ts";
@@ -35,15 +34,17 @@ export const register = async (formData: registerUserType) => {
 }
 
 
-export const isAdmin = async () => {
+export const updateUserDetails = async (userDetails: UserType) => {
     const token = localStorage.getItem("token");
-    if (!token) return {status: "success", admin: false};
+    if(!token) return;
 
-    const response = await axios.get<{status: string;admin: boolean}>(backendUrl + "isAdminAPI", {
-        headers: {
-            Authorization: `Bearer ${token}`
-        }
+    const res = axios.put<registerUserTypeResponse>(backendUrl + "user/update_user_details.php",
+        userDetails, {
+        headers:{
+            Authorization2: `Bearer ${token}`,
+            'Content-Type': 'application/json'
+        },
     });
 
-    return response.data;
+    return await res;
 }
