@@ -1,6 +1,7 @@
 import axios from "axios";
 import {AssetType} from "../utils/types/asset/AssetType";
 import {backendUrl} from "../env.ts";
+import {ChartAssetBuyEnum} from "../utils/enums/ChartAssetBuyEnum.ts";
 
 export const getAllAssets = async (page: number, limit: number) => {
     const token = localStorage.getItem("token");
@@ -71,3 +72,22 @@ export const getMostProfitableAssets = async (page: number, limit: number) => {
     });
     return await response;
 };
+
+export const getAssetBuys = async (asset_id: number, period: ChartAssetBuyEnum) => {
+    const token = localStorage.getItem("token");
+    if(!token) return;
+    
+    if (period === ChartAssetBuyEnum.Week) {
+        const response = axios.get(backendUrl + "graphs/binance_index_assets/earning_in/binance_index_assets_buy_week.php", {
+            params: {
+                asset_id: asset_id
+            },
+            headers: {
+                Authorization2: `Bearer ${token}`,
+                'Content-Type':
+                    'application/json',
+            }
+        });
+        return await response;
+    }
+}

@@ -9,6 +9,7 @@ import {useTranslation} from "react-i18next";
 import {DataPointType} from "../../utils/types/asset/DataPointType.ts";
 import {AssetDetailSkeleton} from "../../components/modules/graphs/asset/AssetDetailSkeleton.tsx";
 import {AssetDetailType} from "../../utils/types/asset/AssetDetailType.ts";
+import {EarningIn} from "./earningIn/EarningIn.tsx";
 
 export const AssetGraph:FC = () => {
     const {t} = useTranslation();
@@ -22,6 +23,7 @@ export const AssetGraph:FC = () => {
         if (id === undefined) return;
         const getGraphData = async () => {
             const response = await getAssetById(parseInt(id));
+            if (!response) return;
             setGraphData(response.data.graph);
             setAsset(response.data.asset);
         }
@@ -60,6 +62,7 @@ export const AssetGraph:FC = () => {
                                             <p>Graf</p>
                                             <ChartComponent data={graphData} width={1000} height={500}
                                                             assetId={asset?.id}></ChartComponent>
+                                            {asset.id && <EarningIn id={asset.id} />}
                                         </>
                                     ) : <AssetDetailSkeleton />}
                                 </div>
