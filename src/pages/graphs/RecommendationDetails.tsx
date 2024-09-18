@@ -2,9 +2,7 @@ import {FC, useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 import {TitleHeader} from "../../components/modules/about/TitleHeader.tsx";
 import {getBinanceIndexAssetRecomBestPreviousDetail} from "../../api/GraphsService.ts";
-import {
-    BinanceIndexAssetRecomBestPreviousDetails
-} from "../../utils/types/graphs/BinanceIndexAssetRecomBestPreviousDetails.ts";
+import {BinanceIndexAssetRecomBestPreviousDetails} from "../../utils/types/graphs/BinanceIndexAssetRecomBestPreviousDetails.ts";
 import {useTranslation} from "react-i18next";
 import {RecommendationDetailsSkeleton} from "../../components/modules/graphs/RecommendationDetailsSkeleton.tsx";
 
@@ -28,9 +26,14 @@ export const RecommendationDetails:FC = () => {
     
     return (
         <>
-            {detailsData && asset_label ? (
+            {asset_label && <TitleHeader title={asset_label} />}
+            {detailsData ? (
                 <>
-                    <TitleHeader title={asset_label} />
+                    <div className="padding-bottom padding-top">
+                        <div className="container padding-bottom">
+                            <div className="service-details__wrapper">
+                                <div className="service-details__item">
+                                    <div className="service-details__item-inner">
                     <h5 className="10 style2">{detailsData.asset_label}</h5>
                     <p>{t("Quote currencies: ")}{detailsData.quote_currencies}</p>
                     <p>{t("Best of all index: ")}{detailsData.all_pos}</p>
@@ -104,6 +107,11 @@ export const RecommendationDetails:FC = () => {
                     <p>{t("Year 1 hour: ")}{detailsData.year_1_hour}</p>
                     <p>{t("Year 2 week day: ")}{detailsData.year_2_week_day}</p>
                     <p>{t("Year 2 hour: ")}{detailsData.year_2_hour}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </>
             ) : <RecommendationDetailsSkeleton />}
             

@@ -41,7 +41,7 @@ export const AssetGraph:FC = () => {
     return (
         <div>
             <TitleHeader title={asset?.index_label ?? t("GraphAssetData - details about asset and graph")}/>
-            <div className="padding-bottom">
+            <div className="padding-bottom padding-top">
                 <div className="container padding-bottom">
                     <div className="service-details__wrapper">
                         <div className="service-details__item">
@@ -59,9 +59,24 @@ export const AssetGraph:FC = () => {
                                             <p>Allocation: {asset.allocation}</p>
                                             <p>Created at: {toCzechDateFormat(asset.created)}</p>
                                             <p>Last updated at: {toCzechDateFormat(asset.changed)}</p>
-                                            <p>Graf</p>
-                                            <ChartComponent data={graphData} width={1000} height={500}
-                                                            assetId={asset?.id}></ChartComponent>
+                                            <div
+                                                className="px-30 py-45 p-rel"
+                                                style={{
+                                                    backgroundColor: "#454a4e",
+                                                    borderRadius: 24,
+                                                    width: "98%",
+                                                    margin: "0 auto",
+                                                    zIndex: 2,
+                                                    
+                                                }}
+                                                data-aos="fade-up"
+                                                data-aos-duration="1000"
+                                            >
+                                                <p>Graf</p>
+                                                <ChartComponent data={graphData} width={1000} height={500}
+                                                                assetId={asset?.id}></ChartComponent>
+                                            </div>
+
                                             {asset.id && <EarningIn id={asset.id} />}
                                         </>
                                     ) : <AssetDetailSkeleton />}
