@@ -13,7 +13,7 @@ type Props = {
     id: number;
 }
 
-type EarningInType = {
+/*type EarningInType = {
     asset_id: number;
     dim_year: number;
     dim_week_day: number;
@@ -24,16 +24,16 @@ type EarningInType = {
     close_eur: number;
     amount_eur: number;
     profit: number;
-}
+}*/
 
 
 export const EarningIn:FC<Props> = ({id}) => {
     console.log(id);
     const {t} = useTranslation();
-    const [graphData, setGraphData] = useState<EarningInType[]>();
+    //const [graphData, setGraphData] = useState<EarningInType[]>();
     const [hoveredDay, setHoveredDay] = useState<Dayjs | null>(null);
     const [value, setValue] = useState<Dayjs | null>(dayjs('2022-04-17'));
-    setGraphData([{asset_id: 1, dim_year: 2022, dim_week_day: 1, dim_hour: 1, dim_minute: 1, amount: 10, num_of_trades: 10, close_eur: 10, amount_eur: 10, profit: 10}]);
+    //setGraphData([{asset_id: 1, dim_year: 2022, dim_week_day: 1, dim_hour: 1, dim_minute: 1, amount: 10, num_of_trades: 10, close_eur: 10, amount_eur: 10, profit: 10}]);
    /* useEffect(() => {
         const getGraphAssetBuyData = async (period: ChartAssetBuyEnum) => {
             const response = await getAssetBuys(id, period);
@@ -99,11 +99,11 @@ export const EarningIn:FC<Props> = ({id}) => {
                                 <p>Ve vybraný týden: </p>
                                 <p>Za celou dobu: </p>
                                 
-                                {graphData ? graphData.map((item, index) => (
+                                {/*graphData ? graphData.map((item, index) => (
                                     <>
                                         <p key={index}>{item.profit}</p>
                                     </>
-                                )) : ""}
+                                )) : ""*/}
                             </div>
                         </div>
                     </div>
