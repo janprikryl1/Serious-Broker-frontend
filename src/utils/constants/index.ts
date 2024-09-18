@@ -1,5 +1,5 @@
 export const company = "Serious Broker";
-
+export const pageLimit = 10;
 
 //Date functions
 export const toCzechDateFormat = (dateRaw: string): string => {

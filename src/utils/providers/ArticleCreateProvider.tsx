@@ -1,4 +1,4 @@
-import React, {ChangeEvent, Dispatch, ReactNode, SetStateAction, useContext, useEffect, useState} from "react";
+/*import React, {ChangeEvent, Dispatch, ReactNode, SetStateAction, useContext, useEffect, useState} from "react";
 import {articlesURL, createArticleAPI} from "../constants";
 import {createArticle} from "../../api/articleService";
 import {ArticleCreateProps} from "../types/article/ArticleProps";
@@ -94,7 +94,7 @@ export const ArticleCreateProvider = ({children}: Props) => {
             .then(response => response.json())
             .then(data => console.log(data))
             .catch(error => console.error(error));*/
-        const article: ArticleCreateProps = {
+    /*    const article: ArticleCreateProps = {
             language: language,
             title: name,
             description: description,
@@ -177,3 +177,4 @@ export const useArticleCreate = () => {
     }
     return context;
 }
+*/

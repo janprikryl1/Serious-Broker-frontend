@@ -1,30 +1,73 @@
-/*import axios from "axios";
-import {assetGraphsAPI} from "../utils/constants";
+import axios from "axios";
 import {AssetType} from "../utils/types/asset/AssetType";
+import {backendUrl} from "../env.ts";
 
-export const getAllAssets = async () => {
-    const response = axios.get<AssetType[]>(assetGraphsAPI);
+export const getAllAssets = async (page: number, limit: number) => {
+    const token = localStorage.getItem("token");
+    if(!token) return;
+    
+    const response = axios.get<{totalPages: number; data: AssetType[]}>(backendUrl + "graphs/binance_index_assets/get_all_assets.php", {
+        params: {
+            page: page,
+            limit: limit
+        },
+        headers:{
+            Authorization2: `Bearer ${token}`,
+                'Content-Type': 'application/json'
+        },
+    });
     return await response;
 };
 
 
 export const getAssetById = async (id: number) => {
-    const response = axios.get( "/api/binance_index_assets_buys/" + id);
+    const token = localStorage.getItem("token");
+    if(!token) return;
+    
+    const response = axios.get( backendUrl + "graphs/binance_index_assets/get_asset_by_id.php", {
+        params: {
+            asset_id: id
+        },
+        headers: {
+            Authorization2: `Bearer ${token}`,
+            'Content-Type':
+                'application/json',
+        }
+    });
     return await response;
 };
 
 export const getAssetBuysBetween = async (asset_id: number, time_from: string, time_to: string) => {
-    return await axios.get(`/api/binance_index_assets_buy_between/`, {
+    const token = localStorage.getItem("token");
+    if(!token) return;
+    
+    return await axios.get(backendUrl + "graphs/binance_index_assets/binance_index_assets_buy_between.php", {
         params: {
             asset_id: asset_id,
             time_from: time_from.toString(),
             time_to: time_to.toString()
+        },
+        headers: {
+            Authorization2: `Bearer ${token}`,
+            'Content-Type':
+                'application/json',
         }
     });
 }
 
-export const getMostProfitableAssets = async () => {
-    const response = axios.get("/api/binance_indexes");
+export const getMostProfitableAssets = async (page: number, limit: number) => {
+    const token = localStorage.getItem("token");
+    if(!token) return;
+    
+    const response = axios.get(backendUrl + "/graphs/binance_index_assets/get_most_profitable_assets.php", {
+        params: {
+            page: page,
+            limit: limit
+        },
+        headers:{
+            Authorization2: `Bearer ${token}`,
+            'Content-Type': 'application/json'
+        },
+    });
     return await response;
 };
-*/

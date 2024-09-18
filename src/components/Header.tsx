@@ -5,6 +5,7 @@ import {SignInIcon} from "../headerIcons/SignInIcon.tsx";
 import {ThemeSwitchIcon} from "../headerIcons/themeSwitch/ThemeSwitchIcon.tsx";
 import {ChangeLanguageIcon} from "../headerIcons/languageSwitchIcon/ChangeLanguageIcon.tsx";
 import Logo from "../utils/icons/logo/symbol.svg"
+import {useUserContext} from "../utils/providers/providerUser.tsx";
 
 type Props = {
     headerClass?: string;
@@ -12,6 +13,7 @@ type Props = {
 
 export const Header: React.FC<Props> = ({headerClass = null}) => {
     const {t} = useTranslation();
+    const {user} = useUserContext();
     const [menu, setMenu] = useState<boolean>(false);
     const [scrollTop, setScrollTop] = useState<number>(0);
 
@@ -34,11 +36,8 @@ export const Header: React.FC<Props> = ({headerClass = null}) => {
 
     useEffect(() => {
         window.addEventListener('scroll', isSticky);
-       // router.events.on('routeChangeStart', removeActive);
-
         return () => {
             window.removeEventListener('scroll', isSticky);
-         //   router.events.off('routeChangeStart', removeActive);
         };
     });
     useEffect(()=>{
@@ -103,13 +102,18 @@ export const Header: React.FC<Props> = ({headerClass = null}) => {
                                 <li className="menu-item-has-children">
                                     <Link to="/graphs" onClick={toggleActive} className="none">{t("Graphs")}</Link>
                                     <ul className="submenu">
-                                        <li><Link to="/assets" className="none">{t("Assets")}</Link></li>
-                                        <li><Link to="/recommendation" className="none">{t("Recommendation")}</Link>
-                                        </li>
+                                        <li><Link to="/recommendation" className="none">{t("Recommendation")}</Link></li>
+                                        {user && (
+                                            <>
+                                                <li><Link to="/assets" className="none">{t("Assets")}</Link></li>
+                                                <li><Link to="/most_profitable_assets"
+                                                          className="none">{t("Most profitable assets")}</Link></li>
+                                            </>
+                                        )}
                                     </ul>
                                 </li>
                                 <li>
-                                    <Link to="contact" className="none">{t("Contact")}</Link>
+                                <Link to="contact" className="none">{t("Contact")}</Link>
                                 </li>
                                 <li>
                                     <ChangeLanguageIcon/>

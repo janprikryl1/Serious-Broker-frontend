@@ -29,6 +29,8 @@ import {Register} from "./pages/Register.tsx";
 import {ProviderUser} from "./utils/providers/providerUser.tsx";
 import {Profile} from "./pages/Profile.tsx";
 import {Admin} from "./pages/admin/Admin.tsx";
+import {MostProfitableAssets} from "./pages/graphs/MostProfitableAssets.tsx";
+import {AssetGraph} from "./pages/graphs/AssetGraph.tsx";
 
 // Disable automatic CSS addition for Font Awesome
 config.autoAddCss = false;
@@ -51,6 +53,8 @@ function App() {
                   <Route path="/article/:id" element={<Article/>}/>
                   <Route path="/search/:text" element={<SearchArticles/>}/>
                   <Route path="/assets" element={<Assets/>}/>
+                  <Route path="/most_profitable_assets" element={<MostProfitableAssets/>}/>
+                  <Route path="/asset_graph/:id" element={<AssetGraph/>}/>
                   <Route path="/recommendation" element={<Recommendation/>}/>
                   <Route path="/dictionary" element={<Dictionary/>}/>
                   <Route path="/crypto_currencies_list" element={<CryptoCurrenciesList/>}/>

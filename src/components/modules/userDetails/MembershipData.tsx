@@ -1,4 +1,4 @@
-import {FC} from "react";
+/*import {FC} from "react";
 import {Link} from "react-router-dom";
 import {CiSettings} from "react-icons/ci";
 import {useTranslation} from "react-i18next";
@@ -23,3 +23,4 @@ export const MembershipData:FC = () => {
         </>
     );
 };
+*/

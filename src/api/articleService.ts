@@ -23,13 +23,16 @@ export const getArticleDetails = async (id: string) => {
     return await res;
 }
 
-export const getAllArticles = async () => {
-    //const token = localStorage.getItem("token");
+export const getAllArticles = async (page: number) => {
+    const token = localStorage.getItem("token");
 
-    const res = axios.get<ArticleProps[]>(backendUrl+"/article/articles.php",{
-        /*headers:{
+    const res = axios.get<{totalPages: number; data: ArticleProps[]}>(backendUrl+"/article/articles.php",{
+        params:{
+            page: page,
+        },
+        headers:{
             Authorization: `Bearer ${token}`,
-        },*/
+        }
     });
 
     return await res;

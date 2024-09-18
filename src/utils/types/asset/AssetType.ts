@@ -1,8 +1,8 @@
 export type AssetType = {
-    id: number;
-    index_label: string;
-    asset_label: string;
-    allocation: number;
-    changed: string;
-    created: string;
+    id: number,
+    label: string,
+    name: string,
+    status: string,
+    created: string,
+    changed: string
 }

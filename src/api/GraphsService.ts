@@ -5,10 +5,11 @@ import {
     BinanceIndexAssetRecomBestPreviousDetails
 } from "../utils/types/graphs/BinanceIndexAssetRecomBestPreviousDetails.ts";
 
-export const getBinanceIndexAssetRecomBestPrevious = async (orderBy: string) => {
-    const res  = axios.get<BinanceIndexAssetRecomBestPreviousType[]>(backendUrl + "graphs/binance_index_asset_recom_best_previous.php", {
+export const getBinanceIndexAssetRecomBestPrevious = async (orderBy: string, page: number) => {
+    const res  = axios.get<{totalPages: number; data: BinanceIndexAssetRecomBestPreviousType[]}>(backendUrl + "graphs/binance_index_asset_recom_best_previous.php", {
         params: {
-            order_by: orderBy
+            order_by: orderBy,
+            page: page
         }
     });
     return await res;

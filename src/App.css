@@ -8,3 +8,28 @@
 .logo-dark {
   filter: brightness(0) saturate(100%) invert(58%) sepia(92%) saturate(1128%) hue-rotate(360deg) brightness(100%) contrast(101%);
 }
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.pagination-list {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.pagination-list li {
+  margin: 0 5px;
+}
+
+.pagination-ellipsis {
+  line-height: 1.5;
+}
+
+button {
+  padding: 5px 10px;
+  font-size: 14px;
+}
