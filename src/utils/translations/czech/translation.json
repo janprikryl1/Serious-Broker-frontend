@@ -121,6 +121,7 @@
     "Add Glossary Entry": "Přidat slovo",
     "Add New Glossary Entry": "Přidat nové slovo",
     "Most Profitable Assets": "Nejvyšší aktiva",
+    "Changed": "Změněno",
     
     
     
@@ -136,7 +137,7 @@
     "Date of publication": "Datum zveřejnění",
     "Date of deleting": "Datum odebrání",
     "Days": "Dny",
-    "Publication now": "Zveřejnit okamžitš",
+    "Publication now": "Zveřejnit okamžitě",
     "Publication from": "Zveřejnit od",
     "Publication to": "Zveřejnit do",
     "Publication from to": "Zveřejnit do do",
@@ -158,6 +159,9 @@
     "Coordinates of pointer": "Souřadnice najetí ukazatele",
     "Next": "Další",
     "Previous": "Předchozí",
+    "Change": "Změnit",
+    
+    
 
     "Login": "Přihlásit se",
     "Enter Email": "Zadejte email",

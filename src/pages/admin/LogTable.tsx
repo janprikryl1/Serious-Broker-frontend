@@ -37,7 +37,7 @@ export const LogTable: FC = () => {
 
     return (
         <div>
-            <div className="padding-bottom">
+            <div className="padding-bottom padding-top">
                 <div className="container">
                     <div className="service-details__wrapper">
                         <div className="service-details__item">

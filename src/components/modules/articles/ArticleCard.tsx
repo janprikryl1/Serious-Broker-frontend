@@ -5,15 +5,16 @@ import {toCzechDateFormat} from "../../../utils/constants";
 
 type Props = {
     data: ArticleProps;
+    link?: string;
 };
 
-export const ArticleCard:FC<Props> = ({data}) => {
+export const ArticleCard:FC<Props> = ({data, link = "article"}) => {
     return (
             <div className="blog__item" data-aos="fade-up" data-aos-duration="1000">
                 <div className="blog__item-inner blog__item-inner--style2">
                     <div className="blog__content">
                         <h5 className="10 style2">
-                            <Link to={`/article/${data.id}`} className="none">{data.title}</Link>
+                            <Link to={`/${link}/${data.id}`} className="none">{data.title}</Link>
                         </h5>
 
                         <p className="mb-15" style={{height: 100}}>{data.description}</p>

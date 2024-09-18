@@ -1,10 +1,10 @@
-/*import React, {ChangeEvent, Dispatch, ReactNode, SetStateAction, useContext, useEffect, useState} from "react";
-import {articlesURL, createArticleAPI} from "../constants";
+import React, { Dispatch, ReactNode, SetStateAction, useContext, useState} from "react";
 import {createArticle} from "../../api/articleService";
-import {ArticleCreateProps} from "../types/article/ArticleProps";
 import Swal from "sweetalert2";
-import {useNavigate} from "react-router-dom";
 import {useTranslation} from "react-i18next";
+import {ArticleCreateProps} from "../types/article/ArticleCreateProps.ts";
+import {SubjectType} from "../types/article/SubjectType.ts";
+import {ContentType} from "../types/article/ContentType.ts";
 
 type Props = {
     children: ReactNode;
@@ -33,20 +33,20 @@ type ArticleCreateProviderProps = {
     setPublicateFrom: Dispatch<SetStateAction<string>>;
     premiumOnly: boolean;
     setPremiumOnly: Dispatch<SetStateAction<boolean>>;
-    allowComments: boolean;
-    setAllowedComments: Dispatch<SetStateAction<boolean>>;
-    content: string;
-    setContent: Dispatch<SetStateAction<string>>;
-    subject: string;
-    setSubject: Dispatch<SetStateAction<string>>;
+    content: ContentType[];
+    setContent: Dispatch<SetStateAction<ContentType[]>>;
+    subjects: SubjectType[];
+    setSubjects: Dispatch<SetStateAction<SubjectType[]>>;
     uploadArticle: () => void;
     nextPage: () => void;
+    currentContent: number;
+    setCurrentContent: Dispatch<SetStateAction<number>>;
 }
 
 const ArticleCreateContext = React.createContext<ArticleCreateProviderProps | undefined>(undefined);
 
 export const ArticleCreateProvider = ({children}: Props) => {
-    const navigate = useNavigate();
+    //const navigate = useNavigate();
     const {t} = useTranslation();
 
     const [page, setPage] = useState(0);
@@ -60,9 +60,10 @@ export const ArticleCreateProvider = ({children}: Props) => {
     const [publicateTo, setPublicateTo] = useState("");
     const [publicateFromDays, setPublicateFromDays] = useState<number | null>(null);
     const [premiumOnly, setPremiumOnly] = useState(false);
-    const [allowComments, setAllowedComments] = useState(false);
-    const [content, setContent] = useState("");
-    const [subject, setSubject] = useState("");
+    const [content, setContent] = useState<ContentType[]>([{id: 0, title: "", tasks: [{id: 0, task: "", image: "", animateTo: {x: 0, y: 0}}]}]);
+    const [subjects, setSubjects] = useState<SubjectType[]>([{id: 0, title: "", text: ""}]);
+    const [currentContent, setCurrentContent] = useState(0);
+
 
     const nextPage = () => {
         if (page === 0) setPage(1);
@@ -94,17 +95,16 @@ export const ArticleCreateProvider = ({children}: Props) => {
             .then(response => response.json())
             .then(data => console.log(data))
             .catch(error => console.error(error));*/
-    /*    const article: ArticleCreateProps = {
+        const article: ArticleCreateProps = {
             language: language,
             title: name,
             description: description,
-            allowComments: allowComments,
             premiumOnly: premiumOnly,
             tmplateId: template,
             publicationType: publicationType,
             publicationFrom: publicateFrom,
             content: content,
-            subjects: subject,
+            subjects: subjects,
             publicatonTo: publicateTo,
             publicationFromDays: publicateFromDays
         };
@@ -117,16 +117,15 @@ export const ArticleCreateProvider = ({children}: Props) => {
                     title: t("Article created"),
                     text: t("Article created"),
                 });
-                navigate(articlesURL + "/" + response.data.id);
+                //navigate(articlesURL + "/" + response.data.id);
             }
         } catch (error) {
-            {
                 Swal.fire({
                     icon: "error",
                     title: t("Error"),
                     text: t("Error while creating article"),
                 });
-            }
+                console.error(error);
         }
     }
 
@@ -155,14 +154,14 @@ export const ArticleCreateProvider = ({children}: Props) => {
         setPublicateFrom,
         premiumOnly,
         setPremiumOnly,
-        allowComments,
-        setAllowedComments,
         content,
         setContent,
-        subject,
-        setSubject,
+        subjects,
+        setSubjects,
         uploadArticle,
-        nextPage
+        nextPage,
+        currentContent,
+        setCurrentContent
     }
 
     return (
@@ -177,4 +176,3 @@ export const useArticleCreate = () => {
     }
     return context;
 }
-*/

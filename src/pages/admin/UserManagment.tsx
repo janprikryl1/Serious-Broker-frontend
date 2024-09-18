@@ -1,8 +1,12 @@
 import {FC, useEffect, useState} from "react";
 import {UserType} from "../../utils/types/user/userTypes.ts";
 import {getAllUsers} from "../../api/adminService.ts";
+import {UserComponent} from "../../components/modules/admin/userManagment/UserComponent.tsx";
+import { v4 as uuidv4 } from 'uuid';
+import {useTranslation} from "react-i18next";
 
 export const UserManagment:FC = () => {
+    const {t} = useTranslation();
     const [users, setUsers] = useState<UserType[]>();
 
     useEffect(() => {
@@ -19,31 +23,34 @@ export const UserManagment:FC = () => {
     }, []);
     
     return (
-        <div className="blog-details padding-top padding-bottom section-bg-color">
-            <div className="container">
-                <div className="blog-details__wrapper">
-                    <div className="row g-5">
-                        <div className="col-lg-8">
-                            User managment
-                        </div>
-                        <div className="col-lg-4 col-md-8  col-12">
-                            <div className="sidebar">
-                                
-                                    
-                                
-                                    {
-                                        users && users.map((user, index) => (
-                                            <div key={index}>
-                                                {user.email}
-                                            </div>
-                                        ))
-                                    }                                 
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div>
+            <h1>{t("User management")}</h1>
+            <table className="table">
+                <thead>
+                <tr>
+                    <th scope="col">{t("Nickname")}</th>
+                    <th scope="col">{t("Email")}</th>
+                    <th scope="col">{t("Title before")}</th>
+                    <th scope="col">{t("Name")}</th>
+                    <th scope="col">{t("Middle name")}</th>
+                    <th scope="col">{t("Surname")}</th>
+                    <th scope="col">{t("Title after")}</th>
+                    <th scope="col">{t("Role")}</th>
+                    <th scope="col">{t("Firm")}</th>
+                    <th scope="col">{t("Street")}</th>
+                    <th scope="col">{t("Street number")}</th>
+                    <th scope="col">{t("Town")}</th>
+                    <th scope="col">{t("Country")}</th>
+                    <th scope="col">{t("Changed")}</th>
+                    <th scope="col">{t("Created")}</th>
+                </tr>
+                </thead>
+                <tbody>
+                {users?.map((user) => (
+                    <UserComponent user={user} key={uuidv4()}/>
+                ))}
+                </tbody>
+            </table>
         </div>
-)
+    )
 }
