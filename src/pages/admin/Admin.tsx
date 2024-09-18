@@ -1,24 +1,28 @@
-import {FC, useEffect} from "react";
-import {useUserContext} from "../../utils/providers/providerUser.tsx";
-import {useNavigate} from "react-router-dom";
+import { FC, useEffect } from "react";
+import { useUserContext } from "../../utils/providers/providerUser.tsx";
+import { useNavigate, Outlet, Navigate } from "react-router-dom";
+import { Sidebar } from "../../components/modules/admin/Sidebar.tsx";
 
-export const Admin:FC = () => {
-    const {user} = useUserContext();
+export const Admin: FC = () => {
+    const { user } = useUserContext();
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (!user || user.role !== "admin") {
+        if (!user) {
             navigate("/");
         }
     }, [user]);
-    
-    
-        return (
-            <div>
-                Admin panel
-                
 
-            </div>
-        )
-    
+    if (!user) {
+        return <Navigate to="/" />;
+    }
+
+    return (
+        <div style={{ display: 'flex' }}>
+            <Sidebar />
+            <main style={{ flex: 1, padding: '20px' }}>
+                <Outlet />
+            </main>
+        </div>
+    );
 }

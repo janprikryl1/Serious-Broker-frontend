@@ -20,7 +20,7 @@ import {Article} from "./pages/Article.tsx";
 import {Assets} from "./pages/graphs/Assets.tsx";
 import {Recommendation} from "./pages/graphs/Recommendation.tsx";
 import {CryptoCurrenciesList} from "./pages/CryptoCurrenciesList.tsx";
-import {Dictionary} from "./pages/Dictionary.tsx";
+import {Glossary} from "./pages/Glossary.tsx";
 import {SearchArticles} from "./pages/SearchArticles.tsx";
 import {CryptoCurrencyDetail} from "./pages/CryptoCurrencyDetail.tsx";
 import {RecommendationDetails} from "./pages/graphs/RecommendationDetails.tsx";
@@ -31,6 +31,11 @@ import {Profile} from "./pages/Profile.tsx";
 import {Admin} from "./pages/admin/Admin.tsx";
 import {MostProfitableAssets} from "./pages/graphs/MostProfitableAssets.tsx";
 import {AssetGraph} from "./pages/graphs/AssetGraph.tsx";
+import {UserManagment} from "./pages/admin/UserManagment.tsx";
+import {ArticleManagement} from "./pages/admin/ArticleManagement.tsx";
+import {GlossaryManagement} from "./pages/admin/GlossaryManagement.tsx";
+import {AdminOverview} from "./pages/admin/AdminOverview.tsx";
+import {LogTable} from "./pages/admin/LogTable.tsx";
 
 // Disable automatic CSS addition for Font Awesome
 config.autoAddCss = false;
@@ -56,14 +61,20 @@ function App() {
                   <Route path="/most_profitable_assets" element={<MostProfitableAssets/>}/>
                   <Route path="/asset_graph/:id" element={<AssetGraph/>}/>
                   <Route path="/recommendation" element={<Recommendation/>}/>
-                  <Route path="/dictionary" element={<Dictionary/>}/>
+                  <Route path="/dictionary" element={<Glossary/>}/>
                   <Route path="/crypto_currencies_list" element={<CryptoCurrenciesList/>}/>
                   <Route path="/cryptocurrency_detail/:id" element={<CryptoCurrencyDetail/>}/>
                   <Route path="/graphs/recommendation/detail/:asset_label" element={<RecommendationDetails/>}/>
                   <Route path="/sign_in" element={<SignIn/>}/>
                   <Route path="/register" element={<Register/>}/>
                   <Route path="/profile" element={<Profile/>}/>
-                  <Route path="/admin" element={<Admin />}/>
+                  <Route path="/admin" element={<Admin />}>
+                      <Route path="" element={<AdminOverview />} />
+                      <Route path="users" element={<UserManagment />} />
+                      <Route path="articles" element={<ArticleManagement />} />
+                      <Route path="glossary" element={<GlossaryManagement />} />
+                      <Route path="log_table" element={<LogTable />} />
+                  </Route>
                   <Route path="*" element={<ErrorPage/>}/>
               </Routes>
             <Footer/>

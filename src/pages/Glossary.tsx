@@ -7,7 +7,7 @@ import {GlossaryItem} from "../components/modules/articles/dictionary/GlossaryIt
 import {GlossaryType} from "../utils/types/GlossaryType.ts";
 import {getGlossary} from "../api/glossaryService.ts";
 
-export const Dictionary: FC = () => {
+export const Glossary: FC = () => {
     const {t} = useTranslation();
     const [glossaries, setGlossaries] = useState<GlossaryType[]>([]);
     

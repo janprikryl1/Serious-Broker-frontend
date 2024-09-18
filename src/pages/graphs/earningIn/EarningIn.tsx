@@ -33,7 +33,7 @@ export const EarningIn:FC<Props> = ({id}) => {
     const [graphData, setGraphData] = useState<EarningInType[]>();
     const [hoveredDay, setHoveredDay] = useState<Dayjs | null>(null);
     const [value, setValue] = useState<Dayjs | null>(dayjs('2022-04-17'));
-    
+    setGraphData([{asset_id: 1, dim_year: 2022, dim_week_day: 1, dim_hour: 1, dim_minute: 1, amount: 10, num_of_trades: 10, close_eur: 10, amount_eur: 10, profit: 10}]);
    /* useEffect(() => {
         const getGraphAssetBuyData = async (period: ChartAssetBuyEnum) => {
             const response = await getAssetBuys(id, period);
