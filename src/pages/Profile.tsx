@@ -1,7 +1,6 @@
 import {TitleHeader} from "../components/modules/about/TitleHeader.tsx";
 import {FC} from "react";
 import {useUserContext} from "../utils/providers/providerUser.tsx";
-import {Link} from "react-router-dom";
 import {UserDetailsProvider} from "../utils/providers/UserDetailsProvider.tsx";
 import {PersonalDataEdit} from "../components/modules/userDetails/PersonalDataEdit.tsx";
 import {LocationData} from "../components/modules/userDetails/LocationData.tsx";
@@ -12,33 +11,24 @@ import {UploadChangesButton} from "../components/modules/userDetails/UploadChang
 export const Profile: FC = () => {
     const {user} = useUserContext();
     
-    
-    return (
-        <>
-            <TitleHeader title="Profile"/>
-            {user ? (
-                <>
-                    <UserDetailsProvider>
-                        <div className="container mt-4">
-                            <div className="row justify-content-center">
-                                <div className="col-md-6">
-                                    <PersonalDataEdit />
-                                    <LocationData />
-                                    <FirmData />
-                                    <CreatedLastEdited />
-                                    <UploadChangesButton />
-                                </div>
+    if (user) {
+        return (
+            <>
+                <TitleHeader title="Profile"/>
+                <UserDetailsProvider>
+                    <div className="container mt-4">
+                        <div className="row justify-content-center">
+                            <div className="col-md-6">
+                                <PersonalDataEdit />
+                                <LocationData />
+                                <FirmData />
+                                <CreatedLastEdited />
+                                <UploadChangesButton />
                             </div>
                         </div>
-                    </UserDetailsProvider>
-                    
-                    {user.role === "admin" && (
-                        <Link to="/admin" className="none">Admin panel</Link>
-                    )}
-                </>
-            ) : <div>Loading...</div>}
-
-            
-        </>
-    );
+                    </div>
+                </UserDetailsProvider>
+            </>
+        );
+    }
 }
