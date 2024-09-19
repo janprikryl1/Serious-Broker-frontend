@@ -1,10 +1,11 @@
-import React, { Dispatch, ReactNode, SetStateAction, useContext, useState} from "react";
-import {createArticle} from "../../api/articleService";
+import React, {Dispatch, ReactNode, SetStateAction, useContext, useEffect, useState} from "react";
+import {createArticle, getArticleByIdAdmin} from "../../api/articleService";
 import Swal from "sweetalert2";
 import {useTranslation} from "react-i18next";
 import {ArticleCreateProps} from "../types/article/ArticleCreateProps.ts";
 import {SubjectType} from "../types/article/SubjectType.ts";
 import {ContentType} from "../types/article/ContentType.ts";
+import {useParams} from "react-router-dom";
 
 type Props = {
     children: ReactNode;
@@ -48,6 +49,7 @@ type ArticleCreateProviderProps = {
 const ArticleCreateContext = React.createContext<ArticleCreateProviderProps | undefined>(undefined);
 
 export const ArticleCreateProvider = ({children}: Props) => {
+    const {id} = useParams();
     //const navigate = useNavigate();
     const {t} = useTranslation();
 
@@ -67,6 +69,29 @@ export const ArticleCreateProvider = ({children}: Props) => {
     const [currentContent, setCurrentContent] = useState(0);
     const [saved, setSaved] = useState(false);
 
+    useEffect(() => {
+        if (id !== undefined) {
+            const getEditedArticle = async () => {
+                const response = await getArticleByIdAdmin(id);
+                if (!response) return;console.log(response.data);
+                setName(response.data.title);
+                    setDescription(response.data.description);
+                    setLanguage(response.data.language);
+                    setArticleTypeOption(response.data.articleType);
+                    setPublicationType(response.data.publicationType);
+                    setPublicateFrom(response.data.publicationFrom);
+                    setPublicateTo(response.data.publicationTo);
+                    setPublicateFromDays(response.data.publicationFromDays);
+                    setPremiumOnly(response.data.premiumOnly !== "0");
+                    setContent(JSON.parse(response.data.content));
+                    setSubjects(JSON.parse(response.data.subjects));
+                    setCurrentContent(0);
+                    setSaved(false);
+            }
+            getEditedArticle();
+        }
+    }, [id]);
+    
     const nextPage = () => {
         if (page === 0) setPage(1);
         else setPage(0);
@@ -89,7 +114,6 @@ export const ArticleCreateProvider = ({children}: Props) => {
         };
         try {
             const response = await createArticle(article);
-            console.log(response);
             if (response !== undefined) {
                 Swal.fire({
                     icon: "success",
@@ -106,11 +130,8 @@ export const ArticleCreateProvider = ({children}: Props) => {
                 });
                 console.error(error);
         }
-        console.log(article);
     }
-
-
-
+    
     const value = {
         page,
         setPage,

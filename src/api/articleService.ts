@@ -66,6 +66,22 @@ export const createArticle = async (article: ArticleCreateProps) => {
     return await res;
 }
 
+export const getArticleByIdAdmin = async (id: string) => {
+    const token = localStorage.getItem("token");
+    if(!token) return;
+
+    const res = axios.get<ArticleDetailProps>(backendUrl+"/article/edit_article.php",{
+        params:{
+            id: id,
+        },
+        headers:{
+            Authorization2: `Bearer ${token}`,
+        },
+    });
+
+    return await res;
+}
+
 //TODO: update article
 export const updateArticle = async (article: ArticleProps) => {
     const token = localStorage.getItem("token");
