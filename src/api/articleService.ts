@@ -11,7 +11,7 @@ export const getArticleDetails = async (id: string) => {
     //const token = localStorage.getItem("token");
     //if(!token) return;
 
-    const res = axios.get<ArticleDetailProps[]>(backendUrl+"article/article_by_id.php",{
+    const res = axios.get<ArticleDetailProps>(backendUrl+"article/article_by_id.php",{
         params:{
             id: id,
         },
@@ -54,17 +54,16 @@ export const getSearchArticles = async (text: string) => {
 }
 
 export const createArticle = async (article: ArticleCreateProps) => {
-    console.log(article);
-    /*const token = localStorage.getItem("token");
+    const token = localStorage.getItem("token");
     if(!token) return;
 
-    const res = axios.post<ArticleProps>(createArticleAPI, article, {
+    const res = axios.post<ArticleProps>(backendUrl+"/article/edit_article.php", article, {
         headers:{
-            Authorization: `Bearer ${token}`,
+            Authorization2: `Bearer ${token}`,
         },
     });
 
-    return await res;*/
+    return await res;
 }
 
 //TODO: update article
@@ -74,7 +73,7 @@ export const updateArticle = async (article: ArticleProps) => {
 
     const res = axios.put<ArticleUpdateProps>("/api/update_article", article, {
         headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization2: `Bearer ${token}`,
         },
     });
 

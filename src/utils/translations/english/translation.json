@@ -159,6 +159,16 @@
     "Next": "Next",
     "Previous": "Previous",
     "Changed": "Changed",
+    "Choose image": "Choose image",
+    "Drag 'n' drop some files here, or click to select files, max 20MB": "Drag 'n' drop some files here, or click to select files, max 20MB",
+    "Upload image": "Upload image",
+    "Success": "Success",
+    "Successfully saved image": "Successfully saved image",
+    "An error occurred while saving this image": "An error occurred while saving this image",
+    "File": "File",
+    "From": "From",
+    "To": "To",
+    
     
 
     "Login": "Login",

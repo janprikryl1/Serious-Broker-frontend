@@ -1,6 +1,7 @@
 export const company = "Serious Broker";
 export const PROTECTED_ROUTES = ['/admin', '/profile', '/assets', '/most_profitable_assets', '/asset_graph/:id'];
 export const pageLimit = 10;
+export const imageURL = "https://api.serious.broker/article/images/";
 
 //Date functions
 export const toCzechDateFormat = (dateRaw: string): string => {

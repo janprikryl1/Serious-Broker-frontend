@@ -17,7 +17,10 @@ export const ContentNavigation: FC = () => {
                         id: 0,
                         task: "",
                         image: "",
-                        animateTo: { x: 0, y: 0 },
+                        animateTo: { 
+                            from: { x: 0, y: 0 },
+                            to: { x: 0, y: 0 }
+                        },
                     },
                 ],
             };

@@ -41,6 +41,8 @@ type ArticleCreateProviderProps = {
     nextPage: () => void;
     currentContent: number;
     setCurrentContent: Dispatch<SetStateAction<number>>;
+    saved: boolean;
+    setSaved: Dispatch<SetStateAction<boolean>>;
 }
 
 const ArticleCreateContext = React.createContext<ArticleCreateProviderProps | undefined>(undefined);
@@ -60,10 +62,10 @@ export const ArticleCreateProvider = ({children}: Props) => {
     const [publicateTo, setPublicateTo] = useState("");
     const [publicateFromDays, setPublicateFromDays] = useState<number | null>(null);
     const [premiumOnly, setPremiumOnly] = useState(false);
-    const [content, setContent] = useState<ContentType[]>([{id: 0, title: "", tasks: [{id: 0, task: "", image: "", animateTo: {x: 0, y: 0}}]}]);
+    const [content, setContent] = useState<ContentType[]>([{id: 0, title: "", tasks: [{id: 0, task: "", image: "", animateTo: {from: {x: 0, y: 0}, to: {x: 0, y: 0}}}]}]);
     const [subjects, setSubjects] = useState<SubjectType[]>([{id: 0, title: "", text: ""}]);
     const [currentContent, setCurrentContent] = useState(0);
-
+    const [saved, setSaved] = useState(false);
 
     const nextPage = () => {
         if (page === 0) setPage(1);
@@ -71,42 +73,19 @@ export const ArticleCreateProvider = ({children}: Props) => {
     }
 
     const uploadArticle = async () => {
-        /*fetch(createArticleAPI, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                //author_id: 1,
-                language: language,
-                title: name,
-                description: description,
-                allowComments: allowComments,
-                premiumOnly: premiumOnly,
-                tmplateId: template,
-                publicationType: publicationType,
-                publicationFrom: publicateFrom,
-                content: content,
-                subjects: subject,
-                publicatonTo: publicateTo,
-                publicationFromDays: publicateFromDays
-            })
-        })
-            .then(response => response.json())
-            .then(data => console.log(data))
-            .catch(error => console.error(error));*/
         const article: ArticleCreateProps = {
             language: language,
             title: name,
             description: description,
             premiumOnly: premiumOnly,
-            tmplateId: template,
+            templateId: template,
             publicationType: publicationType,
             publicationFrom: publicateFrom,
-            content: content,
-            subjects: subjects,
-            publicatonTo: publicateTo,
-            publicationFromDays: publicateFromDays
+            content: JSON.stringify(content),
+            subjects: JSON.stringify(subjects),
+            publicationTo: publicateTo,
+            publicationFromDays: publicateFromDays,
+            allowComments: true
         };
         try {
             const response = await createArticle(article);
@@ -117,8 +96,8 @@ export const ArticleCreateProvider = ({children}: Props) => {
                     title: t("Article created"),
                     text: t("Article created"),
                 });
-                //navigate(articlesURL + "/" + response.data.id);
             }
+            setSaved(true);
         } catch (error) {
                 Swal.fire({
                     icon: "error",
@@ -127,6 +106,7 @@ export const ArticleCreateProvider = ({children}: Props) => {
                 });
                 console.error(error);
         }
+        console.log(article);
     }
 
 
@@ -161,7 +141,9 @@ export const ArticleCreateProvider = ({children}: Props) => {
         uploadArticle,
         nextPage,
         currentContent,
-        setCurrentContent
+        setCurrentContent,
+        saved,
+        setSaved
     }
 
     return (

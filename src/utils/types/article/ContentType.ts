@@ -12,6 +12,12 @@ type ContentSection = {
 }
 
 type ContentAnimation = {
-    x: number;
-    y: number;
+    from: {
+        x: number;
+        y: number;
+    };
+    to: {
+        x: number;
+        y: number;
+    };
 }

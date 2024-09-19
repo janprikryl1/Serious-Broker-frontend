@@ -160,7 +160,15 @@
     "Next": "Další",
     "Previous": "Předchozí",
     "Change": "Změnit",
-    
+    "Choose image": "Vybrat obrázek",
+    "Drag 'n' drop some files here, or click to select files, max 20MB": "Přetáhněte sem soubory nebo klikněte pro výběr souborů, max 20MB",
+    "Upload image": "Nahrát obrázek",
+    "Success": "Úspěch",
+    "Successfully saved image": "Úspěšně uložený obrázek",
+    "An error occurred while saving this image": "Chyba při ukládání tohoto obrázku",
+    "File": "Soubor",
+    "From": "Z",
+    "To": "Do",
     
 
     "Login": "Přihlásit se",
