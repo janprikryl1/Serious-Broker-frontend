@@ -176,7 +176,8 @@
     "Article deleted successfully": "Article deleted successfully",
     "Error while deleting article": "Error while deleting article",
     "Article created": "Article created",
-    
+    "new": "New",
+    "article": "Article",
 
     "Login": "Login",
     "Enter Email": "Enter Email",

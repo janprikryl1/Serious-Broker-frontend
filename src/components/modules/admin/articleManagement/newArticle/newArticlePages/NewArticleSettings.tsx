@@ -58,7 +58,7 @@ export const NewArticleSettings:FC = () => {
 
             <InputGroup className="mb-3">
                 <InputGroup.Text>{t("Article type")}</InputGroup.Text>
-                <Form.Select value={articleTypeOption} onChange={(e) => setArticleTypeOption(parseInt(e.target.value))}>
+                <Form.Select value={articleTypeOption} onChange={(e) => setArticleTypeOption(e.target.value as "article" | "new")}>
                     {articleTypes.map((articleType) => (
                         <option value={articleType.id} key={articleType.id}>{articleType.title}</option>
                     ))}

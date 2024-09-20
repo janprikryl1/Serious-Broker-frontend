@@ -1,4 +1,4 @@
 export const articleTypes = [
-    {id: 0, title: "Výukový materiál"},
-    {id: 1, title: "Aktualita"}
+    {id: "article", title: "Výukový materiál"},
+    {id: "new", title: "Aktualita"}
 ]

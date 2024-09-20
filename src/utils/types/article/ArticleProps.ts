@@ -8,4 +8,5 @@ export type ArticleProps = {
     created: string;
     changed: string;
     allowComments: string;
+    articleTypeOption: string;
 }

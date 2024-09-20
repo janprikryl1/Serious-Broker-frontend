@@ -23,8 +23,8 @@ type ArticleCreateProviderProps = {
     setDescription: Dispatch<SetStateAction<string>>;
     language: string;
     setLanguage: Dispatch<SetStateAction<string>>;
-    articleTypeOption: number;
-    setArticleTypeOption: Dispatch<SetStateAction<number>>;
+    articleTypeOption: "article" | "new";
+    setArticleTypeOption: Dispatch<SetStateAction<"article" | "new">>;
     publicationType: number;
     setPublicationType: Dispatch<SetStateAction<number>>;
     publicateFrom: string;
@@ -63,7 +63,7 @@ export const ArticleCreateProvider = ({children}: Props) => {
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
     const [language, setLanguage] = useState("cs");
-    const [articleTypeOption, setArticleTypeOption] = useState(0);
+    const [articleTypeOption, setArticleTypeOption] = useState<"article" | "new">("article");
     const [publicationType, setPublicationType] = useState(0);
     const [publicateFrom, setPublicateFrom] = useState("");
     const [publicateTo, setPublicateTo] = useState("");
@@ -85,7 +85,7 @@ export const ArticleCreateProvider = ({children}: Props) => {
                 setName(response.data.title);
                 setDescription(response.data.description);
                 setLanguage(response.data.language);
-                setArticleTypeOption(response.data.articleType);
+                setArticleTypeOption(response.data.articleTypeOption as "article" | "new");
                 setPublicationType(response.data.publicationType);
                 setPublicateFrom(response.data.publicationFrom);
                 setPublicateTo(response.data.publicationTo);
@@ -139,7 +139,8 @@ export const ArticleCreateProvider = ({children}: Props) => {
             publicationTo: publicateTo,
             publicationFromDays: publicateFromDays,
             allowComments: allowComments,
-            titleImage: titleImage
+            titleImage: titleImage,
+            articleTypeOption: articleTypeOption
         };
         try {
             const response = await createArticle(article);
@@ -177,7 +178,8 @@ export const ArticleCreateProvider = ({children}: Props) => {
             publicationTo: publicateTo,
             publicationFromDays: publicateFromDays,
             allowComments: allowComments,
-            titleImage: titleImage
+            titleImage: titleImage,
+            articleTypeOption: articleTypeOption
         };
         try {
             const response = await updateArticle(article);
@@ -243,7 +245,7 @@ export const ArticleCreateProvider = ({children}: Props) => {
         titleImage,
         setTitleImage,
         allowComments,
-        setAllowComments
+        setAllowComments,
     }
 
     return (

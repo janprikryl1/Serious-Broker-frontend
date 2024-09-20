@@ -8,7 +8,7 @@ export type ArticleDetailProps = ArticleProps & {
     publicationTo: string;
     publicationFromDays: number;
     premiumOnly: string;
-    articleType: number;
+    articleTypeOption: string;
     templateId: string;
     titleImage: string;
 }
