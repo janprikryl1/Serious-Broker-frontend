@@ -3,10 +3,11 @@ import {Link} from "react-router-dom";
 import {ArticleProps} from "../../../../utils/types/article/ArticleProps.ts";
 import {toCzechDateFormat} from "../../../../utils/constants";
 import {Button} from "react-bootstrap";
-import {FaComment, FaRegTrashAlt} from "react-icons/fa";
+import {FaComment, FaRegTrashAlt, FaShareAlt} from "react-icons/fa";
 import Swal from "sweetalert2";
 import {useTranslation} from "react-i18next";
-import {deleteArticle} from "../../../../api/articleService.ts"; // Import the trash icon
+import {deleteArticle} from "../../../../api/articleService.ts";
+import {MdOutlineTranslate} from "react-icons/md"; // Import the trash icon
 
 type Props = {
     data: ArticleProps;
@@ -68,6 +69,22 @@ export const ArticleAdminCard: FC<Props> = ({data, link = "article", setArticles
                                     </Button>
                                 </Link>
                             )}
+                            <Link to={`/admin/article/share/${data.id}`}>
+                                <Button
+                                    variant="success"
+                                    className="ms-2 p-1"
+                                >
+                                    <FaShareAlt />
+                                </Button>
+                            </Link>
+                            <Link to={`/admin/article/translate/${data.id}`}>
+                                <Button
+                                    variant="secondary"
+                                    className="ms-2 p-1"
+                                >
+                                    <MdOutlineTranslate />
+                                </Button>
+                            </Link>
                         </div>
                     </div>
                 </div>
