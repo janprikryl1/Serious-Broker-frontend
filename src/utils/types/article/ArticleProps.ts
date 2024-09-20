@@ -7,4 +7,5 @@ export type ArticleProps = {
     description: string;
     created: string;
     changed: string;
+    allowComments: string;
 }

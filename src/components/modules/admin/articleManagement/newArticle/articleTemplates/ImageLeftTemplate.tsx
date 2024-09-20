@@ -4,7 +4,7 @@ import { templateProps } from "./templateProps";
 export const ImageLeftTemplate: FC<templateProps> = ({ selected, index }) => {
     return (
         <button style={{background:"none", border:"none"}}>
-            <svg fill={selected===index ? "#ff9f00" : "gray"}
+            <svg fill={selected===index.toString() ? "#ff9f00" : "gray"}
                  width="50mm"
                  height="70mm">
                 <g>

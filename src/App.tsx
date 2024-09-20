@@ -37,6 +37,7 @@ import {GlossaryManagement} from "./pages/admin/GlossaryManagement.tsx";
 import {AdminOverview} from "./pages/admin/AdminOverview.tsx";
 import {LogTable} from "./pages/admin/LogTable.tsx";
 import {EditArticle} from "./pages/admin/EditArticle.tsx";
+import {ArticleComments} from "./pages/admin/ArticleComments.tsx";
 
 // Disable automatic CSS addition for Font Awesome
 config.autoAddCss = false;
@@ -75,6 +76,7 @@ function App() {
                       <Route path="articles" element={<ArticleManagement />} />
                       <Route path="articles/new" element={<EditArticle />} />
                       <Route path="articles/edit/:id" element={<EditArticle />} />
+                      <Route path="article/comments/:id" element={<ArticleComments />} />
                       <Route path="glossary" element={<GlossaryManagement />} />
                       <Route path="log_table" element={<LogTable />} />
                   </Route>

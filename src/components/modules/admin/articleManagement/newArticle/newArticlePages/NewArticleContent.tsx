@@ -13,11 +13,11 @@ export const NewArticleContent:FC = () => {
     
     return (
         <div style={{marginBottom: 10}}>
-            {template === 0 ? <NewArticleVariant0 />
-            : template === 1 ? <NewArticleVariant1 />
-            : template === 2 ? <NewArticleVariant2 />    
-            : template === 3 ? <NewArticleVariant3 />
-            : template === 4 ? <NewArticleVariant4 />
+            {template === "0" ? <NewArticleVariant0 />
+            : template === "1" ? <NewArticleVariant1 />
+            : template === "2" ? <NewArticleVariant2 />    
+            : template === "3" ? <NewArticleVariant3 />
+            : template === "4" ? <NewArticleVariant4 />
             : null}
         </div>
     )

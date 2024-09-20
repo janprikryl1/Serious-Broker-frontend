@@ -169,7 +169,14 @@
     "File": "Soubor",
     "From": "Z",
     "To": "Do",
-    
+    "Title image": "Titulní obrázek",
+    "Article edited": "Článek upraven",
+    "Article edited successfully": "Článek úspěšně upraven",
+    "Error while editing article": "Chyba při úpravě článku",
+    "Article deleted": "Article deleted",
+    "Article deleted successfully": "Článek úspěšně odebrán",
+    "Error while deleting article": "Chyba při odebrání článku",
+    "Article created": "Článek vytvořen",
 
     "Login": "Přihlásit se",
     "Enter Email": "Zadejte email",

@@ -1,7 +1,6 @@
 import {ArticleProps} from "./ArticleProps.ts";
 
 export type ArticleDetailProps = ArticleProps & {
-    allowComments: boolean;
     content: string;
     subjects: string;
     publicationType: number;
@@ -10,4 +9,6 @@ export type ArticleDetailProps = ArticleProps & {
     publicationFromDays: number;
     premiumOnly: string;
     articleType: number;
+    templateId: string;
+    titleImage: string;
 }

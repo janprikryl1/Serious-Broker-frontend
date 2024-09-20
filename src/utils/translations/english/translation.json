@@ -168,7 +168,14 @@
     "File": "File",
     "From": "From",
     "To": "To",
-    
+    "Title image": "Title image",
+    "Article edited": "Article edited",
+    "Article edited successfully": "Article edited successfully",
+    "Error while editing article": "Error while editing article",
+    "Article deleted": "Article deleted",
+    "Article deleted successfully": "Article deleted successfully",
+    "Error while deleting article": "Error while deleting article",
+    "Article created": "Article created",
     
 
     "Login": "Login",

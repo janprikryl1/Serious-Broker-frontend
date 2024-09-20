@@ -10,7 +10,28 @@ import {useArticleCreate} from "../../../../../../utils/providers/ArticleCreateP
 
 export const NewArticleSettings:FC = () => {
     const {t} = useTranslation();
-    const {name, setName, articleTypeOption, setArticleTypeOption, setPublicationType, publicationType, setPremiumOnly, premiumOnly, setTemplate, template, setDescription, description, setLanguage, language, publicateFrom, setPublicateFromDays, publicateTo, setPublicateTo, setPublicateFrom, publicateFromDays} = useArticleCreate();
+    const {name, 
+        setName, 
+        articleTypeOption,
+        setArticleTypeOption,
+        setPublicationType,
+        publicationType,
+        setPremiumOnly,
+        premiumOnly,
+        setTemplate,
+        template,
+        setDescription,
+        description,
+        setLanguage,
+        language,
+        publicateFrom,
+        setPublicateFromDays,
+        publicateTo,
+        setPublicateTo,
+        setPublicateFrom,
+        publicateFromDays,
+        allowComments,
+        setAllowComments} = useArticleCreate();
 
     return (
         <div>
@@ -78,6 +99,11 @@ export const NewArticleSettings:FC = () => {
                 <InputGroup.Checkbox checked={premiumOnly} onChange={(e) => setPremiumOnly(e.target.checked)}/>
             </InputGroup>
             <br/>
+            <InputGroup>
+                <InputGroup.Text>{t("Allow comments")}</InputGroup.Text>
+                <InputGroup.Checkbox checked={allowComments} onChange={(e) => setAllowComments(e.target.checked)}/>
+            </InputGroup>
+            <br />
 
             <h2>{t("Select template")}</h2>
             <ArticleTemplates selected={template} setSelected={setTemplate}/>

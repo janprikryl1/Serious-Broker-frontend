@@ -4,20 +4,18 @@ import {ArticleProps} from "../utils/types/article/ArticleProps";
 import {RecentArticleProps} from "../utils/types/article/RecentArticleProps.ts";
 import {ArticleDetailProps} from "../utils/types/article/ArticleDetailProps.ts";
 import {ArticleCreateProps} from "../utils/types/article/ArticleCreateProps.ts";
-import {ArticleUpdateProps} from "../utils/types/article/ArticleUpdateProps.ts";
+import {ArticleUpdateType} from "../utils/types/article/ArticleUpdateType.ts";
 
 
 export const getArticleDetails = async (id: string) => {
-    //const token = localStorage.getItem("token");
-    //if(!token) return;
-
+    const token = localStorage.getItem("token");
     const res = axios.get<ArticleDetailProps>(backendUrl+"article/article_by_id.php",{
         params:{
             id: id,
         },
-      /*  headers:{
-            Authorization: `Bearer ${token}`,
-        },*/
+        headers:{
+            Authorization2: `Bearer ${token}`,
+        },
     });
 
     return await res;
@@ -31,7 +29,7 @@ export const getAllArticles = async (page: number) => {
             page: page,
         },
         headers:{
-            Authorization: `Bearer ${token}`,
+            Authorization2: `Bearer ${token}`,
         }
     });
 
@@ -57,10 +55,26 @@ export const createArticle = async (article: ArticleCreateProps) => {
     const token = localStorage.getItem("token");
     if(!token) return;
 
-    const res = axios.post<ArticleProps>(backendUrl+"/article/edit_article.php", article, {
+    const res = axios.post<{message:string;article_id:number}>(backendUrl+"/article/edit_article.php", article, {
         headers:{
             Authorization2: `Bearer ${token}`,
         },
+    });
+
+    return await res;
+}
+
+export const getAllArticlesAdmin = async (id: number) => {
+    const token = localStorage.getItem("token");
+    if (!token) return;
+
+    const res = axios.get<{totalPages: number; data: ArticleProps[]}>(backendUrl+"/article/admin_get_all_articles.php",{
+        params:{
+            id: id,
+        },
+        headers:{
+            Authorization2: `Bearer ${token}`,
+        }
     });
 
     return await res;
@@ -82,13 +96,28 @@ export const getArticleByIdAdmin = async (id: string) => {
     return await res;
 }
 
-//TODO: update article
-export const updateArticle = async (article: ArticleProps) => {
+export const updateArticle = async (article: ArticleUpdateType) => {
     const token = localStorage.getItem("token");
     if (!token) return;
 
-    const res = axios.put<ArticleUpdateProps>("/api/update_article", article, {
+    const res = axios.put<{message:string}>(backendUrl+"/article/edit_article.php", article, {
         headers: {
+            Authorization2: `Bearer ${token}`,
+        },
+    });
+
+    return await res;
+}
+
+export const deleteArticle = async (id: number) => {
+    const token = localStorage.getItem("token");
+    if (!token) return;
+
+    const res = axios.delete<{message:string}>(backendUrl+"/article/edit_article.php",{
+        params:{
+            id: id,
+        },
+        headers:{
             Authorization2: `Bearer ${token}`,
         },
     });

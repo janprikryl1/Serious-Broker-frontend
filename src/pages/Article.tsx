@@ -21,8 +21,7 @@ export const Article:FC = () => {
         const fetchArticle = async () => {
             try {
                 const response = await getArticleDetails(id);
-                const arrayData = response.data;
-                setArticle(arrayData);
+                setArticle(response.data);
             } catch (error) {
                 Swal.fire({
                     icon: "error",
@@ -33,7 +32,7 @@ export const Article:FC = () => {
             }
         };
         fetchArticle();
-    }, []);
+    }, [id]);
     
     return (
         <>

@@ -3,12 +3,13 @@ export type ArticleCreateProps = {
     title: string,
     description: string,
     premiumOnly: boolean,
-    templateId: number,
+    templateId: string,
     publicationType: number,
     publicationFrom: string,
     content: string,
     subjects: string,
     publicationTo: string,
     publicationFromDays: number | null,
-    allowComments: boolean
+    allowComments: boolean,
+    titleImage: string
 }
