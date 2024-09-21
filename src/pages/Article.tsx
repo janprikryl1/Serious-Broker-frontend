@@ -8,20 +8,22 @@ import Swal from "sweetalert2";
 import {ArticleDetailProps} from "../utils/types/article/ArticleDetailProps.ts";
 import {useParams} from "react-router-dom";
 import {useTranslation} from "react-i18next";
+import {TranslationsOverview} from "../utils/types/article/TranslationsOverview.ts";
 
 export const Article:FC = () => {
     const {id} = useParams();
     const {t} = useTranslation();
 
     const [article, setArticle] = useState<ArticleDetailProps>();
-   
+    const [translations, setTranslations] = useState<TranslationsOverview[]>([]);
 
     useEffect(() => {
         if (!id) return;
         const fetchArticle = async () => {
             try {
                 const response = await getArticleDetails(id);
-                setArticle(response.data);
+                setArticle(response.data.article);
+                setTranslations([{id: null, language:response.data.article.language}, ...response.data.translations]);
             } catch (error) {
                 Swal.fire({
                     icon: "error",
@@ -42,7 +44,7 @@ export const Article:FC = () => {
                     <div className="blog-details__wrapper">
                         <div className="row g-5">
                             <div className="col-lg-8">
-                                {article && <ArticleDetails article={article} /> }
+                                {article && <ArticleDetails article={article} translations={translations}/> }
                             </div>
                             <div className="col-lg-4 col-md-8  col-12">
                                 <div className="sidebar">

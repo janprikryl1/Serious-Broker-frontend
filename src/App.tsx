@@ -40,6 +40,7 @@ import {EditArticle} from "./pages/admin/EditArticle.tsx";
 import {ArticleComments} from "./pages/admin/ArticleComments.tsx";
 import {ArticleShare} from "./pages/admin/ArticleShare.tsx";
 import {ArticleTranslate} from "./pages/admin/ArticleTranslate.tsx";
+import {TranslateEdit} from "./pages/admin/TranslateEdit.tsx";
 
 // Disable automatic CSS addition for Font Awesome
 config.autoAddCss = false;
@@ -81,6 +82,8 @@ function App() {
                       <Route path="article/comments/:id" element={<ArticleComments />} />
                       <Route path="article/share/:id" element={<ArticleShare />} />
                       <Route path="article/translate/:id" element={<ArticleTranslate />} />
+                      <Route path="translations/:articleId" element={<TranslateEdit />} />
+                      <Route path="translations/:articleId/:id" element={<TranslateEdit />} />
                       <Route path="glossary" element={<GlossaryManagement />} />
                       <Route path="log_table" element={<LogTable />} />
                   </Route>

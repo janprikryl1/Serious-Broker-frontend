@@ -5,11 +5,12 @@ import {RecentArticleProps} from "../utils/types/article/RecentArticleProps.ts";
 import {ArticleDetailProps} from "../utils/types/article/ArticleDetailProps.ts";
 import {ArticleCreateProps} from "../utils/types/article/ArticleCreateProps.ts";
 import {ArticleUpdateType} from "../utils/types/article/ArticleUpdateType.ts";
+import {TranslationsOverview} from "../utils/types/article/TranslationsOverview.ts";
 
 
 export const getArticleDetails = async (id: string) => {
     const token = localStorage.getItem("token");
-    const res = axios.get<ArticleDetailProps>(backendUrl+"article/article_by_id.php",{
+    const res = axios.get<{article: ArticleDetailProps; translations: TranslationsOverview[]}>(backendUrl+"article/article_by_id.php",{
         params:{
             id: id,
         },
@@ -37,14 +38,23 @@ export const getAllArticles = async (page: number) => {
 }
 
 export const getRecentArticles = async () => {
-    const res = axios.get<RecentArticleProps[]>(backendUrl+"/article/recent_articles.php");
+    const token = localStorage.getItem("token");
+    const res = axios.get<RecentArticleProps[]>(backendUrl+"/article/recent_articles.php", {
+        headers:{
+            Authorization2: `Bearer ${token}`,
+        },
+    });
     return await res;
 }
 
 export const getSearchArticles = async (text: string) => {
+    const token = localStorage.getItem("token");
     const res = axios.get<ArticleProps[]>(backendUrl+"/article/search_articles.php",{
         params:{
             text: text,
+        },
+        headers:{
+            Authorization2: `Bearer ${token}`,
         },
     });
 

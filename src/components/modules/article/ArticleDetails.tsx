@@ -15,12 +15,15 @@ import {toCzechDateFormat} from "../../../utils/constants";
 import {ArticleVariant2} from "./articleVariants/ArticleVariant2.tsx";
 import {ArticleVariant3} from "./articleVariants/ArticleVariant3.tsx";
 import {ArticleVariant4} from "./articleVariants/ArticleVariant4.tsx";
+import {ArticleLanguagesSelect} from "./ArticleLanguagesSelect.tsx";
+import {TranslationsOverview} from "../../../utils/types/article/TranslationsOverview.ts";
 
 type Props = {
     article: ArticleDetailProps;
+    translations: TranslationsOverview[];
 };
 
-export const ArticleDetails: FC<Props> = ({ article }) => {
+export const ArticleDetails: FC<Props> = ({ article, translations }) => {
     const { t } = useTranslation();
     const { user } = useUserContext();
     const [category, setCategory] = useState(0);
@@ -35,26 +38,31 @@ export const ArticleDetails: FC<Props> = ({ article }) => {
                 <div className="blog-details__item-inner">
                     <div key={uuidv4()}>
                         <h1>{article.title}</h1>
+                        <ArticleLanguagesSelect translations={translations}/>
                         <p>{article.description}</p>
                         <i>{toCzechDateFormat(article.changed)}</i>
-                        <br /><br />
+                        <br/><br/>
                         <p>{article.description}</p>
-                        <br />
-                        {article.templateId === "0" ? 
-                                <ArticleVariant0 setTask={setTask} content={content} task={task} subjects={subjects} category={category} setCategory={setCategory}/> : 
-                        article.templateId === "1" ? 
-                                <ArticleVariant1 setTask={setTask} content={content} task={task} subjects={subjects} category={category} setCategory={setCategory}/> : 
-                        article.templateId === "2" ? 
-                                <ArticleVariant2 setTask={setTask} content={content} task={task} subjects={subjects} category={category} setCategory={setCategory} image={article.titleImage}/> :
-                        article.templateId === "3" ? 
-                                <ArticleVariant3 subjects={subjects} /> :
-                        article.templateId === "4" ? 
-                                <ArticleVariant4 image={article.titleImage} /> :
-                        null}
+                        <br/>
+                        {article.templateId === "0" ?
+                            <ArticleVariant0 setTask={setTask} content={content} task={task} subjects={subjects}
+                                             category={category} setCategory={setCategory}/> :
+                            article.templateId === "1" ?
+                                <ArticleVariant1 setTask={setTask} content={content} task={task} subjects={subjects}
+                                                 category={category} setCategory={setCategory}/> :
+                                article.templateId === "2" ?
+                                    <ArticleVariant2 setTask={setTask} content={content} task={task} subjects={subjects}
+                                                     category={category} setCategory={setCategory}
+                                                     image={article.titleImage}/> :
+                                    article.templateId === "3" ?
+                                        <ArticleVariant3 subjects={subjects}/> :
+                                        article.templateId === "4" ?
+                                            <ArticleVariant4 image={article.titleImage}/> :
+                                            null}
                     </div>
                     {article?.allowComments !== "0" ? (
                         <>
-                            <Comments articleId={article.id} setComments={setComments} comments={comments} />
+                            <Comments articleId={article.id} setComments={setComments} comments={comments}/>
                             {user && <CommentForm articleId={article.id} setComments={setComments} />}
                         </>
                     ) : (
