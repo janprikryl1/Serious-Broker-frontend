@@ -4,7 +4,7 @@ import cta2 from "../../../utils/icons/cta/2.png";
 import cta4 from "../../../utils/icons/cta/4.png";
 import cta5 from "../../../utils/icons/cta/5.png";
 import Swal from "sweetalert2";
-import {addNewsletter} from "../../../api/NewsletterService.ts";
+import {addNewsletter} from "../../../api/newsletterService.ts";
 
 export const Newsletter: FC = () => {
   const {t} = useTranslation();

@@ -41,6 +41,7 @@ import {ArticleComments} from "./pages/admin/ArticleComments.tsx";
 import {ArticleShare} from "./pages/admin/ArticleShare.tsx";
 import {ArticleTranslate} from "./pages/admin/ArticleTranslate.tsx";
 import {TranslateEdit} from "./pages/admin/TranslateEdit.tsx";
+import {NewsletterOverview} from "./pages/admin/NewsletterOverview.tsx";
 
 // Disable automatic CSS addition for Font Awesome
 config.autoAddCss = false;
@@ -76,6 +77,7 @@ function App() {
                   <Route path="/admin" element={<Admin />}>
                       <Route path="" element={<AdminOverview />} />
                       <Route path="users" element={<UserManagment />} />
+                      <Route path="newsletter" element={<NewsletterOverview />} />
                       <Route path="articles" element={<ArticleManagement />} />
                       <Route path="articles/new" element={<EditArticle />} />
                       <Route path="articles/edit/:id" element={<EditArticle />} />
