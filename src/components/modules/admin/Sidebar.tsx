@@ -35,7 +35,7 @@ export const Sidebar: FC = () => {
                             to="/admin/newsletter"
                             className={({ isActive }) => isActive ? 'activeClicked' : ''}
                         >
-                            <CDBSidebarMenuItem icon="user">{t("Newsletter management")}</CDBSidebarMenuItem>
+                            <CDBSidebarMenuItem icon="chart-line">{t("Newsletter management")}</CDBSidebarMenuItem>
                         </NavLink>
                         <NavLink
                             to="/admin/articles"
@@ -53,7 +53,13 @@ export const Sidebar: FC = () => {
                             to="/admin/log_table"
                             className={({ isActive }) => isActive ? 'activeClicked' : ''}
                         >
-                            <CDBSidebarMenuItem icon="table">{t("Table logs")}</CDBSidebarMenuItem>
+                            <CDBSidebarMenuItem icon="th-large">{t("Table logs")}</CDBSidebarMenuItem>
+                        </NavLink>
+                        <NavLink
+                            to="/admin/feedbacks"
+                            className={({ isActive }) => isActive ? 'activeClicked' : ''}
+                        >
+                            <CDBSidebarMenuItem icon="sticky-note">{t("Feedbacks")}</CDBSidebarMenuItem>
                         </NavLink>
                     </CDBSidebarMenu>
                 </CDBSidebarContent>
