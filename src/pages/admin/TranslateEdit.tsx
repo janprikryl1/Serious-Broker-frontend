@@ -1,12 +1,22 @@
 import {FC} from "react";
-import {useParams} from "react-router-dom";
+import {ArticleTranslateProvider} from "../../utils/providers/ArticleTranslateProvider.tsx";
+import {ButtonToolbar} from "react-bootstrap";
+import {TranslateUpdateButton} from "../../components/modules/admin/translations/TranslateUpdateButton.tsx";
+import {NewTranslationContent} from "../../components/modules/admin/translations/NewTranslationContent.tsx";
+import {
+    NewTranslationPagesTitleDescriptionLanguage
+} from "../../components/modules/admin/translations/NewTranslationPagesTitleDescriptionLanguage.tsx";
 
 export const TranslateEdit:FC = () => {
-    const {articleId, id} = useParams();
-    console.log(articleId, id);
     return (
-        <div>
-            
-        </div>
-    )
+        <ArticleTranslateProvider>
+            <div className="container">
+                <NewTranslationPagesTitleDescriptionLanguage />
+                <NewTranslationContent />
+                <ButtonToolbar>
+                    <TranslateUpdateButton />
+                </ButtonToolbar>
+            </div>
+        </ArticleTranslateProvider>
+)
 };
