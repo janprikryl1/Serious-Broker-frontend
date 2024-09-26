@@ -53,7 +53,7 @@ export const ArticleTranslate:FC = () => {
                                             ) : (
                                                 translations.map((item) => (
                                                     <div key={item.id} className="col-sm-6 col-lg-4">
-                                                        {id && <TranslationCard translation={item} articleId={id} />}
+                                                        {id && <TranslationCard translation={item} articleId={id} setTranslation={setTranslations} />}
                                                     </div>
                                                 ))
                                             )}

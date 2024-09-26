@@ -213,7 +213,12 @@
     "Send email to all": "Napsat všem",
     "Feedbacks": "Zpětné vazby",
     "Translate": "Přeložit",
-    
+    "Translation created": "Překlad vytvořen",
+    "Error while creating translation": "Chyba při vytváření překladu",
+    "Translation edited": "Překlad upraven",
+    "Translation edited successfully": "Překlad úspěšně upraven",
+    "Error while editing translation": "Chyba při úpravě překladu",
+    "Translation deleted": "Překlad odstraněn",
     
 
     "Login": "Přihlásit se",

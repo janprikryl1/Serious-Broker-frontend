@@ -1,36 +1,24 @@
 import React, {Dispatch, ReactNode, SetStateAction, useContext, useEffect, useState} from "react";
-import {ArticleCreateProps} from "../types/article/ArticleCreateProps.ts";
 import {SubjectType} from "../types/article/SubjectType.ts";
 import {ContentType} from "../types/article/ContentType.ts";
 import {useParams} from "react-router-dom";
-import {getArticleTranslateByIdAdmin} from "../../api/translateService.ts";
-import {ArticleTranslateEditType} from "../types/article/translate/ArticleTranslateEditType.ts";
+import {createTranslation, getArticleTranslateByIdAdmin, updateTranslation} from "../../api/translateService.ts";
+import {ArticleNewTranslateEditType, ArticleTranslateEditType} from "../types/article/translate/ArticleTranslateEditType.ts";
+import {getArticleByIdAdmin} from "../../api/articleService.ts";
+import Swal from "sweetalert2";
+import {useTranslation} from "react-i18next";
 
 type Props = {
     children: ReactNode;
 }
 
 type ArticleTranslateProviderProps = {
-    template: string;
-    setTemplate: Dispatch<SetStateAction<string>>;
     name: string;
     setName: Dispatch<SetStateAction<string>>;
     description: string;
     setDescription: Dispatch<SetStateAction<string>>;
     language: string;
     setLanguage: Dispatch<SetStateAction<string>>;
-    articleTypeOption: "article" | "new";
-    setArticleTypeOption: Dispatch<SetStateAction<"article" | "new">>;
-    publicationType: number;
-    setPublicationType: Dispatch<SetStateAction<number>>;
-    publicateFrom: string;
-    publicateTo: string;
-    setPublicateFromDays: Dispatch<SetStateAction<number | null>>;
-    setPublicateTo: Dispatch<SetStateAction<string>>;
-    publicateFromDays: number | null;
-    setPublicateFrom: Dispatch<SetStateAction<string>>;
-    premiumOnly: boolean;
-    setPremiumOnly: Dispatch<SetStateAction<boolean>>;
     content: ContentType[];
     setContent: Dispatch<SetStateAction<ContentType[]>>;
     subjects: SubjectType[];
@@ -40,62 +28,60 @@ type ArticleTranslateProviderProps = {
     setCurrentContent: Dispatch<SetStateAction<number>>;
     saved: boolean;
     setSaved: Dispatch<SetStateAction<boolean>>;
-    titleImage: string;
-    setTitleImage: Dispatch<SetStateAction<string>>;
-    allowComments: boolean;
-    setAllowComments: Dispatch<SetStateAction<boolean>>;
+    template: string;
+    setTemplate: Dispatch<SetStateAction<string>>;
 }
 
 const ArticleTranslateContext = React.createContext<ArticleTranslateProviderProps | undefined>(undefined);
 
 export const ArticleTranslateProvider = ({children}: Props) => {
     const {articleId, id} = useParams();
-    console.log(articleId, id);
-    
-    //const {t} = useTranslation();
+    const {t} = useTranslation();
     const [articleIdParam, setArticleIdParam] = useState<number>();
     const [translateId, setTranslateId] = useState<number>();
-    const [template, setTemplate] = useState("0");
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
     const [language, setLanguage] = useState("cs");
-    const [articleTypeOption, setArticleTypeOption] = useState<"article" | "new">("article");
-    const [publicationType, setPublicationType] = useState(0);
-    const [publicateFrom, setPublicateFrom] = useState("");
-    const [publicateTo, setPublicateTo] = useState("");
-    const [publicateFromDays, setPublicateFromDays] = useState<number | null>(null);
-    const [premiumOnly, setPremiumOnly] = useState(false);
-    const [allowComments, setAllowComments] = useState(true);
-    const [titleImage, setTitleImage] = useState("");
     const [content, setContent] = useState<ContentType[]>([{id: 0, title: "", tasks: [{id: 0, task: "", image: "", animateTo: {from: {x: 0, y: 0}, to: {x: 0, y: 0}}}]}]);
     const [subjects, setSubjects] = useState<SubjectType[]>([{id: 0, title: "", text: ""}]);
     const [currentContent, setCurrentContent] = useState(0);
     const [saved, setSaved] = useState(false);
+    const [template, setTemplate] = useState("0");
 
+    const getEditedTranslate = async () => {
+        if (id === undefined) return;
+        const response = await getArticleTranslateByIdAdmin(id);
+        if (!response) return;
+        setArticleIdParam(response.data.object_id);
+        setTranslateId(response.data.id);
+        setName(response.data.title);
+        setDescription(response.data.description);
+        setLanguage(response.data.language);
+        setContent(JSON.parse(response.data.content));
+        setSubjects(JSON.parse(response.data.subjects));
+        setCurrentContent(0);
+        setTemplate(response.data.templateId);
+    }
+    
+    const loadArticleData = async () => {
+        if (articleId === undefined) return;
+        const response = await getArticleByIdAdmin(articleId);
+        if (!response) return;
+        setArticleIdParam(parseInt(articleId));
+        setName(response.data.title);
+        setDescription(response.data.description);
+        setLanguage(response.data.language);
+        setContent(JSON.parse(response.data.content));
+        setSubjects(JSON.parse(response.data.subjects));
+        setCurrentContent(0);
+        setTemplate(response.data.templateId);
+    }
+    
     useEffect(() => {
         if (id !== undefined) {
-            const getEditedArticle = async () => {
-                const response = await getArticleTranslateByIdAdmin(id);
-                if (!response) return;
-                setArticleIdParam(response.data.article_id);
-                setTranslateId(response.data.translateId);
-                setName(response.data.title);
-                setDescription(response.data.description);
-                setLanguage(response.data.language);
-                setArticleTypeOption(response.data.articleTypeOption as "article" | "new");
-                setPublicationType(response.data.publicationType);
-                setPublicateFrom(response.data.publicationFrom);
-                setPublicateTo(response.data.publicationTo);
-                setPublicateFromDays(response.data.publicationFromDays);
-                setPremiumOnly(response.data.premiumOnly !== "0");
-                setAllowComments(response.data.allowComments !== "0");
-                setContent(JSON.parse(response.data.content));
-                setSubjects(JSON.parse(response.data.subjects));
-                setTitleImage(response.data.titleImage);
-                setTemplate(response.data.templateId);
-                setCurrentContent(0);
-            }
-            getEditedArticle();
+            getEditedTranslate();
+        } else {
+            loadArticleData();
         }
     }, [id]);
 
@@ -104,45 +90,27 @@ export const ArticleTranslateProvider = ({children}: Props) => {
     }, [name,
         description,
         language,
-        articleTypeOption,
-        publicationType,
-        publicateFrom,
-        publicateTo,
-        publicateFromDays,
-        premiumOnly,
         content,
         subjects,
-        titleImage,
-        template,
-        allowComments
     ]);
 
     const uploadNewTranslate = async () => {
-        const article: ArticleCreateProps = {
+        const article: ArticleNewTranslateEditType = {
+            articleId: articleIdParam!,
             language: language,
             title: name,
             description: description,
-            premiumOnly: premiumOnly,
-            templateId: template,
-            publicationType: publicationType,
-            publicationFrom: publicateFrom,
             content: JSON.stringify(content),
             subjects: JSON.stringify(subjects),
-            publicationTo: publicateTo,
-            publicationFromDays: publicateFromDays,
-            allowComments: allowComments,
-            titleImage: titleImage,
-            articleTypeOption: articleTypeOption
         };
-        console.log(article);
-        /*try {
-            const response = await createArticle(article);
-            if (response !== undefined && response.data.message === "Article created successfully") {
-                setArticleId(response.data.article_id);
+        try {
+            const response = await createTranslation(article);
+            if (response !== undefined && response.data.message === "Translate created successfully") {
+                setTranslateId(response.data.translateId);
                 Swal.fire({
                     icon: "success",
-                    title: t("Article created"),
-                    text: t("Article created"),
+                    title: t("Translation created"),
+                    text: t("Translation created"),
                 });
             }
             setSaved(true);
@@ -150,10 +118,10 @@ export const ArticleTranslateProvider = ({children}: Props) => {
             Swal.fire({
                 icon: "error",
                 title: t("Error"),
-                text: t("Error while creating article"),
+                text: t("Error while creating translation"),
             });
             console.error(error);
-        }*/
+        }
     }
 
     const updateEditedTranslate = async () => {
@@ -163,26 +131,16 @@ export const ArticleTranslateProvider = ({children}: Props) => {
             language: language,
             title: name,
             description: description,
-            premiumOnly: premiumOnly,
-            templateId: template,
-            publicationType: publicationType,
-            publicationFrom: publicateFrom,
             content: JSON.stringify(content),
             subjects: JSON.stringify(subjects),
-            publicationTo: publicateTo,
-            publicationFromDays: publicateFromDays,
-            allowComments: allowComments,
-            titleImage: titleImage,
-            articleTypeOption: articleTypeOption
         };
-        console.log(article);
-        /*try {
-            const response = await updateArticle(article);
-            if (response !== undefined && response.data.message === "Article updated successfully") {
+        try {
+            const response = await updateTranslation(article);
+            if (response !== undefined && response.data.message === "Translate updated successfully") {
                 Swal.fire({
                     icon: "success",
-                    title: t("Article edited"),
-                    text: t("Article edited successfully"),
+                    title: t("Translation edited"),
+                    text: t("Translation edited successfully"),
                 });
             }
             setSaved(true);
@@ -190,14 +148,14 @@ export const ArticleTranslateProvider = ({children}: Props) => {
             Swal.fire({
                 icon: "error",
                 title: t("Error"),
-                text: t("Error while editing article"),
+                text: t("Error while editing translation"),
             });
             console.error(error);
-        }*/
+        }
     }
 
     const uploadTranslate = () => {
-        if (articleId !== undefined) {
+        if (translateId !== undefined) {
             updateEditedTranslate();
         } else {
             uploadNewTranslate();
@@ -205,26 +163,12 @@ export const ArticleTranslateProvider = ({children}: Props) => {
     }
 
     const value = {
-        template,
-        setTemplate,
         name,
         setName,
         description,
         setDescription,
         language,
         setLanguage,
-        articleTypeOption,
-        setArticleTypeOption,
-        publicationType,
-        setPublicationType,
-        publicateFrom,
-        publicateTo,
-        setPublicateFromDays,
-        setPublicateTo,
-        publicateFromDays,
-        setPublicateFrom,
-        premiumOnly,
-        setPremiumOnly,
         content,
         setContent,
         subjects,
@@ -234,10 +178,8 @@ export const ArticleTranslateProvider = ({children}: Props) => {
         setCurrentContent,
         saved,
         setSaved,
-        titleImage,
-        setTitleImage,
-        allowComments,
-        setAllowComments,
+        template,
+        setTemplate,
     }
 
     return (

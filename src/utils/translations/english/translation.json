@@ -212,6 +212,12 @@
     "Send email to all": "Send email to all",
     "Feedbacks": "Feedbacks",
     "Translate": "Translate",
+    "Translation created": "Translation created",
+    "Error while creating translation": "Error while creating translation",
+    "Translation edited": "Translation edited",
+    "Translation edited successfully": "Translation edited successfully",
+    "Error while editing translation": "Error while editing translation",
+    "Translation deleted": "Translation deleted",
     
 
     "Login": "Login",

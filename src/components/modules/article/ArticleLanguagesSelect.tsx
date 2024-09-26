@@ -1,14 +1,15 @@
-import {ChangeEvent, FC, useState} from "react";
+import {ChangeEvent, Dispatch, FC, SetStateAction} from "react";
 import {useTranslation} from "react-i18next";
 import {TranslationsOverview} from "../../../utils/types/article/TranslationsOverview.ts";
 
 type Props = {
     translations: TranslationsOverview[];
+    language: string;
+    setLanguage: Dispatch<SetStateAction<string>>;
 };
 
-export const ArticleLanguagesSelect: FC<Props> = ({translations}) => {
+export const ArticleLanguagesSelect: FC<Props> = ({translations, language, setLanguage}) => {
     const {t} = useTranslation();
-    const [language, setLanguage] = useState(translations[0].language);
     
     const handleLanguageChange = (e: ChangeEvent<HTMLSelectElement>) => {
         setLanguage(e.target.value);

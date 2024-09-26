@@ -19,7 +19,6 @@ export const CommentForm: FC<Props> = ({articleId, setComments}) => {
         try {
             const result = await addArticleComment(articleId, message);
             if (!result) return;
-            console.log(result.data);
             if (result.data.status === "success") {
                 const newComment: CommentType = {text: message, created: (new Date()).toString(), articleId: articleId, user: `${user?.firstname} ${user?.surname}`, id: 0};
                 setComments((prevState) => [...prevState ?? [], newComment]);

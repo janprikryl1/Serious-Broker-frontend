@@ -43,10 +43,9 @@ export const Register:FC = () => {
     }
 
     const handleSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
-        e.preventDefault();console.log(registerData);
+        e.preventDefault();
         try{
             const response = await register(registerData);
-            console.log(response);
             if (response.status === "success") {
                 Swal.fire({
                     icon: "success",

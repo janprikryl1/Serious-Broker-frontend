@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import {Dispatch, FC, SetStateAction, useState} from 'react';
 import { Comments } from "./Comments";
 import { CommentForm } from "./CommentForm";
 import { useTranslation } from "react-i18next";
@@ -21,9 +21,11 @@ import {TranslationsOverview} from "../../../utils/types/article/TranslationsOve
 type Props = {
     article: ArticleDetailProps;
     translations: TranslationsOverview[];
+    language: string;
+    setLanguage: Dispatch<SetStateAction<string>>;
 };
 
-export const ArticleDetails: FC<Props> = ({ article, translations }) => {
+export const ArticleDetails: FC<Props> = ({ article, translations, language, setLanguage }) => {
     const { t } = useTranslation();
     const { user } = useUserContext();
     const [category, setCategory] = useState(0);
@@ -31,14 +33,15 @@ export const ArticleDetails: FC<Props> = ({ article, translations }) => {
     const [comments, setComments] = useState<CommentType[]>();
     const content:ContentType[] = JSON.parse(article.content);
     const subjects:SubjectType[]  = JSON.parse(article.subjects);
-    
+
+
     return (
         <div className="blog-details__item">
             {content ? (
                 <div className="blog-details__item-inner">
                     <div key={uuidv4()}>
                         <h1>{article.title}</h1>
-                        <ArticleLanguagesSelect translations={translations}/>
+                        <ArticleLanguagesSelect translations={translations} language={language} setLanguage={setLanguage}/>
                         <p>{article.description}</p>
                         <i>{toCzechDateFormat(article.changed)}</i>
                         <br/><br/>

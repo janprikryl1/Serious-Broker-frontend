@@ -1,17 +1,30 @@
 import {Link} from "react-router-dom";
-import {FC} from "react";
+import {Dispatch, FC, SetStateAction} from "react";
 import {TranslationsOverview} from "../../../../utils/types/article/TranslationsOverview.ts";
 import {Button} from "react-bootstrap";
 import {FaRegTrashAlt} from "react-icons/fa";
+import {useTranslation} from "react-i18next";
+import {deleteTranslation} from "../../../../api/translateService.ts";
+import Swal from "sweetalert2";
 
 type Props = {
     articleId: string;
     translation: TranslationsOverview;
+    setTranslation: Dispatch<SetStateAction<TranslationsOverview[] | undefined>>;
 };
 
-export const TranslationCard:FC<Props> = ({articleId, translation}) => {
+export const TranslationCard:FC<Props> = ({articleId, translation, setTranslation}) => {
+    const {t} = useTranslation();
     const handleDelete = async (id: number) => {
-        console.log(id);
+        const response = await deleteTranslation(id);
+        if (response !== undefined && response.data.message === 'Translate deleted successfully') {
+            Swal.fire({
+                icon: "success",
+                title: t("Translation deleted"),
+                text: t("Translation deleted"),
+            });
+            setTranslation(translations => translations?.filter(item => item.id !== id));
+        }
     }
     
     if (translation) {
@@ -21,7 +34,7 @@ export const TranslationCard:FC<Props> = ({articleId, translation}) => {
                     <div className="blog__content">
                         <h5 className="10 style2">
                             <Link to={`/admin/translations/${articleId}/${translation.id}`}
-                                  className="none">{translation.language}</Link>
+                                  className="none">{t(translation.language)}</Link>
                         </h5>
 
                         {translation.id !== null && (
