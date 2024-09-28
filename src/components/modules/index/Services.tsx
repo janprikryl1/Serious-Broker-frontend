@@ -8,9 +8,7 @@ export const Services: FC = () => {
     return (
       <section className="service padding-top padding-bottom">
         <div className="section-header section-header--max50">
-            <h2 className="mb-15 mt-minus-5">
-                {t("What we ")}<span>{t("offer")}</span>
-            </h2>
+            <h2 className="mb-15 mt-minus-5">{t("What we ")}{t("offer")}</h2>
         </div>
         <div className="container">
           <div className="service__wrapper">

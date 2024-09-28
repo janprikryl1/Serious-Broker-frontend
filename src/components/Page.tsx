@@ -13,10 +13,10 @@ export const Page: FC<Props> = ({ children, image }) => {
                 style={{
                     backgroundImage: `url(${image})`,
                     position: "absolute",
-                    top: "-44vw",
+                    top: "-150vw",
                     left: 0,
                     width: "100%",
-                    height: "208vh",
+                    height: "452vh",
                     opacity: 0.6,
                     zIndex: 1,
                     backgroundSize: "cover",
