@@ -20,3 +20,23 @@ export const toCzechDate = (dateRaw: string): string => {
     const date = new Date(dateRaw);
     return `${date.getDate()}. ${date.getMonth()}. ${date.getFullYear()}`;
 }
+
+export const getDayName = (dayNumber: number) => {
+    const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    return dayNumber ? daysOfWeek[dayNumber] : 'Unknown day';
+}
+
+export const convertUTCToLocalTime = (utcHour: number) => {
+    const utcDate = new Date(Date.UTC(2024, 0, 1, utcHour));
+    const localTime = utcDate.toLocaleString(navigator.language, {
+        timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: false,
+    });
+    return localTime;
+}
+
+export const getYear = (yearNumber: number) => {
+    return 2024 - yearNumber;
+}

@@ -7,5 +7,6 @@ export type BinanceIndexAssetRecomBestPreviousType = {
     week_all: number | null,
     week_all_profit: number,
     week_0_pos: number,
-    week_0_profit: number
+    week_0_profit: number,
+    cmc_rank: number,
 }

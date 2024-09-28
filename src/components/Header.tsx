@@ -6,14 +6,12 @@ import {ThemeSwitchIcon} from "../headerIcons/themeSwitch/ThemeSwitchIcon.tsx";
 import {ChangeLanguageIcon} from "../headerIcons/languageSwitchIcon/ChangeLanguageIcon.tsx";
 import Logo from "../utils/icons/logo/symbol.svg"
 import {useUserContext} from "../utils/providers/providerUser.tsx";
+import {useThemeContext} from "../utils/providers/ThemeProvider.tsx";
 
-type Props = {
-    headerClass?: string;
-}
-
-export const Header: React.FC<Props> = ({headerClass = null}) => {
+export const Header: React.FC = () => {
     const {t} = useTranslation();
     const {user} = useUserContext();
+    const {theme} = useThemeContext();
     const [menu, setMenu] = useState<boolean>(false);
     const [scrollTop, setScrollTop] = useState<number>(0);
 
@@ -85,13 +83,13 @@ export const Header: React.FC<Props> = ({headerClass = null}) => {
     };
 
     return (
-        <header className={`header-section ${headerClass ? headerClass : 'bg-color-3'}`} onScroll={isSticky}>
+        <header className={`header-section ${scrollTop !== 0 && 'bg-color-3'}`} onScroll={isSticky}>
             <div className="header-bottom">
                 <div className="container">
                     <div className="header-wrapper">
                         <div className="logo">
                             <Link to="/">
-                                <img className="dark" src={Logo} alt="logo"/>
+                                <img className={theme === "dark" ? "logo-dark" : ""} src={Logo} alt="logo"/>
                             </Link>
                         </div>
                         <div className="menu-area">

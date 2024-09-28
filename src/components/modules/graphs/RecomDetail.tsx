@@ -19,6 +19,7 @@ export const RecomDetail:FC<Props> = ({data}) => {
                               className="none">{data.asset_label}</Link>
                     </h5>
                     <p>{t("Quote currencies: ")}{data.quote_currencies}</p>
+                    <p>{t("cmc_rank")}: {data.cmc_rank}</p>
                     <p>{t("Best of all index: ")}{data.all_pos}</p>
                     <p>{t("All suggestions: ")}{data.all_sug}</p>
                     <p>{t("Week suggestions: ")}{data.week_sug}</p>

@@ -1,14 +1,15 @@
 export const pricingData = [
     {
         name: "Basic",
-        price: 0,
+        price: "Free",
         features: [
             "Free articles",
-            "graphs",
+            "Graphs",
         ],
         animation: "fade-right",
+        action: {title:"Sign in", link: "/signin"}
     },
-    {
+   /* {
         name: "Standard",
         price: "paid",
         features: [
@@ -19,17 +20,18 @@ export const pricingData = [
         ],
         animation: "fade-up",
         active: true,
-    },
+    },*/
     {
         name: "Premium",
-        price: "paid",
+        price: "Individual",
         features: [
             "Free articles",
-            "graphs",
+            "Graphs",
             "Premium articles",
             "All graphs",
             "Trading assistance",
         ],
         animation: "fade-left",
+        action: {title:"Inquiry", link: "/inquiry"}
     },
 ]

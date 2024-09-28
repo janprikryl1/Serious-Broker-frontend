@@ -1,32 +1,10 @@
-import {FC, useCallback, useEffect, useState} from "react";
-import {useLocation} from "react-router-dom";
+import {FC} from "react";
 import Moon from "../../utils/icons/icon/moon.svg";
 import Sun from "../../utils/icons/icon/sun.svg";
+import {useThemeContext} from "../../utils/providers/ThemeProvider.tsx";
 
 export const ThemeSwitchIcon:FC = () => {
-    const [theme, setTheme] = useState(localStorage.getItem('theme'));
-    const location = useLocation();
-    
-    
-    const updateThemeColor = useCallback((themeMode: 'light' | 'dark' = 'light') => {
-        document.documentElement.setAttribute('data-bs-theme', themeMode);
-        localStorage.setItem('theme', themeMode);
-        setTheme(themeMode);
-    }, []);
-    
-    useEffect(() => {
-        updateThemeColor(theme as 'light' | 'dark');
-    }, [location.search, updateThemeColor]);
-
-    
-    const toggleTheme = () => {
-        const theme = localStorage.getItem('theme');
-        if (theme && theme === 'dark') {
-            updateThemeColor('light');
-        } else {
-            updateThemeColor('dark');
-        }
-    };
+    const {theme, toggleTheme} = useThemeContext();
     
     return (
         <div style={{marginRight: "1vw"}} onClick={toggleTheme}>

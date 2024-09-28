@@ -43,6 +43,8 @@ import {ArticleTranslate} from "./pages/admin/ArticleTranslate.tsx";
 import {TranslateEdit} from "./pages/admin/TranslateEdit.tsx";
 import {NewsletterOverview} from "./pages/admin/NewsletterOverview.tsx";
 import {Feedbacks} from "./pages/admin/Feedbacks.tsx";
+import {ThemeProvider} from "./utils/providers/ThemeProvider.tsx";
+import {InquiryPrice} from "./pages/InquryPrice.tsx";
 
 // Disable automatic CSS addition for Font Awesome
 config.autoAddCss = false;
@@ -55,46 +57,49 @@ function App() {
     
   return (
       <BrowserRouter>
-          <ProviderUser>  
-            <Header/>
-              <Routes>
-                  <Route path="/" element={<Index/>}/>
-                  <Route path="/about" element={<About/>}/>
-                  <Route path="/contact" element={<Contact/>}/>
-                  <Route path="/articles" element={<Articles/>}/>
-                  <Route path="/article/:id/:language?" element={<Article/>}/>
-                  <Route path="/search/:text" element={<SearchArticles/>}/>
-                  <Route path="/assets" element={<Assets/>}/>
-                  <Route path="/most_profitable_assets" element={<MostProfitableAssets/>}/>
-                  <Route path="/asset_graph/:id" element={<AssetGraph/>}/>
-                  <Route path="/recommendation" element={<Recommendation/>}/>
-                  <Route path="/dictionary" element={<Glossary/>}/>
-                  <Route path="/crypto_currencies_list" element={<CryptoCurrenciesList/>}/>
-                  <Route path="/cryptocurrency_detail/:id" element={<CryptoCurrencyDetail/>}/>
-                  <Route path="/graphs/recommendation/detail/:asset_label" element={<RecommendationDetails/>}/>
-                  <Route path="/sign_in" element={<SignIn/>}/>
-                  <Route path="/register" element={<Register/>}/>
-                  <Route path="/profile" element={<Profile/>}/>
-                  <Route path="/admin" element={<Admin />}>
-                      <Route path="" element={<AdminOverview />} />
-                      <Route path="users" element={<UserManagment />} />
-                      <Route path="newsletter" element={<NewsletterOverview />} />
-                      <Route path="articles" element={<ArticleManagement />} />
-                      <Route path="articles/new" element={<EditArticle />} />
-                      <Route path="articles/edit/:id" element={<EditArticle />} />
-                      <Route path="article/comments/:id" element={<ArticleComments />} />
-                      <Route path="article/share/:id" element={<ArticleShare />} />
-                      <Route path="article/translate/:id" element={<ArticleTranslate />} />
-                      <Route path="translations/:articleId" element={<TranslateEdit />} />
-                      <Route path="translations/:articleId/:id" element={<TranslateEdit />} />
-                      <Route path="glossary" element={<GlossaryManagement />} />
-                      <Route path="log_table" element={<LogTable />} />
-                      <Route path="feedbacks" element={<Feedbacks />} />
-                  </Route>
-                  <Route path="*" element={<ErrorPage/>}/>
-              </Routes>
-            <Footer/>
-          </ProviderUser>
+          <ThemeProvider>
+              <ProviderUser>  
+                <Header/>
+                  <Routes>
+                      <Route path="/" element={<Index/>}/>
+                      <Route path="/about" element={<About/>}/>
+                      <Route path="/contact" element={<Contact/>}/>
+                      <Route path="/articles" element={<Articles/>}/>
+                      <Route path="/article/:id/:language?" element={<Article/>}/>
+                      <Route path="/search/:text" element={<SearchArticles/>}/>
+                      <Route path="/assets" element={<Assets/>}/>
+                      <Route path="/most_profitable_assets" element={<MostProfitableAssets/>}/>
+                      <Route path="/asset_graph/:id" element={<AssetGraph/>}/>
+                      <Route path="/recommendation" element={<Recommendation/>}/>
+                      <Route path="/dictionary" element={<Glossary/>}/>
+                      <Route path="/crypto_currencies_list" element={<CryptoCurrenciesList/>}/>
+                      <Route path="/cryptocurrency_detail/:id" element={<CryptoCurrencyDetail/>}/>
+                      <Route path="/graphs/recommendation/detail/:asset_label" element={<RecommendationDetails/>}/>
+                      <Route path="/sign_in" element={<SignIn/>}/>
+                      <Route path="/register" element={<Register/>}/>
+                      <Route path="/profile" element={<Profile/>}/>
+                      <Route path="/admin" element={<Admin />}>
+                          <Route path="" element={<AdminOverview />} />
+                          <Route path="users" element={<UserManagment />} />
+                          <Route path="newsletter" element={<NewsletterOverview />} />
+                          <Route path="articles" element={<ArticleManagement />} />
+                          <Route path="articles/new" element={<EditArticle />} />
+                          <Route path="articles/edit/:id" element={<EditArticle />} />
+                          <Route path="article/comments/:id" element={<ArticleComments />} />
+                          <Route path="article/share/:id" element={<ArticleShare />} />
+                          <Route path="article/translate/:id" element={<ArticleTranslate />} />
+                          <Route path="translations/:articleId" element={<TranslateEdit />} />
+                          <Route path="translations/:articleId/:id" element={<TranslateEdit />} />
+                          <Route path="glossary" element={<GlossaryManagement />} />
+                          <Route path="log_table" element={<LogTable />} />
+                          <Route path="feedbacks" element={<Feedbacks />} />
+                      </Route>
+                      <Route path="inquiry" element={<InquiryPrice />}/>
+                      <Route path="*" element={<ErrorPage/>}/>
+                  </Routes>
+                <Footer/>
+              </ProviderUser>
+          </ThemeProvider>
       </BrowserRouter>
   )
 }

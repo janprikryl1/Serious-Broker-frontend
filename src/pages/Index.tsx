@@ -4,7 +4,7 @@ import { Pricing } from "../components/modules/index/Pricing.tsx";
 import { Services } from "../components/modules/index/Services.tsx";
 import { ComingSoon } from "../components/modules/index/ComingSoon.tsx";
 import { Hero } from "../components/modules/index/Hero.tsx";
-import OverlayBackground from "../utils/icons/overlay_background.jpg";
+import OverlayBackground from "../utils/icons/overlay_background2.jpg";
 import {Page} from "../components/Page.tsx";
 
 export const Index: FC = () => {

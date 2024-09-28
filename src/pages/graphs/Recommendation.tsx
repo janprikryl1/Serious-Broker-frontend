@@ -57,6 +57,7 @@ export const Recommendation: FC = () => {
                             <Form.Select aria-label="Default select example" onChange={handleOrderBy} defaultValue={orderBy}>
                                 <option value="">{t("Order by")}</option>
                                 <option value="all_pos">{t("All positions")}</option>
+                                <option value="cmc_rank">{t("cmc_rank")}</option>
                                 <option value="all_sug">{t("All suggestions")}</option>
                                 <option value="week_sug">{t("Week suggestions")}</option>
                                 <option value="week_all">{t("Week all")}</option>
