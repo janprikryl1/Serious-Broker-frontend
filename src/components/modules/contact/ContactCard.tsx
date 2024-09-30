@@ -2,7 +2,7 @@ import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { LeftFloatingContactDetailsItem } from "./LeftFloatingContactDetailsItem.tsx";
 import { SocialLinkIcon } from "./SocialLinkIcon.tsx";
-import headerImage4 from "../../../utils/icons/contact/4.png";
+import shibaInu from "../../../utils/icons/cta/shiba_inu.png";
 import { addFeedback } from "../../../api/feedbackService.ts";
 import Swal from "sweetalert2";
 
@@ -94,7 +94,7 @@ export const ContactCard: FC = () => {
         </div>
         <div className="contact__shape">
         <span className="contact__shape-item contact__shape-item--1">
-          <img src={headerImage4} alt="shape-icon" />
+          <img src={shibaInu} alt="shape-icon" />
         </span>
           <span className="contact__shape-item contact__shape-item--2">
           <span></span>

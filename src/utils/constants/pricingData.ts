@@ -7,7 +7,7 @@ export const pricingData = [
             "Graphs",
         ],
         animation: "fade-right",
-        action: {title:"Sign in", link: "/signin"}
+        action: {title:"Sign in", link: "/sign_in"}
     },
    /* {
         name: "Standard",

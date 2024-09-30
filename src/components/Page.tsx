@@ -17,7 +17,7 @@ export const Page: FC<Props> = ({ children, image }) => {
                     left: 0,
                     width: "100%",
                     height: "67%",
-                    maxHeight: "135vh",
+                    maxHeight: "165vh",
                     opacity: 0.6,
                     zIndex: 1,
                     backgroundSize: "cover",

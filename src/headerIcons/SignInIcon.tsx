@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useUserContext } from "../utils/providers/providerUser.tsx";
 import { Dropdown } from "react-bootstrap";
+import {SignInLink} from "../components/modules/signIn/SignInLink.tsx";
 
 export const SignInIcon: FC = () => {
     const { t } = useTranslation();
@@ -29,13 +30,7 @@ export const SignInIcon: FC = () => {
                 </Dropdown.Menu>
             </Dropdown>
         ) : (
-            <Link
-                to="/sign_in"
-                className="trk-btn--border trk-btn--primary none"
-                style={{ color: "black", borderRadius: "10px" }}
-            >
-                {t("Sign in")}
-            </Link>
+            <SignInLink />
         )
     );
 }

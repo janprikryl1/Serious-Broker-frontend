@@ -4,7 +4,8 @@ import { getAllCryptocurrencies, getSearchCryptocurrencies } from "../../../../a
 import { CryptoCurrencyLink } from "./CryptoCurrencyLink.tsx";
 import { CryptoCurrenciesSkeleton } from "./CryptoCurrenciesSkeleton.tsx";
 import { useTranslation } from "react-i18next";
-import { Button, Col, Row } from "react-bootstrap";
+import { Col, Row } from "react-bootstrap";
+import {Pagination} from "../../../Pagiation.tsx";
 
 const PAGE_SIZE = 50;
 
@@ -12,15 +13,15 @@ export const CryptoCurrencies: FC = () => {
     const { t } = useTranslation();
     const [cryptocurrencies, setCryptocurrencies] = useState<CryptoCurrencyType[]>([]);
     const [searchValue, setSearchValue] = useState("");
-    const [page, setPage] = useState(1);
-    const [totalPages, setTotalPages] = useState<number | null>(null);
+    const [currentPage, setCurrentPage] = useState<number>(1);
+    const [totalPages, setTotalPages] = useState<number>(1);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const res = searchValue
-                    ? await getSearchCryptocurrencies(searchValue, page, PAGE_SIZE)
-                    : await getAllCryptocurrencies(page, PAGE_SIZE);
+                    ? await getSearchCryptocurrencies(searchValue, currentPage, PAGE_SIZE)
+                    : await getAllCryptocurrencies(currentPage, PAGE_SIZE);
 
                 setCryptocurrencies(res.data.data);
                 setTotalPages(res.data.totalPages || 1);
@@ -29,15 +30,15 @@ export const CryptoCurrencies: FC = () => {
             }
         };
         fetchData();
-    }, [page, searchValue]);
+    }, [currentPage, searchValue]);
 
     const handleSearch = async () => {
-        setPage(1);
+        setCurrentPage(1);
     };
 
     const handlePageChange = (newPage: number) => {
-        if (newPage > 0 && newPage <= (totalPages || 1)) {
-            setPage(newPage);
+        if (newPage >= 1 && newPage <= totalPages) {
+            setCurrentPage(newPage);
         }
     };
 
@@ -72,38 +73,11 @@ export const CryptoCurrencies: FC = () => {
                 <CryptoCurrenciesSkeleton />
             )}
 
-            <div className="paginations" data-aos="fade-up" data-aos-duration="1200">
-                <ul className="lab-ul d-flex flex-wrap justify-content-center mb-1">
-                    <li>
-                        <Button
-                            variant="outline-warning"
-                            onClick={() => handlePageChange(page - 1)}
-                            disabled={page <= 1}
-                        >
-                            <i className="fa-solid fa-angle-left me-2"></i> {t("Previous")}
-                        </Button>
-                    </li>
-                    {totalPages && [...Array(totalPages).keys()].map((p) => (
-                        <li key={p}>
-                            <Button
-                                variant={p + 1 === page ? "success" : "outline-warning"}
-                                onClick={() => handlePageChange(p + 1)}
-                            >
-                                {p + 1}
-                            </Button>
-                        </li>
-                    ))}
-                    <li>
-                        <Button
-                            variant="outline-warning"
-                            onClick={() => handlePageChange(page + 1)}
-                            disabled={page >= (totalPages || 1)}
-                        >
-                            {t("Next")} <i className="fa-solid fa-angle-right ms-2"></i>
-                        </Button>
-                    </li>
-                </ul>
-            </div>
+            <Pagination
+                currentPage={currentPage}
+                totalPages={totalPages}
+                onPageChange={handlePageChange}
+            />
         </>
     );
 };
