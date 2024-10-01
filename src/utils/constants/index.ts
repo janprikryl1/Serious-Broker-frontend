@@ -3,11 +3,11 @@ export const PROTECTED_ROUTES = ['/admin', '/profile', '/assets', '/most_profita
 export const pageLimit = 10;
 export const imageURL = "https://api.serious.broker/article/images/";
 
-export const facebookURL = "https://www.facebook.com/seriousbroker/";
-export const instagramURL = "https://www.instagram.com/seriousbroker/";
-export const linkedinURL = "https://www.linkedin.com/company/serious-broker/";
-export const youtubeURL = "https://www.youtube.com/channel/UC0-0-0";
-export const twitterURL = "https://twitter.com/seriousbroker/";
+export const facebookURL = "https://www.facebook.com/profile.php?id=61566158057883";
+export const instagramURL = "https://www.instagram.com/serious_broker/?igsh=MTVsM3NqMmFxaTNsaQ%3D%3D&utm_source=qr";
+export const linkedinURL = "https://www.linkedin.com/in/serious-broker-5a1584330/";
+export const youtubeURL = "http://www.youtube.com/@SeriousBroker";
+export const twitterURL = "https://x.com/SeriousBroker";
 
 export const phoneNumber = "+420 000 000 000";
 export const contactEmail = "pri0207@vsb.cz";

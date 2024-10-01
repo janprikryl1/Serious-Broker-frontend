@@ -18,7 +18,7 @@ export const LastGraphs: FC<Props> = ({ lastMostProfitable }) => {
     };
 
     return (
-        <div className="row" style={{ minHeight: '100vh' }}>
+        <div className="row" style={{ minHeight: '100vh', maxWidth: '100%' }}>
             <div className="col-12 d-flex justify-content-center align-items-center" style={{ flexDirection: 'column' }}>
                 <div className="d-flex align-items-center">
                     <h2 className="me-2">

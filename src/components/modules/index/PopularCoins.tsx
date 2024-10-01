@@ -5,12 +5,16 @@ import { useEffect, useState } from "react";
 import { getPopularCoins } from "../../../api/indexDataService.ts";
 import { LastCoinmarketCupCoinsType } from "../../../utils/types/indexPage/LastCoinmarketCupCoinsType.ts";
 import { useUserContext } from "../../../utils/providers/providerUser.tsx";
-import {SignInLink} from "../signIn/SignInLink.tsx";
+import { SignInLink } from "../signIn/SignInLink.tsx";
+import { useMediaQuery } from "@mui/material";  // Import useMediaQuery
 
 export const PopularCoins = () => {
     const { t } = useTranslation();
     const { user } = useUserContext();
     const [coins, setCoins] = useState<LastCoinmarketCupCoinsType[]>();
+
+    // Detect if the screen size is mobile using useMediaQuery
+    const isMobile = useMediaQuery('(max-width:768px)');
 
     useEffect(() => {
         const getPopularData = async () => {
@@ -21,7 +25,7 @@ export const PopularCoins = () => {
     }, []);
 
     return (
-        <div className="container padding-top padding-bottom">
+        <div className="container padding-top padding-bottom" style={{ maxWidth: "100%" }}>
             <div className="cta__wrapper">
                 <div className="">
                     <div
@@ -42,8 +46,12 @@ export const PopularCoins = () => {
                                         <th>Coin</th>
                                         <th>{t("Positions in week 0: ")}</th>
                                         <th>{t("Week 0 profit: ")}</th>
-                                        <th>{t("Week 1 position: ")}</th>
-                                        <th>{t("Week 1 profit: ")}</th>
+                                        {!isMobile && (
+                                            <>
+                                                <th>{t("Week 1 position: ")}</th>
+                                                <th>{t("Week 1 profit: ")}</th>
+                                            </>
+                                        )}
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -53,13 +61,13 @@ export const PopularCoins = () => {
                                             <td>{coin.asset_label}</td>
                                             <td>{coin.week_0_pos}</td>
                                             <td>{((coin.week_0_profit - 1) * 100).toFixed(2)} %</td>
-                                            {user ? (
+                                            {!isMobile && user ? (
                                                 <>
                                                     <td>{coin.week_1_pos}</td>
                                                     <td>{((coin.week_1_profit! - 1) * 100).toFixed(2)} %</td>
                                                 </>
                                             ) : (
-                                                index === Math.round(coins.length/2) && (
+                                                !isMobile && index === Math.round(coins.length / 2) && (
                                                     <td colSpan={2} rowSpan={coins.length}>
                                                         <SignInLink style={{fontSize: "20px", padding: "10px"}}/>
                                                     </td>

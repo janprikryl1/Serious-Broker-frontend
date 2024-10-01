@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Link} from 'react-router-dom';
+import {Link, useLocation} from 'react-router-dom';
 import {useTranslation} from "react-i18next";
 import {SignInIcon} from "../headerIcons/SignInIcon.tsx";
 import {ThemeSwitchIcon} from "../headerIcons/themeSwitch/ThemeSwitchIcon.tsx";
@@ -13,6 +13,7 @@ export const Header: React.FC = () => {
     const {t} = useTranslation();
     const {user} = useUserContext();
     const {theme} = useThemeContext();
+    const location = useLocation();
     const [menu, setMenu] = useState<boolean>(false);
     const [scrollTop, setScrollTop] = useState<number>(0);
 
@@ -68,6 +69,12 @@ export const Header: React.FC = () => {
         closeAllMenus();
     };
 
+    useEffect(() => {
+        if (menu) {
+            toggleMenu();
+        }
+    }, [location.pathname]);
+
     const toggleActive = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
         event.preventDefault()
         const mediaQuery = window.matchMedia('(max-width: 991px)');
@@ -99,35 +106,43 @@ export const Header: React.FC = () => {
                                     <Link to={routes.articles} className="link-underline-none">{t("Articles")}</Link>
                                 </li>
                                 <li className="menu-item-has-children">
-                                    <Link to={routes.graphs} onClick={toggleActive} className="link-underline-none">{t("Graphs")}</Link>
+                                    <Link to={routes.graphs} onClick={toggleActive}
+                                          className="link-underline-none">{t("Graphs")}</Link>
                                     <ul className="submenu">
-                                        <li><Link to={routes.recommendation} className="link-underline-none">{t("Recommendation")}</Link></li>
+                                        <li><Link to={routes.recommendation}
+                                                  className="link-underline-none">{t("Recommendation")}</Link></li>
                                         {user && (
                                             <>
-                                                <li><Link to={routes.assets} className="link-underline-none">{t("Assets")}</Link></li>
+                                                <li><Link to={routes.assets}
+                                                          className="link-underline-none">{t("Assets")}</Link></li>
                                                 <li><Link to={routes.mostProfitableAssets}
-                                                          className="link-underline-none">{t("Most profitable assets")}</Link></li>
+                                                          className="link-underline-none">{t("Most profitable assets")}</Link>
+                                                </li>
                                             </>
                                         )}
                                     </ul>
                                 </li>
                                 <li>
-                                <Link to={routes.contact} className="link-underline-none">{t("Contact")}</Link>
+                                    <Link to={routes.contact} className="link-underline-none">{t("Contact")}</Link>
                                 </li>
                                 <li>
-                                    <ChangeLanguageIcon/>
-                                </li>
-                                <li>
-                                    <ThemeSwitchIcon/>
-                                </li>
-                                <li>
-                                    <SignInIcon/>
+                                    <div className="d-flex align-items-center">
+                                        <div className="mx-2">
+                                            <ChangeLanguageIcon/>
+                                        </div>
+                                        <div className="mx-2">
+                                            <ThemeSwitchIcon/>
+                                        </div>
+                                        <div className="mx-2">
+                                            <SignInIcon />
+                                        </div>
+                                    </div>
                                 </li>
                             </ul>
                         </div>
                         <div className="header-action">
                             <div className="menu-area">
-                                
+
                                 <div
                                     className={menu ? "header-bar d-lg-none header-bar--style1 active" : "header-bar d-lg-none header-bar--style1"}
                                     onClick={toggleMenu}>

@@ -31,7 +31,7 @@ export const SignInIcon: FC = () => {
                 </Dropdown.Menu>
             </Dropdown>
         ) : (
-            <SignInLink />
+            <SignInLink style={{fontSize: "20px", padding: "10px"}}/>
         )
     );
 }

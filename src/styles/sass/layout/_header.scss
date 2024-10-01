@@ -198,6 +198,7 @@
   @extend %d-flex,
   %mb-0;
   column-gap: 10px;
+  border-radius: 20px;
 
   >li {
     >a {

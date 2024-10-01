@@ -48,12 +48,7 @@ export const LastGraphComponent: FC<Props> = ({ data, selectedPeriod }) => {
     const xAxisLabels = dataY.map((_, index) => [index]);
 
     return (
-        <div className="col-sm-4" style={{
-            width: "auto",
-            backgroundColor: theme === 'dark' ? "#69737e" : 'transparent',
-            borderRadius: 24,
-            margin: "20px"
-        }} key={uuidv4()}>
+        <div className="col-sm-4" style={{width: "auto", backgroundColor: theme === 'dark' ? "#69737e" : 'transparent', borderRadius: 24, margin: "20px", maxWidth:"100%", overflow: "hidden"}} key={uuidv4()}>
             <LineChart
                 xAxis={[{ data: xAxisLabels }]}
                 series={[{

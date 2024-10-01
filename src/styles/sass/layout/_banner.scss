@@ -526,6 +526,7 @@
             align-items: center;
             justify-content: center;
             filter: drop-shadow(0 0 1em $brand-color);
+            transition: filter 0.5s ease-in-out;
         }
 
     }
