@@ -72,6 +72,13 @@ export const adminURLS = {
     feedbacks: "/admin/feedbacks"
 }
 
+const colors = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#FF4D4D', '#4D80FF', '#4DD0E1', '#80FF80', '#80C4FF', '#C4A0FF', '#FFA0A0', '#FF8080', '#A04D80', '#8080FF', '#80FFFF', '#FFFF80', '#00FF80', '#008000', '#0000FF'];
+
+// Funkce pro výběr náhodné barvy
+export const getRandomColor = () => {
+    return colors[Math.floor(Math.random() * colors.length)];
+};
+
 //Date functions
 export const toCzechDateFormat = (dateRaw: string): string => {
     const date = new Date(dateRaw);

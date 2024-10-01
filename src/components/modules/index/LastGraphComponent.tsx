@@ -3,13 +3,12 @@ import { v4 as uuidv4 } from 'uuid';
 import { LineChart } from "@mui/x-charts";
 import { LastMostProfitableCoins } from "../../../utils/types/indexPage/LastMostProfitableCoins.ts";
 import { useThemeContext } from "../../../utils/providers/ThemeProvider.tsx";
+import {getRandomColor} from "../../../utils/constants";
 
 type Props = {
     data: LastMostProfitableCoins;
     selectedPeriod: string;
 };
-
-const colors = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
 
 export const LastGraphComponent: FC<Props> = ({ data, selectedPeriod }) => {
     const { theme } = useThemeContext();
@@ -63,7 +62,7 @@ export const LastGraphComponent: FC<Props> = ({ data, selectedPeriod }) => {
                 }]}
                 width={500}
                 height={300}
-                colors={[colors[0]]}
+                colors={[getRandomColor()]}
             />
         </div>
     );
