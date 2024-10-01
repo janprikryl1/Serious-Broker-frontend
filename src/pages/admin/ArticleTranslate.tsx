@@ -7,6 +7,7 @@ import {Button} from "react-bootstrap";
 import {ArticlesSkeleton} from "../../components/modules/articles/ArticlesSkeleton.tsx";
 import {TranslationCard} from "../../components/modules/admin/translations/TranslationCard.tsx";
 import {ArticleDetailProps} from "../../utils/types/article/ArticleDetailProps.ts";
+import {adminURLS} from "../../utils/constants";
 
 export const ArticleTranslate:FC = () => {
     const {id} = useParams();
@@ -41,7 +42,7 @@ export const ArticleTranslate:FC = () => {
                                 data-aos-duration="900"
                             >
                                 <h3>{t("Translations for article ")}{article?.title}</h3>
-                                <Link to={`/admin/translations/${id}`}><Button
+                                <Link to={`${adminURLS.translations}${id}`}><Button
                                     variant="outline-warning">{t("New translation")}</Button></Link>
                                 <div className="container padding-top padding-bottom">
                                     <div className="blog__wrapper">

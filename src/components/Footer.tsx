@@ -4,6 +4,7 @@ import ScrollToTop from "react-scroll-to-top";
 import {useTranslation} from "react-i18next";
 import {SocialLinkIcon} from "./modules/contact/SocialLinkIcon.tsx";
 import footer1 from "../utils/icons/footer/1.png";
+import {facebookURL, instagramURL, routes} from "../utils/constants";
 
 
 export const Footer:FC = () => {
@@ -27,7 +28,7 @@ export const Footer:FC = () => {
                     <div className="footer__links">
                       <div className="footer__links-content">
                         <ul className="footer__linklist">
-                          <li className="footer__linklist-item"><Link to="/about" className="none">{t("About us")}</Link></li>
+                          <li className="footer__linklist-item"><Link to={routes.about} className="link-underline-none">{t("About us")}</Link></li>
                         </ul>
                       </div>
                     </div>
@@ -37,7 +38,7 @@ export const Footer:FC = () => {
                     <div className="footer__links">
                       <div className="footer__links-content">
                         <ul className="footer__linklist">
-                          <li className="footer__linklist-item"><Link to="/contact" className="none">{t("Contact")}</Link></li>
+                          <li className="footer__linklist-item"><Link to={routes.contact} className="link-underline-none">{t("Contact")}</Link></li>
                         </ul>
                       </div>
                     </div>
@@ -52,8 +53,8 @@ export const Footer:FC = () => {
                   </div>
                   <div>
                     <ul className="social">
-                      <SocialLinkIcon href="#" icon="fab fa-facebook-f" />
-                      <SocialLinkIcon href="#" icon="fab fa-instagram" />
+                      <SocialLinkIcon href={facebookURL} icon="fab fa-facebook-f" />
+                      <SocialLinkIcon href={instagramURL} icon="fab fa-instagram" />
                     </ul>
                   </div>
                 </div>

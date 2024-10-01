@@ -8,6 +8,7 @@ import { RecentPost } from "../components/modules/article/RecentPost.tsx";
 import { ArticleSkeleton } from "../components/modules/article/ArticleSkeleton.tsx";
 import { useTranslation } from "react-i18next";
 import { Button } from "react-bootstrap";
+import {routes} from "../utils/constants";
 
 export const CryptoCurrencyDetail: FC = () => {
     const { id } = useParams();
@@ -30,7 +31,7 @@ export const CryptoCurrencyDetail: FC = () => {
     }, [id]);
 
     const goBack = () => {
-        navigate("/crypto_currencies_list");
+        navigate(routes.cryptocurrenciesList);
     };
 
     return (
@@ -53,13 +54,13 @@ export const CryptoCurrencyDetail: FC = () => {
                                             />
                                         )}
                                         <p>{t("Price: ")} {cryptocurrency.price}$</p>
-                                        <p>{t("Website:")} <a className="none" href={cryptocurrency.website}>{cryptocurrency.website}</a></p>
+                                        <p>{t("Website:")} <a className="link-underline-none" href={cryptocurrency.website}>{cryptocurrency.website}</a></p>
                                         <p>{t("Marketcup: ")} {cryptocurrency.marketcap}</p>
                                         {cryptocurrency.max_supply !== 0 && <p>{t("Total supply: ")} {cryptocurrency.max_supply}{" "}{t("coins")}</p>}
                                         <p>{t("Circulating supply: ")} {cryptocurrency.circulating_supply}{" "}{t("coins")}</p>
-                                        {cryptocurrency.reddit && <p>{t("Reddit: ")} <a className="none" href={cryptocurrency.reddit}>{cryptocurrency.reddit}</a></p>}
-                                        {cryptocurrency.twitter && <p>{t("Twitter: ")} <a className="none" href={cryptocurrency.twitter}>{cryptocurrency.twitter}</a></p>}
-                                        {cryptocurrency.telegram && <p>{t("Telegram: ")} <a className="none" href={cryptocurrency.telegram}>{cryptocurrency.telegram}</a></p>}
+                                        {cryptocurrency.reddit && <p>{t("Reddit: ")} <a className="link-underline-none" href={cryptocurrency.reddit}>{cryptocurrency.reddit}</a></p>}
+                                        {cryptocurrency.twitter && <p>{t("Twitter: ")} <a className="link-underline-none" href={cryptocurrency.twitter}>{cryptocurrency.twitter}</a></p>}
+                                        {cryptocurrency.telegram && <p>{t("Telegram: ")} <a className="link-underline-none" href={cryptocurrency.telegram}>{cryptocurrency.telegram}</a></p>}
                                         <p>{t("CMC rank: ")} {cryptocurrency.cmc_rank}</p>
                                         <p>{t("Categories: ")} {cryptocurrency.categories}</p>
                                         <Button variant="primary" style={{ marginTop: 30 }} onClick={goBack}>

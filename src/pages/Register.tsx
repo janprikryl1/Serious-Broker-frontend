@@ -9,6 +9,7 @@ import {Accordion} from "react-bootstrap";
 import {CountrySelect} from "../components/modules/signIn/CountrySelect.tsx";
 import {register} from "../api/authenticateService.ts";
 import {useUserContext} from "../utils/providers/providerUser.tsx";
+import {routes} from "../utils/constants";
 
 
 export const Register:FC = () => {
@@ -17,7 +18,7 @@ export const Register:FC = () => {
     const {setUser, user} = useUserContext();
 
     useEffect(() => {
-        if (user) navigate("/profile");    
+        if (user) navigate(routes.profile);    
     }, [user]);
     
     const [registerData, setRegisterData] = useState<registerUserType>({
@@ -53,7 +54,7 @@ export const Register:FC = () => {
                     text: "",
                 }).then(() => {
                     setUser(response.user);
-                    navigate("/");
+                    navigate(routes.home);
                 });
             } else if (response.status === "error") {
                 if (response.message === "Email already used") {
@@ -146,8 +147,8 @@ export const Register:FC = () => {
 
                                     <div className="account__switch">
                                         <p>
-                                            {t("Already have account? ")}<Link to="/sign_in"
-                                                                               className="none">{t("Login")}</Link>
+                                            {t("Already have account? ")}<Link to={routes.signIn}
+                                                                               className="link-underline-none">{t("Login")}</Link>
                                         </p>
                                     </div>
                                 </div>

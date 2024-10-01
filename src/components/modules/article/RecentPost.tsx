@@ -3,6 +3,7 @@ import {Link} from "react-router-dom";
 import {useTranslation} from "react-i18next";
 import {getRecentArticles} from "../../../api/articleService.ts";
 import {RecentArticleProps} from "../../../utils/types/article/RecentArticleProps.ts";
+import {routes} from "../../../utils/constants";
 
 export const RecentPost:FC = () => {
     const {t} = useTranslation();
@@ -33,7 +34,7 @@ export const RecentPost:FC = () => {
                         <div className="sidebar__recentpost-item">
                             <div className="sidebar__recentpost-inner">
                                 <div className="sidebar__recentpost-content">
-                                    <p><Link to={`/article/${data.id}`} className="none">{data.title}</Link></p>
+                                    <p><Link to={`${routes.articleURL}${data.id}`} className="link-underline-none">{data.title}</Link></p>
                                 </div>
                             </div>
                         </div>

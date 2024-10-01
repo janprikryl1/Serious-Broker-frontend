@@ -8,6 +8,7 @@ import {getAllArticlesAdmin} from "../../api/articleService.ts";
 import Swal from "sweetalert2";
 import {Pagination} from "../../components/Pagiation.tsx";
 import {ArticleAdminCard} from "../../components/modules/admin/articleManagement/ArticleAdminCard.tsx";
+import {adminURLS} from "../../utils/constants";
 
 export const ArticleManagement:FC = () => {
     const { t } = useTranslation();
@@ -55,7 +56,7 @@ export const ArticleManagement:FC = () => {
                                 data-aos-duration="900"
                             >
                                 <h3>{t("Article management")}</h3>
-                                <Link to="/admin/articles/new"><Button variant="outline-warning">{t("New article")}</Button></Link>
+                                <Link to={adminURLS.articleNew}><Button variant="outline-warning">{t("New article")}</Button></Link>
                                 <div className="container padding-top padding-bottom">
                                     <div className="blog__wrapper">
                                         <div className="row g-4">
@@ -64,7 +65,7 @@ export const ArticleManagement:FC = () => {
                                             ) : (
                                                 articles.map((item) => (
                                                     <div key={item.id} className="col-sm-6 col-lg-4">
-                                                        <ArticleAdminCard data={item} link="admin/articles/edit" setArticles={setArticles} />
+                                                        <ArticleAdminCard data={item} link={adminURLS.articleEdit} setArticles={setArticles} />
                                                     </div>
                                                 ))
                                             )}

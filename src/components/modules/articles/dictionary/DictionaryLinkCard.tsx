@@ -1,6 +1,7 @@
 import {FC} from "react";
 import {Link} from "react-router-dom";
 import {useTranslation} from "react-i18next";
+import {routes} from "../../../../utils/constants";
 
 export const DictionaryLinkCard:FC = () => {
     const {t} = useTranslation();
@@ -16,7 +17,7 @@ export const DictionaryLinkCard:FC = () => {
                             </span>
                         </div>
                         <h5 className="10 style2">
-                            <Link to="/dictionary" className="none"> {t("Glossary of terms")}</Link>
+                            <Link to={routes.dictionary} className="link-underline-none"> {t("Glossary of terms")}</Link>
                         </h5>
                         <p className="mb-15"
                            style={{height: 100}}>{t("Glossary of terms in the cryptocurrency world")}</p>

@@ -6,6 +6,7 @@ import Swal from "sweetalert2";
 import {LoginRegisterInput} from "../components/modules/signIn/LoginRegisterInput.tsx";
 import {useUserContext} from "../utils/providers/providerUser.tsx";
 import {login} from "../api/authenticateService.ts";
+import {routes} from "../utils/constants";
 
 export const SignIn: FC = () => {
     const {t} = useTranslation();
@@ -16,7 +17,7 @@ export const SignIn: FC = () => {
     const {setUser, user} = useUserContext();
 
     useEffect(() => {
-        if (user) navigate("/profile");
+        if (user) navigate(routes.profile);
     }, [user]);
     
     const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
@@ -35,7 +36,7 @@ export const SignIn: FC = () => {
                     icon: "success", title: t("Login Successful"), text: t("Welcome back!"),
                 }).then(() => {
                     setUser(response.data.user);
-                    navigate("/profile");
+                    navigate(routes.profile);
                 });
             } else if (data.status === "error") {
                 if (data.message === "Invalid email or password") {
@@ -85,8 +86,8 @@ export const SignIn: FC = () => {
                                     </form>
                                     <div className="account__switch">
                                         <p>
-                                            {t("Don’t have an account yet? ")}<Link to="/register"
-                                                                                    className="none">{t("Register")}</Link>
+                                            {t("Don’t have an account yet? ")}<Link to={routes.register}
+                                                                                    className="link-underline-none">{t("Register")}</Link>
                                         </p>
                                     </div>
                                 </div>

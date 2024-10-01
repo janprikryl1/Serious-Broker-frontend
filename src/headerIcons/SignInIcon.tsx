@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import { useUserContext } from "../utils/providers/providerUser.tsx";
 import { Dropdown } from "react-bootstrap";
 import {SignInLink} from "../components/modules/signIn/SignInLink.tsx";
+import {adminURLS, routes} from "../utils/constants";
 
 export const SignInIcon: FC = () => {
     const { t } = useTranslation();
@@ -16,11 +17,11 @@ export const SignInIcon: FC = () => {
                     {user.firstname} {user.surname}
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
-                    <Dropdown.Item as={Link} to="/profile">
+                    <Dropdown.Item as={Link} to={routes.profile}>
                         {t("Profile")}
                     </Dropdown.Item>
                     {user.role === "admin" && (
-                        <Dropdown.Item as={Link} to="/admin">
+                        <Dropdown.Item as={Link} to={adminURLS.index}>
                             Admin panel
                         </Dropdown.Item>
                     )}

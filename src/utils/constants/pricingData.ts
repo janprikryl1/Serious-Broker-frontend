@@ -1,3 +1,5 @@
+import {routes} from "./index.ts";
+
 export const pricingData = [
     {
         name: "Basic",
@@ -7,7 +9,7 @@ export const pricingData = [
             "Graphs",
         ],
         animation: "fade-right",
-        action: {title:"Sign in", link: "/sign_in"}
+        action: {title:"Sign in", link: routes.signIn}
     },
    /* {
         name: "Standard",
@@ -32,6 +34,6 @@ export const pricingData = [
             "Trading assistance",
         ],
         animation: "fade-left",
-        action: {title:"Inquiry", link: "/inquiry"}
+        action: {title:"Inquiry", link: routes.inquiry}
     },
 ]

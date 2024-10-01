@@ -2,6 +2,7 @@ import { FC, useEffect } from "react";
 import { useUserContext } from "../../utils/providers/providerUser.tsx";
 import { useNavigate, Outlet, Navigate } from "react-router-dom";
 import { Sidebar } from "../../components/modules/admin/Sidebar.tsx";
+import {routes} from "../../utils/constants";
 
 export const Admin: FC = () => {
     const { user } = useUserContext();
@@ -9,12 +10,12 @@ export const Admin: FC = () => {
 
     useEffect(() => {
         if (!user) {
-            navigate("/");
+            navigate(routes.home);
         }
     }, [user]);
 
     if (!user) {
-        return <Navigate to="/" />;
+        return <Navigate to={routes.home}/>;
     }
 
     return (

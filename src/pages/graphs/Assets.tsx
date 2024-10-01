@@ -7,7 +7,7 @@ import { AssetType } from "../../utils/types/asset/AssetType.ts";
 import { v4 as uuidv4 } from 'uuid';
 import { AssetSkeleton } from "../../components/modules/graphs/asset/AssetSkeleton.tsx";
 import { AssetCard } from "../../components/modules/graphs/asset/AssetCard.tsx";
-import { pageLimit } from "../../utils/constants";
+import {pageLimit, routes} from "../../utils/constants";
 import {Pagination} from "../../components/Pagiation.tsx";
 
 export const Assets: FC = () => {
@@ -33,7 +33,7 @@ export const Assets: FC = () => {
 
     useEffect(() => {
         if (!user) {
-            navigate("/");
+            navigate(routes.home);
         }
     }, [user]);
 

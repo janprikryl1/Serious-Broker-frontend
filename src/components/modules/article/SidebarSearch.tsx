@@ -1,6 +1,7 @@
 import {FC, FormEvent, useState} from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+import {routes} from "../../../utils/constants";
 
 type Props = {
     param?: string;
@@ -14,7 +15,7 @@ export const SidebarSearch: FC<Props> = ({ param = "" }) => {
     const handleSearch = (e: FormEvent) => {
         e.preventDefault();
         if (searchText.trim()) {
-            navigate(`/search/${encodeURIComponent(searchText.trim())}`);
+            navigate(`${routes.searchURL}${encodeURIComponent(searchText.trim())}`);
         }
     };
 

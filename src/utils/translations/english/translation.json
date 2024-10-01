@@ -418,6 +418,10 @@
     "Coinmarketcap rank": "Coinmarketcap rank",
     "Coinmarketcap rank: ": "Coinmarketcap rank: ",
     "Last Coinmarketcap Coins": "Last Coinmarketcap Coins",
-    "Profit for last 3 weeks in ": "Profit for last 3 weeks in ",
+    "Profit for last ": "Profit for last ",
+    "weeks": "weeks",
+    "months": "months",
+    "quarters": "quarters",
+    "years": "years",
     "Looking for more?": "Looking for more?"
 }

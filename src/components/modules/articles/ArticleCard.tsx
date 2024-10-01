@@ -22,7 +22,7 @@ export const ArticleCard:FC<Props> = ({data, link = "article"}) => {
                             </span>
                         </div>
                         <h5 className="10 style2">
-                            <Link to={`/${link}/${data.id}`} className="none">{data.title}</Link>
+                            <Link to={`/${link}/${data.id}`} className="link-underline-none">{data.title}</Link>
                         </h5>
 
                         <p className="mb-15" style={{height: 100}}>{data.description}</p>

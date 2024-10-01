@@ -7,6 +7,7 @@ import {ChangeLanguageIcon} from "../headerIcons/languageSwitchIcon/ChangeLangua
 import Logo from "../utils/icons/logo/symbol.svg"
 import {useUserContext} from "../utils/providers/providerUser.tsx";
 import {useThemeContext} from "../utils/providers/ThemeProvider.tsx";
+import {routes} from "../utils/constants";
 
 export const Header: React.FC = () => {
     const {t} = useTranslation();
@@ -88,30 +89,30 @@ export const Header: React.FC = () => {
                 <div className="container">
                     <div className="header-wrapper">
                         <div className="logo">
-                            <Link to="/">
+                            <Link to={routes.home}>
                                 <img className={theme === "dark" ? "logo-dark" : ""} src={Logo} alt="logo"/>
                             </Link>
                         </div>
                         <div className="menu-area">
                             <ul id="menu" className={`menu menu--style1 ${menu ? 'active' : ''}`}>
                                 <li style={{marginRight: "-10px"}}>
-                                    <Link to="/articles" className="none">{t("Articles")}</Link>
+                                    <Link to={routes.articles} className="link-underline-none">{t("Articles")}</Link>
                                 </li>
                                 <li className="menu-item-has-children">
-                                    <Link to="/graphs" onClick={toggleActive} className="none">{t("Graphs")}</Link>
+                                    <Link to={routes.graphs} onClick={toggleActive} className="link-underline-none">{t("Graphs")}</Link>
                                     <ul className="submenu">
-                                        <li><Link to="/recommendation" className="none">{t("Recommendation")}</Link></li>
+                                        <li><Link to={routes.recommendation} className="link-underline-none">{t("Recommendation")}</Link></li>
                                         {user && (
                                             <>
-                                                <li><Link to="/assets" className="none">{t("Assets")}</Link></li>
-                                                <li><Link to="/most_profitable_assets"
-                                                          className="none">{t("Most profitable assets")}</Link></li>
+                                                <li><Link to={routes.assets} className="link-underline-none">{t("Assets")}</Link></li>
+                                                <li><Link to={routes.mostProfitableAssets}
+                                                          className="link-underline-none">{t("Most profitable assets")}</Link></li>
                                             </>
                                         )}
                                     </ul>
                                 </li>
                                 <li>
-                                <Link to="contact" className="none">{t("Contact")}</Link>
+                                <Link to={routes.contact} className="link-underline-none">{t("Contact")}</Link>
                                 </li>
                                 <li>
                                     <ChangeLanguageIcon/>

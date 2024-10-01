@@ -1,5 +1,6 @@
 import {FC} from "react";
 import {Link} from "react-router-dom";
+import {routes} from "../../../../utils/constants";
 
 type Props = {
     id: number;
@@ -13,7 +14,7 @@ export const AssetCard:FC<Props> = ({id, label, details}) => {
             <div className="blog__item-inner blog__item-inner--style2">
                 <div className="blog__content">
                     <h5 className="10 style2">
-                        <Link to={"/asset_graph/" + id} className="none">{label}</Link>
+                        <Link to={`${routes.assetGraphURL}${id}`} className="link-underline-none">{label}</Link>
                     </h5>
                     <p className="mb-15">{details}</p>
                 </div>

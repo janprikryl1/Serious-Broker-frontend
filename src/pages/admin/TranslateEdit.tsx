@@ -3,9 +3,7 @@ import {ArticleTranslateProvider} from "../../utils/providers/ArticleTranslatePr
 import {ButtonToolbar} from "react-bootstrap";
 import {TranslateUpdateButton} from "../../components/modules/admin/translations/TranslateUpdateButton.tsx";
 import {NewTranslationContent} from "../../components/modules/admin/translations/NewTranslationContent.tsx";
-import {
-    NewTranslationPagesTitleDescriptionLanguage
-} from "../../components/modules/admin/translations/NewTranslationPagesTitleDescriptionLanguage.tsx";
+import {NewTranslationPagesTitleDescriptionLanguage} from "../../components/modules/admin/translations/NewTranslationPagesTitleDescriptionLanguage.tsx";
 
 export const TranslateEdit:FC = () => {
     return (

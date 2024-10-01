@@ -11,6 +11,7 @@ import {
     CDBSidebarMenu,
     CDBSidebarMenuItem
 } from 'cdbreact';
+import {adminURLS} from "../../../utils/constants";
 
 export const Sidebar: FC = () => {
     const { t } = useTranslation();
@@ -26,37 +27,37 @@ export const Sidebar: FC = () => {
                 <CDBSidebarContent className="sidebar-content">
                     <CDBSidebarMenu>
                         <NavLink
-                            to="/admin/users"
+                            to={adminURLS.users}
                             className={({ isActive }) => isActive ? 'activeClicked' : ''}
                         >
                             <CDBSidebarMenuItem icon="user">{t("User management")}</CDBSidebarMenuItem>
                         </NavLink>
                         <NavLink
-                            to="/admin/newsletter"
+                            to={adminURLS.newsletter}
                             className={({ isActive }) => isActive ? 'activeClicked' : ''}
                         >
                             <CDBSidebarMenuItem icon="chart-line">{t("Newsletter management")}</CDBSidebarMenuItem>
                         </NavLink>
                         <NavLink
-                            to="/admin/articles"
+                            to={adminURLS.articles}
                             className={({ isActive }) => isActive ? 'activeClicked' : ''}
                         >
                             <CDBSidebarMenuItem icon="table">{t("Article management")}</CDBSidebarMenuItem>
                         </NavLink>
                         <NavLink
-                            to="/admin/glossary"
+                            to={adminURLS.glossary}
                             className={({ isActive }) => isActive ? 'activeClicked' : ''}
                         >
                             <CDBSidebarMenuItem icon="exclamation-circle">{t("Glossary")}</CDBSidebarMenuItem>
                         </NavLink>
                         <NavLink
-                            to="/admin/log_table"
+                            to={adminURLS.logTable}
                             className={({ isActive }) => isActive ? 'activeClicked' : ''}
                         >
                             <CDBSidebarMenuItem icon="th-large">{t("Table logs")}</CDBSidebarMenuItem>
                         </NavLink>
                         <NavLink
-                            to="/admin/feedbacks"
+                            to={adminURLS.feedbacks}
                             className={({ isActive }) => isActive ? 'activeClicked' : ''}
                         >
                             <CDBSidebarMenuItem icon="sticky-note">{t("Feedbacks")}</CDBSidebarMenuItem>

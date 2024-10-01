@@ -3,7 +3,7 @@ import {useUserContext} from "../../utils/providers/providerUser.tsx";
 import {useNavigate, useParams} from "react-router-dom";
 import {getAssetById} from "../../api/binanceIndexAssets.ts";
 import {TitleHeader} from "../../components/modules/about/TitleHeader.tsx";
-import {toCzechDateFormat} from "../../utils/constants";
+import {routes, toCzechDateFormat} from "../../utils/constants";
 import {ChartComponent} from "../../components/modules/graphs/asset/ChartComponent.tsx";
 import {useTranslation} from "react-i18next";
 import {DataPointType} from "../../utils/types/asset/DataPointType.ts";
@@ -33,7 +33,7 @@ export const AssetGraph:FC = () => {
 
     useEffect(() => {
         if (!user) {
-            navigate("/");
+            navigate(routes.home);
         }
     }, [user]);
 

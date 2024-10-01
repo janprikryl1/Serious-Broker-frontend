@@ -1,7 +1,7 @@
 import {Dispatch, FC, SetStateAction} from "react";
 import {Link} from "react-router-dom";
 import {ArticleProps} from "../../../../utils/types/article/ArticleProps.ts";
-import {toCzechDateFormat} from "../../../../utils/constants";
+import {adminURLS, toCzechDateFormat} from "../../../../utils/constants";
 import {Button} from "react-bootstrap";
 import {FaComment, FaRegTrashAlt, FaShareAlt} from "react-icons/fa";
 import Swal from "sweetalert2";
@@ -44,7 +44,7 @@ export const ArticleAdminCard: FC<Props> = ({data, link = "article", setArticles
             <div className="blog__item-inner blog__item-inner--style2">
                 <div className="blog__content">
                     <h5 className="10 style2">
-                        <Link to={`/${link}/${data.id}`} className="none">{data.title}</Link>
+                        <Link to={`${link}${data.id}`} className="link-underline-none">{data.title}</Link>
                     </h5>
 
                     <p className="mb-15" style={{height: 100}}>{data.description}</p>
@@ -60,7 +60,7 @@ export const ArticleAdminCard: FC<Props> = ({data, link = "article", setArticles
                                 <FaRegTrashAlt />
                             </Button>
                             {data.allowComments !== "0" && (
-                                <Link to={`/admin/article/comments/${data.id}`} className="none">
+                                <Link to={`${adminURLS.articleComments}${data.id}`} className="link-underline-none">
                                     <Button
                                         variant="warning"
                                         className="ms-2 p-1"
@@ -69,7 +69,7 @@ export const ArticleAdminCard: FC<Props> = ({data, link = "article", setArticles
                                     </Button>
                                 </Link>
                             )}
-                            <Link to={`/admin/article/share/${data.id}`}>
+                            <Link to={`${adminURLS.articleShare}${data.id}`}>
                                 <Button
                                     variant="success"
                                     className="ms-2 p-1"
@@ -77,7 +77,7 @@ export const ArticleAdminCard: FC<Props> = ({data, link = "article", setArticles
                                     <FaShareAlt />
                                 </Button>
                             </Link>
-                            <Link to={`/admin/article/translate/${data.id}`}>
+                            <Link to={`${adminURLS.articleTranslate}${data.id}`}>
                                 <Button
                                     variant="secondary"
                                     className="ms-2 p-1"

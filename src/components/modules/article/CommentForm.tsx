@@ -3,6 +3,7 @@ import {useTranslation} from "react-i18next";
 import {addArticleComment} from "../../../api/commentsService.ts";
 import {CommentType} from "../../../utils/types/CommentType.ts";
 import {useUserContext} from "../../../utils/providers/providerUser.tsx";
+import {routes} from "../../../utils/constants";
 
 type Props = {
     articleId: number;
@@ -41,7 +42,7 @@ export const CommentForm: FC<Props> = ({articleId, setComments}) => {
                         <h3>{t("Leave a comment")}</h3>
                     </div>
                     <div className="sidebar__commentform-body pt-25">
-                        <form action="/">
+                        <form action={routes.home}>
                             <div className="row g-4">
                                 <div className="col-md-12">
                                     <div>

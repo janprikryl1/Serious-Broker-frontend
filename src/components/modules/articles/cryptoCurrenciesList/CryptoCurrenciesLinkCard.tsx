@@ -1,6 +1,7 @@
 import {FC} from "react";
 import {Link} from "react-router-dom";
 import {useTranslation} from "react-i18next";
+import {routes} from "../../../../utils/constants";
 
 export const CryptoCurrenciesLinkCard:FC = () => {
     const {t} = useTranslation();
@@ -16,7 +17,7 @@ export const CryptoCurrenciesLinkCard:FC = () => {
                             </span>
                         </div>
                         <h5 className="10 style2">
-                            <Link to="/crypto_currencies_list" className="none"> {t("Crypto currencies list")}</Link>
+                            <Link to={routes.cryptocurrenciesList} className="link-underline-none"> {t("Crypto currencies list")}</Link>
                         </h5>
                         <p className="mb-15"
                            style={{height: 100}}>{t("Interactive view of currencies with filters and information")}</p>

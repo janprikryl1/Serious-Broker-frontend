@@ -5,6 +5,15 @@ import { SocialLinkIcon } from "./SocialLinkIcon.tsx";
 import shibaInu from "../../../utils/icons/cta/shiba_inu.png";
 import { addFeedback } from "../../../api/feedbackService.ts";
 import Swal from "sweetalert2";
+import {
+  contactEmail,
+  facebookURL,
+  instagramURL,
+  linkedinURL,
+  phoneNumber,
+  twitterURL,
+  youtubeURL
+} from "../../../utils/constants";
 
 export const ContactCard: FC = () => {
   const { t } = useTranslation();
@@ -46,16 +55,16 @@ export const ContactCard: FC = () => {
                   <div className="contact__social">
                     <h3>{t("Welcome")}, <span>{t("Send us message")}</span>.</h3>
                     <ul className="social">
-                      <SocialLinkIcon href="#" icon="fab fa-facebook-f" />
-                      <SocialLinkIcon href="#" icon="fab fa-instagram" />
-                      <SocialLinkIcon href="#" icon="fa-brands fa-linkedin-in" />
-                      <SocialLinkIcon href="#" icon="fab fa-youtube" />
-                      <SocialLinkIcon href="#" icon="fab fa-twitter" />
+                      <SocialLinkIcon href={facebookURL} icon="fab fa-facebook-f" />
+                      <SocialLinkIcon href={instagramURL} icon="fab fa-instagram" />
+                      <SocialLinkIcon href={linkedinURL} icon="fa-brands fa-linkedin-in" />
+                      <SocialLinkIcon href={youtubeURL} icon="fab fa-youtube" />
+                      <SocialLinkIcon href={twitterURL} icon="fab fa-x-twitter" />
                     </ul>
                   </div>
                   <div className="contact__details">
-                    <LeftFloatingContactDetailsItem href="tel:+440" title="+420........." />
-                    <LeftFloatingContactDetailsItem href="mailto:pri0207@vsb.cz" title="pri0207@vsb.cz" />
+                    <LeftFloatingContactDetailsItem href={`tel:${phoneNumber}`} title={phoneNumber} />
+                    <LeftFloatingContactDetailsItem href={`mailto:${contactEmail}`} title={contactEmail} />
                     <LeftFloatingContactDetailsItem title="VŠB - Technická univerzita Ostrava" />
                   </div>
                 </div>

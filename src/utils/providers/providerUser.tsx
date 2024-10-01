@@ -2,7 +2,7 @@ import React, { createContext, useContext, useState, useEffect, ReactNode } from
 import { UserType } from "../types/user/userTypes.ts";
 import { isAuthenticated } from "../../api/authenticateService.ts";
 import { useNavigate, useLocation } from "react-router-dom";
-import {PROTECTED_ROUTES} from "../constants";
+import {PROTECTED_ROUTES, routes} from "../constants";
 import Logo from "../../utils/icons/logo/symbol.svg";
 
 type UserContextType = {
@@ -41,7 +41,7 @@ export const ProviderUser: React.FC<{ children: ReactNode }> = ({ children }) =>
             const isProtected = PROTECTED_ROUTES.some(route => currentPath.startsWith(route.replace(':id', '')));
 
             if (isProtected && user === null) {
-                navigate("/");
+                navigate(routes.home);
             }
         }
     }, [loading, user, location.pathname, navigate]);
@@ -49,7 +49,7 @@ export const ProviderUser: React.FC<{ children: ReactNode }> = ({ children }) =>
     const logout = () => {
         setUser(null);
         localStorage.removeItem('token');
-        navigate("/");
+        navigate(routes.home);
     };
 
     return (

@@ -2,6 +2,7 @@ import {FC} from "react";
 import {Link} from "react-router-dom";
 import {TitleHeader} from "../components/modules/about/TitleHeader.tsx";
 import {useTranslation} from "react-i18next";
+import {routes} from "../utils/constants";
 
 export const ErrorPage:FC = () => {
   const {t} = useTranslation();
@@ -18,7 +19,7 @@ export const ErrorPage:FC = () => {
                   <span>ooops!</span> {t("page not found")}
                 </h2>
                 <Link
-                  to="/"
+                  to={routes.home}
                   className="trk-btn trk-btn--border trk-btn--primary"
                 >
                   {t("Back to home")}

@@ -418,6 +418,10 @@
     "Coinmarketcap rank": "Rank Coinmarketcap",
     "Coinmarketcap rank: ": "Rank Coinmarketcap: ",
     "Last Coinmarketcap Coins": "Poslední Coinmarketcap mince",
-    "Profit for last 3 weeks in ": "Profit za poslední 3 týdny v ",
+    "Profit for last ": "Profit za poslední ",
+    "weeks": "týdny",
+    "months": "měsíce",
+    "quarters": "kvartály",
+    "years": "roky",
     "Looking for more?": "Zajímá vás víc?"
 }

@@ -45,6 +45,7 @@ import {NewsletterOverview} from "./pages/admin/NewsletterOverview.tsx";
 import {Feedbacks} from "./pages/admin/Feedbacks.tsx";
 import {ThemeProvider} from "./utils/providers/ThemeProvider.tsx";
 import {InquiryPrice} from "./pages/InquryPrice.tsx";
+import {adminURLS, routes} from "./utils/constants";
 
 // Disable automatic CSS addition for Font Awesome
 config.autoAddCss = false;
@@ -61,40 +62,40 @@ function App() {
               <ProviderUser>  
                 <Header/>
                   <Routes>
-                      <Route path="/" element={<Index/>}/>
-                      <Route path="/about" element={<About/>}/>
-                      <Route path="/contact" element={<Contact/>}/>
-                      <Route path="/articles" element={<Articles/>}/>
-                      <Route path="/article/:id/:language?" element={<Article/>}/>
-                      <Route path="/search/:text" element={<SearchArticles/>}/>
-                      <Route path="/assets" element={<Assets/>}/>
-                      <Route path="/most_profitable_assets" element={<MostProfitableAssets/>}/>
-                      <Route path="/asset_graph/:id" element={<AssetGraph/>}/>
-                      <Route path="/recommendation" element={<Recommendation/>}/>
-                      <Route path="/dictionary" element={<Glossary/>}/>
-                      <Route path="/crypto_currencies_list" element={<CryptoCurrenciesList/>}/>
-                      <Route path="/cryptocurrency_detail/:id" element={<CryptoCurrencyDetail/>}/>
-                      <Route path="/graphs/recommendation/detail/:asset_label" element={<RecommendationDetails/>}/>
-                      <Route path="/sign_in" element={<SignIn/>}/>
-                      <Route path="/register" element={<Register/>}/>
-                      <Route path="/profile" element={<Profile/>}/>
-                      <Route path="/admin" element={<Admin />}>
-                          <Route path="" element={<AdminOverview />} />
-                          <Route path="users" element={<UserManagment />} />
-                          <Route path="newsletter" element={<NewsletterOverview />} />
-                          <Route path="articles" element={<ArticleManagement />} />
-                          <Route path="articles/new" element={<EditArticle />} />
-                          <Route path="articles/edit/:id" element={<EditArticle />} />
-                          <Route path="article/comments/:id" element={<ArticleComments />} />
-                          <Route path="article/share/:id" element={<ArticleShare />} />
-                          <Route path="article/translate/:id" element={<ArticleTranslate />} />
-                          <Route path="translations/:articleId" element={<TranslateEdit />} />
-                          <Route path="translations/:articleId/:id" element={<TranslateEdit />} />
-                          <Route path="glossary" element={<GlossaryManagement />} />
-                          <Route path="log_table" element={<LogTable />} />
-                          <Route path="feedbacks" element={<Feedbacks />} />
+                      <Route path={routes.home} element={<Index/>}/>
+                      <Route path={routes.about} element={<About/>}/>
+                      <Route path={routes.contact} element={<Contact/>}/>
+                      <Route path={routes.articles} element={<Articles/>}/>
+                      <Route path={routes.article} element={<Article/>}/>
+                      <Route path={routes.search} element={<SearchArticles/>}/>
+                      <Route path={routes.assets} element={<Assets/>}/>
+                      <Route path={routes.mostProfitableAssets} element={<MostProfitableAssets/>}/>
+                      <Route path={routes.assetGraph} element={<AssetGraph/>}/>
+                      <Route path={routes.recommendation} element={<Recommendation/>}/>
+                      <Route path={routes.dictionary} element={<Glossary/>}/>
+                      <Route path={routes.cryptocurrenciesList} element={<CryptoCurrenciesList/>}/>
+                      <Route path={routes.cryptocurrencyDetail} element={<CryptoCurrencyDetail/>}/>
+                      <Route path={routes.graphsRecommendationDetail} element={<RecommendationDetails/>}/>
+                      <Route path={routes.signIn} element={<SignIn/>}/>
+                      <Route path={routes.register} element={<Register/>}/>
+                      <Route path={routes.profile} element={<Profile/>}/>
+                      <Route path={adminURLS.index} element={<Admin />}>
+                          <Route path={routes.admin.index} element={<AdminOverview />} />
+                          <Route path={routes.admin.users} element={<UserManagment />} />
+                          <Route path={routes.admin.newsletter} element={<NewsletterOverview />} />
+                          <Route path={routes.admin.articles} element={<ArticleManagement />} />
+                          <Route path={routes.admin.articleNew} element={<EditArticle />} />
+                          <Route path={routes.admin.articleEdit} element={<EditArticle />} />
+                          <Route path={routes.admin.articleComments} element={<ArticleComments />} />
+                          <Route path={routes.admin.articleShare} element={<ArticleShare />} />
+                          <Route path={routes.admin.articleTranslate} element={<ArticleTranslate />} />
+                          <Route path={routes.admin.translations} element={<TranslateEdit />} />
+                          <Route path={routes.admin.translationsEdit} element={<TranslateEdit />} />
+                          <Route path={routes.admin.glossary} element={<GlossaryManagement />} />
+                          <Route path={routes.admin.logTable} element={<LogTable />} />
+                          <Route path={routes.admin.feedbacks} element={<Feedbacks />} />
                       </Route>
-                      <Route path="inquiry" element={<InquiryPrice />}/>
+                      <Route path={routes.inquiry} element={<InquiryPrice />}/>
                       <Route path="*" element={<ErrorPage/>}/>
                   </Routes>
                 <Footer/>

@@ -10,6 +10,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { TranslationsOverview } from "../utils/types/article/TranslationsOverview.ts";
 import { getTranslatedArticle } from "../api/translateService.ts";
+import {routes} from "../utils/constants";
 
 export const Article: FC = () => {
     const { id, language } = useParams();
@@ -49,7 +50,7 @@ export const Article: FC = () => {
         if (!id || !selectedLanguage || initialLoad) return;
         const isOriginalLanguage = translations.length > 0 && selectedLanguage === translations[0].language;
         if (isOriginalLanguage) {
-            navigate(`/article/${id}`, { replace: true }); // Update the URL
+            navigate(`${routes.articleURL}${id}`, { replace: true }); // Update the URL
             fetchArticle();
             return;
         }
@@ -59,7 +60,7 @@ export const Article: FC = () => {
                 const response = await getTranslatedArticle(id, selectedLanguage);
                 if (!response) return;
                 setArticle(response.data);
-                navigate(`/article/${id}/${selectedLanguage}`, { replace: true });
+                navigate(`${routes.articleURL}${id}/${selectedLanguage}`, { replace: true });
             } catch (error) {
                 Swal.fire({
                     icon: "error",

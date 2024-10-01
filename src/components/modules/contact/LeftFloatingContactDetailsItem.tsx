@@ -11,7 +11,7 @@ export const LeftFloatingContactDetailsItem:FC<Props> = ({href, title}) => {
         <div className="contact__item-inner">
           <div className="contact__item-content">
             <p>
-              {href ? <a href={href} className="none">{title}</a> : title}
+              {href ? <a href={href} className="link-underline-none">{title}</a> : title}
             </p>
           </div>
         </div>

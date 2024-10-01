@@ -2,6 +2,7 @@ import {FC} from "react";
 import { Link } from "react-router-dom";
 import CountUp from "react-countup";
 import {useTranslation} from "react-i18next";
+import {routes} from "../../../utils/constants";
 
 export const AboutUs: FC = () => {
   const {t} = useTranslation();
@@ -62,7 +63,7 @@ export const AboutUs: FC = () => {
                       the amazing team that makes it all happen!
                     </p>
                     <Link
-                        to="/contact"
+                        to={routes.contact}
                         className="trk-btn trk-btn--border trk-btn--primary"
                     >
                       {t("Contact")}
