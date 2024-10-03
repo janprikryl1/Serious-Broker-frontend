@@ -1,4 +1,5 @@
 export const company = "Serious Broker";
+export const domain = "https://serious.broker";
 export const PROTECTED_ROUTES = ['/admin', '/profile', '/assets', '/most_profitable_assets', '/asset_graph/:id'];
 export const pageLimit = 10;
 export const imageURL = "https://api.serious.broker/article/images/";
@@ -50,6 +51,7 @@ export const routes = {
         articleTranslate: "article/translate/:id",
         translations: "translations/:articleId",
         translationsEdit: "translations/:articleId/:id",
+        postEdit: "post/edit/:articleId/:id?",
         glossary: "glossary",
         logTable: "log_table",
         feedbacks: "feedbacks"
@@ -69,6 +71,7 @@ export const adminURLS = {
     articleTranslate: "/admin/article/translate/",
     translations: "/admin/translations/",
     translationsEdit: "/admin/translations/",
+    postEdit: "/admin/post/edit/",
     glossary: "/admin/glossary",
     logTable: "/admin/log_table",
     feedbacks: "/admin/feedbacks"

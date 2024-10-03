@@ -47,6 +47,9 @@ import {ThemeProvider} from "./utils/providers/ThemeProvider.tsx";
 import {InquiryPrice} from "./pages/InquryPrice.tsx";
 import {adminURLS, routes} from "./utils/constants";
 import {AssetGraphCurrencyDetail} from "./pages/graphs/AssetGraphCurrencyDetail.tsx";
+import {PostEdit} from "./pages/admin/PostEdit.tsx";
+import {ToastContainer} from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 // Disable automatic CSS addition for Font Awesome
 config.autoAddCss = false;
@@ -93,6 +96,7 @@ function App() {
                           <Route path={routes.admin.articleTranslate} element={<ArticleTranslate />} />
                           <Route path={routes.admin.translations} element={<TranslateEdit />} />
                           <Route path={routes.admin.translationsEdit} element={<TranslateEdit />} />
+                          <Route path={routes.admin.postEdit} element={<PostEdit />} />
                           <Route path={routes.admin.glossary} element={<GlossaryManagement />} />
                           <Route path={routes.admin.logTable} element={<LogTable />} />
                           <Route path={routes.admin.feedbacks} element={<Feedbacks />} />
@@ -103,6 +107,7 @@ function App() {
                 <Footer/>
               </ProviderUser>
           </ThemeProvider>
+          <ToastContainer position="bottom-right"/>
       </BrowserRouter>
   )
 }

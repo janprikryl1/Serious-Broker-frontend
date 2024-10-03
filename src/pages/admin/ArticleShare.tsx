@@ -1,12 +1,63 @@
-import {FC} from "react";
-import {useParams} from "react-router-dom";
+import {FC, useEffect, useState} from "react";
+import {Link, useParams} from "react-router-dom";
+import {adminURLS} from "../../utils/constants";
+import {Button} from "react-bootstrap";
+import {useTranslation} from "react-i18next";
+import {ShareLink} from "../../components/modules/admin/share/ShareLink.tsx";
+import {ShareSkeleton} from "../../components/modules/admin/share/ShareSkeleton.tsx";
+import {ShareItems} from "../../components/modules/admin/share/ShareItems.tsx";
+import {getArticlePosts} from "../../api/articlePostService.ts";
+import {ArticlePostListResponseResponse} from "../../utils/types/ArticlePostListResponse.ts";
 
 export const ArticleShare:FC = () => {
     const {id} = useParams();
+    const {t} = useTranslation();
+    const [articleName, setArticleName] = useState("");
+    const [articlePosts, setArticlePosts] = useState<ArticlePostListResponseResponse[]>([]);
+    
+    useEffect(() => {
+        if (!id) return;
+        const getArticle = async () => {
+            const response = await getArticlePosts(id);
+            if (response !== undefined) {
+                setArticleName(response.data.article_name);
+                setArticlePosts(response.data.data);
+            }
+        }
+        getArticle();
+    }, [id]);
     
     return (
         <div>
-            {id}
+            <div className="padding-bottom">
+                <div className="container">
+                    <div className="service-details__wrapper">
+                        <div className="service-details__item">
+                            <div
+                                className="service-details__content"
+                                data-aos="fade-up"
+                                data-aos-duration="900"
+                            >
+                                <h3>{t("Share article ")}{articleName}</h3>
+                                <Link to={`${adminURLS.postEdit}${id}`}>
+                                    <Button variant="outline-warning">{t("New post")}</Button>
+                                </Link>
+
+                                {id && articlePosts ? (
+                                    <div className="padding-top padding-bottom">
+                                        <div className="blog__wrapper">
+                                            <ShareLink id={id} languages={["cs", "en", "uk"]}/>
+                                            <ShareItems articlePosts={articlePosts}/>
+                                        </div>
+                                    </div>
+                                    ) : (
+                                        <ShareSkeleton />
+                                )}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     )
 }

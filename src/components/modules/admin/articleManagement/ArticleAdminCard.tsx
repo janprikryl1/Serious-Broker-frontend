@@ -7,7 +7,7 @@ import {FaComment, FaRegTrashAlt, FaShareAlt} from "react-icons/fa";
 import Swal from "sweetalert2";
 import {useTranslation} from "react-i18next";
 import {deleteArticle} from "../../../../api/articleService.ts";
-import {MdOutlineTranslate} from "react-icons/md"; // Import the trash icon
+import {MdOutlineTranslate} from "react-icons/md";
 
 type Props = {
     data: ArticleProps;
