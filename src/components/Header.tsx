@@ -113,11 +113,12 @@ export const Header: React.FC = () => {
                                                   className="link-underline-none">{t("Recommendation")}</Link></li>
                                         {user && (
                                             <>
-                                                <li><Link to={routes.assets}
-                                                          className="link-underline-none">{t("Assets")}</Link></li>
                                                 <li><Link to={routes.mostProfitableAssets}
                                                           className="link-underline-none">{t("Most profitable assets")}</Link>
                                                 </li>
+                                                
+                                                <li><Link to={routes.assets}
+                                                          className="link-underline-none">{t("Assets")}</Link></li>
                                             </>
                                         )}
                                     </ul>

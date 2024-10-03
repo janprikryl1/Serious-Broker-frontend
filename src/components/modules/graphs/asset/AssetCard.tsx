@@ -3,18 +3,17 @@ import {Link} from "react-router-dom";
 import {routes} from "../../../../utils/constants";
 
 type Props = {
-    id: number;
     label: string;
     details: string;
 };
 
-export const AssetCard:FC<Props> = ({id, label, details}) => {
+export const AssetCard:FC<Props> = ({label, details}) => {
     return (
         <div className="blog__item" data-aos="fade-up" data-aos-duration="1000">
             <div className="blog__item-inner blog__item-inner--style2">
                 <div className="blog__content">
                     <h5 className="10 style2">
-                        <Link to={`${routes.assetGraphURL}${id}`} className="link-underline-none">{label}</Link>
+                        <Link to={`${routes.assetGraphURL}${label}`} className="link-underline-none">{label}</Link>
                     </h5>
                     <p className="mb-15">{details}</p>
                 </div>

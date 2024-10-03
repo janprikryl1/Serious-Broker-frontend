@@ -423,5 +423,9 @@
     "months": "months",
     "quarters": "quarters",
     "years": "years",
-    "Looking for more?": "Looking for more?"
+    "Looking for more?": "Looking for more?",
+    "Allocation: ": "Allocation: ",
+    "Currency: ": "Currency: ",
+    "Graph": "Graph",
+    "GraphAssetData - details about asset and graph": "GraphAssetData - details about asset and graph"
 }

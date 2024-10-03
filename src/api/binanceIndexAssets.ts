@@ -21,13 +21,30 @@ export const getAllAssets = async (page: number, limit: number) => {
 };
 
 
-export const getAssetById = async (id: number) => {
+export const getAssetByIndexLabel = async (index_label: string) => {
     const token = localStorage.getItem("token");
     if(!token) return;
     
     const response = axios.get( backendUrl + "graphs/binance_index_assets/get_asset_by_id.php", {
         params: {
-            asset_id: id
+            index_label: index_label
+        },
+        headers: {
+            Authorization2: `Bearer ${token}`,
+            'Content-Type':
+                'application/json',
+        }
+    });
+    return await response;
+};
+
+export const getAssetByIdGraphData = async (asset_id: number) => {
+    const token = localStorage.getItem("token");
+    if(!token) return;
+    
+    const response = axios.get(backendUrl + "graphs/binance_index_assets/get_asset_by_id_graph_data.php", {
+        params: {
+            asset_id: asset_id
         },
         headers: {
             Authorization2: `Bearer ${token}`,

@@ -46,6 +46,7 @@ import {Feedbacks} from "./pages/admin/Feedbacks.tsx";
 import {ThemeProvider} from "./utils/providers/ThemeProvider.tsx";
 import {InquiryPrice} from "./pages/InquryPrice.tsx";
 import {adminURLS, routes} from "./utils/constants";
+import {AssetGraphCurrencyDetail} from "./pages/graphs/AssetGraphCurrencyDetail.tsx";
 
 // Disable automatic CSS addition for Font Awesome
 config.autoAddCss = false;
@@ -71,6 +72,7 @@ function App() {
                       <Route path={routes.assets} element={<Assets/>}/>
                       <Route path={routes.mostProfitableAssets} element={<MostProfitableAssets/>}/>
                       <Route path={routes.assetGraph} element={<AssetGraph/>}/>
+                      <Route path={routes.assetGraphCurrencyDetail} element={<AssetGraphCurrencyDetail/>}/>
                       <Route path={routes.recommendation} element={<Recommendation/>}/>
                       <Route path={routes.dictionary} element={<Glossary/>}/>
                       <Route path={routes.cryptocurrenciesList} element={<CryptoCurrenciesList/>}/>

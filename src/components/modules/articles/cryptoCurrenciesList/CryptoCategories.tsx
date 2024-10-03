@@ -19,7 +19,7 @@ export const CryptoCategories:FC = () => {
     }, []);
     
     return (
-        categories ? (
+        categories  ? (
             categories.map((category) => (
                 <div className="blog__writer" style={{marginTop: 50}}>
                     <div className="blog__writer-designation">

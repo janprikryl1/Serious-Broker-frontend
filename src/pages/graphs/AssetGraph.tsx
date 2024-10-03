@@ -1,35 +1,35 @@
-import {FC, useEffect, useState} from "react";
-import {useUserContext} from "../../utils/providers/providerUser.tsx";
-import {useNavigate, useParams} from "react-router-dom";
-import {getAssetById} from "../../api/binanceIndexAssets.ts";
-import {TitleHeader} from "../../components/modules/about/TitleHeader.tsx";
-import {routes, toCzechDateFormat} from "../../utils/constants";
-import {ChartComponent} from "../../components/modules/graphs/asset/ChartComponent.tsx";
-import {useTranslation} from "react-i18next";
-import {DataPointType} from "../../utils/types/asset/DataPointType.ts";
-import {AssetDetailSkeleton} from "../../components/modules/graphs/asset/AssetDetailSkeleton.tsx";
-import {AssetDetailType} from "../../utils/types/asset/AssetDetailType.ts";
-import {EarningIn} from "./earningIn/EarningIn.tsx";
+import { FC, useEffect, useState } from "react";
+import { useUserContext } from "../../utils/providers/providerUser.tsx";
+import { useNavigate, useParams } from "react-router-dom";
+import { getAssetByIndexLabel } from "../../api/binanceIndexAssets.ts";
+import { TitleHeader } from "../../components/modules/about/TitleHeader.tsx";
+import { routes } from "../../utils/constants";
+import { AssetDetailSkeleton } from "../../components/modules/graphs/asset/AssetDetailSkeleton.tsx";
+import {AssetDetailType, Assets} from "../../utils/types/asset/AssetDetailType.ts";
+import { useTranslation } from "react-i18next";
+import {AssetGraphCurrencyCard} from "../../components/modules/graphs/asset/AssetGraphCurrencyCard.tsx";
+import {AssetGraphPieChart} from "../../components/modules/graphs/asset/AssetGraphPieChart.tsx";
 
-export const AssetGraph:FC = () => {
-    const {t} = useTranslation();
-    const {id} = useParams();
-    const {user} = useUserContext();
+export const AssetGraph: FC = () => {
+    const { t } = useTranslation();
+    const { index_label } = useParams();
+    const { user } = useUserContext();
     const navigate = useNavigate();
-    const [graphData, setGraphData] = useState<DataPointType[]>();
-    const [asset, setAsset] = useState<AssetDetailType>();
+    const [asset, setAsset] = useState<AssetDetailType | null>(null);
+    const [details, setDetails] = useState<Assets[]>();
 
     useEffect(() => {
-        if (id === undefined) return;
-        const getGraphData = async () => {
-            const response = await getAssetById(parseInt(id));
-            if (!response) return;
-            setGraphData(response.data.graph);
-            setAsset(response.data.asset);
-        }
-        getGraphData();
-    }, [id]);
+        if (index_label === undefined) return;
 
+        const getGraphData = async () => {
+            const response = await getAssetByIndexLabel(index_label);
+            if (!response) return;
+            setDetails(JSON.parse(response.data.assets));
+            setAsset(response.data);
+        };
+
+        getGraphData();
+    }, [index_label]);
 
     useEffect(() => {
         if (!user) {
@@ -37,10 +37,11 @@ export const AssetGraph:FC = () => {
         }
     }, [user]);
 
-
     return (
         <div>
-            <TitleHeader title={asset?.index_label ?? t("GraphAssetData - details about asset and graph")}/>
+            <TitleHeader
+                title={asset?.index_label ?? t("GraphAssetData - details about asset and graph")}
+            />
             <div className="padding-bottom padding-top">
                 <div className="container padding-bottom">
                     <div className="service-details__wrapper">
@@ -51,35 +52,20 @@ export const AssetGraph:FC = () => {
                                     data-aos="fade-up"
                                     data-aos-duration="900"
                                 >
-                                    <p>id: {id}</p>
-                                    {asset && graphData ? (
+                                    <p>{t("Title")}: {index_label}</p>
+                                    {asset && details ? (
                                         <>
-                                            <p>Index label: {asset.index_label}</p>
-                                            <p>Label: {asset.asset_label}</p>
-                                            <p>Allocation: {asset.allocation}</p>
-                                            <p>Created at: {toCzechDateFormat(asset.created)}</p>
-                                            <p>Last updated at: {toCzechDateFormat(asset.changed)}</p>
-                                            <div
-                                                className="px-30 py-45 p-rel"
-                                                style={{
-                                                    backgroundColor: "#454a4e",
-                                                    borderRadius: 24,
-                                                    width: "98%",
-                                                    margin: "0 auto",
-                                                    zIndex: 2,
-                                                    
-                                                }}
-                                                data-aos="fade-up"
-                                                data-aos-duration="1000"
-                                            >
-                                                <p>Graf</p>
-                                                <ChartComponent data={graphData} width={1000} height={500}
-                                                                assetId={asset?.id}></ChartComponent>
+                                            <div className="row">
+                                                {details.map((singleAsset: Assets) => (
+                                                    <AssetGraphCurrencyCard singleAsset={singleAsset} key={singleAsset.id} />
+                                                ))}
+                                                
                                             </div>
-
-                                            {asset.id && <EarningIn id={asset.id} />}
+                                            <AssetGraphPieChart assets={details} />
                                         </>
-                                    ) : <AssetDetailSkeleton />}
+                                    ) : (
+                                        <AssetDetailSkeleton />
+                                    )}
                                 </div>
                             </div>
                         </div>
@@ -87,5 +73,5 @@ export const AssetGraph:FC = () => {
                 </div>
             </div>
         </div>
-    )
-}
+    );
+};

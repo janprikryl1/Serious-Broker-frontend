@@ -6,9 +6,9 @@ import { getAllAssets } from "../../api/binanceIndexAssets.ts";
 import { AssetType } from "../../utils/types/asset/AssetType.ts";
 import { v4 as uuidv4 } from 'uuid';
 import { AssetSkeleton } from "../../components/modules/graphs/asset/AssetSkeleton.tsx";
-import { AssetCard } from "../../components/modules/graphs/asset/AssetCard.tsx";
 import {pageLimit, routes} from "../../utils/constants";
 import {Pagination} from "../../components/Pagiation.tsx";
+import {AssetLinkCard} from "../../components/modules/graphs/asset/AssetLinkCard.tsx";
 
 export const Assets: FC = () => {
     const { user } = useUserContext();
@@ -54,7 +54,7 @@ export const Assets: FC = () => {
                         <div className="blog__wrapper">
                             <div className="row g-4">
                                 {assets.map((asset) => (
-                                    <AssetCard id={asset.id} label={asset.name} details={asset.label} key={uuidv4()}/>
+                                    <AssetLinkCard id={asset.id} label={asset.name} details={asset.label} key={uuidv4()}/>
                                 ))}
                             </div>
                             <Pagination

@@ -423,5 +423,9 @@
     "months": "měsíce",
     "quarters": "kvartály",
     "years": "roky",
-    "Looking for more?": "Zajímá vás víc?"
+    "Looking for more?": "Zajímá vás víc?",
+    "Allocation: ": "Zastoupení v indexu: ",
+    "Currency: ": "Měna: ",
+    "Graph": "Graf",
+    "GraphAssetData - details about asset and graph": "Graf - detaily o kryptoměně z assetu"
 }

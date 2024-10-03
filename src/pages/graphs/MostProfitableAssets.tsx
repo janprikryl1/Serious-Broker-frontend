@@ -53,7 +53,7 @@ export const MostProfitableAssets: FC = () => {
                         <div className="blog__wrapper">
                             <div className="row g-4">
                                 {assets.map((asset) => (
-                                    <AssetCard id={asset.id} label={asset.asset_label} details={asset.index_label} key={asset.id}/>
+                                    <AssetCard label={asset.index_label} details={asset.assets} key={asset.index_label}/>
                                 ))}
                             </div>
                             <Pagination
