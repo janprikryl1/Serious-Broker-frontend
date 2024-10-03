@@ -21,6 +21,12 @@ export const UserManagment:FC = () => {
         }
         getUsers();
     }, []);
+
+    const sendEmailToAll = () => {
+        if (!users) return;
+        const emailAddresses = users.map((user) => user.email).join(",");
+        window.location.href = `mailto:${emailAddresses}`;
+    };
     
     return (
         <div>
@@ -51,6 +57,9 @@ export const UserManagment:FC = () => {
                 ))}
                 </tbody>
             </table>
+            <button onClick={sendEmailToAll} className="btn btn-primary mt-3">
+                {t("Send email to all")}
+            </button>
         </div>
     )
 }

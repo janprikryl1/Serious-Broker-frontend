@@ -10,7 +10,7 @@ export const UserComponent:FC<Props> = ({user}) => {
     return (
         <tr>
             <th scope="row">{user.nickname}</th>
-            <td>{user.email}</td>
+            <td><a href={`mailto:${user.email}`}>{user.email}</a></td>
             <td>{user.title_before}</td>
             <td>{user.firstname}</td>
             <td>{user.midlename}</td>

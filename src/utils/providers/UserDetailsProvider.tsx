@@ -19,7 +19,7 @@ type UserDetailsProviderProps = {
 const UserDetailsContext = React.createContext<UserDetailsProviderProps | undefined>(undefined);
 
 export const UserDetailsProvider = ({children}: Props) => {
-    const {user} = useUserContext();
+    const {user, setUser} = useUserContext();
     const {t} = useTranslation();
     const [userDetails, setUserDetails] = useState<UserType | null>(user);
 
@@ -38,6 +38,7 @@ export const UserDetailsProvider = ({children}: Props) => {
             if (!response) return;
             if (response.data.status === "success") {
                 setUserDetails(response.data.user);
+                setUser(response.data.user);
                 Swal.fire({
                     icon: "success",
                     title: t("Updated"),
