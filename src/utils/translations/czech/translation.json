@@ -432,5 +432,11 @@
     "New post": "Nový příspěvek",
     "Share link": "Sdílet odkaz",
     "Link copied to clipboard": "Odkaz zkopírován do schránky",
-    "No posts yet": "Zatím žádné příspěvky"
+    "No posts yet": "Zatím žádné příspěvky",
+    "Post to social media": "Zveřejnit na sociální sítě",
+    "Social media": "Sociální síť",
+    "Publish": "Zveřejnit",
+    "Post created": "Příspěvek vytvořen",
+    "Post created successfully": "Příspěvek úspěšně vytvořen",
+    "Error while creating post": "Chyba při vytváření příspěvku"
 }

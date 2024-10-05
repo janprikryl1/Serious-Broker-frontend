@@ -21,9 +21,9 @@ export const getArticlePostDetail = async (id: string) => {
     const token = localStorage.getItem("token");
     if (!token) return;
     
-    const response = axios.get<ArticlePost>(backendUrl + "article/article_post", {
+    const response = axios.get<ArticlePost>(backendUrl + "article/article_post/post.php", {
         params: {
-            $id: id
+            id: id
         },
         headers: {
             Authorization2: `Bearer ${token}`
@@ -36,19 +36,7 @@ export const createPost = async (post: ArticlePost) => {
     const token = localStorage.getItem("token");
     if (!token) return;
     
-    const response = axios.post(backendUrl + "article/article_post", post, {
-        headers: {
-            Authorization2: `Bearer ${token}`
-        }
-    });
-    return await response;
-}
-
-export const updatePost = async (post: ArticlePost) => {
-    const token = localStorage.getItem("token");
-    if (!token) return;
-    
-    const response = axios.put(backendUrl + "article/article_post", post, {
+    const response = axios.post(backendUrl + "article/article_post/post.php", post, {
         headers: {
             Authorization2: `Bearer ${token}`
         }

@@ -14,6 +14,7 @@ export const ArticleShare:FC = () => {
     const {t} = useTranslation();
     const [articleName, setArticleName] = useState("");
     const [articlePosts, setArticlePosts] = useState<ArticlePostListResponseResponse[]>([]);
+    const [languages, setLanguages] = useState<string[]>([]);
     
     useEffect(() => {
         if (!id) return;
@@ -22,6 +23,7 @@ export const ArticleShare:FC = () => {
             if (response !== undefined) {
                 setArticleName(response.data.article_name);
                 setArticlePosts(response.data.data);
+                setLanguages(response.data.languages);
             }
         }
         getArticle();
@@ -46,7 +48,7 @@ export const ArticleShare:FC = () => {
                                 {id && articlePosts ? (
                                     <div className="padding-top padding-bottom">
                                         <div className="blog__wrapper">
-                                            <ShareLink id={id} languages={["cs", "en", "uk"]}/>
+                                            <ShareLink id={id} languages={languages}/>
                                             <ShareItems articlePosts={articlePosts}/>
                                         </div>
                                     </div>

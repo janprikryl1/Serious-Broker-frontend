@@ -1,10 +1,9 @@
 import React, {Dispatch, ReactNode, SetStateAction, useContext, useEffect, useState} from "react";
-import {ContentType} from "../types/article/ContentType.ts";
 import {useParams} from "react-router-dom";
 import Swal from "sweetalert2";
 import {useTranslation} from "react-i18next";
 import {ArticlePost} from "../types/ArticlePostListResponse.ts";
-import {createPost, getArticlePostDetail, updatePost} from "../../api/articlePostService.ts";
+import {createPost, getArticlePostDetail} from "../../api/articlePostService.ts";
 import {PostOptionType} from "../options/PostOption.ts";
 
 type Props = {
@@ -20,10 +19,11 @@ type PostProviderProps = {
     setDescription: Dispatch<SetStateAction<string>>;
     language: string;
     setLanguage: Dispatch<SetStateAction<string>>;
-    content: ContentType[];
-    setContent: Dispatch<SetStateAction<ContentType[]>>;
+    content: string;
+    setContent: Dispatch<SetStateAction<string>>;
     articleIdParam: string | undefined;
     postId: string | undefined;
+    uploadPost: () => void;
 }
 
 const PostEditContext = React.createContext<PostProviderProps | undefined>(undefined);
@@ -37,7 +37,7 @@ export const PostEditProvider = ({children}: Props) => {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [language, setLanguage] = useState("cs");
-    const [content, setContent] = useState<ContentType[]>([{id: 0, title: "", tasks: [{id: 0, task: "", image: "", animateTo: {from: {x: 0, y: 0}, to: {x: 0, y: 0}}}]}]);
+    const [content, setContent] = useState<string>("");
     const [saved, setSaved] = useState(false);
 
     const getEditedPost = async () => {
@@ -50,11 +50,10 @@ export const PostEditProvider = ({children}: Props) => {
         setLanguage(response.data.language);
         setTitle(response.data.title);
         setDescription(response.data.description);
-        setContent(JSON.parse(response.data.content));
+        setContent(response.data.content);
     }
     
     useEffect(() => {
-        if (id !== undefined) return;
         getEditedPost();
     }, [id, articleId]);
 
@@ -67,14 +66,14 @@ export const PostEditProvider = ({children}: Props) => {
     ]);
 
     const uploadNewPost = async () => {
-        if (!articleId) return;
+        if (!articleId || !type || !content) return;
         const post: ArticlePost = {
             article_id: articleId,
             type: type,
             language: language,
             title: title,
             description: description,
-            content: JSON.stringify(content),
+            content: content,
         };
         try {
             const response = await createPost(post);
@@ -96,41 +95,9 @@ export const PostEditProvider = ({children}: Props) => {
             console.error(error);
         }
     }
-
-    const updateEditedPost = async () => {
-        if (!articleId) return;
-        const post: ArticlePost = {
-            article_id: articleId,
-            type: type,
-            language: language,
-            title: title,
-            description: description,
-            content: JSON.stringify(content),
-        };
-        try {
-            const response = await updatePost(post);
-            if (response !== undefined && response.data.message === "Post updated successfully") {
-                Swal.fire({
-                    icon: "success",
-                    title: t("Post edited"),
-                    text: t("Post edited successfully"),
-                });
-            }
-            setSaved(true);
-        } catch (error) {
-            Swal.fire({
-                icon: "error",
-                title: t("Error"),
-                text: t("Error while editing post"),
-            });
-            console.error(error);
-        }
-    }
-
-    const uploadTranslate = () => {
-        if (postId !== undefined) {
-            updateEditedPost();
-        } else {
+    
+    const uploadPost = () => {
+        if (postId === undefined) {
             uploadNewPost();
         }
     }
@@ -146,7 +113,7 @@ export const PostEditProvider = ({children}: Props) => {
         setLanguage,
         content,
         setContent,
-        uploadTranslate,
+        uploadPost,
         saved,
         setSaved,
         articleIdParam,

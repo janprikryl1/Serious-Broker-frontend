@@ -3,7 +3,6 @@ import { Comments } from "./Comments";
 import { CommentForm } from "./CommentForm";
 import { useTranslation } from "react-i18next";
 import { v4 as uuidv4 } from 'uuid';
-import { ArticleSkeleton } from "./ArticleSkeleton";
 import { ArticleDetailProps } from "../../../utils/types/article/ArticleDetailProps";
 import { useUserContext } from "../../../utils/providers/providerUser";
 import { CommentType } from "../../../utils/types/CommentType";
@@ -37,7 +36,7 @@ export const ArticleDetails: FC<Props> = ({ article, translations, language, set
 
     return (
         <div className="blog-details__item">
-            {content ? (
+            {content && (
                 <div className="blog-details__item-inner">
                     <div key={uuidv4()}>
                         <h1>{article.title}</h1>
@@ -72,8 +71,6 @@ export const ArticleDetails: FC<Props> = ({ article, translations, language, set
                         <p>{t("Komentáře nejsou povoleny")}</p>
                     )}
                 </div>
-            ) : (
-                <ArticleSkeleton />
             )}
         </div>
     );

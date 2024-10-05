@@ -432,5 +432,11 @@
     "New post": "New post",
     "Share link": "Share link",
     "Link copied to clipboard": "Link copied to clipboard",
-    "No posts yet": "No posts yet"
+    "No posts yet": "No posts yet",
+    "Post to social media": "Post to social media",
+    "Social media": "Social media",
+    "Publish": "Publish",
+    "Post created": "Post created",
+    "Post created successfully": "Post created successfully",
+    "Error while creating post": "Error while creating post"
 }

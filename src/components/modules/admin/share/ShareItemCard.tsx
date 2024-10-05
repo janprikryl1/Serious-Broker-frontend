@@ -1,6 +1,6 @@
 import {FC} from "react";
 import {Link} from "react-router-dom";
-import {adminURLS} from "../../../../utils/constants";
+import {adminURLS, toCzechDateFormat} from "../../../../utils/constants";
 import {ArticlePostListResponseResponse} from "../../../../utils/types/ArticlePostListResponse.ts";
 
 type Props = {
@@ -16,6 +16,7 @@ export const ShareItemCard:FC<Props> = ({articlePost}) => {
                         <Link to={`${adminURLS.postEdit}${articlePost.article_id}/${articlePost.id}`}
                               className="link-underline-none">{articlePost.type} ({articlePost.title})</Link>
                     </h5>
+                    <p className="blog__content-text">{toCzechDateFormat(articlePost.created)}</p>
                 </div>
             </div>
         </div>

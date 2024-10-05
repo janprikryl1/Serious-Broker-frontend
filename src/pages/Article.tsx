@@ -11,6 +11,7 @@ import { useTranslation } from "react-i18next";
 import { TranslationsOverview } from "../utils/types/article/TranslationsOverview.ts";
 import { getTranslatedArticle } from "../api/translateService.ts";
 import {routes} from "../utils/constants";
+import {ArticleSkeleton} from "../components/modules/article/ArticleSkeleton.tsx";
 
 export const Article: FC = () => {
     const { id, language } = useParams();
@@ -81,14 +82,14 @@ export const Article: FC = () => {
                     <div className="blog-details__wrapper">
                         <div className="row g-5">
                             <div className="col-lg-8">
-                                {article && (
+                                {article ? (
                                     <ArticleDetails
                                         article={article}
                                         translations={translations}
                                         setLanguage={setLanguage}
                                         language={selectedLanguage}
                                     />
-                                )}
+                                ) : <ArticleSkeleton />}
                             </div>
                             <div className="col-lg-4 col-md-8 col-12">
                                 <div className="sidebar">

@@ -1,6 +1,7 @@
 export type ArticlePostListResponse = {
     article_name: string;
     data: ArticlePostListResponseResponse[];
+    languages: string[];
 }
 
 export type ArticlePostListResponseResponse = {
@@ -8,6 +9,7 @@ export type ArticlePostListResponseResponse = {
     article_id: string;
     type: string;
     title: string;
+    created: string;
 }
 
 
