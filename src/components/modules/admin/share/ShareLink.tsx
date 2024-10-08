@@ -4,6 +4,7 @@ import {domain} from "../../../../utils/constants";
 import {FaCopy} from "react-icons/fa";
 import {useTranslation} from "react-i18next";
 import {toast} from "react-toastify";
+import {ArticleSendEmailComponent} from "./ArticleSendEmailComponent.tsx";
 
 type Props = {
     id: string;
@@ -46,6 +47,7 @@ export const ShareLink:FC<Props> = ({id, languages}) => {
                     <FaCopy />
                 </Button>
             </InputGroup>
+            <ArticleSendEmailComponent url={url}/>
         </>
     );
 }

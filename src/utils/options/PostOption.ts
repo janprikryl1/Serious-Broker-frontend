@@ -10,14 +10,6 @@ export const PostOption = [
     {
         id: "LinkedIn",
         title: "LinkedIn",
-    },
-    {
-        id: "YouTube",
-        title: "YouTube",
-    },
-    {
-        id: "Instagram",
-        title: "Instagram",
     }
 ];
 

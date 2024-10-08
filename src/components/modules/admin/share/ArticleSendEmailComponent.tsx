@@ -1,0 +1,62 @@
+import { ChangeEvent, FC, useEffect, useState } from "react";
+import { getNewslettersEmailsService } from "../../../../api/newslettersEmailsService.ts";
+import { Button, Form } from "react-bootstrap";
+import { useTranslation } from "react-i18next";
+import { MdOutlineEmail } from "react-icons/md";
+
+type Props = {
+    url: string;
+};
+
+export const ArticleSendEmailComponent: FC<Props> = ({ url }) => {
+    const { t } = useTranslation();
+    const [emails, setEmails] = useState<string[]>([]);
+    const [text, setText] = useState("");
+
+    useEffect(() => {
+        const loadEmails = async () => {
+            try {
+                const response = await getNewslettersEmailsService();
+                if (!response) return;
+                setEmails(response.data);
+            } catch (error) {
+                console.error(error);
+            }
+        };
+        loadEmails();
+    }, []);
+
+    useEffect(() => {
+        setText(`Dobrý den,\nS radostí oznamujeme, že vyšel nový článek. Naleznete ho tady: ${url}\nPěkný den, s pozdravem Serious Broker tým.`);
+    }, [url]);
+
+    const handleTextChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        setText(e.target.value);
+    };
+
+    const sendEmails = () => {
+        const emailAddresses = emails.join(",");
+        const encodedText = encodeURIComponent(text).replace(/%0A/g, "%0D%0A");
+        window.location.href = `mailto:${emailAddresses}?subject=${encodeURIComponent(t("New Article"))}&body=${encodedText}`;
+    };
+
+    return (
+        <>
+            <Form.Label htmlFor="email-text">{t("Send emails")}</Form.Label>
+            <Form.Control
+                as="textarea"
+                rows={5}
+                value={text}
+                onChange={handleTextChange}
+            />
+            <Button
+                variant="outline-warning"
+                id="button-addon2"
+                onClick={sendEmails}
+                style={{ marginTop: "10px" }}
+            >
+                <MdOutlineEmail /> {t("Send")}
+            </Button>
+        </>
+    );
+};

@@ -438,5 +438,6 @@
     "Publish": "Zveřejnit",
     "Post created": "Příspěvek vytvořen",
     "Post created successfully": "Příspěvek úspěšně vytvořen",
-    "Error while creating post": "Chyba při vytváření příspěvku"
+    "Error while creating post": "Chyba při vytváření příspěvku",
+    "Send emails": "Poslat emaily"
 }
