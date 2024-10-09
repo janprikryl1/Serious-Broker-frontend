@@ -115,7 +115,6 @@ export const ChartComponent: React.FC<ChartComponentProps> = ({
 
         const debounce = (func: (...args: any[]) => void, timeout = 300) => {
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-            // @ts-expect-error
             let timer: NodeJS.Timeout;
             return (...args: any[]) => {
                 clearTimeout(timer);

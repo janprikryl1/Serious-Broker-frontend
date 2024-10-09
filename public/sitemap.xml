@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <!-- Main Pages -->
+    <url>
+        <loc>https://serious.broker/</loc>
+    </url>
+    <url>
+        <loc>https://serious.broker/about</loc>
+    </url>
+    <url>
+        <loc>https://serious.broker/contact</loc>
+    </url>
+    <url>
+        <loc>https://serious.broker/articles</loc>
+    </url>
+    <url>
+        <loc>https://serious.broker/search/</loc>
+    </url>
+    <url>
+        <loc>https://serious.broker/assets</loc>
+    </url>
+    <url>
+        <loc>https://serious.broker/most_profitable_assets</loc>
+    </url>
+    <url>
+        <loc>https://serious.broker/recommendation</loc>
+    </url>
+    <url>
+        <loc>https://serious.broker/dictionary</loc>
+    </url>
+    <url>
+        <loc>https://serious.broker/cryptocurrencies_list</loc>
+    </url>
+    <url>
+        <loc>https://serious.broker/sign_in</loc>
+    </url>
+    <url>
+        <loc>https://serious.broker/register</loc>
+    </url>
+    <url>
+        <loc>https://serious.broker/profile</loc>
+    </url>
+    <url>
+        <loc>https://serious.broker/inquiry</loc>
+    </url>
+
+    <!-- Dynamic Article and Crypto Pages -->
+    <url>
+        <loc>https://serious.broker/article/</loc>
+    </url>
+    <url>
+        <loc>https://serious.broker/cryptocurrency_detail/</loc>
+    </url>
+    <url>
+        <loc>https://serious.broker/asset_graph/</loc>
+    </url>
+    <url>
+        <loc>https://serious.broker/asset_graph_detail/</loc>
+    </url>
+    <url>
+        <loc>https://serious.broker/graphs/recommendation/detail/</loc>
+    </url>
+
+    <!-- Error Page -->
+    <url>
+        <loc>https://serious.broker/404</loc>
+    </url>
+</urlset>
