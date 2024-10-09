@@ -31,7 +31,7 @@ export const ContactCard: FC = () => {
         Swal.fire({
           icon: "success",
           title: t("Success"),
-          text: t("Message sent."),
+          text: t("Message sent"),
         });
         if (event.currentTarget) event.currentTarget.reset();
       }

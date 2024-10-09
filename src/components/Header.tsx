@@ -94,18 +94,19 @@ export const Header: React.FC = () => {
         <header className={`header-section ${scrollTop !== 0 && 'bg-color-3'}`} onScroll={isSticky}>
             <div className="header-bottom">
                 <div className="container">
-                    <div className="header-wrapper">
+                    <div className="header-wrapper d-flex align-items-center justify-content-between">
                         <div className="logo">
                             <Link to={routes.home}>
                                 <img className={theme === "dark" ? "logo-dark" : ""} src={Logo} alt="logo"/>
                             </Link>
                         </div>
-                        <div className="menu-area">
-                            <ul id="menu" className={`menu menu--style1 ${menu ? 'active' : ''}`}>
-                                <li style={{marginRight: "-10px"}}>
+                        <div className="menu-area d-flex align-items-center">
+                            <ul id="menu"
+                                className={`menu menu--style1 d-flex align-items-center ${menu ? 'active' : ''}`}>
+                                <li className="mr-2">
                                     <Link to={routes.articles} className="link-underline-none">{t("Articles")}</Link>
                                 </li>
-                                <li className="menu-item-has-children">
+                                <li className="menu-item-has-children mr-2">
                                     <Link to={routes.graphs} onClick={toggleActive}
                                           className="link-underline-none">{t("Graphs")}</Link>
                                     <ul className="submenu">
@@ -116,42 +117,30 @@ export const Header: React.FC = () => {
                                                 <li><Link to={routes.mostProfitableAssets}
                                                           className="link-underline-none">{t("Most profitable assets")}</Link>
                                                 </li>
-                                                
                                                 <li><Link to={routes.assets}
                                                           className="link-underline-none">{t("Assets")}</Link></li>
                                             </>
                                         )}
                                     </ul>
                                 </li>
-                                <li>
+                                <li className="mr-2">
                                     <Link to={routes.contact} className="link-underline-none">{t("Contact")}</Link>
-                                </li>
-                                <li>
-                                    <div className="d-flex align-items-center">
-                                        <div className="mx-2">
-                                            <ChangeLanguageIcon/>
-                                        </div>
-                                        <div className="mx-2">
-                                            <ThemeSwitchIcon/>
-                                        </div>
-                                        <div className="mx-2">
-                                            <SignInIcon />
-                                        </div>
-                                    </div>
                                 </li>
                             </ul>
                         </div>
-                        <div className="header-action">
-                            <div className="menu-area">
-
-                                <div
-                                    className={menu ? "header-bar d-lg-none header-bar--style1 active" : "header-bar d-lg-none header-bar--style1"}
-                                    onClick={toggleMenu}>
-                                    <span></span>
-                                    <span></span>
-                                    <span></span>
-                                </div>
+                        <div className="d-flex align-items-center">
+                            <div className="mx-2">
+                                <ChangeLanguageIcon/>
                             </div>
+                            <div className="mx-2">
+                                <ThemeSwitchIcon/>
+                            </div>
+                            <div className="mx-2">
+                                <SignInIcon/>
+                            </div>
+                        </div>
+                        <div className="header-action d-lg-none">
+                            <div className="header-bar header-bar--style1" onClick={toggleMenu} />
                         </div>
                     </div>
                 </div>
