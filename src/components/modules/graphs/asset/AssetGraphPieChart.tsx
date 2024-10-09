@@ -30,7 +30,19 @@ export const AssetGraphPieChart:FC<Props> = ({assets}) => {
                             faded: {innerRadius: 30, additionalRadius: -30, color: 'gray'},
                         },
                     ]}
-                    width={350}
+                    slotProps={{
+                        legend: {
+                            direction: "column",
+                            position: {
+                                vertical: 'middle',
+                                horizontal: 'right',
+                            },
+                            itemMarkHeight: 15,
+                            markGap: 5,
+                            padding: 0
+                        }
+                    }}
+                    width={340}
                     height={200}
                 />
             </div>
