@@ -1,7 +1,7 @@
 import {FC} from "react";
 import {useTranslation} from "react-i18next";
 import {Accordion, Form} from "react-bootstrap";
-import {useUserDetails} from "../../../utils/providers/UserDetailsProvider.tsx";
+import {useUserDetails} from "../../../../utils/providers/UserDetailsProvider.tsx";
 
 export const FirmData:FC = () => {
     const {t} = useTranslation();
@@ -46,8 +46,6 @@ export const FirmData:FC = () => {
                     </Accordion.Body>
                 </Accordion.Item>
             </Accordion>
-
-
         );
     }
 }

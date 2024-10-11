@@ -440,5 +440,12 @@
     "Post created successfully": "Příspěvek úspěšně vytvořen",
     "Error while creating post": "Chyba při vytváření příspěvku",
     "Send emails": "Poslat emaily",
-    "Message sent": "Zpráva odeslána"
+    "Message sent": "Zpráva odeslána",
+    "Edit profile": "Upravit profil",
+    "Achievements": "Achievementy",
+    "Profile overview": "Můj profil",
+    "Title in Czech": "Titulek v češtině",
+    "Answer in Czech": "Odpověď v češtině",
+    "Edit user": "Upravit uživatele",
+    "No user selected": "Nebyl vybrán uživatel"
 }

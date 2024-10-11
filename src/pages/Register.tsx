@@ -18,7 +18,7 @@ export const Register:FC = () => {
     const {setUser, user} = useUserContext();
 
     useEffect(() => {
-        if (user) navigate(routes.profile);    
+        if (user) navigate(routes.profile.profileURL);    
     }, [user]);
     
     const [registerData, setRegisterData] = useState<registerUserType>({

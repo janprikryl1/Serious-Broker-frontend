@@ -1,7 +1,7 @@
 import {FC} from "react";
 import {useTranslation} from "react-i18next";
 import {Form} from "react-bootstrap";
-import {useUserDetails} from "../../../utils/providers/UserDetailsProvider.tsx";
+import {useUserDetails} from "../../../../utils/providers/UserDetailsProvider.tsx";
 
 export const PersonalDataEdit:FC = () => {
     const {t} = useTranslation();

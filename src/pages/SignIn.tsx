@@ -17,7 +17,7 @@ export const SignIn: FC = () => {
     const {setUser, user} = useUserContext();
 
     useEffect(() => {
-        if (user) navigate(routes.profile);
+        if (user) navigate(routes.profile.profileURL);
     }, [user]);
     
     const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
@@ -36,7 +36,7 @@ export const SignIn: FC = () => {
                     icon: "success", title: t("Login Successful"), text: t("Welcome back!"),
                 }).then(() => {
                     setUser(response.data.user);
-                    navigate(routes.profile);
+                    navigate(routes.profile.profileURL);
                 });
             } else if (data.status === "error") {
                 if (data.message === "Invalid email or password") {

@@ -17,7 +17,7 @@ export const SignInIcon: FC = () => {
                     {user.firstname} {user.surname}
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
-                    <Dropdown.Item as={Link} to={routes.profile}>
+                    <Dropdown.Item as={Link} to={routes.profile.profileURL}>
                         {t("Profile")}
                     </Dropdown.Item>
                     {user.role === "admin" && (

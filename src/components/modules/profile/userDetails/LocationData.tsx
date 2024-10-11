@@ -1,8 +1,8 @@
 import {FC} from "react";
 import {useTranslation} from "react-i18next";
 import {Form} from "react-bootstrap";
-import {useUserDetails} from "../../../utils/providers/UserDetailsProvider.tsx";
-import {CountrySelect} from "../signIn/CountrySelect.tsx";
+import {useUserDetails} from "../../../../utils/providers/UserDetailsProvider.tsx";
+import {CountrySelect} from "../../signIn/CountrySelect.tsx";
 
 export const LocationData:FC = () => {
     const {t} = useTranslation();

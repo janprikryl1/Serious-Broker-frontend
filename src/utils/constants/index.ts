@@ -38,7 +38,11 @@ export const routes = {
     graphsRecommendationDetail: "/graphs/recommendation/detail/:asset_label",
     signIn: "/sign_in",
     register: "/register",
-    profile: "/profile",
+    profile: {
+        profileURL: "/profile",
+        edit: "/profile/edit",
+        achievements: "/profile/achievements"
+    },
     admin: {
         index: "",
         users: "users",

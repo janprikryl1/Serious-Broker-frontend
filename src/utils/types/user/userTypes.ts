@@ -1,4 +1,5 @@
 export type UserType = {
+    id: number;
     role: string;
     status: string,
     superior_id?: number,

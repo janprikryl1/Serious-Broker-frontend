@@ -50,6 +50,9 @@ import {AssetGraphCurrencyDetail} from "./pages/graphs/AssetGraphCurrencyDetail.
 import {PostEdit} from "./pages/admin/PostEdit.tsx";
 import {ToastContainer} from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import {ProfileEdit} from "./pages/profile/ProfileEdit.tsx";
+import {ProfileAchievements} from "./pages/profile/ProfileAchievements.tsx";
+import {ProfileOverview} from "./pages/profile/ProfileOverview.tsx";
 
 // Disable automatic CSS addition for Font Awesome
 config.autoAddCss = false;
@@ -83,7 +86,11 @@ function App() {
                       <Route path={routes.graphsRecommendationDetail} element={<RecommendationDetails/>}/>
                       <Route path={routes.signIn} element={<SignIn/>}/>
                       <Route path={routes.register} element={<Register/>}/>
-                      <Route path={routes.profile} element={<Profile/>}/>
+                      <Route path={routes.profile.profileURL} element={<Profile/>}>
+                          <Route path={routes.profile.profileURL} element={<ProfileOverview />}/>
+                          <Route path={routes.profile.edit} element={<ProfileEdit/>}/>
+                          <Route path={routes.profile.achievements} element={<ProfileAchievements/>}/>
+                      </Route>
                       <Route path={adminURLS.index} element={<Admin />}>
                           <Route path={routes.admin.index} element={<AdminOverview />} />
                           <Route path={routes.admin.users} element={<UserManagment />} />
