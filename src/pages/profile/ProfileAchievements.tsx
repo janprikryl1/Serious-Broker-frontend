@@ -2,6 +2,7 @@ import {FC} from "react";
 import {useThemeContext} from "../../utils/providers/ThemeProvider.tsx";
 import {UserAchievmentsTimeLine} from "../../components/modules/profile/userAchievments/UserAchievmentsTimeLine.tsx";
 import {useTranslation} from "react-i18next";
+import {AchievmentAnimation} from "../../components/achievment/AchievmentAnimation.tsx";
 
 export const ProfileAchievements:FC = () => {
     const { t } = useTranslation();
@@ -33,6 +34,7 @@ export const ProfileAchievements:FC = () => {
                     </div>
                 </div>
             </div>
+            <AchievmentAnimation />
         </div>
     );
 }

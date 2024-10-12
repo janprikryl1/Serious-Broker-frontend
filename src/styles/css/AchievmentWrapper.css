@@ -1,0 +1,37 @@
+#achievment-wrapper {
+    animation: bounce 0.5s 10 ease-in,
+    blink 1s ease-in-out 1.3s forwards;
+}
+
+#achievment-wrapper .svg-elem-1 {
+    /* Add any specific styles for svg-elem-1 here */
+}
+
+#achievment-wrapper .svg-elem-2 {
+    /*animation: color-change 3s ease-in-out infinite; 
+    @keyframes color-change {
+    from {fill: yellow;}
+    to { fill: gold; }
+    }*/
+}
+
+#achievment-wrapper .svg-elem-3 {
+    /* Add any specific styles for svg-elem-3 here */
+}
+
+#achievment-wrapper .svg-line, #achievment-wrapper .svg-line-2 {
+    animation: blink 2s ease-in-out infinite;
+}
+
+
+
+@keyframes bounce {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-20px); } /* Adjust this value for bounce height */
+    100% { transform: translateY(0); }
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
