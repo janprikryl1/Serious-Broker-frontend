@@ -17,6 +17,7 @@ export type UserType = {
     street_number?: string,
     town?: string,
     country: string,
+    password?: string,
     changed: string,
     created: string
 }

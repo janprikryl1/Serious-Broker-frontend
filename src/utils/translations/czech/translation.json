@@ -447,5 +447,9 @@
     "Title in Czech": "Titulek v češtině",
     "Answer in Czech": "Odpověď v češtině",
     "Edit user": "Upravit uživatele",
-    "No user selected": "Nebyl vybrán uživatel"
+    "No user selected": "Nebyl vybrán uživatel",
+    "Click on user to edit": "Kliněte na uživatele, abyste mohli upravit",
+    "Update": "Aktualizovat",
+    "User updated": "Uživatel aktualizován",
+    "Error while updating user": "Chyba při aktualizaci uživatele"
 }

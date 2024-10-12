@@ -1,21 +1,22 @@
 import {FC, useEffect, useState} from "react";
 import {UserType} from "../../utils/types/user/userTypes.ts";
-import {getAllUsers} from "../../api/adminService.ts";
+import {getAllUsers, updateUser} from "../../api/adminService.ts";
 import {useTranslation} from "react-i18next";
 import {DataGrid} from "@mui/x-data-grid";
 import {Paper} from "@mui/material";
 import {useThemeContext} from "../../utils/providers/ThemeProvider.tsx";
 import {UserEditModal} from "../../components/modules/admin/userManagment/UserEditModal.tsx";
+import Swal from "sweetalert2";
 
-export const UserManagment:FC = () => {
+export const UserManagment: FC = () => {
     const {t} = useTranslation();
     const [users, setUsers] = useState<UserType[]>();
     const { theme } = useThemeContext();
     const [open, setOpen] = useState(false);
     const [selectedUser, setSelectedUser] = useState<UserType>();
-    
+
     const handleOpen = (userId: number) => {
-        setSelectedUser(users?.find((user) => user.id === userId));
+        setSelectedUser(users?.find((user) => user.id == userId));
         setOpen(true);
     };
     const handleClose = () => {
@@ -31,9 +32,45 @@ export const UserManagment:FC = () => {
             } catch (error) {
                 console.error(error);
             }
-        }
+        };
         getUsers();
     }, []);
+
+    const handleUpdateUser = async (user: UserType) => {
+        try {
+            const response = await updateUser(user);
+            if (!response) return;
+
+            const { status, message } = response.data;
+
+            if (status === "success" && message === "User successfully updated") {
+                Swal.fire({ title: t("User updated"), icon: 'success' });
+
+                if (selectedUser) {
+                    setUsers(users?.map((prevUser) => prevUser.id === user.id ? selectedUser : prevUser));
+                } else {
+                    console.warn("No user is selected for update");
+                }
+
+                handleClose();
+
+            } else if (status === "error" && message === "Email is already in use by another user") {
+                Swal.fire({ title: t("Email is already in use by another user"), icon: 'error' });
+            } else {
+                Swal.fire({ title: t("Error while updating user"), icon: 'error' });
+            }
+        } catch (error) {
+            console.error("Error updating user:", error);
+            Swal.fire({ title: t("Error while updating user"), icon: 'error' });
+        }
+    };
+
+
+    const sendEmailToAll = () => {
+        if (!users) return;
+        const emailAddresses = users.map((user) => user.email).join(",");
+        window.location.href = `mailto:${emailAddresses}`;
+    };
 
     const columns = [
         {field: 'id', headerName: "Id", flex: 1},
@@ -57,30 +94,46 @@ export const UserManagment:FC = () => {
         {field: 'created', headerName: t("Created"), flex: 1},
     ];
 
-    const sendEmailToAll = () => {
-        if (!users) return;
-        const emailAddresses = users.map((user) => user.email).join(",");
-        window.location.href = `mailto:${emailAddresses}`;
-    };
-
     return (
-        <div>
-            <h1>{t("User management")}</h1>
-            <Paper sx={{ width: '100%', backgroundColor: theme === 'dark' ? "#5a636c" : "#f5f8fb" }}>
-                <DataGrid
-                    rows={users}
-                    columns={columns}
-                    hideFooterPagination
-                    hideFooterSelectedRowCount
-                    hideFooter={true}
-                    onCellClick={(e) => handleOpen(Number(e.id))}
-                    sx={{ border: 0 }}
-                />
-            </Paper>
-            <button onClick={sendEmailToAll} className="btn btn-primary mt-3">
-                {t("Send email to all")}
-            </button>
-            <UserEditModal open={open} handleClose={handleClose} selectedUser={selectedUser} />
+    <div className="container padding-top padding-bottom">
+        <h1>{t("User management")}</h1>
+        <div className="cta__wrapper">
+            <div className="cta__newsletter d-flex justify-content-center">
+                <div
+                    className="text-center"
+                    style={{
+                        maxWidth: "95%",
+                        gap: "30px",
+                        backgroundColor: theme === 'dark' ? "#343a40" : "#f5f8fb",
+                        borderRadius: 24,
+                        padding: "30px",
+                        zIndex: 2,
+                        position: 'relative',
+                    }}
+                    data-aos="fade-up"
+                    data-aos-duration="1000"
+                >
+                    <div className="cta__subscribe">
+                        <p>{t("Click on user to edit")}</p>
+                        <Paper sx={{width: '100%', backgroundColor: theme === 'dark' ? "#5a636c" : "#f5f8fb"}}>
+                            <DataGrid
+                                rows={users ?? []}
+                                columns={columns}
+                                hideFooterPagination
+                                hideFooterSelectedRowCount
+                                hideFooter={true}
+                                onCellClick={(e) => handleOpen(Number(e.id))}
+                                sx={{border: 0}}
+                            />
+                        </Paper>
+                    </div>
+                </div>
+            </div>
         </div>
-    )
-}
+        <button onClick={sendEmailToAll} className="btn btn-primary mt-3">
+            {t("Send email to all")}
+        </button>
+        <UserEditModal open={open} handleClose={handleClose} selectedUser={selectedUser} handleUpdateUser={handleUpdateUser}/>
+    </div>
+    );
+};

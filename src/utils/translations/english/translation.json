@@ -447,5 +447,9 @@
     "Title in Czech": "Title in Czech",
     "Answer in Czech": "Answer in Czech",
     "Edit user": "Edit user",
-    "No user selected": "No user selected"
+    "No user selected": "No user selected",
+    "Click on user to edit": "Click on user to edit",
+    "Update": "Update",
+    "User updated": "User updated",
+    "Error while updating user": "Error while updating user"
 }

@@ -9,7 +9,7 @@ type Props = {
 export const AdminOverviewCard:FC<Props> = ({title, value, bottom}) => {
     return (
         <div className="col-md-4 stretch-card grid-margin">
-            <div className="card bg-gradient-danger card-img-holder text-white">
+            <div className="card bg-gradient-danger card-img-holder">
                 <div className="card-body" style={{height: 250}}>
                     <h4 className="font-weight-normal mb-3">
                         {title} <i className="mdi mdi-chart-line mdi-24px float-right"></i>

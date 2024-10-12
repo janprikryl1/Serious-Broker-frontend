@@ -44,3 +44,16 @@ export const getAllLogs = async (page: number = 1) => {
     });
     return await res;
 };
+
+export const updateUser = async (user: UserType) => {
+    const token = localStorage.getItem("token");
+    if (!token) return;
+
+    const res = axios.post(backendUrl + "user/admin_update.php", user, {
+        headers: {
+            Authorization2: `Bearer ${token}`,
+        },
+    });
+
+    return await res;
+};
