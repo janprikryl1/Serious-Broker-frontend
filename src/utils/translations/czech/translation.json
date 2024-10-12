@@ -451,5 +451,17 @@
     "Click on user to edit": "Kliněte na uživatele, abyste mohli upravit",
     "Update": "Aktualizovat",
     "User updated": "Uživatel aktualizován",
-    "Error while updating user": "Chyba při aktualizaci uživatele"
+    "Error while updating user": "Chyba při aktualizaci uživatele",
+    "Column": "Sloupec",
+    "Value": "Hodnota",
+    "Search term...": "Hledat...",
+    "Clear filters": "Vymazat filtry",
+    "No unread achievements": "Žádné nepřečtené achievmenty",
+    "All achievements": "Všechny achievmenty",
+    "List of your achievements": "Seznam všech achievmentů",
+    "Read" : "Přečteno",
+    "Unread": "Nepřečteno",
+    
+    
+    "User registered": "Uživatel registrován"
 }

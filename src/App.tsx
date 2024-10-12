@@ -53,6 +53,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import {ProfileEdit} from "./pages/profile/ProfileEdit.tsx";
 import {ProfileAchievements} from "./pages/profile/ProfileAchievements.tsx";
 import {ProfileOverview} from "./pages/profile/ProfileOverview.tsx";
+import {AchievmentsProvider} from "./utils/providers/AchievmentsProvider.tsx";
 
 // Disable automatic CSS addition for Font Awesome
 config.autoAddCss = false;
@@ -67,51 +68,53 @@ function App() {
       <BrowserRouter>
           <ThemeProvider>
               <ProviderUser>  
-                <Header/>
-                  <Routes>
-                      <Route path={routes.home} element={<Index/>}/>
-                      <Route path={routes.about} element={<About/>}/>
-                      <Route path={routes.contact} element={<Contact/>}/>
-                      <Route path={routes.articles} element={<Articles/>}/>
-                      <Route path={routes.article} element={<Article/>}/>
-                      <Route path={routes.search} element={<SearchArticles/>}/>
-                      <Route path={routes.assets} element={<Assets/>}/>
-                      <Route path={routes.mostProfitableAssets} element={<MostProfitableAssets/>}/>
-                      <Route path={routes.assetGraph} element={<AssetGraph/>}/>
-                      <Route path={routes.assetGraphCurrencyDetail} element={<AssetGraphCurrencyDetail/>}/>
-                      <Route path={routes.recommendation} element={<Recommendation/>}/>
-                      <Route path={routes.dictionary} element={<Glossary/>}/>
-                      <Route path={routes.cryptocurrenciesList} element={<CryptoCurrenciesList/>}/>
-                      <Route path={routes.cryptocurrencyDetail} element={<CryptoCurrencyDetail/>}/>
-                      <Route path={routes.graphsRecommendationDetail} element={<RecommendationDetails/>}/>
-                      <Route path={routes.signIn} element={<SignIn/>}/>
-                      <Route path={routes.register} element={<Register/>}/>
-                      <Route path={routes.profile.profileURL} element={<Profile/>}>
-                          <Route path={routes.profile.profileURL} element={<ProfileOverview />}/>
-                          <Route path={routes.profile.edit} element={<ProfileEdit/>}/>
-                          <Route path={routes.profile.achievements} element={<ProfileAchievements/>}/>
-                      </Route>
-                      <Route path={adminURLS.index} element={<Admin />}>
-                          <Route path={routes.admin.index} element={<AdminOverview />} />
-                          <Route path={routes.admin.users} element={<UserManagment />} />
-                          <Route path={routes.admin.newsletter} element={<NewsletterOverview />} />
-                          <Route path={routes.admin.articles} element={<ArticleManagement />} />
-                          <Route path={routes.admin.articleNew} element={<EditArticle />} />
-                          <Route path={routes.admin.articleEdit} element={<EditArticle />} />
-                          <Route path={routes.admin.articleComments} element={<ArticleComments />} />
-                          <Route path={routes.admin.articleShare} element={<ArticleShare />} />
-                          <Route path={routes.admin.articleTranslate} element={<ArticleTranslate />} />
-                          <Route path={routes.admin.translations} element={<TranslateEdit />} />
-                          <Route path={routes.admin.translationsEdit} element={<TranslateEdit />} />
-                          <Route path={routes.admin.postEdit} element={<PostEdit />} />
-                          <Route path={routes.admin.glossary} element={<GlossaryManagement />} />
-                          <Route path={routes.admin.logTable} element={<LogTable />} />
-                          <Route path={routes.admin.feedbacks} element={<Feedbacks />} />
-                      </Route>
-                      <Route path={routes.inquiry} element={<InquiryPrice />}/>
-                      <Route path="*" element={<ErrorPage/>}/>
-                  </Routes>
-                <Footer/>
+                  <AchievmentsProvider>
+                    <Header/>
+                      <Routes>
+                          <Route path={routes.home} element={<Index/>}/>
+                          <Route path={routes.about} element={<About/>}/>
+                          <Route path={routes.contact} element={<Contact/>}/>
+                          <Route path={routes.articles} element={<Articles/>}/>
+                          <Route path={routes.article} element={<Article/>}/>
+                          <Route path={routes.search} element={<SearchArticles/>}/>
+                          <Route path={routes.assets} element={<Assets/>}/>
+                          <Route path={routes.mostProfitableAssets} element={<MostProfitableAssets/>}/>
+                          <Route path={routes.assetGraph} element={<AssetGraph/>}/>
+                          <Route path={routes.assetGraphCurrencyDetail} element={<AssetGraphCurrencyDetail/>}/>
+                          <Route path={routes.recommendation} element={<Recommendation/>}/>
+                          <Route path={routes.dictionary} element={<Glossary/>}/>
+                          <Route path={routes.cryptocurrenciesList} element={<CryptoCurrenciesList/>}/>
+                          <Route path={routes.cryptocurrencyDetail} element={<CryptoCurrencyDetail/>}/>
+                          <Route path={routes.graphsRecommendationDetail} element={<RecommendationDetails/>}/>
+                          <Route path={routes.signIn} element={<SignIn/>}/>
+                          <Route path={routes.register} element={<Register/>}/>
+                          <Route path={routes.profile.profileURL} element={<Profile/>}>
+                              <Route path={routes.profile.profileURL} element={<ProfileOverview />}/>
+                              <Route path={routes.profile.edit} element={<ProfileEdit/>}/>
+                              <Route path={routes.profile.achievements} element={<ProfileAchievements/>}/>
+                          </Route>
+                          <Route path={adminURLS.index} element={<Admin />}>
+                              <Route path={routes.admin.index} element={<AdminOverview />} />
+                              <Route path={routes.admin.users} element={<UserManagment />} />
+                              <Route path={routes.admin.newsletter} element={<NewsletterOverview />} />
+                              <Route path={routes.admin.articles} element={<ArticleManagement />} />
+                              <Route path={routes.admin.articleNew} element={<EditArticle />} />
+                              <Route path={routes.admin.articleEdit} element={<EditArticle />} />
+                              <Route path={routes.admin.articleComments} element={<ArticleComments />} />
+                              <Route path={routes.admin.articleShare} element={<ArticleShare />} />
+                              <Route path={routes.admin.articleTranslate} element={<ArticleTranslate />} />
+                              <Route path={routes.admin.translations} element={<TranslateEdit />} />
+                              <Route path={routes.admin.translationsEdit} element={<TranslateEdit />} />
+                              <Route path={routes.admin.postEdit} element={<PostEdit />} />
+                              <Route path={routes.admin.glossary} element={<GlossaryManagement />} />
+                              <Route path={routes.admin.logTable} element={<LogTable />} />
+                              <Route path={routes.admin.feedbacks} element={<Feedbacks />} />
+                          </Route>
+                          <Route path={routes.inquiry} element={<InquiryPrice />}/>
+                          <Route path="*" element={<ErrorPage/>}/>
+                      </Routes>
+                    <Footer/>
+                  </AchievmentsProvider>
               </ProviderUser>
           </ThemeProvider>
           <ToastContainer position="bottom-right"/>

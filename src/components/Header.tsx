@@ -8,6 +8,7 @@ import Logo from "../utils/icons/logo/symbol.svg"
 import {useUserContext} from "../utils/providers/providerUser.tsx";
 import {useThemeContext} from "../utils/providers/ThemeProvider.tsx";
 import {routes} from "../utils/constants";
+import {AchievementIcon} from "../headerIcons/AchievementIcon.tsx";
 
 export const Header: React.FC = () => {
     const {t} = useTranslation();
@@ -137,6 +138,9 @@ export const Header: React.FC = () => {
                             </div>
                             <div className="mx-2">
                                 <SignInIcon/>
+                            </div>
+                            <div className="mx-2">
+                                <AchievementIcon />
                             </div>
                         </div>
                         <div className="header-action d-lg-none">

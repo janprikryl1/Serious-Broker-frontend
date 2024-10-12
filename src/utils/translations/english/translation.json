@@ -451,5 +451,16 @@
     "Click on user to edit": "Click on user to edit",
     "Update": "Update",
     "User updated": "User updated",
-    "Error while updating user": "Error while updating user"
+    "Error while updating user": "Error while updating user",
+    "Column": "Column",
+    "Value": "Value",
+    "Search term...": "Search term...",
+    "Clear filters": "Clear filters",
+    "No unread achievements": "No unread achievements",
+    "All achievements": "All achievements",
+    "List of your achievements": "List of your achievements",
+    "Read" : "Read",
+    "Unread": "Unread",
+    
+    "User registered": "User registered"
 }
