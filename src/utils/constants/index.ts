@@ -58,7 +58,8 @@ export const routes = {
         postEdit: "post/edit/:articleId/:id?",
         glossary: "glossary",
         logTable: "log_table",
-        feedbacks: "feedbacks"
+        feedbacks: "feedbacks",
+        achievements: "achievements",
     },
     inquiry: "/inquiry"
 }
@@ -78,7 +79,8 @@ export const adminURLS = {
     postEdit: "/admin/post/edit/",
     glossary: "/admin/glossary",
     logTable: "/admin/log_table",
-    feedbacks: "/admin/feedbacks"
+    feedbacks: "/admin/feedbacks",
+    achievements: "/admin/achievements"
 }
 
 const colors = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#FF4D4D', '#4D80FF', '#4DD0E1', '#80FF80', '#80C4FF', '#C4A0FF', '#FFA0A0', '#FF8080', '#A04D80', '#8080FF', '#80FFFF', '#FFFF80', '#00FF80', '#008000', '#0000FF'];

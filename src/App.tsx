@@ -54,6 +54,7 @@ import {ProfileEdit} from "./pages/profile/ProfileEdit.tsx";
 import {ProfileAchievements} from "./pages/profile/ProfileAchievements.tsx";
 import {ProfileOverview} from "./pages/profile/ProfileOverview.tsx";
 import {AchievmentsProvider} from "./utils/providers/AchievmentsProvider.tsx";
+import {AdminAchivments} from "./pages/admin/AdminAchivments.tsx";
 
 // Disable automatic CSS addition for Font Awesome
 config.autoAddCss = false;
@@ -109,6 +110,7 @@ function App() {
                               <Route path={routes.admin.glossary} element={<GlossaryManagement />} />
                               <Route path={routes.admin.logTable} element={<LogTable />} />
                               <Route path={routes.admin.feedbacks} element={<Feedbacks />} />
+                              <Route path={routes.admin.achievements} element={<AdminAchivments />} />
                           </Route>
                           <Route path={routes.inquiry} element={<InquiryPrice />}/>
                           <Route path="*" element={<ErrorPage/>}/>

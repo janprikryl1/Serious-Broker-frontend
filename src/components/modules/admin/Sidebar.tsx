@@ -62,6 +62,12 @@ export const Sidebar: FC = () => {
                         >
                             <CDBSidebarMenuItem icon="sticky-note">{t("Feedbacks")}</CDBSidebarMenuItem>
                         </NavLink>
+                        <NavLink
+                            to={adminURLS.achievements}
+                            className={({ isActive }) => isActive ? 'activeClicked' : ''}
+                        >
+                            <CDBSidebarMenuItem icon="gamepad">{t("Achievements")}</CDBSidebarMenuItem>
+                        </NavLink>
                     </CDBSidebarMenu>
                 </CDBSidebarContent>
 

@@ -1,0 +1,116 @@
+import {FC, useEffect, useState} from "react";
+import {Button, Form, InputGroup} from "react-bootstrap";
+import {Paper} from "@mui/material";
+import {DataGrid, GridCellParams} from "@mui/x-data-grid";
+import {useTranslation} from "react-i18next";
+import {useThemeContext} from "../../utils/providers/ThemeProvider.tsx";
+import {UserType} from "../../utils/types/user/userTypes.ts";
+import {getAllUsers} from "../../api/adminService.ts";
+import {UserAchievmentDetails} from "../../components/modules/admin/achevments/UserAchievmentDetails.tsx";
+
+export const AdminAchivments:FC = () => {
+    const {t} = useTranslation();
+    const {theme} = useThemeContext();
+    const [users, setUsers] = useState<UserType[]>([]);
+    const [selectedUser, setSelectedUser] = useState<UserType>();
+    const [searchTerm, setSearchTerm] = useState('');
+    const [searchColumn, setSearchColumn] = useState<string>('email');
+    const [filteredUsers, setFilteredUsers] = useState<UserType[]>(users);
+
+    const handleSelectUser = (e: GridCellParams) => {
+        setSelectedUser(users.find((user) => user.id == e.id));
+    };
+
+    useEffect(() => {
+        const getUsers = async () => {
+            try {
+                const response = await getAllUsers();
+                if (!response) return;
+                setUsers(response.data);
+                setFilteredUsers(response.data);
+            } catch (error) {
+                console.error(error);
+            }
+        };
+        getUsers();
+    }, []);
+
+    const columns = [
+        { field: 'id', headerName: "Id", flex: 1 },
+        { field: 'nickname', headerName: t("Nickname"), flex: 1 },
+        { field: 'email', headerName: t("Email"), flex: 1 },
+        { field: 'firstname', headerName: t("Name"), flex: 1 },
+        { field: 'surname', headerName: t("Surname"), flex: 1 }
+    ];
+
+    const handleSearch = () => {
+        const results = users.filter((user) =>
+            user[searchColumn as keyof UserType]?.toString().toLowerCase().includes(searchTerm.toLowerCase())
+        );
+        setFilteredUsers(results);
+    };
+
+    const handleClearFilters = () => {
+        setSearchTerm('');
+        setFilteredUsers(users);
+    };
+    
+    return (
+        <div className="padding-bottom">
+            <div
+                className="text-center"
+                style={{
+                    maxWidth: "95%",
+                    backgroundColor: theme === 'dark' ? "#343a40" : "#f5f8fb",
+                    borderRadius: 24,
+                    padding: "30px",
+                    zIndex: 2,
+                }}
+                data-aos="fade-up"
+                data-aos-duration="1000"
+            >
+                <h1>{t("Achievments management")}</h1>
+                <p>{t("Click on user to load and edit achievements")}</p>
+                <InputGroup className="mb-3">
+                    <InputGroup.Text id="inputGroup-sizing-sm">{t("Column")}</InputGroup.Text>
+                    <Form.Select
+                        value={searchColumn}
+                        onChange={(e) => setSearchColumn(e.target.value)}
+                        aria-label={t("Search Column")}
+                    >
+                        {columns.map((column) => (
+                            <option key={column.field} value={column.field}>
+                                {column.headerName}
+                            </option>
+                        ))}
+                    </Form.Select>
+                    <InputGroup.Text id="inputGroup-sizing-sm">{t("Value")}</InputGroup.Text>
+                    <Form.Control
+                        type="text"
+                        placeholder={t("Search term...")}
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                    />
+                    <Button variant="primary" onClick={handleSearch}>
+                        {t("Search")}
+                    </Button>
+                    <Button variant="secondary" onClick={handleClearFilters}>
+                        {t("Clear filters")}
+                    </Button>
+                </InputGroup>
+                <Paper sx={{ backgroundColor: theme === 'dark' ? "#5a636c" : "#f5f8fb"}}>
+                    <DataGrid
+                        rows={filteredUsers}
+                        columns={columns}
+                        hideFooterPagination
+                        hideFooterSelectedRowCount
+                        hideFooter={true}
+                        onCellClick={handleSelectUser}
+                        sx={{border: 0}}
+                    />
+                </Paper>
+                <UserAchievmentDetails selectedUser={selectedUser}/>
+            </div>
+        </div>
+    );
+};
