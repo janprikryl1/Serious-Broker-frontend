@@ -9,6 +9,10 @@ export const AchievmentAnimation:FC = () => {
     const {t} = useTranslation();
     const [open, setOpen] = useState(true);
     
+    const handleClose = () => {
+        setOpen(false);
+    };
+    
     useEffect(() => {
         setTimeout(() => {
             setOpen(false);
@@ -16,7 +20,7 @@ export const AchievmentAnimation:FC = () => {
     }, []);
     
     return (
-        <Modal open={open}>
+        <Modal open={open} onClick={handleClose}>
             <>
                 <svg width="100%" height="95%" viewBox="0 0 1000 900" id="achievment-wrapper">
                     <path
