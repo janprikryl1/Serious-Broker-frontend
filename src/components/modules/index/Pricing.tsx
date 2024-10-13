@@ -2,8 +2,8 @@ import { FC } from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { pricingData } from "../../../utils/constants/pricingData.ts";
-import checkIcon from "../../../utils/icons/icon/check.svg";
-import icon1 from "../../../utils/icons/icon/1.png";
+import checkIcon from "../../../utils/icons/check/check.svg";
+import icon1 from "../../../utils/icons/cta/1.png";
 import {useUserContext} from "../../../utils/providers/providerUser.tsx";
 
 export const Pricing: FC = () => {

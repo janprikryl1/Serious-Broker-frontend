@@ -1,6 +1,6 @@
 import {FC} from "react";
-import Moon from "../../utils/icons/icon/moon.svg";
-import Sun from "../../utils/icons/icon/sun.svg";
+import Moon from "../../utils/icons/header/moon.svg";
+import Sun from "../../utils/icons/header/sun.svg";
 import {useThemeContext} from "../../utils/providers/ThemeProvider.tsx";
 
 export const ThemeSwitchIcon:FC = () => {

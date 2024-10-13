@@ -295,7 +295,7 @@
           @include add-prefix(transition, $transition);
 
           rect {
-            // stroke: $arrow-icon-color;
+            // stroke: $arrow-check-color;
             stroke: $secondary-color;
           }
 
@@ -342,12 +342,12 @@
           @include add-prefix(transition, $transition);
 
           // rect {
-          //   stroke: $arrow-icon-color;
+          //   stroke: $arrow-check-color;
           // }
 
           // g {
           //   path {
-          //     stroke: $arrow-icon-color;
+          //     stroke: $arrow-check-color;
           //   }
           // }
         }

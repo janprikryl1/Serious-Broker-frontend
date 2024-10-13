@@ -1,6 +1,6 @@
 import {FC} from 'react';
 import {useTranslation} from "react-i18next";
-import HeaderImage from "../../../utils/icons/header/1.png";
+import HeaderImage from "../../../utils/icons/cta/1.png";
 
 type Props = {
   title: string;

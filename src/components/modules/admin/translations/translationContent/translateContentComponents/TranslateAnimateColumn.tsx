@@ -180,7 +180,7 @@ export const TranslateAnimateColumn:FC = () => {
                             onChange={(e) => handleSetContentAnimateToY(e, currentContent, taskIndex)}
                         />
                         <Button variant="danger" onClick={() => handleRemoveTask(currentContent, taskIndex)}>
-                            <FaTrash/> {/* Trash bin icon */}
+                            <FaTrash/> {/* Trash bin check */}
                         </Button>
                     </InputGroup>
                 </div>

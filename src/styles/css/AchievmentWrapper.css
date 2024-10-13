@@ -1,37 +1,51 @@
 #achievment-wrapper {
-    animation: bounce 0.5s 10 ease-in,
-    blink 1s ease-in-out 1.3s forwards;
+    animation: bounce 0.5s ease-in-out 1, flyAwayAndShrink 1s ease-in-out forwards;
+    animation-delay: 0s, 10s;
 }
 
-#achievment-wrapper .svg-elem-1 {
-    /* Add any specific styles for svg-elem-1 here */
+.svg-line {
+    animation: blink 2s ease-in-out 2;
+    animation-delay: 2s;
 }
 
-#achievment-wrapper .svg-elem-2 {
-    /*animation: color-change 3s ease-in-out infinite; 
-    @keyframes color-change {
-    from {fill: yellow;}
-    to { fill: gold; }
-    }*/
+.text-achievment-collected {
+    text-align: center;
+    animation: text-dissapear 0.5s ease-in-out forwards;
+    animation-delay: 10s;
 }
-
-#achievment-wrapper .svg-elem-3 {
-    /* Add any specific styles for svg-elem-3 here */
-}
-
-#achievment-wrapper .svg-line, #achievment-wrapper .svg-line-2 {
-    animation: blink 2s ease-in-out infinite;
-}
-
-
 
 @keyframes bounce {
     0% { transform: translateY(0); }
-    50% { transform: translateY(-20px); } /* Adjust this value for bounce height */
+    20% { transform: translateY(-25px); }
+    50% { transform: translateY(0); }
+    70% { transform: translateY(15px); }
     100% { transform: translateY(0); }
 }
 
 @keyframes blink {
     0%, 100% { opacity: 1; }
     50% { opacity: 0; }
+}
+
+@keyframes flyAwayAndShrink {
+    0% {
+        transform: translate(0, 0) scale(1);
+    }
+    90% {
+        transform: translate(33%, -45%) scale(0.1);
+    }
+    100% {
+        transform: translate(33%, -45%) scale(0.01);
+    }
+}
+
+@keyframes text-dissapear {
+    0% {
+        opacity: 1;
+        transform: translate(0, 0);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(0, 100%);
+    }
 }
