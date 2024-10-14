@@ -4,13 +4,17 @@ import {useTranslation} from "react-i18next";
 import '../../styles/css/AchievmentWrapper.css';
 import {AchievmentAnimatedPath} from "./AchievmentAnimatedPath.tsx";
 
+type Props = {
+    onClose: () => void;
+};
 
-export const AchievmentAnimation:FC = () => {
+export const AchievmentAnimation:FC<Props> = ({onClose}) => {
     const {t} = useTranslation();
     const [open, setOpen] = useState(true);
     
     const handleClose = () => {
         setOpen(false);
+        onClose();
     };
     
     useEffect(() => {

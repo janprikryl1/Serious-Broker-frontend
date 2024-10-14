@@ -84,7 +84,7 @@ export const UserEditModal: FC<Props> = ({ open, handleClose, selectedUser, hand
 
     return (
         <Modal open={open} onClose={handleClose}>
-            <ModalDialog layout="fullscreen" style={{ backgroundColor: "black" }}>
+            <ModalDialog layout="fullscreen" style={{ backgroundColor: "#101214" }}>
                 <ModalClose onClick={handleClose} />
                 <DialogTitle style={{ color: "white" }}>{t("Edit user")}</DialogTitle>
                 <List

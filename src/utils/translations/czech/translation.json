@@ -471,6 +471,13 @@
     "Never": "Nikdy",
     "Achievments management": "Správa achievmentů",
     "Click on user to load and edit achievements": "Klikněte na uživatele, abyste mohli zobrazit a upravit achievmenty",
+    "Add new achievement": "Udělit achievment",
+    "Text for new achievement": "Za co se chce udělit achievment?",
+    "Enter text for new achievement": "Zadejte text pro achievment",
+    "Close": "Zavřít",
+    "Add": "Přidat",
+    "Something went wrong!": "Něco se nepovedlo!",
+    
     
     "User registered": "Uživatel registrován"
 }

@@ -1,11 +1,8 @@
 import {FC} from "react";
 import {useThemeContext} from "../../utils/providers/ThemeProvider.tsx";
 import {UserAchievmentsTimeLine} from "../../components/modules/profile/userAchievments/UserAchievmentsTimeLine.tsx";
-import {useTranslation} from "react-i18next";
-import {AchievmentAnimation} from "../../components/achievment/AchievmentAnimation.tsx";
 
 export const ProfileAchievements:FC = () => {
-    const { t } = useTranslation();
     const {theme} = useThemeContext();
     
     return (
@@ -25,16 +22,9 @@ export const ProfileAchievements:FC = () => {
                     data-aos="fade-up"
                     data-aos-duration="1000"
                 >
-                    <div className="cta__subscribe">
-                        <h2>
-                            <span>{t("Achievements")}</span>
-                        </h2>
-                        <p>{t("List of your achievements")}</p>
-                        <UserAchievmentsTimeLine />
-                    </div>
+                    <UserAchievmentsTimeLine />
                 </div>
             </div>
-            <AchievmentAnimation />
         </div>
     );
 }

@@ -1,20 +1,54 @@
-import {FC} from "react";
+import {FC, useEffect, useState} from "react";
 import {UserType} from "../../../../utils/types/user/userTypes.ts";
 import {UserAchievmentSkeleton} from "./UserAchievmentSkeleton.tsx";
+import {AchievementType} from "../../../../utils/types/AchievementType.ts";
+import Swal from "sweetalert2";
+import {adminUserAchievements} from "../../../../api/achievementService.ts";
+import {Button} from "react-bootstrap";
+import {useTranslation} from "react-i18next";
+import {NewAchievmentModal} from "./NewAchievmentModal.tsx";
+import {TimeLineComponent} from "../../reusable/TimeLineComponent.tsx";
 
 type Props = {
     selectedUser?: UserType;
 }
 
 export const UserAchievmentDetails:FC<Props> = ({selectedUser}) => {
+    const {t} = useTranslation();
+    const [achievements, setAchievements] = useState<AchievementType[]>([]);
+    const [newAchievmentModalOpen, setNewAchievmentModalOpen] = useState(false);
+    
+    useEffect(() => {
+        if (!selectedUser) return;
+        const fetchAchievements = async () => {
+            try {
+                const response = await adminUserAchievements(selectedUser.id);
+                if (!response) return;
+                setAchievements(response.data);
+            } catch (error) {
+                console.error(error);
+                Swal.fire({
+                    title: 'Error',
+                    text: 'Something went wrong!',
+                    icon: 'error',
+                    confirmButtonText: 'Close',
+                });
+            }
+        }
+        fetchAchievements();
+    }, [selectedUser]);
+    
     return (
-        <div className="padding-bottom padding-top">
-            <p>UserAchievmentDetails</p>
-            {selectedUser ? (
-                <p>{selectedUser.nickname}</p>
+        <div className="cta__subscribe padding-bottom padding-top">
+            {selectedUser && achievements ? (
+                <>
+                    <Button variant="outline-warning" onClick={() => setNewAchievmentModalOpen(true)}>{t("Add new achievement")}</Button>
+                    <TimeLineComponent achievements={achievements} />
+                </>
             ) : (
               <UserAchievmentSkeleton />  
             )}
+            <NewAchievmentModal open={newAchievmentModalOpen} setOpen={setNewAchievmentModalOpen} selectedUser={selectedUser} setAchievements={setAchievements}/>
         </div>
     );
 };

@@ -471,7 +471,12 @@
     "Never": "Never",
     "Achievments management": "Achievments management",
     "Click on user to load and edit achievements": "Click on user to load and edit achievements",
-    
+    "Add new achievement": "Add new achievement",
+    "Text for new achievement": "Text for new achievement",
+    "Enter text for new achievement": "Enter text for new achievement",
+    "Close": "Close",
+    "Add": "Add",
+    "Something went wrong!": "Something went wrong!",
     
     "User registered": "User registered"
 }
