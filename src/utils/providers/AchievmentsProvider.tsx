@@ -2,6 +2,7 @@ import React, { createContext, useContext, useState, useEffect, ReactNode } from
 import { AchievementType } from '../types/AchievementType.ts';
 import { getAchievements, markReadAchievment } from '../../api/achievementService.ts';
 import { AchievmentAnimation } from '../../components/achievment/AchievmentAnimation.tsx';
+import {useUserContext} from "./providerUser.tsx";
 
 type AchievmentsContextType = {
     achievements: AchievementType[];
@@ -12,6 +13,7 @@ type AchievmentsContextType = {
 const AchievmentContext = createContext<AchievmentsContextType | undefined>(undefined);
 
 export const AchievmentsProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+    const {user} = useUserContext();
     const [achievements, setAchievements] = useState<AchievementType[]>([]);
     const [unreadAchievements, setUnreadAchievements] = useState<AchievementType[]>([]);
     const [showAnimation, setShowAnimation] = useState(false);
@@ -39,7 +41,7 @@ export const AchievmentsProvider: React.FC<{ children: ReactNode }> = ({ childre
             loadAchievements();
         }, 60000); // 60000 ms = 1 minute
         return () => clearInterval(intervalId); 
-    }, [prevUnreadCount]);
+    }, [prevUnreadCount, user?.id]);
 
     const markAchievementAsRead = async (id: number) => {
         try {
@@ -61,8 +63,7 @@ export const AchievmentsProvider: React.FC<{ children: ReactNode }> = ({ childre
     return (
         <AchievmentContext.Provider value={{ achievements, unreadAchievements, markAchievementAsRead }}>
             {children}
-            {showAnimation && <AchievmentAnimation onClose={handleMarkLastAchievementAsRead}
-            />}
+            {showAnimation && <AchievmentAnimation onClose={handleMarkLastAchievementAsRead}/>}
         </AchievmentContext.Provider>
     );
 };
