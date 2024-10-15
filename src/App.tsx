@@ -55,6 +55,7 @@ import {ProfileAchievements} from "./pages/profile/ProfileAchievements.tsx";
 import {ProfileOverview} from "./pages/profile/ProfileOverview.tsx";
 import {AchievmentsProvider} from "./utils/providers/AchievmentsProvider.tsx";
 import {AdminAchivments} from "./pages/admin/AdminAchivments.tsx";
+import {UnverifiedHeaderInfo} from "./components/UnverifiedHeaderInfo.tsx";
 
 // Disable automatic CSS addition for Font Awesome
 config.autoAddCss = false;
@@ -70,7 +71,8 @@ function App() {
           <ThemeProvider>
               <ProviderUser>  
                   <AchievmentsProvider>
-                    <Header/>
+                      <UnverifiedHeaderInfo />
+                      <Header/>
                       <Routes>
                           <Route path={routes.home} element={<Index/>}/>
                           <Route path={routes.about} element={<About/>}/>

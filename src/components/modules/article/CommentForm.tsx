@@ -4,6 +4,7 @@ import {addArticleComment} from "../../../api/commentsService.ts";
 import {CommentType} from "../../../utils/types/CommentType.ts";
 import {useUserContext} from "../../../utils/providers/providerUser.tsx";
 import {routes} from "../../../utils/constants";
+import {useAchievmentsContext} from "../../../utils/providers/AchievmentsProvider.tsx";
 
 type Props = {
     articleId: number;
@@ -14,6 +15,7 @@ export const CommentForm: FC<Props> = ({articleId, setComments}) => {
     const { t } = useTranslation();
     const [message, setMessage] = useState<string>("");
     const {user} = useUserContext();
+    const {setAchievements} = useAchievmentsContext();
 
     const handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
@@ -24,6 +26,9 @@ export const CommentForm: FC<Props> = ({articleId, setComments}) => {
                 const newComment: CommentType = {text: message, created: (new Date()).toString(), articleId: articleId, user: `${user?.firstname} ${user?.surname}`, id: 0};
                 setComments((prevState) => [...prevState ?? [], newComment]);
                 setMessage("");
+                if (result.data.achievement) {
+                    setAchievements((prevState) => [...prevState ?? [], result.data.achievement]);
+                }
             }
         } catch (error) {
             console.error(error);

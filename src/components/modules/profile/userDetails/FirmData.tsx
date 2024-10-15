@@ -13,36 +13,35 @@ export const FirmData:FC = () => {
                 <Accordion.Item eventKey="0">
                     <Accordion.Header>{t("Firm")}</Accordion.Header>
                     <Accordion.Body>
-
-                    <Form>
-                        <Form.Group controlId="firmName">
-                            <Form.Label>{t("Firm name")}</Form.Label>
-                            <Form.Control
-                                type="text"
-                                name="firm_name"
-                                value={userDetails.firm_name}
-                                onChange={handleChange}
-                            />
-                        </Form.Group>
-                        <Form.Group controlId="firmId">
-                            <Form.Label>{t("Firm id")}</Form.Label>
-                            <Form.Control
-                                type="text"
-                                name="firm_id"
-                                value={userDetails.firm_id}
-                                onChange={handleChange}
-                            />
-                        </Form.Group>
-                        <Form.Group controlId="firmVat">
-                            <Form.Label>{t("Firm VAT")}</Form.Label>
-                            <Form.Control
-                                type="text"
-                                name="firm_vat"
-                                value={userDetails.firm_vat}
-                                onChange={handleChange}
-                            />
-                        </Form.Group>
-                    </Form>
+                        <Form>
+                            <Form.Group controlId="firmName" className="mb-4">
+                                <Form.Label>{t("Firm name")}</Form.Label>
+                                <Form.Control
+                                    type="text"
+                                    name="firm_name"
+                                    value={userDetails.firm_name}
+                                    onChange={handleChange}
+                                />
+                            </Form.Group>
+                            <Form.Group controlId="firmId" className="mb-4">
+                                <Form.Label>{t("Firm id")}</Form.Label>
+                                <Form.Control
+                                    type="text"
+                                    name="firm_id"
+                                    value={userDetails.firm_id}
+                                    onChange={handleChange}
+                                />
+                            </Form.Group>
+                            <Form.Group controlId="firmVat" className="mb-4">
+                                <Form.Label>{t("Firm VAT")}</Form.Label>
+                                <Form.Control
+                                    type="text"
+                                    name="firm_vat"
+                                    value={userDetails.firm_vat}
+                                    onChange={handleChange}
+                                />
+                            </Form.Group>
+                        </Form>
                     </Accordion.Body>
                 </Accordion.Item>
             </Accordion>

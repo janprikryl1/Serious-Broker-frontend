@@ -9,6 +9,7 @@ import { List } from "@mui/joy";
 import { UserFormInput } from "./UserFormInput";
 import { Button, InputGroup } from "react-bootstrap";
 import { toCzechDateFormat } from "../../../../utils/constants";
+import {UserFormCheck} from "./UserFormCheck.tsx";
 
 type Props = {
     open: boolean;
@@ -34,29 +35,35 @@ export const UserEditModal: FC<Props> = ({ open, handleClose, selectedUser, hand
     const [streetNumber, setStreetNumber] = useState("");
     const [town, setTown] = useState("");
     const [country, setCountry] = useState("");
+    const [newsletterSubscription, setNewsletterSubscription] = useState(selectedUser?.newsletter_subscription || 0);
+    const [receiveMessages, setReceiveMessages] = useState(selectedUser?.receive_messages || 0);
+    const [verified, setVerified] = useState(selectedUser?.verified || 0);
     const [newPassword, setNewPassword] = useState<string>();
 
     useEffect(() => {
         if (selectedUser) {
-            setNickname(selectedUser.nickname || "");
-            setEmail(selectedUser.email || "");
-            setTitleBefore(selectedUser.title_before || "");
-            setFirstname(selectedUser.firstname || "");
-            setMidlename(selectedUser.midlename || "");
-            setSurname(selectedUser.surname || "");
-            setFirmId(selectedUser.firm_id || "");
-            setFirmName(selectedUser.firm_name || "");
-            setFirmVat(selectedUser.firm_vat || "");
-            setTitleAfter(selectedUser.title_after || "");
-            setRole(selectedUser.role || "");
-            setStreet(selectedUser.street || "");
-            setStreetNumber(selectedUser.street_number || "");
-            setTown(selectedUser.town || "");
-            setCountry(selectedUser.country || "");
+            setNickname(selectedUser.nickname ?? "");
+            setEmail(selectedUser.email ?? "");
+            setTitleBefore(selectedUser.title_before ?? "");
+            setFirstname(selectedUser.firstname ?? "");
+            setMidlename(selectedUser.midlename ?? "");
+            setSurname(selectedUser.surname ?? "");
+            setFirmId(selectedUser.firm_id ?? "");
+            setFirmName(selectedUser.firm_name ?? "");
+            setFirmVat(selectedUser.firm_vat ?? "");
+            setTitleAfter(selectedUser.title_after ?? "");
+            setRole(selectedUser.role ?? "");
+            setStreet(selectedUser.street ?? "");
+            setStreetNumber(selectedUser.street_number ?? "");
+            setTown(selectedUser.town ?? "");
+            setCountry(selectedUser.country ?? "");
+            setNewsletterSubscription(selectedUser.newsletter_subscription ?? 0);
+            setReceiveMessages(selectedUser.receive_messages ?? 0);
+            setVerified(selectedUser.verified ?? 0);
         }
     }, [selectedUser]);
-    
-    
+
+
     const handleSaveChanges = () => {
         if (selectedUser) {
             const updatedUser: UserType = {
@@ -76,6 +83,9 @@ export const UserEditModal: FC<Props> = ({ open, handleClose, selectedUser, hand
                 street_number: streetNumber,
                 town,
                 country,
+                newsletter_subscription: newsletterSubscription,
+                receive_messages: receiveMessages,
+                verified,
                 password: newPassword,
             };
             handleUpdateUser(updatedUser);
@@ -114,6 +124,9 @@ export const UserEditModal: FC<Props> = ({ open, handleClose, selectedUser, hand
                             <UserFormInput label="Street number" value={streetNumber} onChange={(e) => setStreetNumber(e.target.value)} />
                             <UserFormInput label="Town" value={town} onChange={(e) => setTown(e.target.value)} />
                             <UserFormInput label="Country" value={country} onChange={(e) => setCountry(e.target.value)} />
+                            <UserFormCheck label="Newsletter" value={newsletterSubscription} onChange={(e) => setNewsletterSubscription(e.target.checked ? 1 : 0)} />
+                            <UserFormCheck label="I don't want any messages" value={receiveMessages} onChange={(e) => setReceiveMessages(e.target.checked ? 1 : 0)} />
+                            <UserFormCheck label="Verified" value={verified} onChange={(e) => setVerified(e.target.checked ? 1 : 0)} />
                             <UserFormInput label="Changed" value={toCzechDateFormat(selectedUser.changed)} readOnly />
                             <UserFormInput label="Created" value={toCzechDateFormat(selectedUser.created)} readOnly />
                             <InputGroup className="mb-3">

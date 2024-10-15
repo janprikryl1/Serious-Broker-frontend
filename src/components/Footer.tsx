@@ -19,7 +19,7 @@ export const Footer:FC = () => {
                   <div className="col-md-6">
                     <div className="footer__about">
                       <p className="footer__about-moto">
-                        {t("Here will be serious broker info")}
+                        {t("Serious Broker is a student project that is being developed as part of a bachelor thesis. It focuses on assisting in investing and spreading awareness about cryptocurrencies. Want to know more? Join us on social media or contact us via email for example.")}
                       </p>
                     </div>
                   </div>

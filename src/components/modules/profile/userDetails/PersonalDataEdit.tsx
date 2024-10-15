@@ -11,7 +11,7 @@ export const PersonalDataEdit:FC = () => {
         return (
             <Form>
                 <h3>{t("Profile")}</h3>
-                <Form.Group controlId="titleBefore">
+                <Form.Group controlId="titleBefore" className="mb-4">
                     <Form.Label>{t("Title before")}</Form.Label>
                     <Form.Control
                         type="text"
@@ -20,7 +20,7 @@ export const PersonalDataEdit:FC = () => {
                         onChange={handleChange}
                     />
                 </Form.Group>
-                <Form.Group controlId="firstname">
+                <Form.Group controlId="firstname" className="mb-4">
                     <Form.Label>{t("Name")}</Form.Label>
                     <Form.Control
                         type="text"
@@ -29,7 +29,7 @@ export const PersonalDataEdit:FC = () => {
                         onChange={handleChange}
                     />
                 </Form.Group>
-                <Form.Group controlId="midlename">
+                <Form.Group controlId="midlename" className="mb-4">
                     <Form.Label>{t("Middle name")}</Form.Label>
                     <Form.Control
                         type="text"
@@ -38,7 +38,7 @@ export const PersonalDataEdit:FC = () => {
                         onChange={handleChange}
                     />
                 </Form.Group>
-                <Form.Group controlId="surname">
+                <Form.Group controlId="surname" className="mb-4">
                     <Form.Label>{t("Surname")}</Form.Label>
                     <Form.Control
                         type="text"
@@ -47,7 +47,7 @@ export const PersonalDataEdit:FC = () => {
                         onChange={handleChange}
                     />
                 </Form.Group>
-                <Form.Group controlId="titleAfter">
+                <Form.Group controlId="titleAfter" className="mb-4">
                     <Form.Label>{t("Title after")}</Form.Label>
                     <Form.Control
                         type="text"
@@ -56,7 +56,7 @@ export const PersonalDataEdit:FC = () => {
                         onChange={handleChange}
                     />
                 </Form.Group>
-                <Form.Group controlId="email">
+                <Form.Group controlId="email" className="mb-4">
                     <Form.Label>{t("Email")}</Form.Label>
                     <Form.Control
                         type="email"
@@ -65,7 +65,7 @@ export const PersonalDataEdit:FC = () => {
                         onChange={handleChange}
                     />
                 </Form.Group>
-                <Form.Group controlId="nickname">
+                <Form.Group controlId="nickname" className="mb-4">
                     <Form.Label>{t("Nickname")}</Form.Label>
                     <Form.Control
                         type="text"

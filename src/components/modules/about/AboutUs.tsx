@@ -58,9 +58,7 @@ export const AboutUs: FC = () => {
                     </h2>
 
                     <p className="mb-0">
-                      Hey there! So glad you stopped by to Meet Our Company. Don't
-                      miss out on this opportunity to learn about what we do and
-                      the amazing team that makes it all happen!
+                      {t("Serious Broker is a student project that is being developed as part of a bachelor thesis. It focuses on assisting in investing and spreading awareness about cryptocurrencies. Want to know more? Join us on social media or contact us via email for example.")}
                     </p>
                     <Link
                         to={routes.contact}

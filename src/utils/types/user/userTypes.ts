@@ -1,25 +1,28 @@
 export type UserType = {
     id: number;
     role: string;
-    status: string,
-    superior_id?: number,
-    nickname: string,
-    email: string,
-    firstname?: string,
-    surname?: string,
-    midlename?: string,
-    title_before?: string,
-    title_after?: string,
-    firm_name?: string,
-    firm_id?: string,
-    firm_vat?: string,
-    street?: string,
-    street_number?: string,
-    town?: string,
-    country: string,
-    password?: string,
-    changed: string,
-    created: string
+    status: string;
+    superior_id?: number;
+    nickname: string;
+    email: string;
+    firstname?: string;
+    surname?: string;
+    midlename?: string;
+    title_before?: string;
+    title_after?: string;
+    firm_name?: string;
+    firm_id?: string;
+    firm_vat?: string;
+    street?: string;
+    street_number?: string;
+    town?: string;
+    country: string;
+    password?: string;
+    changed: string;
+    created: string;
+    newsletter_subscription: number;
+    receive_messages: number;
+    verified: number;
 }
 
 export type MembershipTypes = {

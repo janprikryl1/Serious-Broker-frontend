@@ -5,16 +5,18 @@ import {LocationData} from "../../components/modules/profile/userDetails/Locatio
 import {FirmData} from "../../components/modules/profile/userDetails/FirmData.tsx";
 import {CreatedLastEdited} from "../../components/modules/profile/userDetails/CreatedLastEdited.tsx";
 import {UploadChangesButton} from "../../components/modules/profile/userDetails/UploadChangesButton.tsx";
+import {NewsletterEdit} from "../../components/modules/profile/userDetails/NewsletterEdit.tsx";
 
 export const ProfileEdit:FC = () => {
     return (
         <UserDetailsProvider>
             <div className="container mt-4">
-                <div className="row justify-content-center">
+                <div className="row justify-content">
                     <div className="col-md-6">
                         <PersonalDataEdit />
                         <LocationData />
                         <FirmData />
+                        <NewsletterEdit />
                         <CreatedLastEdited />
                         <UploadChangesButton />
                     </div>

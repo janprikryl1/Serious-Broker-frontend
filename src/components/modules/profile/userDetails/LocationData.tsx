@@ -20,7 +20,7 @@ export const LocationData:FC = () => {
             <>
                 <h3>{t("Location")}</h3>
                 <Form>
-                    <Form.Group controlId="street">
+                    <Form.Group controlId="street" className="mb-4">
                         <Form.Label>{t("Street")}</Form.Label>
                         <Form.Control
                             type="text"
@@ -29,7 +29,7 @@ export const LocationData:FC = () => {
                             onChange={handleChange}
                         />
                     </Form.Group>
-                    <Form.Group controlId="streetNumber">
+                    <Form.Group controlId="streetNumber" className="mb-4">
                         <Form.Label>{t("Street number")}</Form.Label>
                         <Form.Control
                             type="text"
@@ -38,7 +38,7 @@ export const LocationData:FC = () => {
                             onChange={handleChange}
                         />
                     </Form.Group>
-                    <Form.Group controlId="town">
+                    <Form.Group controlId="town" className="mb-4">
                         <Form.Label>{t("Town")}</Form.Label>
                         <Form.Control
                             type="text"
@@ -47,8 +47,7 @@ export const LocationData:FC = () => {
                             onChange={handleChange}
                         />
                     </Form.Group>
-                    <Form.Group controlId="country">
-                        <Form.Label>{t("Country")}</Form.Label>
+                    <Form.Group controlId="country" className="mb-4">
                         <CountrySelect
                             value={userDetails.country}
                             setCountry={handleCountryChange}

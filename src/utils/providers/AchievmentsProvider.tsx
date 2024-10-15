@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import React, {createContext, useContext, useState, useEffect, ReactNode, Dispatch, SetStateAction} from 'react';
 import { AchievementType } from '../types/AchievementType.ts';
 import { getAchievements, markReadAchievment } from '../../api/achievementService.ts';
 import { AchievmentAnimation } from '../../components/achievment/AchievmentAnimation.tsx';
@@ -6,6 +6,7 @@ import {useUserContext} from "./providerUser.tsx";
 
 type AchievmentsContextType = {
     achievements: AchievementType[];
+    setAchievements: Dispatch<SetStateAction<AchievementType[]>>;
     unreadAchievements: AchievementType[];
     markAchievementAsRead: (id: number) => Promise<void>;
 };
@@ -25,13 +26,6 @@ export const AchievmentsProvider: React.FC<{ children: ReactNode }> = ({ childre
                 const result = await getAchievements();
                 if (!result) return;
                 setAchievements(result.data);
-                const newUnread = result.data.filter((achievement) => achievement.read == 0);
-                setUnreadAchievements(newUnread);
-                if (newUnread.length > prevUnreadCount) {
-                    setShowAnimation(true);
-                    setTimeout(() => setShowAnimation(false), 11000);
-                }
-                setPrevUnreadCount(newUnread.length);
             } catch (error) {
                 console.error(error);
             }
@@ -42,6 +36,16 @@ export const AchievmentsProvider: React.FC<{ children: ReactNode }> = ({ childre
         }, 60000); // 60000 ms = 1 minute
         return () => clearInterval(intervalId); 
     }, [prevUnreadCount, user?.id]);
+
+    useEffect(() => {
+        const newUnread = achievements.filter((achievement) => achievement.read == 0);
+        setUnreadAchievements(newUnread);
+        if (newUnread.length > prevUnreadCount) {
+            setShowAnimation(true);
+            setTimeout(() => setShowAnimation(false), 11000);
+        }
+        setPrevUnreadCount(newUnread.length);
+    }, [achievements]);
 
     const markAchievementAsRead = async (id: number) => {
         try {
@@ -61,7 +65,7 @@ export const AchievmentsProvider: React.FC<{ children: ReactNode }> = ({ childre
     };
 
     return (
-        <AchievmentContext.Provider value={{ achievements, unreadAchievements, markAchievementAsRead }}>
+        <AchievmentContext.Provider value={{ achievements, setAchievements, unreadAchievements, markAchievementAsRead }}>
             {children}
             {showAnimation && <AchievmentAnimation onClose={handleMarkLastAchievementAsRead}/>}
         </AchievmentContext.Provider>

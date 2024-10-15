@@ -95,6 +95,9 @@ export const UserManagment: FC = () => {
         { field: 'street_number', headerName: t("Street number"), flex: 1 },
         { field: 'town', headerName: t("Town"), flex: 1 },
         { field: 'country', headerName: t("Country"), flex: 1 },
+        { field: 'newsletter_subscription', headerName: t("Newsletter"), flex: 1 },
+        { field: 'receive_messages', headerName: t("Messages"), flex: 1 },
+        { field: 'verified', headerName: t("Verified"), flex: 1 },
         { field: 'changed', headerName: t("Changed"), flex: 1 },
         { field: 'created', headerName: t("Created"), flex: 1 },
     ];
