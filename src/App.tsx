@@ -56,6 +56,7 @@ import {ProfileOverview} from "./pages/profile/ProfileOverview.tsx";
 import {AchievmentsProvider} from "./utils/providers/AchievmentsProvider.tsx";
 import {AdminAchivments} from "./pages/admin/AdminAchivments.tsx";
 import {UnverifiedHeaderInfo} from "./components/UnverifiedHeaderInfo.tsx";
+import {CoinSettings} from "./pages/admin/CoinSettings.tsx";
 
 // Disable automatic CSS addition for Font Awesome
 config.autoAddCss = false;
@@ -113,6 +114,7 @@ function App() {
                               <Route path={routes.admin.logTable} element={<LogTable />} />
                               <Route path={routes.admin.feedbacks} element={<Feedbacks />} />
                               <Route path={routes.admin.achievements} element={<AdminAchivments />} />
+                              <Route path={routes.admin.coinSettings} element={<CoinSettings />} />
                           </Route>
                           <Route path={routes.inquiry} element={<InquiryPrice />}/>
                           <Route path="*" element={<ErrorPage/>}/>

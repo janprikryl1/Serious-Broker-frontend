@@ -35,54 +35,52 @@ export const LogTable: FC = () => {
         }
     };
 
-    return (
-        <div>
-            <div className="padding-bottom padding-top">
-                <div className="container">
-                    <div className="service-details__wrapper">
-                        <div className="service-details__item">
-                            <div className="service-details__item-inner">
-                                <div
-                                    className="service-details__content"
-                                    data-aos="fade-up"
-                                    data-aos-duration="900"
-                                >
-                                    {loading ? (
-                                        <TableLogSkeleton />
-                                    ) : (
-                                        <>
-                                            <h4 className="card-title">{t("Table logs")}</h4>
-                                            <p className="card-description">{t("Logs for migrating tables")}</p>
-                                            <div className="table-responsive">
-                                                <table className="table">
-                                                    <thead>
-                                                    <tr>
-                                                        <th>Id</th>
-                                                        <th>{t("Table")}</th>
-                                                        <th>{t("Action")}</th>
-                                                        <th>{t("Created")}</th>
+    return (         
+        <div className="padding-bottom">
+            <div className="container">
+                <div className="service-details__wrapper">
+                    <div className="service-details__item">
+                        <div className="service-details__item-inner">
+                            <div
+                                className="service-details__content"
+                                data-aos="fade-up"
+                                data-aos-duration="900"
+                            >
+                                {loading ? (
+                                    <TableLogSkeleton />
+                                ) : (
+                                    <>
+                                        <h4 className="card-title">{t("Table logs")}</h4>
+                                        <p className="card-description">{t("Logs for migrating tables")}</p>
+                                        <div className="table-responsive">
+                                            <table className="table">
+                                                <thead>
+                                                <tr>
+                                                    <th>Id</th>
+                                                    <th>{t("Table")}</th>
+                                                    <th>{t("Action")}</th>
+                                                    <th>{t("Created")}</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                {logs.map((log) => (
+                                                    <tr key={log.id}>
+                                                        <td>{log.id}</td>
+                                                        <td>{log.tableName}</td>
+                                                        <td>{log.action}</td>
+                                                        <td>{toCzechDateFormat(log.created)}</td>
                                                     </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                    {logs.map((log) => (
-                                                        <tr key={log.id}>
-                                                            <td>{log.id}</td>
-                                                            <td>{log.tableName}</td>
-                                                            <td>{log.action}</td>
-                                                            <td>{toCzechDateFormat(log.created)}</td>
-                                                        </tr>
-                                                    ))}
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                            <Pagination
-                                                currentPage={currentPage}
-                                                totalPages={totalPages}
-                                                onPageChange={handlePageChange}
-                                            />
-                                        </>
-                                    )}
-                                </div>
+                                                ))}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <Pagination
+                                            currentPage={currentPage}
+                                            totalPages={totalPages}
+                                            onPageChange={handlePageChange}
+                                        />
+                                    </>
+                                )}
                             </div>
                         </div>
                     </div>

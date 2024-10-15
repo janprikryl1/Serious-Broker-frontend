@@ -68,6 +68,12 @@ export const Sidebar: FC = () => {
                         >
                             <CDBSidebarMenuItem icon="gamepad">{t("Achievements")}</CDBSidebarMenuItem>
                         </NavLink>
+                        <NavLink
+                            to={adminURLS.coinSettings}
+                            className={({ isActive }) => isActive ? 'activeClicked' : ''}
+                        >
+                            <CDBSidebarMenuItem icon="credit-card">{t("Coins")}</CDBSidebarMenuItem>
+                        </NavLink>
                     </CDBSidebarMenu>
                 </CDBSidebarContent>
 
