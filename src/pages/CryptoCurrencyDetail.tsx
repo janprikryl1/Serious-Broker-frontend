@@ -8,7 +8,7 @@ import { RecentPost } from "../components/modules/article/RecentPost.tsx";
 import { ArticleSkeleton } from "../components/modules/article/ArticleSkeleton.tsx";
 import { useTranslation } from "react-i18next";
 import { Button } from "react-bootstrap";
-import {routes} from "../utils/constants";
+import {coinURL, routes} from "../utils/constants";
 
 export const CryptoCurrencyDetail: FC = () => {
     const { id } = useParams();
@@ -47,7 +47,7 @@ export const CryptoCurrencyDetail: FC = () => {
                                         <h3>{cryptocurrency.name} ({cryptocurrency.symbol})</h3>
                                         {!imageError && (
                                             <img
-                                                src={`https://cryptologos.cc/logos/${cryptocurrency.name.toLowerCase()}-${cryptocurrency.symbol.toLowerCase()}-logo.svg?v=035`}
+                                                src={`${coinURL}/${cryptocurrency.photo}`}
                                                 alt={cryptocurrency.name}
                                                 width={300}
                                                 onError={() => setImageError(true)}

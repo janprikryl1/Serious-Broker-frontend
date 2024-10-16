@@ -3,6 +3,7 @@ export const domain = "https://serious.broker";
 export const PROTECTED_ROUTES = ['/admin', '/profile', '/assets', '/most_profitable_assets', '/asset_graph/:id'];
 export const pageLimit = 10;
 export const imageURL = "https://api.serious.broker/article/images/";
+export const coinURL = "https://api.serious.broker/cryptocurrency_list/images/";
 
 export const facebookURL = "https://www.facebook.com/profile.php?id=61566158057883";
 export const instagramURL = "https://www.instagram.com/serious_broker/?igsh=MTVsM3NqMmFxaTNsaQ%3D%3D&utm_source=qr";

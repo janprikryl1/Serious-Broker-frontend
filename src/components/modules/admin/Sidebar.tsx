@@ -1,4 +1,4 @@
-import { FC } from "react";
+import {FC, useState} from "react";
 import { NavLink } from 'react-router-dom';
 import { Button } from "react-bootstrap";
 import { useUserContext } from "../../../utils/providers/providerUser.tsx";
@@ -16,11 +16,18 @@ import {adminURLS} from "../../../utils/constants";
 export const Sidebar: FC = () => {
     const { t } = useTranslation();
     const { user, logout } = useUserContext();
+    const [collapsed, setCollapsed] = useState(Boolean(localStorage.getItem("sidebarCollapsed") ?? ""));
+    
+    const collapseToggle = () => {
+        const newCollapsed = !collapsed;
+        setCollapsed(newCollapsed);
+        localStorage.setItem("sidebarCollapsed", newCollapsed.toString());
+    }
 
     return (
         <div style={{ display: 'flex', overflow: 'scroll initial', zIndex: 0 }}>
-            <CDBSidebar textColor="#fff" backgroundColor="#333" breakpoint={200} className="" maxWidth="100%" minWidth="50%" toggled={false}>
-                <CDBSidebarHeader prefix={<i className="fa fa-bars fa-large"></i>}>
+            <CDBSidebar textColor="#fff" backgroundColor="#333" breakpoint={200} className="" maxWidth="100%" minWidth="50%" toggled={collapsed}>
+                <CDBSidebarHeader prefix={<i className="fa fa-bars fa-large" onClick={collapseToggle}></i>}>
                     {user && (user.firstname + " " + user.surname)}
                 </CDBSidebarHeader>
 

@@ -20,3 +20,7 @@ export type CryptoCurrencyDetailType = CryptoCurrencyType & {
     photo: string;
     categories: string;
 }
+
+export type CryptoCurrencyAdminType = CryptoCurrencyType & {
+    photo: File | null;
+};
