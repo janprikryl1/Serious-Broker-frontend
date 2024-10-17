@@ -499,7 +499,10 @@
     "File is too large": "File is too large",
     "File upload failed": "File upload failed",
     "Coin detail updated": "Coin detail updated",
-    
-    
-    "User registered": "User registered"
+    "User registered": "User registered",
+    "Achievement for 1 month!": "Achievement for 1 month!",
+    "Achievement for 3 months!": "Achievement for 3 months!",
+    "Achievement for 6 months!": "Achievement for 6 months!",
+    "Achievement for 1 year!": "Achievement for 1 year!",
+    "Achievement for year number: ": "Achievement for year number: "
 }

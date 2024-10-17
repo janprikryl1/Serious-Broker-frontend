@@ -134,7 +134,7 @@ export const UserEditModal: FC<Props> = ({ open, handleClose, selectedUser, hand
                             </InputGroup>
                             <InputGroup className="mb-3">
                                 <Button variant="primary" onClick={handleSaveChanges}>
-                                    Update
+                                    {t("Update")}
                                 </Button>
                             </InputGroup>
                         </>

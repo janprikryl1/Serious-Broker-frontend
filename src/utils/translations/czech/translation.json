@@ -499,7 +499,10 @@
     "File is too large": "Soubor je moc velký",
     "File upload failed": "Nahrávání souboru selhalo",
     "Coin detail updated": "Detail mince aktualizován",
-    
-    
-    "User registered": "Uživatel registrován"
+    "User registered": "Uživatel registrován",
+    "Achievement for 1 month!": "Achievement za 1 měsíc!",
+    "Achievement for 3 months!": "Achievement za 3 měsíce!",
+    "Achievement for 6 months!": "Achievement za půl roku!",
+    "Achievement for 1 year!": "Achievement za 1 rok!",
+    "Achievement for year number: ": "Achievement za rok číslo: "
 }

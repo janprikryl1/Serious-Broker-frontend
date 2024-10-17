@@ -17,7 +17,7 @@ export const ProfileOverview:FC = () => {
             </div>
             <div className="row">
                 <AdminOverviewCard title={t("Achievments count")} value={`${t("You have")} ${achievements.length} ${t("achievements")}`} bottom={t(`${unreadAchievements.length}/${achievements.length} ${t("unread")}`)}/>
-                <AdminOverviewCard title={t("Last profile edit")} value={user?.changed ? toCzechDateFormat(user?.changed) : t("Never")} bottom={t(`${("You are here since")} ${toCzechDateFormat(user!.created)}`)}/>
+                <AdminOverviewCard title={t("Last profile edit")} value={user?.changed ? toCzechDateFormat(user?.changed) : t("Never")} bottom={t(`${t("You are here since")} ${toCzechDateFormat(user!.created)}`)}/>
             </div>
         </div>
     );
