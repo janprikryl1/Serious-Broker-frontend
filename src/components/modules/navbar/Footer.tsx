@@ -2,10 +2,9 @@ import  {FC} from 'react';
 import { Link } from 'react-router-dom';
 import ScrollToTop from "react-scroll-to-top";
 import {useTranslation} from "react-i18next";
-import {SocialLinkIcon} from "./modules/contact/SocialLinkIcon.tsx";
-import footer1 from "../utils/icons/footer/1.png";
-import {facebookURL, instagramURL, routes} from "../utils/constants";
-
+import footer1 from "../../../utils/icons/footer/1.png";
+import {facebookURL, instagramURL, routes} from "../../../utils/constants";
+import {SocialLinkIcon} from "../contact/SocialLinkIcon.tsx";
 
 export const Footer:FC = () => {
   const {t} = useTranslation();

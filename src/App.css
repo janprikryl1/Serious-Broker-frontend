@@ -38,3 +38,49 @@ button {
   box-shadow: 0px 24px 48px rgba(0, 0, 0, 0.2);
   padding: 20px;
 }
+
+
+.mobile-menu {
+  display: none;
+  position: absolute;
+  width: 100%;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+}
+
+.mobile-menu-list {
+  display: block;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+}
+
+.mobile-menu-list li {
+  padding: 10px 0;
+}
+
+@media (max-width: 900px) {
+  .menu-area, .mobile-hide {
+    display: none;
+  }
+
+  .mobile-menu {
+    display: block;
+  }
+
+  .header-bar {
+    display: flex;
+    width: 2px;
+    height: 2px;
+    cursor: pointer;
+  }
+
+}
+
+@media (min-width: 900px) {
+  .header-bar {
+    display: none;
+  }
+}

@@ -3,7 +3,6 @@ import {BrowserRouter, Route, Routes} from "react-router-dom";
 import {About} from "./pages/About.tsx";
 import {ErrorPage} from "./pages/ErrorPage.tsx";
 import {Contact} from "./pages/Contact.tsx";
-import {Header} from "./components/Header.tsx";
 import { config } from '@fortawesome/fontawesome-svg-core';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
@@ -12,7 +11,6 @@ import 'aos/dist/aos.css';
 import './styles/css/swiper-bundle.min.css';
 import './styles/sass/style.scss';
 import {useEffect} from "react";
-import {Footer} from "./components/Footer.tsx";
 import "./i18n";
 import {Index} from "./pages/Index.tsx";
 import {Articles} from "./pages/Articles.tsx";
@@ -57,6 +55,8 @@ import {AchievmentsProvider} from "./utils/providers/AchievmentsProvider.tsx";
 import {AdminAchivments} from "./pages/admin/AdminAchivments.tsx";
 import {UnverifiedHeaderInfo} from "./components/UnverifiedHeaderInfo.tsx";
 import {CoinSettings} from "./pages/admin/CoinSettings.tsx";
+import {Header} from "./components/modules/navbar/Header.tsx";
+import {Footer} from "./components/modules/navbar/Footer.tsx";
 
 // Disable automatic CSS addition for Font Awesome
 config.autoAddCss = false;
