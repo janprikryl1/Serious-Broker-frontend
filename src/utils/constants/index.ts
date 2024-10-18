@@ -131,4 +131,21 @@ export const getYear = (yearNumber: number) => {
     return 2024 - yearNumber;
 }
 
-    
+export const defaultNewCurrency = {
+    id: 0,
+    name: "",
+    symbol: "",
+    price: 0,
+    marketcap: "",
+    category: "",
+    max_supply: 0,
+    circulating_supply: "",
+    website: "",
+    whitepaper: "",
+    reddit: "",
+    twitter: "",
+    telegram: "",
+    cmc_rank: 0,
+    date: "",
+    photo: null
+}

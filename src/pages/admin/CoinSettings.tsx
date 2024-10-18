@@ -4,12 +4,17 @@ import { CryptoCurrencyType } from "../../utils/types/CryptoCurrencyType.ts";
 import {DataGrid, GridRenderCellParams} from "@mui/x-data-grid";
 import { Paper } from "@mui/material";
 import { useThemeContext } from "../../utils/providers/ThemeProvider.tsx";
-import {cryptoCurrencyUpdate, getAllCryptocurrencies} from "../../api/adminCryptocurrencyService.ts";
+import {
+    cryptoCurrencyUpdate,
+    deleteCryptocurrency,
+    getAllCryptocurrencies
+} from "../../api/adminCryptocurrencyService.ts";
 import {CryptoCurrencyTableInput} from "../../components/modules/admin/cryptoCurrencyManagement/CryptoCurrencyTableInput.tsx";
 import {CryptoCurrencyFileUpload} from "../../components/modules/admin/cryptoCurrencyManagement/CryptoCurrencyFileUpload.tsx";
 import {CryptoCurrencyIconLink} from "../../components/modules/admin/cryptoCurrencyManagement/CryptoCurrencyIconLink.tsx";
 import Swal from "sweetalert2";
-import {Button, Form, InputGroup} from "react-bootstrap";
+import {AdminTableFilter} from "../../components/modules/reusable/AdminTableFilter.tsx";
+import {AddCryptoCurrency} from "../../components/modules/admin/cryptoCurrencyManagement/AddCryptoCurrency.tsx";
 
 export const CoinSettings: FC = () => {
     const { t } = useTranslation();
@@ -17,8 +22,6 @@ export const CoinSettings: FC = () => {
     const [cryptocurrencies, setCryptocurrencies] = useState<CryptoCurrencyType[]>([]);
     const [editModeRows, setEditModeRows] = useState<{ [key: number]: boolean }>({});
     const [selectedFiles, setSelectedFiles] = useState<{ [key: number]: File | null }>({});
-    const [searchTerm, setSearchTerm] = useState('');
-    const [searchColumn, setSearchColumn] = useState<string>('email');
     const [filteredCoins, setFilteredCoins] = useState<CryptoCurrencyType[]>();
 
     
@@ -91,6 +94,28 @@ export const CoinSettings: FC = () => {
             console.error(`Cryptocurrency with ID ${id} not found`);
         }
     };
+    
+    const handleDelete = async (id: number) => {
+        try {
+            const response = await deleteCryptocurrency(id);
+            if (response !== undefined && response.data.stauts === "success") {
+                setCryptocurrencies((cryptocurrencies) => cryptocurrencies.filter(item => item.id !== id));
+                setFilteredCoins(cryptocurrencies);
+                Swal.fire({
+                    icon: "success",
+                    title: t("Coin deleted")
+                });
+            }
+        } catch (error) {
+            Swal.fire({
+                icon: "error",
+                title: t("Error"),
+                text: t("Error while deleting cryptocurrency"),
+            });
+            console.error(error);
+        }
+    }
+    
     const handleRowClick = (id: number) => {
         setEditModeRows((prev) => ({
             ...prev,
@@ -119,54 +144,16 @@ export const CoinSettings: FC = () => {
             headerName: t("Icon"),
             flex: 2,
             renderCell: (params: GridRenderCellParams<{id: number}>) => editModeRows[params.row.id] ? (
-                    <CryptoCurrencyFileUpload handleFileChange={handleFileChange} handleSubmit={handleSubmit} rowId={params.row.id} />
+                    <CryptoCurrencyFileUpload handleFileChange={handleFileChange} handleSubmit={handleSubmit} rowId={params.row.id} handleDelete={handleDelete} />
                 ) : <CryptoCurrencyIconLink link={params.value} />
         },
     ];
 
-    const handleSearch = () => {
-        const results = cryptocurrencies.filter((coin) =>
-            coin[searchColumn as keyof CryptoCurrencyType]?.toString().toLowerCase().includes(searchTerm.toLowerCase())
-        );
-        setFilteredCoins(results);
-    };
-
-    const handleClearFilters = () => {
-        setSearchTerm('');
-        setFilteredCoins(cryptocurrencies);
-    };
-
-
     return (
         <div className="service-details__item-inner">
             <h2>{t("Coins management")}</h2>
-            <InputGroup className="mb-3">
-                <InputGroup.Text id="inputGroup-sizing-sm">{t("Column")}</InputGroup.Text>
-                <Form.Select
-                    value={searchColumn}
-                    onChange={(e) => setSearchColumn(e.target.value)}
-                    aria-label={t("Search Column")}
-                >
-                    {columns.map((column) => (
-                        <option key={column.field} value={column.field}>
-                            {column.headerName}
-                        </option>
-                    ))}
-                </Form.Select>
-                <InputGroup.Text id="inputGroup-sizing-sm">{t("Value")}</InputGroup.Text>
-                <Form.Control
-                    type="text"
-                    placeholder={t("Search term...")}
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                />
-                <Button variant="primary" onClick={handleSearch}>
-                    {t("Search")}
-                </Button>
-                <Button variant="secondary" onClick={handleClearFilters}>
-                    {t("Clear filters")}
-                </Button>
-            </InputGroup>
+            <AddCryptoCurrency />
+            <AdminTableFilter setFilteredCoins={setFilteredCoins} cryptocurrencies={cryptocurrencies} columns={columns} />
             <Paper sx={{ backgroundColor: theme === 'dark' ? "#5a636c" : "#f5f8fb" }}>
                 <DataGrid
                     rows={filteredCoins ?? cryptocurrencies}

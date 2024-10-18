@@ -504,5 +504,11 @@
     "Achievement for 3 months!": "Achievement for 3 months!",
     "Achievement for 6 months!": "Achievement for 6 months!",
     "Achievement for 1 year!": "Achievement for 1 year!",
-    "Achievement for year number: ": "Achievement for year number: "
+    "Achievement for year number: ": "Achievement for year number: ",
+    "Add Cryptocurrency": "Add Cryptocurrency",
+    "Add new coin": "Add new coin",
+    "Coin created": "Coin created",
+    "Failed to add cryptocurrency": "Failed to add cryptocurrency",
+    "Error while deleting cryptocurrency": "Error while deleting cryptocurrency",
+    "Coin deleted": "Coin deleted"
 }

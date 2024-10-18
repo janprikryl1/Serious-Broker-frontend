@@ -504,5 +504,11 @@
     "Achievement for 3 months!": "Achievement za 3 měsíce!",
     "Achievement for 6 months!": "Achievement za půl roku!",
     "Achievement for 1 year!": "Achievement za 1 rok!",
-    "Achievement for year number: ": "Achievement za rok číslo: "
+    "Achievement for year number: ": "Achievement za rok číslo: ",
+    "Add Cryptocurrency": "Přidat kryptoměnu",
+    "Add new coin": "Přidat novou minci",
+    "Coin created": "Mince vytořena",
+    "Failed to add cryptocurrency": "Chyba při vytváření kryptoměny",
+    "Error while deleting cryptocurrency": "Chyba při mazání kryptoměny",
+    "Coin deleted": "Coin odstraněn"
 }

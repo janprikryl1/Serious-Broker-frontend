@@ -2,14 +2,16 @@ import { FC } from "react";
 import Form from "react-bootstrap/Form";
 import { Button } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
+import {FaRegTrashAlt} from "react-icons/fa";
 
 type Props = {
     handleFileChange: (id: number, file: File | null) => void;
     handleSubmit: (id: number) => void;
     rowId: number;
+    handleDelete: (id: number) => void;
 };
 
-export const CryptoCurrencyFileUpload: FC<Props> = ({ handleFileChange, handleSubmit, rowId }) => {
+export const CryptoCurrencyFileUpload: FC<Props> = ({ handleFileChange, handleSubmit, rowId, handleDelete }) => {
     const { t } = useTranslation();
 
     return (
@@ -24,6 +26,12 @@ export const CryptoCurrencyFileUpload: FC<Props> = ({ handleFileChange, handleSu
                 onClick={() => handleSubmit(rowId)}
             >
                 {t("Upload")}
+            </Button>
+            <Button
+                variant="danger"
+                onClick={() => handleDelete(rowId)}
+            >
+                <FaRegTrashAlt />
             </Button>
         </Form.Group>
     );

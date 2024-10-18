@@ -24,3 +24,19 @@ export type CryptoCurrencyDetailType = CryptoCurrencyType & {
 export type CryptoCurrencyAdminType = CryptoCurrencyType & {
     photo: File | null;
 };
+
+export type CryptoCurrencyNewType = CryptoCurrencyType & {
+    price: number;
+    marketcap: string;
+    category: string;
+    max_supply: number;
+    circulating_supply: string;
+    website: string;
+    whitepaper: string;
+    reddit: string;
+    twitter: string;
+    telegram: string;
+    cmc_rank: number;
+    date: string;
+    photo: File | null;
+}
