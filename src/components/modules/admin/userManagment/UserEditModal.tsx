@@ -1,4 +1,4 @@
-import {FC, useEffect, useState} from "react";
+import {ChangeEvent, FC, useEffect, useState} from "react";
 import Modal from "@mui/material/Modal";
 import { UserType } from "../../../../utils/types/user/userTypes";
 import { useTranslation } from "react-i18next";
@@ -92,6 +92,14 @@ export const UserEditModal: FC<Props> = ({ open, handleClose, selectedUser, hand
         }
     };
 
+    const handleReceiveMessagesChange = (e: ChangeEvent<HTMLInputElement>) => {
+        const isChecked = e.target.checked;
+        setReceiveMessages(isChecked ? 1 : 0);
+        if (!isChecked) {
+            setNewsletterSubscription(0);
+        }
+    };
+
     return (
         <Modal open={open} onClose={handleClose}>
             <ModalDialog layout="fullscreen" style={{ backgroundColor: "#101214" }}>
@@ -124,8 +132,16 @@ export const UserEditModal: FC<Props> = ({ open, handleClose, selectedUser, hand
                             <UserFormInput label="Street number" value={streetNumber} onChange={(e) => setStreetNumber(e.target.value)} />
                             <UserFormInput label="Town" value={town} onChange={(e) => setTown(e.target.value)} />
                             <UserFormInput label="Country" value={country} onChange={(e) => setCountry(e.target.value)} />
-                            <UserFormCheck label="Newsletter" value={newsletterSubscription} onChange={(e) => setNewsletterSubscription(e.target.checked ? 1 : 0)} />
-                            <UserFormCheck label="I don't want any messages" value={receiveMessages} onChange={(e) => setReceiveMessages(e.target.checked ? 1 : 0)} />
+                            <UserFormCheck
+                                label="Newsletter"
+                                value={newsletterSubscription}
+                                onChange={(e) => setNewsletterSubscription(e.target.checked ? 1 : 0)}
+                            />
+                            <UserFormCheck
+                                label="I don't want any messages"
+                                value={receiveMessages}
+                                onChange={handleReceiveMessagesChange}
+                            />
                             <UserFormCheck label="Verified" value={verified} onChange={(e) => setVerified(e.target.checked ? 1 : 0)} />
                             <UserFormInput label="Changed" value={toCzechDateFormat(selectedUser.changed)} readOnly />
                             <UserFormInput label="Created" value={toCzechDateFormat(selectedUser.created)} readOnly />
