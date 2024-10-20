@@ -510,5 +510,15 @@
     "Coin created": "Mince vytořena",
     "Failed to add cryptocurrency": "Chyba při vytváření kryptoměny",
     "Error while deleting cryptocurrency": "Chyba při mazání kryptoměny",
-    "Coin deleted": "Coin odstraněn"
+    "Coin deleted": "Coin odstraněn",
+    "Forgotten password?": "Zapomenuté heslo",
+    "Recover": "Obnovení",
+    "Recover password": "Obnovení hesla",
+    "We are happy to see you back!": "Jsme rádi, že jste zpět",
+    "Please enter your email and we will send you link to recover your password": "Zadejte prosím váš email a my vám na něj pošleme odkaz na obnovení hesla",
+    "Submit failed": "Odesílání selhalo",
+    "Email sent": "Email odeslán",
+    "Check your email address!": "Zkontrolujte vaši emailovou schránku",
+    "Verification failed": "Ověřování selhalo",
+    "Link is invalid or user doesn't exist": "Odkaz je neplatný, nebo uživatel neexistuje"
 }

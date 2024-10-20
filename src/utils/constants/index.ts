@@ -44,6 +44,9 @@ export const routes = {
         edit: "/profile/edit",
         achievements: "/profile/achievements"
     },
+    verifyAccount: "/verify_account/:user_id",
+    forgottenPassword: "/forgotten_password",
+    recoverPassword: "/recover_password/:user_id/:secret_key_1/:secret_key_2",
     admin: {
         index: "",
         users: "users",

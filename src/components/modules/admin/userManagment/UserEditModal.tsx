@@ -95,8 +95,16 @@ export const UserEditModal: FC<Props> = ({ open, handleClose, selectedUser, hand
     const handleReceiveMessagesChange = (e: ChangeEvent<HTMLInputElement>) => {
         const isChecked = e.target.checked;
         setReceiveMessages(isChecked ? 1 : 0);
-        if (!isChecked) {
+        if (isChecked) {
             setNewsletterSubscription(0);
+        }
+    };
+    
+    const handleRecieveNewsletterChange = (e: ChangeEvent<HTMLInputElement>) => {
+        const isChecked = e.target.checked;
+        setNewsletterSubscription(isChecked ? 1 : 0);
+        if (isChecked) {
+            setReceiveMessages(0);
         }
     };
 
@@ -135,7 +143,7 @@ export const UserEditModal: FC<Props> = ({ open, handleClose, selectedUser, hand
                             <UserFormCheck
                                 label="Newsletter"
                                 value={newsletterSubscription}
-                                onChange={(e) => setNewsletterSubscription(e.target.checked ? 1 : 0)}
+                                onChange={handleRecieveNewsletterChange}
                             />
                             <UserFormCheck
                                 label="I don't want any messages"

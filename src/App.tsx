@@ -57,6 +57,9 @@ import {UnverifiedHeaderInfo} from "./components/UnverifiedHeaderInfo.tsx";
 import {CoinSettings} from "./pages/admin/CoinSettings.tsx";
 import {Header} from "./components/modules/navbar/Header.tsx";
 import {Footer} from "./components/modules/navbar/Footer.tsx";
+import {VerifyAccount} from "./pages/VerifyAccount.tsx";
+import {ForgottenPassword} from "./pages/ForgottenPassword.tsx";
+import {RecoverPassword} from "./pages/RecoverPassword.tsx";
 
 // Disable automatic CSS addition for Font Awesome
 config.autoAddCss = false;
@@ -97,6 +100,9 @@ function App() {
                               <Route path={routes.profile.edit} element={<ProfileEdit/>}/>
                               <Route path={routes.profile.achievements} element={<ProfileAchievements/>}/>
                           </Route>
+                          <Route path={routes.verifyAccount} element={<VerifyAccount />} />
+                          <Route path={routes.forgottenPassword} element={<ForgottenPassword />} />
+                          <Route path={routes.recoverPassword} element={<RecoverPassword />} />
                           <Route path={adminURLS.index} element={<Admin />}>
                               <Route path={routes.admin.index} element={<AdminOverview />} />
                               <Route path={routes.admin.users} element={<UserManagment />} />
@@ -128,7 +134,4 @@ function App() {
   )
 }
 
-export default App
-
-
-
+export default App;

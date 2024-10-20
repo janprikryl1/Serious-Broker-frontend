@@ -510,5 +510,16 @@
     "Coin created": "Coin created",
     "Failed to add cryptocurrency": "Failed to add cryptocurrency",
     "Error while deleting cryptocurrency": "Error while deleting cryptocurrency",
-    "Coin deleted": "Coin deleted"
+    "Coin deleted": "Coin deleted",
+    "Forgotten password?": "Forgotten password?",
+    "Recover": "Recover",
+    "Recover password": "Recover password",
+    "We are happy to see you back!": "We are happy to see you back!",
+    "Please enter your email and we will send you link to recover your password": "Please enter your email and we will send you link to recover your password",
+    "Submit failed": "Submit failed",
+    "Email sent": "Email sent",
+    "Check your email address!": "Check your email address!",
+    "Verification failed": "Verification failed",
+    "Link is invalid or user doesn't exist": "Link is invalid or user doesn't exist"
+    
 }
