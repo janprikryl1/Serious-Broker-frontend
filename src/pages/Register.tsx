@@ -51,7 +51,7 @@ export const Register:FC = () => {
                 Swal.fire({
                     icon: "success",
                     title: t("Registration Successful"),
-                    text: "",
+                    text: t("Check your email address to verify your account"),
                 }).then(() => {
                     setUser(response.user);
                     navigate(routes.home);

@@ -520,5 +520,6 @@
     "Email sent": "Email odeslán",
     "Check your email address!": "Zkontrolujte vaši emailovou schránku",
     "Verification failed": "Ověřování selhalo",
-    "Link is invalid or user doesn't exist": "Odkaz je neplatný, nebo uživatel neexistuje"
+    "Link is invalid or user doesn't exist": "Odkaz je neplatný, nebo uživatel neexistuje",
+    "Check your email address to verify your account": "Zkontrolujte svou emailovou schránku pro ověření účtu"
 }
