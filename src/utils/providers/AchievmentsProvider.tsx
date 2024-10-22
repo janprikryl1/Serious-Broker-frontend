@@ -40,7 +40,6 @@ export const AchievmentsProvider: React.FC<{ children: ReactNode }> = ({ childre
 
     useEffect(() => {
         if (!achievements || achievements.length === 0 || !user?.id) return;
-        console.log(achievements);
         const newUnread = achievements.filter((achievement) => achievement.read == 0);
         setUnreadAchievements(newUnread);
         if (newUnread.length > prevUnreadCount) {

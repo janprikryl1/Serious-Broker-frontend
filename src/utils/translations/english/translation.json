@@ -524,6 +524,12 @@
     "Check your email address to verify your account": "Check your email address to verify your account",
     "Send again": "Send again",
     "Verification is successful": "Verification is successful",
-    "Your account has been successfully verified!": "Your account has been successfully verified!"
-    
+    "Your account has been successfully verified!": "Your account has been successfully verified!",
+    "User not found": "User not found",
+    "New password": "New password",
+    "Enter password again": "Enter password again",
+    "Password updated": "Password updated",
+    "Your password has been successfully updated.": "Your password has been successfully updated.",
+    "Failed to update the password. Please try again.": "Failed to update the password. Please try again.",
+    "Something went wrong. Please try again.": "Something went wrong. Please try again."
 }

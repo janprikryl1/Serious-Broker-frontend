@@ -1,4 +1,4 @@
-import {FC, useState} from "react";
+import {FC, FormEvent, useState} from "react";
 import {TitleHeader} from "../components/modules/about/TitleHeader.tsx";
 import {useTranslation} from "react-i18next";
 import {LoginRegisterInput} from "../components/modules/signIn/LoginRegisterInput.tsx";
@@ -9,16 +9,21 @@ export const ForgottenPassword:FC = () => {
     const {t} = useTranslation();
     const [email, setEmail] = useState("");
     
-    const handleSubmitForgottenPassword = () => {
+    const handleSubmitForgottenPassword = (e: FormEvent) => {
+        e.preventDefault();
         if (!email) return;
         const submitForgottenPassword = async () => {
             try {
                 const result = await sendForgottenPassword(email);
-                if (result.status === 200) {
+                if (result.data.status === "reset password email sent") {
                     Swal.fire({
                         icon: "success", title: t("Email sent"), text: t("Check your email address!"),
                     });
                     setEmail("");
+                } else if (result.data.status === "user not found") {
+                    Swal.fire({
+                        icon: "error", title: t("Submit failed"), text: t("User not found"),
+                    });
                 }
             } catch (e) {
                 console.error(e);

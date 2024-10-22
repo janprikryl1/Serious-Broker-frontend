@@ -524,5 +524,12 @@
     "Check your email address to verify your account": "Zkontrolujte svou emailovou schránku pro ověření účtu",
     "Send again": "Poslat znovu",
     "Verification is successful": "Ověření bylo úspěšné",
-    "Your account has been successfully verified!": "Váš účet byl úspěšně ověřen!"
+    "Your account has been successfully verified!": "Váš účet byl úspěšně ověřen!",
+    "User not found": "Uživatel nenalezen",
+    "New password": "Nové heslo",
+    "Enter password again": "Nové heslo pro kontrolu",
+    "Password updated": "Heslo aktualizované",
+    "Your password has been successfully updated.": "Heslo bylo úspěšně změněno.",
+    "Failed to update the password. Please try again.": "Při změně hesla došlo k chybě. Zkuste to prosím znovu.",
+    "Something went wrong. Please try again.": "Nastala neznámá chyba. Zkuste to prosím znovu."
 }

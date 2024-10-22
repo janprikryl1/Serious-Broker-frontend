@@ -46,7 +46,7 @@ export const routes = {
     },
     verifyAccount: "/verify_account/:user_id/:token",
     forgottenPassword: "/forgotten_password",
-    recoverPassword: "/recover_password/:user_id/:secret_key_1/:secret_key_2",
+    recoverPassword: "/reset_password/:user_id/:secret_key_1/:secret_key_2",
     admin: {
         index: "",
         users: "users",
