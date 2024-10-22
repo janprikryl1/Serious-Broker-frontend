@@ -1,7 +1,7 @@
 import {FC} from "react";
-import {useUserContext} from "../utils/providers/providerUser.tsx";
 import {Outlet} from "react-router-dom";
-import {ProfileSidebar} from "../components/modules/profile/ProfileSidebar.tsx";
+import {useUserContext} from "../../utils/providers/providerUser.tsx";
+import {ProfileSidebar} from "../../components/modules/profile/ProfileSidebar.tsx";
 
 export const Profile: FC = () => {
     const {user} = useUserContext();

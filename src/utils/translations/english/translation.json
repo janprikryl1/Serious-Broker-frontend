@@ -531,5 +531,6 @@
     "Password updated": "Password updated",
     "Your password has been successfully updated.": "Your password has been successfully updated.",
     "Failed to update the password. Please try again.": "Failed to update the password. Please try again.",
-    "Something went wrong. Please try again.": "Something went wrong. Please try again."
+    "Something went wrong. Please try again.": "Something went wrong. Please try again.",
+    "Account verification": "Account verification"
 }

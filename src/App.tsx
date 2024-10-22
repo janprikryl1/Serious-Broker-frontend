@@ -25,7 +25,6 @@ import {RecommendationDetails} from "./pages/graphs/RecommendationDetails.tsx";
 import {SignIn} from "./pages/SignIn.tsx";
 import {Register} from "./pages/Register.tsx";
 import {ProviderUser} from "./utils/providers/providerUser.tsx";
-import {Profile} from "./pages/Profile.tsx";
 import {Admin} from "./pages/admin/Admin.tsx";
 import {MostProfitableAssets} from "./pages/graphs/MostProfitableAssets.tsx";
 import {AssetGraph} from "./pages/graphs/AssetGraph.tsx";
@@ -60,6 +59,7 @@ import {Footer} from "./components/modules/navbar/Footer.tsx";
 import {VerifyAccount} from "./pages/VerifyAccount.tsx";
 import {ForgottenPassword} from "./pages/ForgottenPassword.tsx";
 import {RecoverPassword} from "./pages/RecoverPassword.tsx";
+import {Profile} from "./pages/profile/Profile.tsx";
 
 // Disable automatic CSS addition for Font Awesome
 config.autoAddCss = false;
