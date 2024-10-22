@@ -60,6 +60,7 @@ import {VerifyAccount} from "./pages/VerifyAccount.tsx";
 import {ForgottenPassword} from "./pages/ForgottenPassword.tsx";
 import {RecoverPassword} from "./pages/RecoverPassword.tsx";
 import {Profile} from "./pages/profile/Profile.tsx";
+import {GraphsOverview} from "./pages/graphs/GraphsOverview.tsx";
 
 // Disable automatic CSS addition for Font Awesome
 config.autoAddCss = false;
@@ -85,6 +86,7 @@ function App() {
                           <Route path={routes.article} element={<Article/>}/>
                           <Route path={routes.search} element={<SearchArticles/>}/>
                           <Route path={routes.assets} element={<Assets/>}/>
+                          <Route path={routes.graphs} element={<GraphsOverview/>}/>
                           <Route path={routes.mostProfitableAssets} element={<MostProfitableAssets/>}/>
                           <Route path={routes.assetGraph} element={<AssetGraph/>}/>
                           <Route path={routes.assetGraphCurrencyDetail} element={<AssetGraphCurrencyDetail/>}/>
