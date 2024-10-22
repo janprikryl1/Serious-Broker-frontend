@@ -490,7 +490,7 @@
     "Posting first comment": "Prvním komentářem",
     "Being here for one, tree months": "Být zde jeden rok až jeden měsíc",
     "Being our loyal user (half year and every year)": "Být naším loajalním uživatelem (půl roku a pak každý rok)",
-    "Your email is not verified yet. Please check your email": "Váš email není ověřen. Prosím zkontrolujte svůj email",
+    "Your email is not verified yet.": "Váš email není ověřen.",
     "Coins management": "Správa mincí",
     "View Icon": "Zobrazit ikonu",
     "No image": "Žádná ikona",
@@ -521,5 +521,8 @@
     "Check your email address!": "Zkontrolujte vaši emailovou schránku",
     "Verification failed": "Ověřování selhalo",
     "Link is invalid or user doesn't exist": "Odkaz je neplatný, nebo uživatel neexistuje",
-    "Check your email address to verify your account": "Zkontrolujte svou emailovou schránku pro ověření účtu"
+    "Check your email address to verify your account": "Zkontrolujte svou emailovou schránku pro ověření účtu",
+    "Send again": "Poslat znovu",
+    "Verification is successful": "Ověření bylo úspěšné",
+    "Your account has been successfully verified!": "Váš účet byl úspěšně ověřen!"
 }

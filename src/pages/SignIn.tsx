@@ -94,6 +94,9 @@ export const SignIn: FC = () => {
                                             {t("Forgotten password?")}<Link to={routes.forgottenPassword}
                                                                                     className="link-underline-none">{t("Recover")}</Link>
                                         </p>
+                                        <p>
+                                            <Link to={routes.forgottenPassword} className="link-underline-none">{t("Forgotten password?")}</Link>
+                                        </p>
                                     </div>
                                 </div>
                             </div>

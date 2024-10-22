@@ -490,7 +490,7 @@
     "Posting first comment": "Posting first comment",
     "Being here for one, tree months": "Being here for one, tree months",
     "Being our loyal user (half year and every year)": "Being our loyal user (half year and every year)",
-    "Your email is not verified yet. Please check your email": "Your email is not verified yet. Please check your email",
+    "Your email is not verified yet.": "Your email is not verified yet.",
     "Coins management": "Coins management",
     "View Icon": "View Icon",
     "No image": "No image",
@@ -521,6 +521,9 @@
     "Check your email address!": "Check your email address!",
     "Verification failed": "Verification failed",
     "Link is invalid or user doesn't exist": "Link is invalid or user doesn't exist",
-    "Check your email address to verify your account": "Check your email address to verify your account"
+    "Check your email address to verify your account": "Check your email address to verify your account",
+    "Send again": "Send again",
+    "Verification is successful": "Verification is successful",
+    "Your account has been successfully verified!": "Your account has been successfully verified!"
     
 }

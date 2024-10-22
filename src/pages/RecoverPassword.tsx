@@ -1,4 +1,4 @@
-import {ChangeEventHandler, FC, useEffect, useState} from "react";
+import {FC, useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 import {useTranslation} from "react-i18next";
 import {LoginRegisterInput} from "../components/modules/signIn/LoginRegisterInput.tsx";
@@ -10,7 +10,7 @@ export const RecoverPassword:FC = () => {
     const [verified, setVerified] = useState(false);
     const [newPassword, setNewPassword] = useState("");
     const [typeAgainNewPassword, setTypeAgainNewPassword] = useState("");
-
+console.log(newPassword, typeAgainNewPassword);
     useEffect(() => {
         if (!user_id || !secret_key_1 || !secret_key_2) {
             setLoading(false);
