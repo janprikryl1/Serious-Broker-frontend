@@ -8,9 +8,11 @@ import {sendForgottenPassword} from "../api/forgottenPasswordService.ts";
 export const ForgottenPassword:FC = () => {
     const {t} = useTranslation();
     const [email, setEmail] = useState("");
+    const [sending, setSending] = useState(false);
     
     const handleSubmitForgottenPassword = (e: FormEvent) => {
         e.preventDefault();
+        setSending(true);
         if (!email) return;
         const submitForgottenPassword = async () => {
             try {
@@ -25,11 +27,13 @@ export const ForgottenPassword:FC = () => {
                         icon: "error", title: t("Submit failed"), text: t("User not found"),
                     });
                 }
+                setSending(false);
             } catch (e) {
                 console.error(e);
                 Swal.fire({
                     icon: "error", title: t("Submit failed"), text: t("Please try again"),
                 });
+                setSending(false);
             }
         }
         submitForgottenPassword();
@@ -56,8 +60,7 @@ export const ForgottenPassword:FC = () => {
                                         <LoginRegisterInput handleChange={(e) => setEmail(e.target.value)}
                                                             placeholder="Email" name="email" type="email"/>
                                         <div className="d-flex justify-content-center mt-4">
-                                            <button
-                                                className="btn btn-outline-warning btn-block btn-lg gradient-custom-4 text-body">{t("Submit")}</button>
+                                            <button className="btn btn-outline-warning btn-block btn-lg gradient-custom-4 text-body" disabled={sending}>{t("Submit")}</button>
                                         </div>
                                     </form>
                                 </div>

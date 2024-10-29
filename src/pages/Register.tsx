@@ -17,6 +17,7 @@ export const Register:FC = () => {
     const {t} = useTranslation();
     const navigate = useNavigate();
     const {setUser, user} = useUserContext();
+    const [sending, setSending] = useState(false);
 
     useEffect(() => {
         if (user) navigate(routes.profile.profileURL);    
@@ -47,6 +48,7 @@ export const Register:FC = () => {
 
     const handleSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
         e.preventDefault();
+        setSending(true);
         try{
             const response = await register(registerData);
             if (response.status === "success") {
@@ -59,6 +61,7 @@ export const Register:FC = () => {
                     navigate(routes.home);
                 });
             } else if (response.status === "error") {
+                setSending(false);
                 if (response.message === "Email already used") {
                     Swal.fire({
                         icon: "error",
@@ -147,8 +150,7 @@ export const Register:FC = () => {
                                                            language: language
                                                        })}/>
                                         <div className="d-flex justify-content-center mt-4">
-                                            <button
-                                                className="btn btn-outline-warning btn-block btn-lg gradient-custom-4 text-body">{t("Register")}</button>
+                                            <button className="btn btn-outline-warning btn-block btn-lg gradient-custom-4 text-body" disabled={sending}>{t("Register")}</button>
                                         </div>
                                     </form>
 

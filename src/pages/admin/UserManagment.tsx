@@ -23,7 +23,7 @@ export const UserManagment: FC = () => {
     const [filteredUsers, setFilteredUsers] = useState<UserType[]>(users);
 
     const handleOpen = (userId: number) => {
-        setSelectedUser(users.find((user) => user.id === userId));
+        setSelectedUser(users.find((user) => user.id == userId));
         setOpen(true);
     };
 
