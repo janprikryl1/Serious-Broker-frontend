@@ -532,5 +532,16 @@
     "Your password has been successfully updated.": "Your password has been successfully updated.",
     "Failed to update the password. Please try again.": "Failed to update the password. Please try again.",
     "Something went wrong. Please try again.": "Something went wrong. Please try again.",
-    "Account verification": "Account verification"
+    "Account verification": "Account verification",
+    "We are not a financial consultancy": "We are not a financial consultancy",
+    "Column 1": "Column 1",
+    "Search term 1...": "Search term 1...",
+    "AND": "AND",
+    "OR": "OR",
+    "Column 2": "Column 2",
+    "Search term 2...": "Search term 2...",
+    "Role": "Role",
+    "First Name": "First Name",
+    "User updated successfully": "User updated successfully",
+    "Failed to update user": "Failed to update user"
 }

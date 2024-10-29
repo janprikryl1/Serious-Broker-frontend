@@ -32,14 +32,14 @@ export const NewsletterEdit: FC = () => {
         <Form className="padding-bottom">
             <h3>{t("Newsletter")}</h3>
             <Form.Check
-                checked={userDetails!.newsletter_subscription === 1}
+                checked={userDetails!.newsletter_subscription == 1}
                 type="switch"
                 label={t("Subscribe to newsletter")}
                 name="newsletter_subscription"
                 onChange={handleChange}
             />
             <Form.Check
-                checked={userDetails!.receive_messages === 1}
+                checked={userDetails!.receive_messages == 1}
                 type="switch"
                 label={t("I don't want any messages")}
                 name="receive_messages"

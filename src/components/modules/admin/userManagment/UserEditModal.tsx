@@ -35,6 +35,7 @@ export const UserEditModal: FC<Props> = ({ open, handleClose, selectedUser, hand
     const [streetNumber, setStreetNumber] = useState("");
     const [town, setTown] = useState("");
     const [country, setCountry] = useState("");
+    const [language, setLanguage] = useState("");
     const [newsletterSubscription, setNewsletterSubscription] = useState(selectedUser?.newsletter_subscription || 0);
     const [receiveMessages, setReceiveMessages] = useState(selectedUser?.receive_messages || 0);
     const [verified, setVerified] = useState(selectedUser?.verified || 0);
@@ -57,6 +58,7 @@ export const UserEditModal: FC<Props> = ({ open, handleClose, selectedUser, hand
             setStreetNumber(selectedUser.street_number ?? "");
             setTown(selectedUser.town ?? "");
             setCountry(selectedUser.country ?? "");
+            setLanguage(selectedUser.language ?? "");
             setNewsletterSubscription(selectedUser.newsletter_subscription ?? 0);
             setReceiveMessages(selectedUser.receive_messages ?? 0);
             setVerified(selectedUser.verified ?? 0);
@@ -83,6 +85,7 @@ export const UserEditModal: FC<Props> = ({ open, handleClose, selectedUser, hand
                 street_number: streetNumber,
                 town,
                 country,
+                language,
                 newsletter_subscription: newsletterSubscription,
                 receive_messages: receiveMessages,
                 verified,
@@ -140,6 +143,7 @@ export const UserEditModal: FC<Props> = ({ open, handleClose, selectedUser, hand
                             <UserFormInput label="Street number" value={streetNumber} onChange={(e) => setStreetNumber(e.target.value)} />
                             <UserFormInput label="Town" value={town} onChange={(e) => setTown(e.target.value)} />
                             <UserFormInput label="Country" value={country} onChange={(e) => setCountry(e.target.value)} />
+                            <UserFormInput label="Language" value={language} onChange={(e) => setLanguage(e.target.value)} />
                             <UserFormCheck
                                 label="Newsletter"
                                 value={newsletterSubscription}

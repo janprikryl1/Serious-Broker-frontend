@@ -2,10 +2,18 @@ import {FC} from "react";
 import {useTranslation} from "react-i18next";
 import {Form} from "react-bootstrap";
 import {useUserDetails} from "../../../../utils/providers/UserDetailsProvider.tsx";
+import {LanguageSelect} from "../../signIn/LanguageSelect.tsx";
 
 export const PersonalDataEdit:FC = () => {
     const {t} = useTranslation();
-    const {userDetails, handleChange} = useUserDetails();
+    const {userDetails, handleChange, setUserDetails} = useUserDetails();
+    
+    const handleLanguageChange = (language: string) => {
+        setUserDetails((prevDetails) => ({
+            ...prevDetails!,
+            language: language
+        }));
+    };
 
     if (userDetails !== null) {
         return (
@@ -73,6 +81,10 @@ export const PersonalDataEdit:FC = () => {
                         value={userDetails.nickname}
                         onChange={handleChange}
                     />
+                </Form.Group>
+                <Form.Group controlId="language" className="mb-4">
+                    <Form.Label>{t("Language")}</Form.Label>
+                    <LanguageSelect value={userDetails.language} setLanguage={handleLanguageChange}/>
                 </Form.Group>
             </Form>
         )

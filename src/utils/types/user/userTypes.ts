@@ -23,6 +23,7 @@ export type UserType = {
     newsletter_subscription: number;
     receive_messages: number;
     verified: number;
+    language: string;
 }
 
 export type MembershipTypes = {

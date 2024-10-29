@@ -1,9 +1,13 @@
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import {createContext, useContext, useState, useEffect, ReactNode, FC} from 'react';
 import { UserType } from "../types/user/userTypes.ts";
 import { isAuthenticated } from "../../api/authenticateService.ts";
 import { useNavigate, useLocation } from "react-router-dom";
 import {PROTECTED_ROUTES, routes} from "../constants";
 import Logo from "../../utils/icons/logo/symbol.svg";
+
+type Props = {
+    children: ReactNode 
+}
 
 type UserContextType = {
     user: UserType | null;
@@ -13,7 +17,7 @@ type UserContextType = {
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
 
-export const ProviderUser: React.FC<{ children: ReactNode }> = ({ children }) => {
+export const ProviderUser: FC<Props> = ({ children }) => {
     const navigate = useNavigate();
     const location = useLocation();
     const [user, setUser] = useState<UserType | null>(null);

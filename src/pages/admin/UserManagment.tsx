@@ -2,12 +2,12 @@ import { FC, useEffect, useState } from "react";
 import { UserType } from "../../utils/types/user/userTypes.ts";
 import { getAllUsers, updateUser } from "../../api/adminService.ts";
 import { useTranslation } from "react-i18next";
-import { DataGrid } from "@mui/x-data-grid";
+import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { Paper } from "@mui/material";
 import { useThemeContext } from "../../utils/providers/ThemeProvider.tsx";
 import { UserEditModal } from "../../components/modules/admin/userManagment/UserEditModal.tsx";
 import Swal from "sweetalert2";
-import { Form, Button, InputGroup } from "react-bootstrap"; // Import Bootstrap components
+import { Form, Button, InputGroup } from "react-bootstrap";
 
 export const UserManagment: FC = () => {
     const { t } = useTranslation();
@@ -15,17 +15,47 @@ export const UserManagment: FC = () => {
     const { theme } = useThemeContext();
     const [open, setOpen] = useState(false);
     const [selectedUser, setSelectedUser] = useState<UserType>();
-    const [searchTerm, setSearchTerm] = useState('');
-    const [searchColumn, setSearchColumn] = useState<string>('email');
+    const [searchTerm1, setSearchTerm1] = useState('');
+    const [searchColumn1, setSearchColumn1] = useState<string>('email');
+    const [searchTerm2, setSearchTerm2] = useState('');
+    const [searchColumn2, setSearchColumn2] = useState<string>('role');
+    const [filterCondition, setFilterCondition] = useState<'AND' | 'OR'>('AND');
     const [filteredUsers, setFilteredUsers] = useState<UserType[]>(users);
 
     const handleOpen = (userId: number) => {
-        setSelectedUser(users.find((user) => user.id == userId));
+        setSelectedUser(users.find((user) => user.id === userId));
         setOpen(true);
     };
 
     const handleClose = () => {
         setOpen(false);
+    };
+
+    const columns: GridColDef[] = [
+        { field: "id", headerName: t("ID"), width: 90 },
+        { field: "email", headerName: t("Email"), width: 200 },
+        { field: "role", headerName: t("Role"), width: 120 },
+        { field: "nickname", headerName: t("Nickname"), width: 150 },
+        { field: "firstname", headerName: t("First Name"), width: 150 },
+        { field: "surname", headerName: t("Surname"), width: 150 },
+    ];
+
+    const handleUpdateUser = async (updatedUser: UserType) => {
+        try {
+            await updateUser(updatedUser);
+            setUsers(users.map((user) => (user.id === updatedUser.id ? updatedUser : user)));
+            setFilteredUsers(filteredUsers.map((user) => (user.id === updatedUser.id ? updatedUser : user)));
+            Swal.fire(t("Success"), t("User updated successfully"), "success");
+        } catch (error) {
+            Swal.fire(t("Error"), t("Failed to update user"), "error");
+            console.error(error);
+        }
+    };
+
+    const sendEmailToAll = () => {
+        if (!users) return;
+        const emailAddresses = users.map((user) => user.email).join(",");
+        window.location.href = `mailto:${emailAddresses}`;
     };
 
     useEffect(() => {
@@ -42,75 +72,18 @@ export const UserManagment: FC = () => {
         getUsers();
     }, []);
 
-    const handleUpdateUser = async (user: UserType) => {
-        try {
-            const response = await updateUser(user);
-            if (!response) return;
-
-            const { status, message } = response.data;
-
-            if (status === "success" && message === "User successfully updated") {
-                Swal.fire({ title: t("User updated"), icon: 'success' });
-
-                if (selectedUser) {
-                    setUsers(users.map((prevUser) => prevUser.id === user.id ? selectedUser : prevUser));
-                    setFilteredUsers(filteredUsers.map((prevUser) => prevUser.id === user.id ? selectedUser : prevUser));
-                } else {
-                    console.warn("No user is selected for update");
-                }
-
-                handleClose();
-            } else if (status === "error" && message === "Email is already in use by another user") {
-                Swal.fire({ title: t("Email is already in use by another user"), icon: 'error' });
-            } else {
-                Swal.fire({ title: t("Error while updating user"), icon: 'error' });
-            }
-        } catch (error) {
-            console.error("Error updating user:", error);
-            Swal.fire({ title: t("Error while updating user"), icon: 'error' });
-        }
-    };
-
-    const sendEmailToAll = () => {
-        if (!users) return;
-        const emailAddresses = users.map((user) => user.email).join(",");
-        window.location.href = `mailto:${emailAddresses}`;
-    };
-
-    const columns = [
-        { field: 'id', headerName: "Id", flex: 1 },
-        { field: 'nickname', headerName: t("Nickname"), flex: 1 },
-        { field: 'email', headerName: t("Email"), flex: 1 },
-        { field: 'title_before', headerName: t("Title before"), flex: 1 },
-        { field: 'firstname', headerName: t("Name"), flex: 1 },
-        { field: 'midlename', headerName: t("Middle name"), flex: 1 },
-        { field: 'surname', headerName: t("Surname"), flex: 1 },
-        { field: 'firm_id', headerName: t("Firm") + " ID", flex: 1 },
-        { field: 'firm_name', headerName: t("Firm") + " name", flex: 1 },
-        { field: 'firm_vat', headerName: t("Firm") + " VAT", flex: 1 },
-        { field: 'title_after', headerName: t("Title after"), flex: 1 },
-        { field: 'role', headerName: t("Role"), flex: 1 },
-        { field: 'firm', headerName: t("Firm"), flex: 1 },
-        { field: 'street', headerName: t("Street"), flex: 1 },
-        { field: 'street_number', headerName: t("Street number"), flex: 1 },
-        { field: 'town', headerName: t("Town"), flex: 1 },
-        { field: 'country', headerName: t("Country"), flex: 1 },
-        { field: 'newsletter_subscription', headerName: t("Newsletter"), flex: 1 },
-        { field: 'receive_messages', headerName: t("Messages"), flex: 1 },
-        { field: 'verified', headerName: t("Verified"), flex: 1 },
-        { field: 'changed', headerName: t("Changed"), flex: 1 },
-        { field: 'created', headerName: t("Created"), flex: 1 },
-    ];
-
     const handleSearch = () => {
-        const results = users.filter((user) =>
-            user[searchColumn as keyof UserType]?.toString().toLowerCase().includes(searchTerm.toLowerCase())
-        );
+        const results = users.filter((user) => {
+            const condition1 = user[searchColumn1 as keyof UserType]?.toString().toLowerCase().includes(searchTerm1.toLowerCase());
+            const condition2 = user[searchColumn2 as keyof UserType]?.toString().toLowerCase().includes(searchTerm2.toLowerCase());
+            return filterCondition === 'AND' ? condition1 && condition2 : condition1 || condition2;
+        });
         setFilteredUsers(results);
     };
 
     const handleClearFilters = () => {
-        setSearchTerm('');
+        setSearchTerm1('');
+        setSearchTerm2('');
         setFilteredUsers(users);
     };
 
@@ -129,33 +102,41 @@ export const UserManagment: FC = () => {
                 data-aos-duration="1000"
             >
                 <h1>{t("User management")}</h1>
-                <p>{t("Click on user to edit")}</p>
                 <InputGroup className="mb-3">
-                    <InputGroup.Text id="inputGroup-sizing-sm">{t("Column")}</InputGroup.Text>
-                    <Form.Select
-                        value={searchColumn}
-                        onChange={(e) => setSearchColumn(e.target.value)}
-                        aria-label={t("Search Column")}
-                    >
+                    <InputGroup.Text>{t("Column 1")}</InputGroup.Text>
+                    <Form.Select value={searchColumn1} onChange={(e) => setSearchColumn1(e.target.value)}>
                         {columns.map((column) => (
                             <option key={column.field} value={column.field}>
                                 {column.headerName}
                             </option>
                         ))}
                     </Form.Select>
-                    <InputGroup.Text id="inputGroup-sizing-sm">{t("Value")}</InputGroup.Text>
                     <Form.Control
                         type="text"
-                        placeholder={t("Search term...")}
-                        value={searchTerm}
-                        onChange={(e) => setSearchTerm(e.target.value)}
+                        placeholder={t("Search term 1...")}
+                        value={searchTerm1}
+                        onChange={(e) => setSearchTerm1(e.target.value)}
                     />
-                    <Button variant="primary" onClick={handleSearch}>
-                        {t("Search")}
-                    </Button>
-                    <Button variant="secondary" onClick={handleClearFilters}>
-                        {t("Clear filters")}
-                    </Button>
+                    <Form.Select value={filterCondition} onChange={(e) => setFilterCondition(e.target.value as 'AND' | 'OR')}>
+                        <option value="AND">{t("AND")}</option>
+                        <option value="OR">{t("OR")}</option>
+                    </Form.Select>
+                    <InputGroup.Text>{t("Column 2")}</InputGroup.Text>
+                    <Form.Select value={searchColumn2} onChange={(e) => setSearchColumn2(e.target.value)}>
+                        {columns.map((column) => (
+                            <option key={column.field} value={column.field}>
+                                {column.headerName}
+                            </option>
+                        ))}
+                    </Form.Select>
+                    <Form.Control
+                        type="text"
+                        placeholder={t("Search term 2...")}
+                        value={searchTerm2}
+                        onChange={(e) => setSearchTerm2(e.target.value)}
+                    />
+                    <Button variant="primary" onClick={handleSearch}>{t("Search")}</Button>
+                    <Button variant="secondary" onClick={handleClearFilters}>{t("Clear filters")}</Button>
                 </InputGroup>
                 <Paper sx={{ backgroundColor: theme === 'dark' ? "#5a636c" : "#f5f8fb"}}>
                     <DataGrid
@@ -163,9 +144,9 @@ export const UserManagment: FC = () => {
                         columns={columns}
                         hideFooterPagination
                         hideFooterSelectedRowCount
-                        hideFooter={true}
+                        hideFooter
                         onCellClick={(e) => handleOpen(Number(e.id))}
-                        sx={{border: 0}}
+                        sx={{ border: 0 }}
                     />
                 </Paper>
             </div>

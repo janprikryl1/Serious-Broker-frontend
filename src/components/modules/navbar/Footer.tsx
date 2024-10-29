@@ -20,6 +20,7 @@ export const Footer:FC = () => {
                       <p className="footer__about-moto">
                         {t("Serious Broker is a student project that is being developed as part of a bachelor thesis. It focuses on assisting in investing and spreading awareness about cryptocurrencies. Want to know more? Join us on social media or contact us via email for example.")}
                       </p>
+                      <p className="footer__about-moto">{t("We are not a financial consultancy")}</p>
                     </div>
                   </div>
 

@@ -10,6 +10,7 @@ import {CountrySelect} from "../components/modules/signIn/CountrySelect.tsx";
 import {register} from "../api/authenticateService.ts";
 import {useUserContext} from "../utils/providers/providerUser.tsx";
 import {routes} from "../utils/constants";
+import {LanguageSelect} from "../components/modules/signIn/LanguageSelect.tsx";
 
 
 export const Register:FC = () => {
@@ -36,7 +37,8 @@ export const Register:FC = () => {
         street: "",
         street_number: "",
         town: "",
-        country: "cs"
+        country: "cs",
+        language: "cs"
     });
 
     const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
@@ -138,6 +140,11 @@ export const Register:FC = () => {
                                                        setCountry={(country: string) => setRegisterData({
                                                            ...registerData,
                                                            country
+                                                       })}/>
+                                        <LanguageSelect value={registerData.language}
+                                                        setLanguage={(language: string) => setRegisterData({
+                                                           ...registerData,
+                                                           language: language
                                                        })}/>
                                         <div className="d-flex justify-content-center mt-4">
                                             <button
