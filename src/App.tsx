@@ -41,7 +41,6 @@ import {TranslateEdit} from "./pages/admin/TranslateEdit.tsx";
 import {NewsletterOverview} from "./pages/admin/NewsletterOverview.tsx";
 import {Feedbacks} from "./pages/admin/Feedbacks.tsx";
 import {ThemeProvider} from "./utils/providers/ThemeProvider.tsx";
-import {InquiryPrice} from "./pages/InquryPrice.tsx";
 import {adminURLS, routes} from "./utils/constants";
 import {AssetGraphCurrencyDetail} from "./pages/graphs/AssetGraphCurrencyDetail.tsx";
 import {PostEdit} from "./pages/admin/PostEdit.tsx";
@@ -124,7 +123,6 @@ function App() {
                               <Route path={routes.admin.achievements} element={<AdminAchivments />} />
                               <Route path={routes.admin.coinSettings} element={<CoinSettings />} />
                           </Route>
-                          <Route path={routes.inquiry} element={<InquiryPrice />}/>
                           <Route path="*" element={<ErrorPage/>}/>
                       </Routes>
                     <Footer/>

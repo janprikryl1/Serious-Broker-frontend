@@ -66,7 +66,6 @@ export const routes = {
         achievements: "achievements",
         coinSettings: "coin_settings"
     },
-    inquiry: "/inquiry"
 }
 
 export const adminURLS = {
