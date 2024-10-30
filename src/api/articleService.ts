@@ -74,13 +74,13 @@ export const createArticle = async (article: ArticleCreateProps) => {
     return await res;
 }
 
-export const getAllArticlesAdmin = async (id: number) => {
+export const getAllArticlesAdmin = async (page: number) => {
     const token = localStorage.getItem("token");
     if (!token) return;
 
     const res = axios.get<{totalPages: number; data: ArticleProps[]}>(backendUrl+"/article/admin_get_all_articles.php",{
         params:{
-            id: id,
+            page: page,
         },
         headers:{
             Authorization2: `Bearer ${token}`,
