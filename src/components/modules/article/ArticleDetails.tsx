@@ -44,8 +44,6 @@ export const ArticleDetails: FC<Props> = ({ article, translations, language, set
                         <p>{article.description}</p>
                         <i>{toCzechDateFormat(article.changed)}</i>
                         <br/><br/>
-                        <p>{article.description}</p>
-                        <br/>
                         {article.templateId === "0" ?
                             <ArticleVariant0 setTask={setTask} content={content} task={task} subjects={subjects}
                                              category={category} setCategory={setCategory}/> :
