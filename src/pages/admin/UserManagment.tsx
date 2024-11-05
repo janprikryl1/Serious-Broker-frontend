@@ -32,12 +32,24 @@ export const UserManagment: FC = () => {
     };
 
     const columns: GridColDef[] = [
-        { field: "id", headerName: t("ID"), width: 90 },
-        { field: "email", headerName: t("Email"), width: 200 },
-        { field: "role", headerName: t("Role"), width: 120 },
-        { field: "nickname", headerName: t("Nickname"), width: 150 },
-        { field: "firstname", headerName: t("First Name"), width: 150 },
-        { field: "surname", headerName: t("Surname"), width: 150 },
+        { field: 'id', headerName: "Id", flex: 1 },
+        { field: 'nickname', headerName: t("Nickname"), flex: 1 },
+        { field: 'email', headerName: t("Email"), flex: 1 },
+        { field: 'title_before', headerName: t("Title before"), flex: 1 },
+        { field: 'firstname', headerName: t("Name"), flex: 1 },
+        { field: 'midlename', headerName: t("Middle name"), flex: 1 },
+        { field: 'surname', headerName: t("Surname"), flex: 1 },
+        { field: 'firm_id', headerName: t("Firm") + " ID", flex: 1 },
+        { field: 'firm_name', headerName: t("Firm") + " name", flex: 1 },
+        { field: 'firm_vat', headerName: t("Firm") + " VAT", flex: 1 },
+        { field: 'title_after', headerName: t("Title after"), flex: 1 },
+        { field: 'role', headerName: t("Role"), flex: 1 },
+        { field: 'firm', headerName: t("Firm"), flex: 1 },
+        { field: 'street', headerName: t("Street"), flex: 1 },
+        { field: 'street_number', headerName: t("Street number"), flex: 1 },
+        { field: 'town', headerName: t("Town"), flex: 1 },
+        { field: 'country', headerName: t("Country"), flex: 1 },
+        { field: 'verified', headerName: t("Verified"), flex: 1 },
     ];
 
     const handleUpdateUser = async (updatedUser: UserType) => {
