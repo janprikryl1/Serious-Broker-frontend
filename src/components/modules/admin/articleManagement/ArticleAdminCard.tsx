@@ -1,13 +1,14 @@
 import {Dispatch, FC, SetStateAction} from "react";
 import {Link} from "react-router-dom";
 import {ArticleProps} from "../../../../utils/types/article/ArticleProps.ts";
-import {adminURLS, toCzechDateFormat} from "../../../../utils/constants";
+import {adminURLS} from "../../../../utils/constants";
 import {Button} from "react-bootstrap";
 import {FaComment, FaRegTrashAlt, FaShareAlt} from "react-icons/fa";
 import Swal from "sweetalert2";
 import {useTranslation} from "react-i18next";
 import {deleteArticle} from "../../../../api/articleService.ts";
 import {MdOutlineTranslate} from "react-icons/md";
+import {toCzechDateFormat} from "../../../../utils/constants/functions.ts";
 
 type Props = {
     data: ArticleProps;

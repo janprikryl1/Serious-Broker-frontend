@@ -1,8 +1,8 @@
 import {FC} from "react";
 import {Link} from "react-router-dom";
 import {ArticleProps} from "../../../utils/types/article/ArticleProps.ts";
-import {toCzechDateFormat} from "../../../utils/constants";
 import {useTranslation} from "react-i18next";
+import {toCzechDateFormat} from "../../../utils/constants/functions.ts";
 
 type Props = {
     data: ArticleProps;

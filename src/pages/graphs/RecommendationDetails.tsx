@@ -5,7 +5,7 @@ import {getBinanceIndexAssetRecomBestPreviousDetail} from "../../api/GraphsServi
 import {BinanceIndexAssetRecomBestPreviousDetails} from "../../utils/types/graphs/BinanceIndexAssetRecomBestPreviousDetails.ts";
 import {useTranslation} from "react-i18next";
 import {RecommendationDetailsSkeleton} from "../../components/modules/graphs/RecommendationDetailsSkeleton.tsx";
-import {convertUTCToLocalTime, getDayName, getYear} from "../../utils/constants";
+import {convertUTCToLocalTime, getDayName, getYear} from "../../utils/constants/functions.ts";
 
 export const RecommendationDetails:FC = () => {
     const {t} = useTranslation();

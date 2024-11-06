@@ -3,8 +3,8 @@ import { useTranslation } from "react-i18next";
 import { TableLogType } from "../../utils/types/TableLogType.ts";
 import { getAllLogs } from "../../api/adminService.ts";
 import {Pagination} from "../../components/Pagiation.tsx";
-import {toCzechDateFormat} from "../../utils/constants";
 import {TableLogSkeleton} from "../../components/modules/admin/TableLogSkeleton.tsx";
+import {toCzechDateFormat} from "../../utils/constants/functions.ts";
 
 export const LogTable: FC = () => {
     const { t } = useTranslation();

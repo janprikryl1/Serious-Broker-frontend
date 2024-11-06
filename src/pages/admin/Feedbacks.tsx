@@ -1,9 +1,9 @@
 import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { toCzechDateFormat } from "../../utils/constants";
 import { FeedbackStoredType } from "../../utils/types/feedback/FeedbackStoredType.ts";
 import { getAllFeedbacks } from "../../api/feedbackService.ts";
 import { Accordion, Button } from "react-bootstrap";
+import {toCzechDateFormat} from "../../utils/constants/functions.ts";
 
 const PAGE_SIZE = 10;
 

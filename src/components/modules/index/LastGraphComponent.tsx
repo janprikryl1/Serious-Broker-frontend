@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { LineChart } from "@mui/x-charts";
 import { LastMostProfitableCoins } from "../../../utils/types/indexPage/LastMostProfitableCoins.ts";
 import { useThemeContext } from "../../../utils/providers/ThemeProvider.tsx";
-import {getRandomColor} from "../../../utils/constants";
+import {getRandomColor} from "../../../utils/constants/functions.ts";
 
 type Props = {
     data: LastMostProfitableCoins;

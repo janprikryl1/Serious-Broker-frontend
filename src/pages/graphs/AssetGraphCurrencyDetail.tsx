@@ -6,11 +6,11 @@ import {TitleHeader} from "../../components/modules/about/TitleHeader.tsx";
 import {getAssetByIdGraphData} from "../../api/binanceIndexAssets.ts";
 import {Assets} from "../../utils/types/asset/AssetDetailType.ts";
 import {ChartComponent} from "../../components/modules/graphs/asset/ChartComponent.tsx";
-import {toCzechDateFormat} from "../../utils/constants";
 import {EarningIn} from "./earningIn/EarningIn.tsx";
 import {
     AssetGraphCurrencyDetailSkeleton
 } from "../../components/modules/graphs/asset/AssetGraphCurrencyDetailSkeleton.tsx";
+import {toCzechDateFormat} from "../../utils/constants/functions.ts";
 
 export const AssetGraphCurrencyDetail:FC = () => {
     const { t } = useTranslation();

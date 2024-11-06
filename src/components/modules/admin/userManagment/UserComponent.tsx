@@ -1,6 +1,6 @@
 import {FC} from "react";
 import {UserType} from "../../../../utils/types/user/userTypes.ts";
-import {toCzechDate} from "../../../../utils/constants";
+import {toCzechDate} from "../../../../utils/constants/functions.ts";
 
 type Props = {
     user: UserType;

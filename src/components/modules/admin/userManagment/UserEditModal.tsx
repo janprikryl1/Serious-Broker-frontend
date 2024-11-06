@@ -8,8 +8,8 @@ import DialogTitle from "@mui/joy/DialogTitle";
 import { List } from "@mui/joy";
 import { UserFormInput } from "./UserFormInput";
 import { Button, InputGroup } from "react-bootstrap";
-import { toCzechDateFormat } from "../../../../utils/constants";
 import {UserFormCheck} from "./UserFormCheck.tsx";
+import {toCzechDateFormat} from "../../../../utils/constants/functions.ts";
 
 type Props = {
     open: boolean;

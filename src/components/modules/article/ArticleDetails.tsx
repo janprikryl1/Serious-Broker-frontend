@@ -10,12 +10,12 @@ import {SubjectType} from "../../../utils/types/article/SubjectType.ts";
 import {ContentType} from "../../../utils/types/article/ContentType.ts";
 import {ArticleVariant0} from "./articleVariants/ArticleVariant0.tsx";
 import {ArticleVariant1} from "./articleVariants/ArticleVariant1.tsx";
-import {toCzechDateFormat} from "../../../utils/constants";
 import {ArticleVariant2} from "./articleVariants/ArticleVariant2.tsx";
 import {ArticleVariant3} from "./articleVariants/ArticleVariant3.tsx";
 import {ArticleVariant4} from "./articleVariants/ArticleVariant4.tsx";
 import {ArticleLanguagesSelect} from "./ArticleLanguagesSelect.tsx";
 import {TranslationsOverview} from "../../../utils/types/article/TranslationsOverview.ts";
+import {toCzechDateFormat} from "../../../utils/constants/functions.ts";
 
 type Props = {
     article: ArticleDetailProps;

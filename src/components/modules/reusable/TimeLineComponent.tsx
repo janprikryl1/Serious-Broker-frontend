@@ -8,8 +8,8 @@ import TimelineDot from "@mui/lab/TimelineDot";
 import TimelineContent from "@mui/lab/TimelineContent";
 import Timeline from "@mui/lab/Timeline";
 import {useTranslation} from "react-i18next";
-import {toCzechDateFormat} from "../../../utils/constants";
 import {AchievementType} from "../../../utils/types/AchievementType.ts";
+import {toCzechDateFormat} from "../../../utils/constants/functions.ts";
 
 type Props = {
     achievements: AchievementType[];
