@@ -1,3 +1,5 @@
+import {NavbarURLs, NavLink} from "../types/NavLink.ts";
+
 export const domain = "https://serious.broker";
 export const PROTECTED_ROUTES = ['/admin', '/profile', '/assets', '/most_profitable_assets', '/asset_graph/:id'];
 export const pageLimit = 10;
@@ -87,23 +89,27 @@ export const adminURLS = {
     coinSettings: "/admin/coin_settings"
 }
 
-export const registeredUserNavbarURLs = {
-    articles: "",
+export const registeredUserNavbarURLs: NavbarURLs = {
+    articles: { title: "Articles", link: routes.articles },
     graphs: {
-        graphs: "/graphs",
-        assets: "/assets",
-        mostProfitableAssets: "/most_profitable_assets",
-        assetGraphURL: "/asset_graph/",
-        assetGraphDetail: "/asset_graph_detail",
-    }
-}
+        title: "Graphs",
+        subLinks: {
+            graphs: { title: "Graphs", link: routes.graphs },
+            assets: { title: "Assets", link: routes.assets },
+            mostProfitableAssets: { title: "Most profitable assets", link: routes.mostProfitableAssets },
+            assetGraphURL: { title: "Asset graph", link: routes.assetGraphURL },
+            assetGraphDetail: { title: "Asset graph detail", link: routes.assetGraphDetail },
+        },
+    },
+};
 
-export const notRegisteredUserNavbarURLs = {
-    cryptoCurrencies: "",
-    posibilities: "",
-    investWithoutLoss: "",
-    gains: "",
-}
+export const notRegisteredUserNavbarURLs: Record<string, NavLink> = {
+    cryptoCurrencies: { title: "Cryptocurrencies", link: routes.cryptocurrenciesList },
+    possibilities: { title: "Posibilities", link: "/article/9" },
+    investWithoutLoss: { title: "Invest safely without loss", link: "/article/10" },
+    gains: { title: "Gains", link: "/article/11" },
+};
+
 
 export const defaultNewCurrency = {
     id: 0,

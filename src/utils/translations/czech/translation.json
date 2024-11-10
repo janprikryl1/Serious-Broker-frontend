@@ -543,6 +543,9 @@
     "Role": "Role",
     "First Name": "Jméno",
     "User updated successfully": "Uživatel byl úspěšně aktualizován",
-    "Failed to update user": "Chyba při aktualizaci uživatele"
+    "Failed to update user": "Chyba při aktualizaci uživatele",
+    "Possibilities": "Možnosti",
+    "Invest safely without loss": "Investujte do kryptoměn bezpečně a bez rizika",
+    "Gains": "Zisky"
     
 }
