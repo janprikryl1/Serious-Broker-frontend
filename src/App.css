@@ -84,3 +84,11 @@ button {
     display: none;
   }
 }
+
+.blur-background {
+  backdrop-filter: blur(10px);
+  padding: 10px 20px; /* Adjust padding to your preference */
+  background-color: rgba(255, 255, 255, 0.3); /* Adjust color and opacity */
+  border-radius: 8px; /* Optional: rounded corners */
+  display: inline-block; /* Make the blur fit only around the content */
+}

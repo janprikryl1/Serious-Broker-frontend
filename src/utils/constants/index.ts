@@ -110,6 +110,16 @@ export const notRegisteredUserNavbarURLs: Record<string, NavLink> = {
     gains: { title: "Gains", link: "/article/11" },
 };
 
+export const indexLinks: Record<string, NavLink> = {
+    investWithoutLoss: { title: "Invest safely without loss", link: "/article/10" },
+    cryptoAndAnotherInvestment: { title: "Crypto and another investment", link: "/article/12" },
+    whatToAvoid: { title: "What to watch out for when investing in cryptocurrencies - How to invest", link: "/article/8" },
+    whenToStartInvesting: { title: "When to start investing in cryptocurrencies", link: "/article/13" },
+    gains: { title: "How much can I earn trading cryptocurrencies", link: "/article/11" },
+    howToAvoidBigLosses: { title: "How to avoid big losses", link: "/article/14" },
+    isInvestingForEveryone: { title: "Is investing in cryptocurrencies for everyone", link: "/article/15" },
+    legislationAndTaxation: { title: "Legislation and taxation of cryptocurrency earnings", link: "/article/16" },
+}
 
 export const defaultNewCurrency = {
     id: 0,
