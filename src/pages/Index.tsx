@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { Newsletter } from "../components/modules/index/Newsletter.tsx";
 import { Services } from "../components/modules/index/Services.tsx";
-import { ComingSoon } from "../components/modules/index/ComingSoon.tsx";
+import { SwiperTerms } from "../components/modules/index/SwiperTerms.tsx";
 import OverlayBackground from "../utils/icons/overlay_background2.jpg";
 import {Page} from "../components/Page.tsx";
 import {LastIndexes} from "../components/modules/index/LastIndexes.tsx";
@@ -15,7 +15,7 @@ export const Index: FC = () => {
     return (
        <Page image={OverlayBackground}>
            <TitleLinks />
-           <ComingSoon/>
+           <SwiperTerms/>
            <Services/>
            <LastIndexes/>
            <PopularCoins/>

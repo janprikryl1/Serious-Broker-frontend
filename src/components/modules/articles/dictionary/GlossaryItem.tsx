@@ -14,7 +14,7 @@ export const GlossaryItem: FC<Props> = ({ glossary }) => {
     const answer = currentLang === 'cs' ? glossary.answer_cs : glossary.answer;
 
     return (
-        <div className="blog__writer" style={{ marginTop: 50 }}>
+        <div className="blog__writer" style={{ marginTop: 50 }} id={glossary.title}>
             <div className="blog__writer-designation">
                 <p>
                     {title}

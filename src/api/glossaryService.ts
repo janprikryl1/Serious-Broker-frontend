@@ -63,3 +63,15 @@ export const addGlossary = async (glossary: GlossaryType) => {
     );
     return await res;
 };
+
+export const randomGlossary = async () => {
+    const token = localStorage.getItem("token");
+    if (!token) return;
+    
+    const res = axios.get<GlossaryType[]>(backendUrl+"glossary/random_glossaries.php", {
+        headers: {
+            Authorization2: `Bearer ${token}`,
+        },
+    });
+    return await res;
+};
