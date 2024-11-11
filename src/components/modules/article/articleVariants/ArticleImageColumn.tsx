@@ -1,8 +1,9 @@
-import {FC, useEffect} from "react";
-import {imageURL} from "../../../../utils/constants";
-import {animated, useSpring} from "@react-spring/web";
-import {TbHandFinger} from "react-icons/tb";
-import {ContentType} from "../../../../utils/types/article/ContentType.ts";
+import { FC, useEffect, useState } from "react";
+import { imageURL } from "../../../../utils/constants";
+import { animated, useSpring } from "@react-spring/web";
+import { TbHandFinger } from "react-icons/tb";
+import { ContentType } from "../../../../utils/types/article/ContentType.ts";
+import {ImageModal} from "./ImageModal.tsx";
 
 type Props = {
     task: number;
@@ -10,10 +11,13 @@ type Props = {
     content: ContentType[];
 };
 
-export const ArticleImageColumn:FC<Props> = ({task, category, content}) => {
+export const ArticleImageColumn: FC<Props> = ({ task, category, content }) => {
     const [springs, api] = useSpring(() => ({
         from: { x: 0, y: 0 },
     }));
+
+    const [isModalOpen, setModalOpen] = useState(false);
+    const [selectedImage, setSelectedImage] = useState("");
 
     useEffect(() => {
         if (!content) return;
@@ -35,12 +39,19 @@ export const ArticleImageColumn:FC<Props> = ({task, category, content}) => {
             });
         }
     }, [task, category, content]);
-    
+
+    const handleImageClick = (imgSrc: string) => {
+        setSelectedImage(imgSrc);
+        setModalOpen(true);
+    };
+
     return (
         <div className="col-sm-4">
             <img
                 src={`${imageURL}${content[category].tasks[task].image}`}
                 alt={`Task ${task + 1}`}
+                onClick={() => handleImageClick(`${imageURL}${content[category].tasks[task].image}`)}
+                style={{ cursor: 'pointer' }}
             />
             {content[category].tasks[task].animateTo.to.x !== 0 && content[category].tasks[task].animateTo.to.y !== 0 && (
                 <animated.div
@@ -51,9 +62,10 @@ export const ArticleImageColumn:FC<Props> = ({task, category, content}) => {
                         left: springs.x,
                     }}
                 >
-                    <TbHandFinger style={{color: "red"}}/>
+                    <TbHandFinger style={{ color: "red" }} />
                 </animated.div>
             )}
+            <ImageModal isModalOpen={isModalOpen} selectedImage={selectedImage} setModalOpen={setModalOpen} />
         </div>
     );
 }
