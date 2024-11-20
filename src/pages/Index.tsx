@@ -4,10 +4,10 @@ import { SwiperTerms } from "../components/modules/index/SwiperTerms.tsx";
 import OverlayBackground from "../utils/icons/overlay_background2.jpg";
 import {Page} from "../components/Page.tsx";
 import {LastIndexes} from "../components/modules/index/LastIndexes.tsx";
-import {PopularCoins} from "../components/modules/index/PopularCoins.tsx";
 import {useUserContext} from "../utils/providers/providerUser.tsx";
 import {TitleLinks} from "../components/modules/index/TitleLinks.tsx";
 import {getIndexData} from "../api/indexDataService.ts";
+import {IndexTableData} from "../components/modules/index/IndexTableData.tsx";
 
 export const Index: FC = () => {
     const {user} = useUserContext();
@@ -28,8 +28,8 @@ export const Index: FC = () => {
        <Page image={OverlayBackground}>
            <TitleLinks />
            <SwiperTerms/>
+           <IndexTableData />
            <LastIndexes/>
-           <PopularCoins/>
            {user === null && (
                <Newsletter/>
            )}

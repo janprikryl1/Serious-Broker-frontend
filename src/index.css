@@ -21,3 +21,7 @@
     padding: 14px;
     border-radius: 10px;
 }
+
+.no-border-row tr td[rowspan] {
+    border-bottom: none !important;
+}

@@ -1,15 +1,15 @@
-type CoinData = {
+export type CoinData = {
     id: number;
     name: string;
     price: number;
 };
 
-type CoinCategory = {
+export type CoinCategory = {
     tag_name: string;
     coins: CoinData[];
 };
 
-type AssetProfitData = {
+export type AssetProfitData = {
     asset_label: string;
     quote_currencies: string[];
     cmc_rank: number;
@@ -28,7 +28,7 @@ type AssetProfitData = {
     year_2_profit: number | null;
 };
 
-type MostProfitable = {
+export type MostProfitable = {
     asset_label: string;
     quote_currencies: string[];
     cmc_rank: number;
@@ -36,14 +36,14 @@ type MostProfitable = {
     week_0_profit: number;
 };
 
-type MostVolatileData = {
+export type MostVolatileData = {
     asset_label: string;
     symbol_name: string;
     percent_volatility: number;
     graph_data: number[];
 };
 
-type MostVolatile = {
+export type MostVolatile = {
     rises: MostVolatileData[];
 };
 

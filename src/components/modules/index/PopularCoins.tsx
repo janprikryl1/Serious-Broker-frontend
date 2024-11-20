@@ -1,98 +1,79 @@
-import dodgeCoin from "../../../utils/icons/cta/dogecoin.png";
-import ethereum from "../../../utils/icons/cta/ethereum.png";
 import { useTranslation } from "react-i18next";
-import { useEffect, useState } from "react";
-import { getPopularCoins } from "../../../api/indexDataService.ts";
-import { LastCoinmarketCupCoinsType } from "../../../utils/types/indexPage/LastCoinmarketCupCoinsType.ts";
-import { useUserContext } from "../../../utils/providers/providerUser.tsx";
-import { SignInLink } from "../signIn/SignInLink.tsx";
-import { useMediaQuery } from "@mui/material";  // Import useMediaQuery
+import { useMediaQuery } from "@mui/material";
+import { MostProfitable } from "../../../utils/types/indexPage/IndexDataStructure.ts";
+import { FC } from "react";
+import { Link } from "react-router-dom";
+import { areEstablishedCryptocurrenciesOrNewcomersToTheMarketBetterArticle, routes, whatIsMarketCapitalizationArticle } from "../../../utils/constants";
+import { TableTemplate } from "../TableTemplate.tsx";
+import {useThemeContext} from "../../../utils/providers/ThemeProvider.tsx";
 
-export const PopularCoins = () => {
+type Props = {
+    lastCoinmarketCupCoins: MostProfitable[];
+};
+
+export const PopularCoins: FC<Props> = ({ lastCoinmarketCupCoins }) => {
     const { t } = useTranslation();
-    const { user } = useUserContext();
-    const [coins, setCoins] = useState<LastCoinmarketCupCoinsType[]>();
-
-    // Detect if the screen size is mobile using useMediaQuery
     const isMobile = useMediaQuery('(max-width:768px)');
-
-    useEffect(() => {
-        const getPopularData = async () => {
-            const res = await getPopularCoins();
-            setCoins(res.data);
-        };
-        getPopularData();
-    }, []);
+    const {theme} = useThemeContext();
 
     return (
-        <div className="container padding-top padding-bottom" style={{ maxWidth: "100%" }}>
-            <div className="cta__wrapper">
-                <div className="">
-                    <div
-                        className="text-center"
-                        data-aos="fade-up"
-                        data-aos-duration="1000"
-                    >
-                        <div className="cta__subscribe">
-                            <h2>
-                                <span>{t("Last Coinmarketcup Coins")}</span>
-                            </h2>
-                            <p>{t("Which coins scored recently in Coinmarketcap?")}</p>
-                            {coins && (
-                                <table className="table">
-                                    <thead>
-                                    <tr>
-                                        <th>{t("cmc_rank")}</th>
-                                        <th>Coin</th>
-                                        <th>{t("Positions in week 0: ")}</th>
-                                        <th>{t("Week 0 profit: ")}</th>
-                                        {!isMobile && (
-                                            <>
-                                                <th>{t("Week 1 position: ")}</th>
-                                                <th>{t("Week 1 profit: ")}</th>
-                                            </>
-                                        )}
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    {coins.map((coin, index) => (
-                                        <tr key={coin.cmc_rank}>
-                                            <td>{coin.cmc_rank}</td>
-                                            <td>{coin.asset_label}</td>
-                                            <td>{coin.week_0_pos}</td>
-                                            <td>{((coin.week_0_profit - 1) * 100).toFixed(2)} %</td>
-                                            {!isMobile && user ? (
-                                                <>
-                                                    <td>{coin.week_1_pos}</td>
-                                                    <td>{((coin.week_1_profit! - 1) * 100).toFixed(2)} %</td>
-                                                </>
-                                            ) : (
-                                                !isMobile && index === Math.round(coins.length / 2) && (
-                                                    <td colSpan={2} rowSpan={coins.length}>
-                                                        <SignInLink style={{fontSize: "20px", padding: "10px"}}/>
-                                                    </td>
-                                                )
-                                            )}
-                                        </tr>
-                                    ))}
-                                    </tbody>
-                                </table>
-                            )}
-                            <div>
-                                Vysvětlení hodnot
-                            </div>
-                        </div>
+        <TableTemplate title="Last Coinmarketcup Coins">
+            <div className={`${theme === "dark" ? "bg-dark" : "bg-white"} p-4 rounded`}>
+                <p className="mb-3">{t("Which coins scored recently in Coinmarketcap?")}</p>
+                <table className="table no-border-row">
+                    <thead>
+                    <tr>
+                        <th>{t("Order")}</th>
+                        <th>Coin</th>
+                        <th>{t("Position")}</th>
+                        <th>{t("Profit")}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {lastCoinmarketCupCoins.map((coin, index) => (
+                        <tr key={coin.cmc_rank}>
+                            <td>{coin.cmc_rank}</td>
+                            <td>{coin.asset_label}</td>
+                            <td>{coin.week_0_pos}</td>
+                            <td>{((coin.week_0_profit - 1) * 100).toFixed(2)} %</td>
+                            {!isMobile &&
+                                index === Math.round(lastCoinmarketCupCoins.length / 2) - 1 && (
+                                    <td
+                                        colSpan={isMobile ? 2 : 4}
+                                        rowSpan={2}
+                                        className="text-center align-middle no-border-row"
+                                    >
+                                        <Link
+                                            to={whatIsMarketCapitalizationArticle}
+                                            className="btn btn-warning text-dark w-100"
+                                            style={{marginLeft:10}}
+                                        >
+                                            {t("What is the market capitalization?")}
+                                        </Link>
+                                    </td>
+                                )}
+                        </tr>
+                    ))}
+                    </tbody>
+                </table>
+            </div>
+            <div className="mt-4">
+                <div className="row">
+                    <div className="col-sm-8">
+                        <Link
+                            to={areEstablishedCryptocurrenciesOrNewcomersToTheMarketBetterArticle}
+                            className="text-decoration-none"
+                        >
+                            {t("Are established cryptocurrencies or newcomers to the market better?")}
+                        </Link>
+                    </div>
+                    <div className="col-sm-4">
+                        <Link to={routes.signIn} className="btn btn-outline-warning w-100">
+                            {t("Sign in")}
+                        </Link>
                     </div>
                 </div>
-                <div className="cta__shape">
-                    <span className="cta__shape-item cta__shape-item--4">
-                        <img src={dodgeCoin} alt="shape icon" width={50} />
-                    </span>
-                    <span className="cta__shape-item cta__shape-item--5">
-                        <img src={ethereum} alt="shape icon" width={50} />
-                    </span>
-                </div>
             </div>
-        </div>
+        </TableTemplate>
     );
 };

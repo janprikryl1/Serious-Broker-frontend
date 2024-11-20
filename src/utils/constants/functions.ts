@@ -39,3 +39,7 @@ export const convertUTCToLocalTime = (utcHour: number) => {
 export const getYear = (yearNumber: number) => {
     return 2024 - yearNumber;
 }
+
+export const randomColor = () => {
+    return colors[Math.floor(Math.random() * colors.length)];
+}

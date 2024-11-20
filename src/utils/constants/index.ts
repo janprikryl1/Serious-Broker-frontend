@@ -139,3 +139,8 @@ export const defaultNewCurrency = {
     date: "",
     photo: null
 }
+
+export const howDoWeEvaluateReportingPeriodArticle = "/article/20";
+export const whatIsPurposeOfReportingPeriodArticle = "/article/21";
+export const whatIsMarketCapitalizationArticle = "/article/22";
+export const areEstablishedCryptocurrenciesOrNewcomersToTheMarketBetterArticle = "/article/23";
