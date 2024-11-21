@@ -43,3 +43,6 @@ export const getYear = (yearNumber: number) => {
 export const randomColor = () => {
     return colors[Math.floor(Math.random() * colors.length)];
 }
+
+export const calculateProfit = (profit: number | null): number | null =>
+    profit !== null ? (profit - 1) * 100 : null;

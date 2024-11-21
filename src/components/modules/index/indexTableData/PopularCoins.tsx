@@ -1,20 +1,20 @@
 import { useTranslation } from "react-i18next";
 import { useMediaQuery } from "@mui/material";
-import { MostProfitable } from "../../../utils/types/indexPage/IndexDataStructure.ts";
 import { FC } from "react";
 import { Link } from "react-router-dom";
-import { areEstablishedCryptocurrenciesOrNewcomersToTheMarketBetterArticle, routes, whatIsMarketCapitalizationArticle } from "../../../utils/constants";
-import { TableTemplate } from "../TableTemplate.tsx";
-import {useThemeContext} from "../../../utils/providers/ThemeProvider.tsx";
+import {useThemeContext} from "../../../../utils/providers/ThemeProvider.tsx";
+import {useIndexDataContext} from "../../../../utils/providers/IndexDataProvider.tsx";
+import {TableTemplate} from "../../TableTemplate.tsx";
+import {
+    areEstablishedCryptocurrenciesOrNewcomersToTheMarketBetterArticle, routes,
+    whatIsMarketCapitalizationArticle
+} from "../../../../utils/constants";
 
-type Props = {
-    lastCoinmarketCupCoins: MostProfitable[];
-};
-
-export const PopularCoins: FC<Props> = ({ lastCoinmarketCupCoins }) => {
+export const PopularCoins: FC = () => {
     const { t } = useTranslation();
     const isMobile = useMediaQuery('(max-width:768px)');
     const {theme} = useThemeContext();
+    const {data} = useIndexDataContext();
 
     return (
         <TableTemplate title="Last Coinmarketcup Coins">
@@ -30,14 +30,14 @@ export const PopularCoins: FC<Props> = ({ lastCoinmarketCupCoins }) => {
                     </tr>
                     </thead>
                     <tbody>
-                    {lastCoinmarketCupCoins.map((coin, index) => (
+                    {data.last_coinmarketcup_coins.map((coin, index) => (
                         <tr key={coin.cmc_rank}>
                             <td>{coin.cmc_rank}</td>
                             <td>{coin.asset_label}</td>
                             <td>{coin.week_0_pos}</td>
                             <td>{((coin.week_0_profit - 1) * 100).toFixed(2)} %</td>
                             {!isMobile &&
-                                index === Math.round(lastCoinmarketCupCoins.length / 2) - 1 && (
+                                index === Math.round(data.last_coinmarketcup_coins.length / 2) - 1 && (
                                     <td
                                         colSpan={isMobile ? 2 : 4}
                                         rowSpan={2}
