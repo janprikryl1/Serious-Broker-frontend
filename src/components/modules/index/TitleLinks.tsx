@@ -2,19 +2,19 @@ import { FC } from "react";
 import { Link } from "react-router-dom";
 import { indexLinks } from "../../../utils/constants";
 import { useTranslation } from "react-i18next";
+import {IndexTitleWrapper} from "./IndexTitleWrapper.tsx";
 
 export const TitleLinks: FC = () => {
     const { t } = useTranslation();
 
     return (
         <div className="container" style={{ marginTop: "3%" }}>
-            <div style={{ textAlign: "center" }}>
-                <h1 className="blur-background" style={{ color: "#fac900" }}>
-                    <strong>{t("Welcome to Serious Broker")}</strong>
-                </h1>
-            </div>
+            <IndexTitleWrapper variant="h1">
+                <strong>{t("Welcome to Serious Broker")}</strong>
+            </IndexTitleWrapper>
+            <IndexTitleWrapper variant="p">{t("Come and save crypto with us")}</IndexTitleWrapper>
 
-            <div className="blur-background" style={{ marginTop: "5%", marginBottom: "5%" }}>
+                <div className="blur-background" style={{ marginTop: "5%", marginBottom: "5%" }}>
                 {Object.keys(indexLinks).map((key) => {
                     const item = indexLinks[key];
                     return (

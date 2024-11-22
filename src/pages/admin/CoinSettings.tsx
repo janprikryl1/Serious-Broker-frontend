@@ -2,13 +2,7 @@ import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { CryptoCurrencyType } from "../../utils/types/CryptoCurrencyType.ts";
 import {DataGrid, GridRenderCellParams} from "@mui/x-data-grid";
-import { Paper } from "@mui/material";
-import { useThemeContext } from "../../utils/providers/ThemeProvider.tsx";
-import {
-    cryptoCurrencyUpdate,
-    deleteCryptocurrency,
-    getAllCryptocurrencies
-} from "../../api/adminCryptocurrencyService.ts";
+import {cryptoCurrencyUpdate, deleteCryptocurrency, getAllCryptocurrencies} from "../../api/adminCryptocurrencyService.ts";
 import {CryptoCurrencyTableInput} from "../../components/modules/admin/cryptoCurrencyManagement/CryptoCurrencyTableInput.tsx";
 import {CryptoCurrencyFileUpload} from "../../components/modules/admin/cryptoCurrencyManagement/CryptoCurrencyFileUpload.tsx";
 import {CryptoCurrencyIconLink} from "../../components/modules/admin/cryptoCurrencyManagement/CryptoCurrencyIconLink.tsx";
@@ -18,7 +12,6 @@ import {AddCryptoCurrency} from "../../components/modules/admin/cryptoCurrencyMa
 
 export const CoinSettings: FC = () => {
     const { t } = useTranslation();
-    const { theme } = useThemeContext();
     const [cryptocurrencies, setCryptocurrencies] = useState<CryptoCurrencyType[]>([]);
     const [editModeRows, setEditModeRows] = useState<{ [key: number]: boolean }>({});
     const [selectedFiles, setSelectedFiles] = useState<{ [key: number]: File | null }>({});
@@ -124,11 +117,12 @@ export const CoinSettings: FC = () => {
     };
 
     const columns = [
-        { field: 'id', headerName: "Id", flex: 1, editable: true },
+        { field: 'id', headerName: "Id", flex: 1, editable: true, headerClassName: 'background-gray' },
         {
             field: 'name',
             headerName: t("Name"),
             flex: 1,
+            headerClassName: 'background-gray',
             renderCell: (params: GridRenderCellParams<{id: number}>) => editModeRows[params.row.id] ? 
                 <CryptoCurrencyTableInput id={params.row.id} value={params.value} onChange={handleTextChange} field="name" /> : params.value,
         },
@@ -136,6 +130,7 @@ export const CoinSettings: FC = () => {
             field: 'symbol',
             headerName: t("Symbol"),
             flex: 1,
+            headerClassName: 'background-gray',
             renderCell: (params: GridRenderCellParams<{id: number}>) => editModeRows[params.row.id] ?
                 <CryptoCurrencyTableInput id={params.row.id} value={params.value} onChange={handleTextChange} field="symbol" /> : params.value,
         },
@@ -143,6 +138,7 @@ export const CoinSettings: FC = () => {
             field: 'photo',
             headerName: t("Icon"),
             flex: 2,
+            headerClassName: 'background-gray',
             renderCell: (params: GridRenderCellParams<{id: number}>) => editModeRows[params.row.id] ? (
                     <CryptoCurrencyFileUpload handleFileChange={handleFileChange} handleSubmit={handleSubmit} rowId={params.row.id} handleDelete={handleDelete} />
                 ) : <CryptoCurrencyIconLink link={params.value} />
@@ -154,19 +150,17 @@ export const CoinSettings: FC = () => {
             <h2>{t("Coins management")}</h2>
             <AddCryptoCurrency />
             <AdminTableFilter setFilteredCoins={setFilteredCoins} cryptocurrencies={cryptocurrencies} columns={columns} />
-            <Paper sx={{ backgroundColor: theme === 'dark' ? "#5a636c" : "#f5f8fb" }}>
-                <DataGrid
-                    rows={filteredCoins ?? cryptocurrencies}
-                    columns={columns}
-                    hideFooterSelectedRowCount
-                    onRowClick={(params) => handleRowClick(params.row.id)}
-                    sx={{ border: 0 }}
-                    pageSizeOptions={[10, 20, 50, 100]}
-                    initialState={{
-                        pagination: { paginationModel: { pageSize: 10 } }
-                    }}
-                />
-            </Paper>
+            <DataGrid
+                rows={filteredCoins ?? cryptocurrencies}
+                columns={columns}
+                hideFooterSelectedRowCount
+                onRowClick={(params) => handleRowClick(params.row.id)}
+                sx={{ border: 0 }}
+                pageSizeOptions={[10, 20, 50, 100]}
+                initialState={{
+                    pagination: { paginationModel: { pageSize: 10 } }
+                }}
+            />
         </div>
     );
 };

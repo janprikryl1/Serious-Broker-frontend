@@ -1,12 +1,12 @@
 import {FC, useEffect, useState} from "react";
 import {Button, Form, InputGroup} from "react-bootstrap";
-import {Paper} from "@mui/material";
 import {DataGrid, GridCellParams} from "@mui/x-data-grid";
 import {useTranslation} from "react-i18next";
 import {useThemeContext} from "../../utils/providers/ThemeProvider.tsx";
 import {UserType} from "../../utils/types/user/userTypes.ts";
 import {getAllUsers} from "../../api/adminService.ts";
 import {UserAchievmentDetails} from "../../components/modules/admin/achevments/UserAchievmentDetails.tsx";
+
 
 export const AdminAchivments:FC = () => {
     const {t} = useTranslation();
@@ -36,11 +36,11 @@ export const AdminAchivments:FC = () => {
     }, []);
 
     const columns = [
-        { field: 'id', headerName: "Id", flex: 1 },
-        { field: 'nickname', headerName: t("Nickname"), flex: 1 },
-        { field: 'email', headerName: t("Email"), flex: 1 },
-        { field: 'firstname', headerName: t("Name"), flex: 1 },
-        { field: 'surname', headerName: t("Surname"), flex: 1 }
+        { field: 'id', headerName: "Id", flex: 1, headerClassName: 'background-gray' },
+        { field: 'nickname', headerName: t("Nickname"), flex: 1, headerClassName: 'background-gray' },
+        { field: 'email', headerName: t("Email"), flex: 1, headerClassName: 'background-gray' },
+        { field: 'firstname', headerName: t("Name"), flex: 1, headerClassName: 'background-gray' },
+        { field: 'surname', headerName: t("Surname"), flex: 1, headerClassName: 'background-gray' }
     ];
 
     const handleSearch = () => {
@@ -98,17 +98,15 @@ export const AdminAchivments:FC = () => {
                         {t("Clear filters")}
                     </Button>
                 </InputGroup>
-                <Paper sx={{ backgroundColor: theme === 'dark' ? "#5a636c" : "#f5f8fb"}}>
-                    <DataGrid
-                        rows={filteredUsers}
-                        columns={columns}
-                        hideFooterPagination
-                        hideFooterSelectedRowCount
-                        hideFooter={true}
-                        onCellClick={handleSelectUser}
-                        sx={{border: 0}}
-                    />
-                </Paper>
+                <DataGrid
+                    rows={filteredUsers}
+                    columns={columns}
+                    hideFooterPagination
+                    hideFooterSelectedRowCount
+                    hideFooter={true}
+                    onCellClick={handleSelectUser}
+                    sx={{border: 0}}
+                />
                 <UserAchievmentDetails selectedUser={selectedUser}/>
             </div>
         </div>
