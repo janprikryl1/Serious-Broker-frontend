@@ -46,3 +46,8 @@ export const randomColor = () => {
 
 export const calculateProfit = (profit: number | null): number | null =>
     profit !== null ? (profit - 1) * 100 : null;
+
+export const filterGraphData = (graphData: string): number[] => {
+    const parsedData = JSON.parse(graphData);
+    return parsedData.filter((_: number, index: number) => index % 10 === 0);
+};

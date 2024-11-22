@@ -2,6 +2,7 @@ import { createContext, useContext, useState, useEffect, ReactNode, FC } from 'r
 import { IndexDataStructure } from "../types/indexPage/IndexDataStructure";
 import { IndexSeason } from "../enums/IndexSeasonEnum";
 import { getIndexData } from "../../api/indexDataService";
+import {IndexTableSkeleton} from "../../components/modules/index/indexTableData/IndexTableSkeleton.tsx";
 
 type Props = {
     children: ReactNode;
@@ -36,7 +37,7 @@ export const IndexDataProvider: FC<Props> = ({ children }) => {
     };
 
     if (!data) {
-        return <p>Loading skeleton...</p>;
+        return <IndexTableSkeleton />;
     }
 
     return (

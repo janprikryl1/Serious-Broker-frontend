@@ -9,6 +9,8 @@ import {
     areEstablishedCryptocurrenciesOrNewcomersToTheMarketBetterArticle, routes,
     whatIsMarketCapitalizationArticle
 } from "../../../../utils/constants";
+import {calculateProfit} from "../../../../utils/constants/functions.ts";
+import {TypographyWithPopover} from "../../TypographyWithPopover.tsx";
 
 export const PopularCoins: FC = () => {
     const { t } = useTranslation();
@@ -19,7 +21,10 @@ export const PopularCoins: FC = () => {
     return (
         <TableTemplate title="Last Coinmarketcup Coins">
             <div className={`${theme === "dark" ? "bg-dark" : "bg-white"} p-4 rounded`}>
-                <p className="mb-3">{t("Which coins scored recently in Coinmarketcap?")}</p>
+                <TypographyWithPopover
+                    popover={t("Coinmarketcap is a website that provides information and data such as prices, trade volumes, market capitalization on cryptocurrencies.")}>
+                    <p className="mb-3">{t("Which coins scored recently in Coinmarketcap?")}</p>
+                </TypographyWithPopover>
                 <table className="table no-border-row">
                     <thead>
                     <tr>
@@ -35,20 +40,21 @@ export const PopularCoins: FC = () => {
                             <td>{coin.cmc_rank}</td>
                             <td>{coin.asset_label}</td>
                             <td>{coin.week_0_pos}</td>
-                            <td>{((coin.week_0_profit - 1) * 100).toFixed(2)} %</td>
+                            <td>{(calculateProfit(coin.week_0_profit) ?? 0).toFixed(2)} %</td>
                             {!isMobile &&
                                 index === Math.round(data.last_coinmarketcup_coins.length / 2) - 1 && (
                                     <td
-                                        colSpan={isMobile ? 2 : 4}
                                         rowSpan={2}
-                                        className="text-center align-middle no-border-row"
+                                        className="text-center align-middle"
                                     >
                                         <Link
                                             to={whatIsMarketCapitalizationArticle}
                                             className="btn btn-warning text-dark w-100"
-                                            style={{marginLeft:10}}
                                         >
-                                            {t("What is the market capitalization?")}
+                                            <span>{t("What is")}</span><br/>
+                                            <span>{t("the market")}</span><br/>
+                                            <span>{t("capitalization")}</span><br/>
+                                            <span>?</span>
                                         </Link>
                                     </td>
                                 )}

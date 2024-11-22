@@ -25,3 +25,8 @@
 .no-border-row tr td[rowspan] {
     border-bottom: none !important;
 }
+
+
+a {
+    color: inherit;
+}

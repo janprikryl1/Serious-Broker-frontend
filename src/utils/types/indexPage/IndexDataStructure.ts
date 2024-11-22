@@ -1,12 +1,13 @@
 export type CoinData = {
     id: number;
     name: string;
+    symbol: string;
     price: number;
 };
 
 export type CoinCategory = {
     tag_name: string;
-    coins: CoinData[];
+    coins: string;
 };
 
 export type AssetProfitData = {
@@ -40,12 +41,47 @@ export type MostVolatileData = {
     asset_label: string;
     symbol_name: string;
     percent_volatility: number;
-    graph_data: number[];
+    graph_data: string;
 };
 
 export type MostVolatile = {
     rises: MostVolatileData[];
+    falls: MostVolatileData[];
 };
+
+export type DYOR = {
+    id: number;
+    title: string;
+    answer: string; 
+    created: string;
+    updated: string;
+    answer_cs: string;
+    title_cs: string;
+}
+
+export type TopMostProfitableAsset = {
+    order_index: number;
+    asset_label: string;
+    quote_currencies: string;
+    week_0_profit: number | null;
+    week_1_profit: number | null;
+    week_2_profit: number | null;
+    week_3_profit: number | null;
+    month_0_profit: number | null;
+    month_1_profit: number | null;
+    month_2_profit: number | null;
+    quarter_0_profit: number | null;
+    quarter_1_profit: number | null;
+    quarter_2_profit: number | null;
+    quarter_3_profit: number | null;
+    year_0_profit: number | null;
+    year_1_profit: number | null;
+    year_2_profit: number | null;
+    week_all_profit: number | null;
+    month_all_profit: number | null;
+    quarter_all_profit: number | null;
+    year_all_profit: number | null;
+}
 
 export type IndexDataStructure = {
     date: string;
@@ -53,4 +89,6 @@ export type IndexDataStructure = {
     last_coinmarketcup_coins: MostProfitable[];
     coin_categories: CoinCategory[];
     most_volatible: MostVolatile;
+    DYOR: DYOR;
+    top_most_profitable_assets: TopMostProfitableAsset[];
 };

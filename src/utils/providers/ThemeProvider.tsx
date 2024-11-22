@@ -1,5 +1,6 @@
 import React, {createContext, useContext, useState, useEffect, ReactNode, useCallback} from 'react';
 import {useLocation} from "react-router-dom";
+import {SkeletonTheme} from "react-loading-skeleton";
 
 type ThemeContextType = {
     theme: string | null;
@@ -35,7 +36,11 @@ export const ThemeProvider: React.FC<{ children: ReactNode }> = ({ children }) =
   
 
     return (
-        <ThemeContext.Provider value={{ theme, toggleTheme }}>{children}</ThemeContext.Provider>
+        <ThemeContext.Provider value={{ theme, toggleTheme }}>
+            <SkeletonTheme baseColor={theme === "dark" ? "#303030" : "#A0A0A0"} highlightColor={theme === "dark" ? "#444" : "#F0F0F0"}>
+                {children}
+            </SkeletonTheme>
+        </ThemeContext.Provider>
     );
 };
 

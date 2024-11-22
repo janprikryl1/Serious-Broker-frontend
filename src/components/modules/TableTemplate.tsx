@@ -12,7 +12,7 @@ export const TableTemplate:FC<Props> = ({title, children}) => {
     const {t} = useTranslation();
     
     return (
-        <div className="container padding-top padding-bottom">
+        <div className="padding-bottom">
             <div className="cta__wrapper">
                 <div className="cta__newsletter d-flex justify-content-center">
                     <div
@@ -20,7 +20,7 @@ export const TableTemplate:FC<Props> = ({title, children}) => {
                             gap: "10px",
                             backgroundColor: theme === 'dark' ? "#343a40" : "#f5f8fb",
                             borderRadius: 24,
-                            padding: "30px",
+                            padding: 30,
                             zIndex: 2,
                             position: 'relative',
                         }}

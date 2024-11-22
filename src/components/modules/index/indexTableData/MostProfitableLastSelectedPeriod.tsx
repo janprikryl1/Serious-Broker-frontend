@@ -1,9 +1,8 @@
-import { useMemo } from "react";
+import {useMemo} from "react";
 import { useTranslation } from "react-i18next";
 import { useMediaQuery } from "@mui/material";
 import { FC } from "react";
 import { Link } from "react-router-dom";
-import { Button } from "react-bootstrap";
 import { useThemeContext } from "../../../../utils/providers/ThemeProvider.tsx";
 import { useIndexDataContext } from "../../../../utils/providers/IndexDataProvider.tsx";
 import { TableTemplate } from "../../TableTemplate.tsx";
@@ -11,6 +10,8 @@ import { IndexTableChart } from "./indexTableChart/IndexTableChart.tsx";
 import { routes } from "../../../../utils/constants";
 import { AssetProfitData } from "../../../../utils/types/indexPage/IndexDataStructure.ts";
 import {calculateProfit} from "../../../../utils/constants/functions.ts";
+import {TypographyWithPopover} from "../../TypographyWithPopover.tsx";
+import {GainSeasonTh} from "./GainSeasonTh.tsx";
 
 export const MostProfitableLastSelectedPeriod: FC = () => {
     const { t } = useTranslation();
@@ -44,7 +45,7 @@ export const MostProfitableLastSelectedPeriod: FC = () => {
 
         return (coin: AssetProfitData) => profitMap(coin)[season as keyof typeof profitMap];
     }, [season]);
-
+    
     return (
         <TableTemplate title={`The most profitable cryptocurrencies over the last ${season.toLowerCase()}`}>
             <div className={`${theme === "dark" ? "bg-dark" : "bg-white"} p-4 rounded`}>
@@ -53,7 +54,7 @@ export const MostProfitableLastSelectedPeriod: FC = () => {
                     <tr>
                         <th>{t("Position")}</th>
                         <th>Coin</th>
-                        <th>{t("Week 0 profit: ")}</th>
+                        <GainSeasonTh />
                         <th>{t("Graph")}</th>
                     </tr>
                     </thead>
@@ -71,13 +72,16 @@ export const MostProfitableLastSelectedPeriod: FC = () => {
                             </td>
                             {!isMobile && index === Math.round(data.last_most_profitable.length / 2) - 1 && (
                                 <td
-                                    colSpan={isMobile ? 2 : 4}
                                     rowSpan={2}
                                     className="text-center align-middle no-border-row"
                                 >
-                                    <Button variant="outline-warning" style={{ marginLeft: 10 }}>
-                                        {t("Want to know more?")}
-                                    </Button>
+                                    <TypographyWithPopover popover={t(t("More in chart section"))}>
+                                        <>
+                                            <span>{t("Want to")}</span><br/>
+                                            <span>{t("know more")}</span><br/>
+                                            <span>?</span>
+                                        </>
+                                    </TypographyWithPopover>
                                 </td>
                             )}
                         </tr>
