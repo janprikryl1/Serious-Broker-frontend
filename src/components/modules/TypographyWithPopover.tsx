@@ -4,7 +4,7 @@ import Popover from "@mui/material/Popover";
 
 type Props = {
     children: ReactNode;
-    popover: string;
+    popover: string | ReactNode;
 }
 
 export const TypographyWithPopover:FC<Props> = ({children, popover}) => {

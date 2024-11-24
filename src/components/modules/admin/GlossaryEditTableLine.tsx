@@ -1,4 +1,4 @@
-import { ChangeEvent, FC } from "react";
+import { ChangeEvent, FC, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { GlossaryType } from "../../../utils/types/GlossaryType.ts";
@@ -14,9 +14,15 @@ type Props = {
 
 export const GlossaryEditTableLine: FC<Props> = ({ glossary, onUpdate, onDelete }) => {
     const { t } = useTranslation();
+    const [localImage, setLocalImage] = useState<File | null>(null);
 
-    const handleInputChange = async (e: ChangeEvent<HTMLInputElement>, field: keyof GlossaryType) => {
-        onUpdate({ ...glossary, [field]: e.target.value });
+    const handleInputChange = (e: ChangeEvent<HTMLInputElement>, field: keyof GlossaryType) => {
+        if (field === "image") {
+            const file = e.target.files?.[0] || null;
+            setLocalImage(file); // Update local state with the selected file
+        } else {
+            onUpdate({ ...glossary, [field]: e.target.value });
+        }
     };
 
     const handleDelete = async () => {
@@ -41,7 +47,12 @@ export const GlossaryEditTableLine: FC<Props> = ({ glossary, onUpdate, onDelete 
 
     const handleSave = async () => {
         try {
-            const result = await editGlossary(glossary);
+            const updatedGlossary = {
+                ...glossary,
+                image: localImage ? localImage.name : glossary.image, // Keep original image URL if no new file is selected
+            };
+
+            const result = await editGlossary(updatedGlossary, localImage); // Pass the file separately to the service
             if (!result) return;
             if (result.data.status === "success") {
                 Swal.fire({
@@ -95,6 +106,24 @@ export const GlossaryEditTableLine: FC<Props> = ({ glossary, onUpdate, onDelete 
                     value={glossary.answer_cs}
                     onChange={(e) => handleInputChange(e, "answer_cs")}
                 />
+            </td>
+            <td>
+                <input
+                    type="file"
+                    onChange={(e) => handleInputChange(e, "image")}
+                    accept="image/*"
+                    className="form-control"
+                />
+                {glossary.image && !localImage && (
+                    <img
+                        src={`/path/to/uploads/${glossary.image}`}
+                        alt="Glossary"
+                        style={{ maxWidth: "100px", marginTop: "10px" }}
+                    />
+                )}
+                {localImage && (
+                    <div style={{ marginTop: "10px" }}>{localImage.name}</div>
+                )}
             </td>
             <td>
                 <button className="btn btn-danger" onClick={handleDelete}>

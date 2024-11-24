@@ -9,11 +9,13 @@ import Swal from "sweetalert2";
 export const GlossaryManagement: FC = () => {
     const { t } = useTranslation();
     const [glossaries, setGlossaries] = useState<GlossaryType[]>([]);
-    const [newGlossary, setNewGlossary] = useState<Partial<GlossaryType>>({
+    const [newGlossary, setNewGlossary] = useState<Partial<GlossaryType & { imageFile: File | null }>>({
         title: "",
         title_cs: "",
         answer: "",
-        answer_cs: ""
+        answer_cs: "",
+        image: null,
+        imageFile: null,
     });
 
     useEffect(() => {
@@ -37,14 +39,27 @@ export const GlossaryManagement: FC = () => {
     };
 
     const handleNewGlossaryChange = (e: ChangeEvent<HTMLInputElement>) => {
-        const { name, value } = e.target;
-        setNewGlossary((prev) => ({ ...prev, [name]: value }));
+        const { name, value, files } = e.target;
+        if (name === "image") {
+            setNewGlossary((prev) => ({
+                ...prev,
+                imageFile: files?.[0] || null,
+                image: files?.[0]?.name || null,
+            }));
+        } else {
+            setNewGlossary((prev) => ({ ...prev, [name]: value }));
+        }
     };
 
     const handleAddGlossary = async (e: FormEvent) => {
         e.preventDefault();
         try {
-            const result = await addGlossary(newGlossary as GlossaryType);
+            const glossaryToSubmit = {
+                ...newGlossary,
+                image: newGlossary.imageFile ? newGlossary.imageFile.name : null,
+            };
+
+            const result = await addGlossary(glossaryToSubmit);
             if (!result) return;
             if (result.data.status === "success") {
                 setGlossaries((prev) => [...prev, result.data.data]);
@@ -52,7 +67,9 @@ export const GlossaryManagement: FC = () => {
                     title: "",
                     title_cs: "",
                     answer: "",
-                    answer_cs: ""
+                    answer_cs: "",
+                    image: null,
+                    imageFile: null,
                 });
                 Swal.fire({
                     title: t("Glossary added"),
@@ -68,9 +85,14 @@ export const GlossaryManagement: FC = () => {
             }
         } catch (error) {
             console.error("Error adding glossary:", error);
+            Swal.fire({
+                title: t("Glossary addition failed"),
+                text: t("Try again later."),
+                icon: "error",
+            });
         }
     };
-    
+
     const handleGlossaryDelete = (id: number) => {
         setGlossaries((prevGlossaries) =>
             prevGlossaries.filter((glossary) => glossary.id !== id)
@@ -108,7 +130,7 @@ export const GlossaryManagement: FC = () => {
                                                 name="title_cs"
                                                 value={newGlossary.title_cs || ""}
                                                 onChange={handleNewGlossaryChange}
-                                                placeholder={t("Title in czech")}
+                                                placeholder={t("Title in Czech")}
                                                 className="form-control"
                                             />
                                         </div>
@@ -128,7 +150,17 @@ export const GlossaryManagement: FC = () => {
                                                 name="answer_cs"
                                                 value={newGlossary.answer_cs || ""}
                                                 onChange={handleNewGlossaryChange}
-                                                placeholder={t("Answer in czech")}
+                                                placeholder={t("Answer in Czech")}
+                                                className="form-control"
+                                            />
+                                        </div>
+                                        <div className="col-md-6 mb-2">
+                                            <input
+                                                type="file"
+                                                name="image"
+                                                onChange={handleNewGlossaryChange}
+                                                placeholder={t("Image")}
+                                                accept="image/*"
                                                 className="form-control"
                                             />
                                         </div>
@@ -152,6 +184,7 @@ export const GlossaryManagement: FC = () => {
                                                     <th>{t("Title in Czech")}</th>
                                                     <th>{t("Answer")}</th>
                                                     <th>{t("Answer in Czech")}</th>
+                                                    <th>{t("Image")}</th>
                                                     <th>{t("Delete")}</th>
                                                     <th>{t("Edit")}</th>
                                                 </tr>

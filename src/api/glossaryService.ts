@@ -7,25 +7,37 @@ export const getGlossary = async () => {
     return await res;
 };
 
-export const editGlossary = async (glossary: GlossaryType) => {
+export const editGlossary = async (glossary: GlossaryType, file: File | null) => {
     const token = localStorage.getItem("token");
-    if (!token) return;
-    
-    const response = axios.put(backendUrl + "glossary/glossary_edit.php", {
-            id: glossary.id,
-            title: glossary.title, 
-            title_cs: glossary.title_cs,
-            answer: glossary.answer,
-            answer_cs: glossary.answer_cs,
-        },
-        {
+    if (!token) {
+        throw new Error("User is not authenticated");
+    }
+
+    const formData = new FormData();
+    formData.append("id", glossary.id.toString());
+    formData.append("title", glossary.title);
+    formData.append("title_cs", glossary.title_cs);
+    formData.append("answer", glossary.answer);
+    formData.append("answer_cs", glossary.answer_cs);
+
+    if (file) {
+        formData.append("photo", file);
+    }
+
+    try {
+        const response = await axios.post(`${backendUrl}glossary/glossary_edit.php`, formData, {
             headers: {
                 Authorization2: `Bearer ${token}`,
-                "Content-Type": "application/json",
             },
         });
-    return await response;
+        return response;
+    } catch (error) {
+        console.error("Error updating glossary:", error);
+        throw error;
+    }
 };
+
+
 
 export const deleteGlossary = async (id: number) => {
     const token = localStorage.getItem("token");
@@ -43,26 +55,27 @@ export const deleteGlossary = async (id: number) => {
     return await response;
 };
 
-
-export const addGlossary = async (glossary: GlossaryType) => {
+export const addGlossary = async (glossary: Partial<GlossaryType & { imageFile?: File | null }>) => {
     const token = localStorage.getItem("token");
     if (!token) return;
-    
-    const res = axios.post<{data: GlossaryType, status: string; message: string}>(backendUrl+"glossary/glossary_add.php", {
-            title: glossary.title,
-            title_cs: glossary.title_cs,
-            answer: glossary.answer,
-            answer_cs: glossary.answer_cs,
+
+    const formData = new FormData();
+    formData.append("title", glossary.title || "");
+    formData.append("title_cs", glossary.title_cs || "");
+    formData.append("answer", glossary.answer || "");
+    formData.append("answer_cs", glossary.answer_cs || "");
+    if (glossary.imageFile) {
+        formData.append("image", glossary.imageFile);
+    }
+
+    const response = await axios.post(`${backendUrl}glossary/glossary_add.php`, formData, {
+        headers: {
+            Authorization2: `Bearer ${token}`,
         },
-        {
-            headers: {
-                Authorization2: `Bearer ${token}`,
-                "Content-Type": "application/json",
-            },
-        }
-    );
-    return await res;
+    });
+    return response;
 };
+
 
 export const randomGlossary = async () => {
     const token = localStorage.getItem("token");

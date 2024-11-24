@@ -4,6 +4,7 @@ export type GlossaryType = {
     title_cs: string;
     answer: string;
     answer_cs: string;
+    image: string | null;
     created: string;
     updated: string;
 }
