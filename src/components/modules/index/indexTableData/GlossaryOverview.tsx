@@ -3,7 +3,7 @@ import {TableTemplate} from "../../TableTemplate.tsx";
 import {useIndexDataContext} from "../../../../utils/providers/IndexDataProvider.tsx";
 import {useTranslation} from "react-i18next";
 import {Link} from "react-router-dom";
-import {routes} from "../../../../utils/constants";
+import {glossaryImagesURL, routes} from "../../../../utils/constants";
 
 export const GlossaryOverview:FC = () => {
     const {data} = useIndexDataContext();
@@ -17,6 +17,8 @@ export const GlossaryOverview:FC = () => {
         <TableTemplate title="Overview of glossary of terms">
             <h2>{title}</h2>
             <p style={{ marginLeft: 10 }}>"{answer}"</p>
+            {data.DYOR.image && <img src={`${glossaryImagesURL}${data.DYOR.image}`} style={{ width: 250 }} alt="DYOR" />}
+            <br />
             <Link to={routes.dictionary} className="text-decoration-none">
                 {t("Interested in more?")}
             </Link>
