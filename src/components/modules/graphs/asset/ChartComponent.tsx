@@ -1,168 +1,119 @@
-import { createChart, ColorType, Time, ISeriesApi } from 'lightweight-charts';
-import React, { useEffect, useRef, useState } from 'react';
-import { DetailComponent } from "./DetailComponent";
-import Button from "react-bootstrap/Button";
-import { Tooltip } from "./Tooltip";
-import { getAssetBuysBetween } from "../../../../api/binanceIndexAssets";
-import {useTranslation} from "react-i18next";
-import {DataPointType} from "../../../../utils/types/asset/DataPointType.ts";
-import {TooltipDataType} from "../../../../utils/types/asset/TooltipDataType.ts";
+import { FC, useEffect, useState } from "react";
+import ReactApexChart from "react-apexcharts";
+import { ApexOptions } from "apexcharts";
+import { useThemeContext } from "../../../../utils/providers/ThemeProvider";
+import { csLocale } from "../../../../utils/constants/csLocale";
+import { useTranslation } from "react-i18next";
+import { Form } from "react-bootstrap";
+import Typography from "@mui/material/Typography";
+import { ChartAssetPeriodEnum } from "../../../../utils/enums/ChartAssetPeriodEnum";
+import { getBinanceAssetGraphData } from "../../../../api/binanceAPIService";
+import { KlineData } from "../../../../utils/types/KlineData.ts";
 
-
-type ChartComponentProps = {
-    data: DataPointType[];
-    backgroundColor?: string;
-    lineColor?: string;
-    textColor?: string;
-    areaTopColor?: string;
-    areaBottomColor?: string;
+type Props = {
     width?: number;
     height?: number;
-    assetId?: number;
+    coin: string;
 };
 
-export const ChartComponent: React.FC<ChartComponentProps> = ({
-                                                                  data,
-                                                                  backgroundColor = 'white',
-                                                                  lineColor = '#dd9f3a',
-                                                                  textColor = 'black',
-                                                                  areaTopColor = '#dd9f3a',
-                                                                  areaBottomColor = 'rgb(218,197,162)',
-                                                                  width = 500,
-                                                                  height = 300,
-                                                                  assetId
-                                                              }) => {
+export const ChartComponent: FC<Props> = ({ width = 500, height = 300, coin }) => {
+    const { theme } = useThemeContext();
     const { t } = useTranslation();
-    const chartContainerRef = useRef<HTMLDivElement>(null);
-    const [tooltip, setTooltip] = useState<TooltipDataType | null>(null);
-    const [showDetails, setShowDetails] = useState(false);
-    const [detailsData, setDetailsData] = useState<DataPointType[] | null>(null);
+    const [selectedPeriod, setSelectedPeriod] = useState<keyof typeof ChartAssetPeriodEnum>("1M");
+
+    // Calculate default startDate (one year ago) and endDate (today)
+    const today = new Date();
+    const oneYearAgo = new Date();
+    oneYearAgo.setFullYear(today.getFullYear() - 1);
+
+    const [startDate, setStartDate] = useState<string>(oneYearAgo.toISOString().split("T")[0]); // Format: YYYY-MM-DD
+    const [endDate, setEndDate] = useState<string>(today.toISOString().split("T")[0]); // Format: YYYY-MM-DD
+    const [series, setSeries] = useState<{ data: { x: Date; y: [number, number, number, number] }[] }[]>([]);
+
+    const options: ApexOptions = {
+        chart: { type: "candlestick", height: height, width: width, locales: [csLocale], defaultLocale: "cs" },
+        xaxis: { type: "datetime", labels: { style: { colors: theme === "dark" ? "#fff" : "#000" } } },
+        yaxis: { tooltip: { enabled: true }, labels: { style: { colors: theme === "dark" ? "#fff" : "#000" } } },
+        tooltip: {
+            theme: theme === "dark" ? "dark" : "light",
+            x: { show: true },
+            y: { formatter: (val) => val.toFixed(2) },
+        },
+    };
 
     useEffect(() => {
-        if (!chartContainerRef.current) {
-            return;
-        }
+        const fetchData = async () => {
+            try {
+                // Convert startDate and endDate to timestamps
+                const startTime = new Date(startDate).getTime(); // Convert to LONG (timestamp in ms)
+                const endTime = new Date(endDate).getTime(); // Convert to LONG (timestamp in ms)
 
-        const chart = createChart(chartContainerRef.current, {
-            layout: {
-                background: { type: ColorType.Solid, color: backgroundColor },
-                textColor,
-            },
-            width: width,
-            height: height,
-        });
-        chart.timeScale().fitContent();
-
-        const formattedData = data.map((dataPoint) => ({
-            time: Date.parse(dataPoint.datetime) / 1000 as Time,
-            value: Number(dataPoint.close_eur),  // Ensure number type
-        }));
-
-        const newSeries = chart.addAreaSeries({
-            lineColor,
-            topColor: areaTopColor,
-            bottomColor: areaBottomColor,
-        });
-
-        newSeries.setData(formattedData);
-
-        chart.subscribeCrosshairMove((param) => {
-            if (
-                param.point === undefined ||
-                !param.time ||
-                param.point.x < 0 ||
-                param.point.x > chartContainerRef.current!.clientWidth ||
-                param.point.y < 0 ||
-                param.point.y > chartContainerRef.current!.clientHeight
-            ) {
-                setTooltip(null);
-            } else {
-                const dateStr = new Date((param.time as number) * 1000).toISOString().split('T')[0];
-                const data = param.seriesData.get(newSeries as ISeriesApi<'Area'>);
-                const price = data !== undefined && "value" in data ? (data as { value: number }).value : 0;
-
-                const coordinate = newSeries.priceToCoordinate(price);
-                if (coordinate === null) {
-                    return;
-                }
-
-                let shiftedCoordinate = param.point.x - 50;
-                shiftedCoordinate = Math.max(
-                    0,
-                    Math.min(chartContainerRef.current!.clientWidth - 80, shiftedCoordinate)
+                const response: KlineData[] = await getBinanceAssetGraphData(
+                    coin + "USDT",
+                    selectedPeriod,
+                    startTime,
+                    endTime
                 );
 
-                const coordinateY =
-                    coordinate - 80 - 15 > 0
-                        ? coordinate - 80 - 15
-                        : Math.max(
-                            0,
-                            Math.min(
-                                chartContainerRef.current!.clientHeight - 80 - 15,
-                                coordinate + 15
-                            )
-                        );
+                const transformedData = response.map((kline) => ({
+                    x: new Date(kline[0]), // Open time
+                    y: [
+                        parseFloat(kline[1]), // Open
+                        parseFloat(kline[2]), // High
+                        parseFloat(kline[3]), // Low
+                        parseFloat(kline[4]), // Close
+                    ] as [number, number, number, number],
+                }));
 
-                setTooltip({
-                    display: true,
-                    top: coordinateY,
-                    left: shiftedCoordinate,
-                    price,
-                    date: dateStr,
-                });
+                setSeries([{ data: transformedData }]);
+            } catch (error) {
+                console.error("Failed to fetch Binance asset data:", error);
             }
-        });
-
-        const debounce = (func: (...args: any[]) => void, timeout = 300) => {
-            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-            // @ts-ignore
-            let timer: NodeJS.Timeout;
-            return (...args: any[]) => {
-                clearTimeout(timer);
-                timer = setTimeout(() => {
-                    func(...args);
-                }, timeout);
-            };
         };
-
-        const handleTimeRangeChange = debounce(async (visibleTimeRange: { from: number; to: number }) => {
-            if (visibleTimeRange) {
-                const fromDate = new Date(visibleTimeRange.from * 1000);
-                const toDate = new Date(visibleTimeRange.to * 1000);
-                const oneMonth = 30 * 24 * 60 * 60 * 1000; // Approximate milliseconds in one month
-                const isLessThanOrEqualToOneMonth = (toDate.getTime() - fromDate.getTime()) <= oneMonth;
-                if (isLessThanOrEqualToOneMonth && assetId) {
-                    try {
-                        const newData: {data: {graph: DataPointType[]}} | undefined = await getAssetBuysBetween(assetId, fromDate.toISOString(), toDate.toISOString());
-                        if (!newData) return;
-                        setDetailsData(newData.data.graph as DataPointType[]);
-                        setShowDetails(true);
-                    } catch (error) {
-                        console.error('Error fetching data:', error);
-                    }
-                }
-            }
-        }, 1500);
-
-        chart.timeScale().subscribeVisibleTimeRangeChange(handleTimeRangeChange);
-
-        return () => {
-            chart.remove();
-        };
-    }, [data, backgroundColor, lineColor, textColor, areaTopColor, areaBottomColor, showDetails]);
+        fetchData();
+    }, [coin, selectedPeriod, startDate, endDate]);
 
     return (
         <>
-            {showDetails && detailsData ? (
-                <>
-                    <DetailComponent data={detailsData} width={width} height={height}></DetailComponent>
-                    <Button onClick={() => setShowDetails(false)}>{t("Back")}</Button>
-                </>
-            ) : (
-                <div style={{ position: 'relative' }} ref={chartContainerRef}>
-                    <Tooltip tooltip={tooltip} lineColor={lineColor}></Tooltip>
+            <div className="row justify-content-center align-items-center mt-3 w-200">
+                <div className="col-auto d-flex align-items-center">
+                    <Typography variant="h6" className="me-2" style={{ minWidth: 100 }}>
+                        {t("Candles per")}
+                    </Typography>
+                    <Form.Select
+                        aria-label="Candles per"
+                        value={selectedPeriod}
+                        onChange={(e) => setSelectedPeriod(e.target.value as keyof typeof ChartAssetPeriodEnum)}
+                    >
+                        {Object.keys(ChartAssetPeriodEnum).map((key) => (
+                            <option key={key} value={key}>
+                                {t(ChartAssetPeriodEnum[key as keyof typeof ChartAssetPeriodEnum])}
+                            </option>
+                        ))}
+                    </Form.Select>
                 </div>
-            )}
+                <div className="col-auto d-flex align-items-center">
+                    <Typography variant="h6" className="me-2">
+                        {t("Season")}
+                    </Typography>
+                    <Form.Control
+                        type="date"
+                        value={startDate}
+                        onChange={(e) => setStartDate(e.target.value)}
+                    />
+                </div>
+                <div className="col-auto d-flex align-items-center">
+                    <Typography variant="h6" className="me-3">
+                        -
+                    </Typography>
+                    <Form.Control
+                        type="date"
+                        value={endDate}
+                        onChange={(e) => setEndDate(e.target.value)}
+                    />
+                </div>
+            </div>
+            <ReactApexChart options={options} series={series} type="candlestick" />
         </>
     );
 };

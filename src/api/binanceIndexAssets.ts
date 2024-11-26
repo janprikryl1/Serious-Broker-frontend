@@ -47,9 +47,7 @@ export const getAssetByIdGraphData = async (asset_id: number) => {
             asset_id: asset_id
         },
         headers: {
-            Authorization2: `Bearer ${token}`,
-            'Content-Type':
-                'application/json',
+            Authorization2: `Bearer ${token}`
         }
     });
     return await response;

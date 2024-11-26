@@ -606,6 +606,27 @@
     "Which coins lost the most": "Které mince nejvíce ztratily",
     "Order of the coins in the portfolio": "Pořadí mincí v portfoliu",
     "Portfolio is a collection of cryptocurrencies": "Portfolio je kolekce kryptoměn",
-    "Come and save crypto with us": "Pojďte s námi spořit krypto"
+    "Come and save crypto with us": "Pojďte s námi spořit krypto",
+    "Opening": "Otevírací",
+    "Closing": "Zavírací",
+    "Highest": "Nejvyšší",
+    "Lowest": "Nejnižší",
+    "Candles per": "Svíčky po",
+    "Season": "Období",
+    "Currency": "Měna",
+    "1 minute": "1 minuta",
+    "3 minutes": "3 minuty",
+    "15 minutes": "15 minut",
+    "30 minutes": "30 minut",
+    "1 hour": "1 hodina",
+    "2 hours": "2 hodiny",
+    "4 hours": "4 hodiny",
+    "6 hours": "6 hodin",
+    "8 hours": "8 hodin",
+    "12 hours": "12 hodin",
+    "1 day": "1 den",
+    "3 days": "3 dny",
+    "1 week": "1 týden",
+    "1 month": "1 měsíc"
     
 }
