@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from "react";
+import {FC, useEffect, useMemo, useState} from "react";
 import { useTranslation } from "react-i18next";
 import { useParams } from "react-router-dom";
 import { TitleHeader } from "../../components/modules/about/TitleHeader.tsx";
@@ -10,12 +10,18 @@ import { AssetGraphCurrencyDetailSkeleton } from "../../components/modules/graph
 import { toCzechDateFormat } from "../../utils/constants/functions.ts";
 import { useThemeContext } from "../../utils/providers/ThemeProvider.tsx";
 import {AssetGraphCurrencyDetailTextItem} from "../../components/modules/graphs/asset/AssetGraphCurrencyDetailTextItem.tsx";
+import {CandlestickData} from "../../utils/types/KlineData.ts";
 
 export const AssetGraphCurrencyDetail: FC = () => {
     const { theme } = useThemeContext();
     const { t } = useTranslation();
     const { index_label } = useParams();
     const [asset, setAsset] = useState<Assets>();
+    const today = useMemo(() => new Date(), []);
+    const oneYearAgo = useMemo(() => new Date(new Date().setFullYear(today.getFullYear() - 1)), [today]);
+    const [startDate, setStartDate] = useState<string>(oneYearAgo.toISOString().split("T")[0]);
+    const [endDate, setEndDate] = useState<string>(today.toISOString().split("T")[0]);
+    const [series, setSeries] = useState<{ data: CandlestickData[] }[]>();
 
     useEffect(() => {
         const getGraphData = async () => {
@@ -55,10 +61,16 @@ export const AssetGraphCurrencyDetail: FC = () => {
                                 width={800}
                                 height={400}
                                 coin={asset.asset_label}
+                                series={series}
+                                setStartDate={setStartDate}
+                                startDate={startDate}
+                                setSeries={setSeries}
+                                endDate={endDate}
+                                setEndDate={setEndDate}
                             ></ChartComponent>
                         </div>
                     </div>
-                    <EarningIn id={asset.id} />
+                    {series !== undefined && <EarningIn series={series} startDate={startDate} endDate={endDate}/>}
                 </>
             ) : (
                 <AssetGraphCurrencyDetailSkeleton />

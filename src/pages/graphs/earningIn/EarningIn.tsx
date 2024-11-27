@@ -1,113 +1,141 @@
-import {FC, useState} from "react";
+import { FC, useState, useMemo } from "react";
 import dayjs, { Dayjs } from 'dayjs';
 import isBetweenPlugin from 'dayjs/plugin/isBetween';
+import 'dayjs/locale/cs'; // Import češtiny pro dayjs
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
-import {Day} from "./Day.tsx";
-import {useTranslation} from "react-i18next";
+import { useTranslation } from "react-i18next";
+import { CandlestickData } from "../../../utils/types/KlineData.ts";
+import { useThemeContext } from "../../../utils/providers/ThemeProvider.tsx";
+import { csCZ } from "@mui/x-date-pickers/locales";
+import {graphColors} from "../../../utils/constants";
 
 dayjs.extend(isBetweenPlugin);
+dayjs.locale('cs'); // Nastavení jazyka na češtinu
 
 type Props = {
-    id: number;
+    series: { data: CandlestickData[] }[] | undefined;
+    startDate: string;
+    endDate: string;
 }
 
-/*type EarningInType = {
-    asset_id: number;
-    dim_year: number;
-    dim_week_day: number;
-    dim_hour: number;
-    dim_minute: number;
-    amount: number;
-    num_of_trades: number;
-    close_eur: number;
-    amount_eur: number;
-    profit: number;
-}*/
+export const EarningIn: FC<Props> = ({ series, startDate, endDate }) => {
+    const { t } = useTranslation();
+    const [buyDate, setBuyDate] = useState<Dayjs | null>(dayjs(startDate));
+    const [sellDate, setSellDate] = useState<Dayjs | null>(dayjs(endDate));
+    const [initialInvestment, setInitialInvestment] = useState<number>(0);
+    const { theme } = useThemeContext();
 
-
-export const EarningIn:FC<Props> = ({id}) => {
-    console.log(id);
-    const {t} = useTranslation();
-    //const [graphData, setGraphData] = useState<EarningInType[]>();
-    const [hoveredDay, setHoveredDay] = useState<Dayjs | null>(null);
-    const [value, setValue] = useState<Dayjs | null>(dayjs('2022-04-17'));
-    //setGraphData([{asset_id: 1, dim_year: 2022, dim_week_day: 1, dim_hour: 1, dim_minute: 1, amount: 10, num_of_trades: 10, close_eur: 10, amount_eur: 10, profit: 10}]);
-   /* useEffect(() => {
-        const getGraphAssetBuyData = async (period: ChartAssetBuyEnum) => {
-            const response = await getAssetBuys(id, period);
-            console.log(response);
-            if (response) {
-                setGraphData(response.data);
-            }
-        }
-        getGraphAssetBuyData(ChartAssetBuyEnum.Week);
-    }, [id]);*/
-    
-    const handleChange = (value: Dayjs) => {
-        setValue(value);
-        console.log(value.get("date"));
+    // Helper function to find the closest data point for a given date
+    const findClosestData = (date: Dayjs | null): CandlestickData | undefined => {
+        if (!series || !date) return undefined;
+        const allData = series[0]?.data || [];
+        return allData.reduce((closest, current) => {
+            const currentDiff = Math.abs(dayjs(current.x).diff(date));
+            const closestDiff = Math.abs(dayjs(closest.x).diff(date));
+            return currentDiff < closestDiff ? current : closest;
+        });
     };
-    
+
+    // Find buy and sell prices
+    const buyData = useMemo(() => findClosestData(buyDate), [buyDate, series]);
+    const sellData = useMemo(() => findClosestData(sellDate), [sellDate, series]);
+
+    const calculateGain = () => {
+        if (!buyData || !sellData || initialInvestment <= 0) return { gain: 0, percentage: 0 };
+
+        const buyPrice = buyData.y[0]; // Open price for buy
+        const sellPrice = sellData.y[3]; // Close price for sell
+
+        const quantity = initialInvestment / buyPrice;
+        const finalValue = quantity * sellPrice;
+
+        const gain = finalValue - initialInvestment;
+        const percentage = (gain / initialInvestment) * 100;
+
+        return { gain, percentage };
+    };
+
+    const { gain, percentage } = calculateGain();
+
+    const handleBuyDateChange = (value: Dayjs | null) => {
+        if (value && value.isAfter(dayjs(startDate))) {
+            setBuyDate(value);
+        }
+    };
+
+    const handleSellDateChange = (value: Dayjs | null) => {
+        if (value && value.isBefore(dayjs(endDate))) {
+            setSellDate(value);
+        }
+    };
+
     return (
-            <div className="container padding-top padding-bottom">
-                <div className="cta__wrapper">
-                    <div className="cta__newsletter d-flex justify-content-center">
-                        <div
-                            className="cta__newsletter-inner text-center"
-                            data-aos="fade-up"
-                            data-aos-duration="1000"
-                        >
-                            <div>
-                                <p>Kdybych začal investovat v nějakém bodě</p>
-                                <div
-                                    className="cta-form form-subscribe cta-form__inner d-sm-flex align-items-center justify-content-center">
-                                    <input
-                                        type="email"
-                                        className="form-control form-control--style2 mb-3 mb-sm-0"
-                                        placeholder="Počáteční invesice"
-                                        value={0}
-                                        onChange={(e) => console.log(e.target.value)}
-                                    />
-                                    <button
-                                        className="trk-btn trk-btn--large trk-btn--secondary2"
-                                        onClick={() => console.log("Submit")}
-                                        style={{paddingLeft: "20px"}}
-                                    >
-                                        {t("Count")}
-                                    </button>
-                                </div>
-                                <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                    <DateCalendar
-                                        value={value}
-                                        onChange={handleChange}
-                                        showDaysOutsideCurrentMonth
-                                        displayWeekNumber
-                                        slots={{day: Day}}
-                                        slotProps={{
-                                            day: (ownerState) =>
-                                                ({
-                                                    selectedDay: value,
-                                                    hoveredDay,
-                                                    onPointerEnter: () => setHoveredDay(ownerState.day),
-                                                    onPointerLeave: () => setHoveredDay(null),
-                                                }),
-                                        }}
-                                    />
-                                </LocalizationProvider>
-                                <p>Ve vybraný týden: </p>
-                                <p>Za celou dobu: </p>
-                                
-                                {/*graphData ? graphData.map((item, index) => (
-                                    <>
-                                        <p key={index}>{item.profit}</p>
-                                    </>
-                                )) : ""*/}
+        <div className="d-flex justify-content-center min-vh-100 padding-bottom padding-top">
+            <div
+                style={{
+                    backgroundColor: theme === "dark" ? "#343a40" : "#f5f8fb",
+                    borderRadius: 24,
+                    padding: 40,
+                    width: "95%",
+                    maxWidth: "1000px",
+                    textAlign: "center",
+                    boxShadow: "0 4px 16px rgba(0,0,0,0.5)"
+                }}
+                data-aos="fade-up"
+                data-aos-duration="1000"
+            >
+                <div className="row justify-content-center align-items-center mt-3">
+                    <h2>{t("If I started investing at some point")}</h2>
+                    <div
+                        className="cta-form d-sm-flex align-items-center justify-content-between mt-5 mb-5"
+                        style={{maxWidth: "30%"}}
+                    >
+                        <h3 className="text-center mb-0">{t("Amount")}</h3>
+                        <input
+                            type="number"
+                            className="form-control form-control--style2"
+                            style={{width: "50%", height: "40px"}}
+                            placeholder={t("Initial investment") + " ($)"}
+                            defaultValue={0}
+                            onChange={(e) => setInitialInvestment(Number(e.target.value))}
+                        />
+                    </div>
+
+                    <LocalizationProvider dateAdapter={AdapterDayjs} localeText={csCZ.components.MuiLocalizationProvider.defaultProps.localeText}>
+                        <div className="row g-3 justify-content-center mb-4">
+                            <div className="col-12 col-md-6">
+                                <p style={{fontWeight: "bold"}}>{t("Buy Date")}</p>
+                                <DateCalendar
+                                    value={buyDate}
+                                    onChange={handleBuyDateChange}
+                                    minDate={dayjs(startDate)}
+                                    maxDate={dayjs(endDate)}
+                                    disableFuture={true}
+                                    disablePast={false}
+                                    showDaysOutsideCurrentMonth={false}
+                                    slotProps={graphColors}
+                                />
+                            </div>
+                            <div className="col-12 col-md-6">
+                                <p style={{fontWeight: "bold"}}>{t("Sell Date")}</p>
+                                <DateCalendar
+                                    value={sellDate}
+                                    onChange={handleSellDateChange}
+                                    minDate={dayjs(startDate)}
+                                    maxDate={dayjs(endDate)}
+                                    disableFuture={true}
+                                    disablePast={false}
+                                    showDaysOutsideCurrentMonth={false}
+                                    slotProps={graphColors}
+                                />
                             </div>
                         </div>
-                    </div>
+                    </LocalizationProvider>
+                    <h4 style={{color: gain > 0 ? "green" : gain < 0 ? "red" : "gray", fontWeight:"bold"}}>{t("Gain: ")}{gain.toFixed(2)}$ ({percentage.toFixed(2)}%)</h4>
                 </div>
             </div>
+        </div>
     );
 };

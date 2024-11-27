@@ -1,4 +1,4 @@
-import { FC, useEffect, useState, useMemo } from "react";
+import {FC, useEffect, useState, useMemo, Dispatch, SetStateAction} from "react";
 import ReactApexChart from "react-apexcharts";
 import Skeleton from "react-loading-skeleton";
 import { useThemeContext } from "../../../../utils/providers/ThemeProvider";
@@ -14,17 +14,19 @@ type Props = {
     width?: number;
     height?: number;
     coin: string;
+    series: { data: CandlestickData[] }[] | undefined;
+    setSeries: Dispatch<SetStateAction<{ data: CandlestickData[] }[] | undefined>>;
+    startDate: string;
+    setStartDate: Dispatch<SetStateAction<string>>;
+    endDate: string;
+    setEndDate: Dispatch<SetStateAction<string>>;
 }
 
-export const ChartComponent: FC<Props> = ({ width = 500, height = 300, coin }) => {
+export const ChartComponent: FC<Props> = ({ width = 500, height = 300, coin, series, setSeries, setStartDate, setEndDate, endDate, startDate }) => {
     const { theme } = useThemeContext();
     const { t } = useTranslation();
     const [selectedPeriod, setSelectedPeriod] = useState<keyof typeof ChartAssetPeriodEnum>("1M");
-    const today = useMemo(() => new Date(), []);
-    const oneYearAgo = useMemo(() => new Date(new Date().setFullYear(today.getFullYear() - 1)), [today]);
-    const [startDate, setStartDate] = useState<string>(oneYearAgo.toISOString().split("T")[0]);
-    const [endDate, setEndDate] = useState<string>(today.toISOString().split("T")[0]);
-    const [series, setSeries] = useState<{ data: CandlestickData[] }[]>();
+    
 
     const options = useMemo(() => ChartOptions({ theme, width, height, t }), [theme, width, height, t]);
 

@@ -627,6 +627,11 @@
     "1 day": "1 den",
     "3 days": "3 dny",
     "1 week": "1 týden",
-    "1 month": "1 měsíc"
-    
+    "1 month": "1 měsíc",
+    "If I started investing at some point": "Kdybych začal investovat v nějakém čase",
+    "Amount": "Částka",
+    "Gain: ": "Zisk: ",
+    "Buy Date": "Datum nákupu",
+    "Sell Date": "Datum prodeje",
+    "Initial investment": "Počáteční investice"
 }

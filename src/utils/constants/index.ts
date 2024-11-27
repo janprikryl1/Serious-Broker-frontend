@@ -141,6 +141,21 @@ export const defaultNewCurrency = {
     photo: null
 }
 
+const graphColor = {
+    color: '#000',
+    backgroundColor: '#ffca2d',
+}
+
+export const graphColors = {
+    day: {
+        sx: {
+            '&.Mui-selected': graphColor,
+            '&.Mui-selected:focus': graphColor,
+            '&.Mui-selected.Mui-focusVisible': graphColor,
+        },
+    },
+}
+
 export const howDoWeEvaluateReportingPeriodArticle = "/article/20";
 export const whatIsPurposeOfReportingPeriodArticle = "/article/21";
 export const whatIsMarketCapitalizationArticle = "/article/22";
