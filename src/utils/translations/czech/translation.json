@@ -633,5 +633,9 @@
     "Gain: ": "Zisk: ",
     "Buy Date": "Datum nákupu",
     "Sell Date": "Datum prodeje",
-    "Initial investment": "Počáteční investice"
+    "Initial investment": "Počáteční investice",
+    "End date must be greater than start date.": "Koncové datum musí být po začátku.",
+    "The selected period": "Vybraný rozsah",
+    "does not allow a date range longer than": "nedovoluje délku rozsahu déle než",
+    "days": "dny"
 }

@@ -1,7 +1,7 @@
 import { FC, useState, useMemo } from "react";
 import dayjs, { Dayjs } from 'dayjs';
 import isBetweenPlugin from 'dayjs/plugin/isBetween';
-import 'dayjs/locale/cs'; // Import češtiny pro dayjs
+import 'dayjs/locale/cs';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
@@ -12,7 +12,7 @@ import { csCZ } from "@mui/x-date-pickers/locales";
 import {graphColors} from "../../../utils/constants";
 
 dayjs.extend(isBetweenPlugin);
-dayjs.locale('cs'); // Nastavení jazyka na češtinu
+dayjs.locale('cs');
 
 type Props = {
     series: { data: CandlestickData[] }[] | undefined;
@@ -60,13 +60,13 @@ export const EarningIn: FC<Props> = ({ series, startDate, endDate }) => {
     const { gain, percentage } = calculateGain();
 
     const handleBuyDateChange = (value: Dayjs | null) => {
-        if (value && value.isAfter(dayjs(startDate))) {
+        if (value && (value.isSame(dayjs(startDate)) || value.isAfter(dayjs(startDate)))) {
             setBuyDate(value);
         }
     };
 
     const handleSellDateChange = (value: Dayjs | null) => {
-        if (value && value.isBefore(dayjs(endDate))) {
+        if (value && (value.isBefore(dayjs(endDate)) || value.isSame(dayjs(endDate)))) {
             setSellDate(value);
         }
     };
