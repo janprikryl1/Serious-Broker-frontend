@@ -60,6 +60,7 @@ import {ForgottenPassword} from "./pages/ForgottenPassword.tsx";
 import {RecoverPassword} from "./pages/RecoverPassword.tsx";
 import {Profile} from "./pages/profile/Profile.tsx";
 import {GraphsOverview} from "./pages/graphs/GraphsOverview.tsx";
+import {ChachedData} from "./pages/admin/ChachedData.tsx";
 
 // Disable automatic CSS addition for Font Awesome
 config.autoAddCss = false;
@@ -122,6 +123,7 @@ function App() {
                               <Route path={routes.admin.feedbacks} element={<Feedbacks />} />
                               <Route path={routes.admin.achievements} element={<AdminAchivments />} />
                               <Route path={routes.admin.coinSettings} element={<CoinSettings />} />
+                              <Route path={routes.admin.chachedData} element={<ChachedData />} />
                           </Route>
                           <Route path="*" element={<ErrorPage/>}/>
                       </Routes>

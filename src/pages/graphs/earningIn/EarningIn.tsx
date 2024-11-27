@@ -99,6 +99,7 @@ export const EarningIn: FC<Props> = ({ series, startDate, endDate }) => {
                             style={{width: "50%", height: "40px"}}
                             placeholder={t("Initial investment") + " ($)"}
                             defaultValue={0}
+                            min={0}
                             onChange={(e) => setInitialInvestment(Number(e.target.value))}
                         />
                     </div>

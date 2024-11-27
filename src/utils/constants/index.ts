@@ -66,7 +66,8 @@ export const routes = {
         logTable: "log_table",
         feedbacks: "feedbacks",
         achievements: "achievements",
-        coinSettings: "coin_settings"
+        coinSettings: "coin_settings",
+        chachedData: "chached_data"
     },
 }
 
@@ -87,7 +88,8 @@ export const adminURLS = {
     logTable: "/admin/log_table",
     feedbacks: "/admin/feedbacks",
     achievements: "/admin/achievements",
-    coinSettings: "/admin/coin_settings"
+    coinSettings: "/admin/coin_settings",
+    chachedData: "/admin/chached_data"
 }
 
 export const registeredUserNavbarURLs: NavbarURLs = {

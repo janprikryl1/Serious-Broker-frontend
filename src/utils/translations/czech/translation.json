@@ -637,5 +637,11 @@
     "End date must be greater than start date.": "Koncové datum musí být po začátku.",
     "The selected period": "Vybraný rozsah",
     "does not allow a date range longer than": "nedovoluje délku rozsahu déle než",
-    "days": "dny"
+    "days": "dny",
+    "Chached data": "Data v cache",
+    "Chached data deleted": "Data v cache odstraněna",
+    "Chached data deleted successfully": "Data v cache byla úspěšně odstraněna",
+    "Failed to delete chached data": "Chyba při odstraňování data v cache",
+    "Error": "Chyba",
+    "Failed to download chached data": "Nepodařilo se stáhnout data z cache"
 }

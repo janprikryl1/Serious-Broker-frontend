@@ -81,6 +81,12 @@ export const Sidebar: FC = () => {
                         >
                             <CDBSidebarMenuItem icon="credit-card">{t("Coins")}</CDBSidebarMenuItem>
                         </NavLink>
+                        <NavLink
+                            to={adminURLS.chachedData}
+                            className={({ isActive }) => isActive ? 'activeClicked' : ''}
+                        >
+                            <CDBSidebarMenuItem icon="th-large">{t("Chached data")}</CDBSidebarMenuItem>
+                        </NavLink>
                     </CDBSidebarMenu>
                 </CDBSidebarContent>
 
