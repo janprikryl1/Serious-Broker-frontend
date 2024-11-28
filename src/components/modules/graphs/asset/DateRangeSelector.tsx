@@ -12,7 +12,8 @@ type Props = {
 
 export const DateRangeSelector: FC<Props> = ({ startDate, setStartDate, endDate, setEndDate }) => {
     const {t} = useTranslation();
-    
+    const today = new Date().toISOString().split("T")[0];
+
     return (
         <>
             <div className="col-auto d-flex align-items-center">
@@ -25,7 +26,7 @@ export const DateRangeSelector: FC<Props> = ({ startDate, setStartDate, endDate,
                 <Typography variant="h6" className="me-3">
                     -
                 </Typography>
-                <Form.Control type="date" value={endDate} onChange={(e) => setEndDate(e.target.value)} />
+                <Form.Control type="date" value={endDate} onChange={(e) => setEndDate(e.target.value)} max={today} />
             </div>
         </>
     );

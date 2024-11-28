@@ -40,6 +40,11 @@ export const ChartComponent: FC<Props> = ({width = 500, height = 300, coin, seri
                 setError(t("End date must be greater than start date."));
                 return false;
             }
+            
+            if (endTime >= new Date().getTime()) {
+                setError(t("End date must be less than today."));
+                return false;
+            }
 
             const maxRange = MAX_RANGES[selectedPeriod];
             if (endTime - startTime > maxRange) {
