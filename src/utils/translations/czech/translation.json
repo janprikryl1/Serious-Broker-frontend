@@ -644,5 +644,9 @@
     "Failed to delete chached data": "Chyba při odstraňování data v cache",
     "Error": "Chyba",
     "Failed to download chached data": "Nepodařilo se stáhnout data z cache",
-    "End date must be less than today.": "Koncové datum musí být menší než dnes."
+    "End date must be less than today.": "Koncové datum musí být menší než dnes.",
+    "Start": "Začátek",
+    "End": "Konec",
+    "Loss": "Ztráta",
+    "Gain": "Výdělek"
 }

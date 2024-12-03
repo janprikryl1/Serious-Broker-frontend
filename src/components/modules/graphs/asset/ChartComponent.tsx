@@ -28,8 +28,9 @@ export const ChartComponent: FC<Props> = ({width = 500, height = 300, coin, seri
     const { t } = useTranslation();
     const [selectedPeriod, setSelectedPeriod] = useState<keyof typeof ChartAssetPeriodEnum>("1M");
     const [error, setError] = useState<string | null>(null);
-
-    const options = useMemo(() => ChartOptions({ theme, width, height, t }), [theme, width, height, t]);
+    const [points, setPoints] = useState<PointAnnotations[]>([]);
+    
+    const options = useMemo(() => ChartOptions({ theme, width, height, points, t }), [theme, width, height, points, t]);
 
     useEffect(() => {
         const validateRange = () => {
@@ -73,6 +74,9 @@ export const ChartComponent: FC<Props> = ({width = 500, height = 300, coin, seri
                             parseFloat(kline[4]),
                         ],
                     }));
+                    const firstPoint = { x: response[0][0], y: transformedData[0].y[3] };
+                    const lastPoint = { x: response[response.length - 1][0], y: transformedData[transformedData.length - 1].y[3] };
+                    setPoints([firstPoint, lastPoint]);
 
                     const minDate = new Date(Math.min(...response.map((kline) => kline[0])));
                     const maxDate = new Date(Math.max(...response.map((kline) => kline[0])));
@@ -105,7 +109,13 @@ export const ChartComponent: FC<Props> = ({width = 500, height = 300, coin, seri
             </div>
             {error && <div style={{ color: "red", textAlign: "center" }}>{error}</div>}
             {series ? (
-                <ReactApexChart options={options} series={series} type="candlestick" />
+                <>
+                    <ReactApexChart options={options} series={series} type="candlestick" />
+                    {points[0].y && points[1].y && points[0].y > points[1].y ?
+                        <p style={{color: "#FF4500"}}>{t("Loss")}</p> :
+                        <p style={{color: "#8bff00"}}>{t("Gain")}</p>
+                    }
+                </>
             ) : (
                 <Skeleton height={height} width={width} style={{ maxWidth: "100%" }} />
             )}
