@@ -30,6 +30,6 @@ export type MembershipTypes = {
     id: number,
     user_id: number,
     price: number,
-    date_time_created: string,
-    date_time_end: string,
+    created: string,
+    datetime_end: string,
 }

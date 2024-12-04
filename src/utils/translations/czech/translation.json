@@ -657,5 +657,19 @@
     "QR Code updated": "QR kód aktualizován",
     "QR Code updated successfully": "QR kód byl úspěšně aktualizován",
     "Failed to update QR Code": "Nepodařilo se aktualizovat QR kód",
-    "To access premium articles, you need to pay with a cryptocurrency": "Pro přístup k premium článkům je třeba zaplatit kryptoměnou"
+    "To access premium articles, you need to pay with a cryptocurrency": "Pro přístup k premium článkům je třeba zaplatit kryptoměnou",
+    "My memberships": "Moje členství",
+    "Membership ID": "Členství ID",
+    "Valid from": "Platné od",
+    "Valid to": "Platné do",
+    "No memberships": "Žádné členství",
+    "Add membership": "Přidat členství",
+    "Date time end": "Datum a čas ukončení",
+    "Failed to save membership. Please try again.": "Nepodařilo se uložit členství. Zkuste to prosím znovu.",
+    "Active": "Aktivní",
+    "Expired": "Po expiraci",
+    "No.": "Č.",
+    "Status": "Stav",
+    "History of my memberships": "Historie mého členství",
+    "Cancel Edit": "Zrušit úpravy"
 }

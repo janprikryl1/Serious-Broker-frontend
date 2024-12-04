@@ -10,6 +10,7 @@ import { UserFormInput } from "./UserFormInput";
 import { Button, InputGroup } from "react-bootstrap";
 import {UserFormCheck} from "./UserFormCheck.tsx";
 import {toCzechDateFormat} from "../../../../utils/constants/functions.ts";
+import {MembershipManagement} from "./MembershipManagement.tsx";
 
 type Props = {
     open: boolean;
@@ -160,8 +161,9 @@ export const UserEditModal: FC<Props> = ({ open, handleClose, selectedUser, hand
                             <InputGroup className="mb-3">
                                 {newPassword === undefined ? <Button variant="warning" onClick={() => setNewPassword("")}>Změna hesla</Button> : <UserFormInput label="Password" value={newPassword} onChange={(e) => setNewPassword(e.target.value)}/>}
                             </InputGroup>
+                            <MembershipManagement userId={selectedUser.id}/>
                             <InputGroup className="mb-3">
-                                <Button variant="primary" onClick={handleSaveChanges}>
+                                <Button variant="warning" onClick={handleSaveChanges}>
                                     {t("Update")}
                                 </Button>
                             </InputGroup>
