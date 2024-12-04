@@ -61,6 +61,8 @@ import {RecoverPassword} from "./pages/RecoverPassword.tsx";
 import {Profile} from "./pages/profile/Profile.tsx";
 import {GraphsOverview} from "./pages/graphs/GraphsOverview.tsx";
 import {ChachedData} from "./pages/admin/ChachedData.tsx";
+import {ProfileMembership} from "./pages/profile/ProfileMembership.tsx";
+import {QRManagement} from "./pages/admin/QRManagement.tsx";
 
 // Disable automatic CSS addition for Font Awesome
 config.autoAddCss = false;
@@ -101,6 +103,7 @@ function App() {
                               <Route path={routes.profile.profileURL} element={<ProfileOverview />}/>
                               <Route path={routes.profile.edit} element={<ProfileEdit/>}/>
                               <Route path={routes.profile.achievements} element={<ProfileAchievements/>}/>
+                              <Route path={routes.profile.membership} element={<ProfileMembership/>} />
                           </Route>
                           <Route path={routes.verifyAccount} element={<VerifyAccount />} />
                           <Route path={routes.forgottenPassword} element={<ForgottenPassword />} />
@@ -124,6 +127,7 @@ function App() {
                               <Route path={routes.admin.achievements} element={<AdminAchivments />} />
                               <Route path={routes.admin.coinSettings} element={<CoinSettings />} />
                               <Route path={routes.admin.chachedData} element={<ChachedData />} />
+                              <Route path={routes.admin.qr} element={<QRManagement />} />
                           </Route>
                           <Route path="*" element={<ErrorPage/>}/>
                       </Routes>

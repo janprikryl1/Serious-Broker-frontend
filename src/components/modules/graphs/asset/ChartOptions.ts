@@ -62,16 +62,16 @@ export const ChartOptions = ({ theme, width, height, points, t }: { theme: strin
                 y: points[1]?.y,
                 marker: {
                     size: 8,
-                    fillColor: points[0].y && points[1].y && points[0]?.y > points[1]?.y ? "#FF4500" : "#8bff00",
+                    fillColor: points[0] && points[0].y && points[1].y && points[0]?.y > points[1]?.y ? "#FF4500" : "#8bff00",
                     strokeColor: "#000",
                     strokeWidth: 2,
                 },
                 label: {
-                    borderColor: points[0].y && points[1].y && points[0]?.y > points[1]?.y ? "#FF4500" : "#8bff00",
+                    borderColor: points[0] && points[0].y && points[1].y && points[0]?.y > points[1]?.y ? "#FF4500" : "#8bff00",
                     offsetY: 0,
                     style: {
                         color: "#000",
-                        background: points[0].y && points[1].y && points[0]?.y > points[1]?.y ? "#FF4500" : "#8bff00",
+                        background: points[0] && points[0].y && points[1].y && points[0]?.y > points[1]?.y ? "#FF4500" : "#8bff00",
                     },
                     text: t("End"),
                 },

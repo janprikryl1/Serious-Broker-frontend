@@ -648,5 +648,14 @@
     "Start": "Začátek",
     "End": "Konec",
     "Loss": "Ztráta",
-    "Gain": "Výdělek"
+    "Gain": "Výdělek",
+    "Membership": "Členství",
+    "QR payment management": "Zpráva QR platby",
+    "Network": "Síť",
+    "Address of deposit": "Adresa vkladu",
+    "Payment to binance": "Platba na Binance",
+    "QR Code updated": "QR kód aktualizován",
+    "QR Code updated successfully": "QR kód byl úspěšně aktualizován",
+    "Failed to update QR Code": "Nepodařilo se aktualizovat QR kód",
+    "To access premium articles, you need to pay with a cryptocurrency": "Pro přístup k premium článkům je třeba zaplatit kryptoměnou"
 }

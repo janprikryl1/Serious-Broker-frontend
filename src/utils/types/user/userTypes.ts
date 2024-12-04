@@ -29,19 +29,7 @@ export type UserType = {
 export type MembershipTypes = {
     id: number,
     user_id: number,
-    type: string,
-    payment: string,
-    date_begin: string,
-    date_end: string,
-    renewal: string,
-    changed: string,
-    created: string
+    price: number,
+    date_time_created: string,
+    date_time_end: string,
 }
-
-export type UserMembershipDetails = {
-    user: UserType,
-    membership: MembershipTypes
-}
-
-
-export type UserTypesWithMembership = UserType & MembershipTypes;

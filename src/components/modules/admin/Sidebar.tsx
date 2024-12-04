@@ -34,6 +34,12 @@ export const Sidebar: FC = () => {
                 <CDBSidebarContent className="sidebar-content">
                     <CDBSidebarMenu>
                         <NavLink
+                            to={adminURLS.qr}
+                            className={({ isActive }) => isActive ? 'activeClicked' : ''}
+                        >
+                            <CDBSidebarMenuItem icon="store">{t("QR")}</CDBSidebarMenuItem>
+                        </NavLink>
+                        <NavLink
                             to={adminURLS.users}
                             className={({ isActive }) => isActive ? 'activeClicked' : ''}
                         >

@@ -33,6 +33,12 @@ export const ProfileSidebar:FC = () => {
                             <CDBSidebarMenuItem icon="user">{t("Edit profile")}</CDBSidebarMenuItem>
                         </NavLink>
                         <NavLink
+                            to={routes.profile.membership}
+                            className={({ isActive }) => isActive ? 'activeClicked' : ''}
+                        >
+                            <CDBSidebarMenuItem icon="exclamation-circle">{t("Membership")}</CDBSidebarMenuItem>
+                        </NavLink>
+                        <NavLink
                             to={routes.profile.achievements}
                             className={({ isActive }) => isActive ? 'activeClicked' : ''}
                         >

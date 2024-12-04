@@ -6,6 +6,7 @@ export const pageLimit = 10;
 export const imageURL = "https://api.serious.broker/article/images/";
 export const coinURL = "https://api.serious.broker/cryptocurrency_list/images/";
 export const glossaryImagesURL = "https://api.serious.broker/glossary/images/";
+export const qrCodeImagesURL = "https://api.serious.broker/qr_codes/qr/";
 
 export const facebookURL = "https://www.facebook.com/profile.php?id=61566158057883";
 export const instagramURL = "https://www.instagram.com/serious_broker/?igsh=MTVsM3NqMmFxaTNsaQ%3D%3D&utm_source=qr";
@@ -44,7 +45,8 @@ export const routes = {
     profile: {
         profileURL: "/profile",
         edit: "/profile/edit",
-        achievements: "/profile/achievements"
+        achievements: "/profile/achievements",
+        membership: "/profile/membership"
     },
     verifyAccount: "/verify_account/:user_id/:token",
     forgottenPassword: "/forgotten_password",
@@ -67,7 +69,8 @@ export const routes = {
         feedbacks: "feedbacks",
         achievements: "achievements",
         coinSettings: "coin_settings",
-        chachedData: "chached_data"
+        chachedData: "chached_data",
+        qr: "qr"
     },
 }
 
@@ -89,7 +92,8 @@ export const adminURLS = {
     feedbacks: "/admin/feedbacks",
     achievements: "/admin/achievements",
     coinSettings: "/admin/coin_settings",
-    chachedData: "/admin/chached_data"
+    chachedData: "/admin/chached_data",
+    qr: "/admin/qr"
 }
 
 export const registeredUserNavbarURLs: NavbarURLs = {
