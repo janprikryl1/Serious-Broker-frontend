@@ -1,7 +1,8 @@
-import { FC, useMemo } from "react";
-import ReactApexChart from "react-apexcharts";
+import {FC, lazy, Suspense, useMemo} from "react";
+const ReactApexChart = lazy(() => import("react-apexcharts"));
 import { ApexOptions } from "apexcharts";
 import { randomColor } from "../../../../../utils/constants/functions.ts";
+import Skeleton from "react-loading-skeleton";
 
 type Props = {
     name: string;
@@ -60,17 +61,19 @@ export const IndexTableChart: FC<Props> = ({ name, data }) => {
     }), []);
 
     return (
-        <ReactApexChart
-            options={options}
-            series={[
-                {
-                    name,
-                    data,
-                },
-            ]}
-            type="line"
-            height={30}
-            width={100}
-        />
+        <Suspense fallback={<Skeleton height={30} width={100} style={{ maxWidth: "100%" }} />}>
+            <ReactApexChart
+                options={options}
+                series={[
+                    {
+                        name,
+                        data,
+                    },
+                ]}
+                type="line"
+                height={30}
+                width={100}
+            />
+        </Suspense>
     );
 };

@@ -1,8 +1,6 @@
 import './App.css';
-import {BrowserRouter, Route, Routes} from "react-router-dom";
-import {About} from "./pages/About.tsx";
-import {ErrorPage} from "./pages/ErrorPage.tsx";
-import {Contact} from "./pages/Contact.tsx";
+import {lazy, Suspense} from 'react';
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { config } from '@fortawesome/fontawesome-svg-core';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
@@ -10,134 +8,94 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 import './styles/css/swiper-bundle.min.css';
 import './styles/sass/style.scss';
-import {useEffect} from "react";
+import { useEffect } from "react";
 import "./i18n";
-import {Index} from "./pages/Index.tsx";
-import {Articles} from "./pages/Articles.tsx";
-import {Article} from "./pages/Article.tsx";
-import {Assets} from "./pages/graphs/Assets.tsx";
-import {Recommendation} from "./pages/graphs/Recommendation.tsx";
-import {CryptoCurrenciesList} from "./pages/CryptoCurrenciesList.tsx";
-import {Glossary} from "./pages/Glossary.tsx";
-import {SearchArticles} from "./pages/SearchArticles.tsx";
-import {CryptoCurrencyDetail} from "./pages/CryptoCurrencyDetail.tsx";
-import {RecommendationDetails} from "./pages/graphs/RecommendationDetails.tsx";
-import {SignIn} from "./pages/SignIn.tsx";
-import {Register} from "./pages/Register.tsx";
-import {ProviderUser} from "./utils/providers/providerUser.tsx";
-import {Admin} from "./pages/admin/Admin.tsx";
-import {MostProfitableAssets} from "./pages/graphs/MostProfitableAssets.tsx";
-import {AssetGraph} from "./pages/graphs/AssetGraph.tsx";
-import {UserManagment} from "./pages/admin/UserManagment.tsx";
-import {ArticleManagement} from "./pages/admin/ArticleManagement.tsx";
-import {GlossaryManagement} from "./pages/admin/GlossaryManagement.tsx";
-import {AdminOverview} from "./pages/admin/AdminOverview.tsx";
-import {LogTable} from "./pages/admin/LogTable.tsx";
-import {EditArticle} from "./pages/admin/EditArticle.tsx";
-import {ArticleComments} from "./pages/admin/ArticleComments.tsx";
-import {ArticleShare} from "./pages/admin/ArticleShare.tsx";
-import {ArticleTranslate} from "./pages/admin/ArticleTranslate.tsx";
-import {TranslateEdit} from "./pages/admin/TranslateEdit.tsx";
-import {NewsletterOverview} from "./pages/admin/NewsletterOverview.tsx";
-import {Feedbacks} from "./pages/admin/Feedbacks.tsx";
-import {ThemeProvider} from "./utils/providers/ThemeProvider.tsx";
-import {adminURLS, routes} from "./utils/constants";
-import {AssetGraphCurrencyDetail} from "./pages/graphs/AssetGraphCurrencyDetail.tsx";
-import {PostEdit} from "./pages/admin/PostEdit.tsx";
-import {ToastContainer} from "react-toastify";
+import { routes, adminURLS } from "./utils/constants";
+import { ThemeProvider } from "./utils/providers/ThemeProvider.tsx";
+import { ProviderUser } from "./utils/providers/providerUser.tsx";
+import { AchievmentsProvider } from "./utils/providers/AchievmentsProvider.tsx";
+import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
-import {ProfileEdit} from "./pages/profile/ProfileEdit.tsx";
-import {ProfileAchievements} from "./pages/profile/ProfileAchievements.tsx";
-import {ProfileOverview} from "./pages/profile/ProfileOverview.tsx";
-import {AchievmentsProvider} from "./utils/providers/AchievmentsProvider.tsx";
-import {AdminAchivments} from "./pages/admin/AdminAchivments.tsx";
-import {UnverifiedHeaderInfo} from "./components/UnverifiedHeaderInfo.tsx";
-import {CoinSettings} from "./pages/admin/CoinSettings.tsx";
-import {Header} from "./components/modules/navbar/Header.tsx";
-import {Footer} from "./components/modules/navbar/Footer.tsx";
-import {VerifyAccount} from "./pages/VerifyAccount.tsx";
-import {ForgottenPassword} from "./pages/ForgottenPassword.tsx";
-import {RecoverPassword} from "./pages/RecoverPassword.tsx";
-import {Profile} from "./pages/profile/Profile.tsx";
-import {GraphsOverview} from "./pages/graphs/GraphsOverview.tsx";
-import {ChachedData} from "./pages/admin/ChachedData.tsx";
-import {ProfileMembership} from "./pages/profile/ProfileMembership.tsx";
-import {QRManagement} from "./pages/admin/QRManagement.tsx";
+import { UnverifiedHeaderInfo } from "./components/UnverifiedHeaderInfo.tsx";
+import { Header } from "./components/modules/navbar/Header.tsx";
+import { Footer } from "./components/modules/navbar/Footer.tsx";
+import {Index} from "./pages/Index.tsx";
+
+//const Index = lazy(() => import("./pages/Index.tsx").then(module => ({ default: module.Index })));
+const About = lazy(() => import("./pages/About.tsx").then(module => ({ default: module.About })));
+const Contact = lazy(() => import("./pages/Contact.tsx").then(module => ({ default: module.Contact })));
+const Articles = lazy(() => import("./pages/Articles.tsx").then(module => ({ default: module.Articles })));
+const Article = lazy(() => import("./pages/Article.tsx").then(module => ({ default: module.Article })));
+const SearchArticles = lazy(() => import("./pages/SearchArticles.tsx").then(module => ({ default: module.SearchArticles })));
+const Assets = lazy(() => import("./pages/graphs/Assets.tsx").then(module => ({ default: module.Assets })));
+const GraphsOverview = lazy(() => import("./pages/graphs/GraphsOverview.tsx").then(module => ({ default: module.GraphsOverview })));
+const MostProfitableAssets = lazy(() => import("./pages/graphs/MostProfitableAssets.tsx").then(module => ({ default: module.MostProfitableAssets })));
+const AssetGraph = lazy(() => import("./pages/graphs/AssetGraph.tsx").then(module => ({ default: module.AssetGraph })));
+const AssetGraphCurrencyDetail = lazy(() => import("./pages/graphs/AssetGraphCurrencyDetail.tsx").then(module => ({ default: module.AssetGraphCurrencyDetail })));
+const Recommendation = lazy(() => import("./pages/graphs/Recommendation.tsx").then(module => ({ default: module.Recommendation })));
+const Glossary = lazy(() => import("./pages/Glossary.tsx").then(module => ({ default: module.Glossary })));
+const CryptoCurrenciesList = lazy(() => import("./pages/CryptoCurrenciesList.tsx").then(module => ({ default: module.CryptoCurrenciesList })));
+const CryptoCurrencyDetail = lazy(() => import("./pages/CryptoCurrencyDetail.tsx").then(module => ({ default: module.CryptoCurrencyDetail })));
+const RecommendationDetails = lazy(() => import("./pages/graphs/RecommendationDetails.tsx").then(module => ({ default: module.RecommendationDetails })));
+const VerifyAccount = lazy(() => import("./pages/VerifyAccount.tsx").then(module => ({ default: module.VerifyAccount })));
+const ForgottenPassword = lazy(() => import("./pages/ForgottenPassword.tsx").then(module => ({ default: module.ForgottenPassword })));
+const RecoverPassword = lazy(() => import("./pages/RecoverPassword.tsx").then(module => ({ default: module.RecoverPassword })));
+const Profile = lazy(() => import("./pages/profile/Profile.tsx").then());
+const Admin = lazy(() => import("./pages/admin/Admin.tsx").then(module => ({ default: module.Admin })));
+const SignIn = lazy(() => import("./pages/SignIn.tsx").then(module => ({ default: module.SignIn })));
+const Register = lazy(() => import("./pages/Register.tsx").then(module => ({ default: module.Register })));
+const ErrorPage = lazy(() => import("./pages/ErrorPage.tsx").then(module => ({ default: module.ErrorPage })));
 
 // Disable automatic CSS addition for Font Awesome
 config.autoAddCss = false;
-
 
 function App() {
     useEffect(() => {
         AOS.init();
     }, []);
-    
-  return (
-      <BrowserRouter>
-          <ThemeProvider>
-              <ProviderUser>  
-                  <AchievmentsProvider>
-                      <UnverifiedHeaderInfo />
-                      <Header/>
-                      <Routes>
-                          <Route path={routes.home} element={<Index/>}/>
-                          <Route path={routes.about} element={<About/>}/>
-                          <Route path={routes.contact} element={<Contact/>}/>
-                          <Route path={routes.articles} element={<Articles/>}/>
-                          <Route path={routes.article} element={<Article/>}/>
-                          <Route path={routes.search} element={<SearchArticles/>}/>
-                          <Route path={routes.assets} element={<Assets/>}/>
-                          <Route path={routes.graphs} element={<GraphsOverview/>}/>
-                          <Route path={routes.mostProfitableAssets} element={<MostProfitableAssets/>}/>
-                          <Route path={routes.assetGraph} element={<AssetGraph/>}/>
-                          <Route path={routes.assetGraphCurrencyDetail} element={<AssetGraphCurrencyDetail/>}/>
-                          <Route path={routes.recommendation} element={<Recommendation/>}/>
-                          <Route path={routes.dictionary} element={<Glossary/>}/>
-                          <Route path={routes.cryptocurrenciesList} element={<CryptoCurrenciesList/>}/>
-                          <Route path={routes.cryptocurrencyDetail} element={<CryptoCurrencyDetail/>}/>
-                          <Route path={routes.graphsRecommendationDetail} element={<RecommendationDetails/>}/>
-                          <Route path={routes.signIn} element={<SignIn/>}/>
-                          <Route path={routes.register} element={<Register/>}/>
-                          <Route path={routes.profile.profileURL} element={<Profile/>}>
-                              <Route path={routes.profile.profileURL} element={<ProfileOverview />}/>
-                              <Route path={routes.profile.edit} element={<ProfileEdit/>}/>
-                              <Route path={routes.profile.achievements} element={<ProfileAchievements/>}/>
-                              <Route path={routes.profile.membership} element={<ProfileMembership/>} />
-                          </Route>
-                          <Route path={routes.verifyAccount} element={<VerifyAccount />} />
-                          <Route path={routes.forgottenPassword} element={<ForgottenPassword />} />
-                          <Route path={routes.recoverPassword} element={<RecoverPassword />} />
-                          <Route path={adminURLS.index} element={<Admin />}>
-                              <Route path={routes.admin.index} element={<AdminOverview />} />
-                              <Route path={routes.admin.users} element={<UserManagment />} />
-                              <Route path={routes.admin.newsletter} element={<NewsletterOverview />} />
-                              <Route path={routes.admin.articles} element={<ArticleManagement />} />
-                              <Route path={routes.admin.articleNew} element={<EditArticle />} />
-                              <Route path={routes.admin.articleEdit} element={<EditArticle />} />
-                              <Route path={routes.admin.articleComments} element={<ArticleComments />} />
-                              <Route path={routes.admin.articleShare} element={<ArticleShare />} />
-                              <Route path={routes.admin.articleTranslate} element={<ArticleTranslate />} />
-                              <Route path={routes.admin.translations} element={<TranslateEdit />} />
-                              <Route path={routes.admin.translationsEdit} element={<TranslateEdit />} />
-                              <Route path={routes.admin.postEdit} element={<PostEdit />} />
-                              <Route path={routes.admin.glossary} element={<GlossaryManagement />} />
-                              <Route path={routes.admin.logTable} element={<LogTable />} />
-                              <Route path={routes.admin.feedbacks} element={<Feedbacks />} />
-                              <Route path={routes.admin.achievements} element={<AdminAchivments />} />
-                              <Route path={routes.admin.coinSettings} element={<CoinSettings />} />
-                              <Route path={routes.admin.chachedData} element={<ChachedData />} />
-                              <Route path={routes.admin.qr} element={<QRManagement />} />
-                          </Route>
-                          <Route path="*" element={<ErrorPage/>}/>
-                      </Routes>
-                    <Footer/>
-                  </AchievmentsProvider>
-              </ProviderUser>
-          </ThemeProvider>
-          <ToastContainer position="bottom-right"/>
-      </BrowserRouter>
-  )
+
+    return (
+        <BrowserRouter>
+            <ThemeProvider>
+                <ProviderUser>
+                    <AchievmentsProvider>
+                        <UnverifiedHeaderInfo />
+                        <Header />
+                        <Routes>
+                            <Route path={routes.home} element={<Index />} />
+                            <Route path={routes.about} element={<Suspense fallback={<>...</>}><About /></Suspense>} />
+                            <Route path={routes.contact} element={<Suspense fallback={<>...</>}><Contact /></Suspense>} />
+                            <Route path={routes.articles} element={<Suspense fallback={<>...</>}><Articles /></Suspense>} />
+                            <Route path={routes.article} element={<Article />} />
+                            <Route path={routes.search} element={<SearchArticles />} />
+                            <Route path={routes.assets} element={<Assets />} />
+                            <Route path={routes.graphs} element={<GraphsOverview />} />
+                            <Route path={routes.mostProfitableAssets} element={<MostProfitableAssets />} />
+                            <Route path={routes.assetGraph} element={<AssetGraph />} />
+                            <Route path={routes.assetGraphCurrencyDetail} element={<AssetGraphCurrencyDetail />} />
+                            <Route path={routes.recommendation} element={<Recommendation />} />
+                            <Route path={routes.dictionary} element={<Glossary />} />
+                            <Route path={routes.cryptocurrenciesList} element={<CryptoCurrenciesList />} />
+                            <Route path={routes.cryptocurrencyDetail} element={<CryptoCurrencyDetail />} />
+                            <Route path={routes.graphsRecommendationDetail} element={<RecommendationDetails />} />
+                            <Route path={routes.signIn} element={<SignIn />} />
+                            <Route path={routes.register} element={<Register />} />
+                            <Route path={routes.profile.profileURL} element={<Profile />}>
+                                <Route path={routes.profile.profileURL} element={<Profile />} />
+                            </Route>
+                            <Route path={routes.verifyAccount} element={<VerifyAccount />} />
+                            <Route path={routes.forgottenPassword} element={<ForgottenPassword />} />
+                            <Route path={routes.recoverPassword} element={<RecoverPassword />} />
+                            <Route path={adminURLS.index} element={<Admin />} />
+                            <Route path="*" element={<ErrorPage />} />
+                        </Routes>
+                        <Footer />
+                    </AchievmentsProvider>
+                </ProviderUser>
+            </ThemeProvider>
+            <ToastContainer position="bottom-right" />
+        </BrowserRouter>
+    );
 }
 
 export default App;

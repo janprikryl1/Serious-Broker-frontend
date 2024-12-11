@@ -4,6 +4,10 @@ import App from './App.tsx'
 import './index.css'
 import "bootstrap/dist/css/bootstrap.min.css";
 import 'react-loading-skeleton/dist/skeleton.css';
+import 'aos/dist/aos.css';
+import '@fortawesome/fontawesome-svg-core/styles.css';
+import '@fortawesome/fontawesome-free/css/all.min.css';
+import 'react-toastify/dist/ReactToastify.css';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

@@ -3,7 +3,7 @@ import { UserType } from "../types/user/userTypes.ts";
 import { isAuthenticated } from "../../api/authenticateService.ts";
 import { useNavigate, useLocation } from "react-router-dom";
 import {PROTECTED_ROUTES, routes} from "../constants";
-import Logo from "../../utils/icons/logo/symbol.svg";
+import {Preloader} from "../../Preloader.tsx";
 
 type Props = {
     children: ReactNode 
@@ -58,11 +58,7 @@ export const ProviderUser: FC<Props> = ({ children }) => {
 
     return (
         <UserContext.Provider value={{ user, logout, setUser }}>
-            {loading ? (
-                <div className="preloader">
-                    <img src={Logo} alt="preloader icon" width={100} height={100} />
-                </div>
-            ) : children}
+            {loading ? <Preloader /> : children}
         </UserContext.Provider>
     );
 };

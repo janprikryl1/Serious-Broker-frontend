@@ -10,8 +10,8 @@ import { IndexTableChart } from "./indexTableChart/IndexTableChart.tsx";
 import { routes } from "../../../../utils/constants";
 import { AssetProfitData } from "../../../../utils/types/indexPage/IndexDataStructure.ts";
 import {calculateProfit} from "../../../../utils/constants/functions.ts";
-import {TypographyWithPopover} from "../../TypographyWithPopover.tsx";
 import {GainSeasonTh} from "./GainSeasonTh.tsx";
+import {TypographyWithPopover} from "../../TypographyWithPopover.tsx";
 
 export const MostProfitableLastSelectedPeriod: FC = () => {
     const { t } = useTranslation();

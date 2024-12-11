@@ -1,5 +1,5 @@
-import { FC, useEffect, useState, useMemo, Dispatch, SetStateAction } from "react";
-import ReactApexChart from "react-apexcharts";
+import {FC, useEffect, useState, useMemo, Dispatch, SetStateAction, lazy, Suspense} from "react";
+const ReactApexChart = lazy(() => import("react-apexcharts"));
 import Skeleton from "react-loading-skeleton";
 import { useThemeContext } from "../../../../utils/providers/ThemeProvider";
 import { useTranslation } from "react-i18next";
@@ -110,7 +110,9 @@ export const ChartComponent: FC<Props> = ({width = 500, height = 300, coin, seri
             {error && <div style={{ color: "red", textAlign: "center" }}>{error}</div>}
             {series ? (
                 <>
-                    <ReactApexChart options={options} series={series} type="candlestick" />
+                    <Suspense fallback={<Skeleton height={height} width={width} style={{ maxWidth: "100%" }} />}>
+                        <ReactApexChart options={options} series={series} type="candlestick" />
+                    </Suspense>
                     {points[0].y && points[1].y && points[0].y > points[1].y ?
                         <p style={{color: "#FF4500"}}>{t("Loss")}</p> :
                         <p style={{color: "#8bff00"}}>{t("Gain")}</p>

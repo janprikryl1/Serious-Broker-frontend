@@ -1,8 +1,19 @@
-import React, {createContext, useContext, useState, useEffect, ReactNode, Dispatch, SetStateAction} from 'react';
+import React, {
+    createContext,
+    useContext,
+    useState,
+    useEffect,
+    ReactNode,
+    Dispatch,
+    SetStateAction,
+    lazy,
+    Suspense
+} from 'react';
 import { AchievementType } from '../types/AchievementType.ts';
 import { getAchievements, markReadAchievment } from '../../api/achievementService.ts';
-import { AchievmentAnimation } from '../../components/achievment/AchievmentAnimation.tsx';
 import {useUserContext} from "./providerUser.tsx";
+import {useTranslation} from "react-i18next";
+const AchievmentAnimation = lazy(() => import('../../components/achievment/AchievmentAnimation.tsx').then(module => ({ default: module.AchievmentAnimation })));
 
 type AchievmentsContextType = {
     achievements: AchievementType[];
@@ -14,6 +25,7 @@ type AchievmentsContextType = {
 const AchievmentContext = createContext<AchievmentsContextType | undefined>(undefined);
 
 export const AchievmentsProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+    const {t} = useTranslation();
     const {user} = useUserContext();
     const [achievements, setAchievements] = useState<AchievementType[]>([]);
     const [unreadAchievements, setUnreadAchievements] = useState<AchievementType[]>([]);
@@ -69,7 +81,7 @@ export const AchievmentsProvider: React.FC<{ children: ReactNode }> = ({ childre
     return (
         <AchievmentContext.Provider value={{ achievements, setAchievements, unreadAchievements, markAchievementAsRead }}>
             {children}
-            {showAnimation && <AchievmentAnimation onClose={handleMarkLastAchievementAsRead}/>}
+            {showAnimation && <Suspense fallback={t("Loading...")}><AchievmentAnimation onClose={handleMarkLastAchievementAsRead}/></Suspense>}
         </AchievmentContext.Provider>
     );
 };

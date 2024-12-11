@@ -1,4 +1,4 @@
-import React, {createContext, useContext, useState, useEffect, ReactNode, useCallback} from 'react';
+import {createContext, useContext, useState, useEffect, ReactNode, useCallback, FC} from 'react';
 import {useLocation} from "react-router-dom";
 import {SkeletonTheme} from "react-loading-skeleton";
 
@@ -9,7 +9,7 @@ type ThemeContextType = {
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
-export const ThemeProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+export const ThemeProvider: FC<{ children: ReactNode }> = ({ children }) => {
     const [theme, setTheme] = useState(localStorage.getItem('theme'));
     const location = useLocation();
 
