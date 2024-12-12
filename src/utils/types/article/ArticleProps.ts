@@ -9,4 +9,5 @@ export type ArticleProps = {
     changed: string;
     allowComments: string;
     articleTypeOption: string;
+    premiumOnly: string;
 }

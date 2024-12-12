@@ -17,9 +17,14 @@ export const ArticleCard:FC<Props> = ({data, link = "article"}) => {
                 <div className="blog__item-inner blog__item-inner--style2">
                     <div className="blog__content">
                         <div className="blog__meta">
-                            <span className={`blog__meta-tag blog__meta-tag--style1`}>
+                            <span className="blog__meta-tag blog__meta-tag--style1">
                               {t(data.articleTypeOption)}
                             </span>
+                            {data.premiumOnly === "1" &&
+                                <span className="blog__meta-tag blog__meta-tag--style3">
+                                    Premium
+                                </span>
+                            }
                         </div>
                         <h5 className="10 style2">
                             <Link to={`/${link}/${data.id}`} className="link-underline-none">{data.title}</Link>

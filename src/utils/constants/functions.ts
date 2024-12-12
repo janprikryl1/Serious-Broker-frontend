@@ -17,7 +17,7 @@ export const toCzechDateFormat = (dateRaw: string): string => {
 
 export const toCzechDate = (dateRaw: string): string => {
     const date = new Date(dateRaw);
-    return `${date.getDate()}. ${date.getMonth()}. ${date.getFullYear()}`;
+    return `${date.getDate()}. ${date.getMonth()+1}. ${date.getFullYear()}`;
 }
 
 export const getDayName = (dayNumber: number) => {
