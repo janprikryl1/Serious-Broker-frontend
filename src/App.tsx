@@ -1,5 +1,5 @@
 import './App.css';
-import {lazy, Suspense} from 'react';
+import {lazy} from 'react';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { config } from '@fortawesome/fontawesome-svg-core';
 import '@fortawesome/fontawesome-svg-core/styles.css';
@@ -20,8 +20,7 @@ import { UnverifiedHeaderInfo } from "./components/UnverifiedHeaderInfo.tsx";
 import { Header } from "./components/modules/navbar/Header.tsx";
 import { Footer } from "./components/modules/navbar/Footer.tsx";
 import {Index} from "./pages/Index.tsx";
-
-//const Index = lazy(() => import("./pages/Index.tsx").then(module => ({ default: module.Index })));
+import {PageLoader} from "./components/PageLoader.tsx";
 const About = lazy(() => import("./pages/About.tsx").then(module => ({ default: module.About })));
 const Contact = lazy(() => import("./pages/Contact.tsx").then(module => ({ default: module.Contact })));
 const Articles = lazy(() => import("./pages/Articles.tsx").then(module => ({ default: module.Articles })));
@@ -40,11 +39,33 @@ const RecommendationDetails = lazy(() => import("./pages/graphs/RecommendationDe
 const VerifyAccount = lazy(() => import("./pages/VerifyAccount.tsx").then(module => ({ default: module.VerifyAccount })));
 const ForgottenPassword = lazy(() => import("./pages/ForgottenPassword.tsx").then(module => ({ default: module.ForgottenPassword })));
 const RecoverPassword = lazy(() => import("./pages/RecoverPassword.tsx").then(module => ({ default: module.RecoverPassword })));
-const Profile = lazy(() => import("./pages/profile/Profile.tsx").then());
 const Admin = lazy(() => import("./pages/admin/Admin.tsx").then(module => ({ default: module.Admin })));
 const SignIn = lazy(() => import("./pages/SignIn.tsx").then(module => ({ default: module.SignIn })));
 const Register = lazy(() => import("./pages/Register.tsx").then(module => ({ default: module.Register })));
 const ErrorPage = lazy(() => import("./pages/ErrorPage.tsx").then(module => ({ default: module.ErrorPage })));
+const AdminOverview = lazy(() => import("./pages/admin/AdminOverview.tsx").then(module => ({ default: module.AdminOverview })));
+const UserManagment = lazy(() => import("./pages/admin/UserManagment.tsx").then(module => ({ default: module.UserManagment })));
+const NewsletterOverview = lazy(() => import("./pages/admin/NewsletterOverview.tsx").then(module => ({ default: module.NewsletterOverview })));
+const ArticleManagement = lazy(() => import("./pages/admin/ArticleManagement.tsx").then(module => ({ default: module.ArticleManagement })));
+const EditArticle = lazy(() => import("./pages/admin/EditArticle.tsx").then(module => ({ default: module.EditArticle })));
+const ArticleComments = lazy(() => import("./pages/admin/ArticleComments.tsx").then(module => ({ default: module.ArticleComments })));
+const ArticleShare = lazy(() => import("./pages/admin/ArticleShare.tsx").then(module => ({ default: module.ArticleShare })));
+const ArticleTranslate = lazy(() => import("./pages/admin/ArticleTranslate.tsx").then(module => ({ default: module.ArticleTranslate })));
+const TranslateEdit = lazy(() => import("./pages/admin/TranslateEdit.tsx").then(module => ({ default: module.TranslateEdit })));
+const PostEdit = lazy(() => import("./pages/admin/PostEdit.tsx").then(module => ({ default: module.PostEdit })));
+const GlossaryManagement = lazy(() => import("./pages/admin/GlossaryManagement.tsx").then(module => ({ default: module.GlossaryManagement })));
+const LogTable = lazy(() => import("./pages/admin/LogTable.tsx").then(module => ({ default: module.LogTable })));
+const Feedbacks = lazy(() => import("./pages/admin/Feedbacks.tsx").then(module => ({ default: module.Feedbacks })));
+const AdminAchivments = lazy(() => import("./pages/admin/AdminAchivments.tsx").then(module => ({ default: module.AdminAchivments })));
+const CoinSettings = lazy(() => import("./pages/admin/CoinSettings.tsx").then(module => ({ default: module.CoinSettings })));
+const ChachedData = lazy(() => import("./pages/admin/ChachedData.tsx").then(module => ({ default: module.ChachedData })));
+const QRManagement = lazy(() => import("./pages/admin/QRManagement.tsx").then(module => ({ default: module.QRManagement })));
+const Profile = lazy(() => import("./pages/profile/Profile.tsx").then(module => ({ default: module.Profile })));
+const ProfileOverview = lazy(() => import("./pages/profile/ProfileOverview.tsx").then(module => ({ default: module.ProfileOverview })));
+const ProfileAchievements = lazy(() => import("./pages/profile/ProfileAchievements.tsx").then(module => ({ default: module.ProfileAchievements })));
+const ProfileMembership = lazy(() => import("./pages/profile/ProfileMembership.tsx").then(module => ({ default: module.ProfileMembership })));
+const ProfileEdit = lazy(() => import("./pages/profile/ProfileEdit.tsx").then(module => ({ default: module.ProfileEdit })));
+
 
 // Disable automatic CSS addition for Font Awesome
 config.autoAddCss = false;
@@ -63,31 +84,54 @@ function App() {
                         <Header />
                         <Routes>
                             <Route path={routes.home} element={<Index />} />
-                            <Route path={routes.about} element={<Suspense fallback={<>...</>}><About /></Suspense>} />
-                            <Route path={routes.contact} element={<Suspense fallback={<>...</>}><Contact /></Suspense>} />
-                            <Route path={routes.articles} element={<Suspense fallback={<>...</>}><Articles /></Suspense>} />
-                            <Route path={routes.article} element={<Article />} />
-                            <Route path={routes.search} element={<SearchArticles />} />
-                            <Route path={routes.assets} element={<Assets />} />
-                            <Route path={routes.graphs} element={<GraphsOverview />} />
-                            <Route path={routes.mostProfitableAssets} element={<MostProfitableAssets />} />
-                            <Route path={routes.assetGraph} element={<AssetGraph />} />
-                            <Route path={routes.assetGraphCurrencyDetail} element={<AssetGraphCurrencyDetail />} />
-                            <Route path={routes.recommendation} element={<Recommendation />} />
-                            <Route path={routes.dictionary} element={<Glossary />} />
-                            <Route path={routes.cryptocurrenciesList} element={<CryptoCurrenciesList />} />
-                            <Route path={routes.cryptocurrencyDetail} element={<CryptoCurrencyDetail />} />
-                            <Route path={routes.graphsRecommendationDetail} element={<RecommendationDetails />} />
-                            <Route path={routes.signIn} element={<SignIn />} />
-                            <Route path={routes.register} element={<Register />} />
-                            <Route path={routes.profile.profileURL} element={<Profile />}>
-                                <Route path={routes.profile.profileURL} element={<Profile />} />
+                            <Route path={routes.about} element={<PageLoader><About /></PageLoader>} />
+                            <Route path={routes.contact} element={<PageLoader><Contact /></PageLoader>} />
+                            <Route path={routes.articles} element={<PageLoader><Articles /></PageLoader>} />
+                            <Route path={routes.article} element={<PageLoader><Article /></PageLoader>} />
+                            <Route path={routes.search} element={<PageLoader><SearchArticles /></PageLoader>} />
+                            <Route path={routes.assets} element={<PageLoader><Assets /></PageLoader>} />
+                            <Route path={routes.graphs} element={<PageLoader><GraphsOverview /></PageLoader>} />
+                            <Route path={routes.mostProfitableAssets} element={<PageLoader><MostProfitableAssets /></PageLoader>} />
+                            <Route path={routes.assetGraph} element={<PageLoader><AssetGraph /></PageLoader>} />
+                            <Route path={routes.assetGraphCurrencyDetail} element={<PageLoader><AssetGraphCurrencyDetail /></PageLoader>} />
+                            <Route path={routes.recommendation} element={<PageLoader><Recommendation /></PageLoader>} />
+                            <Route path={routes.dictionary} element={<PageLoader><Glossary /></PageLoader>} />
+                            <Route path={routes.cryptocurrenciesList} element={<PageLoader><CryptoCurrenciesList /></PageLoader>} />
+                            <Route path={routes.cryptocurrencyDetail} element={<PageLoader><CryptoCurrencyDetail /></PageLoader>} />
+                            <Route path={routes.graphsRecommendationDetail} element={<PageLoader><RecommendationDetails /></PageLoader>} />
+                            <Route path={routes.signIn} element={<PageLoader><SignIn /></PageLoader>} />
+                            <Route path={routes.register} element={<PageLoader><Register /></PageLoader>} />
+                            <Route path={routes.profile.profileURL} element={<PageLoader><Profile/></PageLoader>}>
+                                <Route path={routes.profile.profileURL} element={<PageLoader><ProfileOverview /></PageLoader>}/>
+                                <Route path={routes.profile.edit} element={<PageLoader><ProfileEdit/></PageLoader>}/>
+                                <Route path={routes.profile.achievements} element={<PageLoader><ProfileAchievements/></PageLoader>}/>
+                                <Route path={routes.profile.membership} element={<PageLoader><ProfileMembership/></PageLoader>} />
+                            </Route>                            
+                            <Route path={routes.verifyAccount} element={<PageLoader><VerifyAccount /></PageLoader>} />
+                            <Route path={routes.forgottenPassword} element={<PageLoader><ForgottenPassword /></PageLoader>} />
+                            <Route path={routes.recoverPassword} element={<PageLoader><RecoverPassword /></PageLoader>} />
+                            <Route path={adminURLS.index} element={<PageLoader><Admin /></PageLoader>}>
+                                <Route path={routes.admin.index} element={<PageLoader><AdminOverview /></PageLoader>} />
+                                <Route path={routes.admin.users} element={<PageLoader><UserManagment /></PageLoader>} />
+                                <Route path={routes.admin.newsletter} element={<PageLoader><NewsletterOverview /></PageLoader>} />
+                                <Route path={routes.admin.articles} element={<PageLoader><ArticleManagement /></PageLoader>} />
+                                <Route path={routes.admin.articleNew} element={<PageLoader><EditArticle /></PageLoader>} />
+                                <Route path={routes.admin.articleEdit} element={<PageLoader><EditArticle /></PageLoader>} />
+                                <Route path={routes.admin.articleComments} element={<PageLoader><ArticleComments /></PageLoader>} />
+                                <Route path={routes.admin.articleShare} element={<PageLoader><ArticleShare /></PageLoader>} />
+                                <Route path={routes.admin.articleTranslate} element={<PageLoader><ArticleTranslate /></PageLoader>} />
+                                <Route path={routes.admin.translations} element={<PageLoader><TranslateEdit /></PageLoader>} />
+                                <Route path={routes.admin.translationsEdit} element={<PageLoader><TranslateEdit /></PageLoader>} />
+                                <Route path={routes.admin.postEdit} element={<PageLoader><PostEdit /></PageLoader>} />
+                                <Route path={routes.admin.glossary} element={<PageLoader><GlossaryManagement /></PageLoader>} />
+                                <Route path={routes.admin.logTable} element={<PageLoader><LogTable /></PageLoader>} />
+                                <Route path={routes.admin.feedbacks} element={<PageLoader><Feedbacks /></PageLoader>} />
+                                <Route path={routes.admin.achievements} element={<PageLoader><AdminAchivments /></PageLoader>} />
+                                <Route path={routes.admin.coinSettings} element={<PageLoader><CoinSettings /></PageLoader>} />
+                                <Route path={routes.admin.chachedData} element={<PageLoader><ChachedData /></PageLoader>} />
+                                <Route path={routes.admin.qr} element={<PageLoader><QRManagement /></PageLoader>} />
                             </Route>
-                            <Route path={routes.verifyAccount} element={<VerifyAccount />} />
-                            <Route path={routes.forgottenPassword} element={<ForgottenPassword />} />
-                            <Route path={routes.recoverPassword} element={<RecoverPassword />} />
-                            <Route path={adminURLS.index} element={<Admin />} />
-                            <Route path="*" element={<ErrorPage />} />
+                            <Route path="*" element={<PageLoader><ErrorPage /></PageLoader>} />
                         </Routes>
                         <Footer />
                     </AchievmentsProvider>
