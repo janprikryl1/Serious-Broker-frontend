@@ -93,6 +93,12 @@ export const Sidebar: FC = () => {
                         >
                             <CDBSidebarMenuItem icon="th-large">{t("Chached data")}</CDBSidebarMenuItem>
                         </NavLink>
+                        <NavLink
+                            to={adminURLS.demos}
+                            className={({ isActive }) => isActive ? 'activeClicked' : ''}
+                        >
+                            <CDBSidebarMenuItem icon="store">{t("Demos")}</CDBSidebarMenuItem>
+                        </NavLink>
                     </CDBSidebarMenu>
                 </CDBSidebarContent>
 

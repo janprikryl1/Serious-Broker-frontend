@@ -1,0 +1,21 @@
+export type DemoType = {
+    id?: number;
+    name: string;
+    description: string;
+    time_of_replace: number;
+    created: string | Date;
+    widgets: widgets[];
+}
+
+export type widgets = {
+    type: WidgetsType;
+    propertyId: string;
+}
+
+export enum WidgetsType {
+    Image = "Image",
+    Article = "Article",
+    COIN_GRAPH = "COIN_GRAPH",
+    ASSET_GRAPHS = "ASSET_GRAPHS",
+    GLOSSARY = "GLOSSARY"
+}

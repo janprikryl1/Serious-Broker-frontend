@@ -676,5 +676,16 @@
     "Profit: ": "Výnos:",
     "Last update: ": "Poslední změny: ",
     "Select season": "Vyberte období",
-    "Sell profit": "Výnos při prodeji"
+    "Sell profit": "Výnos při prodeji",
+    "Demos": "Dema",
+    "Demo management": "Správa demo obrazovek",
+    "New demo": "Nová demo obrazovka",
+    "Demo deleted": "Demo obrazovka smazána",
+    "Demo deleted successfully": "Demo obrazovka úspěšně smazána",
+    "Error while deleting demo": "Chyba při odebírání demo obrazovky",
+    "Successfully saved": "Demo uloženo",
+    "Demo successfully saved": "Demo úspěšně uloženo",
+    "Edit Widgets": "Upravit widgety",
+    "Add New Widget": "Přidat nový widget",
+    "Add Widget": "Přidat widget"
 }

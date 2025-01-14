@@ -1,4 +1,5 @@
 import {NavbarURLs, NavLink} from "../types/NavLink.ts";
+import {DemoType} from "../types/demos/demoType.ts";
 
 export const domain = "https://serious.broker";
 export const PROTECTED_ROUTES = ['/admin', '/profile', '/assets', '/most_profitable_assets', '/asset_graph/:id'];
@@ -70,8 +71,15 @@ export const routes = {
         achievements: "achievements",
         coinSettings: "coin_settings",
         chachedData: "chached_data",
-        qr: "qr"
+        qr: "qr",
+        demos: "demos",
+        demo: "demo/:id",
+        editDemo: "demos/edit/:id",
+        newDemo: "demos/edit",
     },
+    demos: "/demos",
+    demo: "/demo/:id",
+    
 }
 
 export const adminURLS = {
@@ -93,7 +101,9 @@ export const adminURLS = {
     achievements: "/admin/achievements",
     coinSettings: "/admin/coin_settings",
     chachedData: "/admin/chached_data",
-    qr: "/admin/qr"
+    qr: "/admin/qr",
+    demos: "/admin/demos",
+    newDemo: "/admin/demos/edit",
 }
 
 export const registeredUserNavbarURLs: NavbarURLs = {
@@ -145,6 +155,14 @@ export const defaultNewCurrency = {
     cmc_rank: 0,
     date: "",
     photo: null
+}
+
+export const defaultNewDemo: DemoType = {
+    name: "",
+    description: "",
+    time_of_replace: 5,
+    created: new Date(),
+    widgets:[]
 }
 
 const graphColor = {

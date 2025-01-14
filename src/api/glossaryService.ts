@@ -78,13 +78,13 @@ export const addGlossary = async (glossary: Partial<GlossaryType & { imageFile?:
 
 
 export const randomGlossary = async () => {
-    const token = localStorage.getItem("token");
-    if (!token) return;
-    
-    const res = axios.get<GlossaryType[]>(backendUrl+"glossary/random_glossaries.php", {
-        headers: {
-            Authorization2: `Bearer ${token}`,
-        },
-    });
-    return await res;
+    return await axios.get<GlossaryType[]>(backendUrl+"glossary/random_glossaries.php");
 };
+
+export const getGlossaryByName = async (title: string) => {
+    return await axios.get<GlossaryType>(backendUrl + "glossary/get_glossary_by_name.php", {
+        params: {
+            title: title,
+        }
+    });
+}

@@ -12,7 +12,7 @@ export const TableTemplate:FC<Props> = ({title, children}) => {
     const {t} = useTranslation();
     
     return (
-        <div className="padding-bottom">
+        <div className="padding-bottom" style={{textAlign: "center"}}>
             <div className="cta__wrapper">
                 <div className="cta__newsletter d-flex justify-content-center">
                     <div

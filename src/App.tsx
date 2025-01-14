@@ -65,7 +65,11 @@ const ProfileOverview = lazy(() => import("./pages/profile/ProfileOverview.tsx")
 const ProfileAchievements = lazy(() => import("./pages/profile/ProfileAchievements.tsx").then(module => ({ default: module.ProfileAchievements })));
 const ProfileMembership = lazy(() => import("./pages/profile/ProfileMembership.tsx").then(module => ({ default: module.ProfileMembership })));
 const ProfileEdit = lazy(() => import("./pages/profile/ProfileEdit.tsx").then(module => ({ default: module.ProfileEdit })));
-
+const Demos = lazy(() => import("./pages/Demos.tsx").then(module => ({ default: module.Demos })));
+const Demo = lazy(() => import("./pages/Demo.tsx").then(module => ({ default: module.Demo })));
+const AdminDemos = lazy(() => import("./pages/admin/AdminDemos.tsx").then(module => ({ default: module.AdminDemos })));
+const AdminDemo = lazy(() => import("./pages/admin/AdminDemo.tsx").then(module => ({ default: module.AdminDemo })));
+const AdminDemoEdit = lazy(() => import("./pages/admin/AdminDemoEdit.tsx").then(module => ({ default: module.AdminDemoEdit })));
 
 // Disable automatic CSS addition for Font Awesome
 config.autoAddCss = false;
@@ -130,7 +134,13 @@ function App() {
                                 <Route path={routes.admin.coinSettings} element={<PageLoader><CoinSettings /></PageLoader>} />
                                 <Route path={routes.admin.chachedData} element={<PageLoader><ChachedData /></PageLoader>} />
                                 <Route path={routes.admin.qr} element={<PageLoader><QRManagement /></PageLoader>} />
+                                <Route path={routes.admin.demos} element={<PageLoader><AdminDemos /></PageLoader>} />
+                                <Route path={routes.admin.demo} element={<PageLoader><AdminDemo /></PageLoader>} />
+                                <Route path={routes.admin.editDemo} element={<PageLoader><AdminDemoEdit /></PageLoader>} />
+                                <Route path={routes.admin.newDemo} element={<PageLoader><AdminDemoEdit /></PageLoader>} />
                             </Route>
+                            <Route path={routes.demos} element={<PageLoader><Demos /></PageLoader>} />
+                            <Route path={routes.demo} element={<PageLoader><Demo /></PageLoader>} />
                             <Route path="*" element={<PageLoader><ErrorPage /></PageLoader>} />
                         </Routes>
                         <Footer />
