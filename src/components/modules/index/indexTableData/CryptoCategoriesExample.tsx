@@ -1,20 +1,35 @@
-import { FC, Fragment } from "react";
-import { useIndexDataContext } from "../../../../utils/providers/IndexDataProvider.tsx";
+import {FC, Fragment, useEffect, useState} from "react";
 import { Link } from "react-router-dom";
 import { routes } from "../../../../utils/constants";
 import { TableTemplate } from "../../TableTemplate.tsx";
 import { useThemeContext } from "../../../../utils/providers/ThemeProvider.tsx";
 import { useTranslation } from "react-i18next";
-import { CoinData } from "../../../../utils/types/indexPage/IndexDataStructure.ts";
+import {CoinCategory} from "../../../../utils/types/indexPage/IndexDataStructure.ts";
+import {getCoinCategories} from "../../../../api/indexDataService.ts";
+import {useMediaQuery} from "@mui/material";
+import {CryptoCategoriesExampleSkeleton} from "./skeletons/CryptoCategoriesExampleSkeleton.tsx";
 
 export const CryptoCategoriesExample: FC = () => {
     const { theme } = useThemeContext();
     const { t } = useTranslation();
-    const { data } = useIndexDataContext();
-    const totalRows = data.coin_categories.reduce(
-        (sum, category) => sum + JSON.parse(category.coins).length + 1,
+    const isMobile = useMediaQuery('(max-width:768px)');
+    const [coin_categories, setCoinCategories] = useState<CoinCategory[]>();
+    const totalRows = coin_categories ? coin_categories.reduce(
+        (sum, category) => sum + category.coins.length + 1,
         0
-    );
+    ) : 0;
+
+    useEffect(() => {
+        const getCategories = async () => {
+            try {
+                const response = await getCoinCategories();
+                setCoinCategories(response.data);
+            } catch (error) {
+                console.error(error);
+            }
+        }
+        getCategories();
+    }, []);
     
     return (
         <TableTemplate title={t("Types of cryptocurrencies")}>
@@ -29,15 +44,13 @@ export const CryptoCategoriesExample: FC = () => {
                     </tr>
                     </thead>
                     <tbody>
-                    {data.coin_categories.map((category, categoryIndex) => {
-                        const coins: CoinData[] = JSON.parse(category.coins);
-                        return (
+                    {coin_categories ? coin_categories.map((category, categoryIndex) => (
                             <Fragment key={category.tag_name}>
                                 <tr>
                                     <td colSpan={4} className="fw-bold" style={{ textAlign: "left" }}>
                                         {t(category.tag_name)}
                                     </td>
-                                    {categoryIndex === 0 && (
+                                    {!isMobile && categoryIndex === 0 && (
                                         <td rowSpan={totalRows} className="text-center align-middle">
                                             <Link
                                                 to={routes.cryptocurrenciesList}
@@ -52,7 +65,7 @@ export const CryptoCategoriesExample: FC = () => {
                                         </td>
                                     )}
                                 </tr>
-                                {coins.map((coin, index) => (
+                                {category.coins.map((coin, index) => (
                                     <tr key={coin.id}>
                                         <td>{index + 1}</td>
                                         <td>{coin.name}</td>
@@ -61,8 +74,7 @@ export const CryptoCategoriesExample: FC = () => {
                                     </tr>
                                 ))}
                             </Fragment>
-                        );
-                    })}
+                        )) : <CryptoCategoriesExampleSkeleton />}
                     </tbody>
                 </table>
             </div>
@@ -72,7 +84,7 @@ export const CryptoCategoriesExample: FC = () => {
                         <Link to={routes.cryptocurrenciesList} className="text-decoration-none">{t("What are the other coins that belong to each group?")}</Link>
                     </div>
                     <div className="col-sm-4">
-                        <Link to={routes.register} className="btn btn-outline-warning w-100">
+                        <Link to={routes.register} className="btn btn-outline-warning w-80 mt-3">
                             {t("Register")}
                         </Link>
                     </div>

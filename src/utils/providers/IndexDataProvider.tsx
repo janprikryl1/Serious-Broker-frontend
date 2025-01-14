@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useEffect, ReactNode, FC } from 'react';
+import {createContext, useContext, useState, useEffect, ReactNode, FC, Dispatch, SetStateAction} from 'react';
 import { IndexDataStructure } from "../types/indexPage/IndexDataStructure";
 import { IndexSeason } from "../enums/IndexSeasonEnum";
 import { getIndexData } from "../../api/indexDataService";
@@ -11,6 +11,7 @@ type Props = {
 type IndexDataContextType = {
     data: IndexDataStructure;
     season: IndexSeason;
+    setSeason: Dispatch<SetStateAction<IndexSeason>>;
     handleSelect: (selectedSeason: IndexSeason) => void;
 };
 
@@ -67,14 +68,12 @@ export const IndexDataProvider: FC<Props> = ({ children }) => {
         }
     };
 
-
-
     if (!data) {
         return <IndexTableSkeleton />;
     }
 
     return (
-        <IndexDataContext.Provider value={{ data, season, handleSelect }}>
+        <IndexDataContext.Provider value={{ data, season, setSeason, handleSelect }}>
             {children}
         </IndexDataContext.Provider>
     );

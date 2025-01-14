@@ -1,11 +1,26 @@
-import {FC} from "react";
-import {useIndexDataContext} from "../../../../utils/providers/IndexDataProvider.tsx";
+import {FC, useEffect, useState} from "react";
 import {GlossaryItemOverview} from "../../reusable/GlossaryItemOverview.tsx";
+import {GlossaryType} from "../../../../utils/types/GlossaryType.ts";
+import {getGlossaryOverview} from "../../../../api/indexDataService.ts";
 
 export const GlossaryOverview:FC = () => {
-    const {data} = useIndexDataContext();
+    const [DYOR, setDyor] = useState<GlossaryType>();
 
-    return (
-        <GlossaryItemOverview data={data.DYOR} />
-    );
+    useEffect(() => {
+        const getDYOR = async () => {
+            try {
+                const response = await getGlossaryOverview();
+                setDyor(response.data);
+            } catch (exception) {
+                console.error(exception);
+            }
+        }
+        getDYOR();
+    }, []);
+    
+    if (DYOR) {
+        return (
+            <GlossaryItemOverview data={DYOR} />
+        );
+    }
 };

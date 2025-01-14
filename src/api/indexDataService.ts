@@ -33,3 +33,23 @@ export const getIndexData = async () => {
     })
     return await res;
 }
+
+export const getMostVolatileData = async () => {
+    return await axios.get(backendUrl+"index/data/most_volatile.php");
+}
+
+export const getCoinCategories = async () => {
+    return await axios.get(backendUrl+"index/data/coin_categories.php");
+}
+
+export const getLatestCoinmarketcupCoins = async () => {
+    return await axios.get(backendUrl+"index/data/last_coinmarketcup_coins.php");
+}
+
+export const getGlossaryOverview = async () => {
+    return await axios.get(backendUrl+"index/data/DYOR.php");
+}
+
+export const getTopMostProfitableAssets = async () => {
+    return await axios.get(backendUrl+"index/data/top_most_profitable_assets.php");
+}

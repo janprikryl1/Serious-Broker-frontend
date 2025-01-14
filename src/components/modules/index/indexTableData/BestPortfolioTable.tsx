@@ -1,4 +1,4 @@
-import {FC, useMemo} from "react";
+import {FC, useEffect, useMemo, useState} from "react";
 import {TableTemplate} from "../../TableTemplate.tsx";
 import {useTranslation} from "react-i18next";
 import {useIndexDataContext} from "../../../../utils/providers/IndexDataProvider.tsx";
@@ -12,12 +12,27 @@ import {calculateProfit} from "../../../../utils/constants/functions.ts";
 import {GainSeasonTh} from "./GainSeasonTh.tsx";
 import {TypographyWithPopover} from "../../TypographyWithPopover.tsx";
 import {useMediaQuery} from "@mui/material";
+import {getTopMostProfitableAssets} from "../../../../api/indexDataService.ts";
+import {BestPortfolioTableSkeleton} from "./skeletons/BestPortfolioTableSkeleton.tsx";
 
 export const BestPortfolioTable:FC = () => {
     const { t } = useTranslation();
     const { theme } = useThemeContext();
-    const { data, season } = useIndexDataContext();
+    const { season } = useIndexDataContext();
     const isMobile = useMediaQuery('(max-width:768px)');
+    const [top_most_profitable_assets, setTopMostProfitableAssets] = useState<TopMostProfitableAsset[]>();
+    
+    useEffect(() => {
+        const getData = async () => {
+            try {
+                const response = await getTopMostProfitableAssets();
+                setTopMostProfitableAssets(response.data);
+            } catch (exception) {
+                console.error(exception);
+            }
+        };
+        getData();
+    }, []);
     
     const getProfitData = useMemo(() => {
         const profitMap = (category: TopMostProfitableAsset) => ({
@@ -52,9 +67,9 @@ export const BestPortfolioTable:FC = () => {
                 <table className="table no-border-row">
                     <thead>
                     <tr>
-                        <th><TypographyWithPopover popover={t("Order of the coins in the portfolio")}>
+                        {!isMobile && <th><TypographyWithPopover popover={t("Order of the coins in the portfolio")}>
                             {t("Order")}
-                    </TypographyWithPopover></th>
+                        </TypographyWithPopover></th>}
                         <th>{t("Title")}</th>
                         <td>
                             <TypographyWithPopover popover={t("Portfolio is a collection of cryptocurrencies")}>
@@ -66,9 +81,9 @@ export const BestPortfolioTable:FC = () => {
                     </tr>
                     </thead>
                     <tbody>
-                    {data.top_most_profitable_assets.map((category) =>  (
+                    {top_most_profitable_assets ? top_most_profitable_assets.map((category) =>  (
                         <tr key={category.asset_label}>
-                            <th>{category.order_index}</th>
+                            {!isMobile && <th>{category.order_index}</th>}
                             <td>{category.asset_label}</td>
                             <td>{isMobile ? category.quote_currencies.substring(0, 5)+" ..." : category.quote_currencies}</td>
                             <td>
@@ -84,7 +99,7 @@ export const BestPortfolioTable:FC = () => {
                                 />
                             </td>
                         </tr>
-                    ))}
+                    )) : <BestPortfolioTableSkeleton />}
                     </tbody>
                 </table>
             </div>

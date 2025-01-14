@@ -97,7 +97,7 @@ export const MostProfitableLastSelectedPeriod: FC = () => {
                         </Link>
                     </div>
                     <div className="col-sm-4">
-                        <Link to={routes.register} className="btn btn-outline-warning w-100">
+                        <Link to={routes.register} className="btn btn-outline-warning w-80 mt-3">
                             {t("Register")}
                         </Link>
                     </div>

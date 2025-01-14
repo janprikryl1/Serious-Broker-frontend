@@ -1,5 +1,4 @@
-import {FC, useEffect, useState} from "react";
-import {filterGraphData} from "../../../../../utils/constants/functions.ts";
+import {FC} from "react";
 import {IndexTableChart} from "./IndexTableChart.tsx";
 import Skeleton from "react-loading-skeleton";
 import {MostVolatileData} from "../../../../../utils/types/indexPage/IndexDataStructure.ts";
@@ -9,21 +8,15 @@ type Props = {
 }
 
 export const VolatileTableChartBody:FC<Props> = ({coin}) => {
-    const [graphData, setGraphData] = useState<number[]>();
-
-    useEffect(() => {
-        setGraphData(filterGraphData(coin.graph_data));
-    }, [coin]);
-
     return (
         <tr>
             <td>{coin.asset_label}</td>
             <td>{coin.symbol_name}</td>
             <td>{coin.percent_volatility} %</td>
             <td>
-                {graphData ? <IndexTableChart
+                {coin.graph_data ? <IndexTableChart
                     name={coin.asset_label}
-                    data={graphData}
+                    data={coin.graph_data}
                 /> : <Skeleton />}
             </td>
         </tr>

@@ -1,5 +1,3 @@
-import {GlossaryType} from "../GlossaryType.ts";
-
 export type CoinData = {
     id: number;
     name: string;
@@ -9,7 +7,7 @@ export type CoinData = {
 
 export type CoinCategory = {
     tag_name: string;
-    coins: string;
+    coins: CoinData[];
 };
 
 export type AssetProfitData = {
@@ -43,7 +41,7 @@ export type MostVolatileData = {
     asset_label: string;
     symbol_name: string;
     percent_volatility: number;
-    graph_data: string;
+    graph_data: number[];
 };
 
 export type MostVolatile = {
@@ -78,9 +76,4 @@ export type TopMostProfitableAsset = {
 export type IndexDataStructure = {
     date: string;
     last_most_profitable: AssetProfitData[];
-    last_coinmarketcup_coins: MostProfitable[];
-    coin_categories: CoinCategory[];
-    most_volatible: MostVolatile;
-    DYOR: GlossaryType;
-    top_most_profitable_assets: TopMostProfitableAsset[];
 };
