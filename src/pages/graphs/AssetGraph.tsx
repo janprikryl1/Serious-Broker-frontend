@@ -9,6 +9,7 @@ import {AssetDetailType, Assets} from "../../utils/types/asset/AssetDetailType.t
 import { useTranslation } from "react-i18next";
 import {AssetGraphCurrencyCard} from "../../components/modules/graphs/asset/AssetGraphCurrencyCard.tsx";
 import {AssetGraphPieChart} from "../../components/modules/graphs/asset/AssetGraphPieChart.tsx";
+import {AssetGraphDetails} from "../../components/modules/graphs/asset/AssetGraphDetails.tsx";
 
 export const AssetGraph: FC = () => {
     const { t } = useTranslation();
@@ -40,7 +41,7 @@ export const AssetGraph: FC = () => {
     return (
         <div>
             <TitleHeader
-                title={asset?.index_label ?? t("GraphAssetData - details about asset and graph")}
+                title={asset?.label ?? t("GraphAssetData - details about asset and graph")}
             />
             <div className="padding-bottom padding-top">
                 <div className="container padding-bottom">
@@ -52,7 +53,8 @@ export const AssetGraph: FC = () => {
                                     data-aos="fade-up"
                                     data-aos-duration="900"
                                 >
-                                    <p>{t("Title")}: {index_label}</p>
+                                    <h2 className="mb-4">{t("Title")}: {index_label}</h2>
+                                    {asset && <AssetGraphDetails asset={asset} />}
                                     {asset && details ? (
                                         <>
                                             <div className="row">

@@ -4,11 +4,10 @@ import { useUserContext } from "../../utils/providers/providerUser.tsx";
 import { useNavigate } from "react-router-dom";
 import { getAllAssets } from "../../api/binanceIndexAssets.ts";
 import { AssetType } from "../../utils/types/asset/AssetType.ts";
-import { v4 as uuidv4 } from 'uuid';
 import { AssetSkeleton } from "../../components/modules/graphs/asset/AssetSkeleton.tsx";
 import {pageLimit, routes} from "../../utils/constants";
 import {Pagination} from "../../components/Pagiation.tsx";
-import {AssetLinkCard} from "../../components/modules/graphs/asset/AssetLinkCard.tsx";
+import {AssetCard} from "../../components/modules/graphs/asset/AssetCard.tsx";
 
 export const Assets: FC = () => {
     const { user } = useUserContext();
@@ -54,7 +53,7 @@ export const Assets: FC = () => {
                         <div className="blog__wrapper">
                             <div className="row g-4">
                                 {assets.map((asset) => (
-                                    <AssetLinkCard id={asset.id} label={asset.name} details={asset.label} key={uuidv4()}/>
+                                    <AssetCard label={asset.label} details={asset.label} key={asset.id}/>
                                 ))}
                             </div>
                             <Pagination

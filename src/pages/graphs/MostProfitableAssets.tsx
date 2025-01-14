@@ -5,14 +5,14 @@ import { TitleHeader } from "../../components/modules/about/TitleHeader.tsx";
 import { getMostProfitableAssets } from "../../api/binanceIndexAssets.ts";
 import { AssetSkeleton } from "../../components/modules/graphs/asset/AssetSkeleton.tsx";
 import { AssetCard } from "../../components/modules/graphs/asset/AssetCard.tsx";
-import { AssetDetailType } from "../../utils/types/asset/AssetDetailType.ts";
 import {pageLimit, routes} from "../../utils/constants";
 import {Pagination} from "../../components/Pagiation.tsx";
+import {MostProfitableAssetDetailType} from "../../utils/types/graphs/MostProfitableAssetDetailType.ts";
 
 export const MostProfitableAssets: FC = () => {
     const { user } = useUserContext();
     const navigate = useNavigate();
-    const [assets, setAssets] = useState<AssetDetailType[]>([]);
+    const [assets, setAssets] = useState<MostProfitableAssetDetailType[]>([]);
     const [page, setPage] = useState<number>(1);
     const [totalPages, setTotalPages] = useState<number>(1);
     const [loading, setLoading] = useState<boolean>(true);
