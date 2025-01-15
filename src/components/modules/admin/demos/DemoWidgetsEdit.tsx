@@ -1,14 +1,17 @@
 import { FC, useState } from "react";
 import { useDemoContext } from "../../../../utils/providers/DemoProvider.tsx";
 import { WidgetsType, widgets } from "../../../../utils/types/demos/demoType";
-import {useTranslation} from "react-i18next";
+import { useTranslation } from "react-i18next";
+import { FaArrowCircleDown, FaArrowCircleUp } from "react-icons/fa";
+import { Button, Form } from "react-bootstrap";
 
 export const DemoWidgetsEdit: FC = () => {
-    const {t} = useTranslation();
+    const { t } = useTranslation();
     const { demo, updateDemo } = useDemoContext();
     const [newWidget, setNewWidget] = useState<widgets>({
         type: WidgetsType.Image,
         propertyId: "",
+        visible: true
     });
 
     const handleWidgetChange = (index: number, updatedWidget: widgets) => {
@@ -18,16 +21,24 @@ export const DemoWidgetsEdit: FC = () => {
     };
 
     const handleAddWidget = () => {
-        if (!newWidget.propertyId.trim()) {
-            alert("Property ID cannot be empty!");
-            return;
-        }
         updateDemo({ widgets: [...demo.widgets, newWidget] });
-        setNewWidget({ type: WidgetsType.Image, propertyId: "" });
+        setNewWidget({ type: WidgetsType.Image, propertyId: "", visible: true });
     };
 
     const handleDeleteWidget = (index: number) => {
         const updatedWidgets = demo.widgets.filter((_, i) => i !== index);
+        updateDemo({ widgets: updatedWidgets });
+    };
+
+    const handleMoveWidget = (index: number, direction: 'up' | 'down') => {
+        const updatedWidgets = [...demo.widgets];
+        if (direction === 'up' && index > 0) {
+            [updatedWidgets[index], updatedWidgets[index - 1]] =
+                [updatedWidgets[index - 1], updatedWidgets[index]];
+        } else if (direction === 'down' && index < updatedWidgets.length - 1) {
+            [updatedWidgets[index], updatedWidgets[index + 1]] =
+                [updatedWidgets[index + 1], updatedWidgets[index]];
+        }
         updateDemo({ widgets: updatedWidgets });
     };
 
@@ -49,7 +60,7 @@ export const DemoWidgetsEdit: FC = () => {
                         >
                             {Object.values(WidgetsType).map((type) => (
                                 <option key={type} value={type}>
-                                    {type}
+                                    {t(type)}
                                 </option>
                             ))}
                         </select>
@@ -65,11 +76,38 @@ export const DemoWidgetsEdit: FC = () => {
                             }
                         />
                         <button
-                            className="btn btn-danger"
+                            className="btn btn-danger me-4"
                             onClick={() => handleDeleteWidget(index)}
                         >
                             {t("Delete")}
                         </button>
+
+                        <div className="d-flex align-items-center me-4">
+                            <Button
+                                className="me-2"
+                                onClick={() => handleMoveWidget(index, 'up')}
+                                disabled={index === 0}
+                            >
+                                <FaArrowCircleUp />
+                            </Button>
+                            <Button
+                                onClick={() => handleMoveWidget(index, 'down')}
+                                disabled={index === demo.widgets.length - 1}
+                            >
+                                <FaArrowCircleDown />
+                            </Button>
+                        </div>
+                        <Form.Check
+                            type="switch"
+                            label={t("Visible")}
+                            checked={widget.visible}
+                            onChange={(e) =>
+                                handleWidgetChange(index, {
+                                    ...widget,
+                                    visible: e.target.checked,
+                                })
+                            }
+                        />
                     </div>
                 </div>
             ))}
@@ -87,7 +125,7 @@ export const DemoWidgetsEdit: FC = () => {
                 >
                     {Object.values(WidgetsType).map((type) => (
                         <option key={type} value={type}>
-                            {type}
+                            {t(type)}
                         </option>
                     ))}
                 </select>

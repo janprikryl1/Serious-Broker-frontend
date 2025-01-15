@@ -1,7 +1,9 @@
 import {ChangeEvent, FC} from "react";
 import {useDemoContext} from "../../../../utils/providers/DemoProvider.tsx";
+import {useTranslation} from "react-i18next";
 
 export const DemoNameEdit:FC = () => {
+    const {t} = useTranslation();
     const {demo, updateDemo} = useDemoContext();
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -11,7 +13,7 @@ export const DemoNameEdit:FC = () => {
     return (
         <div className="mb-3">
             <label htmlFor="demoName" className="form-label">
-                Demo Name
+                {t("Demo Name")}
             </label>
             <input
                 type="text"

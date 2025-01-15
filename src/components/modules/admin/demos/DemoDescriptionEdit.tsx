@@ -1,7 +1,9 @@
 import {ChangeEvent, FC} from "react";
 import {useDemoContext} from "../../../../utils/providers/DemoProvider.tsx";
+import {useTranslation} from "react-i18next";
 
 export const DemoDescriptionEdit:FC = () => {
+    const {t} = useTranslation();
     const {demo, updateDemo} = useDemoContext();
 
     const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
@@ -11,7 +13,7 @@ export const DemoDescriptionEdit:FC = () => {
     return (
         <div className="mb-3">
             <label htmlFor="demoDescription" className="form-label">
-                Demo Description
+                {t("Demo Description")}
             </label>
             <textarea
                 id="demoDescription"

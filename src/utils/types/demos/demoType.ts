@@ -10,6 +10,7 @@ export type DemoType = {
 export type widgets = {
     type: WidgetsType;
     propertyId: string;
+    visible: boolean;
 }
 
 export enum WidgetsType {

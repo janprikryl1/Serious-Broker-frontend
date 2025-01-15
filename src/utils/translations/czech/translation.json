@@ -687,5 +687,12 @@
     "Demo successfully saved": "Demo úspěšně uloženo",
     "Edit Widgets": "Upravit widgety",
     "Add New Widget": "Přidat nový widget",
-    "Add Widget": "Přidat widget"
+    "Add Widget": "Přidat widget",
+    "Demo Name": "Název demo obrazovky",
+    "Demo Description": "Popis demo obrazovky",
+    "Time to toggle": "Čas přepínání",
+    "COIN_GRAPH": "Graf mince",
+    "ASSET_GRAPHS": "Graf aktiva",
+    "GLOSSARY": "Slovník",
+    "Visible": "Viditelné"
 }

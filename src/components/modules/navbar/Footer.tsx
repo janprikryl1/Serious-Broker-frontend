@@ -49,7 +49,7 @@ export const Footer:FC = () => {
               <div className="footer__bottom">
                 <div className="footer__end">
                   <div className="footer__end-copyright">
-                    <p className="mb-0">© 2024 VŠB</p>
+                    <p className="mb-0">© 2024 - 2025 VŠB</p>
                   </div>
                   <div>
                     <ul className="social">

@@ -68,7 +68,6 @@ const ProfileEdit = lazy(() => import("./pages/profile/ProfileEdit.tsx").then(mo
 const Demos = lazy(() => import("./pages/Demos.tsx").then(module => ({ default: module.Demos })));
 const Demo = lazy(() => import("./pages/Demo.tsx").then(module => ({ default: module.Demo })));
 const AdminDemos = lazy(() => import("./pages/admin/AdminDemos.tsx").then(module => ({ default: module.AdminDemos })));
-const AdminDemo = lazy(() => import("./pages/admin/AdminDemo.tsx").then(module => ({ default: module.AdminDemo })));
 const AdminDemoEdit = lazy(() => import("./pages/admin/AdminDemoEdit.tsx").then(module => ({ default: module.AdminDemoEdit })));
 
 // Disable automatic CSS addition for Font Awesome
@@ -135,7 +134,6 @@ function App() {
                                 <Route path={routes.admin.chachedData} element={<PageLoader><ChachedData /></PageLoader>} />
                                 <Route path={routes.admin.qr} element={<PageLoader><QRManagement /></PageLoader>} />
                                 <Route path={routes.admin.demos} element={<PageLoader><AdminDemos /></PageLoader>} />
-                                <Route path={routes.admin.demo} element={<PageLoader><AdminDemo /></PageLoader>} />
                                 <Route path={routes.admin.editDemo} element={<PageLoader><AdminDemoEdit /></PageLoader>} />
                                 <Route path={routes.admin.newDemo} element={<PageLoader><AdminDemoEdit /></PageLoader>} />
                             </Route>
