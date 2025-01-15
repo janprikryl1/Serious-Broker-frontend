@@ -10,4 +10,5 @@ export type ArticleProps = {
     allowComments: string;
     articleTypeOption: string;
     premiumOnly: string;
+    banner: string;
 }

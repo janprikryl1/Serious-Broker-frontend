@@ -16,6 +16,7 @@ import {ArticleVariant4} from "./articleVariants/ArticleVariant4.tsx";
 import {ArticleLanguagesSelect} from "./ArticleLanguagesSelect.tsx";
 import {TranslationsOverview} from "../../../utils/types/article/TranslationsOverview.ts";
 import {toCzechDateFormat} from "../../../utils/constants/functions.ts";
+import {ArticleBanner} from "./ArticleBanner.tsx";
 
 type Props = {
     article: ArticleDetailProps;
@@ -39,8 +40,9 @@ export const ArticleDetails: FC<Props> = ({ article, translations, language, set
             {content && (
                 <div className="blog-details__item-inner">
                     <div key={uuidv4()}>
-                        <h1>{article.title}</h1>
-                        <ArticleLanguagesSelect translations={translations} language={language} setLanguage={setLanguage}/>
+                        <ArticleBanner banner={article.banner} title={article.title} />
+                        <ArticleLanguagesSelect translations={translations} language={language}
+                                                setLanguage={setLanguage}/>
                         <p>{article.description}</p>
                         <i>{toCzechDateFormat(article.changed)}</i>
                         <br/><br/>
@@ -63,7 +65,7 @@ export const ArticleDetails: FC<Props> = ({ article, translations, language, set
                     {article?.allowComments !== "0" ? (
                         <>
                             <Comments articleId={article.id} setComments={setComments} comments={comments}/>
-                            {user && <CommentForm articleId={article.id} setComments={setComments} />}
+                            {user && <CommentForm articleId={article.id} setComments={setComments}/>}
                         </>
                     ) : (
                         <p>{t("Komentáře nejsou povoleny")}</p>

@@ -6,7 +6,9 @@ import {articleTypes} from "../../../../../../utils/options/articleTypes.ts";
 import {publicationOptions} from "../../../../../../utils/options/publicationOptions.ts";
 import {ArticleTemplates} from "../articleTemplates/ArticleTemplates.tsx";
 import {useArticleCreate} from "../../../../../../utils/providers/ArticleCreateProvider.tsx";
-
+import {ListFilesModal} from "./NewArticleContentVariants/imageUpload/ListFilesModal.tsx";
+import {useModal} from "../../../../../../utils/hooks/useModal.tsx";
+import Button from "react-bootstrap/Button";
 
 export const NewArticleSettings:FC = () => {
     const {t} = useTranslation();
@@ -31,7 +33,16 @@ export const NewArticleSettings:FC = () => {
         setPublicateFrom,
         publicateFromDays,
         allowComments,
-        setAllowComments} = useArticleCreate();
+        setAllowComments,
+        banner,
+        setBanner} = useArticleCreate();
+
+    const { isOpen: isFileModalOpen, openModal: openFileModal, closeModal: closeFileModal } = useModal();
+    
+    const handleSetPathOfImage = (path: string) => {
+        setBanner(path);
+        closeFileModal();
+    };
 
     return (
         <div>
@@ -55,10 +66,23 @@ export const NewArticleSettings:FC = () => {
                     ))}
                 </Form.Select>
             </InputGroup>
+            
+            <InputGroup className="mb-3">
+                <div className="col-sm-4">
+                    <h4>{t("Banner")}</h4>
+                    <InputGroup className="mb-3">
+                        <InputGroup.Text>{t("Image")}</InputGroup.Text>
+                        <Button onClick={openFileModal}>
+                            {banner || t("Choose image")}
+                        </Button>
+                    </InputGroup>
+                </div>
+            </InputGroup>
 
             <InputGroup className="mb-3">
                 <InputGroup.Text>{t("Article type")}</InputGroup.Text>
-                <Form.Select value={articleTypeOption} onChange={(e) => setArticleTypeOption(e.target.value as "article" | "new")}>
+                <Form.Select value={articleTypeOption}
+                             onChange={(e) => setArticleTypeOption(e.target.value as "article" | "new")}>
                     {articleTypes.map((articleType) => (
                         <option value={articleType.id} key={articleType.id}>{articleType.title}</option>
                     ))}
@@ -107,6 +131,12 @@ export const NewArticleSettings:FC = () => {
 
             <h2>{t("Select template")}</h2>
             <ArticleTemplates selected={template} setSelected={setTemplate}/>
+
+            <ListFilesModal
+                isOpen={isFileModalOpen}
+                handleSetPath={(path: string) => handleSetPathOfImage(path)}
+                handleModalClose={closeFileModal}
+            />
         </div>
     )
 }

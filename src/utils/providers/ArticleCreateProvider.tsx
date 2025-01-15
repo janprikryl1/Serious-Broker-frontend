@@ -49,13 +49,14 @@ type ArticleCreateProviderProps = {
     setTitleImage: Dispatch<SetStateAction<string>>;
     allowComments: boolean;
     setAllowComments: Dispatch<SetStateAction<boolean>>;
+    banner: string;
+    setBanner: Dispatch<SetStateAction<string>>;
 }
 
 const ArticleCreateContext = React.createContext<ArticleCreateProviderProps | undefined>(undefined);
 
 export const ArticleCreateProvider = ({children}: Props) => {
     const {id} = useParams();
-    //const navigate = useNavigate();
     const {t} = useTranslation();
     const [articleId, setArticleId] = useState<number>();
     const [page, setPage] = useState(0);
@@ -63,6 +64,7 @@ export const ArticleCreateProvider = ({children}: Props) => {
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
     const [language, setLanguage] = useState("cs");
+    const [banner, setBanner] = useState("");
     const [articleTypeOption, setArticleTypeOption] = useState<"article" | "new">("article");
     const [publicationType, setPublicationType] = useState(0);
     const [publicateFrom, setPublicateFrom] = useState("");
@@ -97,6 +99,7 @@ export const ArticleCreateProvider = ({children}: Props) => {
                 setTitleImage(response.data.titleImage);
                 setTemplate(response.data.templateId);
                 setCurrentContent(0);
+                setBanner(response.data.banner);
             }
             getEditedArticle();
         }
@@ -117,7 +120,8 @@ export const ArticleCreateProvider = ({children}: Props) => {
         subjects,
         titleImage, 
         template,
-        allowComments
+        allowComments,
+        banner
     ]);
     
     const nextPage = () => {
@@ -140,7 +144,8 @@ export const ArticleCreateProvider = ({children}: Props) => {
             publicationFromDays: publicateFromDays,
             allowComments: allowComments,
             titleImage: titleImage,
-            articleTypeOption: articleTypeOption
+            articleTypeOption: articleTypeOption,
+            banner: banner
         };
         try {
             const response = await createArticle(article);
@@ -179,7 +184,8 @@ export const ArticleCreateProvider = ({children}: Props) => {
             publicationFromDays: publicateFromDays,
             allowComments: allowComments,
             titleImage: titleImage,
-            articleTypeOption: articleTypeOption
+            articleTypeOption: articleTypeOption,
+            banner: banner
         };
         try {
             const response = await updateArticle(article);
@@ -246,6 +252,8 @@ export const ArticleCreateProvider = ({children}: Props) => {
         setTitleImage,
         allowComments,
         setAllowComments,
+        banner,
+        setBanner
     }
 
     return (

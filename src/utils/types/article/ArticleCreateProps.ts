@@ -12,5 +12,6 @@ export type ArticleCreateProps = {
     publicationFromDays: number | null,
     allowComments: boolean,
     titleImage: string,
-    articleTypeOption: string
+    articleTypeOption: string,
+    banner: string
 }
