@@ -18,5 +18,6 @@ export enum WidgetsType {
     Article = "Article",
     COIN_GRAPH = "COIN_GRAPH",
     ASSET_GRAPHS = "ASSET_GRAPHS",
-    GLOSSARY = "GLOSSARY"
+    GLOSSARY = "GLOSSARY",
+    COINMARKETCUP_TOP_10 = "COINMARKETCUP_TOP_10"
 }

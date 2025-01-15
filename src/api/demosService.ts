@@ -1,6 +1,7 @@
 import axios from "axios";
 import {backendUrl} from "../env.ts";
 import {DemoType} from "../utils/types/demos/demoType.ts";
+import {ConimarketCupCoinsListType} from "../utils/types/demos/ConimarketCupCoinsListType.tsx";
 
 export const getAllDemos = async () => {
     return await axios.get<DemoType[]>(`${backendUrl}demo/get_all_demos.php`);
@@ -42,4 +43,8 @@ export const saveDemo = async (demo: DemoType) => {
     });
 
     return await res;
+}
+
+export const getTop10CoinmarketcupCoins = async () => {
+    return await axios.get<ConimarketCupCoinsListType[]>(`${backendUrl}/demo/get_top_ten_coins_on_coinmarketcup.php`);
 }

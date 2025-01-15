@@ -6,6 +6,7 @@ import { DemoArticleWidget } from "./demoWidgets/DemoArticleWidget.tsx";
 import { DemoCoinGraph } from "./demoWidgets/DemoCoinGraph.tsx";
 import { DemoAssetGraphs } from "./demoWidgets/DemoAssetGraphs.tsx";
 import { DemoWidgetGlossary } from "./demoWidgets/DemoWidgetGlossary.tsx";
+import {DemoCoinmarektcupTop10} from "./demoWidgets/DemoCoinmarektcupTop10.tsx";
 
 type Props = {
     widgets: widgets[];
@@ -44,7 +45,9 @@ export const DemoItem: FC<Props> = ({ widgets, time_of_replace }) => {
                 : currentWidget.type === WidgetsType.COIN_GRAPH ?
                 <DemoCoinGraph index_label={currentWidget.propertyId} />
                 : currentWidget.type === WidgetsType.GLOSSARY ?
-                <DemoWidgetGlossary title={currentWidget.propertyId} />
+                <DemoWidgetGlossary title={currentWidget.propertyId} /> 
+                : currentWidget.type == WidgetsType.COINMARKETCUP_TOP_10 ?
+                <DemoCoinmarektcupTop10 />
                 : <CurrentWidgetSkeleton />
             }
         </div>
