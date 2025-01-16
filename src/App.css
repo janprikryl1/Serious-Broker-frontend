@@ -92,3 +92,26 @@ button {
   border-radius: 8px; /* Optional: rounded corners */
   display: inline-block; /* Make the blur fit only around the content */
 }
+
+
+.index-links-container {
+  margin: 5%;
+  display: flex;
+  gap: 30px;
+}
+
+@media (max-width: 768px) {
+  .index-links-container {
+    gap: 20px;
+  }
+}
+
+.highlight-bar {
+  position: absolute;
+  left: -20px;
+  top: 50%;
+  width: 30px;
+  height: 2px;
+  background-color: #ffa602;
+  transform: translateY(-50%);
+}
