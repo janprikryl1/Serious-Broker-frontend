@@ -51,7 +51,7 @@ export const IndexTitleLinks: FC = () => {
                                 <h3
                                     style={{
                                         color: isActive ? "#ffa602" : "#fac900",
-                                        fontSize: isMobile ? "18px" : "20px",
+                                        fontSize: isMobile ? "18px" : "25px",
                                         marginLeft: !isMobile ? 20 : 0,
                                     }}
                                 >
