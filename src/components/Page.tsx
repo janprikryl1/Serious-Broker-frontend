@@ -7,7 +7,7 @@ type Props = {
 
 export const Page: FC<Props> = ({ children, image }) => {
     return (
-        <div style={{ position: "relative", display: 'flex', flexDirection: 'column',maxHeight: "100%", }}>
+        <>
             <div
                 className="overlay-background"
                 style={{
@@ -16,18 +16,16 @@ export const Page: FC<Props> = ({ children, image }) => {
                     top: "-10%",
                     left: 0,
                     width: "100%",
-                    height: "67%",
-                    maxHeight: "165vh",
+                    height: "115%",
                     opacity: 0.6,
                     zIndex: 1,
                     backgroundSize: "cover",
-                    backgroundPosition: "center",
-
+                    backgroundPosition: "center"
                 }}
             />
             <div style={{ position: "relative", zIndex: 2, flex: 1 }}>
                 {children}
             </div>
-        </div>
+        </>
     );
 };
