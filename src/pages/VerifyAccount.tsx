@@ -3,9 +3,9 @@ import { useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 import { useTranslation } from "react-i18next";
 import { verifyAccount } from "../api/verifyAccountService.ts";
-import { Spinner } from "react-bootstrap"; // Bootstrap Spinner
+import { Spinner } from "react-bootstrap";
 import { FaCheckCircle, FaExclamationTriangle } from "react-icons/fa";
-import {useUserContext} from "../utils/providers/providerUser.tsx"; // Ikony z React-icons
+import {useUserContext} from "../utils/providers/providerUser.tsx";
 
 export const VerifyAccount: FC = () => {
     const { t } = useTranslation();

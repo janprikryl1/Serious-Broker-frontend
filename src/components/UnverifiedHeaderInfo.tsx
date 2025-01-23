@@ -1,6 +1,7 @@
 import {FC} from "react";
 import {useTranslation} from "react-i18next";
 import {useUserContext} from "../utils/providers/providerUser.tsx";
+import {useLocation} from "react-router-dom";
 import {CiWarning} from "react-icons/ci";
 import {sendVerificationEmailAgain} from "../api/verifyAccountService.ts";
 import Swal from "sweetalert2";
@@ -8,7 +9,9 @@ import Swal from "sweetalert2";
 export const UnverifiedHeaderInfo:FC = () => {
     const {t} = useTranslation();
     const {user} = useUserContext();
-    
+    const location = useLocation();
+    const isVerifyAccountPage = /^\/verify_account\/[^/]+\/[^/]+$/.test(location.pathname);
+
     const handleSendVerificationAgain = async () => {
         try {
             const response = await sendVerificationEmailAgain();
@@ -32,9 +35,9 @@ export const UnverifiedHeaderInfo:FC = () => {
                 text: t("Check internet connection"),
             });
         }
-    }
-    
-    if (user?.verified == 0) {
+    };
+
+    if (user?.verified == 0 && !isVerifyAccountPage) {
         return (
             <header className="header-section" style={{backgroundColor:"red"}}>
                 <div className="header-bottom">
@@ -53,4 +56,4 @@ export const UnverifiedHeaderInfo:FC = () => {
             </header>
         );
     }
-}
+};
