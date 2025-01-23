@@ -11,6 +11,7 @@ import {register} from "../api/authenticateService.ts";
 import {useUserContext} from "../utils/providers/providerUser.tsx";
 import {routes} from "../utils/constants";
 import {LanguageSelect} from "../components/modules/signIn/LanguageSelect.tsx";
+import PasswordStrengthBar from "react-password-strength-bar";
 
 
 export const Register:FC = () => {
@@ -43,6 +44,7 @@ export const Register:FC = () => {
         newsletter_subscription: true,
         education_emails: true
     });
+    const [passwordAgain, setPasswordAgain] = useState("");
 
     const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
         setRegisterData({...registerData, [e.target.name]: e.target.value })
@@ -50,6 +52,14 @@ export const Register:FC = () => {
 
     const handleSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
         e.preventDefault();
+        if (registerData.password !== passwordAgain) {
+            Swal.fire({
+                icon: "error",
+                title: t("Error"),
+                text: t("Passwords do not match"),
+            });
+            return;
+        }
         setSending(true);
         try{
             const response = await register(registerData);
@@ -96,7 +106,6 @@ export const Register:FC = () => {
             [name]: checked,
         }));
     };
-
     
     return (
         <>
@@ -128,6 +137,22 @@ export const Register:FC = () => {
                                                             type="email" required/>
                                         <LoginRegisterInput handleChange={handleChange} placeholder="Password"
                                                             name="password" type="password" required/>
+                                        <PasswordStrengthBar password={registerData.password} minLength={8}
+                                                             scoreWords={['velmi slabé', 'slabé', 'silné', 'velmi silné']}
+                                                             shortScoreWord={'velmi slabé'}/>
+                                        <div className="form-outline mb-4">
+                                            <label htmlFor="name" className="form-label">{t("Password again")}</label>
+                                            <input
+                                                type="password"
+                                                placeholder={t("Password again") + "..."}
+                                                className="form-control form-control-lg"
+                                                required
+                                                minLength={8}
+                                                value={passwordAgain}
+                                                onChange={(e) => setPasswordAgain(e.target.value)}
+                                            />
+                                        </div>
+                                        
                                         <LoginRegisterInput handleChange={handleChange} placeholder="Title before"
                                                             name="title_before"/>
                                         <LoginRegisterInput handleChange={handleChange} placeholder="Title after"
@@ -158,9 +183,9 @@ export const Register:FC = () => {
                                                        })}/>
                                         <LanguageSelect value={registerData.language}
                                                         setLanguage={(language: string) => setRegisterData({
-                                                           ...registerData,
-                                                           language: language
-                                                       })}/>
+                                                            ...registerData,
+                                                            language: language
+                                                        })}/>
                                         <Form className="padding-bottom">
                                             <h3>{t("Newsletter")}</h3>
                                             <Form.Check
@@ -179,7 +204,9 @@ export const Register:FC = () => {
                                             />
                                         </Form>
                                         <div className="d-flex justify-content-center mt-4">
-                                            <button className="btn btn-outline-warning btn-block btn-lg gradient-custom-4 text-body" disabled={sending}>{t("Register")}</button>
+                                            <button
+                                                className="btn btn-outline-warning btn-block btn-lg gradient-custom-4 text-body"
+                                                disabled={sending}>{t("Register")}</button>
                                         </div>
                                     </form>
 

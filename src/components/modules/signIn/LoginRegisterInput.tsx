@@ -22,7 +22,7 @@ export const LoginRegisterInput:FC<Props> = ({handleChange, name, placeholder, t
                 className="form-control form-control-lg"
                 onChange={handleChange}
                 required={required}
-                minLength={type === "password" ? 6 : 1}
+                minLength={type === "password" ? 8 : 1}
             />
         </div>
     );
