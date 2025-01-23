@@ -1,11 +1,11 @@
-import {ChangeEventHandler, FC, FormEventHandler, useEffect, useState} from "react";
+import {ChangeEvent, ChangeEventHandler, FC, FormEventHandler, useEffect, useState} from "react";
 import {TitleHeader} from "../components/modules/about/TitleHeader.tsx";
 import {Link, useNavigate} from "react-router-dom";
 import {useTranslation} from "react-i18next";
 import Swal from "sweetalert2";
 import {registerUserType} from "../utils/types/user/registerUserType.ts";
 import {LoginRegisterInput} from "../components/modules/signIn/LoginRegisterInput.tsx";
-import {Accordion} from "react-bootstrap";
+import {Accordion, Form} from "react-bootstrap";
 import {CountrySelect} from "../components/modules/signIn/CountrySelect.tsx";
 import {register} from "../api/authenticateService.ts";
 import {useUserContext} from "../utils/providers/providerUser.tsx";
@@ -39,7 +39,9 @@ export const Register:FC = () => {
         street_number: "",
         town: "",
         country: "cs",
-        language: "cs"
+        language: "cs",
+        newsletter_subscription: true,
+        education_emails: true
     });
 
     const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
@@ -85,6 +87,16 @@ export const Register:FC = () => {
             });
         }
     }
+
+    const handleNewsletterChange = (e: ChangeEvent<HTMLInputElement>) => {
+        const { name, checked } = e.target;
+
+        setRegisterData((prevDetails) => ({
+            ...prevDetails,
+            [name]: checked,
+        }));
+    };
+
     
     return (
         <>
@@ -149,6 +161,23 @@ export const Register:FC = () => {
                                                            ...registerData,
                                                            language: language
                                                        })}/>
+                                        <Form className="padding-bottom">
+                                            <h3>{t("Newsletter")}</h3>
+                                            <Form.Check
+                                                checked={registerData.newsletter_subscription}
+                                                type="switch"
+                                                label={t("Subscribe to newsletter")}
+                                                name="newsletter_subscription"
+                                                onChange={handleNewsletterChange}
+                                            />
+                                            <Form.Check
+                                                checked={registerData.education_emails}
+                                                type="switch"
+                                                label={t("Would you like to join a free educational program with information sent usually once a week?")}
+                                                name="education_emails"
+                                                onChange={handleNewsletterChange}
+                                            />
+                                        </Form>
                                         <div className="d-flex justify-content-center mt-4">
                                             <button className="btn btn-outline-warning btn-block btn-lg gradient-custom-4 text-body" disabled={sending}>{t("Register")}</button>
                                         </div>

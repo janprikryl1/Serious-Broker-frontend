@@ -17,6 +17,8 @@ export type registerUserType = {
     town?: string;
     country: string;
     language: string;
+    newsletter_subscription: boolean;
+    education_emails: boolean;
 }
 
 export type registerUserTypeResponse = {
