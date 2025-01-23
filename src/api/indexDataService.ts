@@ -51,5 +51,11 @@ export const getGlossaryOverview = async () => {
 }
 
 export const getTopMostProfitableAssets = async () => {
-    return await axios.get(backendUrl+"index/data/top_most_profitable_assets.php");
+    const token = localStorage.getItem("token");
+    const response = axios.get(backendUrl+"index/data/top_most_profitable_assets.php", {
+        headers: {
+            Authorization2: `Bearer ${token}`,
+        }
+    });
+    return await response;
 }
