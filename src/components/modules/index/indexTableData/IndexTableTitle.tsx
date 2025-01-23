@@ -27,14 +27,14 @@ const SeasonButton: FC<SeasonButtonProps> = ({ seasonValue, isActive, onSelect }
 
 export const IndexTableTitle: FC = () => {
     const { t } = useTranslation();
-    const { data, season, handleSelect } = useIndexDataContext();
+    const { date, season, handleSelect } = useIndexDataContext();
 
     return (
         <>
             <h1>{t("Which cryptocurrencies are best for regular savings?")}</h1>
             <p>
                 {t("Date: ")}
-                {data.date}
+                {date}
             </p>
             <p className="mt-3">
                 <strong>{t("Monitoring period for evaluation")}</strong>

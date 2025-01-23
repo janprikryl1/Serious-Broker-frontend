@@ -2,7 +2,8 @@ import axios from "axios";
 import {backendUrl} from "../env.ts";
 import {LastCoinmarketCupCoinsType} from "../utils/types/indexPage/LastCoinmarketCupCoinsType.ts";
 import {LastMostProfitableCoins} from "../utils/types/indexPage/LastMostProfitableCoins.ts";
-import {IndexDataStructure} from "../utils/types/indexPage/IndexDataStructure.ts";
+import {AssetProfitData, IndexDataStructure} from "../utils/types/indexPage/IndexDataStructure.ts";
+import {IndexSeason} from "../utils/enums/IndexSeasonEnum.ts";
 
 export const getPopularCoins = async () => {
     const token = localStorage.getItem("token");
@@ -25,8 +26,15 @@ export const getLastMostProfitable = async () => {
 }
 
 export const getIndexData = async () => {
+    return  await axios.get<IndexDataStructure>(backendUrl + "index/index.php");
+}
+
+export const getMostProfitableSelectedPeriod = async (season: IndexSeason) => {
     const token = localStorage.getItem("token");
-    const res = await axios.get<IndexDataStructure>(backendUrl + "index/index.php", {
+    const res = axios.get<AssetProfitData[]>(backendUrl + "index/data/get_most_profitable_selected_peroiod.php", {
+        params: {
+            season: season
+        },
         headers: {
             Authorization2: `Bearer ${token}`,
         }
