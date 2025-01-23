@@ -1,5 +1,5 @@
 import {FC, useState} from "react";
-import AchievmentSvg from "../utils/icons/achievment_icon.svg";
+import AchievmentSvg from "../utils/icons/achievment_icon_black_white_grayscale.svg";
 import { useUserContext } from "../utils/providers/providerUser.tsx";
 import {Link} from "react-router-dom";
 import { Divider, Menu, MenuItem } from "@mui/joy";

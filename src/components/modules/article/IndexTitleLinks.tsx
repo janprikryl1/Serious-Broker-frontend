@@ -25,7 +25,7 @@ export const IndexTitleLinks: FC = () => {
                 <img
                     src={currentLink.image}
                     alt="Preview"
-                    style={{ width: 300, borderRadius: 10 }}
+                    style={{ width: 300, height: "auto", borderRadius: 10, objectFit: "contain" }}
                 />
             )}
             <div style={{ flex: 1 }}>

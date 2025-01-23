@@ -7,11 +7,10 @@ import { useThemeContext } from "../../../../utils/providers/ThemeProvider.tsx";
 import { useIndexDataContext } from "../../../../utils/providers/IndexDataProvider.tsx";
 import { TableTemplate } from "../../TableTemplate.tsx";
 import { IndexTableChart } from "./indexTableChart/IndexTableChart.tsx";
-import { routes } from "../../../../utils/constants";
+import {routes} from "../../../../utils/constants";
 import { AssetProfitData } from "../../../../utils/types/indexPage/IndexDataStructure.ts";
 import {calculateProfit} from "../../../../utils/constants/functions.ts";
 import {GainSeasonTh} from "./GainSeasonTh.tsx";
-import {TypographyWithPopover} from "../../TypographyWithPopover.tsx";
 
 export const MostProfitableLastSelectedPeriod: FC = () => {
     const { t } = useTranslation();
@@ -75,13 +74,14 @@ export const MostProfitableLastSelectedPeriod: FC = () => {
                                     rowSpan={2}
                                     className="text-center align-middle no-border-row"
                                 >
-                                    <TypographyWithPopover popover={t(t("More in chart section"))}>
-                                        <>
-                                            <span>{t("Want to")}</span><br/>
-                                            <span>{t("know more")}</span><br/>
-                                            <span>?</span>
-                                        </>
-                                    </TypographyWithPopover>
+                                    <Link
+                                        to={routes.graphs}
+                                        className="btn btn-warning text-dark"
+                                    >
+                                        <span>{t("Want to")}</span><br/>
+                                        <span>{t("know more")}</span><br/>
+                                        <span>?</span>
+                                    </Link>
                                 </td>
                             )}
                         </tr>

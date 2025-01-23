@@ -1,7 +1,7 @@
-import {createContext, useContext, useState, useEffect, ReactNode, FC, Dispatch, SetStateAction} from 'react';
-import { IndexDataStructure } from "../types/indexPage/IndexDataStructure";
-import { IndexSeason } from "../enums/IndexSeasonEnum";
-import { getIndexData } from "../../api/indexDataService";
+import {createContext, Dispatch, FC, ReactNode, SetStateAction, useContext, useEffect, useState} from 'react';
+import {IndexDataStructure} from "../types/indexPage/IndexDataStructure";
+import {IndexSeason} from "../enums/IndexSeasonEnum";
+import {getIndexData} from "../../api/indexDataService";
 import {IndexTableSkeleton} from "../../components/modules/index/indexTableData/IndexTableSkeleton.tsx";
 
 type Props = {

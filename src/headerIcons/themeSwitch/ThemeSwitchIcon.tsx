@@ -9,7 +9,7 @@ export const ThemeSwitchIcon:FC = () => {
     return (
         <div style={{marginRight: "1vw"}} onClick={toggleTheme}>
             <img
-                src={theme === "dark" ? Sun : Moon}
+                src={theme === "dark" ? Moon : Sun}
                 alt="light-dark-switchbtn"
                 width={20}
             />

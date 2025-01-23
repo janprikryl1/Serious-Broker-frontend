@@ -1,48 +1,65 @@
-import {FC} from "react";
-import Nav from "react-bootstrap/Nav";
-import {IndexSeason} from "../../../../utils/enums/IndexSeasonEnum.ts";
-import {Link} from "react-router-dom";
+import { FC } from "react";
+import { IndexSeason } from "../../../../utils/enums/IndexSeasonEnum.ts";
+import { Link } from "react-router-dom";
 import {howDoWeEvaluateReportingPeriodArticle, whatIsPurposeOfReportingPeriodArticle} from "../../../../utils/constants";
-import {useThemeContext} from "../../../../utils/providers/ThemeProvider.tsx";
-import {useTranslation} from "react-i18next";
-import {useIndexDataContext} from "../../../../utils/providers/IndexDataProvider.tsx";
+import { useTranslation } from "react-i18next";
+import { useIndexDataContext } from "../../../../utils/providers/IndexDataProvider.tsx";
+import { Button } from "react-bootstrap";
+
+type SeasonButtonProps = {
+    seasonValue: string;
+    isActive: boolean;
+    onSelect: () => void;
+};
+
+const SeasonButton: FC<SeasonButtonProps> = ({ seasonValue, isActive, onSelect }) => {
+    const { t } = useTranslation();
+    return (
+        <Button
+            className="text-decoration-none trk-btn trk-btn--border trk-btn--primary btn-warning"
+            style={{fontWeight: isActive ? "bold" : "normal"}}
+            onClick={onSelect}
+        >
+            {t(seasonValue)}
+        </Button>
+    );
+};
 
 export const IndexTableTitle: FC = () => {
-    const {theme} = useThemeContext();
-    const {t} = useTranslation();
-    const {data, season, handleSelect} = useIndexDataContext();
+    const { t } = useTranslation();
+    const { data, season, handleSelect } = useIndexDataContext();
 
     return (
         <>
             <h1>{t("Which cryptocurrencies are best for regular savings?")}</h1>
-            <p>{t("Date: ")}{data.date}</p>
-            <p className="mt-3"><strong>{t("Monitoring period for evaluation")}</strong></p>
-            <Nav
-                variant="underline"
-                activeKey={season}
-                onSelect={(selectedKey) => handleSelect(selectedKey as IndexSeason)}
-            >
+            <p>
+                {t("Date: ")}
+                {data.date}
+            </p>
+            <p className="mt-3">
+                <strong>{t("Monitoring period for evaluation")}</strong>
+            </p>
+
+            <div className="d-flex justify-content-between gap-3 mb-25">
                 {Object.values(IndexSeason).map((seasonValue) => (
-                    <Nav.Item key={seasonValue}>
-                        <Nav.Link
-                            eventKey={seasonValue}
-                            style={{color: theme === 'dark' ? "#fff" : "#000"}}
-                        >
-                            {t(seasonValue)}
-                        </Nav.Link>
-                    </Nav.Item>
+                    <SeasonButton
+                        key={seasonValue}
+                        seasonValue={seasonValue}
+                        isActive={season === seasonValue}
+                        onSelect={() => handleSelect(seasonValue)}
+                    />
                 ))}
-            </Nav>
-            <div className="d-flex justify-content-between mt-3 gap-3">
+            </div>
+            <div>
                 <Link
                     to={howDoWeEvaluateReportingPeriodArticle}
-                    className="text-decoration-none trk-btn trk-btn--border trk-btn--primary"
+                    className="text-decoration-none m-r20 text-warning"
                 >
                     {t("How do we evaluate the reporting period?")}
                 </Link>
                 <Link
                     to={whatIsPurposeOfReportingPeriodArticle}
-                    className="text-decoration-none trk-btn trk-btn--border trk-btn--primary"
+                    className="text-decoration-none text-warning"
                 >
                     {t("What is the purpose of the reporting period?")}
                 </Link>

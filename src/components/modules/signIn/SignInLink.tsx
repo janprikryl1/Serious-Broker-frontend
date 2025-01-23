@@ -16,7 +16,7 @@ export const SignInLink:FC<Props> = ({style}) => {
             className="trk-btn--border trk-btn--primary link-underline-none"
             style={{ color: "black", borderRadius: "10px", ...style }}
         >
-            {t("Sign in")}
+            {t("Register")}
         </Link>
     );
 }
