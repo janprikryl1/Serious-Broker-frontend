@@ -19,7 +19,7 @@ export const MyPortfolio:FC = () => {
             <h2>
                 <span>{t("My portfolio")}</span>
             </h2>
-            <p>{t("You can create your own portfolio from our assets and coins and see how much you can earn")}</p>
+            <p>{t("You can create your own portfolio from coins and see how much you can earn")}</p>
             <NewPortfolioButton />
             {myPortfolio.map((portfolio) => (
                 <MyPortfolioCard key={portfolio.id} data={portfolio} />

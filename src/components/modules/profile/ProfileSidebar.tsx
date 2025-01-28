@@ -45,7 +45,7 @@ export const ProfileSidebar:FC = () => {
                             <CDBSidebarMenuItem icon="chart-line">{t("Achievements")}</CDBSidebarMenuItem>
                         </NavLink>
                         <NavLink
-                            to={routes.profile.my_portfolio}
+                            to={routes.profile.myPortfolio}
                             className={({ isActive }) => isActive ? 'activeClicked' : ''}
                         >
                             <CDBSidebarMenuItem icon="gamepad">{t("My portfolio")}</CDBSidebarMenuItem>
