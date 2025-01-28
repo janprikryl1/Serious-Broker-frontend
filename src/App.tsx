@@ -69,6 +69,9 @@ const Demos = lazy(() => import("./pages/Demos.tsx").then(module => ({ default: 
 const Demo = lazy(() => import("./pages/Demo.tsx").then(module => ({ default: module.Demo })));
 const AdminDemos = lazy(() => import("./pages/admin/AdminDemos.tsx").then(module => ({ default: module.AdminDemos })));
 const AdminDemoEdit = lazy(() => import("./pages/admin/AdminDemoEdit.tsx").then(module => ({ default: module.AdminDemoEdit })));
+const MyPortfolio = lazy(() => import("./pages/profile/MyPortfolio.tsx").then(module => ({ default: module.MyPortfolio })));
+const EditMyPortfolio = lazy(() => import("./pages/profile/EditMyPortfolio.tsx").then(module => ({ default: module.EditMyPortfolio })));
+const MyPortfolioDetails = lazy(() => import("./pages/profile/MyPortfolioDetails.tsx").then(module => ({ default: module.MyPortfolioDetails })));
 
 // Disable automatic CSS addition for Font Awesome
 config.autoAddCss = false;
@@ -109,6 +112,10 @@ function App() {
                                 <Route path={routes.profile.edit} element={<PageLoader><ProfileEdit/></PageLoader>}/>
                                 <Route path={routes.profile.achievements} element={<PageLoader><ProfileAchievements/></PageLoader>}/>
                                 <Route path={routes.profile.membership} element={<PageLoader><ProfileMembership/></PageLoader>} />
+                                <Route path={routes.profile.myPortfolio} element={<PageLoader><MyPortfolio/></PageLoader>} />
+                                <Route path={routes.profile.editMyPortfolio} element={<PageLoader><EditMyPortfolio/></PageLoader>} />
+                                <Route path={routes.profile.myPortfolioDetails} element={<PageLoader><MyPortfolioDetails/></PageLoader>} />
+                                <Route path={routes.profile.newMyPortfolio} element={<PageLoader><EditMyPortfolio/></PageLoader>} />
                             </Route>                            
                             <Route path={routes.verifyAccount} element={<PageLoader><VerifyAccount /></PageLoader>} />
                             <Route path={routes.forgottenPassword} element={<PageLoader><ForgottenPassword /></PageLoader>} />

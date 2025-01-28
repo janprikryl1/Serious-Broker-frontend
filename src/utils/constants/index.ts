@@ -47,7 +47,11 @@ export const routes = {
         profileURL: "/profile",
         edit: "/profile/edit",
         achievements: "/profile/achievements",
-        membership: "/profile/membership"
+        membership: "/profile/membership",
+        myPortfolio: "/profile/my_portfolio",
+        editMyPortfolio: "/profile/edit_my_portfolio/:id",
+        newMyPortfolio: "/profile/edit_my_portfolio",
+        myPortfolioDetails: "/profile/my_portfolio_details/:id",
     },
     verifyAccount: "/verify_account/:user_id/:token",
     forgottenPassword: "/forgotten_password",
