@@ -1,15 +1,15 @@
 import {FC} from "react";
-import {useParams} from "react-router-dom";
-import {useTranslation} from "react-i18next";
+import {MyPortfolioProvider} from "../../utils/providers/MyPortfolioProvider.tsx";
+import {MyPortfolioAssets} from "../../components/modules/profile/myPortfolio/myPortfolioEdit/MyPortfolioAssets.tsx";
+import {MyPortfolioDetails} from "../../components/modules/profile/myPortfolio/myPortfolioEdit/MyPortfolioDetails.tsx";
+import {SavePortfolioButton} from "../../components/modules/profile/myPortfolio/myPortfolioEdit/SavePortfolioButton.tsx";
 
 export const EditMyPortfolio:FC = () => {
-    const {id} = useParams();
-    const { t } = useTranslation();
-    
-    
     return (
-        <div>
-            
-        </div>
+        <MyPortfolioProvider>
+            <MyPortfolioDetails />
+            <MyPortfolioAssets />
+            <SavePortfolioButton />
+        </MyPortfolioProvider>
     );
 }

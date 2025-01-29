@@ -1,18 +1,26 @@
-import {FC} from "react";
+import {FC, useCallback, useEffect, useState} from "react";
 import {useTranslation} from "react-i18next";
 import {NewPortfolioButton} from "../../components/modules/profile/myPortfolio/NewPortfolioButton.tsx";
 import {MyPortfolioCard} from "../../components/modules/profile/myPortfolio/MyPortfolioCard.tsx";
-
-const myPortfolio = [
-    {
-        id: 1,
-        title: "Portfolio 1",
-        description: "Lorem ipsum dolor sit amet",
-    }
-];
+import {MyPortfolioType} from "../../utils/types/myPortfolio/MyPortfolioType.ts";
+import {getMyPortfolios} from "../../api/myPortfolioService.ts";
 
 export const MyPortfolio:FC = () => {
     const { t } = useTranslation();
+    const [myPortfolios, setMyPortfolios] = useState<MyPortfolioType[]>([]);
+
+    const fetchMyPortfolios = useCallback(async () => {
+        try {
+            const response = await getMyPortfolios();
+            setMyPortfolios(response.data);
+        } catch (error) {
+            console.error(error);
+        }
+    }, []);
+    
+    useEffect(() => {
+        fetchMyPortfolios();
+    }, [fetchMyPortfolios]);
     
     return (
         <div className="mt-1" style={{marginLeft: "20px"}}>
@@ -21,9 +29,11 @@ export const MyPortfolio:FC = () => {
             </h2>
             <p>{t("You can create your own portfolio from coins and see how much you can earn")}</p>
             <NewPortfolioButton />
-            {myPortfolio.map((portfolio) => (
-                <MyPortfolioCard key={portfolio.id} data={portfolio} />
-            ))}
+            <div className="row">
+                {myPortfolios.map((portfolio) => (
+                    <MyPortfolioCard key={portfolio.id} data={portfolio} fetchMyPortfolios={fetchMyPortfolios} />
+                ))}
+            </div>
         </div>
     );
 };

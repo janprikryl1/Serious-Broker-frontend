@@ -55,8 +55,8 @@ export const AssetGraphCurrencyDetail: FC = () => {
                             <AssetGraphCurrencyDetailTextItem text={t("GraphAssetData - details about asset and graph")} marginBottom="20px" fontSize="1.8rem" />
                             <AssetGraphCurrencyDetailTextItem text={<span>{t("Currency: ")} <strong>{asset.asset_label}</strong></span>} />
                             <AssetGraphCurrencyDetailTextItem text={<span>{t("Allocation: ")} <strong>{asset.allocation * 100}%</strong></span>} />
-                            <AssetGraphCurrencyDetailTextItem text={<span>{t("Changed")}: <strong>{toCzechDateFormat(asset.changed)}</strong></span>} />
-                            <AssetGraphCurrencyDetailTextItem text={<span>{t("Created")}: <strong>{toCzechDateFormat(asset.created)}</strong></span>} marginBottom="40px" />
+                            <AssetGraphCurrencyDetailTextItem text={<span>{t("Changed")}: <strong>{toCzechDateFormat(asset.changed!)}</strong></span>} />
+                            <AssetGraphCurrencyDetailTextItem text={<span>{t("Created")}: <strong>{toCzechDateFormat(asset.created!)}</strong></span>} marginBottom="40px" />
                             <CoinGraph
                                 asset_label={asset.asset_label}
                                 series={series}

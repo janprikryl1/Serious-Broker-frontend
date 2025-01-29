@@ -21,6 +21,7 @@ import { Header } from "./components/modules/navbar/Header.tsx";
 import { Footer } from "./components/modules/navbar/Footer.tsx";
 import {Index} from "./pages/Index.tsx";
 import {PageLoader} from "./components/PageLoader.tsx";
+import 'react-bootstrap-typeahead/css/Typeahead.css';
 const About = lazy(() => import("./pages/About.tsx").then(module => ({ default: module.About })));
 const Contact = lazy(() => import("./pages/Contact.tsx").then(module => ({ default: module.Contact })));
 const Articles = lazy(() => import("./pages/Articles.tsx").then(module => ({ default: module.Articles })));

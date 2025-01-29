@@ -1,5 +1,6 @@
 import {NavbarURLs, NavLink} from "../types/NavLink.ts";
 import {DemoType} from "../types/demos/demoType.ts";
+import {Assets} from "../types/asset/AssetDetailType.ts";
 
 export const domain = "https://serious.broker";
 export const PROTECTED_ROUTES = ['/admin', '/profile', '/assets', '/most_profitable_assets', '/asset_graph/:id'];
@@ -167,6 +168,13 @@ export const defaultNewDemo: DemoType = {
     time_of_replace: 5,
     created: new Date(),
     widgets:[]
+}
+
+export const defaultNewMyPortfolioAsset: Assets = {
+    id: 0,
+    asset_label: "",
+    allocation: 0,
+    status: true
 }
 
 const graphColor = {

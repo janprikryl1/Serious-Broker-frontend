@@ -1,6 +1,7 @@
 export type AssetDetailType = {
     label: string;
-    assets: string;
+    description?: string;
+    assets: Assets[];
     COINS: string;
     last_update: string;
     week_all_profit: number;
@@ -41,6 +42,7 @@ export type Assets = {
     id: number;
     asset_label: string;
     allocation: number;
-    changed: string;
-    created: string;
+    status?: boolean;
+    changed?: string;
+    created?: string;
 };

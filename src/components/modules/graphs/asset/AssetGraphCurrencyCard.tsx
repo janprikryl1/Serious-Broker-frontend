@@ -21,6 +21,7 @@ export const AssetGraphCurrencyCard:FC<Props> = ({singleAsset}) => {
             }}>
                 <Link to={`${routes.assetGraphDetail}/${singleAsset.id}`} className="link-underline-none">{singleAsset.asset_label}</Link>
                 <p>{t("Allocation: ")} {singleAsset.allocation * 100}%</p>
+                {singleAsset.status && <i>{t("Not counted")}</i>}
             </div>
         </>
     );
