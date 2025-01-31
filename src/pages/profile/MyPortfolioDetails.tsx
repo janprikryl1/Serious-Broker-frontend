@@ -6,6 +6,8 @@ import {AssetGraphCurrencyCard} from "../../components/modules/graphs/asset/Asse
 import {AssetGraphPieChart} from "../../components/modules/graphs/asset/AssetGraphPieChart.tsx";
 import {AssetDetailSkeleton} from "../../components/modules/graphs/asset/AssetDetailSkeleton.tsx";
 import {useTranslation} from "react-i18next";
+import {AssetGraphDetails} from "../../components/modules/graphs/asset/AssetGraphDetails.tsx";
+import {toCzechDate} from "../../utils/constants/functions.ts";
 
 export const MyPortfolioDetails:FC = () => {
     const { t } = useTranslation();
@@ -39,7 +41,8 @@ export const MyPortfolioDetails:FC = () => {
                                 <>
                                     <h2 className="mb-4">{t("Title of portfolio")}: {portfolio.name}</h2>
                                     <h3>{portfolio.description}</h3>
-                                    {/*<AssetGraphDetails asset={portfolio}/>*/}
+                                    <p>{t("Created")}: {toCzechDate(portfolio.created)}</p>
+                                    <AssetGraphDetails asset={portfolio}/>
                                     <div className="row">
                                         {portfolio.asset.map((singleAsset: Assets) => (
                                             <AssetGraphCurrencyCard singleAsset={singleAsset}

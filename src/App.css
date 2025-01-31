@@ -115,3 +115,8 @@ button {
   background-color: #ffa602;
   transform: translateY(-50%);
 }
+
+.custom-switch .form-check-input:checked {
+  background-color: #ffca2c !important;
+  border-color: #ffca2c !important;
+}

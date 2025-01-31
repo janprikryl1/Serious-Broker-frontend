@@ -1,7 +1,7 @@
 import { FC, useState } from "react";
 import { AssetDetailType } from "../../../../utils/types/asset/AssetDetailType.ts";
 import { useTranslation } from "react-i18next";
-import { toCzechDate } from "../../../../utils/constants/functions.ts";
+import {toCzechDate, toPercentTwoDecimal} from "../../../../utils/constants/functions.ts";
 
 type Props = {
     asset: AssetDetailType;
@@ -25,39 +25,39 @@ export const AssetGraphDetails: FC<Props> = ({ asset }) => {
                 case "week":
                     return (
                         <div>
-                            <p>{t("Week all profit: ")} {asset.week_all_profit}</p>
-                            <p>{t("Week 0 profit: ")} {asset.week_0_profit}</p>
-                            <p>{t("Week 1 profit: ")} {asset.week_1_profit}</p>
-                            <p>{t("Week 2 profit: ")} {asset.week_2_profit}</p>
-                            <p>{t("Week 3 profit: ")} {asset.week_3_profit}</p>
+                            {asset.week_all_profit !== 0 && asset.week_all_profit !== null && <p>{t("Week all profit: ")} {toPercentTwoDecimal(asset.week_all_profit)} %</p>}
+                            {asset.week_0_profit !== 0 && asset.week_0_profit !== null && <p>{t("Week 0 profit: ")} {toPercentTwoDecimal(asset.week_0_profit)} %</p>}
+                            {asset.week_1_profit !== 0 && asset.week_1_profit !== null && <p>{t("Week 1 profit: ")} {toPercentTwoDecimal(asset.week_1_profit)} %</p>}
+                            {asset.week_2_profit !== 0 && asset.week_2_profit !== null && <p>{t("Week 2 profit: ")} {toPercentTwoDecimal(asset.week_2_profit)} %</p>}
+                            {asset.week_3_profit !== 0 && asset.week_3_profit !== null && <p>{t("Week 3 profit: ")} {toPercentTwoDecimal(asset.week_3_profit)} %</p>}
                         </div>
                     );
                 case "month":
                     return (
                         <div>
-                            <p>{t("Month all profit: ")} {asset.month_all_profit}</p>
-                            <p>{t("Month 0 profit: ")} {asset.month_0_profit}</p>
-                            <p>{t("Month 1 profit: ")} {asset.month_1_profit}</p>
-                            <p>{t("Month 2 profit: ")} {asset.month_2_profit}</p>
+                            {asset.month_all_profit !== 0 && asset.month_all_profit !== null && <p>{t("Month all profit: ")} {toPercentTwoDecimal(asset.month_all_profit)} %</p>}
+                            {asset.month_0_profit !== 0 && asset.month_0_profit !== null && <p>{t("Month 0 profit: ")} {toPercentTwoDecimal(asset.month_0_profit)} %</p>}
+                            {asset.month_1_profit !== 0 && asset.month_1_profit !== null && <p>{t("Month 1 profit: ")} {toPercentTwoDecimal(asset.month_1_profit)} %</p>}
+                            {asset.month_2_profit !== 0 && asset.month_2_profit !== null && <p>{t("Month 2 profit: ")} {toPercentTwoDecimal(asset.month_2_profit)} %</p>}
                         </div>
                     );
                 case "quarter":
                     return (
                         <div>
-                            <p>{t("Quarter all profit: ")} {asset.quarter_all_profit}</p>
-                            <p>{t("Quarter 0 profit: ")} {asset.quarter_0_profit}</p>
-                            <p>{t("Quarter 1 profit: ")} {asset.quarter_1_profit}</p>
-                            <p>{t("Quarter 2 profit: ")} {asset.quarter_2_profit}</p>
-                            <p>{t("Quarter 3 profit: ")} {asset.quarter_3_profit}</p>
+                            {asset.quarter_all_profit !== 0 && asset.quarter_all_profit != null && <p>{t("Quarter all profit: ")} {toPercentTwoDecimal(asset.quarter_all_profit)} %</p>}
+                            {asset.quarter_0_profit !== 0 && asset.quarter_0_profit != null && <p>{t("Quarter 0 profit: ")} {toPercentTwoDecimal(asset.quarter_0_profit)} %</p>}
+                            {asset.quarter_1_profit !== 0 && asset.quarter_1_profit != null && <p>{t("Quarter 1 profit: ")} {toPercentTwoDecimal(asset.quarter_1_profit)} %</p>}
+                            {asset.quarter_2_profit !== 0 && asset.quarter_2_profit != null && <p>{t("Quarter 2 profit: ")} {toPercentTwoDecimal(asset.quarter_2_profit)} %</p>}
+                            {asset.quarter_3_profit !== 0 && asset.quarter_3_profit != null && <p>{t("Quarter 3 profit: ")} {toPercentTwoDecimal(asset.quarter_3_profit)} %</p>}
                         </div>
                     );
                 case "year":
                     return (
                         <div>
-                            <p>{t("Year all profit: ")} {asset.year_all_profit}</p>
-                            <p>{t("Year 0 profit: ")} {asset.year_0_profit}</p>
-                            <p>{t("Year 1 profit: ")} {asset.year_1_profit}</p>
-                            <p>{t("Year 2 profit: ")} {asset.year_2_profit}</p>
+                            {asset.year_all_profit !== 0 && asset.year_all_profit != null && <p>{t("Year all profit: ")} {toPercentTwoDecimal(asset.year_all_profit)} %</p>}
+                            {asset.year_0_profit !== 0 && asset.year_0_profit != null && <p>{t("Year 0 profit: ")} {toPercentTwoDecimal(asset.year_0_profit)} %</p>}
+                            {asset.year_1_profit !== 0 && asset.year_1_profit != null && <p>{t("Year 1 profit: ")} {toPercentTwoDecimal(asset.year_1_profit)} %</p>}
+                            {asset.year_2_profit !== 0 && asset.year_2_profit != null && <p>{t("Year 2 profit: ")} {toPercentTwoDecimal(asset.year_2_profit)} %</p>}
                         </div>
                     );
                 default:
@@ -68,35 +68,35 @@ export const AssetGraphDetails: FC<Props> = ({ asset }) => {
                 case "week":
                     return (
                         <div>
-                            <p>{t("Week 0 profit: ")} {asset.sell_week_0_profit}</p>
-                            <p>{t("Week 1 profit: ")} {asset.sell_week_1_profit}</p>
-                            <p>{t("Week 2 profit: ")} {asset.sell_week_2_profit}</p>
-                            <p>{t("Week 3 profit: ")} {asset.sell_week_3_profit}</p>
+                            {asset.sell_week_0_profit !== 0 && asset.sell_week_0_profit !== null && <p>{t("Week 0 profit: ")} {toPercentTwoDecimal(asset.sell_week_0_profit)} %</p>}
+                            {asset.sell_week_1_profit !== 0 && asset.sell_week_1_profit !== null && <p>{t("Week 1 profit: ")} {toPercentTwoDecimal(asset.sell_week_1_profit)} %</p>}
+                            {asset.sell_week_2_profit !== 0 && asset.sell_week_2_profit !== null && <p>{t("Week 2 profit: ")} {toPercentTwoDecimal(asset.sell_week_2_profit)} %</p>}
+                            {asset.sell_week_3_profit !== 0 && asset.sell_week_3_profit !== null && <p>{t("Week 3 profit: ")} {toPercentTwoDecimal(asset.sell_week_3_profit)} %</p>}
                         </div>
                     );
                 case "month":
                     return (
                         <div>
-                            <p>{t("Month 0 profit: ")} {asset.sell_month_0_profit}</p>
-                            <p>{t("Month 1 profit: ")} {asset.sell_month_1_profit}</p>
-                            <p>{t("Month 2 profit: ")} {asset.sell_month_2_profit}</p>
+                            {asset.sell_month_0_profit !== 0 && asset.sell_month_0_profit !== null && <p>{t("Month 0 profit: ")} {toPercentTwoDecimal(asset.sell_month_0_profit)} %</p>}
+                            {asset.sell_month_1_profit !== 0 && asset.sell_month_1_profit !== null && <p>{t("Month 1 profit: ")} {toPercentTwoDecimal(asset.sell_month_1_profit)} %</p>}
+                            {asset.sell_month_2_profit !== 0 && asset.sell_month_2_profit !== null && <p>{t("Month 2 profit: ")} {toPercentTwoDecimal(asset.sell_month_2_profit)} %</p>}
                         </div>
                     );
                 case "quarter":
                     return (
                         <div>
-                            <p>{t("Quarter 0 profit: ")} {asset.sell_quarter_0_profit}</p>
-                            <p>{t("Quarter 1 profit: ")} {asset.sell_quarter_1_profit}</p>
-                            <p>{t("Quarter 2 profit: ")} {asset.sell_quarter_2_profit}</p>
-                            <p>{t("Quarter 3 profit: ")} {asset.sell_quarter_3_profit}</p>
+                            {asset.sell_quarter_0_profit !== 0 && asset.sell_quarter_0_profit !== null && <p>{t("Quarter 0 profit: ")} {toPercentTwoDecimal(asset.sell_quarter_0_profit)} %</p>}
+                            {asset.sell_quarter_1_profit !== 0 && asset.sell_quarter_1_profit !== null && <p>{t("Quarter 1 profit: ")} {toPercentTwoDecimal(asset.sell_quarter_1_profit)} %</p>}
+                            {asset.sell_quarter_2_profit !== 0 && asset.sell_quarter_2_profit !== null && <p>{t("Quarter 2 profit: ")} {toPercentTwoDecimal(asset.sell_quarter_2_profit)} %</p>}
+                            {asset.sell_quarter_3_profit !== 0 && asset.sell_quarter_3_profit !== null && <p>{t("Quarter 3 profit: ")} {toPercentTwoDecimal(asset.sell_quarter_3_profit)} %</p>}
                         </div>
                     );
                 case "year":
                     return (
                         <div>
-                            <p>{t("Year 0 profit: ")} {asset.sell_year_0_profit}</p>
-                            <p>{t("Year 1 profit: ")} {asset.sell_year_1_profit}</p>
-                            <p>{t("Year 2 profit: ")} {asset.sell_year_2_profit}</p>
+                            {asset.sell_year_0_profit !== 0 && asset.sell_year_0_profit !== null && <p>{t("Year 0 profit: ")} {toPercentTwoDecimal(asset.sell_year_0_profit)} %</p>}
+                            {asset.sell_year_1_profit !== 0 && asset.sell_year_1_profit !== null && <p>{t("Year 1 profit: ")} {toPercentTwoDecimal(asset.sell_year_1_profit)} %</p>}
+                            {asset.sell_year_2_profit !== 0 && asset.sell_year_2_profit !== null && <p>{t("Year 2 profit: ")} {toPercentTwoDecimal(asset.sell_year_2_profit)} %</p>}
                         </div>
                     );
             }
@@ -105,7 +105,6 @@ export const AssetGraphDetails: FC<Props> = ({ asset }) => {
 
     return (
         <div className="service-details__content mb-5">
-            <p><strong>{t("Coins")}: {asset.COINS}</strong></p>
             <p>{t("Last update: ")} {toCzechDate(asset.last_update)}</p>
 
             <div className="d-flex gap-3 mb-3">
