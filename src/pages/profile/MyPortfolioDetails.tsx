@@ -8,6 +8,9 @@ import {AssetDetailSkeleton} from "../../components/modules/graphs/asset/AssetDe
 import {useTranslation} from "react-i18next";
 import {AssetGraphDetails} from "../../components/modules/graphs/asset/AssetGraphDetails.tsx";
 import {toCzechDate} from "../../utils/constants/functions.ts";
+import {
+    MyPortfolioEditButton
+} from "../../components/modules/profile/myPortfolio/myPortfolioEdit/MyPortfolioEditButton.tsx";
 
 export const MyPortfolioDetails:FC = () => {
     const { t } = useTranslation();
@@ -39,7 +42,7 @@ export const MyPortfolioDetails:FC = () => {
                         >
                             {portfolio ? (
                                 <>
-                                    <h2 className="mb-4">{t("Title of portfolio")}: {portfolio.name}</h2>
+                                    <h2 className="mb-4">{t("Title of portfolio")}: {portfolio.label} <MyPortfolioEditButton /></h2>
                                     <h3>{portfolio.description}</h3>
                                     <p>{t("Created")}: {toCzechDate(portfolio.created)}</p>
                                     <AssetGraphDetails asset={portfolio}/>
