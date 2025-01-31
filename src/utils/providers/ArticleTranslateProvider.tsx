@@ -57,8 +57,8 @@ export const ArticleTranslateProvider = ({children}: Props) => {
         setName(response.data.title);
         setDescription(response.data.description);
         setLanguage(response.data.language);
-        setContent(JSON.parse(response.data.content));
-        setSubjects(JSON.parse(response.data.subjects));
+        setContent(response.data.content);
+        setSubjects(response.data.subjects);
         setCurrentContent(0);
         setTemplate(response.data.templateId);
     }
@@ -71,8 +71,8 @@ export const ArticleTranslateProvider = ({children}: Props) => {
         setName(response.data.title);
         setDescription(response.data.description);
         setLanguage(response.data.language);
-        setContent(JSON.parse(response.data.content));
-        setSubjects(JSON.parse(response.data.subjects));
+        setContent(response.data.content);
+        setSubjects(response.data.subjects);
         setCurrentContent(0);
         setTemplate(response.data.templateId);
     }

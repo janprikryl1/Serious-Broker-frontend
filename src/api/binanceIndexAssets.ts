@@ -30,9 +30,7 @@ export const getAssetByIndexLabel = async (index_label: string) => {
             index_label: index_label
         },
         headers: {
-            Authorization2: `Bearer ${token}`,
-            'Content-Type':
-                'application/json',
+            Authorization2: `Bearer ${token}`
         }
     });
     return await response;

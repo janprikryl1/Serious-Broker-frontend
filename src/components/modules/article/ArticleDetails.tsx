@@ -6,8 +6,6 @@ import { v4 as uuidv4 } from 'uuid';
 import { ArticleDetailProps } from "../../../utils/types/article/ArticleDetailProps";
 import { useUserContext } from "../../../utils/providers/providerUser";
 import { CommentType } from "../../../utils/types/CommentType";
-import {SubjectType} from "../../../utils/types/article/SubjectType.ts";
-import {ContentType} from "../../../utils/types/article/ContentType.ts";
 import {ArticleVariant0} from "./articleVariants/ArticleVariant0.tsx";
 import {ArticleVariant1} from "./articleVariants/ArticleVariant1.tsx";
 import {ArticleVariant2} from "./articleVariants/ArticleVariant2.tsx";
@@ -31,13 +29,10 @@ export const ArticleDetails: FC<Props> = ({ article, translations, language, set
     const [category, setCategory] = useState(0);
     const [task, setTask] = useState(0);
     const [comments, setComments] = useState<CommentType[]>();
-    const content:ContentType[] = JSON.parse(article.content);
-    const subjects:SubjectType[]  = JSON.parse(article.subjects);
-
 
     return (
         <div className="blog-details__item">
-            {content && (
+            {article.content && (
                 <div className="blog-details__item-inner">
                     <div key={uuidv4()}>
                         <ArticleBanner banner={article.banner} title={article.title} />
@@ -47,17 +42,17 @@ export const ArticleDetails: FC<Props> = ({ article, translations, language, set
                         <i>{toCzechDateFormat(article.changed)}</i>
                         <br/><br/>
                         {article.templateId === "0" ?
-                            <ArticleVariant0 setTask={setTask} content={content} task={task} subjects={subjects}
+                            <ArticleVariant0 setTask={setTask} content={article.content} task={task} subjects={article.subjects}
                                              category={category} setCategory={setCategory}/> :
                             article.templateId === "1" ?
-                                <ArticleVariant1 setTask={setTask} content={content} task={task} subjects={subjects}
+                                <ArticleVariant1 setTask={setTask} content={article.content} task={task} subjects={article.subjects}
                                                  category={category} setCategory={setCategory}/> :
                                 article.templateId === "2" ?
-                                    <ArticleVariant2 setTask={setTask} content={content} task={task} subjects={subjects}
+                                    <ArticleVariant2 setTask={setTask} content={article.content} task={task} subjects={article.subjects}
                                                      category={category} setCategory={setCategory}
                                                      image={article.titleImage}/> :
                                     article.templateId === "3" ?
-                                        <ArticleVariant3 subjects={subjects}/> :
+                                        <ArticleVariant3 subjects={article.subjects}/> :
                                         article.templateId === "4" ?
                                             <ArticleVariant4 image={article.titleImage}/> :
                                             null}

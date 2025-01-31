@@ -21,7 +21,7 @@ export const DemoAssetGraphs:FC<Props> = ({index_label}) => {
         const getGraphData = async () => {
             const response = await getAssetByIndexLabel(index_label);
             if (!response) return;
-            setDetails(JSON.parse(response.data.assets));
+            setDetails(response.data.assets);
             setAsset(response.data);
         };
 
