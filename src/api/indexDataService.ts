@@ -26,7 +26,7 @@ export const getLastMostProfitable = async () => {
 }
 
 export const getIndexData = async () => {
-    return  await axios.get<IndexDataStructure>(backendUrl + "index/index.php");
+    return await axios.get<IndexDataStructure>(backendUrl + "index/index.php");
 }
 
 export const getMostProfitableSelectedPeriod = async (season: IndexSeason) => {

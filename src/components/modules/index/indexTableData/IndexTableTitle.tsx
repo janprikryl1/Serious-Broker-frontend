@@ -5,6 +5,7 @@ import {howDoWeEvaluateReportingPeriodArticle, whatIsPurposeOfReportingPeriodArt
 import { useTranslation } from "react-i18next";
 import { useIndexDataContext } from "../../../../utils/providers/IndexDataProvider.tsx";
 import { Button } from "react-bootstrap";
+import {toCzechDate} from "../../../../utils/constants/functions.ts";
 
 type SeasonButtonProps = {
     seasonValue: string;
@@ -32,10 +33,12 @@ export const IndexTableTitle: FC = () => {
     return (
         <>
             <h1>{t("Which cryptocurrencies are best for regular savings?")}</h1>
-            <p>
-                {t("Date: ")}
-                {date}
-            </p>
+            {date && (
+                <p>
+                    {t("Date: ")}
+                    {toCzechDate(date)}
+                </p>
+            )}
             <p className="mt-3">
                 <strong>{t("Monitoring period for evaluation")}</strong>
             </p>
