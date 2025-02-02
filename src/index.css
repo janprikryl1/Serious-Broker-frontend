@@ -1,3 +1,10 @@
+/*:root[data-bs-theme=light] {
+    --bs-body-bg: #FFFFFF !important;
+}
+:root[data-bs-theme=dark] {
+    --bs-body-bg: #000000 !important;
+}*/
+
 .link-underline-none {
     text-decoration: none;
 }

@@ -1,62 +1,58 @@
-import { FC, useEffect, useState } from "react";
+import {ChangeEvent, FC, useEffect, useState} from "react";
+import { useForm } from "react-hook-form";
 import { Button, Form, Row, Col } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { useThemeContext } from "../../utils/providers/ThemeProvider";
 import { QRCodeType } from "../../utils/types/QRCodeType";
 import { getQR, saveQRCode } from "../../api/qrService";
 import Swal from "sweetalert2";
+import { qrCodeImagesURL } from "../../utils/constants";
 
 export const QRManagement: FC = () => {
     const { t } = useTranslation();
     const { theme } = useThemeContext();
-    const [formData, setFormData] = useState<Partial<QRCodeType>>({
-        image: "",
-        description: "",
-        network: "",
-        address_of_deposit: "",
-    });
     const [image, setImage] = useState<File | null>(null);
+    const [imageUrl, setImageUrl] = useState<string | null>(null);
+    const [isEditingImage, setIsEditingImage] = useState<boolean>(false);
+
+    const { register, handleSubmit, reset } = useForm<QRCodeType>({
+        defaultValues: {
+            image: "",
+            description: "",
+            network: "",
+            address_of_deposit: "",
+        },
+    });
 
     useEffect(() => {
         const fetchQR = async () => {
             try {
                 const response = await getQR();
                 if (response) {
-                    setFormData(response.data);
+                    reset(response.data);
+                    setImageUrl(response.data.image ? `${qrCodeImagesURL}/${response.data.image}` : null);
                 }
             } catch (error) {
                 console.error(t("Failed to fetch QR code details"), error);
             }
         };
         fetchQR();
-    }, [t]);
+    }, [t, reset]);
 
-    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        const { name, value } = e.target;
-        setFormData((prev) => ({ ...prev, [name]: value }));
-    };
-
-    const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0] || null;
         setImage(file);
     };
 
-    const handleSave = async () => {
+    const onSubmit = async (data: QRCodeType) => {
         try {
-            const response = await saveQRCode(formData, image);
+            const response = await saveQRCode(data, image);
             if (response) {
                 Swal.fire({
                     title: t("QR Code updated"),
                     text: t("QR Code updated successfully"),
                     icon: "success",
                 });
-                setFormData({
-                    image: "",
-                    description: "",
-                    network: "",
-                    address_of_deposit: "",
-                });
-                setImage(null);
             } else {
                 Swal.fire({
                     title: t("Error"),
@@ -89,54 +85,41 @@ export const QRManagement: FC = () => {
                 data-aos-duration="1000"
             >
                 <h1>{t("QR payment management")}</h1>
-                <Form>
+                <Form onSubmit={handleSubmit(onSubmit)}>
                     <Row className="mb-3">
                         <Col>
                             <Form.Group controlId="image">
                                 <Form.Label>{t("Image")}</Form.Label>
-                                <Form.Control
-                                    type="file"
-                                    name="image"
-                                    onChange={handleImageChange}
-                                />
+                                {imageUrl && !isEditingImage ? (
+                                    <div className="mb-2">
+                                        <a href={imageUrl} target="_blank" rel="noopener noreferrer" className="text-decoration-none">
+                                            {t("View current image")}
+                                        </a>
+                                        <Button variant="warning" className="ms-5" onClick={() => setIsEditingImage(true)}>
+                                            {t("Change Image")}
+                                        </Button>
+                                    </div>
+                                ) : (
+                                    <Form.Control type="file" {...register("image")} onChange={handleImageChange} />
+                                )}
                             </Form.Group>
                         </Col>
                         <Col>
                             <Form.Group controlId="network">
                                 <Form.Label>{t("Network")}</Form.Label>
-                                <Form.Control
-                                    type="text"
-                                    placeholder={t("Enter network")}
-                                    name="network"
-                                    value={formData.network}
-                                    onChange={handleInputChange}
-                                />
+                                <Form.Control type="text" placeholder={t("Enter network")} {...register("network")} />
                             </Form.Group>
                         </Col>
                     </Row>
                     <Form.Group controlId="description" className="mb-3">
                         <Form.Label>{t("Description")}</Form.Label>
-                        <Form.Control
-                            as="textarea"
-                            rows={3}
-                            placeholder={t("Enter description")}
-                            name="description"
-                            value={formData.description}
-                            onChange={handleInputChange}
-                        />
+                        <Form.Control as="textarea" rows={3} placeholder={t("Enter description")} {...register("description")} />
                     </Form.Group>
                     <Form.Group controlId="address_of_deposit" className="mb-3">
                         <Form.Label>{t("Address of deposit")}</Form.Label>
-                        <Form.Control
-                            as="textarea"
-                            rows={3}
-                            placeholder={t("Enter address of deposit")}
-                            name="address_of_deposit"
-                            value={formData.address_of_deposit}
-                            onChange={handleInputChange}
-                        />
+                        <Form.Control as="textarea" rows={3} placeholder={t("Enter address of deposit")} {...register("address_of_deposit")} />
                     </Form.Group>
-                    <Button variant="primary" onClick={handleSave} className="mt-3">
+                    <Button variant="primary" type="submit" className="mt-3">
                         {t("Save")}
                     </Button>
                 </Form>
