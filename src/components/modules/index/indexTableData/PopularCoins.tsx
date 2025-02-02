@@ -44,6 +44,7 @@ export const PopularCoins: FC = () => {
                     <tr>
                         <th>{t("Order")}</th>
                         <th>Coin</th>
+                        <th>{t("Name")}</th>
                         <th>{t("Position")}</th>
                         <th>{t("Profit")}</th>
                     </tr>
@@ -53,6 +54,7 @@ export const PopularCoins: FC = () => {
                         <tr key={coin.cmc_rank}>
                             <td>{coin.cmc_rank}</td>
                             <td>{coin.asset_label}</td>
+                            <td>{coin.name}</td>
                             <td>{coin.week_0_pos}</td>
                             <td>{(calculateProfit(coin.week_0_profit) ?? 0).toFixed(2)} %</td>
                             {!isMobile &&

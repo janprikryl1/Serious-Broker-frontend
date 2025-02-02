@@ -81,6 +81,7 @@ export const MostProfitableLastSelectedPeriod: FC = () => {
                     <tr>
                         <th>{t("Position")}</th>
                         <th>Coin</th>
+                        <th>{t("Name")}</th>
                         <GainSeasonTh/>
                         <th>{t("Graph")}</th>
                     </tr>
@@ -101,6 +102,7 @@ export const MostProfitableLastSelectedPeriod: FC = () => {
                                 }
                             </td>
                             <td>{coin.asset_label}</td>
+                            <td>{coin.name}</td>
                             <td>
                                 {season === IndexSeason.SMART
                                     ? `${(coin.max_0_profit! * 100).toFixed(2)} %`

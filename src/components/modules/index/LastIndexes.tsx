@@ -36,6 +36,7 @@ export const LastIndexes = () => {
     const rows = lastMostProfitable.map((coin) => ({
         id: coin.cmc_rank, // Use a unique identifier from the data
         asset_label: coin.asset_label,
+        name: coin.name,
         quote_currencies: coin.quote_currencies,
         cmc_rank: coin.cmc_rank,
         week_0_pos: coin.week_0_pos,

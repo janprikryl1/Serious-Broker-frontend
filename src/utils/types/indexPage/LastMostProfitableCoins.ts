@@ -1,5 +1,6 @@
 export type LastMostProfitableCoins = {
     asset_label: string;
+    name: string;
     quote_currencies: string;
     cmc_rank: string;
     week_0_pos: number;

@@ -67,9 +67,14 @@ export const BestPortfolioTable:FC = () => {
                 <table className="table no-border-row">
                     <thead>
                     <tr>
-                        {!isMobile && <th><TypographyWithPopover popover={t("Order of the coins in the portfolio")}>
-                            {t("Order")}
-                        </TypographyWithPopover></th>}
+                        {!isMobile && <>
+                            <th>
+                                <TypographyWithPopover popover={t("Order of the coins in the portfolio")}>
+                                    {t("Order")}
+                                </TypographyWithPopover>
+                            </th>
+                            <th>{t("Name")}</th>
+                        </>}
                         <th>{t("Title")}</th>
                         <td>
                             <TypographyWithPopover popover={t("Portfolio is a collection of cryptocurrencies")}>
@@ -83,7 +88,11 @@ export const BestPortfolioTable:FC = () => {
                     <tbody>
                     {top_most_profitable_assets ? top_most_profitable_assets.map((category) =>  (
                         <tr key={category.asset_label}>
-                            {!isMobile && <th>{category.order_index}</th>}
+                            {!isMobile && (
+                                <>
+                                <th>{category.order_index}</th>
+                                <td>{category.name}</td>
+                                </>)}
                             <td>{category.asset_label}</td>
                             <td>{isMobile ? category.quote_currencies.substring(0, 5)+" ..." : category.quote_currencies}</td>
                             <td>

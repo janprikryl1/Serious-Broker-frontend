@@ -12,6 +12,7 @@ export type CoinCategory = {
 
 export type AssetProfitData = {
     asset_label: string;
+    name: string;
     quote_currencies: string[];
     cmc_rank: number;
     week_0_pos?: number;
@@ -37,6 +38,7 @@ export type AssetProfitData = {
 
 export type MostProfitable = {
     asset_label: string;
+    name: string;
     quote_currencies: string[];
     cmc_rank: number;
     week_0_pos: number;
@@ -58,6 +60,7 @@ export type MostVolatile = {
 export type TopMostProfitableAsset = {
     order_index: number;
     asset_label: string;
+    name: string;
     quote_currencies: string;
     week_0_profit: number | null;
     week_1_profit: number | null;
