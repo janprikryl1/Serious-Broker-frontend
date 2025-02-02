@@ -13,7 +13,7 @@ type SeasonButtonProps = {
     onSelect: () => void;
 };
 
-const SeasonButton: FC<SeasonButtonProps> = ({ seasonValue, isActive, onSelect }) => {
+export const SeasonButton: FC<SeasonButtonProps> = ({ seasonValue, isActive, onSelect }) => {
     const { t } = useTranslation();
     return (
         <Button

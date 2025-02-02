@@ -39,20 +39,21 @@ export const AssetGraph: FC = () => {
                                     data-aos="fade-up"
                                     data-aos-duration="900"
                                 >
-                                    <h2 className="mb-4">{t("Title")}: {index_label}</h2>
+                                    <h2 className="mb-4">{t("Title")}: {index_label} ({asset?.name})</h2>
                                     {asset ? (
                                         <>
-                                            <AssetGraphDetails asset={asset} />
+                                            <AssetGraphDetails asset={asset}/>
                                             <div className="row">
                                                 {asset.assets.map((singleAsset: Assets) => (
-                                                    <AssetGraphCurrencyCard singleAsset={singleAsset} key={singleAsset.id} />
+                                                    <AssetGraphCurrencyCard singleAsset={singleAsset}
+                                                                            key={singleAsset.id}/>
                                                 ))}
-                                                
+
                                             </div>
-                                            <AssetGraphPieChart assets={asset.assets} />
+                                            <AssetGraphPieChart assets={asset.assets}/>
                                         </>
                                     ) : (
-                                        <AssetDetailSkeleton />
+                                        <AssetDetailSkeleton/>
                                     )}
                                 </div>
                             </div>

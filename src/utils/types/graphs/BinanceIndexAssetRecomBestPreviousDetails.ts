@@ -1,5 +1,6 @@
 export type BinanceIndexAssetRecomBestPreviousDetails = {
     asset_label: string,
+    name: string,
     quote_currencies: string | null,
     last_update: string | null,
     cmc_rank: number | null,

@@ -118,9 +118,7 @@ export const registeredUserNavbarURLs: NavbarURLs = {
         subLinks: {
             graphs: { title: "Graphs", link: routes.graphs },
             assets: { title: "Assets", link: routes.assets },
-            mostProfitableAssets: { title: "Most profitable assets", link: routes.mostProfitableAssets },
-            assetGraphURL: { title: "Asset graph", link: routes.assetGraphURL },
-            assetGraphDetail: { title: "Asset graph detail", link: routes.assetGraphDetail },
+            mostProfitableAssets: { title: "Most profitable assets", link: routes.mostProfitableAssets }
         },
     },
 };

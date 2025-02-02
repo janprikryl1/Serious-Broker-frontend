@@ -3,6 +3,7 @@ import {BinanceIndexAssetRecomBestPreviousType} from "../../../utils/types/graph
 import {Link} from "react-router-dom";
 import {useTranslation} from "react-i18next";
 import {routes} from "../../../utils/constants";
+import {toPercentTwoDecimal} from "../../../utils/constants/functions.ts";
 
 type Props = {
     data: BinanceIndexAssetRecomBestPreviousType;
@@ -19,13 +20,14 @@ export const RecomDetail:FC<Props> = ({data}) => {
                         <Link to={`${routes.graphsRecommendationDetailURL}${data.asset_label}`}
                               className="link-underline-none">{data.asset_label}</Link>
                     </h5>
+                    <p>{t("Name")}: {data.name}</p>
                     <p>{t("Quote currencies: ")}{data.quote_currencies}</p>
                     <p>{t("cmc_rank")}: {data.cmc_rank}</p>
-                    <p>{t("Best of all index: ")}{data.all_pos}</p>
-                    <p>{t("All suggestions: ")}{data.all_sug}</p>
+                    {data.all_pos !== null && <p>{t("Best of all index: ")}{data.all_pos}</p>}
+                    {data.all_sug !== null && <p>{t("All suggestions: ")}{data.all_sug}</p>}
                     <p>{t("Week suggestions: ")}{data.week_sug}</p>
                     <p>{t("Week all: ")}{data.week_all}</p>
-                    <p>{t("Week all profit: ")}{data.week_all_profit}</p>
+                    <p>{t("Week all profit: ")}{toPercentTwoDecimal(data.week_all_profit)} %</p>
                     <p>{t("Positions in week 0: ")}{data.week_0_pos}</p>
                 </div>
             </div>
