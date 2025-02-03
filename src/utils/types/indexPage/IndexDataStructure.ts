@@ -43,6 +43,7 @@ export type MostProfitable = {
     cmc_rank: number;
     week_0_pos: number;
     week_0_profit: number;
+    photo: string;
 };
 
 export type MostVolatileData = {

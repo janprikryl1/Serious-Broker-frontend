@@ -1,5 +1,4 @@
 import {createContext, useContext, useState, useEffect, ReactNode, useCallback, FC} from 'react';
-import {useLocation} from "react-router-dom";
 import {SkeletonTheme} from "react-loading-skeleton";
 
 type ThemeContextType = {
@@ -10,19 +9,21 @@ type ThemeContextType = {
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export const ThemeProvider: FC<{ children: ReactNode }> = ({ children }) => {
-    const [theme, setTheme] = useState(localStorage.getItem('theme'));
-    const location = useLocation();
+    const [theme, setTheme] = useState("dark");
 
-
-    const updateThemeColor = useCallback((themeMode: 'light' | 'dark' = 'light') => {
+    const updateThemeColor = useCallback((themeMode: 'light' | 'dark' = 'dark') => {
         document.documentElement.setAttribute('data-bs-theme', themeMode);
         localStorage.setItem('theme', themeMode);
         setTheme(themeMode);
     }, []);
-
+    
     useEffect(() => {
-        updateThemeColor(theme as 'light' | 'dark');
-    }, [location.search, updateThemeColor]);
+        if ("theme" in localStorage) {
+            updateThemeColor(localStorage.getItem('theme') as 'light' | 'dark');
+        } else {
+            updateThemeColor("dark");
+        }
+    }, []);
 
     const toggleTheme = () => {
         const theme = localStorage.getItem('theme');
@@ -32,8 +33,6 @@ export const ThemeProvider: FC<{ children: ReactNode }> = ({ children }) => {
             updateThemeColor('dark');
         }
     };
-
-  
 
     return (
         <ThemeContext.Provider value={{ theme, toggleTheme }}>

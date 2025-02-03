@@ -1,0 +1,22 @@
+import {FC} from "react";
+import {MostProfitable} from "../../../utils/types/indexPage/IndexDataStructure.ts";
+import {toPercentTwoDecimal} from "../../../utils/constants/functions.ts";
+import {coinURL} from "../../../utils/constants";
+import {BsCoin} from "react-icons/bs";
+
+type Props = {
+    item: MostProfitable;
+};
+
+export const TrendingSwiperItem: FC<Props> = ({ item }) => {
+    return (
+        <div className="crypto-card">
+            {item.photo ? <img src={`${coinURL}/${item.photo}`} alt={item.name} className="crypto-logo" /> : <BsCoin />}
+            <div className="crypto-info">
+                <small style={{fontWeight:"bold", overflow:"hidden", maxHeight:20}}>{item.name}</small>
+                <small>{item.asset_label}</small>
+                <span className="percentage">{toPercentTwoDecimal(item.week_0_profit)} %</span>
+            </div>
+        </div>
+    );
+};

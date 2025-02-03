@@ -3,6 +3,7 @@
 
   &__wrapper {
     @extend %p-rel;
+    margin-left: 2vw;
   }
 
   &__newsletter {
@@ -11,16 +12,12 @@
       %py-45,
       %p-rel;
       gap: 30px;
-      background-color: $border-color;
-      border-radius: 24px;
-      width: 98%;
-      margin: 0 auto;
+      background-color: #cfbe8d;
+      border-radius: 12px;
+      margin: 20px;
       z-index: 2;
-
-
-      &--style2 {
-        background-color: $brand-color;
-      }
+      max-width: 600px;
+      text-align: center;
 
       @include breakpoint(max-md) {
         text-align: center;
@@ -28,7 +25,6 @@
 
       @include breakpoint(sm) {
         width: 85%;
-        // padding: 30px;
       }
 
       @include breakpoint(md) {
@@ -144,11 +140,9 @@
     flex: 1;
 
     h2 {
-      color: $title-color;
-
-      span {
-        color: $brand-color;
-      }
+      color: black;
+      margin-bottom: 20px;
+      font-size: 24px;
 
       @include breakpoint(max-md) {
         margin-block-end: 5px;
@@ -377,10 +371,8 @@
         }
       }
     }
-
   }
-
-
+  
   &--style2 {
     @extend %p-rel;
     // width: 95%;
@@ -394,5 +386,54 @@
       margin-bottom: -180px;
     }
   }
+}
 
+.cta-signup {
+  @extend %of-hidden;
+  background-color: #cfbe8d;
+  &__wrapper {
+    @extend %p-rel;
+  }
+  p {
+    color: black;
+    font-size: 30px;
+    font-weight: bold;
+  }
+  button {
+    border-radius: 3px;
+  }
+}
+
+.cta-dark {
+  background-color: rgb(33, 30, 27);
+  padding-top: 30px;
+  padding-bottom: 30px;
+  
+  p {
+    font-size: 20px;
+  }
+
+  a {
+    color: $thm-brand-color;
+    font-size: 18px;
+    font-weight: 550;
+    text-align: left;
+    display: inline-block;
+  }
+
+  i, svg {
+    font-size: 20px;
+    color: $thm-brand-color;
+    margin-right: 10px;
+  }
+
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .col-sm-4 {
+    display: flex;
+    align-items: center;
+  }
 }

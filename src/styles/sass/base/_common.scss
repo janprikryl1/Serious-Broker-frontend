@@ -102,6 +102,7 @@
             @extend %py-10,
             %px-20,
             %me-10;
+            border-radius: 3px;
             background-color: $bg-white;
             border-color: $bg-white;
             color: $thm-title-color;
@@ -109,9 +110,6 @@
             &::placeholder {
                 color: $thm-text-color;
             }
-
-
-
 
             @include breakpoint(sm) {
                 max-width: 60%;

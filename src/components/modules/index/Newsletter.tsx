@@ -1,8 +1,5 @@
 import {FC, useState} from "react";
 import {useTranslation} from "react-i18next";
-import cta2 from "../../../utils/icons/cta/2.png";
-import cta4 from "../../../utils/icons/cta/4.png";
-import cta5 from "../../../utils/icons/cta/5.png";
 import Swal from "sweetalert2";
 import {addNewsletter} from "../../../api/newsletterService.ts";
 
@@ -51,51 +48,39 @@ export const Newsletter: FC = () => {
   };
   
   return (
-      <section className="cta padding-top padding-bottom bg-color">
-        <div className="container">
+      <section className="container cta padding-top padding-bottom bg-color">
           <div className="cta__wrapper">
-            <div className="cta__newsletter d-flex justify-content-center">
+            <div className="cta__newsletter d-flex row">
+              <div className="col-sm-6" style={{marginRight:30}}>
+                <h2>{t("Investing Made Easy")}</h2>
+                <ul className="newsletter-list">
+                  <li>{t("We will create a full-step guide on investing just for you.")}</li>
+                  <li>{t("Get recommendations on what to buy, when to buy and when to sell.")}</li>
+                  <li>{t("You are in control – execute transactions based on our detailed guide.")}</li>
+                </ul>
+              </div>
               <div
-                  className="cta__newsletter-inner text-center"
+                  className="col-sm cta__newsletter-inner text-center"
                   data-aos="fade-up"
                   data-aos-duration="1000"
               >
                 <div className="cta__subscribe">
-                  <h2>
-                    <span>{t("Subscribe")}</span> {t("to our news")}
-                  </h2>
-                  <p>{t("Subscribe to our news now and stay in the loop!")}</p>                   
-                  <div className="cta-form form-subscribe cta-form__inner d-sm-flex align-items-center justify-content-center">
+                  <h2 style={{fontSize: "28px", marginBottom: 20}}>{t("Get a guide just for you!")}</h2>
+                  <div>
                     <input
                         type="email"
-                        className="form-control form-control--style2 mb-3 mb-sm-0"
-                        placeholder="Email"
+                        style={{backgroundColor:"white", border:"none", borderRadius:3, maxWidth:"500px", color:"black"}}
+                        placeholder="E-mail"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                     />
-                    <button
-                        className="trk-btn trk-btn--large trk-btn--secondary2"
-                        onClick={handleAddNewsletter}
-                    >
-                      {t("Submit")}
-                    </button>
                   </div>
+                  <button className="trk-btn trk-btn--secondary2 mt-3" style={{borderRadius:3, fontSize:20}}
+                          onClick={handleAddNewsletter}>{t("Register")}</button>
                 </div>
               </div>
             </div>
-            <div className="cta__shape">
-            <span className="cta__shape-item cta__shape-item--1">
-              <img src={cta2} alt="shape icon" />
-            </span>
-              <span className="cta__shape-item cta__shape-item--2">
-              <img src={cta4} alt="shape icon" />
-            </span>
-              <span className="cta__shape-item cta__shape-item--3">
-              <img src={cta5} alt="shape icon" />
-            </span>
-            </div>
           </div>
-        </div>
       </section>
   );
 };

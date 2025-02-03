@@ -124,22 +124,9 @@ export const registeredUserNavbarURLs: NavbarURLs = {
 };
 
 export const notRegisteredUserNavbarURLs: Record<string, NavLink> = {
-    cryptoCurrencies: { title: "Cryptocurrencies", link: routes.cryptocurrenciesList },
-    possibilities: { title: "Posibilities", link: "/article/9" },
-    investWithoutLoss: { title: "Invest safely without loss", link: "/article/10" },
-    gains: { title: "Gains", link: "/article/11" },
+    learn: { title: "Learn", link: routes.articles },
+    aboutUs: { title: "About us", link: routes.about },
 };
-
-export const indexLinks = {
-    investWithoutLoss: { title: "Invest safely without loss", link: "/article/10", image: "https://api.serious.broker/article/images/IMG-678823ee0b6c4.png" },
-    cryptoAndAnotherInvestment: { title: "Crypto and another investment", link: "/article/12", image: "https://api.serious.broker/article/images/IMG-678823ee0170d.png" },
-    whatToAvoid: { title: "What to watch out for when investing in cryptocurrencies - How to invest", link: "/article/8", image: "https://api.serious.broker/article/images/IMG-678823ee2fde0.png" },
-    whenToStartInvesting: { title: "When to start investing in cryptocurrencies", link: "/article/13", image: "https://api.serious.broker/article/images/is_it_save_to_inverst_1x1.png" },
-    gains: { title: "How much can I earn trading cryptocurrencies", link: "/article/11", image: "https://api.serious.broker/article/images/IMG-678823ee07d26.png" },
-    howToAvoidBigLosses: { title: "How to avoid big losses", link: "/article/14", image: "https://api.serious.broker/article/images/IMG-678823ee2fde0.png" },
-    isInvestingForEveryone: { title: "Is investing in cryptocurrencies for everyone", link: "/article/15", image: "https://api.serious.broker/article/images/is_it_save_to_inverst_1x1.png" },
-    legislationAndTaxation: { title: "Legislation and taxation of cryptocurrency earnings", link: "/article/16", image: "https://api.serious.broker/article/images/IMG-6788279197f34.png" },
-}
 
 export const defaultNewCurrency = {
     id: 0,

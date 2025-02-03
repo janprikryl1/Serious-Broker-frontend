@@ -1,16 +1,16 @@
 import {FC} from "react";
 import {NavDropdown} from "react-bootstrap";
 import {LanguageFlagComponent} from "./LanguageFlagComponent";
-import {SelectedLanguageIcon} from "./SelectedLanguageIcon";
-import Czech from "../../utils/icons/languages/czech.png";
-import English from "../../utils/icons/languages/english.png";
+import {useTranslation} from "react-i18next";
 
 export const ChangeLanguageIcon:FC = () => {
+    const { t} = useTranslation();
+    
     return (
         <div style={{marginRight: "1vw"}}>
-            <NavDropdown title={<SelectedLanguageIcon />}>
-                <LanguageFlagComponent languageId="cs" languageName="Čeština" languageFlag={Czech}/>
-                <LanguageFlagComponent languageId="en" languageName="English" languageFlag={English}/>
+            <NavDropdown title={t("Language")}>
+                <LanguageFlagComponent languageId="cs" languageName="Čeština"/>
+                <LanguageFlagComponent languageId="en" languageName="English"/>
             </NavDropdown>
         </div>
     )

@@ -1,4 +1,3 @@
-import './App.css';
 import {lazy} from 'react';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { config } from '@fortawesome/fontawesome-svg-core';

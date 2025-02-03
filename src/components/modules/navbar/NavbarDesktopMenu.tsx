@@ -4,12 +4,16 @@ import { registeredUserNavbarURLs, notRegisteredUserNavbarURLs } from "../../../
 import { useTranslation } from "react-i18next";
 import { useUserContext } from "../../../utils/providers/providerUser.tsx";
 
-export const NavbarDesktopMenu: FC = () => {
+interface NavbarDesktopMenuProps {
+    className?: string;
+}
+
+export const NavbarDesktopMenu: FC<NavbarDesktopMenuProps> = ({ className }) => {
     const { t } = useTranslation();
     const { user } = useUserContext();
 
     return (
-        <div className="menu-area d-none d-lg-flex align-items-center">
+        <div className={`menu-area ${className}`}>
             <ul className="menu menu--style1 d-flex align-items-center">
                 {user ? (
                     Object.keys(registeredUserNavbarURLs).map((key) => {

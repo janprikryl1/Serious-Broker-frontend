@@ -14,9 +14,9 @@ export const SignInLink:FC<Props> = ({style}) => {
         <Link
             to={routes.signIn}
             className="trk-btn--border trk-btn--primary link-underline-none"
-            style={{ color: "black", borderRadius: "10px", ...style }}
+            style={{ color: "black", borderRadius: "3px", fontWeight: "bold", ...style }}
         >
-            {t("Register")}
+            {t("Sign in")}
         </Link>
     );
 }

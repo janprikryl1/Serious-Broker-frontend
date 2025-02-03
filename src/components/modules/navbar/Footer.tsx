@@ -1,72 +1,59 @@
 import  {FC} from 'react';
-import { Link } from 'react-router-dom';
 import ScrollToTop from "react-scroll-to-top";
 import {useTranslation} from "react-i18next";
-import footer1 from "../../../utils/icons/footer/1.png";
-import {facebookURL, instagramURL, routes} from "../../../utils/constants";
+import {
+  contactEmail,
+  facebookURL,
+  instagramURL,
+  linkedinURL,
+  phoneNumber,
+  twitterURL,
+  youtubeURL
+} from "../../../utils/constants";
 import {SocialLinkIcon} from "../contact/SocialLinkIcon.tsx";
+import {LeftFloatingContactDetailsItem} from "../contact/LeftFloatingContactDetailsItem.tsx";
 
 export const Footer:FC = () => {
   const {t} = useTranslation();
   return (
       <>
-        <footer className="footer brand-1">
+        <footer className="footer">
           <div className="container">
             <div className="footer__wrapper">
               <div className="footer__top footer__top--style1">
-                <div className="row gy-2 gx-4">
+                <div className="row">
                   <div className="col-md-6">
                     <div className="footer__about">
                       <p className="footer__about-moto">
-                        {t("Serious Broker is a student project that is being developed as part of a bachelor thesis. It focuses on assisting in investing and spreading awareness about cryptocurrencies. Want to know more? Join us on social media or contact us via email for example.")}
+                        {t("Serious Broker is a student project that is being developed as part of a bachelor thesis. It focuses on assisting in investing and spreading awareness about cryptocurrencies.")}
                       </p>
-                      <p className="footer__about-moto">{t("We are not a financial consultancy")}</p>
+                      <p className="footer__about-moto">{t("Want to know more? Join us on social media or contact us via email for example.")}</p>
+                      <p className="footer__about-moto">{t("We are not a financial consultancy")}.</p>
+                    </div>
+                  </div>
+                  <div className="col-sm-6 d-flex justify-content-end">
+                    <div className="contact text-end" data-aos="fade-right" data-aos-duration="1000">
+                      <LeftFloatingContactDetailsItem href={`mailto:${contactEmail}`} title={contactEmail}/>
+                      <LeftFloatingContactDetailsItem href={`tel:${phoneNumber}`} title={phoneNumber}/>
+                      <ul className="social justify-content-end">
+                        <SocialLinkIcon href={facebookURL} icon="fab fa-facebook-f"/>
+                        <SocialLinkIcon href={instagramURL} icon="fab fa-instagram"/>
+                        <SocialLinkIcon href={linkedinURL} icon="fa-brands fa-linkedin-in"/>
+                        <SocialLinkIcon href={twitterURL} icon="fab fa-x-twitter"/>
+                        <SocialLinkIcon href={youtubeURL} icon="fab fa-youtube"/>
+                      </ul>
                     </div>
                   </div>
 
-                  <div className="col-md-1 col-sm-4 col-6">
-                    <div className="footer__links">
-                      <div className="footer__links-content">
-                        <ul className="footer__linklist">
-                          <li className="footer__linklist-item"><Link to={routes.about} className="link-underline-none">{t("About us")}</Link></li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="col-md-2 col-sm-4 col-6">
-                    <div className="footer__links">
-                      <div className="footer__links-content">
-                        <ul className="footer__linklist">
-                          <li className="footer__linklist-item"><Link to={routes.contact} className="link-underline-none">{t("Contact")}</Link></li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
                 </div>
               </div>
-
-              <div className="footer__bottom">
-                <div className="footer__end">
-                  <div className="footer__end-copyright">
-                    <p className="mb-0">© 2024 - 2025 VŠB</p>
-                  </div>
-                  <div>
-                    <ul className="social">
-                      <SocialLinkIcon href={facebookURL} icon="fab fa-facebook-f" />
-                      <SocialLinkIcon href={instagramURL} icon="fab fa-instagram" />
-                    </ul>
-                  </div>
+              <div className="footer__end">
+                <div>
+                  <p>© 2024 - 2025</p>
+                  <p>VŠB - Technical University of Ostrava</p>
                 </div>
               </div>
             </div>
-          </div>
-
-          <div className="footer__shape">
-          <span className="footer__shape-item footer__shape-item--1">
-            <img src={footer1} alt="shape icon" />
-          </span>
-            <span className="footer__shape-item footer__shape-item--2"><span></span></span>
           </div>
         </footer>
 

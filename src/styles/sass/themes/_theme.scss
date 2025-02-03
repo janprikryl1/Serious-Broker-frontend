@@ -319,6 +319,12 @@ html[data-bs-theme='dark'] {
     }
 
   .cta {
+    font-size: 22px;
+    
+    h2 {
+      font-size: 40px;
+    }
+    
     &--style1 {
       .cta {
         &__content {

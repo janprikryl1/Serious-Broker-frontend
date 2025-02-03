@@ -5,7 +5,7 @@
     @extend %ps-0;
     @extend %mb-0;
     gap: 10px;
-
+    
     @include breakpoint(md) {
         gap: 15px;
     }

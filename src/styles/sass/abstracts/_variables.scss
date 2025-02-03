@@ -1,8 +1,8 @@
-$thm-brand-color: #ff9d00;
-$thm-brand-color-dark: #dd9f3a;
+$thm-brand-color: #b1964d;
+$thm-brand-color-dark: #b1964d;
 
-$thm-secondary-color: #dd9f3a;
-$thm-secondary-color-dark:#dd9f3a;
+$thm-secondary-color: #b1964d;
+$thm-secondary-color-dark:#b1964d;
 
 $thm-tertiary-color:#E0FAF2;
 $thm-tertiary-color-dark: #986d28;
@@ -168,7 +168,7 @@ $thm-danger-dark: #FF0000;
     --title-color-style2:#{$thm-title-color};
     --text-color:#{$thm-text-color};
     --text-color-light:#{$thm-text-color-light};
-    --text-color-2: rgb(255, 255, 255);
+    --text-color-2: rgb(172, 159, 141);
     --text-color-3: rgba(255, 255, 255, 0.70);
 
     // background colors
@@ -340,7 +340,7 @@ $thm-danger-dark: #FF0000;
     --title-color-style2:#BBC2C7;
     --text-color:rgba(255, 255, 255, 0.6);
     --text-color-light:#{$thm-text-color-light-dark};
-    --text-color-2: rgba(255, 255, 255, 0.6);
+    --text-color-2: rgb(172, 159, 141);
     --text-color-3: rgba(255, 255, 255, 0.70);
 
     // background colors
@@ -590,14 +590,14 @@ $danger: var(--danger-color);
 
 //Template Font family
 @font-face {
-    font-family: 'IBMPlexSans';
-    src: url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
-    font-weight: 300;
+    font-family: 'Raleway';
+    src: url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+    font-weight: 900;
     font-style: normal;
 }
 
-$title-font: 'Ubuntu Mono', sans-serif;
-$text-font: 'Ubuntu Mono', sans-serif;
+$title-font: 'Raleway', sans-serif;
+$text-font: 'Raleway', sans-serif;
 
 //Template font sizes
 $fs-base: 16px !default;
@@ -609,6 +609,7 @@ $fs-h3: 32px;
 $fs-h4: 28px;
 $fs-h5: 24px;
 $fs-h6: 20px;
+
 
 //Template transition
 

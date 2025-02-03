@@ -1,10 +1,5 @@
 .footer {
-    @extend %of-hidden,
-    %p-rel;
-    background-color: $footer-bg-color;
-    color: $wh-color;
-    font-weight: 400;
-
+    @extend %of-hidden, %p-rel;
 
     &--style2 {
         background-color: $bg-color-12;
@@ -16,21 +11,19 @@
     }
 
     &__top {
-
-        // @extend %mb-30;
         @include breakpoint(sm) {
             margin-block-end: 0;
         }
 
         &--style1 {
-            padding-block: 80px;
+            padding-block: 40px;
 
             @include breakpoint(sm) {
-                padding-block: 90px;
+                padding-block: 40px;
             }
 
             @include breakpoint(lg) {
-                padding-block: 100px;
+                padding-block: 60px;
             }
         }
 
@@ -108,16 +101,10 @@
     }
 
     &__about {
-        &-logo {
-            img {
-                @extend %mb-20;
-            }
-
-        }
-
         &-moto {
-            @extend %mb-30;
             color: $text-color-2;
+            font-size: 20px;
+            font-weight: 480;
 
             @include breakpoint(md) {
                 max-inline-size: 40ch;
@@ -130,7 +117,6 @@
         &-tittle {
             h6 {
                 color: $bg-white;
-                @extend %mb-20;
 
                 @include breakpoint(sm) {
                     margin-block-end: 20px
@@ -142,11 +128,6 @@
 
     &__linklist {
         &-item {
-            &:not(:last-child) {
-                @extend %mb-10;
-
-            }
-
             p {
                 color: $text-color;
                 // color: $text-color-2
@@ -201,9 +182,10 @@
 
     &__end {
         @extend %py-25;
-        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        border-top: 1px solid rgb(172, 159, 141);
         color: $text-color-2;
-        @include font-size(16px);
+        font-weight: 500;
+        font-size: 20px;
 
         @include breakpoint(sm) {
             display: flex;
@@ -211,9 +193,7 @@
         }
 
         &-copyright {
-            @extend %mb-20,
-            %d-inline-flex,
-            %align-i-center;
+            @extend %d-inline-flex, %align-i-center;
 
             a {
                 @extend %text-semibold;
@@ -231,9 +211,7 @@
 
         &-links {
             @extend %d-flex,
-            %align-i-center,
-            %mt-25,
-            %mb-20;
+            %align-i-center;
 
             @include breakpoint (max-sm) {
                 justify-content: space-between;

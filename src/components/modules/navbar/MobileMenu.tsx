@@ -1,10 +1,7 @@
 import { FC } from "react";
 import { Link } from "react-router-dom";
 import { registeredUserNavbarURLs, notRegisteredUserNavbarURLs } from "../../../utils/constants";
-import { ThemeSwitchIcon } from "../../../headerIcons/themeSwitch/ThemeSwitchIcon.tsx";
-import { AchievementIcon } from "../../../headerIcons/AchievementIcon.tsx";
 import { useTranslation } from "react-i18next";
-import { useThemeContext } from "../../../utils/providers/ThemeProvider.tsx";
 import { useUserContext } from "../../../utils/providers/providerUser.tsx";
 
 type Props = {
@@ -13,13 +10,12 @@ type Props = {
 
 export const MobileMenu: FC<Props> = ({ toggleMobileMenu }) => {
     const { t } = useTranslation();
-    const { theme } = useThemeContext();
     const { user } = useUserContext();
 
     const menuLinks = user ? registeredUserNavbarURLs : notRegisteredUserNavbarURLs;
 
     return (
-        <div className="mobile-menu" style={{ backgroundColor: theme === 'dark' ? "#393735" : "#f5f8fb" }}>
+        <div className="mobile-menu">
             <ul className="mobile-menu-list">
                 {Object.keys(menuLinks).map((key) => {
                     const item = menuLinks[key];
@@ -37,12 +33,6 @@ export const MobileMenu: FC<Props> = ({ toggleMobileMenu }) => {
                         </li>
                     );
                 })}
-                <li>
-                    <ThemeSwitchIcon />
-                </li>
-                <li>
-                    <AchievementIcon />
-                </li>
             </ul>
         </div>
     );

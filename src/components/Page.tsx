@@ -1,31 +1,50 @@
-import { FC, ReactNode } from "react";
+import { FC } from "react";
+import {useMediaQuery} from "@mui/material";
 
 type Props = {
-    children: ReactNode;
     image: string;
 };
 
-export const Page: FC<Props> = ({ children, image }) => {
+export const Page: FC<Props> = ({ image }) => {
+    const isMobile = useMediaQuery('(max-width:768px)');
+
     return (
-        <>
+        <div
+            className="container"
+            style={{
+                position: "relative",
+                height: "55vh",
+                width: "100%",
+                backgroundColor: "#120c06",
+                backgroundImage: `url(${image})`,
+                backgroundSize: "cover",
+                backgroundRepeat: "no-repeat",
+                backgroundPosition: isMobile ? "-40vw 20vh" : "-15vw -5vh",
+                display: "flex",
+                justifyContent: "right",
+                alignItems: "center",
+                color: "#fff",
+                letterSpacing: "10px",
+            }}
+        >
             <div
-                className="overlay-background"
                 style={{
-                    backgroundImage: `url(${image})`,
                     position: "absolute",
-                    top: "-10%",
-                    left: 0,
-                    width: "100%",
-                    height: "115%",
-                    opacity: 0.6,
+                    width: "99.1%",
+                    height: "100%",
+                    backgroundColor: "rgba(0, 0, 0, 0.2)",
                     zIndex: 1,
-                    backgroundSize: "cover",
-                    backgroundPosition: "center"
                 }}
             />
-            <div style={{ position: "relative", zIndex: 2, flex: 1 }}>
-                {children}
+            <div style={{position: "relative", zIndex: 2, paddingRight: isMobile ? "5vw" : "5rem"}}>
+                <div style={{textAlign: "right", marginBottom: "5vh"}}>
+                    <h1 style={{fontSize: isMobile ? "10vw" : "5rem", margin: 0}}>SERIOUS</h1>
+                    <h1 style={{fontSize: isMobile ? "10vw" : "5rem", margin: 0}}>BROKER</h1>
+                </div>
+                <p style={{fontSize: "3vw"}}>
+                    Save Crypto Safely
+                </p>
             </div>
-        </>
+        </div>
     );
 };
