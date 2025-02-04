@@ -8,7 +8,7 @@ import {NewTranslationPagesTitleDescriptionLanguage} from "../../components/modu
 export const TranslateEdit:FC = () => {
     return (
         <ArticleTranslateProvider>
-            <div className="container">
+            <div className="admin-container">
                 <NewTranslationPagesTitleDescriptionLanguage />
                 <NewTranslationContent />
                 <ButtonToolbar>

@@ -72,12 +72,11 @@ export const EarningIn: FC<Props> = ({ series, startDate, endDate }) => {
     };
 
     return (
-        <div className="d-flex justify-content-center min-vh-100 padding-bottom padding-top">
+        <div className="d-flex justify-content-center min-vh-100 padding-bottom padding-top asset-font">
             <div
                 style={{
                     backgroundColor: theme === "dark" ? "#343a40" : "#f5f8fb",
                     borderRadius: 24,
-                    padding: 40,
                     width: "95%",
                     maxWidth: "1000px",
                     textAlign: "center",
@@ -92,7 +91,7 @@ export const EarningIn: FC<Props> = ({ series, startDate, endDate }) => {
                         className="cta-form d-sm-flex align-items-center justify-content-between mt-5 mb-5"
                         style={{maxWidth: "30%"}}
                     >
-                        <h3 className="text-center mb-0">{t("Amount")}</h3>
+                        <p className="text-center mb-0">{t("Amount")}</p>
                         <input
                             type="number"
                             className="form-control form-control--style2"
@@ -134,7 +133,7 @@ export const EarningIn: FC<Props> = ({ series, startDate, endDate }) => {
                             </div>
                         </div>
                     </LocalizationProvider>
-                    <h4 style={{color: gain > 0 ? "green" : gain < 0 ? "red" : "gray", fontWeight:"bold"}}>{t("Gain: ")}{gain.toFixed(2)}$ ({percentage.toFixed(2)}%)</h4>
+                    <h4 style={{color: gain > 0 ? "green" : gain < 0 ? "red" : "gray", fontWeight:"bold", fontSize:"35px"}}>{t("Gain: ")}{gain.toFixed(2)}$ ({percentage.toFixed(2)}%)</h4>
                 </div>
             </div>
         </div>

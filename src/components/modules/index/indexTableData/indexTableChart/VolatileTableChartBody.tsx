@@ -5,11 +5,13 @@ import {MostVolatileData} from "../../../../../utils/types/indexPage/IndexDataSt
 
 type Props = {
     coin: MostVolatileData;
+    index: number;
 }
 
-export const VolatileTableChartBody:FC<Props> = ({coin}) => {
+export const VolatileTableChartBody:FC<Props> = ({coin, index}) => {
     return (
         <tr>
+            <td>{index + 1}</td>
             <td>{coin.asset_label}</td>
             <td>{coin.symbol_name}</td>
             <td>{coin.percent_volatility} %</td>

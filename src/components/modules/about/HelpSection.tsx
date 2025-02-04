@@ -16,7 +16,7 @@ export const HelpSection:FC = () => {
                                 data-aos="fade-right"
                                 data-aos-duration="800"
                             >
-                                <h3>{t("Help")}</h3>
+                                <h1>{t("Help")}</h1>
                                 <AchievmentHelp />
                             </div>
                         </div>

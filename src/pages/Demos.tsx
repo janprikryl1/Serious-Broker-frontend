@@ -28,6 +28,7 @@ export const Demos:FC = () => {
     
     return (
         <div className="container mt-5 mb-5">
+            <h1 className="mb-3">{t("Demos")}</h1>
             <div className="row">
                 {demos.map((demo) => (
                     <DemoLinkCard key={demo.id} title={demo.name} id={demo.id!}/>

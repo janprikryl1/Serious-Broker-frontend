@@ -7,10 +7,8 @@ export const NowTrending:FC = () => {
     
     return (
         <div className="cta-dark">
-            <div className="container">
-                <h1>{t("Now Trending")}</h1>
-                <TrendingSwiper />
-            </div>
+            <h1>{t("Now Trending")}</h1>
+            <TrendingSwiper />
         </div>
     );
 }

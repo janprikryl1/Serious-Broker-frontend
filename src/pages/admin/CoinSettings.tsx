@@ -147,7 +147,7 @@ export const CoinSettings: FC = () => {
 
     return (
         <div className="service-details__item-inner">
-            <h2>{t("Coins management")}</h2>
+            <h2 className="admin-section-title">{t("Coins management")}</h2>
             <AddCryptoCurrency />
             <AdminTableFilter setFilteredCoins={setFilteredCoins} cryptocurrencies={cryptocurrencies} columns={columns} />
             <DataGrid
@@ -155,7 +155,7 @@ export const CoinSettings: FC = () => {
                 columns={columns}
                 hideFooterSelectedRowCount
                 onRowClick={(params) => handleRowClick(params.row.id)}
-                sx={{ border: 0 }}
+                sx={{ border: 0, color:"#fff" }}
                 pageSizeOptions={[10, 20, 50, 100]}
                 initialState={{
                     pagination: { paginationModel: { pageSize: 10 } }

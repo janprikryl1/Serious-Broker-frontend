@@ -35,8 +35,7 @@ export const Feedbacks: FC = () => {
     };
 
     return (
-        <div className="padding-bottom padding-top">
-            <div className="container">
+        <div className="padding-bottom">
                 <div className="service-details__wrapper">
                     <div className="service-details__item">
                         <div className="service-details__item-inner">
@@ -45,9 +44,9 @@ export const Feedbacks: FC = () => {
                                 data-aos="fade-up"
                                 data-aos-duration="900"
                             >
-                                <h4 className="card-title">{t("Feedbacks")}</h4>
+                                <h1 className="card-title">{t("Feedbacks")}</h1>
                                 <div className="table-responsive mt-3">
-                                    <table className="table">
+                                    <table className="table-index-light" style={{width: "100%", margin:0}}>
                                         <thead>
                                         <tr>
                                             <th>Id</th>
@@ -123,7 +122,6 @@ export const Feedbacks: FC = () => {
                         </div>
                     </div>
                 </div>
-            </div>
         </div>
     );
 };

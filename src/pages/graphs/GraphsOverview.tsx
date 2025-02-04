@@ -11,7 +11,7 @@ export const GraphsOverview: FC = () => {
     const { user } = useUserContext();
 
     return (
-        <>
+        <div style={{fontSize:"25px", color:"#ae9647"}}>
             <TitleHeader title="Graphs" />
             <Nav variant="pills" defaultActiveKey={routes.recommendation} className="container flex-column">
                 <Nav.Item className="padding-top">
@@ -34,6 +34,6 @@ export const GraphsOverview: FC = () => {
                     </>
                 )}
             </Nav>
-        </>
+        </div>
     );
 };

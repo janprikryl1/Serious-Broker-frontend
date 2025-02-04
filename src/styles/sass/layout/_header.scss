@@ -1,14 +1,11 @@
-// ===============       *************      ================ //
-// This file contained all styles related header section
-// ===============       *************      ================ //
-
-//  --------------  >>>  header style start here <<< ------------- //
 .header-section {
   @extend %p-rel;
   width: 100%;
   z-index: 99;
   background: #0e0a05;
   font-weight: bold;
+  padding-right: 3vw;
+  padding-left: 3vw;
 
   &--style1 {
     @extend %p-rel;

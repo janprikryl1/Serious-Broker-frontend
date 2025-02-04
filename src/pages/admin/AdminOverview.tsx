@@ -23,10 +23,8 @@ export const AdminOverview: FC = () => {
     }, []);
     
     return (
-        <div>
-            <div className="page-header">
-                <h3>Admin dashboard</h3>
-            </div>
+        <div className="admin-container">
+            <h3 className="admin-section-title">Admin dashboard</h3>
             {dashboardData ? (
                 <div className="row">
                     <AdminOverviewCard title={t("Article count")} value={dashboardData.article_count} bottom={t("Now")}/>

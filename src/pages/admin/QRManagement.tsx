@@ -76,7 +76,7 @@ export const QRManagement: FC = () => {
                 className="text-center"
                 style={{
                     maxWidth: "95%",
-                    backgroundColor: theme === "dark" ? "#343a40" : "#f5f8fb",
+                    backgroundColor: theme === "dark" ? "#211f1b" : "#f5f8fb",
                     borderRadius: 24,
                     padding: "30px",
                     zIndex: 2,
@@ -84,7 +84,7 @@ export const QRManagement: FC = () => {
                 data-aos="fade-up"
                 data-aos-duration="1000"
             >
-                <h1>{t("QR payment management")}</h1>
+                <h1 className="admin-section-title">{t("QR payment management")}</h1>
                 <Form onSubmit={handleSubmit(onSubmit)}>
                     <Row className="mb-3">
                         <Col>

@@ -23,7 +23,7 @@ export const Demo:FC = () => {
     }, [id]);
     
     return (
-        <div className="padding-bottom">
+        <div className="padding-bottom" style={{height: "100vh"}}>
             <div className="container">
                 <div className="service-details__wrapper">
                     <div className="service-details__item">
@@ -34,7 +34,7 @@ export const Demo:FC = () => {
                                 data-aos-duration="800"
                             >
                                 {demoData ? (
-                                    <h1>{demoData.name}</h1>
+                                    <h1 style={{fontSize: "50px"}}>{demoData.name}</h1>
                                     ) : (
                                     <Skeleton height={50} width={300} />
                                 )}

@@ -18,7 +18,6 @@ export const Footer:FC = () => {
   return (
       <>
         <footer className="footer">
-          <div className="container">
             <div className="footer__wrapper">
               <div className="footer__top footer__top--style1">
                 <div className="row">
@@ -54,7 +53,6 @@ export const Footer:FC = () => {
                 </div>
               </div>
             </div>
-          </div>
         </footer>
 
         <ScrollToTop

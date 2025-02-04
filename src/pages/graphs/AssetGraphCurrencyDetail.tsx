@@ -38,7 +38,7 @@ export const AssetGraphCurrencyDetail: FC = () => {
             <TitleHeader title={t("GraphAssetData - details about asset and graph")} />
             {asset ? (
                 <>
-                    <div className="d-flex justify-content-center  min-vh-100 padding-bottom padding-top">
+                    <div className="d-flex justify-content-center min-vh-100 padding-bottom padding-top">
                         <div
                             style={{
                                 backgroundColor: theme === "dark" ? "#343a40" : "#f5f8fb",
@@ -52,7 +52,7 @@ export const AssetGraphCurrencyDetail: FC = () => {
                             data-aos="fade-up"
                             data-aos-duration="1000"
                         >
-                            <AssetGraphCurrencyDetailTextItem text={t("GraphAssetData - details about asset and graph")} marginBottom="20px" fontSize="1.8rem" />
+                            <AssetGraphCurrencyDetailTextItem text={<h1>{t("GraphAssetData - details about asset and graph")}</h1>} marginBottom="20px" fontSize="80px" />
                             <AssetGraphCurrencyDetailTextItem text={<span>{t("Currency: ")} <strong>{asset.asset_label}</strong></span>} />
                             <AssetGraphCurrencyDetailTextItem text={<span>{t("Allocation: ")} <strong>{asset.allocation * 100}%</strong></span>} />
                             <AssetGraphCurrencyDetailTextItem text={<span>{t("Changed")}: <strong>{toCzechDateFormat(asset.changed!)}</strong></span>} />

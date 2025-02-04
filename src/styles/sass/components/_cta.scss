@@ -3,7 +3,14 @@
 
   &__wrapper {
     @extend %p-rel;
-    margin-left: 2vw;
+    margin-left: 5vw;
+    margin-right: 5vw;
+  }
+  
+  @media (max-width: 768px) {
+    &__wrapper {
+      margin-left: -18vw;
+    }
   }
 
   &__newsletter {
@@ -408,6 +415,8 @@
   background-color: rgb(33, 30, 27);
   padding-top: 30px;
   padding-bottom: 30px;
+  padding-left: 5vw;
+  padding-right: 5vw;
   
   p {
     font-size: 20px;

@@ -4,13 +4,14 @@ import { QRPayment } from "../../components/modules/profile/membershipDetails/QR
 import { getMemberships } from "../../api/membershipService";
 import { MembershipTypes } from "../../utils/types/user/userTypes";
 import { toCzechDate } from "../../utils/constants/functions";
-import { Table, TableBody, TableCell, TableHead, TableRow, Chip } from "@mui/material";
+import {Table, TableBody, TableCell, TableHead, TableRow, Chip, useMediaQuery} from "@mui/material";
 import { useThemeContext } from "../../utils/providers/ThemeProvider.tsx";
 import {MembershipDetailsSkeleton} from "../../components/modules/profile/membershipDetails/MembershipDetailsSkeleton.tsx";
 
 export const ProfileMembership: FC = () => {
     const { t } = useTranslation();
     const { theme } = useThemeContext();
+    const isDesktop = useMediaQuery('(max-width:768px)');
     const [memberships, setMemberships] = useState<MembershipTypes[]>([]);
     const [hasActiveMembership, setHasActiveMembership] = useState(false);
     const [loading, setLoading] = useState(true);
@@ -37,31 +38,26 @@ export const ProfileMembership: FC = () => {
     }, []);
 
     return (
-        <>
+        <div className="cta__wrapper">
             {loading ? (
                 <MembershipDetailsSkeleton />
             ) : hasActiveMembership ? (
                 <div className="padding-bottom">
-                    <div className="cta__wrapper">
                         <div
                             className="text-center"
                             style={{
-                                maxWidth: "500px",
-                                gap: "30px",
-                                backgroundColor: theme === 'dark' ? "#343a40" : "#f5f8fb",
+                                maxWidth: "600px",
+                                backgroundColor: theme === 'dark' ? "#211f1b" : "#f5f8fb",
                                 borderRadius: 24,
-                                padding: "30px",
+                                padding: "5vw",
                                 zIndex: 2,
                                 position: 'relative',
                             }}
                             data-aos="fade-up"
                             data-aos-duration="1000"
                         >
-                            <div className="cta__subscribe">
-                                <h2>
-                                    <span>{t("My memberships")}</span>
-                                </h2>
-                                <p>{t("History of my memberships")}</p>
+                                <h2 className="asset-title">{t("My memberships")}</h2>
+                                <p style={{fontSize: 25}}>{t("History of my memberships")}</p>
                                 <Table sx={{
                                     '& th, & td': {
                                         color: theme === 'dark' ? '#ffffff' : 'inherit',
@@ -69,7 +65,7 @@ export const ProfileMembership: FC = () => {
                                 }}>
                                     <TableHead>
                                         <TableRow>
-                                            <TableCell>{t("No.")}</TableCell>
+                                            {isDesktop && <TableCell>{t("No.")}</TableCell>}
                                             <TableCell>{t("Price")}</TableCell>
                                             <TableCell>{t("Valid from")}</TableCell>
                                             <TableCell>{t("Valid to")}</TableCell>
@@ -81,7 +77,7 @@ export const ProfileMembership: FC = () => {
                                             const isActive = new Date(membership.datetime_end) > new Date();
                                             return (
                                                 <TableRow key={membership.id}>
-                                                    <TableCell>{index + 1}</TableCell>
+                                                    {isDesktop && <TableCell>{index + 1}</TableCell>}
                                                     <TableCell>{membership.price}</TableCell>
                                                     <TableCell>{toCzechDate(membership.created)}</TableCell>
                                                     <TableCell>{toCzechDate(membership.datetime_end)}</TableCell>
@@ -96,13 +92,11 @@ export const ProfileMembership: FC = () => {
                                         })}
                                     </TableBody>
                                 </Table>
-                            </div>
                         </div>
-                    </div>
                 </div>
             ) : (
                 <QRPayment />
             )}
-        </>
+        </div>
     );
 };

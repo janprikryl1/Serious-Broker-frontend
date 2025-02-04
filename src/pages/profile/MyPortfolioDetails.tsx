@@ -31,7 +31,7 @@ export const MyPortfolioDetails:FC = () => {
     }, []);
     
     return (
-        <div className="container padding-bottom">
+        <div className="padding-bottom admin-container">
             <div className="service-details__wrapper">
                 <div className="service-details__item">
                     <div className="service-details__item-inner">

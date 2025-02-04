@@ -8,7 +8,7 @@ import {NewArticleUploadButton} from "../../components/modules/admin/articleMana
 export const EditArticle:FC = () => {
     return (
         <ArticleCreateProvider>
-            <div className="container">
+            <div className="admin-container">
                 <NewArticlePages />
                 <ButtonToolbar>
                     <NewPage />

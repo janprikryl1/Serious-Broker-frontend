@@ -6,7 +6,7 @@ import {BinanceIndexAssetRecomBestPreviousDetails} from "../../utils/types/graph
 import {useTranslation} from "react-i18next";
 import {RecommendationDetailsSkeleton} from "../../components/modules/graphs/RecommendationDetailsSkeleton.tsx";
 import {convertUTCToLocalTime, getDayName, getYear, toPercentTwoDecimal} from "../../utils/constants/functions.ts";
-import {SeasonButton} from "../../components/modules/index/indexTableData/IndexTableTitle.tsx";
+import {SeasonButton} from "../../components/modules/index/SeasonButton.tsx";
 
 export const RecommendationDetails:FC = () => {
     const {t} = useTranslation();
@@ -48,7 +48,7 @@ export const RecommendationDetails:FC = () => {
                                                 <p>{t("cmc_rank")}: {detailsData.cmc_rank}</p>}
 
 
-                                            <div className="d-flex gap-3 mb-25">
+                                            <div className="col-sm season-button-group d-flex gap-3 mb-25" style={{maxWidth: 400}}>
                                                 <SeasonButton
                                                     seasonValue="Week"
                                                     isActive={"Week" === selectedPeriod}

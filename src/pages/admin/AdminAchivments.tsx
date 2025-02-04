@@ -61,7 +61,7 @@ export const AdminAchivments:FC = () => {
                 className="text-center"
                 style={{
                     maxWidth: "95%",
-                    backgroundColor: theme === 'dark' ? "#343a40" : "#f5f8fb",
+                    backgroundColor: theme === 'dark' ? "#211f1b" : "#f5f8fb",
                     borderRadius: 24,
                     padding: "30px",
                     zIndex: 2,
@@ -69,7 +69,7 @@ export const AdminAchivments:FC = () => {
                 data-aos="fade-up"
                 data-aos-duration="1000"
             >
-                <h1>{t("Achievments management")}</h1>
+                <h1 className="admin-section-title">{t("Achievments management")}</h1>
                 <p>{t("Click on user to load and edit achievements")}</p>
                 <InputGroup className="mb-3">
                     <InputGroup.Text id="inputGroup-sizing-sm">{t("Column")}</InputGroup.Text>
@@ -105,7 +105,7 @@ export const AdminAchivments:FC = () => {
                     hideFooterSelectedRowCount
                     hideFooter={true}
                     onCellClick={handleSelectUser}
-                    sx={{border: 0}}
+                    sx={{border: 0, color:"#fff"}}
                 />
                 <UserAchievmentDetails selectedUser={selectedUser}/>
             </div>

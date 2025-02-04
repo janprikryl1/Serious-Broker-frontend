@@ -25,42 +25,31 @@ export const AssetGraph: FC = () => {
     }, [index_label]);
 
     return (
-        <div>
-            <TitleHeader
-                title={asset?.label ?? t("GraphAssetData - details about asset and graph")}
-            />
-            <div className="padding-bottom padding-top">
-                <div className="container padding-bottom">
-                    <div className="service-details__wrapper">
-                        <div className="service-details__item">
-                            <div className="service-details__item-inner">
-                                <div
-                                    className="service-details__content"
-                                    data-aos="fade-up"
-                                    data-aos-duration="900"
-                                >
-                                    <h2 className="mb-4">{t("Title")}: {index_label} ({asset?.name})</h2>
-                                    {asset ? (
-                                        <>
-                                            <AssetGraphDetails asset={asset}/>
-                                            <div className="row">
-                                                {asset.assets.map((singleAsset: Assets) => (
-                                                    <AssetGraphCurrencyCard singleAsset={singleAsset}
-                                                                            key={singleAsset.id}/>
-                                                ))}
-
-                                            </div>
-                                            <AssetGraphPieChart assets={asset.assets}/>
-                                        </>
-                                    ) : (
-                                        <AssetDetailSkeleton/>
-                                    )}
-                                </div>
+        <>
+            <TitleHeader title={t("GraphAssetData - details about asset and graph")}/>
+            <div className="container padding-bottom mt-5 asset-font">
+                <div
+                    className="service-details__content"
+                    data-aos="fade-up"
+                    data-aos-duration="900"
+                >
+                    <h2 className="mb-5 asset-title">{t("Title")}: {index_label} ({asset?.name})</h2>
+                    {asset ? (
+                        <>
+                            <AssetGraphDetails asset={asset}/>
+                            <div className="row">
+                                {asset.assets.map((singleAsset: Assets) => (
+                                    <AssetGraphCurrencyCard singleAsset={singleAsset}
+                                                            key={singleAsset.id}/>
+                                ))}
                             </div>
-                        </div>
-                    </div>
+                            <AssetGraphPieChart assets={asset.assets}/>
+                        </>
+                    ) : (
+                        <AssetDetailSkeleton/>
+                    )}
                 </div>
             </div>
-        </div>
+        </>
     );
 };

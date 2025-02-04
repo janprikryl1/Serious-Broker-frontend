@@ -76,43 +76,41 @@ export const ChachedData:FC = () => {
 
     return (
         <div className="padding-bottom">
-            <div className="container">
-                <div className="service-details__wrapper">
-                    <div className="service-details__item">
-                        <div className="service-details__item-inner">
-                            <div
-                                className="service-details__content"
-                                data-aos="fade-up"
-                                data-aos-duration="900"
-                            >
-                                {loading ? (
-                                    <TableLogSkeleton />
-                                ) : (
-                                    <>
-                                        <h4 className="card-title">{t("Chached data")}</h4>
-                                        <div className="table-responsive">
-                                            <table className="table">
-                                                <thead>
-                                                <tr>
-                                                    <th>{t("Filename")}</th>
-                                                    <th>{t("Created")}</th>
-                                                    <td>{t("Action")}</td>
+            <div className="service-details__wrapper">
+                <div className="service-details__item">
+                    <div className="service-details__item-inner">
+                        <div
+                            className="service-details__content"
+                            data-aos="fade-up"
+                            data-aos-duration="900"
+                        >
+                            {loading ? (
+                                <TableLogSkeleton />
+                            ) : (
+                                <>
+                                    <h1 className="card-title">{t("Chached data")}</h1>
+                                    <div className="table-responsive">
+                                        <table className="table">
+                                            <thead>
+                                            <tr>
+                                                <th>{t("Filename")}</th>
+                                                <th>{t("Created")}</th>
+                                                <td>{t("Action")}</td>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            {logs.map((log) => (
+                                                <tr key={log.name}>
+                                                    <td><Button variant="link" onClick={() => handleDownload(log.name)}>{log.name}</Button></td>
+                                                    <td>{toCzechDateFormat(log.created_at)}</td>
+                                                    <td><Button variant="danger" onClick={() => handleDelete(log.name)}><FaRegTrashAlt /></Button></td>
                                                 </tr>
-                                                </thead>
-                                                <tbody>
-                                                {logs.map((log) => (
-                                                    <tr key={log.name}>
-                                                        <td><Button variant="link" onClick={() => handleDownload(log.name)}>{log.name}</Button></td>
-                                                        <td>{toCzechDateFormat(log.created_at)}</td>
-                                                        <td><Button variant="danger" onClick={() => handleDelete(log.name)}><FaRegTrashAlt /></Button></td>
-                                                    </tr>
-                                                ))}
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </>
-                                )}
-                            </div>
+                                            ))}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </>
+                            )}
                         </div>
                     </div>
                 </div>

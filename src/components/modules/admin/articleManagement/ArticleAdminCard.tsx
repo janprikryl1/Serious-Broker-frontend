@@ -44,7 +44,7 @@ export const ArticleAdminCard: FC<Props> = ({data, link = "article", setArticles
         <div className="blog__item" data-aos="fade-up" data-aos-duration="1000">
             <div className="blog__item-inner blog__item-inner--style2">
                 <div className="blog__content">
-                    <h5 className="10 style2">
+                    <h5 className="style2">
                         <Link to={`${link}${data.id}`} className="link-underline-none">{data.title}</Link>
                     </h5>
 

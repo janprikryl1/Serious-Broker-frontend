@@ -37,7 +37,6 @@ export const LogTable: FC = () => {
 
     return (         
         <div className="padding-bottom">
-            <div className="container">
                 <div className="service-details__wrapper">
                     <div className="service-details__item">
                         <div className="service-details__item-inner">
@@ -50,7 +49,7 @@ export const LogTable: FC = () => {
                                     <TableLogSkeleton />
                                 ) : (
                                     <>
-                                        <h4 className="card-title">{t("Table logs")}</h4>
+                                        <h1 className="card-title">{t("Table logs")}</h1>
                                         <p className="card-description">{t("Logs for migrating tables")}</p>
                                         <div className="table-responsive">
                                             <table className="table">
@@ -85,7 +84,6 @@ export const LogTable: FC = () => {
                         </div>
                     </div>
                 </div>
-            </div>
         </div>
     );
 };

@@ -8,14 +8,12 @@ export const NewToInvesting:FC = () => {
     
     return (
         <div className="cta-dark">
-            <div className="container">
-                <h1>{t("New to Investing?")}</h1>
-                <p>{t("Start with the basics")}</p>
-                <div className="row">
-                    {indexLinks.map((link) => (
-                        <InvestmentTopicsLink key={link.title} link={link.link} title={link.title} icon={link.icon} />
-                    ))}
-                </div>
+            <h1>{t("New to Investing?")}</h1>
+            <p>{t("Start with the basics")}</p>
+            <div className="row">
+                {indexLinks.map((link) => (
+                    <InvestmentTopicsLink key={link.title} link={link.link} title={link.title} icon={link.icon} />
+                ))}
             </div>
         </div>
     );

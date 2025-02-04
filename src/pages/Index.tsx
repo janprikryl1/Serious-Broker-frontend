@@ -3,7 +3,7 @@ import { Newsletter } from "../components/modules/index/Newsletter.tsx";
 import CryptoHand from "../utils/icons/crypto-hand2_light.png";
 import {Page} from "../components/Page.tsx";
 import {useUserContext} from "../utils/providers/providerUser.tsx";
-//import {IndexTableData} from "../components/modules/index/indexTableData/IndexTableData.tsx";
+import {IndexTableData} from "../components/modules/index/indexTableData/IndexTableData.tsx";
 import {LookingForMoreInDepthStatistics} from "../components/modules/index/LookingForMoreInDepthStatistics.tsx";
 import {SignUpBanner} from "../components/modules/index/SignUpBanner.tsx";
 import {NowTrending} from "../components/modules/index/NowTrending.tsx";
@@ -21,7 +21,7 @@ export const Index: FC = () => {
             {user === null && (
                 <Newsletter/>
             )}
-            {/* <IndexTableData /> */}
+            <IndexTableData />
             <LookingForMoreInDepthStatistics />
             {user === null && (
                 <SignUpBanner />

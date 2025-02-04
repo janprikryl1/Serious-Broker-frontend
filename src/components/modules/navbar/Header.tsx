@@ -1,7 +1,6 @@
 import { FC, useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { NavbarDesktopMenu } from "./NavbarDesktopMenu.tsx";
-import { useThemeContext } from "../../../utils/providers/ThemeProvider.tsx";
 import { routes } from "../../../utils/constants";
 import { ChangeLanguageIcon } from "../../../headerIcons/languageSwitchIcon/ChangeLanguageIcon.tsx";
 import { SignInIcon } from "../../../headerIcons/SignInIcon.tsx";
@@ -11,7 +10,6 @@ import { useUserContext } from "../../../utils/providers/providerUser.tsx";
 import { SignUpIcon } from "../../../headerIcons/SignUpIcon.tsx";
 
 export const Header: FC = () => {
-    const { theme } = useThemeContext();
     const { user } = useUserContext();
     const [scrollTop, setScrollTop] = useState(0);
     const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -43,13 +41,13 @@ export const Header: FC = () => {
     }, [location.pathname]);
 
     return (
-        <header className="container header-section">
+        <header className="header-section">
             <div className="header-bottom">
                 <div className="header-wrapper d-flex align-items-center justify-content-between">
                     <div className="d-flex align-items-center">
                         <div className="logo">
                             <Link to={routes.home}>
-                                <img className={theme === "dark" ? "logo-dark" : ""} src={Logo} alt="logo" />
+                                <img className="logo-dark" src={Logo} alt="logo" />
                             </Link>
                         </div>
                         <NavbarDesktopMenu className="ml-4" />

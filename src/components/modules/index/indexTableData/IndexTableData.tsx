@@ -1,16 +1,18 @@
 import { FC } from "react";
 import { IndexTableTitle } from "./IndexTableTitle.tsx";
 import {IndexTables} from "./IndexTables.tsx";
+import {IndexChartTypeButtons} from "../IndexChartTypeButtons.tsx";
+import {IndexSeasonButtons} from "../IndexSeasonButtons.tsx";
 
 export const IndexTableData: FC = () => {
     return (
-        
-            <div
-                className="text-center d-flex flex-column align-items-center justify-content-center"
-                style={{ marginTop: "250px" }}
-            >
-                <IndexTableTitle />
-                <IndexTables />
+        <div className="cta-dark mt-5">
+            <IndexTableTitle/>
+            <div className="row">
+                <IndexChartTypeButtons/>
+                <IndexSeasonButtons/>
             </div>
+            <IndexTables/>
+        </div>
     );
 };

@@ -8,7 +8,7 @@ export const Profile: FC = () => {
     
     if (user) {
         return (
-            <div style={{display: 'flex'}}>
+            <div style={{display: 'flex', backgroundColor:"#25231f"}}>
                 <ProfileSidebar/>
                 <main style={{flex: 1, padding: '20px'}}>
                     <Outlet/>

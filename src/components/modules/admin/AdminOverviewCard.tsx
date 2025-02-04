@@ -14,8 +14,8 @@ export const AdminOverviewCard:FC<Props> = ({title, value, bottom}) => {
                     <h4 className="font-weight-normal mb-3">
                         {title} <i className="mdi mdi-chart-line mdi-24px float-right"></i>
                     </h4>
-                    <h2 className="mb-5">{value}</h2>
-                    <h6 className="card-text">{bottom}</h6>
+                    <p className="mb-5" style={{fontSize: 35}}>{value}</p>
+                    <p className="card-text" style={{fontSize: 25}}>{bottom}</p>
                 </div>
             </div>
         </div>

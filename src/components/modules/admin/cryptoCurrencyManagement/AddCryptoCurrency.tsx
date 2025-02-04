@@ -48,7 +48,7 @@ export const AddCryptoCurrency:FC = () => {
     }
     
     return (
-        <div className="padding-top padding-bottom">
+        <div className="padding-bottom">
             {!showForm ? (
                 <button
                     className="btn btn-warning"

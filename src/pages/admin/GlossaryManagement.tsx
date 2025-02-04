@@ -101,7 +101,6 @@ export const GlossaryManagement: FC = () => {
 
     return (
         <div className="padding-bottom">
-            <div className="container">
                 <div className="service-details__wrapper">
                     <div className="service-details__item">
                         <div className="service-details__item-inner">
@@ -111,7 +110,7 @@ export const GlossaryManagement: FC = () => {
                                 data-aos-duration="900"
                             >
                                 <form onSubmit={handleAddGlossary} className="mb-4">
-                                    <h4 className="card-title">{t("Add New Glossary Entry")}</h4>
+                                    <h1 className="card-title">{t("Add New Glossary Entry")}</h1>
                                     <br />
                                     <div className="row">
                                         <div className="col-md-6 mb-2">
@@ -174,7 +173,7 @@ export const GlossaryManagement: FC = () => {
 
                                 {glossaries.length ? (
                                     <>
-                                        <h4 className="card-title">{t("Glossary")}</h4>
+                                        <h1 className="card-title">{t("Glossary")}</h1>
                                         <br />
                                         <div className="table-responsive">
                                             <table className="table">
@@ -209,7 +208,6 @@ export const GlossaryManagement: FC = () => {
                         </div>
                     </div>
                 </div>
-            </div>
         </div>
     );
 };

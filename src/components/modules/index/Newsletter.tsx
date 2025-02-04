@@ -48,7 +48,7 @@ export const Newsletter: FC = () => {
   };
   
   return (
-      <section className="container cta padding-top padding-bottom bg-color">
+      <section className="cta padding-top padding-bottom bg-color">
           <div className="cta__wrapper">
             <div className="cta__newsletter d-flex row">
               <div className="col-sm-6" style={{marginRight:30}}>

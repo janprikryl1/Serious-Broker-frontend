@@ -8,7 +8,7 @@ export const Faq:FC = () => {
     
     return (
         <div
-            className="service-details__faq mt-55"
+            className="mt-55"
             data-aos="fade-up"
             data-aos-duration="1000"
         >

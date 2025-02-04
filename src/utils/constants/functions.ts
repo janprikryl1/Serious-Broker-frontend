@@ -1,4 +1,16 @@
-const colors = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#FF4D4D', '#4D80FF', '#4DD0E1', '#80FF80', '#80C4FF', '#C4A0FF', '#FFA0A0', '#FF8080', '#A04D80', '#8080FF', '#80FFFF', '#FFFF80', '#00FF80', '#008000', '#0000FF'];
+const colors = [
+    "#5D4037", // Dark Brown
+    "#3E2723", // Very Dark Brown
+    "#4A148C", // Deep Purple
+    "#283593", // Dark Blue
+    "#1565C0", // Darker Blue
+    "#00695C", // Dark Teal
+    "#2E7D32", // Dark Green
+    "#9E9D24", // Dark Olive
+    "#E65100", // Dark Orange
+    "#B71C1C"  // Dark Red
+];
+
 export const getRandomColor = () => {
     return colors[Math.floor(Math.random() * colors.length)];
 };
@@ -42,11 +54,17 @@ export const getYear = (yearNumber: number) => {
 
 export const randomColor = () => {
     return colors[Math.floor(Math.random() * colors.length)];
-}
+};
+
 
 export const calculateProfit = (profit: number | null): number | null =>
     profit !== null ? (profit - 1) * 100 : null;
 
 export const toPercentTwoDecimal = (profit: number) => {
     return Math.round((profit * 100) * 100)/100;
+}
+
+export const formatLargeCurrency = (number: number | string, multiplier = 1) => {
+    const scaledNumber = Number(number) * multiplier;
+    return `$${scaledNumber.toLocaleString('en-US')}`;
 }

@@ -1,1 +1,1 @@
-export const backendUrl = "https://api.serious.broker/";
+export const backendUrl = "https://api.serious.broker/";//"https://localhost/bakalarska_prace_backend";

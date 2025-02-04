@@ -31,9 +31,7 @@ export const ArticleTranslate:FC = () => {
     }, []);
     
     return (
-        <div>
-            <div className="padding-bottom padding-top">
-                <div className="container">
+            <div className="padding-bottom admin-container mt-5">
                     <div className="service-details__wrapper">
                         <div className="service-details__item">
                             <div
@@ -44,7 +42,7 @@ export const ArticleTranslate:FC = () => {
                                 <h3>{t("Translations for article ")}{article?.title}</h3>
                                 <Link to={`${adminURLS.translations}${id}`}><Button
                                     variant="outline-warning">{t("New translation")}</Button></Link>
-                                <div className="container padding-top padding-bottom">
+                                <div className="padding-bottom mt-3">
                                     <div className="blog__wrapper">
                                         <div className="row g-4">
                                             {translations === undefined ? (
@@ -65,7 +63,5 @@ export const ArticleTranslate:FC = () => {
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
         );
 };

@@ -1,5 +1,6 @@
 import { FC } from "react";
 import {useMediaQuery} from "@mui/material";
+import Logo from "../utils/icons/logo/SB2.svg";
 
 type Props = {
     image: string;
@@ -10,7 +11,6 @@ export const Page: FC<Props> = ({ image }) => {
 
     return (
         <div
-            className="container"
             style={{
                 position: "relative",
                 height: "55vh",
@@ -38,10 +38,9 @@ export const Page: FC<Props> = ({ image }) => {
             />
             <div style={{position: "relative", zIndex: 2, paddingRight: isMobile ? "5vw" : "5rem"}}>
                 <div style={{textAlign: "right", marginBottom: "5vh"}}>
-                    <h1 style={{fontSize: isMobile ? "10vw" : "5rem", margin: 0}}>SERIOUS</h1>
-                    <h1 style={{fontSize: isMobile ? "10vw" : "5rem", margin: 0}}>BROKER</h1>
+                    <img src={Logo} alt="Serious Broker logo" className="logo-dark title-serious-broker"/>
                 </div>
-                <p style={{fontSize: "3vw"}}>
+                <p className="title-save-crypto-safely">
                     Save Crypto Safely
                 </p>
             </div>

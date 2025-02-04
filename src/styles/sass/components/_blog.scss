@@ -1,6 +1,8 @@
 .blog {
     @extend %of-hidden,
     %p-rel;
+    
+    font-size: 23px;
 
     &__wrapper {
         @extend %p-rel;
@@ -126,14 +128,13 @@
             @extend %text-semibold,
             %text-clamp-1;
             @include add-prefix(transition, $transition);
-
-
+            
             &.style2 {
-                &:hover {
+               
                     a {
                         color: $secondary-color;
                     }
-                }
+               
             }
 
         }

@@ -5,7 +5,7 @@ export const LookingForMoreInDepthStatistics:FC = () => {
     const {t} = useTranslation();
     
     return (
-        <section className="container cta padding-top padding-bottom bg-color">
+        <section className="cta padding-top padding-bottom bg-color">
             <div className="cta__wrapper">
                 <h2 className="mb-4">{t("Looking for More In-Depth Statistics?")}</h2>
                 <ul className="newsletter-list">

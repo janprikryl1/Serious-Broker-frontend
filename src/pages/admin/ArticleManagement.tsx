@@ -45,43 +45,39 @@ export const ArticleManagement:FC = () => {
     };
 
     return (
-        <div>
-            <div className="padding-bottom padding-top">
-                <div className="container">
-                    <div className="service-details__wrapper">
-                        <div className="service-details__item">
-                            <div
-                                className="service-details__content"
-                                data-aos="fade-up"
-                                data-aos-duration="900"
-                            >
-                                <h3>{t("Article management")}</h3>
-                                <Link to={adminURLS.articleNew}><Button variant="outline-warning">{t("New article")}</Button></Link>
-                                <div className="container padding-top padding-bottom">
-                                    <div className="blog__wrapper">
-                                        <div className="row g-4">
-                                            {loading ? (
-                                                <ArticlesSkeleton />
-                                            ) : (
-                                                articles.map((item) => (
-                                                    <div key={item.id} className="col-sm-6 col-lg-4">
-                                                        <ArticleAdminCard data={item} link={adminURLS.articleEdit} setArticles={setArticles} />
-                                                    </div>
-                                                ))
-                                            )}
-                                        </div>
-                                        <Pagination
-                                            currentPage={page}
-                                            totalPages={totalPages}
-                                            onPageChange={handlePageChange}
-                                        />
-                                    </div>
+        <div className="padding-bottom admin-container">
+            <div className="service-details__wrapper">
+                <div className="service-details__item">
+                    <div
+                        className="service-details__content"
+                        data-aos="fade-up"
+                        data-aos-duration="900"
+                    >
+                        <h1 className="admin-section-title">{t("Article management")}</h1>
+                        <Link to={adminURLS.articleNew}><Button variant="outline-warning">{t("New article")}</Button></Link>
+                        <div className=" padding-top padding-bottom">
+                            <div className="blog__wrapper">
+                                <div className="row g-4">
+                                    {loading ? (
+                                        <ArticlesSkeleton />
+                                    ) : (
+                                        articles.map((item) => (
+                                            <div key={item.id} className="col-sm-6 col-lg-4">
+                                                <ArticleAdminCard data={item} link={adminURLS.articleEdit} setArticles={setArticles} />
+                                            </div>
+                                        ))
+                                    )}
                                 </div>
+                                <Pagination
+                                    currentPage={page}
+                                    totalPages={totalPages}
+                                    onPageChange={handlePageChange}
+                                />
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    )
+    );
 }

@@ -34,16 +34,18 @@ export type AssetProfitData = {
     max_0_profit?: number | null;
     max_1_profit?: number | null;
     max_2_profit?: number | null;
+    photo?: string;
 };
 
 export type MostProfitable = {
     asset_label: string;
     name: string;
-    quote_currencies: string[];
     cmc_rank: number;
     week_0_pos: number;
     week_0_profit: number;
     photo: string;
+    price: string;
+    graph_data: number[];
 };
 
 export type MostVolatileData = {

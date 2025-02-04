@@ -13,7 +13,7 @@ export const ProfileAchievements:FC = () => {
                     style={{
                         maxWidth: "500px",
                         gap: "30px",
-                        backgroundColor: theme === 'dark' ? "#343a40" : "#f5f8fb",
+                        backgroundColor: theme === 'dark' ? "#211f1b" : "#f5f8fb",
                         borderRadius: 24,
                         padding: "30px",
                         zIndex: 2,

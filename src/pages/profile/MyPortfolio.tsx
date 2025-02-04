@@ -23,10 +23,8 @@ export const MyPortfolio:FC = () => {
     }, [fetchMyPortfolios]);
     
     return (
-        <div className="mt-1" style={{marginLeft: "20px"}}>
-            <h2>
-                <span>{t("My portfolio")}</span>
-            </h2>
+        <div className="mt-1">
+            <h2 className="asset-title">{t("My portfolio")}</h2>
             <p>{t("You can create your own portfolio from coins and see how much you can earn")}</p>
             <NewPortfolioButton />
             <div className="row">

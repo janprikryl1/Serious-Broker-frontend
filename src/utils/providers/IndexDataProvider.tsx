@@ -1,6 +1,7 @@
 import {createContext, Dispatch, FC, ReactNode, SetStateAction, useContext, useEffect, useState} from 'react';
 import {IndexSeason} from "../enums/IndexSeasonEnum";
 import {getIndexData} from "../../api/indexDataService";
+import {IndexChartsType} from "../enums/IndexChartsTypeEnum.ts";
 
 type Props = {
     children: ReactNode;
@@ -10,6 +11,8 @@ type IndexDataContextType = {
     date: string;
     season: IndexSeason;
     setSeason: Dispatch<SetStateAction<IndexSeason>>;
+    chartType: IndexChartsType;
+    handleSelectChartType: (selectedChartType: IndexChartsType) => void;
     handleSelect: (selectedSeason: IndexSeason) => void;
 };
 
@@ -17,6 +20,7 @@ const IndexDataContext = createContext<IndexDataContextType | undefined>(undefin
 
 export const IndexDataProvider: FC<Props> = ({ children }) => {
     const [season, setSeason] = useState<IndexSeason>(IndexSeason.WEEK);
+    const [chartType, setChartType] = useState<IndexChartsType>(IndexChartsType.GAINS);
     const [date, setDate] = useState("");
 
     useEffect(() => {
@@ -34,10 +38,13 @@ export const IndexDataProvider: FC<Props> = ({ children }) => {
     const handleSelect = (selectedSeason: IndexSeason) => {
         setSeason(selectedSeason);
     };
-
+    
+    const handleSelectChartType = (selectedChartType: IndexChartsType) => {
+        setChartType(selectedChartType);
+    };
 
     return (
-        <IndexDataContext.Provider value={{ date, season, setSeason, handleSelect }}>
+        <IndexDataContext.Provider value={{ date, season, setSeason, handleSelect, chartType, handleSelectChartType }}>
             {children}
         </IndexDataContext.Provider>
     );

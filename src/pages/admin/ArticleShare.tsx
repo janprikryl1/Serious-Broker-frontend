@@ -30,36 +30,31 @@ export const ArticleShare:FC = () => {
     }, [id]);
     
     return (
-        <div>
-            <div className="padding-bottom">
-                <div className="container">
-                    <div className="service-details__wrapper">
-                        <div className="service-details__item">
-                            <div
-                                className="service-details__content"
-                                data-aos="fade-up"
-                                data-aos-duration="900"
-                            >
-                                <h3>{t("Share article ")}{articleName}</h3>
-                                <Link to={`${adminURLS.postEdit}${id}`}>
-                                    <Button variant="outline-warning">{t("New post")}</Button>
-                                </Link>
-
-                                {id && articlePosts ? (
-                                    <div className="padding-top padding-bottom">
-                                        <div className="blog__wrapper">
-                                            <ShareLink id={id} languages={languages}/>
-                                            <ShareItems articlePosts={articlePosts}/>
-                                        </div>
-                                    </div>
-                                    ) : (
-                                        <ShareSkeleton />
-                                )}
+        <div className="padding-bottom admin-container">
+            <div className="service-details__wrapper">
+                <div className="service-details__item">
+                    <div
+                        className="service-details__content"
+                        data-aos="fade-up"
+                        data-aos-duration="900"
+                    >
+                        <h3>{t("Share article ")}{articleName}</h3>
+                        <Link to={`${adminURLS.postEdit}${id}`}>
+                            <Button variant="outline-warning">{t("New post")}</Button>
+                        </Link>
+                        {id && articlePosts ? (
+                            <div className="padding-top padding-bottom">
+                                <div className="blog__wrapper">
+                                    <ShareLink id={id} languages={languages}/>
+                                    <ShareItems articlePosts={articlePosts}/>
+                                </div>
                             </div>
-                        </div>
+                        ) : (
+                            <ShareSkeleton />
+                        )}
                     </div>
                 </div>
             </div>
         </div>
-    )
+    );
 }

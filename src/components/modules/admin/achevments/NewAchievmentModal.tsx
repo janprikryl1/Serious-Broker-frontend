@@ -54,7 +54,7 @@ export const NewAchievmentModal: FC<Props> = ({ selectedUser, setAchievements, o
             aria-describedby="alert-dialog-slide-description"
             PaperComponent={PaperComponent}
         >
-            <DialogTitle style={{ cursor: "move", color: "white" }} id="draggable-dialog-title">
+            <DialogTitle style={{ cursor: "move", color: "white", fontSize:40 }} id="draggable-dialog-title">
                 {t("Add new achievement")}
             </DialogTitle>
             <DialogContent>

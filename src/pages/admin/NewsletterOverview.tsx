@@ -28,44 +28,38 @@ export const NewsletterOverview: FC = () => {
     };
 
     return (
-        <div>
-            <div className="padding-bottom padding-top">
-                <div className="container">
-                    <div className="service-details__wrapper">
-                        <div className="service-details__item">
-                            <div className="service-details__item-inner">
-                                <div
-                                    className="service-details__content"
-                                    data-aos="fade-up"
-                                    data-aos-duration="900"
-                                >
-                                    <h4 className="card-title">{t("Registered newsletters")}</h4>
-                                    <div className="table-responsive mt-3">
-                                        <table className="table">
-                                            <thead>
-                                            <tr>
-                                                <th>Id</th>
-                                                <th>Email</th>
-                                                <th>{t("Created")}</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            {newsletters.map((newsletter) => (
-                                                <tr key={uuidv4()}>
-                                                    <td>{newsletter.id}</td>
-                                                    <td><a href={`mailto:${newsletter.email}`}>{newsletter.email}</a></td>
-                                                    <td>{toCzechDateFormat(newsletter.created)}</td>
-                                                </tr>
-                                            ))}
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <button onClick={sendEmailToAll} className="btn btn-primary mt-3">
-                                        {t("Send email to all")}
-                                    </button>
-                                </div>
-                            </div>
+        <div className="padding-bottom service-details__wrapper">
+            <div className="service-details__item">
+                <div className="service-details__item-inner">
+                    <div
+                        className="service-details__content"
+                        data-aos="fade-up"
+                        data-aos-duration="900"
+                    >
+                        <h1 className="admin-section-title">{t("Registered newsletters")}</h1>
+                        <div className="table-responsive mt-3">
+                            <table className="table-index-light" style={{width: "100%", margin:0}}>
+                                <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Email</th>
+                                    <th>{t("Created")}</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {newsletters.map((newsletter) => (
+                                    <tr key={uuidv4()}>
+                                        <td>{newsletter.id}</td>
+                                        <td><a href={`mailto:${newsletter.email}`}>{newsletter.email}</a></td>
+                                        <td>{toCzechDateFormat(newsletter.created)}</td>
+                                    </tr>
+                                ))}
+                                </tbody>
+                            </table>
                         </div>
+                        <button onClick={sendEmailToAll} className="btn btn-primary mt-3">
+                            {t("Send email to all")}
+                        </button>
                     </div>
                 </div>
             </div>
