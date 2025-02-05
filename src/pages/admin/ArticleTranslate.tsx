@@ -1,13 +1,13 @@
 import {FC, useEffect, useState} from "react";
-import {Link, useParams} from "react-router-dom";
+import {useParams} from "react-router-dom";
 import {TranslationsOverview} from "../../utils/types/article/TranslationsOverview.ts";
 import {useTranslation} from "react-i18next";
 import {getTranslations} from "../../api/translationsService.ts";
-import {Button} from "react-bootstrap";
 import {ArticlesSkeleton} from "../../components/modules/articles/ArticlesSkeleton.tsx";
 import {TranslationCard} from "../../components/modules/admin/translations/TranslationCard.tsx";
 import {ArticleDetailProps} from "../../utils/types/article/ArticleDetailProps.ts";
 import {adminURLS} from "../../utils/constants";
+import {Button} from "../../components/Button.tsx";
 
 export const ArticleTranslate:FC = () => {
     const {id} = useParams();
@@ -40,8 +40,7 @@ export const ArticleTranslate:FC = () => {
                                 data-aos-duration="900"
                             >
                                 <h3>{t("Translations for article ")}{article?.title}</h3>
-                                <Link to={`${adminURLS.translations}${id}`}><Button
-                                    variant="outline-warning">{t("New translation")}</Button></Link>
+                                <Button type="link" to={`${adminURLS.translations}${id}`} style={{padding:5}}>{t("New translation")}</Button>
                                 <div className="padding-bottom mt-3">
                                     <div className="blog__wrapper">
                                         <div className="row g-4">

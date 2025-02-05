@@ -4,10 +4,10 @@ import {UserAchievmentSkeleton} from "./UserAchievmentSkeleton.tsx";
 import {AchievementType} from "../../../../utils/types/AchievementType.ts";
 import Swal from "sweetalert2";
 import {adminUserAchievements} from "../../../../api/achievementService.ts";
-import {Button} from "react-bootstrap";
 import {useTranslation} from "react-i18next";
 import {NewAchievmentModal} from "./NewAchievmentModal.tsx";
 import {TimeLineComponent} from "../../reusable/TimeLineComponent.tsx";
+import {Button} from "../../../Button.tsx";
 
 type Props = {
     selectedUser?: UserType;
@@ -42,7 +42,7 @@ export const UserAchievmentDetails:FC<Props> = ({selectedUser}) => {
         <div className="cta__subscribe padding-bottom padding-top">
             {selectedUser && achievements ? (
                 <>
-                    <Button variant="outline-warning" onClick={() => setNewAchievmentModalOpen(true)}>{t("Add new achievement")}</Button>
+                    <Button onClick={() => setNewAchievmentModalOpen(true)}>{t("Add new achievement")}</Button>
                     <TimeLineComponent achievements={achievements} />
                 </>
             ) : (

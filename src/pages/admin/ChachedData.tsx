@@ -5,8 +5,8 @@ import {toCzechDateFormat} from "../../utils/constants/functions.ts";
 import {ChachedDataType} from "../../utils/types/ChachedDataType.ts";
 import {deleteChachedData, downloadFile, getAllChachedData} from "../../api/chachedDataAPI.ts";
 import {FaRegTrashAlt} from "react-icons/fa";
-import {Button} from "react-bootstrap";
 import Swal from "sweetalert2";
+import {Button, ButtonColor} from "../../components/Button.tsx";
 
 export const ChachedData:FC = () => {
     const { t } = useTranslation();
@@ -101,9 +101,9 @@ export const ChachedData:FC = () => {
                                             <tbody>
                                             {logs.map((log) => (
                                                 <tr key={log.name}>
-                                                    <td><Button variant="link" onClick={() => handleDownload(log.name)}>{log.name}</Button></td>
+                                                    <td><Button color={ButtonColor.transparent} onClick={() => handleDownload(log.name)}>{log.name}</Button></td>
                                                     <td>{toCzechDateFormat(log.created_at)}</td>
-                                                    <td><Button variant="danger" onClick={() => handleDelete(log.name)}><FaRegTrashAlt /></Button></td>
+                                                    <td><Button color={ButtonColor.red} onClick={() => handleDelete(log.name)}><FaRegTrashAlt /></Button></td>
                                                 </tr>
                                             ))}
                                             </tbody>

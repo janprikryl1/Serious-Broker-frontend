@@ -4,12 +4,13 @@ import { useTranslation } from "react-i18next";
 import { useEffect, useState } from "react";
 import { getLastMostProfitable } from "../../../api/indexDataService.ts";
 import { LastMostProfitableCoins } from "../../../utils/types/indexPage/LastMostProfitableCoins.ts";
-import { SignInLink } from "../signIn/SignInLink.tsx";
 import { useUserContext } from "../../../utils/providers/providerUser.tsx";
 import { LastGraphs } from "./LastGraphs.tsx";
 import { useThemeContext } from "../../../utils/providers/ThemeProvider.tsx";
 import { Paper } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
+import {Button} from "../../Button.tsx";
+import {routes} from "../../../utils/constants";
 
 export const LastIndexes = () => {
     const { t } = useTranslation();
@@ -30,11 +31,11 @@ export const LastIndexes = () => {
     }, []);
 
     if (!lastMostProfitable) {
-        return <p>Loading data...</p>; // Consider adding a spinner or loading component here
+        return <p>Loading data...</p>;
     }
 
     const rows = lastMostProfitable.map((coin) => ({
-        id: coin.cmc_rank, // Use a unique identifier from the data
+        id: coin.cmc_rank,
         asset_label: coin.asset_label,
         name: coin.name,
         quote_currencies: coin.quote_currencies,
@@ -95,7 +96,9 @@ export const LastIndexes = () => {
                         {!user && (
                             <>
                                 <h1>{t("Looking for more?")}</h1>
-                                <SignInLink style={{ fontSize: "20px", padding: "10px" }} />
+                                <Button type="link" to={routes.signIn} style={{fontSize: "20px", padding: "10px"}}>
+                                    Přihlásit se
+                                </Button>
                             </>
                         )}
                     </div>

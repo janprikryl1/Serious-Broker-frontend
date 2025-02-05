@@ -24,21 +24,24 @@ export const MostVolatileCoins: FC = () => {
     }, []);
     
     return (
-        <div className="p-4 rounded">
-            <h1 style={{ fontSize: "40 px" }}>{t("The biggest jumpers up and down")}</h1>
+        <>
             {mostVolatile ? (
                 <>
-                    <TypographyWithPopover popover={t("Which coins got the most")}>
-                        <p>{t("Rises")}</p>
+                    <h1 style={{fontSize: "40 px"}}>{t("The biggest jumpers up and down")}</h1>
+                    <TypographyWithPopover popover={t("Which coins got the most")} style={{marginBottom:-25}}>
+                        {t("Rises")}
                     </TypographyWithPopover>
-                    <VolatileTable data={mostVolatile.rises}/>
-                    <TypographyWithPopover popover={t("Which coins lost the most")}>
-                        <p>{t("Falls")}</p>
+                    <div className="p-4 rounded">
+                        <VolatileTable data={mostVolatile.rises}/>
+                    </div>
+                    <TypographyWithPopover popover={t("Which coins lost the most")} style={{marginBottom:-25}}>
+                        {t("Falls")}
                     </TypographyWithPopover>
-                    <VolatileTable data={mostVolatile.falls}/>
+                    <div className="p-4 rounded">
+                        <VolatileTable data={mostVolatile.falls}/>
+                    </div>
                 </>
-                ) : <MostVolatileCoinsSkeleton/>
-            }
-        </div>
+            ) : <MostVolatileCoinsSkeleton/>}
+        </>
     );
 };

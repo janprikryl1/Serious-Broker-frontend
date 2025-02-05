@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next";
 import { TableLogSkeleton } from "../../components/modules/admin/TableLogSkeleton.tsx";
 import { GlossaryEditTableLine } from "../../components/modules/admin/GlossaryEditTableLine.tsx";
 import Swal from "sweetalert2";
+import {Button} from "../../components/Button.tsx";
 
 export const GlossaryManagement: FC = () => {
     const { t } = useTranslation();
@@ -164,9 +165,9 @@ export const GlossaryManagement: FC = () => {
                                             />
                                         </div>
                                         <div className="col-md-12">
-                                            <button type="submit" className="btn btn-primary">
+                                            <Button type="submit" className="btn btn-primary">
                                                 {t("Add Glossary Entry")}
-                                            </button>
+                                            </Button>
                                         </div>
                                     </div>
                                 </form>

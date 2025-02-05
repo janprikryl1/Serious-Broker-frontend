@@ -3,9 +3,11 @@ import { Link } from "react-router-dom";
 import CountUp from "react-countup";
 import {useTranslation} from "react-i18next";
 import {routes} from "../../../utils/constants";
+import {useMediaQuery} from "@mui/material";
 
 export const AboutUs: FC = () => {
   const {t} = useTranslation();
+  const isMobile = useMediaQuery('(max-width:990px)');
   
   return (
       <section className="about about--style1">
@@ -18,7 +20,7 @@ export const AboutUs: FC = () => {
                     data-aos="fade-right"
                     data-aos-duration="800"
                 >
-                  <div className="about__thumb-inner">
+                  {!isMobile && (<div className="about__thumb-inner">
                     <div className="about__thumb-image floating-content">
                       <div className="floating-content__top-left">
                         <div className="floating-content__item">
@@ -43,7 +45,7 @@ export const AboutUs: FC = () => {
                         </div>
                       </div>
                     </div>
-                  </div>
+                  </div>)}
                 </div>
               </div>
               <div className="col-lg-6">

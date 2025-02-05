@@ -7,7 +7,7 @@ export const IndexSeasonButtons:FC = () => {
     const { season, handleSelect } = useIndexDataContext();
 
     return (
-        <div className="col-sm season-button-group" style={{maxWidth: 480}}>
+        <div className="col-sm season-button-group season-gains">
             {Object.values(IndexSeason).map((seasonValue) => (
                 <SeasonButton
                     key={seasonValue}

@@ -1,7 +1,8 @@
 import {FC} from "react";
-import {Button, Form, InputGroup} from "react-bootstrap";
+import {Form, InputGroup} from "react-bootstrap";
 import {useTranslation} from "react-i18next";
 import {useArticleCreate} from "../../../../../../../../utils/providers/ArticleCreateProvider.tsx";
+import {Button} from "../../../../../../../Button.tsx";
 
 export const Subjects:FC = () => {
     const {t} = useTranslation();
@@ -44,7 +45,7 @@ export const Subjects:FC = () => {
                     </InputGroup> 
                 </div>
             ))}
-            <Button variant="warning" onClick={handleAddSubject}>+</Button>
+            <Button style={{fontSize:15, fontWeight:"bold"}} onClick={handleAddSubject}>+</Button>
             <br/><br/>
         </>
     )

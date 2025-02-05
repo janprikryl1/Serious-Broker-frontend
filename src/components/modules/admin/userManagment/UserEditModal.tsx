@@ -7,10 +7,11 @@ import ModalClose from "@mui/joy/ModalClose";
 import DialogTitle from "@mui/joy/DialogTitle";
 import { List } from "@mui/joy";
 import { UserFormInput } from "./UserFormInput";
-import { Button, InputGroup } from "react-bootstrap";
+import { InputGroup } from "react-bootstrap";
 import {UserFormCheck} from "./UserFormCheck.tsx";
 import {toCzechDateFormat} from "../../../../utils/constants/functions.ts";
 import {MembershipManagement} from "./MembershipManagement.tsx";
+import {Button} from "../../../Button.tsx";
 
 type Props = {
     open: boolean;
@@ -159,11 +160,11 @@ export const UserEditModal: FC<Props> = ({ open, handleClose, selectedUser, hand
                             <UserFormInput label="Changed" value={toCzechDateFormat(selectedUser.changed)} readOnly />
                             <UserFormInput label="Created" value={toCzechDateFormat(selectedUser.created)} readOnly />
                             <InputGroup className="mb-3">
-                                {newPassword === undefined ? <Button variant="warning" onClick={() => setNewPassword("")}>Změna hesla</Button> : <UserFormInput label="Password" value={newPassword} onChange={(e) => setNewPassword(e.target.value)}/>}
+                                {newPassword === undefined ? <Button onClick={() => setNewPassword("")}>Změna hesla</Button> : <UserFormInput label="Password" value={newPassword} onChange={(e) => setNewPassword(e.target.value)}/>}
                             </InputGroup>
                             <MembershipManagement userId={selectedUser.id}/>
                             <InputGroup className="mb-3">
-                                <Button variant="warning" onClick={handleSaveChanges}>
+                                <Button onClick={handleSaveChanges}>
                                     {t("Update")}
                                 </Button>
                             </InputGroup>

@@ -4,6 +4,7 @@ import { NewsletterType } from "../../utils/types/NewslwtterType.ts";
 import { getAllNewsletters } from "../../api/newsletterService.ts";
 import {v4 as uuidv4} from "uuid";
 import {toCzechDateFormat} from "../../utils/constants/functions.ts";
+import {Button} from "../../components/Button.tsx";
 
 export const NewsletterOverview: FC = () => {
     const { t } = useTranslation();
@@ -38,7 +39,7 @@ export const NewsletterOverview: FC = () => {
                     >
                         <h1 className="admin-section-title">{t("Registered newsletters")}</h1>
                         <div className="table-responsive mt-3">
-                            <table className="table-index-light" style={{width: "100%", margin:0}}>
+                            <table className="table" style={{width: "100%", margin:0}}>
                                 <thead>
                                 <tr>
                                     <th>Id</th>
@@ -57,9 +58,9 @@ export const NewsletterOverview: FC = () => {
                                 </tbody>
                             </table>
                         </div>
-                        <button onClick={sendEmailToAll} className="btn btn-primary mt-3">
+                        <Button onClick={sendEmailToAll} className="btn btn-primary mt-3">
                             {t("Send email to all")}
-                        </button>
+                        </Button>
                     </div>
                 </div>
             </div>

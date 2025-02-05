@@ -1,10 +1,13 @@
-import { ChangeEvent, FC, useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash } from "@fortawesome/free-solid-svg-icons";
-import { GlossaryType } from "../../../utils/types/GlossaryType.ts";
-import { deleteGlossary, editGlossary } from "../../../api/glossaryService.ts";
+import {ChangeEvent, FC, useState} from "react";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faTrash} from "@fortawesome/free-solid-svg-icons";
+import {GlossaryType} from "../../../utils/types/GlossaryType.ts";
+import {deleteGlossary, editGlossary} from "../../../api/glossaryService.ts";
 import Swal from "sweetalert2";
-import { useTranslation } from "react-i18next";
+import {useTranslation} from "react-i18next";
+import {Button, ButtonColor} from "../../Button.tsx";
+import {Link} from "react-router-dom";
+import {glossaryImagesURL} from "../../../utils/constants";
 
 type Props = {
     glossary: GlossaryType;
@@ -115,25 +118,21 @@ export const GlossaryEditTableLine: FC<Props> = ({ glossary, onUpdate, onDelete 
                     className="form-control"
                 />
                 {glossary.image && !localImage && (
-                    <img
-                        src={`/path/to/uploads/${glossary.image}`}
-                        alt="Glossary"
-                        style={{ maxWidth: "100px", marginTop: "10px" }}
-                    />
+                    <Link to={`${glossaryImagesURL}${glossary.image}`}>{glossary.image}</Link>
                 )}
                 {localImage && (
                     <div style={{ marginTop: "10px" }}>{localImage.name}</div>
                 )}
             </td>
             <td>
-                <button className="btn btn-danger" onClick={handleDelete}>
+                <Button color={ButtonColor.red} onClick={handleDelete}>
                     <FontAwesomeIcon icon={faTrash} />
-                </button>
+                </Button>
             </td>
             <td>
-                <button className="btn btn-success" onClick={handleSave}>
+                <Button onClick={handleSave}>
                     {t("Save")}
-                </button>
+                </Button>
             </td>
         </tr>
     );

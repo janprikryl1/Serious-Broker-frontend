@@ -1,6 +1,5 @@
 import {FC, useState} from "react";
 import { NavLink } from 'react-router-dom';
-import { Button } from "react-bootstrap";
 import { useUserContext } from "../../../utils/providers/providerUser.tsx";
 import { useTranslation } from "react-i18next";
 import {
@@ -12,6 +11,8 @@ import {
     CDBSidebarMenuItem
 } from 'cdbreact';
 import {adminURLS} from "../../../utils/constants";
+import {Button} from "../../Button.tsx";
+import {CiLogout} from "react-icons/ci";
 
 export const Sidebar: FC = () => {
     const { t } = useTranslation();
@@ -104,7 +105,7 @@ export const Sidebar: FC = () => {
 
                 <CDBSidebarFooter>
                     <div style={{ padding: '20px 5px', textAlign: 'center' }}>
-                        <Button variant="outline-warning" onClick={logout}>{t("Logout")}</Button>
+                        <Button onClick={logout}><CiLogout /></Button>
                     </div>
                 </CDBSidebarFooter>
             </CDBSidebar>

@@ -5,9 +5,9 @@ import {getAllDemos} from "../../api/demosService.ts";
 import Swal from "sweetalert2";
 import {Link} from "react-router-dom";
 import {adminURLS} from "../../utils/constants";
-import {Button} from "react-bootstrap";
 import {ArticlesSkeleton} from "../../components/modules/articles/ArticlesSkeleton.tsx";
 import {DemoAdminCard} from "../../components/modules/admin/demos/DemoAdminCard.tsx";
+import {Button} from "../../components/Button.tsx";
 
 export const AdminDemos:FC = () => {
     const {t} = useTranslation();
@@ -40,8 +40,9 @@ export const AdminDemos:FC = () => {
                         data-aos-duration="900"
                     >
                         <h3 className="admin-section-title">{t("Demo management")}</h3>
-                        <Link to={adminURLS.newDemo}><Button
-                            variant="outline-warning">{t("New demo")}</Button></Link>
+                        <Link to={adminURLS.newDemo}>
+                            <Button>{t("New demo")}</Button>
+                        </Link>
                         <div className="padding-top padding-bottom">
                             <div className="blog__wrapper">
                                 <div className="row g-4">

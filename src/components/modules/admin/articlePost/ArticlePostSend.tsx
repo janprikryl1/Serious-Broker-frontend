@@ -1,8 +1,8 @@
 import {FC} from "react";
-import {Button} from "react-bootstrap";
 import {useTranslation} from "react-i18next";
 import {usePostEdit} from "../../../../utils/providers/PostEditProvider.tsx";
 import {useNavigate} from "react-router-dom";
+import {Button, ButtonColor} from "../../../Button.tsx";
 
 export const ArticlePostSend:FC = () => {
     const {t} = useTranslation();
@@ -16,9 +16,12 @@ export const ArticlePostSend:FC = () => {
     return (
         <>
             {postId === undefined ? (
-                <Button variant="outline-warning" onClick={uploadPost}>{t("Publish")}</Button>
+                <>
+                    <Button style={{marginRight:20}} onClick={uploadPost}>{t("Publish")}</Button>
+                    <Button color={ButtonColor.red} onClick={goBack}>{t("Back")}</Button>
+                </>
             ) : (
-                <Button variant="outline-danger" onClick={goBack}>{t("Back")}</Button>
+                <Button color={ButtonColor.gray} onClick={goBack}>{t("Back")}</Button>
             )}
         </>
     );

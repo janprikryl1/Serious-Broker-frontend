@@ -6,6 +6,7 @@ import { CryptoCurrenciesSkeleton } from "./CryptoCurrenciesSkeleton.tsx";
 import { useTranslation } from "react-i18next";
 import { Col, Row } from "react-bootstrap";
 import {Pagination} from "../../../Pagiation.tsx";
+import {Button, ButtonColor} from "../../../Button.tsx";
 
 const PAGE_SIZE = 50;
 
@@ -54,13 +55,9 @@ export const CryptoCurrencies: FC = () => {
                             value={searchValue}
                             onChange={(e) => setSearchValue(e.target.value)}
                         />
-                        <button
-                            className="trk-btn trk-btn--large trk-btn--secondary2"
-                            onClick={handleSearch}
-                            style={{ marginLeft: 10, paddingLeft: 15 }}
-                        >
+                        <Button className="trk-btn trk-btn--large trk-btn--secondary2" onClick={handleSearch} color={ButtonColor.white} style={{ paddingRight: 50 }}>
                             {t("Search")}
-                        </button>
+                        </Button>
                     </div>
                 </Col>
             </Row>

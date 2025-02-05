@@ -8,12 +8,14 @@ import Logo from "../../../utils/icons/logo/symbol.svg";
 import { MobileMenu } from "./MobileMenu.tsx";
 import { useUserContext } from "../../../utils/providers/providerUser.tsx";
 import { SignUpIcon } from "../../../headerIcons/SignUpIcon.tsx";
+import {useMediaQuery} from "@mui/material";
 
 export const Header: FC = () => {
     const { user } = useUserContext();
     const [scrollTop, setScrollTop] = useState(0);
     const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
     const location = useLocation();
+    const isMobile = useMediaQuery('(max-width:768px)');
 
     useEffect(() => {
         const handleScroll = () => {
@@ -57,7 +59,7 @@ export const Header: FC = () => {
                         <div className="mx-2 mobile-hide">
                             <ChangeLanguageIcon />
                         </div>
-                        {user === null && (
+                        {user === null && !isMobile && (
                             <div className="border-start px-3" style={{ color: "white", fontWeight: "bold" }}>
                                 <SignUpIcon />
                             </div>

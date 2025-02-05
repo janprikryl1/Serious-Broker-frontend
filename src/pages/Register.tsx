@@ -1,5 +1,4 @@
 import {ChangeEvent, ChangeEventHandler, FC, FormEventHandler, useEffect, useState} from "react";
-import {TitleHeader} from "../components/modules/about/TitleHeader.tsx";
 import {Link, useNavigate} from "react-router-dom";
 import {useTranslation} from "react-i18next";
 import Swal from "sweetalert2";
@@ -12,6 +11,7 @@ import {useUserContext} from "../utils/providers/providerUser.tsx";
 import {routes} from "../utils/constants";
 import {LanguageSelect} from "../components/modules/signIn/LanguageSelect.tsx";
 import PasswordStrengthBar from "react-password-strength-bar";
+import {Button} from "../components/Button.tsx";
 
 
 export const Register:FC = () => {
@@ -108,9 +108,7 @@ export const Register:FC = () => {
     };
     
     return (
-        <>
-            <TitleHeader title="Login" />
-            <section className="account padding-top padding-bottom">
+            <section className="account padding-bottom mt-3">
                 <div className="container">
                     <div
                         className="account__wrapper"
@@ -203,10 +201,10 @@ export const Register:FC = () => {
                                                 onChange={handleNewsletterChange}
                                             />
                                         </Form>
-                                        <div className="d-flex justify-content-center mt-4">
-                                            <button
-                                                className="btn btn-outline-warning btn-block btn-lg gradient-custom-4 text-body"
-                                                disabled={sending}>{t("Register")}</button>
+                                        <div className="d-flex justify-content-center">
+                                            <Button type="submit"
+                                                className="btn  btn-block btn-lg"
+                                                disabled={sending}>{t("Register")}</Button>
                                         </div>
                                     </form>
 
@@ -222,6 +220,5 @@ export const Register:FC = () => {
                     </div>
                 </div>
             </section>
-        </>
     );
 }

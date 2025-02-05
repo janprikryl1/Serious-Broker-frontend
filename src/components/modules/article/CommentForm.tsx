@@ -37,17 +37,15 @@ export const CommentForm: FC<Props> = ({articleId, setComments}) => {
 
     return (
         <div
-            className="blog-details__commentform"
+            className="sidebar__comment"
             data-aos="fade-up"
             data-aos-duration="1000"
         >
             <div className="sidebar">
-                <div className="sidebar__commentform" id="post">
                     <div className="sidebar__head">
                         <h3>{t("Leave a comment")}</h3>
                     </div>
-                    <div className="sidebar__commentform-body pt-25">
-                        <form action={routes.home}>
+                        <form action={routes.home} className="pt-25">
                             <div className="row g-4">
                                 <div className="col-md-12">
                                     <div>
@@ -74,9 +72,7 @@ export const CommentForm: FC<Props> = ({articleId, setComments}) => {
                                 {t("Send")}
                             </button>
                         </form>
-                    </div>
                 </div>
-            </div>
         </div>
     );
 };

@@ -1,13 +1,14 @@
-import {FC, ReactNode, useState} from "react";
+import {CSSProperties, FC, ReactNode, useState} from "react";
 import Typography from "@mui/material/Typography";
 import Popover from "@mui/material/Popover";
 
 type Props = {
     children: ReactNode;
     popover: string | ReactNode;
+    style?: CSSProperties;
 }
 
-export const TypographyWithPopover:FC<Props> = ({children, popover}) => {
+export const TypographyWithPopover:FC<Props> = ({children, popover, style}) => {
     const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
     const handlePopoverOpen = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorEl(event.currentTarget);
@@ -18,7 +19,7 @@ export const TypographyWithPopover:FC<Props> = ({children, popover}) => {
     const open = Boolean(anchorEl);
     
     return (
-        <div>
+        <div style={style}>
             <Typography
                 aria-owns={open ? 'mouse-over-popover' : undefined}
                 aria-haspopup="true"

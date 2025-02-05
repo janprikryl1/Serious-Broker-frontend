@@ -2,18 +2,20 @@ import {FC, useState} from "react";
 import {useTranslation} from "react-i18next";
 import Swal from "sweetalert2";
 import {addNewsletter} from "../../../api/newsletterService.ts";
+import { Button, ButtonColor } from "../../Button.tsx";
 
 export const Newsletter: FC = () => {
   const {t} = useTranslation();
   const [email, setEmail] = useState("");
   
   const handleAddNewsletter = () => {
+    if (!email) return;
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
       Swal.fire({
         icon: "error",
         title: t("Error"),
-        text: t("Invalid email or password. Please try again"),
+        text: t("Invalid email"),
       });
       return;
     }
@@ -75,8 +77,9 @@ export const Newsletter: FC = () => {
                         onChange={(e) => setEmail(e.target.value)}
                     />
                   </div>
-                  <button className="trk-btn trk-btn--secondary2 mt-3" style={{borderRadius:3, fontSize:20}}
-                          onClick={handleAddNewsletter}>{t("Register")}</button>
+                  <Button className="trk-btn trk-btn--secondary2 mt-3" style={{borderRadius:3, fontSize:20, border:"none"}} onClick={handleAddNewsletter} color={ButtonColor.white}>
+                    {t("Register")}
+                  </Button>
                 </div>
               </div>
             </div>

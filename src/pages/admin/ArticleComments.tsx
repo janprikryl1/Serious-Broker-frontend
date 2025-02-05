@@ -3,8 +3,8 @@ import {useNavigate, useParams} from "react-router-dom";
 import {useTranslation} from "react-i18next";
 import {getArticleComments} from "../../api/commentsService.ts";
 import {CommentType} from "../../utils/types/CommentType.ts";
-import {Button} from "react-bootstrap";
 import {toCzechDateFormat} from "../../utils/constants/functions.ts";
+import {Button} from "../../components/Button.tsx";
 
 export const ArticleComments:FC = () => {
     const {id} = useParams();
@@ -30,41 +30,29 @@ export const ArticleComments:FC = () => {
     }
     
     return (
-        <div className="blog-details__comment" data-aos="fade-up" data-aos-duration="1000">
-            <div className="sidebar">
-                <div className="sidebar__comment">
-                    <div className="sidebar__head">
-                        <h3>{t("Comments")}</h3>
-                    </div>
-                    <div className="sidebar__comment-body">
-                        <ul>
+        <div className="padding-bottom">
+            <div className="service-details__wrapper">
+                <div className="service-details__item">
+                    <div className="service-details__item-inner">
+                        <div
+                            className="service-details__content"
+                            data-aos="fade-up"
+                            data-aos-duration="900"
+                        >
+                            <h1 className="admin-section-title">{t("Comments")}</h1>
                             {comments !== undefined && comments.length > 0 ? comments.map((comment) => (
-                                <li className="sidebar__comment-item" key={comment.id}>
-                                    <div className="comment">
-                                        <div className="comment__inner">
-                                            <div className="comment__head">
-                                                <div className="comment__author">
-                                                    <div className="comment__author-info">
-                                                        <h6 className="mb-0">
-                                                            {comment.user}
-                                                            <span>{toCzechDateFormat(comment.created)}</span></h6>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="comment__body">
-                                                <div className="comment__body-inner">
-                                                    <p className="mb-0">{comment.text}</p>
-                                                </div>
-                                            </div>
-                                        </div>
+                                <div key={comment.id} className="mb-5">
+                                    <p>{comment.user} (<span>{toCzechDateFormat(comment.created)}</span>)</p>
+                                    <div className="comment__body-inner">
+                                        <p className="mb-0">{comment.text}</p>
                                     </div>
-                                </li>
+                                </div>
                             )) : <p>{t("No comments yet")}</p>}
-                            <Button variant="outline-warning" className="p-2" onClick={goBack}>{t("Back")}</Button>
-                        </ul>
+                            <Button onClick={goBack}>{t("Back")}</Button>
                     </div>
                 </div>
             </div>
         </div>
-    )
+        </div>
+    );
 }

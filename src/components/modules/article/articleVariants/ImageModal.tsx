@@ -1,6 +1,7 @@
-import { Dispatch, FC, SetStateAction } from "react";
-import { Modal, Button } from "react-bootstrap";
+import {Dispatch, FC, SetStateAction} from "react";
+import {Modal} from "react-bootstrap";
 import {useTranslation} from "react-i18next";
+import {Button, ButtonColor} from "../../../Button.tsx";
 
 type Props = {
     isModalOpen: boolean;
@@ -28,7 +29,7 @@ export const ImageModal: FC<Props> = ({ isModalOpen, selectedImage, setModalOpen
                 />
             </Modal.Body>
             <Modal.Footer>
-                <Button variant="secondary" onClick={() => setModalOpen(false)}>
+                <Button color={ButtonColor.gray} onClick={() => setModalOpen(false)}>
                     {t("Close")}
                 </Button>
             </Modal.Footer>

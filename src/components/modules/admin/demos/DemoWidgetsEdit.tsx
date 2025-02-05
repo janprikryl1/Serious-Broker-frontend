@@ -3,7 +3,8 @@ import { useDemoContext } from "../../../../utils/providers/DemoProvider.tsx";
 import { WidgetsType, widgets } from "../../../../utils/types/demos/demoType";
 import { useTranslation } from "react-i18next";
 import { FaArrowCircleDown, FaArrowCircleUp } from "react-icons/fa";
-import { Button, Form } from "react-bootstrap";
+import { Form } from "react-bootstrap";
+import {Button, ButtonColor} from "../../../Button.tsx";
 
 export const DemoWidgetsEdit: FC = () => {
     const { t } = useTranslation();
@@ -75,12 +76,13 @@ export const DemoWidgetsEdit: FC = () => {
                                 })
                             }
                         />
-                        <button
+                        <Button
+                            color={ButtonColor.red}
                             className="btn btn-danger me-4"
                             onClick={() => handleDeleteWidget(index)}
                         >
                             {t("Delete")}
-                        </button>
+                        </Button>
 
                         <div className="d-flex align-items-center me-4">
                             <Button
@@ -137,9 +139,9 @@ export const DemoWidgetsEdit: FC = () => {
                         setNewWidget({ ...newWidget, propertyId: e.target.value })
                     }
                 />
-                <button className="btn btn-primary" onClick={handleAddWidget}>
+                <Button onClick={handleAddWidget}>
                     {t("Add Widget")}
-                </button>
+                </Button>
             </div>
         </div>
     );

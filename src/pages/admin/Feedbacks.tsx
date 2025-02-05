@@ -2,8 +2,9 @@ import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { FeedbackStoredType } from "../../utils/types/feedback/FeedbackStoredType.ts";
 import { getAllFeedbacks } from "../../api/feedbackService.ts";
-import { Accordion, Button } from "react-bootstrap";
+import { Accordion } from "react-bootstrap";
 import {toCzechDateFormat} from "../../utils/constants/functions.ts";
+import {Pagination} from "../../components/Pagiation.tsx";
 
 const PAGE_SIZE = 10;
 
@@ -46,7 +47,7 @@ export const Feedbacks: FC = () => {
                             >
                                 <h1 className="card-title">{t("Feedbacks")}</h1>
                                 <div className="table-responsive mt-3">
-                                    <table className="table-index-light" style={{width: "100%", margin:0}}>
+                                    <table className="table">
                                         <thead>
                                         <tr>
                                             <th>Id</th>
@@ -85,39 +86,11 @@ export const Feedbacks: FC = () => {
                                     </table>
                                 </div>
 
-                                <div className="paginations" data-aos="fade-up" data-aos-duration="1200">
-                                    <ul className="lab-ul d-flex flex-wrap justify-content-center mb-1">
-                                        <li>
-                                            <Button
-                                                variant="outline-warning"
-                                                onClick={() => handlePageChange(page - 1)}
-                                                disabled={page <= 1}
-                                            >
-                                                <i className="fa-solid fa-angle-left me-2"></i> {t("Previous")}
-                                            </Button>
-                                        </li>
-                                        {totalPages &&
-                                            [...Array(totalPages).keys()].map((p) => (
-                                                <li key={p}>
-                                                    <Button
-                                                        variant={p + 1 === page ? "success" : "outline-warning"}
-                                                        onClick={() => handlePageChange(p + 1)}
-                                                    >
-                                                        {p + 1}
-                                                    </Button>
-                                                </li>
-                                            ))}
-                                        <li>
-                                            <Button
-                                                variant="outline-warning"
-                                                onClick={() => handlePageChange(page + 1)}
-                                                disabled={page >= (totalPages || 1)}
-                                            >
-                                                {t("Next")} <i className="fa-solid fa-angle-right ms-2"></i>
-                                            </Button>
-                                        </li>
-                                    </ul>
-                                </div>
+                                <Pagination
+                                    currentPage={page}
+                                    totalPages={totalPages ?? 1}
+                                    onPageChange={handlePageChange}
+                                />
                             </div>
                         </div>
                     </div>

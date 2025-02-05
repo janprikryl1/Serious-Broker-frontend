@@ -1,9 +1,10 @@
 import {Dispatch, FC, SetStateAction} from "react";
 import {useArticleTranslate} from "../../../../utils/providers/ArticleTranslateProvider.tsx";
-import {Button, Form, InputGroup} from "react-bootstrap";
+import {Form, InputGroup} from "react-bootstrap";
 import {languages} from "../../../../utils/options/languages.ts";
 import {useTranslation} from "react-i18next";
 import {translate} from "../../../../api/translateService.ts";
+import {Button} from "../../../Button.tsx";
 
 export const NewTranslationPagesTitleDescriptionLanguage:FC = () => {
     const {t} = useTranslation();
@@ -22,7 +23,7 @@ export const NewTranslationPagesTitleDescriptionLanguage:FC = () => {
 
     return (
         <div>
-            <h1>{t("Translate")}</h1>
+            <h1 className="admin-section-title">{t("Translate")}</h1>
             <InputGroup className="mb-3">
                 <InputGroup.Text>{t("Title")}</InputGroup.Text>
                 <Form.Control placeholder={t("How to buy Bitcoin...")} value={name}

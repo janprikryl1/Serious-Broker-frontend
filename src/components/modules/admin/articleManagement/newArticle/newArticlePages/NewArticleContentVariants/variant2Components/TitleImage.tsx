@@ -1,11 +1,11 @@
 import {FC} from "react";
 import {InputGroup} from "react-bootstrap";
-import Button from "react-bootstrap/Button";
 import {useTranslation} from "react-i18next";
 import {useArticleCreate} from "../../../../../../../../utils/providers/ArticleCreateProvider.tsx";
 import {ListFilesModal} from "../imageUpload/ListFilesModal.tsx";
 import {useModal} from "../../../../../../../../utils/hooks/useModal.tsx";
 import {imageURL} from "../../../../../../../../utils/constants";
+import {Button} from "../../../../../../../Button.tsx";
 
 export const TitleImage:FC = () => {
     const {t} = useTranslation();

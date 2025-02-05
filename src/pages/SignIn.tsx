@@ -1,5 +1,4 @@
 import {ChangeEventHandler, FC, FormEventHandler, useEffect, useState} from "react";
-import {TitleHeader} from "../components/modules/about/TitleHeader.tsx";
 import {Link, useNavigate} from "react-router-dom";
 import {useTranslation} from "react-i18next";
 import Swal from "sweetalert2";
@@ -7,6 +6,7 @@ import {LoginRegisterInput} from "../components/modules/signIn/LoginRegisterInpu
 import {useUserContext} from "../utils/providers/providerUser.tsx";
 import {login} from "../api/authenticateService.ts";
 import {routes} from "../utils/constants";
+import {Button, ButtonColor} from "../components/Button.tsx";
 
 export const SignIn: FC = () => {
     const {t} = useTranslation();
@@ -58,52 +58,43 @@ export const SignIn: FC = () => {
     }
 
     return (
-        <>
-            <TitleHeader title="Login"/>
-            <section className="account padding-top padding-bottom">
-                <div className="container">
-                    <div
-                        className="account__wrapper"
-                        data-aos="fade-up"
-                        data-aos-duration="800"
-                    >
-                        <div className="row g-4">
-                            <div className="col-12">
-                                <div className="account__content account__content--style1">
-                                    <div className="account__header">
-                                        <h2>{t("Welcome back!")}</h2>
-                                        <p>{t("Fill in your details to log in")}</p>
+        <section className="account padding-bottom mt-3">
+            <div className="container">
+                <div
+                    className="account__wrapper"
+                    data-aos="fade-up"
+                    data-aos-duration="800"
+                >
+                    <div className="row g-4">
+                        <div className="col-12">
+                            <div className="account__content account__content--style1">
+                                <div className="account__header">
+                                    <h2>{t("Welcome back!")}</h2>
+                                    <p>{t("Fill in your details to log in")}</p>
+                                </div>
+                                <form onSubmit={handleSubmit}>
+                                    <LoginRegisterInput handleChange={handleChange} placeholder="Email" name="email" type="email"/>
+                                    <LoginRegisterInput handleChange={handleChange} placeholder="Password" name="password" type="password"/>
+                                    <div className="d-flex justify-content-center mt-4">
+                                        <Button type="submit" className="trk-btn trk-btn--large trk-btn--secondary2" color={ButtonColor.yellow}>{t("Submit")}</Button>
                                     </div>
-                                    <form onSubmit={handleSubmit}>
-                                        <LoginRegisterInput handleChange={handleChange} placeholder="Email" name="email"
-                                                            type="email"/>
-                                        <LoginRegisterInput handleChange={handleChange} placeholder="Password"
-                                                            name="password" type="password"/>
-                                        <div className="d-flex justify-content-center mt-4">
-                                            <button
-                                                className="btn btn-outline-warning btn-block btn-lg gradient-custom-4 text-body">{t("Submit")}</button>
-                                        </div>
-                                    </form>
-                                    <div className="account__switch">
-                                        <p>
-                                            {t("Don’t have an account yet? ")}<Link to={routes.register}
-                                                                                    className="link-underline-none">{t("Register")}</Link>
-                                        </p>
-
-                                        <p>
-                                            {t("Forgotten password?")}<Link to={routes.forgottenPassword}
-                                                                                    className="link-underline-none">{t("Recover")}</Link>
-                                        </p>
-                                        <p>
-                                            <Link to={routes.forgottenPassword} className="link-underline-none">{t("Forgotten password?")}</Link>
-                                        </p>
-                                    </div>
+                                </form>
+                                <div className="account__switch">
+                                    <p>
+                                        {t("Don’t have an account yet? ")}<Link to={routes.register} className="link-underline-none">{t("Register")}</Link>
+                                    </p>
+                                    <p>
+                                        {t("Forgotten password?")}<Link to={routes.forgottenPassword} className="link-underline-none">{t("Recover")}</Link>
+                                    </p>
+                                    <p>
+                                        <Link to={routes.forgottenPassword} className="link-underline-none">{t("Forgotten password?")}</Link>
+                                    </p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </section>
-        </>
+            </div>
+        </section>
     );
 }

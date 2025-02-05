@@ -1,8 +1,10 @@
-import { ChangeEvent, FC, useEffect, useState } from "react";
-import { getNewslettersEmailsService } from "../../../../api/newslettersEmailsService.ts";
-import { Button, Form } from "react-bootstrap";
-import { useTranslation } from "react-i18next";
-import { MdOutlineEmail } from "react-icons/md";
+import {ChangeEvent, FC, useEffect, useState} from "react";
+import {getNewslettersEmailsService} from "../../../../api/newslettersEmailsService.ts";
+import {Form} from "react-bootstrap";
+import {useTranslation} from "react-i18next";
+import {MdOutlineEmail} from "react-icons/md";
+import {useNavigate} from "react-router-dom";
+import {Button, ButtonColor} from "../../../Button.tsx";
 
 type Props = {
     url: string;
@@ -12,7 +14,12 @@ export const ArticleSendEmailComponent: FC<Props> = ({ url }) => {
     const { t } = useTranslation();
     const [emails, setEmails] = useState<string[]>([]);
     const [text, setText] = useState("");
-
+    const navigate = useNavigate();
+    
+    const goBack = () => {
+        navigate(-1);
+    }
+    
     useEffect(() => {
         const loadEmails = async () => {
             try {
@@ -50,13 +57,13 @@ export const ArticleSendEmailComponent: FC<Props> = ({ url }) => {
                 onChange={handleTextChange}
             />
             <Button
-                variant="outline-warning"
-                id="button-addon2"
+                className="mt-3"
+                style={{marginRight: 10}}
                 onClick={sendEmails}
-                style={{ marginTop: "10px" }}
             >
                 <MdOutlineEmail /> {t("Send")}
             </Button>
+            <Button color={ButtonColor.red} className="mt-3" onClick={goBack}>{t("Back")}</Button>
         </>
     );
 };

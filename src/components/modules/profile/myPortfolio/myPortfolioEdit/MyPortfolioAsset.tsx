@@ -5,6 +5,7 @@ import { useMyPortfolioContext } from "../../../../../utils/providers/MyPortfoli
 import { AvailableCoinsDropdown } from "./AvailableCoinsDropdown.tsx";
 import { Assets } from "../../../../../utils/types/asset/AssetDetailType.ts";
 import Slider from "@mui/material/Slider";
+import {Button, ButtonColor} from "../../../../Button.tsx";
 
 type Props = {
     asset: Assets;
@@ -96,9 +97,9 @@ export const MyPortfolioAsset: FC<Props> = ({ asset, index }) => {
                     sx={{color: "#ffca2c", "& .MuiSlider-markLabel": { color: "#ffca2c" }}}
                 />
 
-                <button className="btn btn-danger me-4" onClick={handleRemoveAsset}>
+                <Button color={ButtonColor.red} className="btn btn-danger me-4" onClick={handleRemoveAsset}>
                     {t("Delete")}
-                </button>
+                </Button>
 
                 <Form.Check
                     type="switch"

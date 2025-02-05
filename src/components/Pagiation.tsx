@@ -1,6 +1,6 @@
 import {FC} from "react";
-import { Button } from "react-bootstrap";
 import {useTranslation} from "react-i18next";
+import {Button, ButtonColor} from "./Button.tsx";
 
 interface PaginationProps {
     currentPage: number;
@@ -22,7 +22,6 @@ export const Pagination: FC<PaginationProps> = ({ currentPage, totalPages, onPag
             <ul className="lab-ul d-flex flex-wrap justify-content-center mb-1">
                 <li>
                     <Button
-                        variant="outline-warning"
                         onClick={() => onPageChange(currentPage - 1)}
                         disabled={currentPage <= 1}
                     >
@@ -32,10 +31,7 @@ export const Pagination: FC<PaginationProps> = ({ currentPage, totalPages, onPag
                 {startPage > 1 && (
                     <>
                         <li>
-                            <Button
-                                variant="outline-warning"
-                                onClick={() => onPageChange(1)}
-                            >
+                            <Button onClick={() => onPageChange(1)}>
                                 1
                             </Button>
                         </li>
@@ -45,7 +41,7 @@ export const Pagination: FC<PaginationProps> = ({ currentPage, totalPages, onPag
                 {pagesToShow.map(p => (
                     <li key={p}>
                         <Button
-                            variant={p === currentPage ? "success" : "outline-warning"}
+                            color={p === currentPage ? ButtonColor.green : ButtonColor.yellow}
                             onClick={() => onPageChange(p)}
                         >
                             {p}
@@ -56,10 +52,7 @@ export const Pagination: FC<PaginationProps> = ({ currentPage, totalPages, onPag
                     <>
                         {endPage < totalPages - 1 && <li>...</li>}
                         <li>
-                            <Button
-                                variant="outline-warning"
-                                onClick={() => onPageChange(totalPages)}
-                            >
+                            <Button onClick={() => onPageChange(totalPages)}>
                                 {totalPages}
                             </Button>
                         </li>
@@ -67,7 +60,6 @@ export const Pagination: FC<PaginationProps> = ({ currentPage, totalPages, onPag
                 )}
                 <li>
                     <Button
-                        variant="outline-warning"
                         onClick={() => onPageChange(currentPage + 1)}
                         disabled={currentPage >= totalPages}
                     >

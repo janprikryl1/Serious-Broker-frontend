@@ -7,6 +7,7 @@ import {setSubmitNewPassword, verifySecureKeys} from "../api/forgottenPasswordSe
 import {Spinner} from "react-bootstrap";
 import {FaExclamationTriangle} from "react-icons/fa";
 import {routes} from "../utils/constants";
+import {Button} from "../components/Button.tsx";
 
 export const RecoverPassword: FC = () => {
     const { t } = useTranslation();
@@ -111,12 +112,12 @@ export const RecoverPassword: FC = () => {
                             type="password"
                         />
                         <div className="d-flex justify-content-center mt-4">
-                            <button
+                            <Button
                                 className="btn btn-outline-warning btn-block btn-lg gradient-custom-4 text-body"
                                 type="submit"
                             >
                                 {t("Submit")}
-                            </button>
+                            </Button>
                         </div>
                     </form>
                 </div>

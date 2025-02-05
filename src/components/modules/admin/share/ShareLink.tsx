@@ -1,10 +1,11 @@
 import {ChangeEvent, FC, useState} from "react";
-import {Button, Form, InputGroup} from "react-bootstrap";
+import {Form, InputGroup} from "react-bootstrap";
 import {domain} from "../../../../utils/constants";
 import {FaCopy} from "react-icons/fa";
 import {useTranslation} from "react-i18next";
 import {toast} from "react-toastify";
 import {ArticleSendEmailComponent} from "./ArticleSendEmailComponent.tsx";
+import {Button} from "../../../Button.tsx";
 
 type Props = {
     id: string;
@@ -43,7 +44,7 @@ export const ShareLink:FC<Props> = ({id, languages}) => {
                 <InputGroup.Text> <a href={url} target="_blank"
                                      rel="noreferrer" className="link-underline-none">{url}</a>
                 </InputGroup.Text>
-                <Button variant="outline-secondary" id="button-addon2" onClick={copyLink}>
+                <Button onClick={copyLink}>
                     <FaCopy />
                 </Button>
             </InputGroup>

@@ -7,6 +7,7 @@ import Swal from "sweetalert2";
 import {defaultNewCurrency} from "../../../../utils/constants";
 import Form from "react-bootstrap/Form";
 import {InputGroup} from "react-bootstrap";
+import {Button} from "../../../Button.tsx";
 
 export const AddCryptoCurrency:FC = () => {
     const {t} = useTranslation();
@@ -50,12 +51,9 @@ export const AddCryptoCurrency:FC = () => {
     return (
         <div className="padding-bottom">
             {!showForm ? (
-                <button
-                    className="btn btn-warning"
-                    onClick={() => setShowForm(!showForm)}
-                >
+                <Button onClick={() => setShowForm(!showForm)}>
                     {t("Add new coin")}
-                </button>
+                </Button>
             ) : (
         <form onSubmit={handleAddCryptoCurrency}>
             <h4 className="card-title">{t("Add new coin")}</h4>
@@ -158,9 +156,9 @@ export const AddCryptoCurrency:FC = () => {
                 </InputGroup>
                 <div className="col-md-12">
                     <div className="col-md-12">
-                        <button type="submit" className="btn btn-warning">
+                        <Button type="submit" className="btn btn-warning">
                             {t("Add Cryptocurrency")}
-                        </button>
+                        </Button>
                     </div>
                 </div>
         </form>

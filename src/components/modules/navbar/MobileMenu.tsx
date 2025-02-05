@@ -16,11 +16,10 @@ export const MobileMenu: FC<Props> = ({ toggleMobileMenu }) => {
 
     return (
         <div className="mobile-menu">
+            <button className="close-button" onClick={toggleMobileMenu}>&times;</button>
             <ul className="mobile-menu-list">
                 {Object.keys(menuLinks).map((key) => {
                     const item = menuLinks[key];
-
-                    // Render only the main link for each item, skipping any subLinks
                     return (
                         <li key={key}>
                             <Link

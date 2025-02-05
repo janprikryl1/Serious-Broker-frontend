@@ -1,7 +1,7 @@
 import {Dispatch, FC, SetStateAction} from "react";
-import {Button} from "react-bootstrap";
 import {FaCheckCircle} from "react-icons/fa";
 import {ContentType} from "../../../../utils/types/article/ContentType.ts";
+import {Button, ButtonColor} from "../../../Button.tsx";
 
 type Props = {
     task: number;
@@ -27,7 +27,8 @@ export const ArticleTaskTextColumn:FC<Props> = ({task, category, content, setTas
 
             <Button
                 onClick={handleTaskDone}
-                variant="success"
+                color={ButtonColor.green}
+                style={{width: 40, height: 40}}
                 disabled={task === content[category].tasks.length - 1}
             >
                 <FaCheckCircle/>

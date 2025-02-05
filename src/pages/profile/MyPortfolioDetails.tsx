@@ -8,9 +8,7 @@ import {AssetDetailSkeleton} from "../../components/modules/graphs/asset/AssetDe
 import {useTranslation} from "react-i18next";
 import {AssetGraphDetails} from "../../components/modules/graphs/asset/AssetGraphDetails.tsx";
 import {toCzechDate} from "../../utils/constants/functions.ts";
-import {
-    MyPortfolioEditButton
-} from "../../components/modules/profile/myPortfolio/myPortfolioEdit/MyPortfolioEditButton.tsx";
+import {MyPortfolioEditButton} from "../../components/modules/profile/myPortfolio/myPortfolioEdit/MyPortfolioEditButton.tsx";
 
 export const MyPortfolioDetails:FC = () => {
     const { t } = useTranslation();

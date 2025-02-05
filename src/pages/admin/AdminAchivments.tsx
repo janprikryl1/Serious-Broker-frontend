@@ -1,16 +1,15 @@
 import {FC, useEffect, useState} from "react";
-import {Button, Form, InputGroup} from "react-bootstrap";
+import {Form, InputGroup} from "react-bootstrap";
 import {DataGrid, GridCellParams} from "@mui/x-data-grid";
 import {useTranslation} from "react-i18next";
-import {useThemeContext} from "../../utils/providers/ThemeProvider.tsx";
 import {UserType} from "../../utils/types/user/userTypes.ts";
 import {getAllUsers} from "../../api/adminService.ts";
 import {UserAchievmentDetails} from "../../components/modules/admin/achevments/UserAchievmentDetails.tsx";
+import {Button, ButtonColor} from "../../components/Button.tsx";
 
 
 export const AdminAchivments:FC = () => {
     const {t} = useTranslation();
-    const {theme} = useThemeContext();
     const [users, setUsers] = useState<UserType[]>([]);
     const [selectedUser, setSelectedUser] = useState<UserType>();
     const [searchTerm, setSearchTerm] = useState('');
@@ -57,57 +56,56 @@ export const AdminAchivments:FC = () => {
     
     return (
         <div className="padding-bottom">
-            <div
-                className="text-center"
-                style={{
-                    maxWidth: "95%",
-                    backgroundColor: theme === 'dark' ? "#211f1b" : "#f5f8fb",
-                    borderRadius: 24,
-                    padding: "30px",
-                    zIndex: 2,
-                }}
-                data-aos="fade-up"
-                data-aos-duration="1000"
-            >
-                <h1 className="admin-section-title">{t("Achievments management")}</h1>
-                <p>{t("Click on user to load and edit achievements")}</p>
-                <InputGroup className="mb-3">
-                    <InputGroup.Text id="inputGroup-sizing-sm">{t("Column")}</InputGroup.Text>
-                    <Form.Select
-                        value={searchColumn}
-                        onChange={(e) => setSearchColumn(e.target.value)}
-                        aria-label={t("Search Column")}
-                    >
-                        {columns.map((column) => (
-                            <option key={column.field} value={column.field}>
-                                {column.headerName}
-                            </option>
-                        ))}
-                    </Form.Select>
-                    <InputGroup.Text id="inputGroup-sizing-sm">{t("Value")}</InputGroup.Text>
-                    <Form.Control
-                        type="text"
-                        placeholder={t("Search term...")}
-                        value={searchTerm}
-                        onChange={(e) => setSearchTerm(e.target.value)}
-                    />
-                    <Button variant="primary" onClick={handleSearch}>
-                        {t("Search")}
-                    </Button>
-                    <Button variant="secondary" onClick={handleClearFilters}>
-                        {t("Clear filters")}
-                    </Button>
-                </InputGroup>
-                <DataGrid
-                    rows={filteredUsers}
-                    columns={columns}
-                    hideFooterPagination
-                    hideFooterSelectedRowCount
-                    hideFooter={true}
-                    onCellClick={handleSelectUser}
-                    sx={{border: 0, color:"#fff"}}
-                />
-                <UserAchievmentDetails selectedUser={selectedUser}/>
+            <div className="service-details__wrapper">
+                <div className="service-details__item">
+                    <div className="service-details__item-inner">
+                        <div
+                            className="service-details__content"
+                            data-aos="fade-up"
+                            data-aos-duration="900"
+                        >
+                            <h1 className="admin-section-title">{t("Achievments management")}</h1>
+                            <p>{t("Click on user to load and edit achievements")}</p>
+                            <InputGroup className="mb-3">
+                                <InputGroup.Text id="inputGroup-sizing-sm">{t("Column")}</InputGroup.Text>
+                                <Form.Select
+                                    value={searchColumn}
+                                    onChange={(e) => setSearchColumn(e.target.value)}
+                                    aria-label={t("Search Column")}
+                                >
+                                    {columns.map((column) => (
+                                        <option key={column.field} value={column.field}>
+                                            {column.headerName}
+                                        </option>
+                                    ))}
+                                </Form.Select>
+                                <InputGroup.Text id="inputGroup-sizing-sm">{t("Value")}</InputGroup.Text>
+                                <Form.Control
+                                    type="text"
+                                    placeholder={t("Search term...")}
+                                    value={searchTerm}
+                                    onChange={(e) => setSearchTerm(e.target.value)}
+                                />
+                                <Button onClick={handleSearch}>
+                                    {t("Search")}
+                                </Button>
+                                <Button color={ButtonColor.red} onClick={handleClearFilters}>
+                                    {t("Clear filters")}
+                                </Button>
+                            </InputGroup>
+                            <DataGrid
+                                rows={filteredUsers}
+                                columns={columns}
+                                hideFooterPagination
+                                hideFooterSelectedRowCount
+                                hideFooter={true}
+                                onCellClick={handleSelectUser}
+                                sx={{border: 0, color:"#fff"}}
+                            />
+                            <UserAchievmentDetails selectedUser={selectedUser}/>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     );

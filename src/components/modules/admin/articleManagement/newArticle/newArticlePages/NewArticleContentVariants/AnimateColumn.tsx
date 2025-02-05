@@ -1,9 +1,9 @@
 import {FC} from "react";
 import {Form, InputGroup} from "react-bootstrap";
-import Button from "react-bootstrap/Button";
 import {FaTrash} from "react-icons/fa";
 import {useTranslation} from "react-i18next";
 import {useArticleCreate} from "../../../../../../../utils/providers/ArticleCreateProvider.tsx";
+import {Button, ButtonColor} from "../../../../../../Button.tsx";
 
 export const AnimateColumn:FC = () => {
     const { t } = useTranslation();
@@ -179,8 +179,8 @@ export const AnimateColumn:FC = () => {
                             value={task.animateTo.to.y}
                             onChange={(e) => handleSetContentAnimateToY(e, currentContent, taskIndex)}
                         />
-                        <Button variant="danger" onClick={() => handleRemoveTask(currentContent, taskIndex)}>
-                            <FaTrash/> {/* Trash bin check */}
+                        <Button color={ButtonColor.red} onClick={() => handleRemoveTask(currentContent, taskIndex)}>
+                            <FaTrash/>
                         </Button>
                     </InputGroup>
                 </div>

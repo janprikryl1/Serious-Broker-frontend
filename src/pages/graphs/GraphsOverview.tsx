@@ -11,9 +11,9 @@ export const GraphsOverview: FC = () => {
     const { user } = useUserContext();
 
     return (
-        <div style={{fontSize:"25px", color:"#ae9647"}}>
+        <div>
             <TitleHeader title="Graphs" />
-            <Nav variant="pills" defaultActiveKey={routes.recommendation} className="container flex-column">
+            <Nav variant="pills" defaultActiveKey={routes.recommendation} className="flex-column overview-graphs-container">
                 <Nav.Item className="padding-top">
                     <Link to={routes.recommendation} className="text-decoration-none">
                         {t("Recommendation")}

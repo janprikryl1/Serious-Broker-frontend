@@ -1,9 +1,10 @@
 import {FC} from "react";
 import {templateProps} from "./templateProps";
+import {Button, ButtonColor} from "../../../../../Button.tsx";
 
 export const ScrollTemplate:FC<templateProps> = ({selected, index}) => {
     return (
-        <button style={{background: "none", border: "none"}}>
+        <Button color={ButtonColor.transparent}>
             <svg fill={selected === index ? "#ff9f00" : "gray"}
                  width="50mm"
                  height="70mm">
@@ -55,6 +56,6 @@ export const ScrollTemplate:FC<templateProps> = ({selected, index}) => {
                     y="174.60085"/>
             </g>
         </svg>
-    </button>
+    </Button>
     )
 }

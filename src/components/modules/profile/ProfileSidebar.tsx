@@ -11,7 +11,8 @@ import {
 } from "cdbreact";
 import {NavLink} from "react-router-dom";
 import {routes} from "../../../utils/constants";
-import {Button} from "react-bootstrap";
+import {Button} from "../../Button.tsx";
+import {CiLogout} from "react-icons/ci";
 
 export const ProfileSidebar:FC = () => {
     const { t } = useTranslation();
@@ -55,7 +56,7 @@ export const ProfileSidebar:FC = () => {
 
                 <CDBSidebarFooter>
                     <div style={{ padding: '20px 5px', textAlign: 'center' }}>
-                        <Button variant="outline-warning" onClick={logout}>{t("Logout")}</Button>
+                        <Button onClick={logout}><CiLogout /></Button>
                     </div>
                 </CDBSidebarFooter>
             </CDBSidebar>

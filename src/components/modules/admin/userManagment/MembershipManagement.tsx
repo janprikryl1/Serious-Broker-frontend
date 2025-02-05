@@ -1,11 +1,11 @@
 import { FC, useEffect, useState } from "react";
 import { MembershipTypes } from "../../../../utils/types/user/userTypes.ts";
 import {addMembership, editMembership, getMembershipByUserId} from "../../../../api/membershipService.ts";
-import { Button } from "react-bootstrap";
 import { MembershipComponent } from "./MembershipComponent.tsx";
 import { useTranslation } from "react-i18next";
 import { NewMembership } from "./NewMembership.tsx";
 import { MembershipLoadingSkeleton } from "./MembershipLoadingSkeleton.tsx";
+import {Button, ButtonColor} from "../../../Button.tsx";
 
 type Props = {
     userId: number;
@@ -72,7 +72,7 @@ export const MembershipManagement: FC<Props> = ({ userId }) => {
     return (
         <div>
             {!showNewMembership && editingMembershipId === null && (
-                <Button variant="outline-warning" onClick={handleAddMembership}>
+                <Button onClick={handleAddMembership}>
                     {t("Add membership")}
                 </Button>
             )}
@@ -105,7 +105,7 @@ export const MembershipManagement: FC<Props> = ({ userId }) => {
             )}
 
             {editingMembershipId !== null && (
-                <Button variant="outline-secondary" className="mb-5" onClick={handleCancelEdit}>
+                <Button color={ButtonColor.gray} className="mb-5" onClick={handleCancelEdit}>
                     {t("Cancel Edit")}
                 </Button>
             )}

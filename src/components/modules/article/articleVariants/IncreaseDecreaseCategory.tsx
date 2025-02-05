@@ -1,7 +1,7 @@
 import {Dispatch, FC, SetStateAction} from "react";
-import {Button} from "react-bootstrap";
 import {useTranslation} from "react-i18next";
 import {ContentType} from "../../../../utils/types/article/ContentType.ts";
+import {Button, ButtonColor} from "../../../Button.tsx";
 
 type Props = {
     category: number;
@@ -29,16 +29,18 @@ export const IncreaseDecreaseCategory:FC<Props> = ({category, setCategory, setTa
     return (
         <>
             <Button
-                variant="danger"
+                color={ButtonColor.red}
                 onClick={handleDecreaseCategory}
                 disabled={category === 0}
+                style={{fontSize: "20px"}}
             >
                 {t("Previous")}
             </Button>{' '}
             <Button
-                variant="primary"
+                color={ButtonColor.blue}
                 onClick={handleIncreaseCategory}
                 disabled={category === content.length - 1}
+                style={{fontSize: "20px"}}
             >
                 {t("Next")}
             </Button>

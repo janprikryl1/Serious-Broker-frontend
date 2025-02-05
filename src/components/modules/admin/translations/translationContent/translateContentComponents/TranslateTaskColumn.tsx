@@ -1,8 +1,9 @@
 import {FC} from "react";
-import {Button, Form, InputGroup} from "react-bootstrap";
+import {Form, InputGroup} from "react-bootstrap";
 import {useTranslation} from "react-i18next";
 import {useArticleTranslate} from "../../../../../../utils/providers/ArticleTranslateProvider.tsx";
 import {translate} from "../../../../../../api/translateService.ts";
+import {Button} from "../../../../../Button.tsx";
 
 export const TranslateTaskColumn:FC = () => {
     const { t } = useTranslation();

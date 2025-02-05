@@ -8,7 +8,7 @@ import {ArticleTemplates} from "../articleTemplates/ArticleTemplates.tsx";
 import {useArticleCreate} from "../../../../../../utils/providers/ArticleCreateProvider.tsx";
 import {ListFilesModal} from "./NewArticleContentVariants/imageUpload/ListFilesModal.tsx";
 import {useModal} from "../../../../../../utils/hooks/useModal.tsx";
-import Button from "react-bootstrap/Button";
+import {Button} from "../../../../../Button.tsx";
 
 export const NewArticleSettings:FC = () => {
     const {t} = useTranslation();

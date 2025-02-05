@@ -28,6 +28,7 @@ export const SidebarSearch: FC<Props> = ({ param = "" }) => {
                         <input
                             type="text"
                             className="form-control"
+                            style={{borderRadius: 4}}
                             placeholder={t("Search articles")}
                             value={searchText}
                             onChange={(e) => setSearchText(e.target.value)}

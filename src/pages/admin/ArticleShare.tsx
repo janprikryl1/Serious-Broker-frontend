@@ -1,7 +1,5 @@
 import {FC, useEffect, useState} from "react";
-import {Link, useParams} from "react-router-dom";
-import {adminURLS} from "../../utils/constants";
-import {Button} from "react-bootstrap";
+import {useParams} from "react-router-dom";
 import {useTranslation} from "react-i18next";
 import {ShareLink} from "../../components/modules/admin/share/ShareLink.tsx";
 import {ShareSkeleton} from "../../components/modules/admin/share/ShareSkeleton.tsx";
@@ -30,20 +28,18 @@ export const ArticleShare:FC = () => {
     }, [id]);
     
     return (
-        <div className="padding-bottom admin-container">
+        <div className="padding-bottom">
             <div className="service-details__wrapper">
                 <div className="service-details__item">
-                    <div
-                        className="service-details__content"
-                        data-aos="fade-up"
-                        data-aos-duration="900"
-                    >
-                        <h3>{t("Share article ")}{articleName}</h3>
-                        <Link to={`${adminURLS.postEdit}${id}`}>
-                            <Button variant="outline-warning">{t("New post")}</Button>
-                        </Link>
+                    <div className="service-details__item-inner">
+                        <div
+                            className="service-details__content"
+                            data-aos="fade-up"
+                            data-aos-duration="900"
+                        >
+                        <h3 className="admin-section-title">{t("Share article ")}{articleName}</h3>
                         {id && articlePosts ? (
-                            <div className="padding-top padding-bottom">
+                            <div className="mt-3 mb-2">
                                 <div className="blog__wrapper">
                                     <ShareLink id={id} languages={languages}/>
                                     <ShareItems articlePosts={articlePosts}/>
@@ -55,6 +51,7 @@ export const ArticleShare:FC = () => {
                     </div>
                 </div>
             </div>
+        </div>
         </div>
     );
 }

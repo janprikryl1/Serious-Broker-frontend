@@ -11,14 +11,28 @@ export const PostEdit = () => {
     const {t} = useTranslation();
     
     return (
-        <PostEditProvider>
-            <h1>{t("Post to social media")}</h1>
-            <ArticlePostType />
-            <ArticlePostLanguage />
-            <ArticlePostTitle />
-            <ArticlePostDescription />
-            <ArticlePostContent />
-            <ArticlePostSend />
-        </PostEditProvider>
+        <div className="padding-bottom">
+            <div className="service-details__wrapper">
+                <div className="service-details__item">
+                    <div className="service-details__item-inner">
+                        <div
+                            className="service-details__content"
+                            data-aos="fade-up"
+                            data-aos-duration="900"
+                        >
+                            <PostEditProvider>
+                                <h1 className="admin-section-title">{t("Post to social media")}</h1>
+                                <ArticlePostType />
+                                <ArticlePostLanguage />
+                                <ArticlePostTitle />
+                                <ArticlePostDescription />
+                                <ArticlePostContent />
+                                <ArticlePostSend />
+                            </PostEditProvider>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     )
 }

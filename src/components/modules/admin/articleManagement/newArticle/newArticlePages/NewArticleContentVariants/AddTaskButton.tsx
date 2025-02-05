@@ -1,6 +1,6 @@
 import {FC} from "react";
-import Button from "react-bootstrap/Button";
 import {useArticleCreate} from "../../../../../../../utils/providers/ArticleCreateProvider.tsx";
+import {Button} from "../../../../../../Button.tsx";
 
 export const AddTaskButton:FC = () => {
     const { setContent, currentContent } = useArticleCreate();
@@ -33,7 +33,7 @@ export const AddTaskButton:FC = () => {
     return (
         <div className="row">
             <div className="col-sm-16" style={{textAlign: "center"}}>
-                <Button variant="warning" onClick={handleAddTask}>
+                <Button style={{fontSize:15, fontWeight:"bold"}} onClick={handleAddTask}>
                     +
                 </Button>
             </div>

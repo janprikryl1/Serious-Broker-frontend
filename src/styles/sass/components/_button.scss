@@ -16,7 +16,7 @@
   text-decoration: none;
   @include add-prefix(transition, $transition);
   line-height: 1;
-  border-radius: 8px;
+  border-radius: 4px;
 
 
   &:after {
@@ -338,16 +338,6 @@
         i,
         svg {
           @include add-prefix(transition, $transition);
-
-          // rect {
-          //   stroke: $arrow-check-color;
-          // }
-
-          // g {
-          //   path {
-          //     stroke: $arrow-check-color;
-          //   }
-          // }
         }
       }
     }
@@ -452,10 +442,9 @@
 
   &.active,
   &:hover {
-
+    color: $thm-title-color;
     // Index One
     &.trk-btn--primary {
-      color: $thm-title-color;
       transform: translateY(-3px);
 
       &:after {
@@ -475,7 +464,6 @@
     }
 
     &.trk-btn--secondary2 {
-      color: $bg-white;
       transform: translateY(-3px);
 
       &:after {

@@ -7,7 +7,7 @@ export const IndexChartTypeButtons:FC = () => {
     const { chartType, handleSelectChartType } = useIndexDataContext();
 
     return (
-        <div className="col-sm season-button-group mb-3" style={{marginRight: 50, maxWidth: 190}}>
+        <div className="col-sm season-button-group chart-type mb-3">
             {Object.values(IndexChartsType).map((chartTypeItem) => (
                 <SeasonButton
                     key={chartTypeItem}

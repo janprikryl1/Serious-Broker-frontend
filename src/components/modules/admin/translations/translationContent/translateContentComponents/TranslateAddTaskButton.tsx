@@ -1,6 +1,6 @@
 import {FC} from "react";
-import Button from "react-bootstrap/Button";
 import {useArticleTranslate} from "../../../../../../utils/providers/ArticleTranslateProvider.tsx";
+import {Button} from "../../../../../Button.tsx";
 
 export const TranslateAddTaskButton:FC = () => {
     const { setContent, currentContent } = useArticleTranslate();
@@ -33,7 +33,7 @@ export const TranslateAddTaskButton:FC = () => {
     return (
         <div className="row">
             <div className="col-sm-16" style={{textAlign: "center"}}>
-                <Button variant="warning" onClick={handleAddTask}>
+                <Button onClick={handleAddTask}>
                     +
                 </Button>
             </div>

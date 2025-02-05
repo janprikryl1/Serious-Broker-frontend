@@ -7,8 +7,8 @@ import { SidebarSearch } from "../components/modules/article/SidebarSearch.tsx";
 import { RecentPost } from "../components/modules/article/RecentPost.tsx";
 import { ArticleSkeleton } from "../components/modules/article/ArticleSkeleton.tsx";
 import { useTranslation } from "react-i18next";
-import { Button } from "react-bootstrap";
 import {coinURL, routes} from "../utils/constants";
+import {Button, ButtonColor} from "../components/Button.tsx";
 
 export const CryptoCurrencyDetail: FC = () => {
     const { id } = useParams();
@@ -51,6 +51,7 @@ export const CryptoCurrencyDetail: FC = () => {
                                                 alt={cryptocurrency.name}
                                                 width={300}
                                                 onError={() => setImageError(true)}
+                                                className="mb-3"
                                             />
                                         )}
                                         <p>{t("Price: ")} {cryptocurrency.price}$</p>
@@ -63,7 +64,7 @@ export const CryptoCurrencyDetail: FC = () => {
                                         {cryptocurrency.telegram && <p>{t("Telegram: ")} <a className="link-underline-none" href={cryptocurrency.telegram}>{cryptocurrency.telegram}</a></p>}
                                         <p>{t("CMC rank: ")} {cryptocurrency.cmc_rank}</p>
                                         <p>{t("Categories: ")} {cryptocurrency.categories}</p>
-                                        <Button variant="primary" style={{ marginTop: 30 }} onClick={goBack}>
+                                        <Button className="trk-btn trk-btn--large trk-btn--secondary2" style={{ marginTop: 30 }} onClick={goBack} color={ButtonColor.white}>
                                             {t("Back")}
                                         </Button>
                                     </div>

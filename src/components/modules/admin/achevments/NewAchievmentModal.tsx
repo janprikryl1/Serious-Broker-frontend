@@ -1,17 +1,17 @@
-import { Dispatch, FC, SetStateAction, useState } from "react";
-import { UserType } from "../../../../utils/types/user/userTypes.ts";
-import { AchievementType } from "../../../../utils/types/AchievementType.ts";
+import {Dispatch, FC, SetStateAction, useState} from "react";
+import {UserType} from "../../../../utils/types/user/userTypes.ts";
+import {AchievementType} from "../../../../utils/types/AchievementType.ts";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
-import { Button } from "react-bootstrap";
-import { useTranslation } from "react-i18next";
-import { Input } from "@mui/joy";
-import { Transition } from "../../reusable/Transition.tsx";
-import { PaperComponent } from "../../reusable/PaperComponent.tsx";
+import {useTranslation} from "react-i18next";
+import {Input} from "@mui/joy";
+import {Transition} from "../../reusable/Transition.tsx";
+import {PaperComponent} from "../../reusable/PaperComponent.tsx";
 import {adminAddAchievement} from "../../../../api/achievementService.ts";
 import Swal from "sweetalert2";
+import {Button, ButtonColor} from "../../../Button.tsx";
 
 type Props = {
     selectedUser?: UserType;
@@ -69,7 +69,7 @@ export const NewAchievmentModal: FC<Props> = ({ selectedUser, setAchievements, o
                 />
             </DialogContent>
             <DialogActions>
-                <Button onClick={handleClose}>{t("Close")}</Button>
+                <Button color={ButtonColor.gray} onClick={handleClose}>{t("Close")}</Button>
                 <Button onClick={handleAddAchievement}>{t("Add")}</Button>
             </DialogActions>
         </Dialog>

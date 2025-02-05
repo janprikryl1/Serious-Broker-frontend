@@ -1,6 +1,5 @@
 import {FC, useEffect, useState} from "react";
 import {useTranslation} from "react-i18next";
-import {Button} from "react-bootstrap";
 import {Link} from "react-router-dom";
 import {ArticlesSkeleton} from "../../components/modules/articles/ArticlesSkeleton.tsx";
 import {ArticleProps} from "../../utils/types/article/ArticleProps.ts";
@@ -9,6 +8,7 @@ import Swal from "sweetalert2";
 import {Pagination} from "../../components/Pagiation.tsx";
 import {ArticleAdminCard} from "../../components/modules/admin/articleManagement/ArticleAdminCard.tsx";
 import {adminURLS} from "../../utils/constants";
+import {Button} from "../../components/Button.tsx";
 
 export const ArticleManagement:FC = () => {
     const { t } = useTranslation();
@@ -54,7 +54,7 @@ export const ArticleManagement:FC = () => {
                         data-aos-duration="900"
                     >
                         <h1 className="admin-section-title">{t("Article management")}</h1>
-                        <Link to={adminURLS.articleNew}><Button variant="outline-warning">{t("New article")}</Button></Link>
+                        <Link to={adminURLS.articleNew}><Button style={{fontSize:20}}>{t("New article")}</Button></Link>
                         <div className=" padding-top padding-bottom">
                             <div className="blog__wrapper">
                                 <div className="row g-4">

@@ -1,8 +1,8 @@
 import {Dispatch, FC, SetStateAction} from "react";
 import {InputGroup} from "react-bootstrap";
-import Button from "react-bootstrap/Button";
 import {useTranslation} from "react-i18next";
 import {useArticleCreate} from "../../../../../../../utils/providers/ArticleCreateProvider.tsx";
+import {Button} from "../../../../../../Button.tsx";
 
 type Props = {
     currentContent: number;

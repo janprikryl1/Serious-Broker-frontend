@@ -54,7 +54,7 @@ export const Comments:FC<Props> = ({articleId, comments, setComments}) => {
                                         </div>
                                     </div>
                                 </li>
-                            )) : <p>{t("No comments yet")}</p>}
+                            )) : <p style={{marginLeft: -30}}>{t("No comments yet")}</p>}
                         </ul>
                     </div>
                 </div>

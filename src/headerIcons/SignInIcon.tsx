@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useUserContext } from "../utils/providers/providerUser.tsx";
 import { Dropdown } from "react-bootstrap";
-import {SignInLink} from "../components/modules/signIn/SignInLink.tsx";
 import {adminURLS, routes} from "../utils/constants";
+import { Button } from "../components/Button.tsx";
 
 export const SignInIcon: FC = () => {
     const { t } = useTranslation();
@@ -31,7 +31,9 @@ export const SignInIcon: FC = () => {
                 </Dropdown.Menu>
             </Dropdown>
         ) : (
-            <SignInLink style={{fontSize: "20px", padding: "10px"}}/>
+            <Button type="link" to={routes.signIn} style={{fontSize: "20px", padding: "10px"}}>
+                {t("Sign in")}
+            </Button>
         )
     );
 }

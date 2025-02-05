@@ -1,9 +1,9 @@
-import { FC } from "react";
-import { Button } from "react-bootstrap";
+import {FC} from "react";
 import Typography from "@mui/material/Typography";
-import { useTranslation } from "react-i18next";
-import { toCzechDate } from "../../../../utils/constants/functions.ts";
-import { MembershipTypes } from "../../../../utils/types/user/userTypes.ts";
+import {useTranslation} from "react-i18next";
+import {toCzechDate} from "../../../../utils/constants/functions.ts";
+import {MembershipTypes} from "../../../../utils/types/user/userTypes.ts";
+import {Button, ButtonColor} from "../../../Button.tsx";
 
 type Props = {
     membership: MembershipTypes;
@@ -17,7 +17,7 @@ export const MembershipComponent: FC<Props> = ({ membership, onEdit }) => {
         <div className="mb-5 mt-3 text-white">
             <Typography>{t("Price")}: {membership.price}</Typography>
             <Typography>{toCzechDate(membership.created)} - {toCzechDate(membership.datetime_end)}</Typography>
-            <Button variant="outline-secondary" className="mt-2" onClick={onEdit}>
+            <Button color={ButtonColor.gray} className="mt-2" onClick={onEdit}>
                 {t("Edit")}
             </Button>
         </div>

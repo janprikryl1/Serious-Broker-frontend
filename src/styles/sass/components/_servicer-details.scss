@@ -2,6 +2,7 @@
     @extend  %of-hidden;
     &__item {
         &-inner {
+            margin-right: 20px;
             @extend %p-30;
             background-color: $wh-color;
             // trk-rgba 

@@ -1,6 +1,7 @@
 import { FC, useState } from "react";
-import { Button, Form } from "react-bootstrap";
+import { Form } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
+import {Button} from "../../../Button.tsx";
 
 type Props = {
     addNewMembership: (price: number, dateTimeEnd: string) => void;
@@ -39,7 +40,7 @@ export const NewMembership: FC<Props> = ({ addNewMembership, selectedPrice = 0, 
                 />
             </Form.Group>
 
-            <Button variant="outline-warning" className="mt-3" onClick={handleSaveNewMembership}>
+            <Button className="mt-3" onClick={handleSaveNewMembership}>
                 {t("Save")}
             </Button>
         </Form>

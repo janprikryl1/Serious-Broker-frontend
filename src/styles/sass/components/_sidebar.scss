@@ -247,7 +247,7 @@
         @extend %p-30,
         %mt-40;
         background-color: $header-border-color;
-        border-radius: 16px;
+        border-radius: 5px;
 
         @include breakpoint(lg) {
             padding: 40px;

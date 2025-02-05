@@ -76,7 +76,7 @@ export const MostProfitableLastSelectedPeriod: FC = () => {
                     </thead>
                     <tbody>
                     {data.map((coin, index) => (
-                        <tr key={coin.cmc_rank}>
+                        <tr key={index}>
                             <td>
                                 {season === IndexSeason.SMART
                                     ? index + 1

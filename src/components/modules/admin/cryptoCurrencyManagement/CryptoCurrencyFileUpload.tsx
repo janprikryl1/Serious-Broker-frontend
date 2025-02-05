@@ -1,8 +1,8 @@
 import { FC } from "react";
 import Form from "react-bootstrap/Form";
-import { Button } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import {FaRegTrashAlt} from "react-icons/fa";
+import {Button, ButtonColor} from "../../../Button.tsx";
 
 type Props = {
     handleFileChange: (id: number, file: File | null) => void;
@@ -22,13 +22,12 @@ export const CryptoCurrencyFileUpload: FC<Props> = ({ handleFileChange, handleSu
                 onChange={(e) => handleFileChange(rowId, (e.target as HTMLInputElement).files ? (e.target as HTMLInputElement).files![0] : null)}
             />
             <Button
-                variant="warning"
                 onClick={() => handleSubmit(rowId)}
             >
                 {t("Upload")}
             </Button>
             <Button
-                variant="danger"
+                color={ButtonColor.red}
                 onClick={() => handleDelete(rowId)}
             >
                 <FaRegTrashAlt />

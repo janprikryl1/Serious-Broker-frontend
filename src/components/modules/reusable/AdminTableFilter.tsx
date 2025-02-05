@@ -1,7 +1,8 @@
 import {Dispatch, FC, SetStateAction, useState} from "react";
-import {Button, Form, InputGroup} from "react-bootstrap";
+import {Form, InputGroup} from "react-bootstrap";
 import {useTranslation} from "react-i18next";
 import {CryptoCurrencyType} from "../../../utils/types/CryptoCurrencyType.ts";
+import {Button, ButtonColor} from "../../Button.tsx";
 
 type Props = {
     cryptocurrencies: CryptoCurrencyType[];
@@ -48,10 +49,10 @@ export const AdminTableFilter:FC<Props> = ({cryptocurrencies, setFilteredCoins, 
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
             />
-            <Button variant="primary" onClick={handleSearch}>
+            <Button onClick={handleSearch}>
                 {t("Search")}
             </Button>
-            <Button variant="secondary" onClick={handleClearFilters}>
+            <Button color={ButtonColor.red} onClick={handleClearFilters}>
                 {t("Clear filters")}
             </Button>
         </InputGroup>

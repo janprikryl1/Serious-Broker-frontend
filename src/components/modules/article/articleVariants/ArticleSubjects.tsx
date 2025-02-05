@@ -9,7 +9,7 @@ export const ArticleSubjects:FC<Props> = ({subjects}) => {
     return (
         <div>
             {subjects?.map((subject) => (
-                <div key={subject.title}>
+                <div key={subject.id}>
                     <h3>{subject.title}</h3>
                     <p>{subject.text}</p>
                 </div>
