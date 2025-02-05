@@ -9,7 +9,7 @@ import {Button} from "../../components/Button.tsx";
 export const NewsletterOverview: FC = () => {
     const { t } = useTranslation();
     const [newsletters, setNewsletters] = useState<NewsletterType[]>([]);
-
+    
     useEffect(() => {
         const fetchNewsletters = async () => {
             try {
@@ -39,7 +39,7 @@ export const NewsletterOverview: FC = () => {
                     >
                         <h1 className="admin-section-title">{t("Registered newsletters")}</h1>
                         <div className="table-responsive mt-3">
-                            <table className="table" style={{width: "100%", margin:0}}>
+                            <table className="table">
                                 <thead>
                                 <tr>
                                     <th>Id</th>

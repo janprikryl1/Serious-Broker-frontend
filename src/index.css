@@ -392,11 +392,22 @@ button {
     margin-top: 0.1vw;
 }
 
+.graph-container {
+    margin-left: 70px;
+}
+
 .title-serious-broker {
     width: 35vw;
     margin: 0;
 }
 
+.asset-graph-currency-card {
+    background-color: #454a4e;
+    border-radius: 24px;
+    margin: 1%;
+    padding: 1%;
+    font-size: 20px;
+}
 
 .title-save-crypto-safely {
     font-size: 3vw;
@@ -412,8 +423,22 @@ button {
 }
 
 @media (max-width: 768px) {
+    .asset-graph-currency-card {
+        background-color: #454a4e;
+        border-radius: 24px;
+        font-size: 15px;
+        margin: 2%;
+        padding: 3%;
+        max-width: 250px;
+        margin-left: 10px;
+    }
+    
+    .admin-section-title {
+        font-size: 30px;
+    }
+    
     .admin-container {
-        margin-left: -20vw;
+        margin-left: -17vw;
         max-width: 90vw;
     }
     
@@ -473,6 +498,11 @@ button {
         white-space: nowrap;
         max-width: 30vw;
     }
+
+    .table th:first-child,
+    .table td:first-child {
+        display: none;
+    }
     
     .season-button-group {
         height: 35px;
@@ -499,5 +529,58 @@ button {
     
     .season-gains {
        max-width: 350px;
+    }
+}
+
+.css-1wvake5 {
+    border-right: 0 !important;   
+}
+
+
+
+.custom-sidebar {
+    height: 100vh;
+    max-height: 100%;
+    transition: transform 0.3s ease-in-out;
+
+    @media (max-width: 768px) {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 250px;
+        transform: translateX(-100%);
+        z-index: 1000;
+        background-color: #333;
+    }
+
+    &.mobile-visible {
+        transform: translateX(0);
+    }
+}
+
+.mobile-sidebar-toggle {
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    z-index: 1100;
+    background-color: #ab9641;
+    color: black;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    cursor: pointer;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+
+    &:hover {
+        background-color: #967c2f;
+    }
+
+    @media (min-width: 769px) {
+        display: none;
     }
 }

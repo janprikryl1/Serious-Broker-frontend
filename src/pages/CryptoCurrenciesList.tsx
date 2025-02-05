@@ -11,7 +11,7 @@ export const CryptoCurrenciesList:FC = () => {
         <>
             <TitleHeader title="Crypto currencies list"/>
             <div className="padding-bottom">
-                <div className="container">
+                <div className="graph-container">
                     <div className="service-details__wrapper">
                         <div className="service-details__item">
                             <div className="service-details__item-inner">

@@ -10,7 +10,7 @@ import {NewsletterEdit} from "../../components/modules/profile/userDetails/Newsl
 export const ProfileEdit:FC = () => {
     return (
         <UserDetailsProvider>
-            <div className="container mt-4">
+            <div className="admin-container mt-4">
                 <div className="row justify-content">
                     <div className="col-md-6">
                         <PersonalDataEdit />

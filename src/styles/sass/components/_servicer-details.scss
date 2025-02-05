@@ -5,10 +5,13 @@
             margin-right: 20px;
             @extend %p-30;
             background-color: $wh-color;
-            // trk-rgba 
             box-shadow: 0px -16px 48px rgba(6, 35, 63, 0.03), 0px 16px 48px rgba(6, 35, 63, 0.03);
             border-radius: 4px;
 
+            @media (max-width: 768px) {
+                margin-left: -90px;
+            }
+            
             @include breakpoint(md){
                 padding: 50px
             }
@@ -40,6 +43,11 @@
             @extend %text-medium;
         }
     }
-
-
+    
+    &__wrapper {
+        @media (max-width: 768px) {
+            margin-left: 30px;
+            max-width: 100%;
+        }
+    }
 }

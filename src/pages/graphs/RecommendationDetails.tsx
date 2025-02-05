@@ -33,12 +33,10 @@ export const RecommendationDetails:FC = () => {
             {detailsData ? (
                 <>
                     <TitleHeader title={`${detailsData.asset_label} - ${detailsData.name}`} />
-                    <div className="padding-bottom padding-top">
-                        <div className="container padding-bottom">
+                        <div className="graph-container padding-bottom">
                             <div className="service-details__wrapper">
                                 <div className="service-details__item">
-                                    <div className="service-details__item-inner">
-                                        <div className="mb-5">
+                                    <div className="service-details__item-inner mb-5">
                                             <h5 className="10 style2">{t("Quote currencies: ")}{detailsData.quote_currencies}</h5>
                                             {detailsData.all_pos !== null &&
                                                 <p>{t("Best of all index: ")}{detailsData.all_pos}</p>}
@@ -243,12 +241,10 @@ export const RecommendationDetails:FC = () => {
                                                         <p>{t("Recommendations for the year before previous: ")} {getYear(detailsData.sell_year_2_week_day)} {convertUTCToLocalTime(detailsData.sell_year_2_hour)}</p>}
                                                 </>
                                             )}
-                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
                 </>
             ) : <RecommendationDetailsSkeleton/>}
         </>

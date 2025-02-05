@@ -1,114 +1,112 @@
-import {FC, useState} from "react";
-import { NavLink } from 'react-router-dom';
+import { FC, useState } from "react";
+import { NavLink } from "react-router-dom";
 import { useUserContext } from "../../../utils/providers/providerUser.tsx";
 import { useTranslation } from "react-i18next";
-import {
-    CDBSidebar,
-    CDBSidebarContent,
-    CDBSidebarFooter,
-    CDBSidebarHeader,
-    CDBSidebarMenu,
-    CDBSidebarMenuItem
-} from 'cdbreact';
-import {adminURLS} from "../../../utils/constants";
-import {Button} from "../../Button.tsx";
-import {CiLogout} from "react-icons/ci";
+import { Sidebar as ProSidebar, Menu, MenuItem } from "react-pro-sidebar";
+import { adminURLS } from "../../../utils/constants";
+import { CiLogout } from "react-icons/ci";
+import { FaBars, FaUsersCog } from "react-icons/fa";
+import { IoQrCode } from "react-icons/io5";
+import { MdOutlineArticle, MdOutlineScreenshotMonitor, MdOutlineSdStorage, MdOutlineSubscriptions } from "react-icons/md";
+import { SiDictionarydotcom } from "react-icons/si";
+import { FiDatabase } from "react-icons/fi";
+import { VscFeedback } from "react-icons/vsc";
+import { GrAchievement } from "react-icons/gr";
+import { RiCoinsLine } from "react-icons/ri";
 
 export const Sidebar: FC = () => {
     const { t } = useTranslation();
     const { user, logout } = useUserContext();
     const [collapsed, setCollapsed] = useState(Boolean(localStorage.getItem("sidebarCollapsed") ?? ""));
-    
+    const [mobileVisible, setMobileVisible] = useState(false);
+
     const collapseToggle = () => {
         const newCollapsed = !collapsed;
         setCollapsed(newCollapsed);
         localStorage.setItem("sidebarCollapsed", newCollapsed.toString());
-    }
+    };
+
+    const toggleMobileSidebar = () => {
+        setMobileVisible(!mobileVisible);
+    };
 
     return (
-        <div style={{ display: 'flex', overflow: 'scroll initial', zIndex: 0 }}>
-            <CDBSidebar textColor="#fff" backgroundColor="#333" breakpoint={200} className="" maxWidth="100%" minWidth="50%" toggled={collapsed}>
-                <CDBSidebarHeader prefix={<i className="fa fa-bars fa-large" onClick={collapseToggle}></i>}>
-                    {user && (user.firstname + " " + user.surname)}
-                </CDBSidebarHeader>
+        <>
+            <button className="mobile-sidebar-toggle" onClick={toggleMobileSidebar}>
+                <FaBars />
+            </button>
 
-                <CDBSidebarContent className="sidebar-content">
-                    <CDBSidebarMenu>
-                        <NavLink
-                            to={adminURLS.qr}
-                            className={({ isActive }) => isActive ? 'activeClicked' : ''}
-                        >
-                            <CDBSidebarMenuItem icon="store">{t("QR")}</CDBSidebarMenuItem>
-                        </NavLink>
-                        <NavLink
-                            to={adminURLS.users}
-                            className={({ isActive }) => isActive ? 'activeClicked' : ''}
-                        >
-                            <CDBSidebarMenuItem icon="user">{t("User management")}</CDBSidebarMenuItem>
-                        </NavLink>
-                        <NavLink
-                            to={adminURLS.newsletter}
-                            className={({ isActive }) => isActive ? 'activeClicked' : ''}
-                        >
-                            <CDBSidebarMenuItem icon="chart-line">{t("Newsletter management")}</CDBSidebarMenuItem>
-                        </NavLink>
-                        <NavLink
-                            to={adminURLS.articles}
-                            className={({ isActive }) => isActive ? 'activeClicked' : ''}
-                        >
-                            <CDBSidebarMenuItem icon="table">{t("Article management")}</CDBSidebarMenuItem>
-                        </NavLink>
-                        <NavLink
-                            to={adminURLS.glossary}
-                            className={({ isActive }) => isActive ? 'activeClicked' : ''}
-                        >
-                            <CDBSidebarMenuItem icon="exclamation-circle">{t("Glossary")}</CDBSidebarMenuItem>
-                        </NavLink>
-                        <NavLink
-                            to={adminURLS.logTable}
-                            className={({ isActive }) => isActive ? 'activeClicked' : ''}
-                        >
-                            <CDBSidebarMenuItem icon="th-large">{t("Table logs")}</CDBSidebarMenuItem>
-                        </NavLink>
-                        <NavLink
-                            to={adminURLS.feedbacks}
-                            className={({ isActive }) => isActive ? 'activeClicked' : ''}
-                        >
-                            <CDBSidebarMenuItem icon="sticky-note">{t("Feedbacks")}</CDBSidebarMenuItem>
-                        </NavLink>
-                        <NavLink
-                            to={adminURLS.achievements}
-                            className={({ isActive }) => isActive ? 'activeClicked' : ''}
-                        >
-                            <CDBSidebarMenuItem icon="gamepad">{t("Achievements")}</CDBSidebarMenuItem>
-                        </NavLink>
-                        <NavLink
-                            to={adminURLS.coinSettings}
-                            className={({ isActive }) => isActive ? 'activeClicked' : ''}
-                        >
-                            <CDBSidebarMenuItem icon="credit-card">{t("Coins")}</CDBSidebarMenuItem>
-                        </NavLink>
-                        <NavLink
-                            to={adminURLS.chachedData}
-                            className={({ isActive }) => isActive ? 'activeClicked' : ''}
-                        >
-                            <CDBSidebarMenuItem icon="th-large">{t("Chached data")}</CDBSidebarMenuItem>
-                        </NavLink>
-                        <NavLink
-                            to={adminURLS.demos}
-                            className={({ isActive }) => isActive ? 'activeClicked' : ''}
-                        >
-                            <CDBSidebarMenuItem icon="store">{t("Demos")}</CDBSidebarMenuItem>
-                        </NavLink>
-                    </CDBSidebarMenu>
-                </CDBSidebarContent>
+            <ProSidebar
+                collapsed={collapsed}
+                className={`custom-sidebar ${mobileVisible ? "mobile-visible" : ""}`}
+                backgroundColor="#333"
+            >
+                <Menu menuItemStyles={{
+                    button: ({ level, active, disabled }) => {
+                        if (level === 0) {
+                            return {
+                                color: disabled ? "#eee" : "#black",
+                                backgroundColor: active ? "#ab9641" : undefined,
+                                "&:hover": {
+                                    backgroundColor: "#ab9641 !important",
+                                    color: "black !important",
+                                    borderRadius: "8px !important",
+                                    fontWeight: "bold !important"
+                                },
+                                [`&.active`]: {
+                                    backgroundColor: '#ab9641',
+                                    color: 'black',
+                                },
+                            };
+                        }
+                    },
+                }}>
+                    <MenuItem
+                        icon={<FaBars />}
+                        onClick={collapseToggle}
+                        className="sidebar-header"
+                    >
+                        {user && !collapsed ? `${user.firstname} ${user.surname}` : ""}
+                    </MenuItem>
 
-                <CDBSidebarFooter>
-                    <div style={{ padding: '20px 5px', textAlign: 'center' }}>
-                        <Button onClick={logout}><CiLogout /></Button>
-                    </div>
-                </CDBSidebarFooter>
-            </CDBSidebar>
-        </div>
+                    <MenuItem icon={<IoQrCode />} component={<NavLink to={adminURLS.qr} />} className="sidebar-item">
+                        {t("QR")}
+                    </MenuItem>
+                    <MenuItem icon={<FaUsersCog />} component={<NavLink to={adminURLS.users} />} className="sidebar-item">
+                        {t("User management")}
+                    </MenuItem>
+                    <MenuItem icon={<MdOutlineSubscriptions />} component={<NavLink to={adminURLS.newsletter} />} className="sidebar-item">
+                        {t("Newsletter management")}
+                    </MenuItem>
+                    <MenuItem icon={<MdOutlineArticle />} component={<NavLink to={adminURLS.articles} />} className="sidebar-item">
+                        {t("Article management")}
+                    </MenuItem>
+                    <MenuItem icon={<SiDictionarydotcom />} component={<NavLink to={adminURLS.glossary} />} className="sidebar-item">
+                        {t("Glossary")}
+                    </MenuItem>
+                    <MenuItem icon={<FiDatabase />} component={<NavLink to={adminURLS.logTable} />} className="sidebar-item">
+                        {t("Table logs")}
+                    </MenuItem>
+                    <MenuItem icon={<VscFeedback />} component={<NavLink to={adminURLS.feedbacks} />} className="sidebar-item">
+                        {t("Feedbacks")}
+                    </MenuItem>
+                    <MenuItem icon={<GrAchievement />} component={<NavLink to={adminURLS.achievements} />} className="sidebar-item">
+                        {t("Achievements")}
+                    </MenuItem>
+                    <MenuItem icon={<RiCoinsLine />} component={<NavLink to={adminURLS.coinSettings} />} className="sidebar-item">
+                        {t("Coins")}
+                    </MenuItem>
+                    <MenuItem icon={<MdOutlineSdStorage />} component={<NavLink to={adminURLS.chachedData} />} className="sidebar-item">
+                        {t("Chached data")}
+                    </MenuItem>
+                    <MenuItem icon={<MdOutlineScreenshotMonitor />} component={<NavLink to={adminURLS.demos} />} className="sidebar-item">
+                        {t("Demos")}
+                    </MenuItem>
+                    <MenuItem icon={<CiLogout />} onClick={logout} className="sidebar-item">
+                        {t("Logout")}
+                    </MenuItem>
+                </Menu>
+            </ProSidebar>
+        </>
     );
 };
