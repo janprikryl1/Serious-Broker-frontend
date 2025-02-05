@@ -1,7 +1,8 @@
 import {createContext, Dispatch, FC, ReactNode, SetStateAction, useContext, useEffect, useState} from 'react';
 import {IndexSeason} from "../enums/IndexSeasonEnum";
-import {getIndexData} from "../../api/indexDataService";
+import {getIndexData, getLatestCoinmarketcupCoins} from "../../api/indexDataService";
 import {IndexChartsType} from "../enums/IndexChartsTypeEnum.ts";
+import {MostProfitable} from "../types/indexPage/IndexDataStructure.ts";
 
 type Props = {
     children: ReactNode;
@@ -14,6 +15,7 @@ type IndexDataContextType = {
     chartType: IndexChartsType;
     handleSelectChartType: (selectedChartType: IndexChartsType) => void;
     handleSelect: (selectedSeason: IndexSeason) => void;
+    last_coinmarketcup_coins?: MostProfitable[];
 };
 
 const IndexDataContext = createContext<IndexDataContextType | undefined>(undefined);
@@ -22,6 +24,7 @@ export const IndexDataProvider: FC<Props> = ({ children }) => {
     const [season, setSeason] = useState<IndexSeason>(IndexSeason.WEEK);
     const [chartType, setChartType] = useState<IndexChartsType>(IndexChartsType.GAINS);
     const [date, setDate] = useState("");
+    const [last_coinmarketcup_coins, setLastCoinmarketcupCoins] = useState<MostProfitable[]>();
 
     useEffect(() => {
         const fetchDate = async () => {
@@ -35,6 +38,18 @@ export const IndexDataProvider: FC<Props> = ({ children }) => {
         fetchDate();
     }, []);
 
+    useEffect(() => {
+        const getData = async () => {
+            try {
+                const response = await getLatestCoinmarketcupCoins();
+                setLastCoinmarketcupCoins(response.data);
+            } catch (exception) {
+                console.error(exception);
+            }
+        };
+        getData();
+    }, []);
+
     const handleSelect = (selectedSeason: IndexSeason) => {
         setSeason(selectedSeason);
     };
@@ -44,7 +59,7 @@ export const IndexDataProvider: FC<Props> = ({ children }) => {
     };
 
     return (
-        <IndexDataContext.Provider value={{ date, season, setSeason, handleSelect, chartType, handleSelectChartType }}>
+        <IndexDataContext.Provider value={{ date, season, setSeason, handleSelect, chartType, handleSelectChartType, last_coinmarketcup_coins }}>
             {children}
         </IndexDataContext.Provider>
     );

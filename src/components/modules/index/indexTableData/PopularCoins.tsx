@@ -1,29 +1,16 @@
 import { useTranslation } from "react-i18next";
-import { FC, useEffect, useState } from "react";
+import { FC } from "react";
 import { formatLargeCurrency } from "../../../../utils/constants/functions.ts";
-import { MostProfitable } from "../../../../utils/types/indexPage/IndexDataStructure.ts";
-import { getLatestCoinmarketcupCoins } from "../../../../api/indexDataService.ts";
 import { PopularCoinsSkeleton } from "./skeletons/PopularCoinsSkeleton.tsx";
 import { coinURL } from "../../../../utils/constants";
 import {IndexTableChart} from "./indexTableChart/IndexTableChart.tsx";
 import {useMediaQuery} from "@mui/material";
+import {useIndexDataContext} from "../../../../utils/providers/IndexDataProvider.tsx";
 
 export const PopularCoins: FC = () => {
     const { t } = useTranslation();
     const isMobile = useMediaQuery('(max-width:768px)');
-    const [last_coinmarketcup_coins, setLastCoinmarketcupCoins] = useState<MostProfitable[]>();
-
-    useEffect(() => {
-        const getData = async () => {
-            try {
-                const response = await getLatestCoinmarketcupCoins();
-                setLastCoinmarketcupCoins(response.data);
-            } catch (exception) {
-                console.error(exception);
-            }
-        };
-        getData();
-    }, []);
+    const { last_coinmarketcup_coins } = useIndexDataContext();
 
     return (
         <>

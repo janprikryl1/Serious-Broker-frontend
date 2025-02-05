@@ -1,30 +1,17 @@
-import {useEffect, useRef, useState} from "react";
+import {useRef, useState} from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import SwiperCore from "swiper";
 import { TrendingSwiperItem } from "./TrendingSwiperItem.tsx";
 import { GrLinkNext, GrLinkPrevious } from "react-icons/gr";
-import {MostProfitable} from "../../../utils/types/indexPage/IndexDataStructure.ts";
-import {getLatestCoinmarketcupCoins} from "../../../api/indexDataService.ts";
 import {TrendingSwiperSkeleton} from "./TrendingSwiperSkeleton.tsx";
+import {useIndexDataContext} from "../../../utils/providers/IndexDataProvider.tsx";
 
 export const TrendingSwiper = () => {
     const swiperRef = useRef<SwiperCore | null>(null);
+    const { last_coinmarketcup_coins } = useIndexDataContext();
     const [canGoPrev, setCanGoPrev] = useState(false);
     const [canGoNext, setCanGoNext] = useState(true);
-    const [last_coinmarketcup_coins, setLastCoinmarketcupCoins] = useState<MostProfitable[]>();
-
-    useEffect(() => {
-        const getData = async () => {
-            try {
-                const response = await getLatestCoinmarketcupCoins();
-                setLastCoinmarketcupCoins(response.data);
-            } catch (exception) {
-                console.error(exception);
-            }
-        };
-        getData();
-    }, []);
 
     const handleSlideChange = () => {
         if (swiperRef.current) {

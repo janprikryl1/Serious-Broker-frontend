@@ -1,6 +1,6 @@
 import {FC} from "react";
 import { Newsletter } from "../components/modules/index/Newsletter.tsx";
-import CryptoHand from "../utils/icons/crypto-hand2_light.png";
+import CryptoHand from "../utils/icons/1_crypto-hand2_light.webp";
 import {Page} from "../components/Page.tsx";
 import {useUserContext} from "../utils/providers/providerUser.tsx";
 import {IndexTableData} from "../components/modules/index/indexTableData/IndexTableData.tsx";
