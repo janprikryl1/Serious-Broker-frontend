@@ -1,26 +1,4 @@
-// -----------------------------------------------------------------------------
-// When having several themes, this file contains everything related to the
-// default one.
-// -----------------------------------------------------------------------------
 html[data-bs-theme='dark'] {
-  
-  .team {
-    &__item {
-      &-author {
-        &--style1 {
-          background-color: rgba(0, 21, 15, 0.8);
-          backdrop-filter: blur(2px);
-        }
-      }
-
-      &-inner {
-        &--shape2 {
-          background-color: #051a14;
-        }
-      }
-    }
-  }
-
   .banner {
     &--style3 {
       .banner {
@@ -84,116 +62,8 @@ html[data-bs-theme='dark'] {
           box-shadow: none;
         }
       }
-
-      &--style2 {
-        .service {
-          &__item {
-            &-inner {
-              // background-color: $thm-bg-color-2-dark;
-
-              &:hover {
-                box-shadow: 0px 12px 30px rgba(14, 4, 0, 0.64);
-              }
-            }
-          }
-        }
-      }
-
-      &--style3 {
-        .service {
-          &__item {
-            &-inner {
-
-              &:hover {;
-                // background-color: $body-color;
-
-                h5 {
-                  a {
-                    color: $thm-title-color;
-                  }
-                }
-
-                p {
-                  color: $thm-title-color;
-                  opacity: 0.8;
-                }
-              }
-            }
-          }
-        }
-      }
     }
   }
-
-  .pricing {
-    &__item {
-      &-inner {
-        @include add-prefix(transition, $transition);
-
-        &.active,
-        &:hover {
-          border: 2px solid $brand-color;
-          box-shadow: 0px 16px 40px 0px rgba(26, 64, 137, 0.06);
-        }
-      }
-
-      &-top {
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-      }
-
-      &--style2 {
-        .pricing__item {
-          &-inner {
-            @include add-prefix(transition, $transition);
-            border: 1px solid rgba(229, 237, 248, 0.1);
-
-            &.active,
-            &:hover {
-              border: 1px solid rgba(255, 255, 255, 0.3);
-              box-shadow: none;
-            }
-
-            &.active {
-              // background-color: $body-color;
-              background-color: $bg-color-10;
-
-              .pricing__item-top {
-                h6 {
-                  color: $thm-title-color;
-                }
-
-                h3 {
-                  span {
-                    color: $thm-title-color;
-                  }
-                }
-
-                border-bottom: 1px solid #1c1b1b59;
-              }
-
-              .pricing__list {
-                &-item {
-                  color: $thm-title-color;
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-
-    &__shape {
-
-      &-item {
-
-        &--1 {
-          border-left: block;
-          border-bottom: block;
-        }
-      }
-    }
-  }
-
 
   .blog {
     &__item {
@@ -206,117 +76,6 @@ html[data-bs-theme='dark'] {
       }
     }
   }
-
-  .swiper-nav {
-
-    &__btn {
-      border-color: $thm-wh-color-dark;
-
-      i,
-      svg {
-        color: $bg-white;
-      }
-
-      &.active,
-      &:hover {
-        background-color: $brand-color;
-        border-color: $brand-color;
-
-        i,
-        svg {
-          color: $thm-title-color;
-        }
-      }
-
-      &--style3 {
-        border: 1px solid $tertiary-color4;
-
-        &.active,
-        &:hover {
-          background-color: $tertiary-color4;
-          border-color: $tertiary-color4;
-
-          i,
-          svg {
-            color: $title-color;
-          }
-        }
-      }
-    }
-
-
-  }
-
-  .testimonial {
-    &__item {
-      &-content {
-        p {
-          // trk-rgba 
-          border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-      }
-
-      &:hover {
-        .testimonial {
-          &__item {
-            &-inner {
-              box-shadow: none;
-            }
-          }
-
-          &__quote {
-            span {
-
-              i,
-              svg {
-                // opacity: 0.8;
-                color: $brand-color;
-              }
-            }
-
-            &--style2 {
-              span {
-
-                i,
-                svg {
-                  color: $bg-color-11;
-                }
-              }
-            }
-
-          }
-        }
-      }
-    }
-
-    &__quote {
-      span {
-
-        i,
-        svg {
-          // trk-rgba 
-          @include add-prefix(transition, $transition);
-          color: rgba(255, 255, 255);
-          opacity: 0.3;
-        }
-      }
-
-
-    }
-
-  }
-
-    .accordion {
-      &--style1 {
-        [class^="col"] {
-          &:not(:last-child) {
-            .accordion__item {
-              border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            }
-          }
-        }
-      }
-    }
 
   .cta {
     font-size: 22px;
@@ -335,17 +94,6 @@ html[data-bs-theme='dark'] {
         }
       }
     }
-
-    // &--style2 {
-    //   .cta {
-    //     &__subscribe {
-    //       .form-control {
-    //         background-color: $thm-tertiary-color-dark;
-    //         border: 1px solid $thm-tertiary-color-dark;
-    //       }
-    //     }
-    //   }
-    // }
   }
 
   .form-control {
@@ -369,16 +117,7 @@ html[data-bs-theme='dark'] {
       }
     }
   }
-
-  .account {
-    &__social {
-      &-btn {
-        border-color: $thm-bg-color-4-dark;
-      }
-    }
-  }
-
-
+  
   .trk-btn {
     &--outline {
       color: $brand-color;
@@ -393,6 +132,11 @@ html[data-bs-theme='dark'] {
   }
 
   .account {
+    &__social {
+      &-btn {
+        border-color: $thm-bg-color-4-dark;
+      }
+    }
     &__divider {
       &--style1 {
         &::before {
@@ -404,13 +148,11 @@ html[data-bs-theme='dark'] {
 
   .contact {
     &__form {
-
       @include breakpoint(md) {
         &::before {
           background: linear-gradient(188.07deg, rgba(157, 157, 157, 0) 31.91%, #97999B75 98.96%);
         }
       }
-
     }
   }
 
@@ -424,8 +166,7 @@ html[data-bs-theme='dark'] {
 
     }
   }
-
-
+  
   .social {
     &__link {
       &--style1 {

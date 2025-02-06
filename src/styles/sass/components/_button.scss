@@ -1,7 +1,3 @@
-// -----------------------------------------------------------------------------
-// This file contains all styles related to the button component.
-// -----------------------------------------------------------------------------
-//default button style
 .trk-btn {
   @extend %p-rel,
   %d-inline-block,
@@ -9,15 +5,18 @@
   %text-center,
   %text-semibold;
   @include font-size(16px);
-  border: transparent;
-  color: $thm-title-color;
-  font-family: $text-font;
-  padding: 0.75rem 1rem;
-  text-decoration: none;
+  & {
+    border: transparent;
+    color: $thm-title-color;
+    font-family: $text-font;
+    padding: 0.75rem 1rem;
+    text-decoration: none;
+  }
   @include add-prefix(transition, $transition);
-  line-height: 1;
-  border-radius: 4px;
-
+  & {
+    line-height: 1;
+    border-radius: 4px;
+  }
 
   &:after {
     @extend %p-abs;
@@ -72,7 +71,6 @@
       i,
       svg {
         @include font-size(16px);
-        // @include add-prefix(transform,rotate(-45deg));
       }
 
       &.style2 {
@@ -89,10 +87,12 @@
     @extend %text-center,
     %d-inline-flex,
     %align-i-center;
-    gap: 5px;
     @include add-prefix(transition, $transition);
-    color: $title-color;
-    padding: 0.53rem 1rem;
+    & {
+      gap: 5px;
+      color: $title-color;
+      padding: 0.53rem 1rem;
+    }
 
     @include breakpoint(sm) {
       padding: 0.8rem 1rem;
@@ -167,15 +167,19 @@
       @extend %d-inline-flex,
       %align-i-center;
       @include box(24px);
-      background-color: $bg-white;
-      border-radius: 99px;
-      padding: 4px;
-
+      & {
+        background-color: $bg-white;
+        border-radius: 99px;
+        padding: 4px;
+      }
+        
       i,
       svg {
         @include font-size(14px);
-        color: $brand-color;
-        line-height: 24px;
+        & {
+          color: $brand-color;
+          line-height: 24px;
+        }
       }
     }
   }
@@ -208,218 +212,12 @@
     color: $bg-white;
   }
 
-  &--outline {
-    @extend %text-center;
-    @include add-prefix(transition, $transition);
-    width: 100%;
-    border: 1px solid $brand-color;
-    color: $thm-title-color;
-  }
-
-  &--outline2 {
-    @extend %text-center,
-    %d-inline-flex,
-    %align-i-center;
-    @include add-prefix(transition, $transition);
-    gap: 5px;
-    // width: 100%;
-    border: 1px solid $secondary-color;
-    color: $secondary-color;
-    padding: 0.53rem 1rem;
-
-    @include breakpoint(sm) {
-      padding: 0.8rem 1.25rem;
-    }
-
-    @include breakpoint(lg) {
-      padding: 0.8rem 1.75rem;
-    }
-
-    @include breakpoint(xl) {
-      padding: 0.78rem 1.875rem;
-    }
-
-    span {
-      &.style1 {
-
-        i,
-        svg {
-          @include add-prefix(transition, $transition);
-
-          rect {
-            stroke: $arrow-icon-color;
-          }
-
-          g {
-            path {
-              stroke: $arrow-icon-color;
-            }
-          }
-        }
-      }
-    }
-
-
-  }
-
-  &--outline22 {
-    @extend %text-center,
-    %d-inline-flex,
-    %align-i-center;
-    @include add-prefix(transition, $transition);
-    gap: 5px;
-    // width: 100%;
-    border: 1px solid $secondary-color;
-    color: $secondary-color;
-    padding: 0.53rem 1rem;
-
-    @include breakpoint(sm) {
-      padding: 0.8rem 1.25rem;
-    }
-
-    @include breakpoint(lg) {
-      padding: 0.8rem 1.75rem;
-    }
-
-    @include breakpoint(xl) {
-      padding: 0.78rem 1.875rem;
-    }
-
-    span {
-      &.style1 {
-
-        i,
-        svg {
-          @include add-prefix(transition, $transition);
-
-          rect {
-            // stroke: $arrow-check-color;
-            stroke: $secondary-color;
-          }
-
-          g {
-            path {
-              stroke: $secondary-color;
-            }
-          }
-        }
-      }
-    }
-  }
-
-  &--outline3 {
-    @extend %text-center,
-    %d-inline-flex,
-    %align-i-center;
-    @include add-prefix(transition, $transition);
-    gap: 5px;
-    // width: 100%;
-    // background-color: $thm-wh-color-dark;
-    border-color: $thm-wh-color-dark;
-    background: rgba(255, 255, 255, 0.08);
-    color: $thm-wh-color;
-    padding: 0.53rem 1rem;
-
-    @include breakpoint(sm) {
-      padding: 0.8rem 1.25rem;
-    }
-
-    @include breakpoint(lg) {
-      padding: 0.8rem 1.75rem;
-    }
-
-    @include breakpoint(xl) {
-      padding: 0.78rem 1.875rem;
-    }
-
-    span {
-      &.style1 {
-
-        i,
-        svg {
-          @include add-prefix(transition, $transition);
-        }
-      }
-    }
-
-  }
-
-  &--outline4 {
-    @extend %text-center;
-    @include add-prefix(transition, $transition);
-    width: 100%;
-    border: 1px solid $secondary-color;
-    color: $secondary-color;
-
-    &.active,
-    &:hover {
-      background-color: $secondary-color;
-      color: $bg-white;
-    }
-  }
-
-  &--outline5 {
-    @extend %text-center,
-    %d-inline-flex,
-    %align-i-center;
-    @include add-prefix(transition, $transition);
-    gap: 5px;
-    // width: 100%;
-    // border: 1px solid $secondary-color;
-    color: $secondary-color;
-    padding: 0.53rem 1rem;
-
-    @include breakpoint(sm) {
-      padding: 0.8rem 1.25rem;
-    }
-
-    @include breakpoint(lg) {
-      padding: 0.8rem 1.75rem;
-    }
-
-    @include breakpoint(xl) {
-      padding: 0.78rem 1.875rem;
-    }
-
-    span {
-      &.style1 {
-
-        i,
-        svg {
-          @include add-prefix(transition, $transition);
-
-          rect {
-            stroke: $arrow-icon-color;
-          }
-
-          g {
-            path {
-              stroke: $arrow-icon-color;
-            }
-          }
-        }
-      }
-    }
-
-
-  }
-
-  &--outline6 {
-    @extend %text-center;
-    @include add-prefix(transition, $transition);
-    width: 100%;
-    border: 1.5px solid $title-color;
-    color: $title-color;
-  }
-
-
-
   &.search-btn {
-    padding: 1.2rem 1.85rem;
     @include font-size(18px);
+    & {
+      padding: 1.2rem 1.85rem;
+    }
   }
-
-
 
   span {
     position: inherit;
@@ -432,18 +230,9 @@
     }
   }
 
-
-  // &--small {
-  //   // line-height: 46px;
-  //   padding: 1.125rem 2.5rem;
-  // }
-
-
-
   &.active,
   &:hover {
     color: $thm-title-color;
-    // Index One
     &.trk-btn--primary {
       transform: translateY(-3px);
 
@@ -496,62 +285,6 @@
       transform: rotate(0deg);
     }
 
-    &.trk-btn--outline {
-      background-color: $brand-color;
-      border-color: $brand-color;
-      color: $thm-title-color;
-    }
-
-    &.trk-btn--outline2 {
-      background-color: $brand-color;
-      border-color: $brand-color;
-      color: $thm-title-color;
-
-      span {
-        &.style1 {
-
-          i,
-          svg {
-            rect {
-              stroke: $thm-title-color;
-
-            }
-
-            g {
-              path {
-                stroke: $thm-title-color;
-              }
-            }
-          }
-        }
-      }
-    }
-
-    &.trk-btn--outline22 {
-      background-color: $thm-secondary-color;
-      border-color: $thm-secondary-color;
-      color: $bg-white;
-
-      span {
-        &.style1 {
-
-          i,
-          svg {
-            rect {
-              stroke: $bg-white;
-
-            }
-
-            g {
-              path {
-                stroke: $bg-white;
-              }
-            }
-          }
-        }
-      }
-    }
-
     &.trk-btn--defult {
       background-color: $brand-color;
       border-color: $brand-color;
@@ -576,40 +309,7 @@
         }
       }
     }
-
-    &.trk-btn--outline3 {
-      background-color: $brand-color;
-      border-color: $brand-color;
-      color: $thm-title-color;
-
-      span {
-        &.style1 {
-
-          i,
-          svg {
-            rect {
-              stroke: $thm-title-color;
-
-            }
-
-            g {
-              path {
-                stroke: $thm-title-color;
-              }
-            }
-          }
-        }
-      }
-    }
-
-    &.trk-btn--outline6 {
-      background-color: $title-color;
-      border-color: $title-color;
-      color: $thm-title-color-dark;
-    }
-
-
-    // Index Two
+    
     &.trk-btn--primary2 {
 
       i,
@@ -617,8 +317,6 @@
         @include add-prefix(transform, translateX(5px));
       }
     }
-
-
   }
 
   &-active {
@@ -633,20 +331,23 @@
   @extend %align-i-center,
   %p-rel;
   @include add-prefix(transition, $transition);
-  display: inline-flex;
-  font-weight: 600;
-  color: $brand-color;
+  & {
+    display: inline-flex;
+    font-weight: 600;
+    color: $brand-color;
+  }
 
   &::after {
     @extend %p-abs;
     @include add-prefix(transition, $transition);
-    content: "";
-    left: 0;
-    bottom: -4px;
-    height: 2px;
-    width: 0%;
-    background-color: $brand-color;
-
+    & {
+      content: "";
+      left: 0;
+      bottom: -4px;
+      height: 2px;
+      width: 0%;
+      background-color: $brand-color;
+    }
   }
 
   &--style2 {
@@ -655,12 +356,14 @@
     &::after {
       @extend %p-abs;
       @include add-prefix(transition, $transition);
-      content: "";
-      left: 0;
-      bottom: -4px;
-      height: 2px;
-      width: 0%;
-      background-color: $secondary-color;
+      & {
+        content: "";
+        left: 0;
+        bottom: -4px;
+        height: 2px;
+        width: 0%;
+        background-color: $secondary-color;
+      }
     }
   }
 
@@ -675,8 +378,10 @@
   &.text-btn--small {
     @extend %text-regular;
     @include font-size(16px);
-    color: $title-color;
-    font-family: $text-font;
+    & {
+      color: $title-color;
+      font-family: $text-font;
+    }
 
     span {
       @extend %me-10;
@@ -705,28 +410,5 @@
     span {
       @include add-prefix(transform, translateX(5px));
     }
-  }
-}
-
-
-.btn-group {
-  @extend %d-flex,
-  %align-i-center;
-  gap: 20px;
-
-  &--gap-xs {
-    gap: 20px;
-  }
-
-  &--gap-sm {
-    gap: 20px;
-  }
-
-  &--gap-md {
-    gap: 20px;
-  }
-
-  &--gap-lg {
-    gap: 20px;
   }
 }

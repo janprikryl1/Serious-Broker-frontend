@@ -6,7 +6,7 @@ import {IndexSeasonButtons} from "../IndexSeasonButtons.tsx";
 
 export const IndexTableData: FC = () => {
     return (
-        <div className="cta-dark mt-5">
+        <div className="cta-dark">
             <IndexTableTitle/>
             <div className="row">
                 <IndexChartTypeButtons/>

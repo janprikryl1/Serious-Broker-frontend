@@ -1,4 +1,3 @@
-/*===== keyframes for banner img ====*/
 @include keyframes(santa-ride) {
     0% {
         transform: translateX(0);
@@ -79,8 +78,6 @@
     }
 }
 
-//glitch animation
-
 @include keyframes(light) {
 
     10%,
@@ -101,12 +98,10 @@
 
     40%,
     60% {
-        // transform: translate3d(4px, 0, 0);
         opacity: 1;
     }
 }
 
-//animation fadeInUP
 @keyframes fadeInUp {
     from {
         opacity: 0;
@@ -121,7 +116,6 @@
     }
 }
 
-// fadeInDown animation keyframes 
 @keyframes fadeInDown {
     from {
         opacity: 0;

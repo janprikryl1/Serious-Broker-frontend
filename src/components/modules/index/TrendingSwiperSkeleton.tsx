@@ -2,6 +2,7 @@ import {FC} from "react";
 import {Swiper, SwiperSlide} from "swiper/react";
 import {Navigation} from "swiper/modules";
 import Skeleton from "react-loading-skeleton";
+import '../../../styles/css/swiper-bundle.min.css';
 
 export const TrendingSwiperSkeleton:FC = () => {
     return (

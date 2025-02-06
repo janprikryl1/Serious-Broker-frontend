@@ -148,99 +148,12 @@
             %d-grid,
             %place-i-center;
             @include box(70px);
-            background-color: $bg-color-3;
-            border-radius: 50%;
-        }
-    }
-
-
-
-    &__shape {
-        &--style1 {
-            .about__shape {
-                &-item {
-                    @extend %p-abs;
-                    width: 40px;
-                    top: 5%;
-                    right: 6%;
-                    @include animation(rotate 3s cubic-bezier(0.41, 0.15, 0.64, 0.86) infinite alternate);
-
-                    @include breakpoint(sm) {
-                        top: 5%;
-                        right: 7%;
-                    }
-
-                    @include breakpoint(md) {
-                        width: auto;
-                        top: 6%;
-                        right: 6%;
-                    }
-
-                    @include breakpoint(lg) {
-                        right: 5%;
-                        top: 16%;
-                    }
-
-                    @include breakpoint(xl) {
-                        top: 16%;
-                        right: 6%;
-                    }
-
-                    @include breakpoint(xxl) {
-                        top: 16%;
-                        right: 9%;
-                    }
-                }
-            }
-        }
-
-        &--style2 {
-            .about__shape {
-                &-item {
-                    @extend %p-abs;
-
-                    &--1 {
-                        width: 80px;
-                        top: 52%;
-                        right: 71%;
-                        @include animation(floating 3s cubic-bezier(0.41, 0.15, 0.64, 0.86) infinite alternate);
-
-                        @include breakpoint(sm) {
-                            width: auto;
-                            top: 45%;
-                            right: 71%;
-                        }
-
-                        @include breakpoint(md) {
-                            top: 45%;
-                            right: 77%;
-                        }
-
-                        @include breakpoint(lg) {
-                            right: 43%;
-                            top: 8%;
-                        }
-
-                        @include breakpoint(xl) {
-                            top: 3%;
-                            right: 40%;
-                        }
-
-                        @include breakpoint(xxl) {
-                            top: -1%;
-                            right: 3%;
-                        }
-
-                        @include breakpoint(xxxl) {
-                            top: 0%;
-                            right: 9%;
-                        }
-                    }
-                }
+            & {
+                background-color: $bg-color-3;
+                border-radius: 50%;
             }
         }
     }
-
 
     &--style3 {
         .about {
@@ -249,8 +162,10 @@
                     @extend %mb-30;
 
                     img {
-                        width: 70px;
                         @include animation(left-right 3s cubic-bezier(0.41, 0.15, 0.64, 0.86) infinite alternate);
+                        & {
+                            width: 70px;
+                        }
 
                         @include breakpoint (sm) {
                             width: 73px;
@@ -297,8 +212,10 @@
                         %d-block,
                         %align-i-center;
                         @include font-size(18px);
-                        color: $title-color-style2;
-                        font-family: $text-font;
+                        & {
+                            color: $title-color-style2;
+                            font-family: $text-font;
+                        }
 
                         span {
 

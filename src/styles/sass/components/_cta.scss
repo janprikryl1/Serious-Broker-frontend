@@ -160,7 +160,6 @@
           @include font-size(32px);
         }
       }
-
     }
 
     p {
@@ -382,14 +381,12 @@
   
   &--style2 {
     @extend %p-rel;
-    // width: 95%;
     margin: 0 auto;
     margin-bottom: -140px;
     z-index: 3;
     overflow: visible;
 
     @include breakpoint(sm) {
-      // width: 90%;
       margin-bottom: -180px;
     }
   }

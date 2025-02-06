@@ -6,6 +6,8 @@ import {useTranslation} from "react-i18next";
 import {toast} from "react-toastify";
 import {ArticleSendEmailComponent} from "./ArticleSendEmailComponent.tsx";
 import {Button} from "../../../Button.tsx";
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 type Props = {
     id: string;
@@ -49,6 +51,7 @@ export const ShareLink:FC<Props> = ({id, languages}) => {
                 </Button>
             </InputGroup>
             <ArticleSendEmailComponent url={url}/>
+            <ToastContainer position="bottom-right" />
         </>
     );
 }

@@ -1,27 +1,12 @@
 .blog {
     @extend %of-hidden,
     %p-rel;
-    
-    font-size: 23px;
+
+    font-size: 20px;
 
     &__wrapper {
         @extend %p-rel;
         z-index: 2;
-    }
-
-    &__bg {
-        &-element {
-            img {
-                @extend %w-100,
-                %p-abs;
-                left: 0;
-                top: 0;
-                background-repeat: no-repeat;
-                background-size: cover;
-                background-position: center;
-                opacity: 0.8;
-            }
-        }
     }
 
     &__item {
@@ -31,11 +16,12 @@
             %pb-30,
             %of-hidden;
             @include add-prefix(transition, $transition);
-            background-color: $wh-color;
-            border: 2px solid transparent;
-            // todo
-            box-shadow: 0px 16px 48px 0px rgba(6, 35, 63, 0.03), 0px -16px 48px 0px rgba(6, 35, 63, 0.03);
-            border-radius: 16px;
+            & {
+                background-color: $wh-color;
+                border: 2px solid transparent;
+                box-shadow: 0px 16px 48px 0px rgba(6, 35, 63, 0.03), 0px -16px 48px 0px rgba(6, 35, 63, 0.03);
+                border-radius: 16px;
+            }
 
             &:hover {
                 border: 2px solid $brand-color;
@@ -54,7 +40,6 @@
                         }
                     }
                 }
-
             }
 
             &--style2 {
@@ -77,49 +62,12 @@
                             }
                         }
                     }
-
                 }
             }
-
-
         }
 
         &--style2 {
             @extend %pb-35;
-
-        }
-
-
-        &--style3 {
-            .blog__item {
-                &-inner {
-                    &:hover {
-                        border: 2px solid $tertiary-color4;
-
-                        .blog {
-                            &__content {
-                                h5 {
-                                    a{
-                                        color: $tertiary-color4;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-
-    }
-
-    &__thumb {
-        @extend %of-hidden;
-        border-radius: 8px;
-
-        img {
-            @extend %w-100;
-            @include add-prefix(transition, $transition);
         }
     }
 
@@ -128,15 +76,12 @@
             @extend %text-semibold,
             %text-clamp-1;
             @include add-prefix(transition, $transition);
-            
-            &.style2 {
-               
-                    a {
-                        color: $secondary-color;
-                    }
-               
-            }
 
+            &.style2 {
+                a {
+                    color: $secondary-color;
+                }
+            }
         }
 
         p {
@@ -161,20 +106,26 @@
             h6 {
                 @extend %text-semibold;
                 @include font-size(16px);
-                font-family: $text-font;
-                color: $title-color;
+                & {
+                    font-family: $text-font;
+                    color: $title-color;
+                }
             }
 
             p {
                 @extend %text-semibold;
                 @include font-size(18px);
-                color: $title-color;
-                margin-bottom: -3px;
+                & {
+                    color: $title-color;
+                    margin-bottom: -3px;
+                }
             }
 
             span {
                 @include font-size(14px);
-                color: $text-color;
+                & {
+                    color: $text-color;
+                }
             }
         }
     }
@@ -190,94 +141,16 @@
             @extend %d-inline-block,
             %text-semibold;
             @include font-size(14px);
-            padding: 3px 12px;
-            border-radius: 8px;
-            text-transform: capitalize;
-            // background-color: rgba($brand-color-1, $alpha: .1);
+            & {
+                padding: 3px 12px;
+                border-radius: 8px;
+                text-transform: capitalize;
+            }
 
             &--style1 {
-                // trk-rgba 
                 color: $secondary-color;
                 background-color: $bg-color-7;
             }
-
-            &--style2 {
-                color: $brand-color;
-                background-color: $tertiary-color;
-            }
-
-            &--style3 {
-                color: $thm-tertiary-color3-dark;
-                margin-left: 10px;
-            }
         }
     }
-
-
-
-    // footer shape
-
-    &__shape {
-
-        &-item {
-            @extend %p-abs;
-
-            &--1 {
-                content: "";
-                // border: 2px solid #B5CAF2;
-                border: 2px solid var(--bg-shape-color);
-                padding: 40px;
-                border-radius: 100px 100px 229px 100px;
-                transform: rotate(65deg);
-                border-top: transparent;
-                display: none;
-
-                @include breakpoint(md) {
-                    display: block;
-                    height: 80%;
-                    width: 1000px;
-                    top: -14%;
-                    left: -36%;
-                }
-
-                @include breakpoint(lg) {
-                    top: -6%;
-                    left: -28%;
-                }
-
-                @include breakpoint(xl) {
-                    height: 95%;
-                    top: -17%;
-                    left: -10%;
-                }
-
-                @include breakpoint(xxl) {
-                    top: -17%;
-                    left: 0%;
-                }
-
-
-                span {
-                    position: absolute;
-                    content: "";
-                    height: 94%;
-                    width: 980px;
-                    border-radius: 100px 100px 236px 100px;
-                    background: linear-gradient(180deg, var(--bg-shape-color-trans) 0%, var(--bg-shape-color) 100%);
-                    opacity: 0.6;
-
-                    @include breakpoint(md) {
-                        top: 3%;
-                        left: -1%;
-                    }
-                }
-
-
-            }
-        }
-
-    }
-
-
-
 }

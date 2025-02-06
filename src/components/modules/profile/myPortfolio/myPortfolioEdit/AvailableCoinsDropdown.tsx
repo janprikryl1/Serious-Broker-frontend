@@ -3,6 +3,7 @@ import { useMyPortfolioContext } from "../../../../../utils/providers/MyPortfoli
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { Option } from "react-bootstrap-typeahead/types/types";
+import 'react-bootstrap-typeahead/css/Typeahead.css';
 
 type Props = {
     coin?: string;

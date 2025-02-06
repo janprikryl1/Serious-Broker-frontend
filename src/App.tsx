@@ -8,7 +8,6 @@ import { routes, adminURLS } from "./utils/constants";
 import { ThemeProvider } from "./utils/providers/ThemeProvider.tsx";
 import { ProviderUser } from "./utils/providers/providerUser.tsx";
 import { AchievmentsProvider } from "./utils/providers/AchievmentsProvider.tsx";
-import { ToastContainer } from "react-toastify";
 import { UnverifiedHeaderInfo } from "./components/UnverifiedHeaderInfo.tsx";
 import { Header } from "./components/modules/navbar/Header.tsx";
 import { Footer } from "./components/modules/navbar/Footer.tsx";
@@ -32,10 +31,14 @@ const RecommendationDetails = lazy(() => import("./pages/graphs/RecommendationDe
 const VerifyAccount = lazy(() => import("./pages/VerifyAccount.tsx").then(module => ({ default: module.VerifyAccount })));
 const ForgottenPassword = lazy(() => import("./pages/ForgottenPassword.tsx").then(module => ({ default: module.ForgottenPassword })));
 const RecoverPassword = lazy(() => import("./pages/RecoverPassword.tsx").then(module => ({ default: module.RecoverPassword })));
-const Admin = lazy(() => import("./pages/admin/Admin.tsx").then(module => ({ default: module.Admin })));
 const SignIn = lazy(() => import("./pages/SignIn.tsx").then(module => ({ default: module.SignIn })));
 const Register = lazy(() => import("./pages/Register.tsx").then(module => ({ default: module.Register })));
 const ErrorPage = lazy(() => import("./pages/ErrorPage.tsx").then(module => ({ default: module.ErrorPage })));
+const Demos = lazy(() => import("./pages/Demos.tsx").then(module => ({ default: module.Demos })));
+const Demo = lazy(() => import("./pages/Demo.tsx").then(module => ({ default: module.Demo })));
+const AdminDemos = lazy(() => import("./pages/admin/AdminDemos.tsx").then(module => ({ default: module.AdminDemos })));
+const AdminDemoEdit = lazy(() => import("./pages/admin/AdminDemoEdit.tsx").then(module => ({ default: module.AdminDemoEdit })));
+const Admin = lazy(() => import("./pages/admin/Admin.tsx").then(module => ({ default: module.Admin })));
 const AdminOverview = lazy(() => import("./pages/admin/AdminOverview.tsx").then(module => ({ default: module.AdminOverview })));
 const UserManagment = lazy(() => import("./pages/admin/UserManagment.tsx").then(module => ({ default: module.UserManagment })));
 const NewsletterOverview = lazy(() => import("./pages/admin/NewsletterOverview.tsx").then(module => ({ default: module.NewsletterOverview })));
@@ -53,18 +56,14 @@ const AdminAchivments = lazy(() => import("./pages/admin/AdminAchivments.tsx").t
 const CoinSettings = lazy(() => import("./pages/admin/CoinSettings.tsx").then(module => ({ default: module.CoinSettings })));
 const ChachedData = lazy(() => import("./pages/admin/ChachedData.tsx").then(module => ({ default: module.ChachedData })));
 const QRManagement = lazy(() => import("./pages/admin/QRManagement.tsx").then(module => ({ default: module.QRManagement })));
+const MyPortfolio = lazy(() => import("./pages/profile/MyPortfolio.tsx").then(module => ({ default: module.MyPortfolio })));
+const EditMyPortfolio = lazy(() => import("./pages/profile/EditMyPortfolio.tsx").then(module => ({ default: module.EditMyPortfolio })));
+const MyPortfolioDetails = lazy(() => import("./pages/profile/MyPortfolioDetails.tsx").then(module => ({ default: module.MyPortfolioDetails })));
 const Profile = lazy(() => import("./pages/profile/Profile.tsx").then(module => ({ default: module.Profile })));
 const ProfileOverview = lazy(() => import("./pages/profile/ProfileOverview.tsx").then(module => ({ default: module.ProfileOverview })));
 const ProfileAchievements = lazy(() => import("./pages/profile/ProfileAchievements.tsx").then(module => ({ default: module.ProfileAchievements })));
 const ProfileMembership = lazy(() => import("./pages/profile/ProfileMembership.tsx").then(module => ({ default: module.ProfileMembership })));
 const ProfileEdit = lazy(() => import("./pages/profile/ProfileEdit.tsx").then(module => ({ default: module.ProfileEdit })));
-const Demos = lazy(() => import("./pages/Demos.tsx").then(module => ({ default: module.Demos })));
-const Demo = lazy(() => import("./pages/Demo.tsx").then(module => ({ default: module.Demo })));
-const AdminDemos = lazy(() => import("./pages/admin/AdminDemos.tsx").then(module => ({ default: module.AdminDemos })));
-const AdminDemoEdit = lazy(() => import("./pages/admin/AdminDemoEdit.tsx").then(module => ({ default: module.AdminDemoEdit })));
-const MyPortfolio = lazy(() => import("./pages/profile/MyPortfolio.tsx").then(module => ({ default: module.MyPortfolio })));
-const EditMyPortfolio = lazy(() => import("./pages/profile/EditMyPortfolio.tsx").then(module => ({ default: module.EditMyPortfolio })));
-const MyPortfolioDetails = lazy(() => import("./pages/profile/MyPortfolioDetails.tsx").then(module => ({ default: module.MyPortfolioDetails })));
 
 // Disable automatic CSS addition for Font Awesome
 config.autoAddCss = false;
@@ -100,6 +99,11 @@ function App() {
                             <Route path={routes.graphsRecommendationDetail} element={<PageLoader><RecommendationDetails /></PageLoader>} />
                             <Route path={routes.signIn} element={<PageLoader><SignIn /></PageLoader>} />
                             <Route path={routes.register} element={<PageLoader><Register /></PageLoader>} />
+                            <Route path={routes.verifyAccount} element={<PageLoader><VerifyAccount /></PageLoader>} />
+                            <Route path={routes.forgottenPassword} element={<PageLoader><ForgottenPassword /></PageLoader>} />
+                            <Route path={routes.recoverPassword} element={<PageLoader><RecoverPassword /></PageLoader>} />
+                            <Route path={routes.demos} element={<PageLoader><Demos /></PageLoader>} />
+                            <Route path={routes.demo} element={<PageLoader><Demo /></PageLoader>} />
                             <Route path={routes.profile.profileURL} element={<PageLoader><Profile/></PageLoader>}>
                                 <Route path={routes.profile.profileURL} element={<PageLoader><ProfileOverview /></PageLoader>}/>
                                 <Route path={routes.profile.edit} element={<PageLoader><ProfileEdit/></PageLoader>}/>
@@ -109,10 +113,7 @@ function App() {
                                 <Route path={routes.profile.editMyPortfolio} element={<PageLoader><EditMyPortfolio/></PageLoader>} />
                                 <Route path={routes.profile.myPortfolioDetails} element={<PageLoader><MyPortfolioDetails/></PageLoader>} />
                                 <Route path={routes.profile.newMyPortfolio} element={<PageLoader><EditMyPortfolio/></PageLoader>} />
-                            </Route>                            
-                            <Route path={routes.verifyAccount} element={<PageLoader><VerifyAccount /></PageLoader>} />
-                            <Route path={routes.forgottenPassword} element={<PageLoader><ForgottenPassword /></PageLoader>} />
-                            <Route path={routes.recoverPassword} element={<PageLoader><RecoverPassword /></PageLoader>} />
+                            </Route>
                             <Route path={adminURLS.index} element={<PageLoader><Admin /></PageLoader>}>
                                 <Route path={routes.admin.index} element={<PageLoader><AdminOverview /></PageLoader>} />
                                 <Route path={routes.admin.users} element={<PageLoader><UserManagment /></PageLoader>} />
@@ -137,15 +138,12 @@ function App() {
                                 <Route path={routes.admin.editDemo} element={<PageLoader><AdminDemoEdit /></PageLoader>} />
                                 <Route path={routes.admin.newDemo} element={<PageLoader><AdminDemoEdit /></PageLoader>} />
                             </Route>
-                            <Route path={routes.demos} element={<PageLoader><Demos /></PageLoader>} />
-                            <Route path={routes.demo} element={<PageLoader><Demo /></PageLoader>} />
                             <Route path="*" element={<PageLoader><ErrorPage /></PageLoader>} />
                         </Routes>
                         <Footer />
                     </AchievmentsProvider>
                 </ProviderUser>
             </ThemeProvider>
-            <ToastContainer position="bottom-right" />
         </BrowserRouter>
     );
 }

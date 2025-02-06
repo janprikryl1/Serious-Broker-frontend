@@ -6,6 +6,7 @@ import { TrendingSwiperItem } from "./TrendingSwiperItem.tsx";
 import { GrLinkNext, GrLinkPrevious } from "react-icons/gr";
 import {TrendingSwiperSkeleton} from "./TrendingSwiperSkeleton.tsx";
 import {useIndexDataContext} from "../../../utils/providers/IndexDataProvider.tsx";
+import '../../../styles/css/swiper-bundle.min.css';
 
 export const TrendingSwiper = () => {
     const swiperRef = useRef<SwiperCore | null>(null);

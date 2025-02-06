@@ -36,7 +36,6 @@
 
             input {
                 @extend %p-15;
-                // background-color: transparent;
                 background-color: $bg-color-6;
                 border-color: $border-color-2;
                 border-radius: 8px;
@@ -45,9 +44,6 @@
 
                 &:focus {
                     box-shadow: none;
-                    // trk-rgba 
-                    // border-color: rgba($brand-color, $alpha: 0.50);
-                    // border-color: $brand-color;
                     border-color: $brand-color;
                 }
             }
@@ -65,7 +61,6 @@
                 background-color: $brand-color;
                 color: $wh-color;
 
-                // @include transform(translateY(-50%));
                 i,
                 svg {
                     @include font-size(18px);
@@ -125,7 +120,9 @@
             img {
                 @extend %w-100;
                 @include add-prefix(transition, $transition);
-                object-fit: cover;
+                & {
+                    object-fit: cover;
+                }
 
                 &:hover {
                     @include add-prefix(transform, scale(1.09));
@@ -134,26 +131,30 @@
         }
 
         &-content {
-            // @extend %ps-15;
-
             p {
                 @extend %mb-0,
                 %text-medium;
                 @include font-size(16px);
-                color: $title-color;
-                font-family: $title-font;
+                & {
+                    color: $title-color;
+                    font-family: $title-font;
+                }
 
                 a {
                     @extend %text-clamp-3;
                     @include add-prefix(transition, $transition);
-                    color: $title-color;
+                    & {
+                        color: $title-color;
+                    }
                 }
             }
 
             span {
                 @include font-size(14px);
                 @include add-prefix(transition, $transition);
-                color: $text-color;
+                & {
+                    color: $text-color;
+                }
             }
 
             &:hover {
@@ -197,7 +198,9 @@
                         %text-regular;
                         @include font-size(16px);
                         @include add-prefix(transition, $transition);
-                        color: $title-color;
+                        & {
+                            color: $title-color;
+                        }
                     }
 
                     &.active,
@@ -224,7 +227,6 @@
     &__social {
         @extend %p-25;
         background-color: $wh-color;
-        // trk-rgba 
         box-shadow: 0px -16px 48px rgba(6, 35, 63, 0.03), 0px 16px 48px rgba(6, 35, 63, 0.03);
         border-radius: 4px;
     }
@@ -237,7 +239,6 @@
 
         &-body {
             @extend %pt-25;
-
         }
     }
 
@@ -272,15 +273,9 @@
                 }
             }
         }
-
     }
-
 }
 
-
-
-
-// tag for global
 .tags {
     ul {
         @extend %d-flex;
@@ -291,20 +286,23 @@
 
             h6 {
                 @include font-size(18px);
-                font-family: $text-font;
+                & {
+                    font-family: $text-font;
+                }
             }
 
             a {
                 @extend %text-regular;
                 @include add-prefix(transition, $transition);
                 @include font-size(16px);
-                padding: 8px 16px;
-                color: $text-color;
-                border: 1px solid $border-color-5;
-
-                outline: none;
-                border-radius: 99px;
-
+                & {
+                    padding: 8px 16px;
+                    color: $text-color;
+                    border: 1px solid $border-color-5;
+                    outline: none;
+                    border-radius: 99px;
+                }
+                    
                 &.active,
                 &:hover {
                     background-color: $tertiary-color;
@@ -325,20 +323,23 @@
 
                 h6 {
                     @include font-size(18px);
-                    font-family: $text-font;
+                    & {
+                        font-family: $text-font;
+                    }
                 }
 
                 a {
                     @extend %text-regular;
                     @include add-prefix(transition, $transition);
                     @include font-size(16px);
-                    padding: 8px 16px;
-                    color: $text-color;
-                    border: 1px solid $border-color-5;
-
-                    outline: none;
-                    border-radius: 99px;
-
+                    & {
+                        padding: 8px 16px;
+                        color: $text-color;
+                        border: 1px solid $border-color-5;
+                        outline: none;
+                        border-radius: 99px;
+                    }
+                        
                     &.active,
                     &:hover {
                         background-color: $tag-bg-color;
@@ -346,8 +347,6 @@
                         color: $brand-color;
                     }
                 }
-
-
             }
         }
     }

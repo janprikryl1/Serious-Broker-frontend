@@ -19,7 +19,9 @@
 
             span {
                 @include font-size(14px);
-                color: $text-color;
+                & {
+                    color: $text-color;
+                }
             }
         }
         &-thumb{
@@ -33,14 +35,18 @@
         a {
             @extend %text-medium;
             @include add-prefix(transition, $transition);
-            font-family: $title-font;
-            color: $text-color;
+            & {
+                font-family: $title-font;
+                color: $text-color;
+            }
             @include font-size(16px);
 
             img {
                 @include add-prefix(transition, $transition);
-                margin-inline-end: 1px;
-                margin-bottom: 2px;
+                & {
+                    margin-inline-end: 1px;
+                    margin-bottom: 2px;
+                }
             }
 
             &:hover {

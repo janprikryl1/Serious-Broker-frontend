@@ -17,33 +17,38 @@
     &__item {
         h6 {
             @include font-size(18px);
-            font-family: $text-font;
+            & {
+                font-family: $text-font;
+            }
         }
     }
 
     &__link {
-        // @extend %d-inline-block;
         @extend %text-center;
         @include add-prefix(transition, background-color .2s linear);
-        background-color: transparent;
-        // border: 2px solid rgba($wh-color, $alpha: .70);
+        & {
+            background-color: transparent;
+        }
         @include font-size(18px);
-
-
+        
         &--style1 {
             @extend %d-grid,
             %place-i-center;
             @include add-prefix(transition, $transition);
-            background-color: transparent;
-            border: 1px solid $social-border-color-2;
             @include box(34px);
-            border-radius: 99px;
-            transition: $transition;
+            & {
+                background-color: transparent;
+                border: 1px solid $social-border-color-2;
+                border-radius: 99px;
+                transition: $transition;
+            }
 
             svg,
             i {
                 @include font-size(16px);
-                color: $title-color;
+                & {
+                    color: $title-color;
+                }
             }
 
 
@@ -62,11 +67,12 @@
             @extend %d-grid,
             %place-i-center;
             @include add-prefix(transition, $transition);
-            background-color: transparent;
             @include box(34px);
-            border-radius: 99px;
-            // border: 2px solid rgba(255, 255, 255, 0.1);
-            border: 2px solid $social-border-color-3;
+            & {
+                background-color: transparent;
+                border-radius: 99px;
+                border: 2px solid $social-border-color-3;
+            }
 
             @include breakpoint(md) {
                 @include box(40px);
@@ -89,11 +95,12 @@
             @extend %d-grid,
             %place-i-center;
             @include add-prefix(transition, $transition);
-            background-color: transparent;
             @include box(34px);
-            border-radius: 99px;
-            border: 2px solid rgba(255, 255, 255, 0.1);
-            // border: 2px solid $social-border-color-3;
+            & {
+                background-color: transparent;
+                border-radius: 99px;
+                border: 2px solid rgba(255, 255, 255, 0.1);
+            }
 
             @include breakpoint(md) {
                 @include box(40px);
@@ -115,11 +122,12 @@
             @extend %d-grid,
             %place-i-center;
             @include add-prefix(transition, $transition);
-            background-color: transparent;
             @include box(34px);
-            border-radius: 99px;
-            border: 2px solid rgba(255, 255, 255, 0.1);
-            // border: 2px solid $social-border-color-3;
+            & {
+                background-color: transparent;
+                border-radius: 99px;
+                border: 2px solid rgba(255, 255, 255, 0.1);
+            }
 
             @include breakpoint(md) {
                 @include box(40px);
@@ -141,21 +149,24 @@
             @extend %d-grid,
             %place-i-center,
             %p-rel;
-            z-index: 3;
             @include add-prefix(transition, $transition);
-            background-color: transparent;
-            border: 1.3px solid $social-border-color;
             @include font-size(16px);
             @include box(32px);
-            line-height: 32px;
-            border-radius: 99px;
-            transition: $transition;
+            & {
+                z-index: 3;
+                background-color: transparent;
+                border: 1.3px solid $social-border-color;
+                line-height: 32px;
+                border-radius: 99px;
+                transition: $transition;
+            }
 
-            svg,
-            i {
+            svg, i {
                 color: $title-color;
                 @include add-prefix(transition, $transition);
-                font-size: inherit;
+                & {
+                    font-size: inherit;
+                }
             }
         }
 
@@ -163,10 +174,12 @@
             @extend %d-grid,
             %place-i-center;
             @include add-prefix(transition, $transition);
-            background-color: transparent;
             @include box(34px);
-            border-radius: 99px;
-            border: 2px solid rgba(255, 255, 255, 0.1);
+            & {
+                background-color: transparent;
+                border-radius: 99px;
+                border: 2px solid rgba(255, 255, 255, 0.1);
+            }
 
             @include breakpoint(md) {
                 @include box(40px);
@@ -188,10 +201,12 @@
             @extend %d-grid,
             %place-i-center;
             @include add-prefix(transition, $transition);
-            background-color: transparent;
             @include box(34px);
-            border-radius: 99px;
-            border: 2px solid $tertiary-color;
+            & {
+                background-color: transparent;
+                border-radius: 99px;
+                border: 2px solid $tertiary-color;
+            }
 
             @include breakpoint(md) {
                 @include box(40px);
@@ -210,10 +225,7 @@
 
             &.active,
             &:hover {
-                // border-color: $brand-color;
-
-                svg,
-                i {
+                svg, i {
                     color: $brand-color;
                 }
             }
@@ -223,10 +235,12 @@
             @extend %d-grid,
             %place-i-center;
             @include add-prefix(transition, $transition);
-            background-color: transparent;
             @include box(34px);
-            border-radius: 99px;
-            border: 2px solid $tertiary-color2;
+            & {
+                background-color: transparent;
+                border-radius: 99px;
+                border: 2px solid $tertiary-color2;
+            }
 
             @include breakpoint(md) {
                 @include box(40px);
@@ -262,73 +276,47 @@
                 background-color: $brand-color;
                 border-color: $brand-color;
 
-                svg,
-                i {
+                svg, i {
                     color: $thm-wh-color-dark;
                 }
-
             }
 
 
             &.social__link--style2 {
                 border-color: $brand-color;
-
-                svg,
-                i {
+                svg, i {
                     color: $brand-color;
                 }
-
             }
             &.social__link--style22 {
                 border-color: $brand-color;
 
-                svg,
-                i {
+                svg, i {
                     color: $brand-color;
                 }
-
             }
             &.social__link--style222 {
                 border-color: $bg-color-10;
 
-                svg,
-                i {
+                svg, i {
                     color: $bg-color-10;
                 }
-
             }
 
             &.social__link--style3 {
                 background-color: $brand-color;
                 border-color: $brand-color;
 
-                svg,
-                i {
+                svg, i {
                     color: $thm-title-color;
                 }
-
             }
 
             &.social__link--style5 {
-                // border-color: $brand-color;
-
-                svg,
-                i {
+                svg, i {
                     color: $brand-color;
                 }
-
             }
-
-            // &--style6 {
-            //     border-color: $bg-white;
-
-            //     svg,
-            //     i {
-            //         color: $brand-color;
-            //     }
-
-            // }
-
         }
     }
 }

@@ -8,7 +8,6 @@
 
 // 2. Vendors
 @import 'vendors/normalize',
-'vendors/nice-select',
 'vendors/rfs';
 
 // 3. Base stuff
@@ -21,7 +20,6 @@
 
 // 4. Layout-related sections
 @import 'layout/header',
-'layout/banner',
 'layout/contact',
 'layout/account',
 'layout/form',
@@ -30,33 +28,21 @@
 
 // 5. Components
 @import 'components/button',
+'components/blog',
 'components/preloader',
-'components/lightdark-switch',
 'components/social-link',
 'components/foating-content',
-'components/partner',
-'components/feature',
 'components/service',
-'components/pricing',
-'components/team',
-'components/blog',
 'components/blog-details',
-'components/testimonial',
 'components/cta',
-'components/story',
 'components/sidebar',
 'components/faq',
 'components/error',
 'components/servicer-details',
 'components/nav',
-'components/counter',
 'components/comment',
 'components/accordion',
-'components/roadmap',
 'components/about';
-
-// 6. Page-specific styles
-@import 'pages/home';
 
 
 // 8. Themes

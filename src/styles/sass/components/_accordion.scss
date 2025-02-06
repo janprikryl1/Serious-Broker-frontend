@@ -1,6 +1,5 @@
 .accordion {
     &-button {
-        // bootstrap overwrite
         padding: 0px;
 
         &:not(.collapesd) {
@@ -47,8 +46,10 @@
         @extend %d-flex;
         @extend %justify-between;
         @include font-size(20px);
-        font-family: $title-font;
-        border: none;
+        & {
+            font-family: $title-font;
+            border: none;
+        }
         
         &-content {
             flex: 1;
@@ -66,12 +67,14 @@
 
                     &::after {
                         @include add-prefix(transform, translateY(-50%));
-                        content: "";
-                        height: 14px;
-                        width: 2px;
-                        top: 50%;
-                        left: 11px;
-                        background-color: $title-color;
+                        & {
+                            content: "";
+                            height: 14px;
+                            width: 2px;
+                            top: 50%;
+                            left: 11px;
+                            background-color: $title-color;
+                        }
                     }
                 }
             }
@@ -150,12 +153,14 @@
                 &-plusicon {
                     &::before {
                         @include add-prefix(transform, translateY(-50%));
-                        content: "";
-                        width: 14px;
-                        height: 2px;
-                        top: 50%;
-                        left: 5px;
-                        background-color: $secondary-color;
+                        & {
+                            content: "";
+                            width: 14px;
+                            height: 2px;
+                            top: 50%;
+                            left: 5px;
+                            background-color: $secondary-color;
+                        }
                     }
                 }
             }
@@ -188,21 +193,17 @@
                 background-color: $bg-color-3;
                 border-top-right-radius: 4px;
                 border-top-left-radius: 4px;
-
+                color: $title-color;
+                
                 @include breakpoint(xl) {
                     padding-inline: 24px;
                 }
-
-                // modify bootstrap
-                color: $title-color;
 
                 &:not(.collapsed) {
                     color: $thm-title-color;
                     background-color: $bg-color-10;
                     padding-block-end: 8px;
                 }
-
-
 
                 &--style2 {
                     background-color: $tertiary-color3;

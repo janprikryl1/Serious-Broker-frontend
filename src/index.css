@@ -31,12 +31,12 @@ h1, h2, h3 {
 
 .cta__newsletter {
     display: flex;
-    justify-content: center; /* Center horizontally */
-    align-items: center; /* Center vertically */
+    justify-content: center;
+    align-items: center;
 }
 
 .cta-form__inner {
-    justify-content: center; /* Center the form elements */
+    justify-content: center;
 }
 
 .language-switch-btn {
@@ -308,7 +308,7 @@ button {
     overflow: hidden;
     background-color: #6f675e;
     padding: 2px;
-    height: 47px;
+    height: 42px;
     margin-left: 10px;
 }
 
@@ -390,10 +390,6 @@ button {
     margin-left: 3vw;
     margin-right: 3vw;
     margin-top: 0.1vw;
-}
-
-.graph-container {
-    margin-left: 70px;
 }
 
 .title-serious-broker {

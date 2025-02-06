@@ -1,14 +1,3 @@
-// (RFS is a resizing engine unit) used basically for resize font size, margin, padding, border-radius, shadow for responsive
-
-// SCSS RFS mixin
-//
-// Automated responsive values for font sizes, paddings, margins and much more
-//
-// Licensed under MIT (https://github.com/twbs/rfs/blob/main/LICENSE)
-
-// Configuration
-
-// Base value
 @use "sass:math";
 
 $rfs-base-value: 1.25rem !default;
@@ -269,19 +258,23 @@ $rfs-mq-property-height: if($rfs-mode==max-media-query, max-height, min-height);
 
     // Do not print the media query if responsive & non-responsive values are the same
     @if $val==$fluidVal {
-      #{$property}: $val;
+      & {
+        #{$property}: $val;
+      }
     }
 
     @else {
       @include _rfs-rule {
-        #{$property}: if($rfs-mode==max-media-query, $val, $fluidVal);
-
-        // Include safari iframe resize fix if needed
-        min-width: if($rfs-safari-iframe-resize-bug-fix, (0 * 1vw), null);
+        & {
+          #{$property}: if($rfs-mode==max-media-query, $val, $fluidVal);
+          min-width: if($rfs-safari-iframe-resize-bug-fix, (0 * 1vw), null);
+        }
       }
 
       @include _rfs-media-query-rule {
-        #{$property}: if($rfs-mode==max-media-query, $fluidVal, $val);
+        & {
+          #{$property}: if($rfs-mode==max-media-query, $fluidVal, $val);
+        }
       }
     }
   }

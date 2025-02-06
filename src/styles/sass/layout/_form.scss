@@ -2,10 +2,12 @@ input,
 textarea {
     @extend %w-100;
     @include add-prefix(transition, $transition);
-    border-radius: 8px;
-    color: $text-color;
-    padding: 1rem 2rem;
-    z-index: 1;
+    & {
+        border-radius: 8px;
+        color: $text-color;
+        padding: 1rem 2rem;
+        z-index: 1;
+    }
 
     &.style1 {
         border-radius: 0;
@@ -29,7 +31,7 @@ textarea {
 
     &:focus-within {
         outline: none;
-        border-color: none;
+        border-color: transparent;
         box-shadow: none;
     }
 }
@@ -58,23 +60,22 @@ textarea {
     background-color: $wh-color;
 }
 
-
-
-
-
-
 .form-label {
     @extend %mb-5,
     %text-semibold;
     @include font-size(18px);
-    font-family: $text-font;
-    color: $title-color;
+    & {
+        font-family: $text-font;
+        color: $title-color;
+    }
 }
 
 .input-group {
     @include add-prefix(transition, $transition);
-    border: 1px solid rgba($text-color, $alpha: .3);
-    border-radius: .5rem;
+    & {
+        border: 1px solid rgba($text-color, $alpha: .3);
+        border-radius: .5rem;
+    }
 
     &:focus-within {
         border-color: $text-color;
@@ -85,7 +86,6 @@ textarea {
         background-color: transparent;
         top: 90%;
     }
-
 }
 
 

@@ -4,7 +4,6 @@ import {useUserContext} from "../utils/providers/providerUser.tsx";
 import {useLocation} from "react-router-dom";
 import {CiWarning} from "react-icons/ci";
 import {sendVerificationEmailAgain} from "../api/verifyAccountService.ts";
-import Swal from "sweetalert2";
 
 export const UnverifiedHeaderInfo:FC = () => {
     const {t} = useTranslation();
@@ -13,6 +12,7 @@ export const UnverifiedHeaderInfo:FC = () => {
     const isVerifyAccountPage = /^\/verify_account\/[^/]+\/[^/]+$/.test(location.pathname);
 
     const handleSendVerificationAgain = async () => {
+        const Swal = (await import("sweetalert2")).default;
         try {
             const response = await sendVerificationEmailAgain();
             if (!response) return;
@@ -36,6 +36,7 @@ export const UnverifiedHeaderInfo:FC = () => {
             });
         }
     };
+
 
     if (user?.verified == 0 && !isVerifyAccountPage) {
         return (
