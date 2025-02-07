@@ -2,7 +2,7 @@ import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { LeftFloatingContactDetailsItem } from "./LeftFloatingContactDetailsItem.tsx";
 import { SocialLinkIcon } from "./SocialLinkIcon.tsx";
-import shibaInu from "../../../utils/icons/cta/shiba_inu.png";
+import shibaInu from "../../../utils/icons/cta/shiba_inu.webp";
 import { addFeedback } from "../../../api/feedbackService.ts";
 import Swal from "sweetalert2";
 import {

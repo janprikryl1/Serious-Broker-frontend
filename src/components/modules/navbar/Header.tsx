@@ -4,7 +4,7 @@ import { NavbarDesktopMenu } from "./NavbarDesktopMenu.tsx";
 import { routes } from "../../../utils/constants";
 import { ChangeLanguageIcon } from "../../../headerIcons/languageSwitchIcon/ChangeLanguageIcon.tsx";
 import { SignInIcon } from "../../../headerIcons/SignInIcon.tsx";
-import Logo from "../../../utils/icons/logo/symbol.svg";
+import Logo from "../../../utils/icons/logo/SB_only.svg";
 import { MobileMenu } from "./MobileMenu.tsx";
 import { useUserContext } from "../../../utils/providers/providerUser.tsx";
 import { SignUpIcon } from "../../../headerIcons/SignUpIcon.tsx";

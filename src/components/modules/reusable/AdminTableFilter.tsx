@@ -29,7 +29,7 @@ export const AdminTableFilter:FC<Props> = ({cryptocurrencies, setFilteredCoins, 
     };
     
     return (
-        <InputGroup className="mb-3">
+        <InputGroup className="mb-3 mt-3">
             <InputGroup.Text id="inputGroup-sizing-sm">{t("Column")}</InputGroup.Text>
             <Form.Select
                 value={searchColumn}

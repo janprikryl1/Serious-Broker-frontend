@@ -612,7 +612,7 @@
     "GLOSSARY": "Slovník",
     "Visible": "Viditelné",
     "COINMARKETCUP_TOP_10": "TOP 10 minců na Coinmarketcup",
-    "No data available": "Nejsou k dispozici data",
+    "Available only for members": "Dostupné pouze pro členy",
     "To access advanced data, login or register for free": "Tyto funkce a podrobnější statistiky jsou přístupné pouze přihlášeným uživatelům.",
     "Would you like to join a free educational program with information sent usually once a week?": "Chcete vstoupit bezplatně do vzdělávacího programu s informacemi zasílanými obvykle jednou týdně?",
     "Passwords do not match": "Hesla se neshodují",
@@ -677,5 +677,6 @@
     "A list of top 10 cryptocurrencies by market cap.": "Seznam největších 10 kryptoměn podle kapitálu tržního obchodu.",
     "Last 7 Days": "Posledních 7 dnů",
     "Profit Details": "Detaily assetu",
-    "Invalid email": "Neplatný email"
+    "Invalid email": "Neplatný email",
+    "Save to log": "Uložit do logu"
 }

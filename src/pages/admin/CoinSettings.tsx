@@ -9,6 +9,8 @@ import {CryptoCurrencyIconLink} from "../../components/modules/admin/cryptoCurre
 import Swal from "sweetalert2";
 import {AdminTableFilter} from "../../components/modules/reusable/AdminTableFilter.tsx";
 import {AddCryptoCurrency} from "../../components/modules/admin/cryptoCurrencyManagement/AddCryptoCurrency.tsx";
+import {Button} from "../../components/Button.tsx";
+import {logURL} from "../../utils/constants";
 
 export const CoinSettings: FC = () => {
     const { t } = useTranslation();
@@ -149,6 +151,7 @@ export const CoinSettings: FC = () => {
         <div className="service-details__item-inner">
             <h2 className="admin-section-title">{t("Coins management")}</h2>
             <AddCryptoCurrency />
+            <Button type="link" className="p-2" to={logURL}>{t("Save to log")}</Button>
             <AdminTableFilter setFilteredCoins={setFilteredCoins} cryptocurrencies={cryptocurrencies} columns={columns} />
             <DataGrid
                 rows={filteredCoins ?? cryptocurrencies}

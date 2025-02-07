@@ -49,7 +49,7 @@ export const AddCryptoCurrency:FC = () => {
     }
     
     return (
-        <div className="padding-bottom">
+        <div className="mb-3">
             {!showForm ? (
                 <Button onClick={() => setShowForm(!showForm)}>
                     {t("Add new coin")}
