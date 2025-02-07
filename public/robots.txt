@@ -1,0 +1,20 @@
+User-agent: *
+Disallow: /admin/
+Disallow: /profile/
+Disallow: /verify-account/
+Disallow: /forgotten-password/
+Disallow: /recover-password/
+Disallow: /sign-in/
+Disallow: /register/
+Disallow: /qr/
+Disallow: /chached-data/
+Disallow: /logTable/
+Disallow: /newsletter/
+Disallow: /translations/
+Disallow: /translationsEdit/
+Disallow: /postEdit/
+Disallow: /achievements/
+
+Allow: /
+
+Sitemap: https://www.serious.broker/sitemap.xml

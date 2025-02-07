@@ -36,7 +36,7 @@ export const PopularCoins: FC = () => {
                                     {coin.photo && (
                                         <img
                                             src={`${coinURL}/${coin.photo}`}
-                                            alt={coin.asset_label}
+                                            alt={`Coin image: ${coin.asset_label}`}
                                             width={30}
                                         />
                                     )}

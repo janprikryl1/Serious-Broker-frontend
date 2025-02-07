@@ -89,7 +89,7 @@ export const MostProfitableLastSelectedPeriod: FC = () => {
                                                 : coin.year_0_pos
                                 }
                             </td>
-                            <td>{coin.photo && <img src={`${coinURL}/${coin.photo}`} alt={coin.asset_label}
+                            <td>{coin.photo && <img src={`${coinURL}/${coin.photo}`} alt={`Coin image: ${coin.asset_label}`}
                                                     width={30}/>} {coin.asset_label}</td>
                             <td>{coin.name}</td>
                             <td>

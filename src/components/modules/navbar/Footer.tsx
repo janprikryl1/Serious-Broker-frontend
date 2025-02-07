@@ -16,20 +16,17 @@ export const Footer:FC = () => {
   const {t} = useTranslation();
   return (
     <footer className="footer">
-      <div className="footer__wrapper">
-        <div className="footer__top footer__top--style1">
+        <div className="footer__top--style1">
           <div className="row">
             <div className="col-md-6">
-              <div className="footer__about">
-                <p className="footer__about-moto">
+                <p>
                   {t("Serious Broker is a student project that is being developed as part of a bachelor thesis. It focuses on assisting in investing and spreading awareness about cryptocurrencies.")}
                 </p>
                 <p className="footer__about-moto">{t("Want to know more? Join us on social media or contact us via email for example.")}</p>
                 <p className="footer__about-moto">{t("We are not a financial consultancy")}.</p>
-              </div>
             </div>
             <div className="col-sm-6 d-flex justify-content-end">
-              <div className="contact text-end" data-aos="fade-right" data-aos-duration="1000">
+              <div className="contact text-end">
                 <LeftFloatingContactDetailsItem href={`mailto:${contactEmail}`} title={contactEmail}/>
                 <LeftFloatingContactDetailsItem href={`tel:${phoneNumber}`} title={phoneNumber}/>
                 <ul className="social justify-content-end">
@@ -49,7 +46,6 @@ export const Footer:FC = () => {
             <p>VŠB - Technical University of Ostrava</p>
           </div>
         </div>
-      </div>
     </footer>
   );
 }

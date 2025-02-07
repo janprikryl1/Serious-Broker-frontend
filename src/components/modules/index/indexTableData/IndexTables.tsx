@@ -1,11 +1,12 @@
-import {FC} from "react";
+import {FC, lazy} from "react";
 import {IndexSeason} from "../../../../utils/enums/IndexSeasonEnum.ts";
 import {NotAuthenticatedIndexTable} from "./NotAuthenticatedIndexTable.tsx";
-import {MostProfitableLastSelectedPeriod} from "./MostProfitableLastSelectedPeriod.tsx";
-import {PopularCoins} from "./PopularCoins.tsx";
-import {MostVolatileCoins} from "./MostVolatileCoins.tsx";
+const MostProfitableLastSelectedPeriod = lazy(() => import("./MostProfitableLastSelectedPeriod.tsx").then(module => ({ default: module.MostProfitableLastSelectedPeriod })));
+const PopularCoins = lazy(() => import("./PopularCoins.tsx").then(module => ({ default: module.PopularCoins })));
+const MostVolatileCoins = lazy(() => import("./MostVolatileCoins.tsx").then(module => ({ default: module.MostVolatileCoins })));
 import {useUserContext} from "../../../../utils/providers/providerUser.tsx";
 import {useIndexDataContext} from "../../../../utils/providers/IndexDataProvider.tsx";
+import {PageLoader} from "../../../PageLoader.tsx";
 
 export const IndexTables:FC = () => {
     const {user} = useUserContext();
@@ -17,11 +18,9 @@ export const IndexTables:FC = () => {
                 <NotAuthenticatedIndexTable />
             ) : (
                 <>
-                    <MostProfitableLastSelectedPeriod />
-                    <MostVolatileCoins />
-                    <PopularCoins />
-                    {/*<CryptoCategoriesExample />*/}    
-                    {/*<BestPortfolioTable />*/}
+                    <PageLoader><MostProfitableLastSelectedPeriod /></PageLoader>
+                    <PageLoader><MostVolatileCoins /></PageLoader>
+                    <PageLoader><PopularCoins /></PageLoader>
                 </>
             )}
         </>

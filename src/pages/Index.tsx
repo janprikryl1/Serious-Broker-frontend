@@ -1,31 +1,29 @@
-import {FC} from "react";
+import {FC, lazy, Suspense} from "react";
 import { Newsletter } from "../components/modules/index/Newsletter.tsx";
-import CryptoHand from "../utils/icons/1_crypto-hand2_light.webp";
-import {Page} from "../components/Page.tsx";
 import {useUserContext} from "../utils/providers/providerUser.tsx";
-import {IndexTableData} from "../components/modules/index/indexTableData/IndexTableData.tsx";
-import {LookingForMoreInDepthStatistics} from "../components/modules/index/LookingForMoreInDepthStatistics.tsx";
 import {SignUpBanner} from "../components/modules/index/SignUpBanner.tsx";
 import {NowTrending} from "../components/modules/index/NowTrending.tsx";
 import {NewToInvesting} from "../components/modules/index/NewToInvesting.tsx";
-import {IndexDataProvider} from "../utils/providers/IndexDataProvider.tsx";
+import {Page} from "../components/modules/index/Page.tsx";
+const IndexTableData = lazy(() => import("../components/modules/index/indexTableData/IndexTableData.tsx").then(module => ({ default: module.IndexTableData })));
+const LookingForMoreInDepthStatistics = lazy(() => import("../components/modules/index/LookingForMoreInDepthStatistics.tsx").then(module => ({ default: module.LookingForMoreInDepthStatistics })));
 
 export const Index: FC = () => {
     const {user} = useUserContext();
     
     return (
-        <IndexDataProvider>
-            <Page image={CryptoHand} />
+        <>
+            <Page />
             <NowTrending />
             <NewToInvesting />
             {user === null && (
                 <Newsletter/>
             )}
-            <IndexTableData />
-            <LookingForMoreInDepthStatistics />
+            <Suspense><IndexTableData /></Suspense>
+            <Suspense><LookingForMoreInDepthStatistics /></Suspense>
             {user === null && (
                 <SignUpBanner />
             )}
-        </IndexDataProvider>
+        </>
     );
 };

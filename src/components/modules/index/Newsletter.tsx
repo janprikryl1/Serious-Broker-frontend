@@ -52,32 +52,28 @@ export const Newsletter: FC = () => {
   return (
       <section className="cta padding-top padding-bottom bg-color">
           <div className="cta__wrapper">
-            <div className="cta__newsletter d-flex row">
-              <div className="col-sm-6" style={{marginRight:30}}>
-                <h2>{t("Investing Made Easy")}</h2>
+            <div className="d-flex row">
+              <div className="col-sm-6 newsletter-wrapper">
+                <h2 className="bg-color">{t("Investing Made Easy")}</h2>
                 <ul className="newsletter-list">
                   <li>{t("We will create a full-step guide on investing just for you.")}</li>
                   <li>{t("Get recommendations on what to buy, when to buy and when to sell.")}</li>
                   <li>{t("You are in control – execute transactions based on our detailed guide.")}</li>
                 </ul>
               </div>
-              <div
-                  className="col-sm cta__newsletter-inner text-center"
-                  data-aos="fade-up"
-                  data-aos-duration="1000"
-              >
+              <div className="col-sm cta__newsletter-inner text-center">
                 <div className="cta__subscribe">
-                  <h2 style={{fontSize: "28px", marginBottom: 20}}>{t("Get a guide just for you!")}</h2>
+                  <h2 className="guide-title">{t("Get a guide just for you!")}</h2>
                   <div>
                     <input
+                        className="register-input"
                         type="email"
-                        style={{backgroundColor:"white", border:"none", borderRadius:3, maxWidth:"500px", color:"black"}}
                         placeholder="E-mail"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                     />
                   </div>
-                  <Button className="trk-btn trk-btn--secondary2 mt-3" style={{borderRadius:3, fontSize:20, border:"none"}} onClick={handleAddNewsletter} color={ButtonColor.white}>
+                  <Button className="trk-btn trk-btn--secondary2 mt-3 register-button" onClick={handleAddNewsletter} color={ButtonColor.white}>
                     {t("Register")}
                   </Button>
                 </div>

@@ -7,7 +7,7 @@ type Props = {
 
 export const LeftFloatingContactDetailsItem:FC<Props> = ({href, title}) => {
   return (
-      <div className="contact__item" data-aos="fade-right" data-aos-duration="1000">
+      <div className="contact__item">
         <div className="contact__item-inner">
           <div className="contact__item-content">
             <p>

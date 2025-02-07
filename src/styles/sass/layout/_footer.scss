@@ -45,20 +45,6 @@
         }
     }
 
-    &__about {
-        &-moto {
-            color: $text-color-2;
-            font-size: 20px;
-            font-weight: 480;
-
-            @include breakpoint(md) {
-                max-inline-size: 40ch;
-                margin-block-end: 32px;
-            }
-        }
-    }
-
-
     &__end {
         @extend %py-25;
         border-top: 1px solid rgb(172, 159, 141);
