@@ -56,6 +56,10 @@ export const getLatestCoinmarketcupCoins = async () => {
     return await axios.get(backendUrl+"index/data/last_coinmarketcup_coins.php");
 }
 
+export const getLastCoinmarketcupCoinsSevenDays = async () => {
+    return await axios.get(backendUrl+"index/data/last_coinmarketcup_coins_seven_days.php");
+}
+
 export const getGlossaryOverview = async () => {
     return await axios.get(backendUrl+"index/data/DYOR.php");
 }

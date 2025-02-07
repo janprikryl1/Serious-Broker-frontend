@@ -41,12 +41,18 @@ export type MostProfitable = {
     asset_label: string;
     name: string;
     cmc_rank: number;
-    week_0_pos: number;
     week_0_profit: number;
     photo: string;
-    price: string;
-    graph_data: number[];
 };
+
+export type MostProfitableCoinsLastSevenDays = {
+    asset_label: string;
+    name: string;
+    price: string;
+    cmc_rank: number;
+    photo: string;
+    graph_data: number[];
+}
 
 export type MostVolatileData = {
     asset_label: string;

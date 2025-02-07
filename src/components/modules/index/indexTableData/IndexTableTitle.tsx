@@ -1,11 +1,23 @@
-import { FC } from "react";
+import {FC, useEffect, useState} from "react";
 import { useTranslation } from "react-i18next";
-import { useIndexDataContext } from "../../../../utils/providers/IndexDataProvider.tsx";
 import { toCzechDate } from "../../../../utils/constants/functions.ts";
+import {getIndexData} from "../../../../api/indexDataService.ts";
 
 export const IndexTableTitle: FC = () => {
     const { t } = useTranslation();
-    const { date } = useIndexDataContext();
+    const [date, setDate] = useState("");
+
+    useEffect(() => {
+        const fetchDate = async () => {
+            try {
+                const result = await getIndexData();
+                setDate(result.data.date);
+            } catch (error) {
+                console.error(error);
+            }
+        };
+        fetchDate();
+    }, []);
 
     return (
         <div className="text-light">

@@ -7,15 +7,17 @@ import {IndexDataProvider} from "../../../../utils/providers/IndexDataProvider.t
 
 export const IndexTableData: FC = () => {
     return (
-        <IndexDataProvider>
-            <div className="cta-dark">
-                <IndexTableTitle/>
-                <div className="row">
-                    <IndexChartTypeButtons/>
-                    <IndexSeasonButtons/>
-                </div>
-                <IndexTables/>
-            </div>
-        </IndexDataProvider>
+        <div className="cta-dark">
+            <IndexTableTitle/>
+            <IndexDataProvider>
+                <>
+                    <div className="row">
+                        <IndexChartTypeButtons/>
+                        <IndexSeasonButtons/>
+                    </div>
+                    <IndexTables/>
+                </>
+            </IndexDataProvider>
+        </div>
     );
 };

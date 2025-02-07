@@ -1,17 +1,30 @@
 import { useTranslation } from "react-i18next";
-import { FC } from "react";
+import {FC, useEffect, useState} from "react";
 import { formatLargeCurrency } from "../../../../utils/constants/functions.ts";
 import { PopularCoinsSkeleton } from "./skeletons/PopularCoinsSkeleton.tsx";
 import { coinURL } from "../../../../utils/constants";
 import {IndexTableChart} from "./indexTableChart/IndexTableChart.tsx";
 import {useMediaQuery} from "@mui/material";
-import {useIndexDataContext} from "../../../../utils/providers/IndexDataProvider.tsx";
+import {MostProfitableCoinsLastSevenDays} from "../../../../utils/types/indexPage/IndexDataStructure.ts";
+import {getLastCoinmarketcupCoinsSevenDays} from "../../../../api/indexDataService.ts";
 
 export const PopularCoins: FC = () => {
     const { t } = useTranslation();
     const isMobile = useMediaQuery('(max-width:768px)');
-    const { last_coinmarketcup_coins } = useIndexDataContext();
+    const [last_coinmarketcup_coins, setLastCoinmarketcupCoins] = useState<MostProfitableCoinsLastSevenDays[]>();
 
+    useEffect(() => {
+        const getData = async () => {
+            try {
+                const response = await getLastCoinmarketcupCoinsSevenDays();
+                setLastCoinmarketcupCoins(response.data);
+            } catch (exception) {
+                console.error(exception);
+            }
+        };
+        getData();
+    }, []);
+    
     return (
         <>
             <h2 style={{fontSize: "35px"}}>{t("Top Coins by Market Capitalization")}</h2>
@@ -38,6 +51,8 @@ export const PopularCoins: FC = () => {
                                             src={`${coinURL}/${coin.photo}`}
                                             alt={`Coin image: ${coin.asset_label}`}
                                             width={30}
+                                            height={30}
+                                            className="min-w-30-min-h-30"
                                         />
                                     )}
                                     <strong>{coin.asset_label}</strong>
