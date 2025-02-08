@@ -6,7 +6,7 @@ import { RecentPost } from "../components/modules/article/RecentPost.tsx";
 import { getArticleDetails } from "../api/articleService.ts";
 import Swal from "sweetalert2";
 import { ArticleDetailProps } from "../utils/types/article/ArticleDetailProps.ts";
-import { useParams, useNavigate } from "react-router-dom";
+import {useParams, useNavigate, useLocation} from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { TranslationsOverview } from "../utils/types/article/TranslationsOverview.ts";
 import { getTranslatedArticle } from "../api/translateService.ts";
@@ -21,6 +21,11 @@ export const Article: FC = () => {
     const [translations, setTranslations] = useState<TranslationsOverview[]>([]);
     const [selectedLanguage, setLanguage] = useState<string>(language ?? "cs");
     const [initialLoad, setInitialLoad] = useState(true);
+    const { pathname } = useLocation();
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [pathname]);
     
     const fetchArticle = async () => {
         try {

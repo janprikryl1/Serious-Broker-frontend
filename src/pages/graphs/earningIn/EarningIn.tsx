@@ -88,14 +88,14 @@ export const EarningIn: FC<Props> = ({ series, startDate, endDate }) => {
                 <div className="row justify-content-center align-items-center mt-3">
                     <h2>{t("If I started investing at some point")}</h2>
                     <div
-                        className="cta-form d-sm-flex align-items-center justify-content-between mt-5 mb-5"
-                        style={{maxWidth: "30%"}}
+                        className="cta-form d-flex align-items-center justify-content-center gap-2 mt-5 mb-5 w-100"
+                        style={{maxWidth: "300px"}}
                     >
-                        <p className="text-center mb-0">{t("Amount")}</p>
+                        <p className="mb-0" style={{whiteSpace: "nowrap"}}>{t("Amount")}</p>
                         <input
                             type="number"
-                            className="form-control form-control--style2"
-                            style={{width: "50%", height: "40px"}}
+                            className="form-control form-control--style2 flex-grow-1"
+                            style={{height: "40px"}}
                             placeholder={t("Initial investment") + " ($)"}
                             defaultValue={0}
                             min={0}
@@ -103,7 +103,8 @@ export const EarningIn: FC<Props> = ({ series, startDate, endDate }) => {
                         />
                     </div>
 
-                    <LocalizationProvider dateAdapter={AdapterDayjs} localeText={csCZ.components.MuiLocalizationProvider.defaultProps.localeText}>
+                    <LocalizationProvider dateAdapter={AdapterDayjs}
+                                          localeText={csCZ.components.MuiLocalizationProvider.defaultProps.localeText}>
                         <div className="row g-3 justify-content-center mb-4">
                             <div className="col-12 col-md-6">
                                 <p style={{fontWeight: "bold"}}>{t("Buy Date")}</p>
@@ -133,7 +134,11 @@ export const EarningIn: FC<Props> = ({ series, startDate, endDate }) => {
                             </div>
                         </div>
                     </LocalizationProvider>
-                    <h4 style={{color: gain > 0 ? "green" : gain < 0 ? "red" : "gray", fontWeight:"bold", fontSize:"35px"}}>{t("Gain: ")}{gain.toFixed(2)}$ ({percentage.toFixed(2)}%)</h4>
+                    <h4 style={{
+                        color: gain > 0 ? "green" : gain < 0 ? "red" : "gray",
+                        fontWeight: "bold",
+                        fontSize: "35px"
+                    }}>{t("Gain: ")}{gain.toFixed(2)}$ ({percentage.toFixed(2)}%)</h4>
                 </div>
             </div>
         </div>

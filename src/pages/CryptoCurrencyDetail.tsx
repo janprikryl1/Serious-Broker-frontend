@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import {useLocation, useNavigate, useParams} from "react-router-dom";
 import { getCryptocurrencyById } from "../api/CryptocurrencyService.ts";
 import { CryptoCurrencyDetailType } from "../utils/types/CryptoCurrencyType.ts";
 import { TitleHeader } from "../components/modules/about/TitleHeader.tsx";
@@ -16,7 +16,12 @@ export const CryptoCurrencyDetail: FC = () => {
     const navigate = useNavigate();
     const [cryptocurrency, setCryptocurrency] = useState<CryptoCurrencyDetailType>();
     const [imageError, setImageError] = useState(false);
+    const { pathname } = useLocation();
 
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [pathname]);
+    
     useEffect(() => {
         if (!id) return;
         const fetchData = async () => {

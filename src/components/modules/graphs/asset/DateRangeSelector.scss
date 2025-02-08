@@ -1,0 +1,33 @@
+.date-range-selector {
+    margin-top: 10px;
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+}
+
+.input-date {
+  width: 150px;
+  height: 40px;
+
+  @media (max-width: 768px) {
+    width: 100px;
+  }
+}
+
+.cta-form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+
+  p {
+    margin-bottom: 0;
+    white-space: nowrap;
+  }
+
+  input {
+    flex-grow: 1;
+    min-width: 100px;
+  }
+}

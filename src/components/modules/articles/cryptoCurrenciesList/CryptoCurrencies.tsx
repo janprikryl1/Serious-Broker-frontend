@@ -16,7 +16,7 @@ export const CryptoCurrencies: FC = () => {
     const [searchValue, setSearchValue] = useState("");
     const [currentPage, setCurrentPage] = useState<number>(1);
     const [totalPages, setTotalPages] = useState<number>(1);
-
+    
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -50,12 +50,13 @@ export const CryptoCurrencies: FC = () => {
                     <div className="cta-form d-sm-flex align-items-center justify-content-center">
                         <input
                             type="text"
-                            className="form-control form-control--style2 mb-3 mb-sm-0"
+                            className="form-control form-control--style2 mb-sm-0" 
+                            style={{ height: 40 }}
                             placeholder="Bitcoin"
                             value={searchValue}
                             onChange={(e) => setSearchValue(e.target.value)}
                         />
-                        <Button className="trk-btn trk-btn--large trk-btn--secondary2" onClick={handleSearch} color={ButtonColor.white} style={{ paddingRight: 50 }}>
+                        <Button className="trk-btn trk-btn--secondary2" onClick={handleSearch} color={ButtonColor.white} style={{ paddingRight: 50, height: 40 }}>
                             {t("Search")}
                         </Button>
                     </div>

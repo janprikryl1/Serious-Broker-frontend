@@ -12,27 +12,9 @@ import {useMediaQuery} from "@mui/material";
 
 export const Header: FC = () => {
     const { user } = useUserContext();
-    const [scrollTop, setScrollTop] = useState(0);
     const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
     const location = useLocation();
     const isMobile = useMediaQuery('(max-width:768px)');
-
-    useEffect(() => {
-        const handleScroll = () => {
-            setScrollTop(window.scrollY);
-            const header = document.querySelector(".header-section");
-            if (header) {
-                if (window.scrollY >= 250) {
-                    header.classList.add("header-fixed", "fadeInUp");
-                } else {
-                    header.classList.remove("header-fixed", "fadeInUp");
-                }
-            }
-        };
-
-        window.addEventListener("scroll", handleScroll);
-        return () => window.removeEventListener("scroll", handleScroll);
-    }, [scrollTop]);
 
     const toggleMobileMenu = () => {
         setMobileMenuOpen(!isMobileMenuOpen);

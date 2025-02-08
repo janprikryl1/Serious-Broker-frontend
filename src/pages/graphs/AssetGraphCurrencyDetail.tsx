@@ -38,11 +38,11 @@ export const AssetGraphCurrencyDetail: FC = () => {
             <TitleHeader title={t("GraphAssetData - details about asset and graph")} />
             {asset ? (
                 <>
-                    <div className="d-flex justify-content-center min-vh-100 padding-bottom mt-3">
+                    <div className="d-flex justify-content-center min-vh-100 mb-1 mt-3">
                         <div
                             style={{
                                 backgroundColor: theme === "dark" ? "#343a40" : "#f5f8fb",
-                                borderRadius: 24,
+                                borderRadius: 8,
                                 padding: 40,
                                 width: "95%",
                                 maxWidth: "1000px",
