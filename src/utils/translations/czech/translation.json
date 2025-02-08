@@ -682,5 +682,11 @@
     "Too many wrong attempts. Try again after hour": "Příliš mnoho špatných pokusů. Zkuste to znovu po hodině",
     "Invalid email or password. Remaining attempts:": "Neplatný email nebo heslo. Zbývající pokusy:",
     "Too many wrong attempts. Remaining time:": "Účet zablokován. Zbývající čas:",
-    "minutes": "minut"
+    "minutes": "minut",
+    "Sessions": "Relace",
+    "Profile Sessions": "Přihlášená zařízení",
+    "List of your active and past login sessions.": "Seznam vašich aktivních a minulostích přihlášení.",
+    "ID": "ID",
+    "IP Address": "IP adresa",
+    "Logout Everywhere": "Odhlásit všude"
 }

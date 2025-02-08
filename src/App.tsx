@@ -64,6 +64,7 @@ const ProfileOverview = lazy(() => import("./pages/profile/ProfileOverview.tsx")
 const ProfileAchievements = lazy(() => import("./pages/profile/ProfileAchievements.tsx").then(module => ({ default: module.ProfileAchievements })));
 const ProfileMembership = lazy(() => import("./pages/profile/ProfileMembership.tsx").then(module => ({ default: module.ProfileMembership })));
 const ProfileEdit = lazy(() => import("./pages/profile/ProfileEdit.tsx").then(module => ({ default: module.ProfileEdit })));
+const ProfileSessions = lazy(() => import("./pages/profile/ProfileSessions.tsx").then(module => ({ default: module.ProfileSessions })));
 
 // Disable automatic CSS addition for Font Awesome
 config.autoAddCss = false;
@@ -113,6 +114,7 @@ function App() {
                                 <Route path={routes.profile.editMyPortfolio} element={<PageLoader><EditMyPortfolio/></PageLoader>} />
                                 <Route path={routes.profile.myPortfolioDetails} element={<PageLoader><MyPortfolioDetails/></PageLoader>} />
                                 <Route path={routes.profile.newMyPortfolio} element={<PageLoader><EditMyPortfolio/></PageLoader>} />
+                                <Route path={routes.profile.sessions} element={<PageLoader><ProfileSessions/></PageLoader>} />
                             </Route>
                             <Route path={adminURLS.index} element={<PageLoader><Admin /></PageLoader>}>
                                 <Route path={routes.admin.index} element={<PageLoader><AdminOverview /></PageLoader>} />

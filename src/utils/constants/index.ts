@@ -48,6 +48,7 @@ export const routes = {
     profile: {
         profileURL: "/profile",
         edit: "/profile/edit",
+        sessions: "/profile/sessions",
         achievements: "/profile/achievements",
         membership: "/profile/membership",
         myPortfolio: "/profile/my_portfolio",

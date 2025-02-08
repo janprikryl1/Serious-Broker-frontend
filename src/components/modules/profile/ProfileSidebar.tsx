@@ -67,6 +67,9 @@ export const ProfileSidebar: FC = () => {
                 <MenuItem icon={<FaUserEdit />} component={<NavLink to={routes.profile.edit} />} className="sidebar-item">
                     {t("Edit profile")}
                 </MenuItem>
+                <MenuItem icon={<FaUserEdit />} component={<NavLink to={routes.profile.sessions} />} className="sidebar-item">
+                    {t("Sessions")}
+                </MenuItem>
                 <MenuItem icon={<MdOutlineSubscriptions />} component={<NavLink to={routes.profile.membership} />} className="sidebar-item">
                     {t("Membership")}
                 </MenuItem>
