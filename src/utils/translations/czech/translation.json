@@ -678,5 +678,9 @@
     "Last 7 Days": "Posledních 7 dnů",
     "Profit Details": "Detaily assetu",
     "Invalid email": "Neplatný email",
-    "Save to log": "Uložit do logu"
+    "Save to log": "Uložit do logu",
+    "Too many wrong attempts. Try again after hour": "Příliš mnoho špatných pokusů. Zkuste to znovu po hodině",
+    "Invalid email or password. Remaining attempts:": "Neplatný email nebo heslo. Zbývající pokusy:",
+    "Too many wrong attempts. Remaining time:": "Účet zablokován. Zbývající čas:",
+    "minutes": "minut"
 }

@@ -39,13 +39,17 @@ export const SignIn: FC = () => {
                     navigate(routes.profile.profileURL);
                 });
             } else if (data.status === "error") {
-                if (data.message === "Invalid email or password") {
+                if (data.message === "invalid") {
                     Swal.fire({
-                        icon: "error", title: t("Login Failed"), text: t("Invalid email or password. Please try again"),
+                        icon: "error", title: t("Login Failed"), text: data.attempts > 0 ? `${t("Invalid email or password. Remaining attempts:")} ${data.attempts}` : t("Too many wrong attempts. Try again after hour"),
+                    });
+                } else if (data.message === "Too many wrong attempts") {
+                    Swal.fire({
+                        icon: "error", title: t("Login Failed"), text: `${t("Too many wrong attempts. Remaining time:")} ${60 - data.time} ${t("minutes")}`,
                     });
                 } else {
                     Swal.fire({
-                        icon: "error", title: t("Login Failed"), text: t("Login failed"),
+                        icon: "error", title: t("Login Failed"), text: t("Login Failed"),
                     });
                 }
             }

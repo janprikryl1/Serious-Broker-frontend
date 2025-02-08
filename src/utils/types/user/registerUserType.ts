@@ -25,5 +25,7 @@ export type registerUserTypeResponse = {
     status: string;
     message: string;
     token: string;
+    attempts: number;
+    time: number;
     user: UserType;
 }
