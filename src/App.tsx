@@ -82,7 +82,7 @@ function App() {
                         <UnverifiedHeaderInfo />
                         <Header />
                         <Routes>
-                            <Route path={routes.home} element={<Index />} />
+                            <Route path={routes.home} element={<PageLoader><Index /></PageLoader>} />
                             <Route path={routes.about} element={<PageLoader><About /></PageLoader>} />
                             <Route path={routes.contact} element={<PageLoader><Contact /></PageLoader>} />
                             <Route path={routes.articles} element={<PageLoader><Articles /></PageLoader>} />
