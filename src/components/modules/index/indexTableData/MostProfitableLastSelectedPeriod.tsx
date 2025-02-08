@@ -1,4 +1,4 @@
-import {FC, useEffect, useMemo, useState} from "react";
+import {FC, useEffect, useMemo, useState, useTransition} from "react";
 import { useTranslation } from "react-i18next";
 import { useIndexDataContext } from "../../../../utils/providers/IndexDataProvider.tsx";
 import { IndexTableChart } from "./indexTableChart/IndexTableChart.tsx";
@@ -15,6 +15,7 @@ export const MostProfitableLastSelectedPeriod: FC = () => {
     const { t } = useTranslation();
     const { season, chartType } = useIndexDataContext();
     const [data, setData] = useState<AssetProfitData[]>();
+    const [isPending, startTransition] = useTransition();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -26,7 +27,9 @@ export const MostProfitableLastSelectedPeriod: FC = () => {
                 console.error(error);
             }
         };
-        fetchData();
+        startTransition(() => {
+            fetchData();
+        });
     }, [season, chartType]);
 
     const getProfitData = useMemo(() => {
@@ -63,7 +66,7 @@ export const MostProfitableLastSelectedPeriod: FC = () => {
     
     return (
         <div className="p-4 rounded">
-            {data ? (
+            {!isPending && data ? (
                 <table className="table-index-light mb-3">
                     <thead>
                     <tr>

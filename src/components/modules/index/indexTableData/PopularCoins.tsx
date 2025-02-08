@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import {FC, useEffect, useState} from "react";
+import {FC, useDeferredValue, useEffect, useState, useTransition} from "react";
 import { formatLargeCurrency } from "../../../../utils/constants/functions.ts";
 import { PopularCoinsSkeleton } from "./skeletons/PopularCoinsSkeleton.tsx";
 import { coinURL } from "../../../../utils/constants";
@@ -12,6 +12,8 @@ export const PopularCoins: FC = () => {
     const { t } = useTranslation();
     const isMobile = useMediaQuery('(max-width:768px)');
     const [last_coinmarketcup_coins, setLastCoinmarketcupCoins] = useState<MostProfitableCoinsLastSevenDays[]>();
+    const [isPending, startTransition] = useTransition();
+    const deferredData = useDeferredValue(last_coinmarketcup_coins);
 
     useEffect(() => {
         const getData = async () => {
@@ -22,7 +24,9 @@ export const PopularCoins: FC = () => {
                 console.error(exception);
             }
         };
-        getData();
+        startTransition(() => {
+            getData();
+        });
     }, []);
     
     return (
@@ -41,8 +45,8 @@ export const PopularCoins: FC = () => {
                     </tr>
                     </thead>
                     <tbody>
-                    {last_coinmarketcup_coins ? (
-                        last_coinmarketcup_coins.map((coin) => (
+                    {!isPending && deferredData ? (
+                        deferredData.map((coin) => (
                             <tr key={coin.cmc_rank}>
                                 <td>{coin.cmc_rank}</td>
                                 <td className="coin-symbol">

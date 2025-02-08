@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import {FC, useEffect, useState} from "react";
+import {FC, useEffect, useState, useTransition} from "react";
 import {VolatileTable} from "./VolatileTable.tsx";
 import {TypographyWithPopover} from "../../TypographyWithPopover.tsx";
 import {MostVolatile} from "../../../../utils/types/indexPage/IndexDataStructure.ts";
@@ -9,6 +9,7 @@ import {MostVolatileCoinsSkeleton} from "./skeletons/MostVolatileCoinsSkeleton.t
 export const MostVolatileCoins: FC = () => {
     const { t } = useTranslation();
     const [mostVolatile, setMostVolatile] = useState<MostVolatile>();
+    const [isPending, startTransition] = useTransition();
 
     useEffect(() => {
         const getMostVolatile = async () => {
@@ -20,12 +21,14 @@ export const MostVolatileCoins: FC = () => {
                 console.error(exception);
             }
         }
-        getMostVolatile();
+        startTransition(() => {
+            getMostVolatile();
+        });
     }, []);
     
     return (
         <>
-            {mostVolatile ? (
+            {!isPending && mostVolatile ? (
                 <>
                     <h1 style={{fontSize: "40 px"}}>{t("The biggest jumpers up and down")}</h1>
                     <TypographyWithPopover popover={t("Which coins got the most")} style={{marginBottom:-25}}>
