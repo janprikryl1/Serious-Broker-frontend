@@ -649,7 +649,6 @@ button {
 }
 
 .custom-sidebar {
-  height: 100vh;
   max-height: 100%;
   transition: transform 0.3s ease-in-out;
 
@@ -743,3 +742,9 @@ button {
   min-height: 30px;
 }
 
+.accordion-button {
+   background-color: transparent !important;
+   box-shadow: none !important;
+   color: #fff !important;
+   font-size: 30px !important;
+}

@@ -11,7 +11,7 @@ export const FirmData:FC = () => {
         return (
             <Accordion className="mb-4">
                 <Accordion.Item eventKey="0">
-                    <Accordion.Header>{t("Firm")}</Accordion.Header>
+                    <Accordion.Header className="custom-accordion-header">{t("Firm")}</Accordion.Header>
                     <Accordion.Body>
                         <Form>
                             <Form.Group controlId="firmName" className="mb-4">

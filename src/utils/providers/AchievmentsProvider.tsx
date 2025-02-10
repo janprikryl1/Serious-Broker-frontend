@@ -31,6 +31,7 @@ export const AchievmentsProvider: React.FC<{ children: ReactNode }> = ({ childre
                 setAchievements(result.data);
             } catch (error) {
                 console.error(error);
+                setAchievements([]);
             }
         };
         loadAchievements();

@@ -8,12 +8,24 @@ import {DemoWidgetTimeToggle} from "../../components/modules/admin/demos/DemoWid
 
 export const AdminDemoEdit:FC = () => {
     return (
-        <DemoProvider>
-            <DemoNameEdit />
-            <DemoDescriptionEdit />
-            <DemoWidgetTimeToggle />
-            <DemoWidgetsEdit />
-            <DemoSave />
-        </DemoProvider>
+        <div className="padding-bottom">
+            <div className="service-details__item">
+                <div className="service-details__item-inner">
+                    <div
+                        className="service-details__content"
+                        data-aos="fade-up"
+                        data-aos-duration="900"
+                    >
+                        <DemoProvider>
+                            <DemoNameEdit />
+                            <DemoDescriptionEdit />
+                            <DemoWidgetTimeToggle />
+                            <DemoWidgetsEdit />
+                            <DemoSave />
+                        </DemoProvider>
+                    </div>
+                </div>
+            </div>
+        </div>
     );
 }

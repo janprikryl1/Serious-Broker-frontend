@@ -51,6 +51,7 @@ export const DemoWidgetsEdit: FC = () => {
                     <div className="d-flex align-items-center mb-2">
                         <select
                             className="form-select me-2"
+                            style={{height:50}}
                             value={widget.type}
                             onChange={(e) =>
                                 handleWidgetChange(index, {
@@ -68,6 +69,7 @@ export const DemoWidgetsEdit: FC = () => {
                         <input
                             type="text"
                             className="form-control me-2"
+                            style={{height:50}}
                             value={widget.propertyId}
                             onChange={(e) =>
                                 handleWidgetChange(index, {
@@ -117,6 +119,7 @@ export const DemoWidgetsEdit: FC = () => {
             <div className="d-flex align-items-center mb-3">
                 <select
                     className="form-select me-2"
+                    style={{height:50}}
                     value={newWidget.type}
                     onChange={(e) =>
                         setNewWidget({
@@ -134,12 +137,13 @@ export const DemoWidgetsEdit: FC = () => {
                 <input
                     type="text"
                     className="form-control me-2"
+                    style={{height:50}}
                     value={newWidget.propertyId}
                     onChange={(e) =>
                         setNewWidget({ ...newWidget, propertyId: e.target.value })
                     }
                 />
-                <Button onClick={handleAddWidget}>
+                <Button onClick={handleAddWidget} style={{height:50}}>
                     {t("Add Widget")}
                 </Button>
             </div>
