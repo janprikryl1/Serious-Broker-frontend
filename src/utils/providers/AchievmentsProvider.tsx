@@ -27,7 +27,7 @@ export const AchievmentsProvider: React.FC<{ children: ReactNode }> = ({ childre
         const loadAchievements = async () => {
             try {
                 const result = await getAchievements();
-                if (!result) return;
+                if (!result || result.status !== 200) return;
                 setAchievements(result.data);
             } catch (error) {
                 console.error(error);

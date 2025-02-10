@@ -74,22 +74,13 @@ export const ContactCard: FC = () => {
                   <form onSubmit={handleSendMessage} data-aos="fade-left" data-aos-duration="1000">
                     <div className="row g-4">
                       <div className="input-group mb-3">
-                        <div className="input-group-prepend">
-                          <span className="input-group-text" id="name">{t("Name")}</span>
-                        </div>
-                        <input className="form-control" type="text" id="name" name="name" placeholder={t("Full Name")} />
+                        <input className="form-control" type="text" name="name" placeholder={t("Full Name")} required />
                       </div>
                       <div className="input-group mb-3">
-                        <div className="input-group-prepend">
-                          <span className="input-group-text" id="email">Email</span>
-                        </div>
-                        <input className="form-control" type="email" id="email" name="email" placeholder={t("Email here")} />
+                        <input className="form-control" type="email" name="email" placeholder={t("Email here")} required />
                       </div>
                       <div className="input-group">
-                        <div className="input-group-prepend">
-                          <span className="input-group-text" style={{ height: "100%" }}>{t("Message")}</span>
-                        </div>
-                        <textarea cols={30} rows={5} className="form-control" id="textarea" name="message" placeholder={t("Enter Your Message")}></textarea>
+                        <textarea cols={30} rows={5} className="form-control" name="message" placeholder={t("Enter Your Message")} required></textarea>
                       </div>
                     </div>
                     <button type="submit" className="trk-btn trk-btn--border trk-btn--primary mt-4 d-block">
