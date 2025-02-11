@@ -5,7 +5,7 @@
     "Article": "Článek",
     "Articles": "Články",
     "Graphs": "Grafy",
-    "Assets": "Aktiva",
+    "Assets": "List assetů",
     "Recommendation": "Doporučení",
     "New article": "Nový článek",
     "Sign in": "Přihlášení",
@@ -130,7 +130,7 @@
     "Already have account? ": "Již máte účet? ",
     "Create an account to get started. We just need a few details from you to get started.": "Vytvořte účet a začněte. Potřebujeme jen několik údajů pro začátek.",
     "No comments yet": "Zatím žádné komentáře",
-    "Most profitable assets": "Nejvýznamnější aktiva",
+    "Most profitable assets": "Nejvýznamnější assety",
     "Article count": "Počet článků",
     "User count": "Počet uživatelů",
     "Last log": "Poslední záznam",
@@ -688,5 +688,11 @@
     "List of your active and past login sessions.": "Seznam vašich aktivních a minulostích přihlášení.",
     "ID": "ID",
     "IP Address": "IP adresa",
-    "Logout Everywhere": "Odhlásit všude"
+    "Logout Everywhere": "Odhlásit všude",
+    "Crypto indices provide a way to measure a performance of a selection of cryptocurrencies": "Krypto indexy poskytují způsob měření výkonu výběru kryptoměn",
+    "Newest": "Nejnovější",
+    "WeeklyProfit": "Týdenní profit",
+    "MonthlyProfit": "Měsíční profit",
+    "No data": "Žádná data",
+    "Add to watchlist": "Přidat do seznamu sledovaných"
 }

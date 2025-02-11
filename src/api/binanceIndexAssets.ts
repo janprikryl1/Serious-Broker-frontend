@@ -2,15 +2,17 @@ import axios from "axios";
 import {AssetType} from "../utils/types/asset/AssetType";
 import {backendUrl} from "../env.ts";
 import {ChartAssetBuyEnum} from "../utils/enums/ChartAssetBuyEnum.ts";
+import {AssetOrder} from "../utils/enums/AssetOrderEnum.ts";
 
-export const getAllAssets = async (page: number, limit: number) => {
+export const getAllAssets = async (page: number, limit: number, orderType: AssetOrder) => {
     const token = localStorage.getItem("token");
     if(!token) return;
     
     const response = axios.get<{totalPages: number; data: AssetType[]}>(backendUrl + "graphs/binance_index_assets/get_all_assets.php", {
         params: {
             page: page,
-            limit: limit
+            limit: limit,
+            order: orderType
         },
         headers:{
             Authorization2: `Bearer ${token}`,
@@ -27,7 +29,7 @@ export const getAssetByIndexLabel = async (index_label: string) => {
     
     const response = axios.get( backendUrl + "graphs/binance_index_assets/get_asset_by_id.php", {
         params: {
-            index_label: index_label
+            name: index_label
         },
         headers: {
             Authorization2: `Bearer ${token}`

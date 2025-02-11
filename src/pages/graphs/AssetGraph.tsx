@@ -11,18 +11,18 @@ import {AssetGraphDetails} from "../../components/modules/graphs/asset/AssetGrap
 
 export const AssetGraph: FC = () => {
     const { t } = useTranslation();
-    const { index_label } = useParams();
+    const { name } = useParams();
     const [asset, setAsset] = useState<AssetDetailType | null>(null);
 
     useEffect(() => {
-        if (index_label === undefined) return;
+        if (name === undefined) return;
         const getGraphData = async () => {
-            const response = await getAssetByIndexLabel(index_label);
+            const response = await getAssetByIndexLabel(name);
             if (!response) return;
             setAsset(response.data);
         };
         getGraphData();
-    }, [index_label]);
+    }, [name]);
 
     return (
         <>
@@ -33,7 +33,7 @@ export const AssetGraph: FC = () => {
                     data-aos="fade-up"
                     data-aos-duration="900"
                 >
-                    <h2 className="mb-5 asset-title">{t("Title")}: {index_label} ({asset?.name})</h2>
+                    <h2 className="mb-5 asset-title">{t("Title")}: {name} ({asset?.label})</h2>
                     {asset ? (
                         <>
                             <AssetGraphDetails asset={asset}/>

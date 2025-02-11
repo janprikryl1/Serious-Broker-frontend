@@ -1,15 +1,14 @@
-import { ChangeEvent, FC, useEffect, useState } from "react";
+import { ChangeEvent, FC, useEffect, useState, useRef, useCallback } from "react";
 import { TitleHeader } from "../../components/modules/about/TitleHeader.tsx";
 import { BinanceIndexAssetRecomBestPreviousType } from "../../utils/types/graphs/BinanceIndexAssetRecomBestPreviousType.ts";
 import { getBinanceIndexAssetRecomBestPrevious } from "../../api/GraphsService.ts";
 import { PositionGraphComponent } from "../../components/modules/graphs/PositionGraphComponent.tsx";
 import { RecomDetail } from "../../components/modules/graphs/RecomDetail.tsx";
 import { RecommendationSkeleton } from "./RecommendationSkeleton.tsx";
-import Form from 'react-bootstrap/Form';
+import Form from "react-bootstrap/Form";
 import { Col, Row } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
-import { v4 as uuidv4 } from 'uuid';
-import {Pagination} from "../../components/Pagiation.tsx";
+import { v4 as uuidv4 } from "uuid";
 
 export const Recommendation: FC = () => {
     const { t } = useTranslation();
@@ -17,34 +16,59 @@ export const Recommendation: FC = () => {
     const [orderBy, setOrderBy] = useState<string>("");
     const [currentPage, setCurrentPage] = useState<number>(1);
     const [totalPages, setTotalPages] = useState<number>(1);
-    const [loading, setLoading] = useState<boolean>(true);
+    const [loading, setLoading] = useState<boolean>(false);
+
+    const observerRef = useRef<IntersectionObserver | null>(null);
+    const loaderRef = useRef<HTMLDivElement | null>(null);
+    const isFetchingRef = useRef<boolean>(false);
+
+    const fetchData = useCallback(async (reset: boolean = false) => {
+        if (!orderBy || isFetchingRef.current || (currentPage > totalPages && !reset)) return;
+
+        isFetchingRef.current = true;
+        setLoading(true);
+
+        try {
+            const res = await getBinanceIndexAssetRecomBestPrevious(orderBy, reset ? 1 : currentPage);
+            setData((prev) => (reset ? res.data.data : [...prev, ...res.data.data]));
+            setTotalPages(res.data.totalPages);
+        } catch (e) {
+            console.error("Error fetching recommendations:", e);
+        }
+
+        setLoading(false);
+        isFetchingRef.current = false;
+    }, [orderBy, currentPage]);
 
     useEffect(() => {
-        if (!orderBy) return;
-        const getData = async () => {
-            setLoading(true);
-            try {
-                const res = await getBinanceIndexAssetRecomBestPrevious(orderBy, currentPage);
-                setData(res.data.data);
-                setTotalPages(res.data.totalPages);
-            } catch (e) {
-                console.error(e);
-            }
-            setLoading(false);
-        };
-        getData();
-    }, [orderBy, currentPage]);
+        fetchData(true);
+    }, [orderBy]);
+
+    useEffect(() => {
+        fetchData();
+    }, [currentPage]);
+
+    useEffect(() => {
+        if (!loaderRef.current) return;
+
+        observerRef.current = new IntersectionObserver(
+            (entries) => {
+                if (entries[0].isIntersecting && !loading && currentPage < totalPages) {
+                    setCurrentPage((prev) => prev + 1);
+                }
+            },
+            { root: null, rootMargin: "100px", threshold: 1.0 }
+        );
+
+        observerRef.current.observe(loaderRef.current);
+
+        return () => observerRef.current?.disconnect();
+    }, [loading, totalPages, currentPage]);
 
     const handleOrderBy = (e: ChangeEvent<HTMLSelectElement>) => {
         setOrderBy(e.target.value);
         setCurrentPage(1);
         setData([]);
-    };
-
-    const handlePageChange = (newPage: number) => {
-        if (newPage >= 1 && newPage <= totalPages) {
-            setCurrentPage(newPage);
-        }
     };
 
     return (
@@ -65,7 +89,8 @@ export const Recommendation: FC = () => {
                             </Form.Select>
                         </Col>
                     </Row>
-                    {loading ? (
+
+                    {(loading && currentPage === 1) || data.length === 0 ? (
                         <RecommendationSkeleton />
                     ) : (
                         <>
@@ -78,11 +103,9 @@ export const Recommendation: FC = () => {
                                         </div>
                                     ))}
                                 </div>
-                                <Pagination
-                                    currentPage={currentPage}
-                                    totalPages={totalPages}
-                                    onPageChange={handlePageChange}
-                                />
+                                <div ref={loaderRef}>
+                                    {loading && <RecommendationSkeleton />}
+                                </div>
                             </div>
                         </>
                     )}

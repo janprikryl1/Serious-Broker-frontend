@@ -1,12 +1,11 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useEffect, useState, useRef, useCallback } from "react";
 import { CryptoCurrencyType } from "../../../../utils/types/CryptoCurrencyType.ts";
 import { getAllCryptocurrencies, getSearchCryptocurrencies } from "../../../../api/CryptocurrencyService.ts";
 import { CryptoCurrencyLink } from "./CryptoCurrencyLink.tsx";
 import { CryptoCurrenciesSkeleton } from "./CryptoCurrenciesSkeleton.tsx";
 import { useTranslation } from "react-i18next";
 import { Col, Row } from "react-bootstrap";
-import {Pagination} from "../../../Pagiation.tsx";
-import {Button, ButtonColor} from "../../../Button.tsx";
+import { Button, ButtonColor } from "../../../Button.tsx";
 
 const PAGE_SIZE = 50;
 
@@ -16,31 +15,61 @@ export const CryptoCurrencies: FC = () => {
     const [searchValue, setSearchValue] = useState("");
     const [currentPage, setCurrentPage] = useState<number>(1);
     const [totalPages, setTotalPages] = useState<number>(1);
-    
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const res = searchValue
-                    ? await getSearchCryptocurrencies(searchValue, currentPage, PAGE_SIZE)
-                    : await getAllCryptocurrencies(currentPage, PAGE_SIZE);
+    const [loading, setLoading] = useState<boolean>(false);
 
-                setCryptocurrencies(res.data.data);
-                setTotalPages(res.data.totalPages || 1);
-            } catch (e) {
-                console.error(e);
-            }
-        };
-        fetchData();
+    const observerRef = useRef<IntersectionObserver | null>(null);
+    const loaderRef = useRef<HTMLDivElement | null>(null);
+    const isFetchingRef = useRef<boolean>(false);
+
+    const fetchData = useCallback(async (reset: boolean = false) => {
+        if (isFetchingRef.current || (currentPage > totalPages && !reset)) return;
+
+        isFetchingRef.current = true;
+        setLoading(true);
+
+        try {
+            const res = searchValue
+                ? await getSearchCryptocurrencies(searchValue, reset ? 1 : currentPage, PAGE_SIZE)
+                : await getAllCryptocurrencies(reset ? 1 : currentPage, PAGE_SIZE);
+
+            setCryptocurrencies((prev) => (reset ? res.data.data : [...prev, ...res.data.data]));
+            setTotalPages(res.data.totalPages || 1);
+        } catch (e) {
+            console.error("Error fetching cryptocurrencies:", e);
+        }
+
+        setLoading(false);
+        isFetchingRef.current = false;
     }, [currentPage, searchValue]);
 
-    const handleSearch = async () => {
-        setCurrentPage(1);
-    };
+    useEffect(() => {
+        fetchData(true);
+    }, [searchValue]);
 
-    const handlePageChange = (newPage: number) => {
-        if (newPage >= 1 && newPage <= totalPages) {
-            setCurrentPage(newPage);
-        }
+    useEffect(() => {
+        fetchData();
+    }, [currentPage]);
+
+    useEffect(() => {
+        if (!loaderRef.current) return;
+
+        observerRef.current = new IntersectionObserver(
+            (entries) => {
+                if (entries[0].isIntersecting && !loading && currentPage < totalPages) {
+                    setCurrentPage((prev) => prev + 1);
+                }
+            },
+            { root: null, rootMargin: "100px", threshold: 1.0 }
+        );
+
+        observerRef.current.observe(loaderRef.current);
+
+        return () => observerRef.current?.disconnect();
+    }, [loading, totalPages, currentPage]);
+
+    const handleSearch = () => {
+        setCurrentPage(1);
+        setCryptocurrencies([]);
     };
 
     return (
@@ -50,32 +79,36 @@ export const CryptoCurrencies: FC = () => {
                     <div className="cta-form d-sm-flex align-items-center justify-content-center">
                         <input
                             type="text"
-                            className="form-control form-control--style2 mb-sm-0" 
+                            className="form-control form-control--style2 mb-sm-0"
                             style={{ height: 40 }}
                             placeholder="Bitcoin"
                             value={searchValue}
                             onChange={(e) => setSearchValue(e.target.value)}
                         />
-                        <Button className="trk-btn trk-btn--secondary2" onClick={handleSearch} color={ButtonColor.white} style={{ paddingRight: 50, height: 40 }}>
+                        <Button
+                            className="trk-btn trk-btn--secondary2"
+                            onClick={handleSearch}
+                            color={ButtonColor.white}
+                            style={{ paddingRight: 50, height: 40 }}
+                        >
                             {t("Search")}
                         </Button>
                     </div>
                 </Col>
             </Row>
 
-            {cryptocurrencies.length > 0 ? (
-                cryptocurrencies.map((cryptocurrency) => (
-                    <CryptoCurrencyLink cryptocurrency={cryptocurrency} key={cryptocurrency.id} />
-                ))
-            ) : (
-                <CryptoCurrenciesSkeleton />
-            )}
-
-            <Pagination
-                currentPage={currentPage}
-                totalPages={totalPages}
-                onPageChange={handlePageChange}
-            />
+            <div className="crypto-list">
+                {cryptocurrencies.length > 0 ? (
+                    cryptocurrencies.map((cryptocurrency) => (
+                        <CryptoCurrencyLink cryptocurrency={cryptocurrency} key={cryptocurrency.id} />
+                    ))
+                ) : (
+                    <CryptoCurrenciesSkeleton />
+                )}
+            </div>
+            <div ref={loaderRef} style={{ height: 40, marginTop: 20, textAlign: "center" }}>
+                {loading && <CryptoCurrenciesSkeleton />}
+            </div>
         </>
     );
 };

@@ -1,6 +1,6 @@
 import {FC} from 'react';
 import {useTranslation} from "react-i18next";
-import HeaderImage from "../../../utils/icons/cta/1.webp";
+import HeaderImage from "../../../utils/icons/cta/sticks_graph.webp";
 
 type Props = {
   title: string;

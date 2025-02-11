@@ -1,4 +1,5 @@
 export type MostProfitableAssetDetailType = {
-    index_label: string;
+    name: string;
     assets: string;
+    profit_list: number[];
 }

@@ -15,7 +15,6 @@
             %pt-25,
             %pb-30,
             %of-hidden;
-            @include add-prefix(transition, $transition);
             & {
                 background-color: $wh-color;
                 border: 2px solid transparent;

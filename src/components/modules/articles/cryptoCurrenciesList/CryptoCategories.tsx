@@ -24,7 +24,7 @@ export const CryptoCategories:FC = () => {
                 <div className="blog__writer" style={{marginTop: 50}}>
                     <div className="blog__writer-designation">
                         <div>
-                            {category.name}
+                            <strong>{category.name}</strong>
                             <span style={{marginLeft: 10}}>{category.currencies}</span>
                         </div>
                     </div>

@@ -1,70 +1,103 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useEffect, useState, useRef, useCallback } from "react";
 import { TitleHeader } from "../../components/modules/about/TitleHeader.tsx";
-import { useUserContext } from "../../utils/providers/providerUser.tsx";
-import { useNavigate } from "react-router-dom";
 import { getAllAssets } from "../../api/binanceIndexAssets.ts";
 import { AssetType } from "../../utils/types/asset/AssetType.ts";
 import { AssetSkeleton } from "../../components/modules/graphs/asset/AssetSkeleton.tsx";
-import {pageLimit, routes} from "../../utils/constants";
-import {Pagination} from "../../components/Pagiation.tsx";
-import {AssetCard} from "../../components/modules/graphs/asset/AssetCard.tsx";
+import { AssetCard } from "../../components/modules/graphs/asset/AssetCard.tsx";
+import { useTranslation } from "react-i18next";
+import { SeasonButton } from "../../components/modules/index/SeasonButton.tsx";
+import { AssetOrder } from "../../utils/enums/AssetOrderEnum.ts";
 
 export const Assets: FC = () => {
-    const { user } = useUserContext();
-    const navigate = useNavigate();
+    const { t } = useTranslation();
     const [assets, setAssets] = useState<AssetType[]>([]);
     const [page, setPage] = useState<number>(1);
     const [totalPages, setTotalPages] = useState<number>(1);
-    const [loading, setLoading] = useState<boolean>(true);
+    const [loading, setLoading] = useState<boolean>(false);
+    const [orderType, setOrderType] = useState<AssetOrder>(AssetOrder.WeeklyProfit);
+    const observerRef = useRef<IntersectionObserver | null>(null);
+    const loaderRef = useRef<HTMLDivElement | null>(null);
+    const isFetchingRef = useRef<boolean>(false);
+    
+    const getAssets = useCallback(async (reset: boolean = false) => {
+        if (isFetchingRef.current || (page > totalPages && !reset)) return;
+
+        isFetchingRef.current = true;
+        setLoading(true);
+
+        const response = await getAllAssets(reset ? 1 : page, 10, orderType);
+        if (response) {
+            setAssets((prev) => (reset ? response.data.data : [...prev, ...response.data.data]));
+            setTotalPages(response.data.totalPages);
+        }
+
+        setLoading(false);
+        isFetchingRef.current = false;
+    }, [page, orderType]);
 
     useEffect(() => {
-        const getAssets = async () => {
-            setLoading(true);
-            const response = await getAllAssets(page, pageLimit);
-            if (response) {
-                setAssets(response.data.data);
-                setTotalPages(response.data.totalPages);
-            }
-            setLoading(false);
-        }
         getAssets();
-    }, [page]);
+    }, [page, orderType]);
 
     useEffect(() => {
-        if (!user) {
-            navigate(routes.home);
-        }
-    }, [user]);
+        if (!loaderRef.current) return;
 
-    const handlePageChange = (newPage: number) => {
-        if (newPage >= 1 && newPage <= totalPages) {
-            setPage(newPage);
-        }
-    };
+        observerRef.current = new IntersectionObserver(
+            (entries) => {
+                const target = entries[0];
+                if (target.isIntersecting && !loading && page < totalPages) {
+                    setPage((prev) => prev + 1);
+                }
+            },
+            {
+                root: null,
+                rootMargin: "100px",
+                threshold: 1.0,
+            }
+        );
+
+        observerRef.current.observe(loaderRef.current);
+
+        return () => observerRef.current?.disconnect();
+    }, [loading, totalPages, page]);
 
     return (
         <>
-            <TitleHeader title="Assets"/>
-            {loading ? (
-                <AssetSkeleton />
-            ) : (
-                <div className="blog padding-top padding-bottom section-bg-color">
-                    <div className="container">
-                        <div className="blog__wrapper">
-                            <div className="row g-4">
-                                {assets.map((asset) => (
-                                    <AssetCard label={asset.label} details={asset.label} key={asset.id}/>
-                                ))}
-                            </div>
-                            <Pagination
-                                currentPage={page}
-                                totalPages={totalPages}
-                                onPageChange={handlePageChange}
-                            />
+            <TitleHeader title="Assets" />
+            <div className="blog padding-top padding-bottom section-bg-color">
+                <div className="container">
+                    <div className="blog__wrapper">
+                        <p className="text-white">
+                            {t("Crypto indices provide a way to measure a performance of a selection of cryptocurrencies")}
+                        </p>
+                        <p>{t("Order by")}</p>
+                        <div className="col-sm season-button-group chart-type mb-3" style={{ minWidth: 430 }}>
+                            {Object.values(AssetOrder).map((orderTypeItem) => (
+                                <SeasonButton
+                                    key={orderTypeItem}
+                                    seasonValue={orderTypeItem}
+                                    isActive={orderTypeItem === orderType}
+                                    onSelect={() => {
+                                        setAssets([]);
+                                        setPage(1);
+                                        setOrderType(orderTypeItem);
+                                    }}
+                                />
+                            ))}
+                        </div>
+
+                        <div className="row g-4">
+                            {assets.map((asset) => (
+                                <AssetCard label={asset.name} details={asset.label} key={asset.id} data={asset.profit_list} />
+                            ))}
+                        </div>
+
+                        <div ref={loaderRef}>
+                            {loading && <AssetSkeleton />}
                         </div>
                     </div>
                 </div>
-            )}
+            </div>
         </>
     );
 };

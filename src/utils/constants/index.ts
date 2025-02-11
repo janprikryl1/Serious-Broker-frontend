@@ -3,8 +3,8 @@ import {DemoType} from "../types/demos/demoType.ts";
 import {Assets} from "../types/asset/AssetDetailType.ts";
 
 export const domain = "https://serious.broker";
-export const PROTECTED_ROUTES = ['/admin', '/profile', '/assets', '/most_profitable_assets', '/asset_graph/:id'];
-export const pageLimit = 10;
+export const PROTECTED_ROUTES = ['/admin', '/profile', '/assets', '/graphs', '/most_profitable_assets', '/asset_graph/:id'];
+export const pageLimit = 9;
 export const imageURL = "https://api.serious.broker/article/images/";
 export const coinURL = "https://api.serious.broker/cryptocurrency_list/images/";
 export const glossaryImagesURL = "https://api.serious.broker/glossary/images/";
@@ -35,7 +35,7 @@ export const routes = {
     assetGraphURL: "/asset_graph/",
     assetGraphDetail: "/asset_graph_detail",
     assetGraphCurrencyDetail: "/asset_graph_detail/:index_label",
-    assetGraph: "/asset_graph/:index_label",
+    assetGraph: "/asset_graph/:name",
     recommendation: "/recommendation",
     dictionary: "/dictionary",
     cryptocurrenciesList: "/cryptocurrencies_list",
