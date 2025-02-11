@@ -12,7 +12,7 @@ export const Index: FC = () => {
     const {user} = useUserContext();
     
     return (
-        <>
+        <div className="container">
             <Page />
             <NowTrending />
             <NewToInvesting />
@@ -24,6 +24,6 @@ export const Index: FC = () => {
             {user === null && (
                 <SignUpBanner />
             )}
-        </>
+        </div>
     );
 };

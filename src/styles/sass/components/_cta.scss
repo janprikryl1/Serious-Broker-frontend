@@ -3,8 +3,8 @@
 
   &__wrapper {
     @extend %p-rel;
-    margin-left: 5vw;
-    margin-right: 5vw;
+    margin-left: 2vw;
+    margin-right: 2vw;
   }
   
   @media (max-width: 768px) {
@@ -411,8 +411,8 @@
   background-color: rgb(33, 30, 27);
   padding-top: 30px;
   padding-bottom: 30px;
-  padding-left: 5vw;
-  padding-right: 5vw;
+  padding-left: 2vw;
+  padding-right: 2vw;
   
   p {
     font-size: 20px;

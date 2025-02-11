@@ -35,32 +35,31 @@ export const MostProfitableLastSelectedPeriod: FC = () => {
     const getProfitData = useMemo(() => {
         const profitMap = (coin: AssetProfitData) => ({
             Week: [
-                calculateProfit(coin.week_0_profit!),
-                calculateProfit(coin.week_1_profit!),
                 calculateProfit(coin.week_2_profit!),
+                calculateProfit(coin.week_1_profit!),
+                calculateProfit(coin.week_0_profit!),
             ].filter(value => value !== null),
             Month: [
-                calculateProfit(coin.month_0_profit!),
-                calculateProfit(coin.month_1_profit!),
                 calculateProfit(coin.month_2_profit!),
+                calculateProfit(coin.month_1_profit!),
+                calculateProfit(coin.month_0_profit!),
             ].filter(value => value !== null),
             Quarter: [
-                calculateProfit(coin.quarter_0_profit!),
-                calculateProfit(coin.quarter_1_profit!),
                 calculateProfit(coin.quarter_2_profit!),
+                calculateProfit(coin.quarter_1_profit!),
+                calculateProfit(coin.quarter_0_profit!),
             ].filter(value => value !== null),
             Year: [
-                calculateProfit(coin.year_0_profit!),
-                calculateProfit(coin.year_1_profit!),
                 calculateProfit(coin.year_2_profit!),
+                calculateProfit(coin.year_1_profit!),
+                calculateProfit(coin.year_0_profit!),
             ].filter(value => value !== null),
             Smart: [
-                calculateProfit(coin.max_0_profit!),
-                calculateProfit(coin.max_1_profit!),
                 calculateProfit(coin.max_2_profit!),
+                calculateProfit(coin.max_1_profit!),
+                calculateProfit(coin.max_0_profit!),
             ].filter(value => value !== null),
         });
-
         return (coin: AssetProfitData) => profitMap(coin)[season as keyof typeof profitMap];
     }, [season]);
     

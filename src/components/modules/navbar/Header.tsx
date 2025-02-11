@@ -26,7 +26,7 @@ export const Header: FC = () => {
 
     return (
         <header className="header-section">
-            <div className="header-bottom">
+            <div className="container header-bottom">
                 <div className="header-wrapper d-flex align-items-center justify-content-between">
                     <div className="d-flex align-items-center">
                         <div className="logo">

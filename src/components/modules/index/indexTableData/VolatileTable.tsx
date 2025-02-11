@@ -11,7 +11,7 @@ export const VolatileTable:FC<Props> = ({data}) => {
     const { t } = useTranslation();
 
     return (
-        <table className="table-index-light mb-5">
+        <table className="table-index-light mb-5 mt-1">
             <thead>
             <tr>
                 <th>#</th>

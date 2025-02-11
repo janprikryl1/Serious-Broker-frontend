@@ -15,7 +15,7 @@ import {LeftFloatingContactDetailsItem} from "../contact/LeftFloatingContactDeta
 export const Footer:FC = () => {
   const {t} = useTranslation();
   return (
-    <footer className="footer">
+    <footer className="container footer">
         <div className="footer__top--style1">
           <div className="row">
             <div className="col-md-6">
