@@ -59,10 +59,8 @@ export const routes = {
     verifyAccount: "/verify_account/:user_id/:token",
     forgottenPassword: "/forgotten_password",
     recoverPassword: "/reset_password/:user_id/:secret_key_1/:secret_key_2",
-    admin: {
+    editor: {
         index: "",
-        users: "users",
-        newsletter: "newsletter",
         articles: "articles",
         articleNew: "articles/new",
         articleEdit: "articles/edit/:id",
@@ -72,6 +70,11 @@ export const routes = {
         translations: "translations/:articleId",
         translationsEdit: "translations/:articleId/:id",
         postEdit: "post/edit/:articleId/:id?",
+    },
+    admin: {
+        index: "",
+        users: "users",
+        newsletter: "newsletter",
         glossary: "glossary",
         logTable: "log_table",
         feedbacks: "feedbacks",
@@ -89,19 +92,23 @@ export const routes = {
     
 }
 
+export const editorURLS = {
+    index: "/editor",
+    articles: "/editor/articles",
+    articleNew: "/editor/articles/new",
+    articleEdit: "/editor/articles/edit/",
+    articleComments: "/editor/article/comments/",
+    articleShare: "/editor/article/share/",
+    articleTranslate: "/editor/article/translate/",
+    translations: "/editor/translations/",
+    translationsEdit: "/editor/translations/",
+    postEdit: "/editor/post/edit/",
+}
+
 export const adminURLS = {
     index: "/admin",
     users: "/admin/users",
     newsletter: "/admin/newsletter",
-    articles: "/admin/articles",
-    articleNew: "/admin/articles/new",
-    articleEdit: "/admin/articles/edit/",
-    articleComments: "/admin/article/comments/",
-    articleShare: "/admin/article/share/",
-    articleTranslate: "/admin/article/translate/",
-    translations: "/admin/translations/",
-    translationsEdit: "/admin/translations/",
-    postEdit: "/admin/post/edit/",
     glossary: "/admin/glossary",
     logTable: "/admin/log_table",
     feedbacks: "/admin/feedbacks",

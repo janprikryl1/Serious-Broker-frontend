@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from "react";
-import { UserType } from "../../utils/types/user/userTypes.ts";
+import {UserRole, UserType} from "../../utils/types/user/userTypes.ts";
 import { getAllUsers, updateUser } from "../../api/adminService.ts";
 import { useTranslation } from "react-i18next";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
@@ -7,9 +7,14 @@ import { UserEditModal } from "../../components/modules/admin/userManagment/User
 import Swal from "sweetalert2";
 import { Form, InputGroup } from "react-bootstrap";
 import {Button, ButtonColor} from "../../components/Button.tsx";
+import {useUserContext} from "../../utils/providers/providerUser.tsx";
+import {routes} from "../../utils/constants";
+import {useNavigate} from "react-router-dom";
 
 export const UserManagment: FC = () => {
     const { t } = useTranslation();
+    const {user} = useUserContext();
+    const navigate = useNavigate();
     const [users, setUsers] = useState<UserType[]>([]);
     const [open, setOpen] = useState(false);
     const [selectedUser, setSelectedUser] = useState<UserType>();
@@ -20,6 +25,12 @@ export const UserManagment: FC = () => {
     const [filterCondition, setFilterCondition] = useState<'AND' | 'OR'>('AND');
     const [filteredUsers, setFilteredUsers] = useState<UserType[]>(users);
 
+    useEffect(() => {
+        if (!user || user.role !== UserRole.Admin) {
+            navigate(routes.home);
+        }
+    }, [user]);
+    
     const handleOpen = (userId: number) => {
         setSelectedUser(users.find((user) => user.id == userId));
         setOpen(true);

@@ -1,6 +1,6 @@
 import {ChangeEvent, FC, useEffect, useState} from "react";
 import Modal from "@mui/material/Modal";
-import { UserType } from "../../../../utils/types/user/userTypes";
+import {UserRole, UserType} from "../../../../utils/types/user/userTypes";
 import { useTranslation } from "react-i18next";
 import ModalDialog from "@mui/joy/ModalDialog";
 import ModalClose from "@mui/joy/ModalClose";
@@ -32,7 +32,7 @@ export const UserEditModal: FC<Props> = ({ open, handleClose, selectedUser, hand
     const [firmName, setFirmName] = useState("");
     const [firmVat, setFirmVat] = useState("");
     const [titleAfter, setTitleAfter] = useState("");
-    const [role, setRole] = useState("");
+    const [role, setRole] = useState<UserRole>(UserRole.Default);
     const [street, setStreet] = useState("");
     const [streetNumber, setStreetNumber] = useState("");
     const [town, setTown] = useState("");
@@ -140,7 +140,7 @@ export const UserEditModal: FC<Props> = ({ open, handleClose, selectedUser, hand
                             <UserFormInput label="Firm name" value={firmName} onChange={(e) => setFirmName(e.target.value)} />
                             <UserFormInput label="Firm VAT" value={firmVat} onChange={(e) => setFirmVat(e.target.value)} />
                             <UserFormInput label="Title after" value={titleAfter} onChange={(e) => setTitleAfter(e.target.value)} />
-                            <UserFormInput label="Role" value={role} onChange={(e) => setRole(e.target.value)} />
+                            <UserFormInput label="Role" value={role} onChange={(e) => setRole(e.target.value as UserRole)} />
                             <UserFormInput label="Street" value={street} onChange={(e) => setStreet(e.target.value)} />
                             <UserFormInput label="Street number" value={streetNumber} onChange={(e) => setStreetNumber(e.target.value)} />
                             <UserFormInput label="Town" value={town} onChange={(e) => setTown(e.target.value)} />

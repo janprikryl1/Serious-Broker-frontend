@@ -4,7 +4,7 @@ import { config } from '@fortawesome/fontawesome-svg-core';
 import AOS from 'aos';
 import { useEffect } from "react";
 import "./i18n";
-import { routes, adminURLS } from "./utils/constants";
+import {routes, adminURLS, editorURLS} from "./utils/constants";
 import { ThemeProvider } from "./utils/providers/ThemeProvider.tsx";
 import { ProviderUser } from "./utils/providers/providerUser.tsx";
 import { AchievmentsProvider } from "./utils/providers/AchievmentsProvider.tsx";
@@ -42,13 +42,13 @@ const Admin = lazy(() => import("./pages/admin/Admin.tsx").then(module => ({ def
 const AdminOverview = lazy(() => import("./pages/admin/AdminOverview.tsx").then(module => ({ default: module.AdminOverview })));
 const UserManagment = lazy(() => import("./pages/admin/UserManagment.tsx").then(module => ({ default: module.UserManagment })));
 const NewsletterOverview = lazy(() => import("./pages/admin/NewsletterOverview.tsx").then(module => ({ default: module.NewsletterOverview })));
-const ArticleManagement = lazy(() => import("./pages/admin/ArticleManagement.tsx").then(module => ({ default: module.ArticleManagement })));
-const EditArticle = lazy(() => import("./pages/admin/EditArticle.tsx").then(module => ({ default: module.EditArticle })));
-const ArticleComments = lazy(() => import("./pages/admin/ArticleComments.tsx").then(module => ({ default: module.ArticleComments })));
-const ArticleShare = lazy(() => import("./pages/admin/ArticleShare.tsx").then(module => ({ default: module.ArticleShare })));
-const ArticleTranslate = lazy(() => import("./pages/admin/ArticleTranslate.tsx").then(module => ({ default: module.ArticleTranslate })));
-const TranslateEdit = lazy(() => import("./pages/admin/TranslateEdit.tsx").then(module => ({ default: module.TranslateEdit })));
-const PostEdit = lazy(() => import("./pages/admin/PostEdit.tsx").then(module => ({ default: module.PostEdit })));
+const ArticleManagement = lazy(() => import("./pages/editor/ArticleManagement.tsx").then(module => ({ default: module.ArticleManagement })));
+const EditArticle = lazy(() => import("./pages/editor/EditArticle.tsx").then(module => ({ default: module.EditArticle })));
+const ArticleComments = lazy(() => import("./pages/editor/ArticleComments.tsx").then(module => ({ default: module.ArticleComments })));
+const ArticleShare = lazy(() => import("./pages/editor/ArticleShare.tsx").then(module => ({ default: module.ArticleShare })));
+const ArticleTranslate = lazy(() => import("./pages/editor/ArticleTranslate.tsx").then(module => ({ default: module.ArticleTranslate })));
+const TranslateEdit = lazy(() => import("./pages/editor/TranslateEdit.tsx").then(module => ({ default: module.TranslateEdit })));
+const PostEdit = lazy(() => import("./pages/editor/PostEdit.tsx").then(module => ({ default: module.PostEdit })));
 const GlossaryManagement = lazy(() => import("./pages/admin/GlossaryManagement.tsx").then(module => ({ default: module.GlossaryManagement })));
 const LogTable = lazy(() => import("./pages/admin/LogTable.tsx").then(module => ({ default: module.LogTable })));
 const Feedbacks = lazy(() => import("./pages/admin/Feedbacks.tsx").then(module => ({ default: module.Feedbacks })));
@@ -65,7 +65,8 @@ const ProfileAchievements = lazy(() => import("./pages/profile/ProfileAchievemen
 const ProfileMembership = lazy(() => import("./pages/profile/ProfileMembership.tsx").then(module => ({ default: module.ProfileMembership })));
 const ProfileEdit = lazy(() => import("./pages/profile/ProfileEdit.tsx").then(module => ({ default: module.ProfileEdit })));
 const ProfileSessions = lazy(() => import("./pages/profile/ProfileSessions.tsx").then(module => ({ default: module.ProfileSessions })));
-
+const EditorIndex = lazy(() => import("./pages/editor/EditorIndex.tsx").then(module => ({ default: module.EditorIndex })));
+import {EditorOverview} from "./pages/editor/EditorOverview.tsx";
 // Disable automatic CSS addition for Font Awesome
 config.autoAddCss = false;
 
@@ -116,19 +117,22 @@ function App() {
                                 <Route path={routes.profile.newMyPortfolio} element={<PageLoader><EditMyPortfolio/></PageLoader>} />
                                 <Route path={routes.profile.sessions} element={<PageLoader><ProfileSessions/></PageLoader>} />
                             </Route>
+                            <Route path={editorURLS.index} element={<EditorOverview />}>
+                                <Route path={routes.editor.index} element={<PageLoader><EditorIndex /></PageLoader>} />
+                                <Route path={routes.editor.articles} element={<PageLoader><ArticleManagement /></PageLoader>} />
+                                <Route path={routes.editor.articleNew} element={<PageLoader><EditArticle /></PageLoader>} />
+                                <Route path={routes.editor.articleEdit} element={<PageLoader><EditArticle /></PageLoader>} />
+                                <Route path={routes.editor.articleComments} element={<PageLoader><ArticleComments /></PageLoader>} />
+                                <Route path={routes.editor.articleShare} element={<PageLoader><ArticleShare /></PageLoader>} />
+                                <Route path={routes.editor.articleTranslate} element={<PageLoader><ArticleTranslate /></PageLoader>} />
+                                <Route path={routes.editor.translations} element={<PageLoader><TranslateEdit /></PageLoader>} />
+                                <Route path={routes.editor.translationsEdit} element={<PageLoader><TranslateEdit /></PageLoader>} />
+                                <Route path={routes.editor.postEdit} element={<PageLoader><PostEdit /></PageLoader>} />
+                            </Route>
                             <Route path={adminURLS.index} element={<PageLoader><Admin /></PageLoader>}>
                                 <Route path={routes.admin.index} element={<PageLoader><AdminOverview /></PageLoader>} />
                                 <Route path={routes.admin.users} element={<PageLoader><UserManagment /></PageLoader>} />
                                 <Route path={routes.admin.newsletter} element={<PageLoader><NewsletterOverview /></PageLoader>} />
-                                <Route path={routes.admin.articles} element={<PageLoader><ArticleManagement /></PageLoader>} />
-                                <Route path={routes.admin.articleNew} element={<PageLoader><EditArticle /></PageLoader>} />
-                                <Route path={routes.admin.articleEdit} element={<PageLoader><EditArticle /></PageLoader>} />
-                                <Route path={routes.admin.articleComments} element={<PageLoader><ArticleComments /></PageLoader>} />
-                                <Route path={routes.admin.articleShare} element={<PageLoader><ArticleShare /></PageLoader>} />
-                                <Route path={routes.admin.articleTranslate} element={<PageLoader><ArticleTranslate /></PageLoader>} />
-                                <Route path={routes.admin.translations} element={<PageLoader><TranslateEdit /></PageLoader>} />
-                                <Route path={routes.admin.translationsEdit} element={<PageLoader><TranslateEdit /></PageLoader>} />
-                                <Route path={routes.admin.postEdit} element={<PageLoader><PostEdit /></PageLoader>} />
                                 <Route path={routes.admin.glossary} element={<PageLoader><GlossaryManagement /></PageLoader>} />
                                 <Route path={routes.admin.logTable} element={<PageLoader><LogTable /></PageLoader>} />
                                 <Route path={routes.admin.feedbacks} element={<PageLoader><Feedbacks /></PageLoader>} />

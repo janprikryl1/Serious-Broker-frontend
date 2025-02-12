@@ -1,7 +1,7 @@
 import {Dispatch, FC, SetStateAction} from "react";
 import {Link} from "react-router-dom";
 import {ArticleProps} from "../../../../utils/types/article/ArticleProps.ts";
-import {adminURLS} from "../../../../utils/constants";
+import {editorURLS} from "../../../../utils/constants";
 import {Button} from "react-bootstrap";
 import {FaComment, FaRegTrashAlt, FaShareAlt} from "react-icons/fa";
 import Swal from "sweetalert2";
@@ -61,7 +61,7 @@ export const ArticleAdminCard: FC<Props> = ({data, link = "article", setArticles
                                 <FaRegTrashAlt />
                             </Button>
                             {data.allowComments !== "0" && (
-                                <Link to={`${adminURLS.articleComments}${data.id}`} className="link-underline-none">
+                                <Link to={`${editorURLS.articleComments}${data.id}`} className="link-underline-none">
                                     <Button
                                         variant="warning"
                                         className="ms-2 p-1"
@@ -70,7 +70,7 @@ export const ArticleAdminCard: FC<Props> = ({data, link = "article", setArticles
                                     </Button>
                                 </Link>
                             )}
-                            <Link to={`${adminURLS.articleShare}${data.id}`}>
+                            <Link to={`${editorURLS.articleShare}${data.id}`}>
                                 <Button
                                     variant="success"
                                     className="ms-2 p-1"
@@ -78,7 +78,7 @@ export const ArticleAdminCard: FC<Props> = ({data, link = "article", setArticles
                                     <FaShareAlt />
                                 </Button>
                             </Link>
-                            <Link to={`${adminURLS.articleTranslate}${data.id}`}>
+                            <Link to={`${editorURLS.articleTranslate}${data.id}`}>
                                 <Button
                                     variant="secondary"
                                     className="ms-2 p-1"

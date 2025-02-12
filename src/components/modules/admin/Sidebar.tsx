@@ -1,22 +1,24 @@
-import { FC, useState } from "react";
-import { NavLink } from "react-router-dom";
+import {FC, useEffect, useState} from "react";
+import {NavLink, useNavigate} from "react-router-dom";
 import { useUserContext } from "../../../utils/providers/providerUser.tsx";
 import { useTranslation } from "react-i18next";
 import { Sidebar as ProSidebar, Menu, MenuItem } from "react-pro-sidebar";
-import { adminURLS } from "../../../utils/constants";
+import {adminURLS, routes} from "../../../utils/constants";
 import { CiLogout } from "react-icons/ci";
 import { FaBars, FaUsersCog } from "react-icons/fa";
 import { IoQrCode } from "react-icons/io5";
-import { MdOutlineArticle, MdOutlineScreenshotMonitor, MdOutlineSdStorage, MdOutlineSubscriptions } from "react-icons/md";
+import { MdOutlineScreenshotMonitor, MdOutlineSdStorage, MdOutlineSubscriptions } from "react-icons/md";
 import { SiDictionarydotcom } from "react-icons/si";
 import { FiDatabase } from "react-icons/fi";
 import { VscFeedback } from "react-icons/vsc";
 import { GrAchievement } from "react-icons/gr";
 import { RiCoinsLine } from "react-icons/ri";
+import {UserRole} from "../../../utils/types/user/userTypes.ts";
 
 export const Sidebar: FC = () => {
     const { t } = useTranslation();
     const { user, logout } = useUserContext();
+    const navigate = useNavigate();
     const [collapsed, setCollapsed] = useState(Boolean(localStorage.getItem("sidebarCollapsed") ?? ""));
     const [mobileVisible, setMobileVisible] = useState(false);
 
@@ -29,6 +31,12 @@ export const Sidebar: FC = () => {
     const toggleMobileSidebar = () => {
         setMobileVisible(!mobileVisible);
     };
+    
+    useEffect(() => {
+        if (user === null || !(user.role === UserRole.Admin || user.role === UserRole.Manager)) {
+            navigate(routes.home);
+        }
+    }, [user]);
 
     return (
         <>
@@ -72,14 +80,13 @@ export const Sidebar: FC = () => {
                     <MenuItem icon={<IoQrCode />} component={<NavLink to={adminURLS.qr} />} className="sidebar-item">
                         {t("QR")}
                     </MenuItem>
-                    <MenuItem icon={<FaUsersCog />} component={<NavLink to={adminURLS.users} />} className="sidebar-item">
-                        {t("User management")}
-                    </MenuItem>
+                    {user!.role === UserRole.Admin && (
+                        <MenuItem icon={<FaUsersCog />} component={<NavLink to={adminURLS.users} />} className="sidebar-item">
+                            {t("User management")}
+                        </MenuItem>
+                    )}
                     <MenuItem icon={<MdOutlineSubscriptions />} component={<NavLink to={adminURLS.newsletter} />} className="sidebar-item">
                         {t("Newsletter management")}
-                    </MenuItem>
-                    <MenuItem icon={<MdOutlineArticle />} component={<NavLink to={adminURLS.articles} />} className="sidebar-item">
-                        {t("Article management")}
                     </MenuItem>
                     <MenuItem icon={<SiDictionarydotcom />} component={<NavLink to={adminURLS.glossary} />} className="sidebar-item">
                         {t("Glossary")}

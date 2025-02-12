@@ -6,7 +6,7 @@ import {getTranslations} from "../../api/translationsService.ts";
 import {ArticlesSkeleton} from "../../components/modules/articles/ArticlesSkeleton.tsx";
 import {TranslationCard} from "../../components/modules/admin/translations/TranslationCard.tsx";
 import {ArticleDetailProps} from "../../utils/types/article/ArticleDetailProps.ts";
-import {adminURLS} from "../../utils/constants";
+import {editorURLS} from "../../utils/constants";
 import {Button} from "../../components/Button.tsx";
 
 export const ArticleTranslate:FC = () => {
@@ -40,7 +40,7 @@ export const ArticleTranslate:FC = () => {
                                 data-aos-duration="900"
                             >
                                 <h3>{t("Translations for article ")}{article?.title}</h3>
-                                <Button type="link" to={`${adminURLS.translations}${id}`} style={{padding:5}}>{t("New translation")}</Button>
+                                <Button type="link" to={`${editorURLS.translations}${id}`} style={{padding:5}}>{t("New translation")}</Button>
                                 <div className="padding-bottom mt-3">
                                     <div className="blog__wrapper">
                                         <div className="row g-4">

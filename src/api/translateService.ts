@@ -9,10 +9,9 @@ export const getArticleTranslateByIdAdmin = async (id: string) => {
     const token = localStorage.getItem("token");
     if (!token) return;
     const res = await axios.get<TranslateEditLoadType>(backendUrl + "article/edit_translate.php?id=" + id, {
-        headers: {
-            "Content-Type": "application/json",
-            Authorization2: `Bearer ${token}`
-        }
+        headers:{
+            Authorization2: `Bearer ${token}`,
+        },
     });
     return res;
 }
@@ -22,10 +21,9 @@ export const createTranslation = async (article: ArticleNewTranslateEditType) =>
     if (!token) return;
     
     return await axios.post(backendUrl + "article/edit_translate.php", article, {
-        headers: {
-            "Content-Type": "application/json",
-            Authorization2: `Bearer ${token}`
-        }
+        headers:{
+            Authorization2: `Bearer ${token}`,
+        },
     });
 }
 
@@ -34,10 +32,9 @@ export const updateTranslation = async (article: ArticleTranslateEditType) => {
     if (!token) return;
     
     return await axios.put(backendUrl + "article/edit_translate.php", article, {
-        headers: {
-            "Content-Type": "application/json",
-            Authorization2: `Bearer ${token}`
-        }
+        headers:{
+            Authorization2: `Bearer ${token}`,
+        },
     });
 }
 
@@ -46,10 +43,9 @@ export const deleteTranslation = async (id: number) => {
     if (!token) return;
     
     return await axios.delete(backendUrl + "article/edit_translate.php?id=" + id, {
-        headers: {
-            "Content-Type": "application/json",
-            Authorization2: `Bearer ${token}`
-        }
+        headers:{
+            Authorization2: `Bearer ${token}`,
+        },
     });
 }
 
@@ -61,16 +57,12 @@ export const translate = async (text: string, target_lang: string) => {
         text: text,
         target_lang: target_lang
     }, {
-        headers: {
-            "Content-Type": "application/json",
-            Authorization2: `Bearer ${token}`
-        }
+        headers:{
+            Authorization2: `Bearer ${token}`,
+        },
     });
 }
 
 export const getTranslatedArticle = async (id: string, language: string) => {
-    const token = localStorage.getItem("token");
-    if (!token) return;
-
     return await axios.get<ArticleDetailProps>(backendUrl + "article/translated_article.php?id=" + id + "&language=" + language);
 }

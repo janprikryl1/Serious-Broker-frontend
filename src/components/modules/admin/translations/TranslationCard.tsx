@@ -6,7 +6,7 @@ import {FaRegTrashAlt} from "react-icons/fa";
 import {useTranslation} from "react-i18next";
 import {deleteTranslation} from "../../../../api/translateService.ts";
 import Swal from "sweetalert2";
-import {adminURLS} from "../../../../utils/constants";
+import {editorURLS} from "../../../../utils/constants";
 
 type Props = {
     articleId: string;
@@ -34,7 +34,7 @@ export const TranslationCard:FC<Props> = ({articleId, translation, setTranslatio
                 <div className="blog__item-inner blog__item-inner--style2">
                     <div className="blog__content">
                         <h5 className="10 style2">
-                            <Link to={`${adminURLS.translationsEdit}${articleId}/${translation.id}`}
+                            <Link to={`${editorURLS.translationsEdit}${articleId}/${translation.id}`}
                                   className="link-underline-none">{t(translation.language)}</Link>
                         </h5>
 

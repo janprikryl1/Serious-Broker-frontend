@@ -2,7 +2,7 @@ import {FC} from "react";
 import {ShareItemCard} from "./ShareItemCard.tsx";
 import {ArticlePostListResponseResponse} from "../../../../utils/types/ArticlePostListResponse.ts";
 import {useTranslation} from "react-i18next";
-import {adminURLS} from "../../../../utils/constants";
+import {editorURLS} from "../../../../utils/constants";
 import {Link, useParams} from "react-router-dom";
 import {Button} from "../../../Button.tsx";
 
@@ -21,7 +21,7 @@ export const ShareItems:FC<Props> = ({articlePosts}) => {
                     <ShareItemCard articlePost={articlePost}/>
                 </div>
             )) : <p>{t("No posts yet")}</p>}
-            <Link to={`${adminURLS.postEdit}${id}`}>
+            <Link to={`${editorURLS.postEdit}${id}`}>
                 <Button>{t("New post")}</Button>
             </Link>
         </div>

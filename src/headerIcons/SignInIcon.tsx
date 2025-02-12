@@ -3,8 +3,9 @@ import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useUserContext } from "../utils/providers/providerUser.tsx";
 import { Dropdown } from "react-bootstrap";
-import {adminURLS, routes} from "../utils/constants";
+import {adminURLS, editorURLS, routes} from "../utils/constants";
 import { Button } from "../components/Button.tsx";
+import {UserRole} from "../utils/types/user/userTypes.ts";
 
 export const SignInIcon: FC = () => {
     const { t } = useTranslation();
@@ -20,7 +21,12 @@ export const SignInIcon: FC = () => {
                     <Dropdown.Item as={Link} to={routes.profile.profileURL}>
                         {t("Profile")}
                     </Dropdown.Item>
-                    {user.role === "admin" && (
+                    {(user.role === UserRole.Editor || user.role === UserRole.Admin || user.role === UserRole.Manager) && (
+                        <Dropdown.Item as={Link} to={editorURLS.articles}>
+                            Editor panel
+                        </Dropdown.Item>
+                    )}
+                    {(user.role === UserRole.Admin || user.role === UserRole.Manager) && (
                         <Dropdown.Item as={Link} to={adminURLS.index}>
                             Admin panel
                         </Dropdown.Item>

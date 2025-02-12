@@ -1,6 +1,13 @@
+export enum UserRole {
+    Default = "member",
+    Editor = "editor",
+    Admin = "admin",
+    Manager = "manager",
+}
+
 export type UserType = {
     id: number;
-    role: string;
+    role: UserRole;
     status: string;
     superior_id?: number;
     nickname: string;
