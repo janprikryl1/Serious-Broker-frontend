@@ -3,7 +3,7 @@ import {DemoType} from "../types/demos/demoType.ts";
 import {Assets} from "../types/asset/AssetDetailType.ts";
 
 export const domain = "https://serious.broker";
-export const PROTECTED_ROUTES = ['/admin', '/profile', '/assets', '/graphs', '/most_profitable_assets', '/asset_graph/:id'];
+export const PROTECTED_ROUTES = ['/admin', '/profile', '/assets', '/graphs', '/most_profitable_assets', '/asset_graph/:id', '/editor'];
 export const pageLimit = 9;
 export const imageURL = "https://api.serious.broker/article/images/";
 export const coinURL = "https://api.serious.broker/cryptocurrency_list/images/";
@@ -17,8 +17,8 @@ export const linkedinURL = "https://www.linkedin.com/in/serious-broker-07283b331
 export const youtubeURL = "http://www.youtube.com/@SeriousBroker";
 export const twitterURL = "https://x.com/SeriousBroker";
 
-export const phoneNumber = "+420 000 000 000";
-export const contactEmail = "pri0207@vsb.cz";
+export const phoneNumber = "+420 735 838 972";
+export const contactEmail = "brokerserious@gmail.com";
 
 export const routes = {
     home: "/",

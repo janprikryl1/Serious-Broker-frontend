@@ -48,6 +48,7 @@ export const Sidebar: FC = () => {
                 collapsed={collapsed}
                 className={`custom-sidebar ${mobileVisible ? "mobile-visible" : ""}`}
                 backgroundColor="#333"
+                style={{position:"absolute"}}
             >
                 <Menu menuItemStyles={{
                     button: ({ level, active, disabled }) => {

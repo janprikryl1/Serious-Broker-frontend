@@ -9,29 +9,27 @@ import {NewsletterEdit} from "../../components/modules/profile/userDetails/Newsl
 
 export const ProfileEdit:FC = () => {
     return (
-        <div className="padding-bottom">
-            <div className="service-details__item">
-                <div className="service-details__item-inner">
-                    <div
-                        className="service-details__content"
-                        data-aos="fade-up"
-                        data-aos-duration="900"
-                    >
-                        <UserDetailsProvider>
-                            <div className="admin-container mt-4">
-                                <div className="row justify-content">
-                                    <div className="col-md-6">
-                                        <PersonalDataEdit/>
-                                        <LocationData/>
-                                        <FirmData/>
-                                        <NewsletterEdit/>
-                                        <CreatedLastEdited/>
-                                        <UploadChangesButton/>
-                                    </div>
+        <div className="padding-bottom service-details__item">
+            <div className="service-details__item-inner">
+                <div
+                    className="service-details__content"
+                    data-aos="fade-up"
+                    data-aos-duration="900"
+                >
+                    <UserDetailsProvider>
+                        <div className="admin-container mt-4">
+                            <div className="row justify-content">
+                                <div className="col-md-6">
+                                    <PersonalDataEdit/>
+                                    <LocationData/>
+                                    <FirmData/>
+                                    <NewsletterEdit/>
+                                    <CreatedLastEdited/>
+                                    <UploadChangesButton/>
                                 </div>
                             </div>
-                        </UserDetailsProvider>
-                    </div>
+                        </div>
+                    </UserDetailsProvider>
                 </div>
             </div>
         </div>

@@ -7,7 +7,6 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
 import { useTranslation } from "react-i18next";
 import { CandlestickData } from "../../../utils/types/KlineData.ts";
-import { useThemeContext } from "../../../utils/providers/ThemeProvider.tsx";
 import { csCZ } from "@mui/x-date-pickers/locales";
 import {graphColors} from "../../../utils/constants";
 
@@ -25,7 +24,6 @@ export const EarningIn: FC<Props> = ({ series, startDate, endDate }) => {
     const [buyDate, setBuyDate] = useState<Dayjs | null>(dayjs(startDate));
     const [sellDate, setSellDate] = useState<Dayjs | null>(dayjs(endDate));
     const [initialInvestment, setInitialInvestment] = useState<number>(0);
-    const { theme } = useThemeContext();
 
     // Helper function to find the closest data point for a given date
     const findClosestData = (date: Dayjs | null): CandlestickData | undefined => {
@@ -72,74 +70,60 @@ export const EarningIn: FC<Props> = ({ series, startDate, endDate }) => {
     };
 
     return (
-        <div className="d-flex justify-content-center min-vh-100 padding-bottom padding-top asset-font">
-            <div
-                style={{
-                    backgroundColor: theme === "dark" ? "#343a40" : "#f5f8fb",
-                    borderRadius: 24,
-                    width: "95%",
-                    maxWidth: "1000px",
-                    textAlign: "center",
-                    boxShadow: "0 4px 16px rgba(0,0,0,0.5)"
-                }}
-                data-aos="fade-up"
-                data-aos-duration="1000"
-            >
-                <div className="row justify-content-center align-items-center mt-3">
-                    <h2>{t("If I started investing at some point")}</h2>
-                    <div
-                        className="cta-form d-flex align-items-center justify-content-center gap-2 mt-5 mb-5 w-100"
-                        style={{maxWidth: "300px"}}
-                    >
-                        <p className="mb-0" style={{whiteSpace: "nowrap"}}>{t("Amount")}</p>
-                        <input
-                            type="number"
-                            className="form-control form-control--style2 flex-grow-1"
-                            style={{height: "40px"}}
-                            placeholder={t("Initial investment") + " ($)"}
-                            defaultValue={0}
-                            min={0}
-                            onChange={(e) => setInitialInvestment(Number(e.target.value))}
-                        />
-                    </div>
-
-                    <LocalizationProvider dateAdapter={AdapterDayjs}
-                                          localeText={csCZ.components.MuiLocalizationProvider.defaultProps.localeText}>
-                        <div className="row g-3 justify-content-center mb-4">
-                            <div className="col-12 col-md-6">
-                                <p style={{fontWeight: "bold"}}>{t("Buy Date")}</p>
-                                <DateCalendar
-                                    value={buyDate}
-                                    onChange={handleBuyDateChange}
-                                    minDate={dayjs(startDate)}
-                                    maxDate={dayjs(endDate)}
-                                    disableFuture={true}
-                                    disablePast={false}
-                                    showDaysOutsideCurrentMonth={false}
-                                    slotProps={graphColors}
-                                />
-                            </div>
-                            <div className="col-12 col-md-6">
-                                <p style={{fontWeight: "bold"}}>{t("Sell Date")}</p>
-                                <DateCalendar
-                                    value={sellDate}
-                                    onChange={handleSellDateChange}
-                                    minDate={dayjs(startDate)}
-                                    maxDate={dayjs(endDate)}
-                                    disableFuture={true}
-                                    disablePast={false}
-                                    showDaysOutsideCurrentMonth={false}
-                                    slotProps={graphColors}
-                                />
-                            </div>
-                        </div>
-                    </LocalizationProvider>
-                    <h4 style={{
-                        color: gain > 0 ? "green" : gain < 0 ? "red" : "gray",
-                        fontWeight: "bold",
-                        fontSize: "35px"
-                    }}>{t("Gain: ")}{gain.toFixed(2)}$ ({percentage.toFixed(2)}%)</h4>
+        <div className="padding-bottom padding-top asset-font" data-aos="fade-up" data-aos-duration="1000">
+            <div className="row justify-content-center align-items-center mt-3">
+                <h2 style={{textAlign: "center"}}>{t("If I started investing at some point")}</h2>
+                <div
+                    className="cta-form d-flex align-items-center justify-content-center gap-2 mt-5 mb-5 w-100"
+                    style={{maxWidth: "300px"}}
+                >
+                    <p className="mb-0" style={{whiteSpace: "nowrap"}}>{t("Amount")}</p>
+                    <input
+                        type="number"
+                        className="form-control form-control--style2 flex-grow-1"
+                        style={{height: "40px"}}
+                        placeholder={t("Initial investment") + " ($)"}
+                        defaultValue={0}
+                        min={0}
+                        onChange={(e) => setInitialInvestment(Number(e.target.value))}
+                    />
                 </div>
+
+                <LocalizationProvider dateAdapter={AdapterDayjs} localeText={csCZ.components.MuiLocalizationProvider.defaultProps.localeText}>
+                    <div className="row g-3 justify-content-center mb-4">
+                        <div className="col-12 col-md-6 mobile-margin">
+                            <p style={{fontWeight: "bold"}}>{t("Buy Date")}</p>
+                            <DateCalendar
+                                value={buyDate}
+                                onChange={handleBuyDateChange}
+                                minDate={dayjs(startDate)}
+                                maxDate={dayjs(endDate)}
+                                disableFuture={true}
+                                disablePast={false}
+                                showDaysOutsideCurrentMonth={false}
+                                slotProps={graphColors}
+                            />
+                        </div>
+                        <div className="col-12 col-md-6 mobile-margin">
+                            <p style={{fontWeight: "bold"}}>{t("Sell Date")}</p>
+                            <DateCalendar
+                                value={sellDate}
+                                onChange={handleSellDateChange}
+                                minDate={dayjs(startDate)}
+                                maxDate={dayjs(endDate)}
+                                disableFuture={true}
+                                disablePast={false}
+                                showDaysOutsideCurrentMonth={false}
+                                slotProps={graphColors}
+                            />
+                        </div>
+                    </div>
+                </LocalizationProvider>
+                <h4 style={{
+                    color: gain > 0 ? "green" : gain < 0 ? "red" : "gray",
+                    fontWeight: "bold",
+                    fontSize: "35px"
+                }}>{t("Gain: ")}{gain.toFixed(2)}$ ({percentage.toFixed(2)}%)</h4>
             </div>
         </div>
     );

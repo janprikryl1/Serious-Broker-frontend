@@ -39,8 +39,7 @@ export const Glossary: FC = () => {
     return (
         <>
             <TitleHeader title="Glossary of terms" />
-            <div className="padding-bottom">
-                <div className="service-details__wrapper">
+            <div className="container padding-bottom">
                     <div className="service-details__item">
                         <div className="service-details__item-inner">
                             <div
@@ -68,7 +67,6 @@ export const Glossary: FC = () => {
                             <Faq />
                         </div>
                     </div>
-                </div>
             </div>
         </>
     );

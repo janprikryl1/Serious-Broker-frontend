@@ -41,14 +41,14 @@ export const CryptoCurrencyDetail: FC = () => {
 
     return (
         <>
+            <TitleHeader title={cryptocurrency?.name ?? "Cryptocurrency"} />
             {cryptocurrency ? (
-                <>
-                    <TitleHeader title={cryptocurrency.name} />
-                    <div className="blog-details padding-top padding-bottom section-bg-color">
-                        <div className="container">
-                            <div className="blog-details__wrapper">
-                                <div className="row g-5">
-                                    <div className="col-lg-8">
+                <div className="blog-details padding-top padding-bottom section-bg-color">
+                    <div className="container">
+                        <div className="row g-5">
+                            <div className="col-lg-8">
+                                <div className="blog-details__item">
+                                    <div className="blog-details__item-inner">
                                         <h3>{cryptocurrency.name} ({cryptocurrency.symbol})</h3>
                                         {!imageError && (
                                             <img
@@ -59,37 +59,37 @@ export const CryptoCurrencyDetail: FC = () => {
                                                 className="mb-3"
                                             />
                                         )}
-                                        <p>{t("Price: ")} {cryptocurrency.price}$</p>
-                                        <p>{t("Website:")} <a className="link-underline-none" href={cryptocurrency.website}>{cryptocurrency.website}</a></p>
-                                        <p>{t("Marketcup: ")} {cryptocurrency.marketcap}</p>
-                                        {cryptocurrency.max_supply !== 0 && <p>{t("Total supply: ")} {cryptocurrency.max_supply}{" "}{t("coins")}</p>}
-                                        <p>{t("Circulating supply: ")} {cryptocurrency.circulating_supply}{" "}{t("coins")}</p>
-                                        {cryptocurrency.reddit && <p>{t("Reddit: ")} <a className="link-underline-none" href={cryptocurrency.reddit}>{cryptocurrency.reddit}</a></p>}
-                                        {cryptocurrency.twitter && <p>{t("Twitter: ")} <a className="link-underline-none" href={cryptocurrency.twitter}>{cryptocurrency.twitter}</a></p>}
-                                        {cryptocurrency.telegram && <p>{t("Telegram: ")} <a className="link-underline-none" href={cryptocurrency.telegram}>{cryptocurrency.telegram}</a></p>}
-                                        <p>{t("CMC rank: ")} {cryptocurrency.cmc_rank}</p>
-                                        <p>{t("Categories: ")} {cryptocurrency.categories}</p>
+                                        <p><strong>{t("Price: ")}</strong> {cryptocurrency.price}$</p>
+                                        <p><strong>{t("Website:")}</strong> <a className="link-underline-none" href={cryptocurrency.website}>{cryptocurrency.website}</a></p>
+                                        <p><strong>{t("Marketcup: ")}</strong> {cryptocurrency.marketcap}</p>
+                                        {cryptocurrency.max_supply !== 0 && <p><strong>{t("Total supply: ")}</strong>{cryptocurrency.max_supply}{" "}{t("coins")}</p>}
+                                        <p><strong>{t("Circulating supply: ")}</strong> {cryptocurrency.circulating_supply}{" "}{t("coins")}</p>
+                                        {cryptocurrency.reddit && <p><strong>{t("Reddit: ")}</strong> <a className="link-underline-none" href={cryptocurrency.reddit}>{cryptocurrency.reddit}</a></p>}
+                                        {cryptocurrency.twitter && <p><strong>{t("Twitter: ")}</strong> <a className="link-underline-none" href={cryptocurrency.twitter}>{cryptocurrency.twitter}</a></p>}
+                                        {cryptocurrency.telegram && <p><strong>{t("Telegram: ")}</strong> <a className="link-underline-none" href={cryptocurrency.telegram}>{cryptocurrency.telegram}</a></p>}
+                                        <p><strong>{t("CMC rank: ")}</strong> {cryptocurrency.cmc_rank}</p>
+                                        <p><strong>{t("Categories: ")}</strong> {cryptocurrency.categories}</p>
                                         <Button className="trk-btn trk-btn--large trk-btn--secondary2" style={{ marginTop: 30 }} onClick={goBack} color={ButtonColor.white}>
                                             {t("Back")}
                                         </Button>
                                     </div>
-                                    <div className="col-lg-4 col-md-8 col-12">
-                                        <div className="sidebar">
-                                            <div className="row g-4">
-                                                <div className="col-12">
-                                                    <SidebarSearch />
-                                                </div>
-                                                <div className="col-12">
-                                                    <RecentPost />
-                                                </div>
-                                            </div>
+                                </div>
+                            </div>
+                            <div className="col-lg-4 col-md-8 col-12">
+                                <div className="sidebar">
+                                    <div className="row g-4">
+                                        <div className="col-12">
+                                            <SidebarSearch />
+                                        </div>
+                                        <div className="col-12">
+                                            <RecentPost />
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </>
+                </div>
             ) : (
                 <ArticleSkeleton />
             )}

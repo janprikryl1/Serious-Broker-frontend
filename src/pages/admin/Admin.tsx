@@ -4,9 +4,9 @@ import { Sidebar } from "../../components/modules/admin/Sidebar.tsx";
 
 export const Admin: FC = () => {
     return (
-        <div style={{ display: 'flex', backgroundColor:"#25231f" }}>
+        <div style={{ display: 'flex' }}>
             <Sidebar />
-            <main style={{ flex: 1, paddingTop: '20px' }}>
+            <main className="container" style={{ flex: 1 }}>
                 <Outlet />
             </main>
         </div>

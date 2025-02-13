@@ -1,7 +1,6 @@
 .blog {
     @extend %of-hidden,
     %p-rel;
-
     font-size: 20px;
 
     &__wrapper {

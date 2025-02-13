@@ -695,5 +695,16 @@
     "MonthlyProfit": "Měsíční profit",
     "No data": "Žádná data",
     "Add to watchlist": "Přidat do seznamu sledovaných",
-    "Help for editors": "Nápověda pro editory"
+    "Help for editors": "Nápověda pro editory",
+    "How to create new article?": "Jak vytvořit nový článek?",
+    "First of all, you need to be an editor. If you are not, please contact us.": "Nejprve musíte být editorem. Pokud nejste, kontaktujte nás.",
+    "To enter the editor's area, click on the \"Editor\" button in the top right corner of the page.": "Pro vstup do editora klikněte na tlačítko \"Editor\" v pravém horním rohu stránky.",
+    "You will be redirected to the editor's area. Here you can create new article.": "Budete přesměrováni do editora. Zde můžete vytvořit nový článek.",
+    "1. Click on the \"New Article\" button.": "1. Klikněte na tlačítko \"Nový článek\".",
+    "2. Enter the title, description and another required fields.": "2. Zadejte název, popis a další povinná pole.",
+    "3. Choose article template.": "3. Vyberte šablonu článku.",
+    "4. Go to next step via next button.": "4. Jděte na další krok pomocí tlačítka Další.",
+    "5. Fill in the form containing subjects and the article content.": "5. Vyplňte formulář obsahující předměty a obsah článku.",
+    "3. Click on the \"Create\" button.": "3. Klikněte na tlačítko \"Vytvořit\".",
+    "Now you can edit, translate, delete or share your article.": "Nyní můžete upravit, přeložit, odstranit nebo sdílet svůj článek."
 }

@@ -25,9 +25,8 @@ export const Header: FC = () => {
     }, [location.pathname]);
 
     return (
-        <header className="header-section">
-            <div className="container header-bottom">
-                <div className="header-wrapper d-flex align-items-center justify-content-between">
+        <header className="container header-section">
+                <div className="header-wrapper">
                     <div className="d-flex align-items-center">
                         <div className="logo">
                             <Link to={routes.home}>
@@ -56,7 +55,6 @@ export const Header: FC = () => {
                         </div>
                     </div>
                 </div>
-            </div>
             {isMobileMenuOpen && <MobileMenu toggleMobileMenu={toggleMobileMenu} />}
         </header>
     );

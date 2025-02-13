@@ -11,7 +11,7 @@ export const ProfileOverview:FC = () => {
     const {user} = useUserContext();
     
     return (
-        <div className="admin-container padding-bottom" style={{minHeight: "50vh"}}>             
+        <div className="padding-bottom" style={{minHeight: "50vh"}}>             
             <h3 className="admin-section-title">{t("Profile overview")}</h3>
             <div className="row">
                 <AdminOverviewCard title={t("Achievments count")} value={`${t("You have")} ${achievements.length} ${t("achievements")}`} bottom={t(`${unreadAchievements.length}/${achievements.length} ${t("unread")}`)}/>

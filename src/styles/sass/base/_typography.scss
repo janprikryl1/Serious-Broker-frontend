@@ -243,7 +243,9 @@ button {
 .overview-graphs-container {
   font-size: 25px;
   color: #ae9647;
-  margin-left: 7vw;
+  .content {
+    margin-left: 3vw;
+  }
 }
 
 @media (max-width: 900px) {
@@ -751,4 +753,14 @@ button {
    box-shadow: none !important;
    color: #fff !important;
    font-size: 30px !important;
+}
+
+.font-footer {
+  font-size: 16px;
+}
+
+@media (max-width: 767px) {
+  .mobile-margin {
+    margin-left: -50px;
+  }
 }

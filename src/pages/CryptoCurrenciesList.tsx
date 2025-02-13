@@ -10,7 +10,7 @@ export const CryptoCurrenciesList:FC = () => {
     return (
         <>
             <TitleHeader title="Crypto currencies list"/>
-            <div className="padding-bottom">
+            <div className="container padding-bottom">
                 <div className="graph-container">
                     <div className="service-details__wrapper">
                         <div className="service-details__item">

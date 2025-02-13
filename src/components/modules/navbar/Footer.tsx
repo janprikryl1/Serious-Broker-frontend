@@ -1,24 +1,17 @@
 import  {FC} from 'react';
 import {useTranslation} from "react-i18next";
-import {
-  contactEmail,
-  facebookURL,
-  instagramURL,
-  linkedinURL,
-  phoneNumber,
-  twitterURL,
-  youtubeURL
-} from "../../../utils/constants";
+import {contactEmail, facebookURL, instagramURL, linkedinURL, phoneNumber, twitterURL, youtubeURL} from "../../../utils/constants";
 import {SocialLinkIcon} from "../contact/SocialLinkIcon.tsx";
 import {LeftFloatingContactDetailsItem} from "../contact/LeftFloatingContactDetailsItem.tsx";
 
 export const Footer:FC = () => {
   const {t} = useTranslation();
+  
   return (
-    <footer className="container footer">
-        <div className="footer__top--style1">
+    <footer className="container cta footer">
+        <div className="footer__top--style1 cta__wrapper">
           <div className="row">
-            <div className="col-md-6">
+            <div className="col-md-6 font-footer">
                 <p>
                   {t("Serious Broker is a student project that is being developed as part of a bachelor thesis. It focuses on assisting in investing and spreading awareness about cryptocurrencies.")}
                 </p>
@@ -40,7 +33,7 @@ export const Footer:FC = () => {
             </div>
           </div>
         </div>
-        <div className="footer__end">
+        <div className="footer__end cta__wrapper">
           <div>
             <p>© 2024 - 2025</p>
             <p>VŠB - Technical University of Ostrava</p>

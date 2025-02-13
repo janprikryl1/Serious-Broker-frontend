@@ -8,13 +8,13 @@ type Props = {
 
 export const TitleHeader: FC<Props> = ({ title }) => {
   const {t} = useTranslation();
-  
+
   return (
-      <section
-          className="page-header bg--cover"
-          style={{ backgroundImage: `url(${HeaderImage})` }}
-      >
-        <div className="container">
+      <div className="container">
+        <section
+            className="page-header bg--cover"
+            style={{ backgroundImage: `url(${HeaderImage})` }}
+        >
           <div
               className="page-header__content"
               data-aos="fade-right"
@@ -22,7 +22,7 @@ export const TitleHeader: FC<Props> = ({ title }) => {
           >
             <h2>{t(title)}</h2>
           </div>
-        </div>
-      </section>
+        </section>
+      </div>
   );
 };

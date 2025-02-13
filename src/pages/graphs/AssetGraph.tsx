@@ -28,6 +28,9 @@ export const AssetGraph: FC = () => {
         <>
             <TitleHeader title={t("GraphAssetData - details about asset and graph")}/>
             <div className="container padding-bottom mt-5 asset-font">
+                <div className="service-details__wrapper">
+                    <div className="service-details__item">
+                        <div className="service-details__item-inner">
                 <div
                     className="service-details__content"
                     data-aos="fade-up"
@@ -48,6 +51,9 @@ export const AssetGraph: FC = () => {
                     ) : (
                         <AssetDetailSkeleton/>
                     )}
+                </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </>

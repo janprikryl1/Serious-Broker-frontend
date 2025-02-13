@@ -92,7 +92,7 @@ export const Assets: FC = () => {
                             ))}
                         </div>
 
-                        <div ref={loaderRef}>
+                        <div ref={loaderRef} style={{marginTop: '20px'}}>
                             {loading && <AssetSkeleton />}
                         </div>
                     </div>
