@@ -70,7 +70,7 @@ export const Articles: FC = () => {
     return (
         <>
             <TitleHeader title="Articles" />
-            <div className="padding-top padding-bottom">
+            <div className="mt-4 padding-bottom">
                 <div className="container">
                     <div className="blog__wrapper">
                         <div className="row g-4">

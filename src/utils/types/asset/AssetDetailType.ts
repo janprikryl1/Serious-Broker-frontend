@@ -41,9 +41,11 @@ export type AssetDetailType = {
 
 export type Assets = {
     id: number;
+    name: string;
     asset_label: string;
     allocation: number;
     status?: boolean;
     changed?: string;
     created?: string;
+    photo: string;
 };

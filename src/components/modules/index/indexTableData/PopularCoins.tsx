@@ -38,8 +38,7 @@ export const PopularCoins: FC = () => {
                     <thead>
                     <tr>
                         <th>#</th>
-                        <th>{t("Symbol")}</th>
-                        {!isMobile && <th>{t("Name")}</th>}
+                        <th colSpan={2}>{t("Name")}</th>
                         <th>{t("Market Cap")}</th>
                         <th>{t("Last 7 Days")}</th>
                     </tr>
@@ -63,7 +62,7 @@ export const PopularCoins: FC = () => {
                                 </td>
                                 {!isMobile && <td>{coin.name}</td>}
                                 <td>{formatLargeCurrency(coin.price)}</td>
-                                <td>
+                                <td className="chart-cell">
                                     <IndexTableChart
                                         name={coin.asset_label}
                                         data={coin.graph_data}

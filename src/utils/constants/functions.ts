@@ -1,14 +1,6 @@
 const colors = [
-    "#5D4037", // Dark Brown
-    "#3E2723", // Very Dark Brown
-    "#4A148C", // Deep Purple
-    "#283593", // Dark Blue
-    "#1565C0", // Darker Blue
-    "#00695C", // Dark Teal
-    "#2E7D32", // Dark Green
-    "#9E9D24", // Dark Olive
-    "#E65100", // Dark Orange
-    "#B71C1C"  // Dark Red
+    "#aa0000",
+    "#2E7D32"
 ];
 
 export const getRandomColor = () => {
@@ -68,3 +60,8 @@ export const formatLargeCurrency = (number: number | string, multiplier = 1) => 
     const scaledNumber = Number(number) * multiplier;
     return `$${scaledNumber.toLocaleString('en-US')}`;
 }
+
+export const generateColor = (index: number) => {
+    const hue = (index * 137.508) % 360;
+    return `hsl(${hue}, 70%, 50%)`;
+};

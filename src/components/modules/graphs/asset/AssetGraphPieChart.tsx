@@ -1,50 +1,45 @@
-import {FC} from "react";
-import {PieChart} from "@mui/x-charts";
-import {Assets} from "../../../../utils/types/asset/AssetDetailType.ts";
+import { FC } from "react";
+import { PieChart } from "@mui/x-charts";
+import { Assets } from "../../../../utils/types/asset/AssetDetailType.ts";
+import { LegendItem } from "./LegendItem.tsx";
 
 type Props = {
     assets: Assets[];
-}
+};
 
-export const AssetGraphPieChart:FC<Props> = ({assets}) => {
+export const AssetGraphPieChart: FC<Props> = ({ assets }) => {
     return (
-            <div className="col-sm-5" style={{
-                backgroundColor: "#454a4e",
-                borderRadius: 24,
-                marginTop: "5%",
-                padding: "3%",
-                width: "103%",
-                maxWidth: 500,
-            }}>
-                <PieChart
-                    series={[
-                        {
-                            data: assets.map((singleAsset: Assets) => (
-                                {
-                                    id: singleAsset.id,
-                                    value: singleAsset.allocation * 100,
-                                    label: singleAsset.asset_label
-                                }
-                            )),
-                            highlightScope: {fade: 'global', highlight: 'item'},
-                            faded: {innerRadius: 30, additionalRadius: -30, color: 'gray'},
-                        },
-                    ]}
-                    slotProps={{
-                        legend: {
-                            direction: "column",
-                            position: {
-                                vertical: 'middle',
-                                horizontal: 'right',
-                            },
-                            itemMarkHeight: 15,
-                            markGap: 5,
-                            padding: 0
-                        }
-                    }}
-                    width={340}
-                    height={200}
-                />
+        <div style={{ display: "flex", alignItems: "center" }}>
+            <PieChart
+                series={[
+                    {
+                        data: assets.map((singleAsset: Assets, index) => ({
+                            id: singleAsset.id,
+                            value: singleAsset.allocation * 100,
+                            label: singleAsset.asset_label,
+                            color: `hsl(${index * 60}, 30%, 50%)`,
+                        })),
+                        highlightScope: { fade: 'global', highlight: 'item' },
+                    },
+                ]}
+                slotProps={{
+                    legend: {
+                        hidden: true,
+                    }
+                }}
+                width={360}
+                height={240}
+            />
+
+            <div style={{ marginLeft: "-20%" }}>
+                {assets.map((singleAsset, index) => (
+                    <LegendItem
+                        key={singleAsset.id}
+                        color={`hsl(${index * 60}, 30%, 50%)`}
+                        label={singleAsset.asset_label}
+                    />
+                ))}
             </div>
+        </div>
     );
 };

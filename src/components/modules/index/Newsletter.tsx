@@ -54,8 +54,8 @@ export const Newsletter: FC = () => {
           <div className="cta__wrapper">
             <div className="d-flex row">
               <div className="col-sm-6 newsletter-wrapper">
-                <h2 className="bg-color">{t("Investing Made Easy")}</h2>
-                <ul className="newsletter-list">
+                <h2 className="bg-color" style={{fontSize: "35px"}}>{t("Investing Made Easy")}</h2>
+              <ul className="newsletter-list">
                   <li>{t("We will create a full-step guide on investing just for you.")}</li>
                   <li>{t("Get recommendations on what to buy, when to buy and when to sell.")}</li>
                   <li>{t("You are in control – execute transactions based on our detailed guide.")}</li>

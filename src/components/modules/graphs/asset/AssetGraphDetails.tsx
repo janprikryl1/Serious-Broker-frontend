@@ -104,12 +104,13 @@ export const AssetGraphDetails: FC<Props> = ({ asset }) => {
     };
 
     return (
-        <div className="service-details__content mb-5">
-            <p>{t("Last update: ")} {toCzechDate(asset.last_update)}</p>
+        <div className="service-details__content mb-5" style={{border: "0.5px solid #3e3a32", borderRadius: "16px", padding: "20px", color:"white"}}>
+            <p style={{fontSize: "25px", fontWeight:"bold"}}>{t("Statistics")}</p>
+            <p style={{fontSize: "15px"}}>{t("Last update: ")} {toCzechDate(asset.last_update)}</p>
 
             <div className="d-flex gap-3 mb-3">
                 <div>
-                    <label htmlFor="profitType" className="form-label">{t("Profit")}</label>
+                    <label htmlFor="profitType" className="form-label" style={{fontSize: "13px"}}>{t("Profit")}</label>
                     <select
                         id="profitType"
                         className="form-select"
@@ -121,7 +122,7 @@ export const AssetGraphDetails: FC<Props> = ({ asset }) => {
                     </select>
                 </div>
                 <div>
-                    <label htmlFor="timeFrame" className="form-label">{t("Select season")}</label>
+                    <label htmlFor="timeFrame" className="form-label" style={{fontSize: "13px"}}>{t("Select season")}</label>
                     <select
                         id="timeFrame"
                         className="form-select"
@@ -135,8 +136,7 @@ export const AssetGraphDetails: FC<Props> = ({ asset }) => {
                 </div>
             </div>
 
-            <div className="mt-4">
-                <h5>{t("Profit Details")}</h5>
+            <div className="mt-4" style={{fontSize: "14px"}}>
                 {renderProfitDetails()}
             </div>
         </div>

@@ -89,7 +89,7 @@ export const EarningIn: FC<Props> = ({ series, startDate, endDate }) => {
                     />
                 </div>
 
-                <LocalizationProvider dateAdapter={AdapterDayjs} localeText={csCZ.components.MuiLocalizationProvider.defaultProps.localeText}>
+                <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="cs" localeText={csCZ.components.MuiLocalizationProvider.defaultProps.localeText}>
                     <div className="row g-3 justify-content-center mb-4">
                         <div className="col-12 col-md-6 mobile-margin">
                             <p style={{fontWeight: "bold"}}>{t("Buy Date")}</p>
@@ -102,6 +102,14 @@ export const EarningIn: FC<Props> = ({ series, startDate, endDate }) => {
                                 disablePast={false}
                                 showDaysOutsideCurrentMonth={false}
                                 slotProps={graphColors}
+                                sx={{
+                                    color: "#ffca2d",
+                                    "& .MuiPickersDay-root": { color: "#ffca2d" },
+                                    "& .MuiDayCalendar-weekDayLabel": { color: "white" },
+                                    "& .Mui-selected": { backgroundColor: "#ffca2d", color: "#000" },
+                                    "& .MuiPickersCalendarHeader-label": { color: "white" },
+                                    "& .MuiPickersArrowSwitcher-root": { color: "white" },
+                                }}                          
                             />
                         </div>
                         <div className="col-12 col-md-6 mobile-margin">
@@ -115,6 +123,14 @@ export const EarningIn: FC<Props> = ({ series, startDate, endDate }) => {
                                 disablePast={false}
                                 showDaysOutsideCurrentMonth={false}
                                 slotProps={graphColors}
+                                sx={{
+                                    color: "#ffca2d",
+                                    "& .MuiPickersDay-root": { color: "#ffca2d" },
+                                    "& .MuiDayCalendar-weekDayLabel": { color: "white" },
+                                    "& .Mui-selected": { backgroundColor: "#ffca2d", color: "#000" },
+                                    "& .MuiPickersCalendarHeader-label": { color: "white" },
+                                    "& .MuiPickersArrowSwitcher-root": { color: "white" },
+                                }} 
                             />
                         </div>
                     </div>

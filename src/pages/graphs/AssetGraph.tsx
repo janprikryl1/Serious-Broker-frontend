@@ -8,6 +8,7 @@ import { useTranslation } from "react-i18next";
 import {AssetGraphCurrencyCard} from "../../components/modules/graphs/asset/AssetGraphCurrencyCard.tsx";
 import {AssetGraphPieChart} from "../../components/modules/graphs/asset/AssetGraphPieChart.tsx";
 import {AssetGraphDetails} from "../../components/modules/graphs/asset/AssetGraphDetails.tsx";
+import {AssetAnalysisGraph} from "../../components/modules/graphs/asset/AssetAnalysisGraph.tsx";
 
 export const AssetGraph: FC = () => {
     const { t } = useTranslation();
@@ -26,36 +27,47 @@ export const AssetGraph: FC = () => {
 
     return (
         <>
-            <TitleHeader title={t("GraphAssetData - details about asset and graph")}/>
-            <div className="container padding-bottom mt-5 asset-font">
-                <div className="service-details__wrapper">
-                    <div className="service-details__item">
-                        <div className="service-details__item-inner">
-                <div
-                    className="service-details__content"
-                    data-aos="fade-up"
-                    data-aos-duration="900"
-                >
-                    <h2 className="mb-5 asset-title">{t("Title")}: {name} ({asset?.label})</h2>
-                    {asset ? (
-                        <>
-                            <AssetGraphDetails asset={asset}/>
-                            <div className="row">
-                                {asset.assets.map((singleAsset: Assets) => (
-                                    <AssetGraphCurrencyCard singleAsset={singleAsset}
-                                                            key={singleAsset.id}/>
-                                ))}
+            {asset ? (
+                <>
+                    <TitleHeader title={asset?.name} text={asset?.label}/>
+                    <div className="container padding-bottom asset-font">
+                        <div className="service-details__wrapper">
+                            <div className="service-details__item">
+                                <div className="service-details__item-inner">
+                                    <div className="service-details__item">
+                                        <div className="service-details__content" data-aos="fade-up"
+                                             data-aos-duration="900">
+                                            <h2 className="asset-title">{t("Analytics")}</h2>
+                                            <div className="row">
+                                                <div className="col-sm-8">
+                                                    <AssetAnalysisGraph />
+                                                </div>
+                                                <div className="col-sm-4">
+                                                    <AssetGraphDetails asset={asset}/>  
+                                                </div>
+                                            </div>
+                                            <h2 className="asset-title">{t("Index composition")}</h2>
+                                            <div className="row">
+                                                <div className="col-sm-8">
+                                                    <div className="row">
+                                                        {asset.assets.map((singleAsset: Assets) => (
+                                                            <AssetGraphCurrencyCard singleAsset={singleAsset}
+                                                                                    key={singleAsset.id}/>
+                                                        ))}
+                                                    </div>
+                                                </div>
+                                                <div className="col-sm-4">
+                                                    <AssetGraphPieChart assets={asset.assets}/>  
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <AssetGraphPieChart assets={asset.assets}/>
-                        </>
-                    ) : (
-                        <AssetDetailSkeleton/>
-                    )}
-                </div>
                         </div>
                     </div>
-                </div>
-            </div>
+                </>
+            ) : <AssetDetailSkeleton/>}
         </>
     );
 };

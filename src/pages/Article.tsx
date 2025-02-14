@@ -82,7 +82,7 @@ export const Article: FC = () => {
     return (
         <>
             <TitleHeader title={article?.title ?? "Article"} />
-            <div className="blog-details padding-top padding-bottom section-bg-color article-font-size">
+            <div className="blog-details mt-4 padding-bottom section-bg-color article-font-size">
                 <div className="container">
                     <div className="blog-details__wrapper">
                         <div className="row g-5">

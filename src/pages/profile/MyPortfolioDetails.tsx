@@ -45,12 +45,17 @@ export const MyPortfolioDetails:FC = () => {
                                     <p>{t("Created")}: {toCzechDate(portfolio.created)}</p>
                                     <AssetGraphDetails asset={portfolio}/>
                                     <div className="row">
-                                        {portfolio.asset.map((singleAsset: Assets) => (
-                                            <AssetGraphCurrencyCard singleAsset={singleAsset}
-                                                                    key={singleAsset.id}/>
-                                        ))}
+                                        <div className="col-sm-8">
+                                            <div className="row">
+                                                {portfolio.asset.map((singleAsset: Assets) => (
+                                                    <AssetGraphCurrencyCard singleAsset={singleAsset} key={singleAsset.id}/>
+                                                ))}
+                                            </div>
+                                        </div>
+                                        <div className="col-sm-4">
+                                            <AssetGraphPieChart assets={portfolio.asset}/>
+                                        </div>
                                     </div>
-                                    <AssetGraphPieChart assets={portfolio.asset}/>
                                 </>
                             ) : (
                                 <AssetDetailSkeleton/>

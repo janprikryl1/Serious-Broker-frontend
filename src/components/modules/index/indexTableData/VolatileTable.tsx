@@ -15,8 +15,7 @@ export const VolatileTable:FC<Props> = ({data}) => {
             <thead>
             <tr>
                 <th>#</th>
-                <th>{t("Symbol")}</th>
-                <th>{t("Title")}</th>
+                <th colSpan={2}>{t("Name")}</th>
                 <th>{t("Difference")}</th>
                 <th>{t("Graph")}</th>
             </tr>

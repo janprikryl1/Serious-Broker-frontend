@@ -33,9 +33,9 @@ export const AssetGraphCurrencyDetail: FC = () => {
 
     return (
         <>
-            <TitleHeader title={t("GraphAssetData - details about asset and graph")} />
+            <TitleHeader title={t("GraphAssetData - details about asset and graph")} text={asset?.asset_label} />
             {asset ? (
-                <div className="container justify-content-center mb-1 mt-3">
+                <div className="container justify-content-center mb-1">
                     <div className="service-details__wrapper">
                         <div className="service-details__item">
                             <div className="service-details__item-inner">

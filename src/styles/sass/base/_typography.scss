@@ -416,8 +416,16 @@ button {
 
 .table-index-light th,
 .table-index-light td {
+  text-align: center;
+}
+.table-index-light td {
   padding: 15px;
-  text-align: left;
+}
+
+.table-index-light th {
+  font-size: 15px;
+  font-weight: normal;
+  padding: 5px;
 }
 
 .table-index-light tbody tr:not(:last-child) td {
@@ -435,7 +443,7 @@ button {
 }
 
 .asset-title {
-  font-size: 50px;
+  font-size: 35px;
 }
 
 .coin-symbol {
@@ -466,20 +474,20 @@ button {
 }
 
 .title-serious-broker {
-  width: 35vw;
+  width: 30vw;
   margin: 0;
 }
 
 .asset-graph-currency-card {
-  background-color: #454a4e;
-  border-radius: 24px;
+  background-color: #d4c6a9;
+  border-radius: 16px;
   margin: 1%;
   padding: 1%;
-  font-size: 20px;
 }
 
 .title-save-crypto-safely {
   font-size: 3vw;
+  margin-left: 8rem;
 }
 
 .season-gains {
@@ -565,9 +573,9 @@ button {
   }
 
   .title-save-crypto-safely {
-    font-size: 3vw;
-    max-width: 10vw;
-    margin-left: 110px;
+    font-size: 20px;
+    letter-spacing: 0.5px;
+    margin-left: 1rem;
   }
 
   .card-title {
@@ -703,10 +711,11 @@ button {
 
 .page-container {
   position: relative;
-  height: 55vh;
+  height: 50vh;
   background-color: #120c06;
   background-size: cover;
   background-repeat: no-repeat;
+  background-position: calc(100% - 30vh) calc(100% + 40vh);
   display: flex;
   justify-content: right;
   align-items: center;
@@ -716,7 +725,7 @@ button {
 
   .overlay {
     position: absolute;
-    width: 99.1%;
+    width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.2);
     z-index: 1;
@@ -725,7 +734,7 @@ button {
   .content {
     position: relative;
     z-index: 2;
-    padding-right: 5rem;
+    padding-right: 2rem;
 
     &.mobile {
       padding-right: 5vw;
@@ -734,12 +743,17 @@ button {
 
   .logo-container {
     text-align: right;
-    margin-bottom: 5vh;
+    margin-bottom: 4vh;
   }
 
   .title-save-crypto-safely {
-    font-size: 1.5rem;
     font-weight: bold;
+    font-size: 1.5rem;
+  }
+  
+  @media (max-width: 768px) {
+    height: 40vh;
+    background-position: calc(100% - 20vh) calc(100% + 15vh);
   }
 }
 
@@ -763,4 +777,12 @@ button {
   .mobile-margin {
     margin-left: -50px;
   }
+}
+
+.chart-cell {
+  text-align: center;
+}
+
+.chart-cell > div {
+  display: inline-block;
 }

@@ -69,9 +69,8 @@ export const MostProfitableLastSelectedPeriod: FC = () => {
                 <table className="table-index-light mb-3">
                     <thead>
                     <tr>
-                        <th>{t("Position")}</th>
-                        <th>Coin</th>
-                        <th>{t("Name")}</th>
+                        <th>#</th>
+                        <th colSpan={2}>{t("Name")}</th>
                         <GainSeasonTh/>
                         <th>{t("Graph")}</th>
                     </tr>
@@ -81,32 +80,32 @@ export const MostProfitableLastSelectedPeriod: FC = () => {
                         <tr key={index}>
                             <td>
                                 {season === IndexSeason.SMART
-                                    ? index + 1
-                                    : season === IndexSeason.WEEK
-                                        ? coin.week_0_pos
-                                        : season === IndexSeason.MONTH
-                                            ? coin.month_0_pos
-                                            : season === IndexSeason.QUARTER
-                                                ? coin.quarter_0_pos
-                                                : coin.year_0_pos
+                                 ? index + 1
+                                 : season === IndexSeason.WEEK
+                                 ? coin.week_0_pos
+                                 : season === IndexSeason.MONTH
+                                 ? coin.month_0_pos
+                                 : season === IndexSeason.QUARTER
+                                 ? coin.quarter_0_pos
+                                 : coin.year_0_pos
                                 }
                             </td>
-                            <td>{coin.photo && <img src={`${coinURL}/${coin.photo}`} alt={`Coin image: ${coin.asset_label}`}
-                                                    width={30}/>} {coin.asset_label}</td>
+                            <td className="coin-symbol">{coin.photo && <img src={`${coinURL}/${coin.photo}`} alt={`Coin image: ${coin.asset_label}`}
+                                                    width={30}/>} <strong>{coin.asset_label}</strong></td>
                             <td>{coin.name}</td>
                             <td>
                                 {season === IndexSeason.SMART
-                                    ? `${(coin.max_0_profit! * 100).toFixed(2)} %`
-                                    : `${(((season === IndexSeason.WEEK
-                                        ? coin.week_0_profit!
-                                        : season === IndexSeason.MONTH
-                                            ? coin.month_0_profit!
-                                            : season === IndexSeason.QUARTER
-                                                ? coin.quarter_0_profit!
-                                                : coin.year_0_profit!) - 1) * 100).toFixed(2)} %`
+                                 ? `${(coin.max_0_profit! * 100).toFixed(2)} %`
+                                 : `${(((season === IndexSeason.WEEK
+                                 ? coin.week_0_profit!
+                                 : season === IndexSeason.MONTH
+                                 ? coin.month_0_profit!
+                                 : season === IndexSeason.QUARTER
+                                 ? coin.quarter_0_profit!
+                                 : coin.year_0_profit!) - 1) * 100).toFixed(2)} %`
                                 }
                             </td>
-                            <td>
+                            <td className="chart-cell">
                                 <IndexTableChart
                                     name={coin.asset_label}
                                     data={getProfitData(coin)}

@@ -673,7 +673,7 @@
     "Biggest Movers": "Největší skokani",
     "Explore which coins gained or lost the most in a specified period.": "Prozkoumejte, které mince získaly nebo ztratily nejvíce v určitém období.",
     "Losses": "Ztráty",
-    "Top Coins by Market Capitalization": "Top mince podle Coinmarketcup",
+    "Top Coins by Market Capitalization": "Top mince podle CoinMarketCap",
     "A list of top 10 cryptocurrencies by market cap.": "Seznam největších 10 kryptoměn podle kapitálu tržního obchodu.",
     "Last 7 Days": "Posledních 7 dnů",
     "Profit Details": "Detaily assetu",
@@ -706,5 +706,9 @@
     "4. Go to next step via next button.": "4. Jděte na další krok pomocí tlačítka Další.",
     "5. Fill in the form containing subjects and the article content.": "5. Vyplňte formulář obsahující předměty a obsah článku.",
     "3. Click on the \"Create\" button.": "3. Klikněte na tlačítko \"Vytvořit\".",
-    "Now you can edit, translate, delete or share your article.": "Nyní můžete upravit, přeložit, odstranit nebo sdílet svůj článek."
+    "Now you can edit, translate, delete or share your article.": "Nyní můžete upravit, přeložit, odstranit nebo sdílet svůj článek.",
+    "Analytics": "Analtika",
+    "Index composition": "Rozložení indexu",
+    "Contribution": "Zastoupení",
+    "Statistics": "Statistiky"
 }

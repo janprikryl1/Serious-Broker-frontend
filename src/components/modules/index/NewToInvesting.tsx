@@ -8,7 +8,7 @@ export const NewToInvesting:FC = () => {
     
     return (
         <div className="cta-dark">
-            <h1>{t("New to Investing?")}</h1>
+            <h2 style={{fontSize: "35px"}}>{t("New to Investing?")}</h2>
             <p>{t("Start with the basics")}</p>
             <div className="row">
                 {indexLinks.map((link) => (

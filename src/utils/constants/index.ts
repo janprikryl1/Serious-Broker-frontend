@@ -168,7 +168,9 @@ export const defaultNewMyPortfolioAsset: Assets = {
     id: 0,
     asset_label: "",
     allocation: 0,
-    status: true
+    status: true,
+    photo: "",
+    name: "",
 }
 
 const graphColor = {

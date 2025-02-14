@@ -7,7 +7,7 @@ export const LookingForMoreInDepthStatistics:FC = () => {
     return (
         <section className="cta padding-top padding-bottom bg-color">
             <div className="cta__wrapper">
-                <h2 className="mb-4 bg-color">{t("Looking for More In-Depth Statistics?")}</h2>
+                <h2 style={{fontSize: "35px"}} className="mb-4 bg-color">{t("Looking for More In-Depth Statistics?")}</h2>
                 <ul className="newsletter-list">
                     <li>{t("Detailed insights and historical data on all cryptocurrencies")}</li>
                     <li>{t("Comparison of cryptocurrencies")}</li>
