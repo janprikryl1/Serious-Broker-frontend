@@ -35,34 +35,37 @@ export const MostProfitableLastSelectedPeriod: FC = () => {
     const getProfitData = useMemo(() => {
         const profitMap = (coin: AssetProfitData) => ({
             Week: [
-                calculateProfit(coin.week_2_profit!),
-                calculateProfit(coin.week_1_profit!),
-                calculateProfit(coin.week_0_profit!),
-            ].filter(value => value !== null),
+                coin.week_3_profit ? calculateProfit(coin.week_3_profit) : undefined,
+                coin.week_2_profit ? calculateProfit(coin.week_2_profit) : undefined,
+                coin.week_1_profit ? calculateProfit(coin.week_1_profit) : undefined,
+                coin.week_0_profit ? calculateProfit(coin.week_0_profit) : undefined,
+            ].filter((value) => value !== undefined && value !== null),
             Month: [
-                calculateProfit(coin.month_2_profit!),
-                calculateProfit(coin.month_1_profit!),
-                calculateProfit(coin.month_0_profit!),
-            ].filter(value => value !== null),
+                coin.month_2_profit ? calculateProfit(coin.month_2_profit) : undefined,
+                coin.month_1_profit ? calculateProfit(coin.month_1_profit) : undefined,
+                coin.month_0_profit ? calculateProfit(coin.month_0_profit) : undefined,
+            ].filter((value) => value !== undefined && value !== null),
             Quarter: [
-                calculateProfit(coin.quarter_2_profit!),
-                calculateProfit(coin.quarter_1_profit!),
-                calculateProfit(coin.quarter_0_profit!),
-            ].filter(value => value !== null),
+                coin.quarter_3_profit ? calculateProfit(coin.quarter_3_profit) : undefined,
+                coin.quarter_2_profit ? calculateProfit(coin.quarter_2_profit) : undefined,
+                coin.quarter_1_profit ? calculateProfit(coin.quarter_1_profit) : undefined,
+                coin.quarter_0_profit ? calculateProfit(coin.quarter_0_profit) : undefined,
+            ].filter((value) => value !== undefined && value !== null),
             Year: [
-                calculateProfit(coin.year_2_profit!),
-                calculateProfit(coin.year_1_profit!),
-                calculateProfit(coin.year_0_profit!),
-            ].filter(value => value !== null),
+                coin.year_2_profit ? calculateProfit(coin.year_2_profit) : undefined,
+                coin.year_1_profit ? calculateProfit(coin.year_1_profit) : undefined,
+                coin.year_0_profit ? calculateProfit(coin.year_0_profit) : undefined,
+            ].filter((value) => value !== undefined && value !== null),
             Smart: [
-                calculateProfit(coin.max_2_profit!),
-                calculateProfit(coin.max_1_profit!),
-                calculateProfit(coin.max_0_profit!),
-            ].filter(value => value !== null),
+                coin.max_2_profit ? calculateProfit(coin.max_2_profit) : undefined,
+                coin.max_1_profit ? calculateProfit(coin.max_1_profit) : undefined,
+                coin.max_0_profit ? calculateProfit(coin.max_0_profit) : undefined,
+            ].filter((value) => value !== undefined && value !== null),
         });
         return (coin: AssetProfitData) => profitMap(coin)[season as keyof typeof profitMap];
     }, [season]);
-    
+
+
     return (
         <div className="p-4 rounded">
             {!isPending && data ? (
@@ -78,18 +81,7 @@ export const MostProfitableLastSelectedPeriod: FC = () => {
                     <tbody>
                     {data.map((coin, index) => (
                         <tr key={index}>
-                            <td>
-                                {season === IndexSeason.SMART
-                                 ? index + 1
-                                 : season === IndexSeason.WEEK
-                                 ? coin.week_0_pos
-                                 : season === IndexSeason.MONTH
-                                 ? coin.month_0_pos
-                                 : season === IndexSeason.QUARTER
-                                 ? coin.quarter_0_pos
-                                 : coin.year_0_pos
-                                }
-                            </td>
+                            <td>{index+1}</td>
                             <td className="coin-symbol">{coin.photo && <img src={`${coinURL}/${coin.photo}`} alt={`Coin image: ${coin.asset_label}`}
                                                     width={30}/>} <strong>{coin.asset_label}</strong></td>
                             <td>{coin.name}</td>

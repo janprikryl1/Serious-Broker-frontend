@@ -12,6 +12,7 @@ import { TranslationsOverview } from "../utils/types/article/TranslationsOvervie
 import { getTranslatedArticle } from "../api/translateService.ts";
 import {routes} from "../utils/constants";
 import {ArticleSkeleton} from "../components/modules/article/ArticleSkeleton.tsx";
+import { Highlight } from "../components/modules/highlights/Highlight.tsx";
 
 export const Article: FC = () => {
     const { id, language } = useParams();
@@ -100,10 +101,13 @@ export const Article: FC = () => {
                                 <div className="sidebar">
                                     <div className="row g-4">
                                         <div className="col-12">
-                                            <SidebarSearch />
+                                            <SidebarSearch/>
                                         </div>
                                         <div className="col-12">
-                                            <RecentPost />
+                                            <RecentPost/>
+                                        </div>
+                                        <div className="col-12">
+                                            <Highlight />
                                         </div>
                                     </div>
                                 </div>

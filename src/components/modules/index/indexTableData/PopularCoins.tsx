@@ -45,9 +45,9 @@ export const PopularCoins: FC = () => {
                     </thead>
                     <tbody>
                     {!isPending && deferredData ? (
-                        deferredData.map((coin) => (
+                        deferredData.map((coin, index) => (
                             <tr key={coin.cmc_rank}>
-                                <td>{coin.cmc_rank}</td>
+                                <td>{index+1}</td>
                                 <td className="coin-symbol">
                                     {coin.photo && (
                                         <img

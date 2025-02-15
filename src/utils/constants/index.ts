@@ -70,6 +70,7 @@ export const routes = {
         translations: "translations/:articleId",
         translationsEdit: "translations/:articleId/:id",
         postEdit: "post/edit/:articleId/:id?",
+        highlitsEditor: "highlits/editor",
     },
     admin: {
         index: "",
@@ -103,6 +104,7 @@ export const editorURLS = {
     translations: "/editor/translations/",
     translationsEdit: "/editor/translations/",
     postEdit: "/editor/post/edit/",
+    highlitsEditor: "/editor/highlits/editor",
 }
 
 export const adminURLS = {

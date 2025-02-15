@@ -1,13 +1,13 @@
-import {useEffect, useRef, useState} from "react";
+import { useEffect, useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import SwiperCore from "swiper";
 import { TrendingSwiperItem } from "./TrendingSwiperItem.tsx";
 import { GrLinkNext, GrLinkPrevious } from "react-icons/gr";
-import {TrendingSwiperSkeleton} from "./TrendingSwiperSkeleton.tsx";
+import { TrendingSwiperSkeleton } from "./TrendingSwiperSkeleton.tsx";
 import '../../../styles/css/swiper-bundle.min.css';
-import {MostProfitable} from "../../../utils/types/indexPage/IndexDataStructure.ts";
-import {getLatestCoinmarketcupCoins} from "../../../api/indexDataService.ts";
+import { MostProfitable } from "../../../utils/types/indexPage/IndexDataStructure.ts";
+import { getLatestCoinmarketcupCoins } from "../../../api/indexDataService.ts";
 
 export const TrendingSwiper = () => {
     const swiperRef = useRef<SwiperCore | null>(null);
@@ -26,21 +26,21 @@ export const TrendingSwiper = () => {
         };
         getData();
     }, []);
-    
+
     const handleSlideChange = () => {
         if (swiperRef.current) {
             setCanGoPrev(!swiperRef.current.isBeginning);
             setCanGoNext(!swiperRef.current.isEnd);
         }
     };
-    
+
     return (
         <>
-            {last_coinmarketcup_coins ? (  
+            {last_coinmarketcup_coins ? (
                 <div className="trending-swiper-wrapper">
                     {canGoPrev && (
                         <button className="swiper-button" onClick={() => swiperRef.current?.slidePrev()} aria-label="Previous">
-                            <GrLinkPrevious style={{color:"black"}} />
+                            <GrLinkPrevious style={{color:"black", paddingLeft: "5px"}} />
                         </button>
                     )}
                     <div className="trending-swiper">
@@ -65,7 +65,7 @@ export const TrendingSwiper = () => {
                     </div>
                     {canGoNext && (
                         <button className="swiper-button" onClick={() => swiperRef.current?.slideNext()} aria-label="Next">
-                            <GrLinkNext style={{color:"black"}} />
+                            <GrLinkNext style={{color:"black", paddingLeft: "5px"}} />
                         </button>
                     )}
                 </div>

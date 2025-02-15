@@ -329,13 +329,15 @@ button {
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  position: relative;
 }
 
 .trending-swiper {
   flex-grow: 1;
-  max-width: 100%;
+  max-width: 1100px;
   overflow: hidden;
 }
+
 .crypto-card {
   background-color: #d5c6aa;
   border-radius: 8px;
@@ -344,19 +346,30 @@ button {
   color: black;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 10px;
   max-width: 200px;
+  margin: 0 auto;
+}
 
-  .crypto-logo {
-    width: 40px;
-    height: 40px;
-    object-fit: contain;
-  }
+.crypto-logo {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
 
-  .crypto-info {
-    display: flex;
-    flex-direction: column;
-  }
+.crypto-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 1;
+}
+
+.crypto-name {
+  font-weight: bold;
+  overflow: hidden;
+  max-height: 20px;
 }
 
 .percentage {
@@ -370,10 +383,12 @@ button {
 .swiper-button {
   background-color: #b1964d;
   border: none;
-  padding: 10px;
-  width: 45px;
-  border-radius: 50%;
-  font-size: 18px;
+  width: 45px; /* Set width */
+  height: 45px; /* Set height to match width for perfect circle */
+  border-radius: 50%; /* Makes the button circular */
+  display: flex;
+  justify-content: center; /* Horizontally centers the icon */
+  align-items: center; /* Vertically centers the icon */
   margin: 10px;
 }
 

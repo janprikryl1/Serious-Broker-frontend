@@ -19,6 +19,7 @@ export type AssetProfitData = {
     week_0_profit?: number;
     week_1_profit?: number;
     week_2_profit?: number | null;
+    week_3_profit?: number | null;
     month_0_pos?: number;
     month_0_profit?: number;
     month_1_profit?: number;
@@ -27,6 +28,7 @@ export type AssetProfitData = {
     quarter_0_profit?: number;
     quarter_1_profit?: number | null;
     quarter_2_profit?: number | null;
+    quarter_3_profit?: number | null;
     year_0_pos?: number;
     year_0_profit?: number;
     year_1_profit?: number | null;

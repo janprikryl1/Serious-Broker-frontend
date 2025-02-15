@@ -66,7 +66,9 @@ const ProfileMembership = lazy(() => import("./pages/profile/ProfileMembership.t
 const ProfileEdit = lazy(() => import("./pages/profile/ProfileEdit.tsx").then(module => ({ default: module.ProfileEdit })));
 const ProfileSessions = lazy(() => import("./pages/profile/ProfileSessions.tsx").then(module => ({ default: module.ProfileSessions })));
 const EditorIndex = lazy(() => import("./pages/editor/EditorIndex.tsx").then(module => ({ default: module.EditorIndex })));
+const HighlightsList = lazy(() => import("./pages/editor/HighlightsList.tsx").then(module => ({ default: module.HighlightsList })));
 import {EditorOverview} from "./pages/editor/EditorOverview.tsx";
+
 // Disable automatic CSS addition for Font Awesome
 config.autoAddCss = false;
 
@@ -128,6 +130,7 @@ function App() {
                                 <Route path={routes.editor.translations} element={<PageLoader><TranslateEdit /></PageLoader>} />
                                 <Route path={routes.editor.translationsEdit} element={<PageLoader><TranslateEdit /></PageLoader>} />
                                 <Route path={routes.editor.postEdit} element={<PageLoader><PostEdit /></PageLoader>} />
+                                <Route path={routes.editor.highlitsEditor} element={<PageLoader><HighlightsList /></PageLoader>} />
                             </Route>
                             <Route path={adminURLS.index} element={<PageLoader><Admin /></PageLoader>}>
                                 <Route path={routes.admin.index} element={<PageLoader><AdminOverview /></PageLoader>} />
