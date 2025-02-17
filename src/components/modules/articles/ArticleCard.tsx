@@ -3,6 +3,7 @@ import {Link} from "react-router-dom";
 import {ArticleProps} from "../../../utils/types/article/ArticleProps.ts";
 import {useTranslation} from "react-i18next";
 import {toCzechDateFormat} from "../../../utils/constants/functions.ts";
+import {FaRegBookmark} from "react-icons/fa";
 
 type Props = {
     data: ArticleProps;
@@ -25,6 +26,7 @@ export const ArticleCard:FC<Props> = ({data, link = "article"}) => {
                                     Premium
                                 </span>
                             }
+                            <FaRegBookmark style={{marginLeft: 10, marginBottom: 5, cursor:"pointer"}} />
                         </div>
                         <h5 className="10 style2">
                             <Link to={`/${link}/${data.id}`} className="link-underline-none">{data.title}</Link>

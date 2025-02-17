@@ -56,6 +56,7 @@ export const routes = {
         editMyPortfolio: "/profile/edit_my_portfolio/:id",
         newMyPortfolio: "/profile/edit_my_portfolio",
         myPortfolioDetails: "/profile/my_portfolio_details/:id",
+        myWatchList: "/profile/my_watch_list",
     },
     verifyAccount: "/verify_account/:user_id/:token",
     forgottenPassword: "/forgotten_password",
@@ -138,6 +139,7 @@ export const registeredUserNavbarURLs: NavbarURLs = {
             mostProfitableAssets: { title: "Most profitable assets", link: routes.mostProfitableAssets }
         },
     },
+    myWatchList: { title: "My watch list", link: routes.profile.myWatchList },
 };
 
 export const notRegisteredUserNavbarURLs: Record<string, NavLink> = {

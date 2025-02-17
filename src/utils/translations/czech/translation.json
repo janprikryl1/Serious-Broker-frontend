@@ -723,5 +723,9 @@
     "Highlight deleted": "Highlight smazán",
     "Highlight successfully deleted": "Highlight byl úspěšně smazán",
     "About": "O assetu",
-    "Binance indexes management": "Správa dat binance_index"
+    "Binance indexes management": "Správa dat binance_index",
+    "My watch list": "Můj watchlist",
+    "No items in your watchlist": "Žádné položky v watchlistu",
+    "Start by clicking on watchlist icon": "Začněte kliknutím na ikonu watchlistu",
+    "You can add asset, coin or article to your watchlist": "Můžete přidat asset, mince nebo článek do watchlistu"
 }

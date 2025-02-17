@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 import { Sidebar as ProSidebar, Menu, MenuItem } from "react-pro-sidebar";
 import { routes } from "../../../utils/constants";
 import { CiLogout } from "react-icons/ci";
-import {FaBars, FaUserEdit} from "react-icons/fa";
+import {FaBars, FaRegBookmark, FaUserEdit} from "react-icons/fa";
 import {MdDevicesOther, MdOutlineSubscriptions} from "react-icons/md";
 import { GrAchievement } from "react-icons/gr";
 import { RiCoinsLine } from "react-icons/ri";
@@ -67,6 +67,9 @@ export const ProfileSidebar: FC = () => {
                     </MenuItem>
                     <MenuItem icon={<FaUserEdit />} component={<NavLink to={routes.profile.edit} />} className="sidebar-item">
                         {t("Edit profile")}
+                    </MenuItem>
+                    <MenuItem icon={<FaRegBookmark />} component={<NavLink to={routes.profile.myWatchList} />} className="sidebar-item">
+                        {t("My watch list")}
                     </MenuItem>
                     <MenuItem icon={<MdDevicesOther />} component={<NavLink to={routes.profile.sessions} />} className="sidebar-item">
                         {t("Sessions")}

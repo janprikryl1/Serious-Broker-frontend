@@ -69,6 +69,7 @@ const EditorIndex = lazy(() => import("./pages/editor/EditorIndex.tsx").then(mod
 const HighlightsList = lazy(() => import("./pages/editor/HighlightsList.tsx").then(module => ({ default: module.HighlightsList })));
 const HighlightsEditor = lazy(() => import("./pages/editor/HighlightsEditor.tsx").then(module => ({ default: module.HighlightsEditor })));
 const BinanceIndexAbout = lazy(() => import("./pages/admin/BinanceIndexAbout.tsx").then(module => ({ default: module.BinanceIndexAbout })));
+const MyWatchList = lazy(() => import("./pages/profile/MyWatchList.tsx").then(module => ({ default: module.MyWatchList })));
 import {EditorOverview} from "./pages/editor/EditorOverview.tsx";
 
 // Disable automatic CSS addition for Font Awesome
@@ -120,6 +121,7 @@ function App() {
                                 <Route path={routes.profile.myPortfolioDetails} element={<PageLoader><MyPortfolioDetails/></PageLoader>} />
                                 <Route path={routes.profile.newMyPortfolio} element={<PageLoader><EditMyPortfolio/></PageLoader>} />
                                 <Route path={routes.profile.sessions} element={<PageLoader><ProfileSessions/></PageLoader>} />
+                                <Route path={routes.profile.myWatchList} element={<PageLoader><MyWatchList/></PageLoader>} />
                             </Route>
                             <Route path={editorURLS.index} element={<EditorOverview />}>
                                 <Route path={routes.editor.index} element={<PageLoader><EditorIndex /></PageLoader>} />
