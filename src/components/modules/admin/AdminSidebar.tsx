@@ -14,8 +14,9 @@ import { VscFeedback } from "react-icons/vsc";
 import { GrAchievement } from "react-icons/gr";
 import { RiCoinsLine } from "react-icons/ri";
 import {UserRole} from "../../../utils/types/user/userTypes.ts";
+import {FaTable} from "react-icons/fa6";
 
-export const Sidebar: FC = () => {
+export const AdminSidebar: FC = () => {
     const { t } = useTranslation();
     const { user, logout } = useUserContext();
     const navigate = useNavigate();
@@ -33,7 +34,7 @@ export const Sidebar: FC = () => {
     };
     
     useEffect(() => {
-        if (user === null || !(user.role === UserRole.Admin || user.role === UserRole.Manager)) {
+        if (user === undefined || !(user.role === UserRole.Admin || user.role === UserRole.Manager)) {
             navigate(routes.home);
         }
     }, [user]);
@@ -103,6 +104,9 @@ export const Sidebar: FC = () => {
                     </MenuItem>
                     <MenuItem icon={<RiCoinsLine />} component={<NavLink to={adminURLS.coinSettings} />} className="sidebar-item">
                         {t("Coins")}
+                    </MenuItem>
+                    <MenuItem icon={<FaTable />} component={<NavLink to={adminURLS.binanceIndexAbout} />} className="sidebar-item">
+                        {t("binance_index About")}
                     </MenuItem>
                     <MenuItem icon={<MdOutlineSdStorage />} component={<NavLink to={adminURLS.chachedData} />} className="sidebar-item">
                         {t("Chached data")}

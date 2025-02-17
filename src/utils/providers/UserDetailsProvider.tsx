@@ -10,8 +10,8 @@ type Props = {
 }
 
 type UserDetailsProviderProps = {
-    userDetails: UserType | null;
-    setUserDetails: Dispatch<SetStateAction<UserType | null>>;
+    userDetails: UserType | undefined;
+    setUserDetails: Dispatch<SetStateAction<UserType | undefined>>;
     sumbitChanges: () => Promise<void>;
     handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
 }
@@ -21,7 +21,7 @@ const UserDetailsContext = React.createContext<UserDetailsProviderProps | undefi
 export const UserDetailsProvider = ({children}: Props) => {
     const {user, setUser} = useUserContext();
     const {t} = useTranslation();
-    const [userDetails, setUserDetails] = useState<UserType | null>(user);
+    const [userDetails, setUserDetails] = useState<UserType | undefined>(user);
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
@@ -32,7 +32,7 @@ export const UserDetailsProvider = ({children}: Props) => {
     };
 
     const sumbitChanges = async () => {
-        if (userDetails === null || userDetails.email === "") return;
+        if (userDetails === undefined || userDetails.email === "") return;
         try {
             const response = await updateUserDetails(userDetails);
             if (!response) return;

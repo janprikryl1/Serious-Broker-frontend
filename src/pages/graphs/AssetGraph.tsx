@@ -50,12 +50,13 @@ export const AssetGraph: FC = () => {
                                             <div className="row">
                                                 <div className="col-sm-8">
                                                     <h2 className="asset-title">{t("About")}</h2>
+                                                    <p>{asset.about}</p>
                                                 </div>
                                                 <div className="col-sm-4">
                                                     <Highlight/>
                                                 </div>
                                             </div>
-                                                <h2 className="asset-title">{t("Index composition")}</h2>
+                                            <h2 className="asset-title">{t("Index composition")}</h2>
                                             <div className="row">
                                                 <div className="col-sm-8">
                                                     <div className="row">

@@ -5,7 +5,7 @@ import { IndexTableChart } from "./indexTableChart/IndexTableChart.tsx";
 import {AssetProfitData} from "../../../../utils/types/indexPage/IndexDataStructure.ts";
 import { calculateProfit } from "../../../../utils/constants/functions.ts";
 import { GainSeasonTh } from "./GainSeasonTh.tsx";
-import { IndexSeason } from "../../../../utils/enums/IndexSeasonEnum.ts";
+import {IndexSeasonExtended} from "../../../../utils/enums/IndexSeasonEnum.ts";
 import { getMostProfitableSelectedPeriod} from "../../../../api/indexDataService.ts";
 import {IndexTableSkeleton} from "./IndexTableSkeleton.tsx";
 import {coinURL} from "../../../../utils/constants";
@@ -86,13 +86,13 @@ export const MostProfitableLastSelectedPeriod: FC = () => {
                                                     width={30}/>} <strong>{coin.asset_label}</strong></td>
                             <td>{coin.name}</td>
                             <td>
-                                {season === IndexSeason.SMART
+                                {season === IndexSeasonExtended.SMART
                                  ? `${(coin.max_0_profit! * 100).toFixed(2)} %`
-                                 : `${(((season === IndexSeason.WEEK
+                                 : `${(((season === IndexSeasonExtended.WEEK
                                  ? coin.week_0_profit!
-                                 : season === IndexSeason.MONTH
+                                 : season === IndexSeasonExtended.MONTH
                                  ? coin.month_0_profit!
-                                 : season === IndexSeason.QUARTER
+                                 : season === IndexSeasonExtended.QUARTER
                                  ? coin.quarter_0_profit!
                                  : coin.year_0_profit!) - 1) * 100).toFixed(2)} %`
                                 }

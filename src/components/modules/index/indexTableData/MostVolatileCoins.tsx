@@ -30,7 +30,7 @@ export const MostVolatileCoins: FC = () => {
         <>
             {!isPending && mostVolatile ? (
                 <>
-                    <h2 style={{fontSize: "35px"}}>{t("The biggest jumpers up and down")}</h2>
+                    <h2 className="index-title">{t("The biggest jumpers up and down")}</h2>
                     <TypographyWithPopover popover={t("Which coins got the most")}>
                         {t("Rises")}
                     </TypographyWithPopover>

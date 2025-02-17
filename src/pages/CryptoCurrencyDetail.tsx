@@ -50,7 +50,7 @@ export const CryptoCurrencyDetail: FC = () => {
                             <div className="col-lg-8">
                                 <div className="blog-details__item">
                                     <div className="blog-details__item-inner">
-                                        <h3>{cryptocurrency.name} ({cryptocurrency.symbol})</h3>
+                                        <h3 className="index-title">{cryptocurrency.name} ({cryptocurrency.symbol})</h3>
                                         {!imageError && (
                                             <img
                                                 src={`${coinURL}/${cryptocurrency.photo}`}

@@ -15,7 +15,7 @@ export const LocationData:FC = () => {
         }));
     };
 
-    if (userDetails !== null) {
+    if (userDetails !== undefined) {
         return (
             <>
                 <h3>{t("Location")}</h3>

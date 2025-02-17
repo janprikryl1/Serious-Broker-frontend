@@ -3,7 +3,7 @@ import {backendUrl} from "../env.ts";
 import {LastCoinmarketCupCoinsType} from "../utils/types/indexPage/LastCoinmarketCupCoinsType.ts";
 import {LastMostProfitableCoins} from "../utils/types/indexPage/LastMostProfitableCoins.ts";
 import {AssetProfitData, IndexDataStructure} from "../utils/types/indexPage/IndexDataStructure.ts";
-import {IndexSeason} from "../utils/enums/IndexSeasonEnum.ts";
+import {IndexSeasonExtended} from "../utils/enums/IndexSeasonEnum.ts";
 import {IndexChartsType} from "../utils/enums/IndexChartsTypeEnum.ts";
 
 export const getPopularCoins = async () => {
@@ -30,7 +30,7 @@ export const getIndexData = async () => {
     return await axios.get<IndexDataStructure>(backendUrl + "index/index.php");
 }
 
-export const getMostProfitableSelectedPeriod = async (season: IndexSeason, chartType: IndexChartsType) => {
+export const getMostProfitableSelectedPeriod = async (season: IndexSeasonExtended, chartType: IndexChartsType) => {
     const token = localStorage.getItem("token");
     const res = axios.get<AssetProfitData[]>(backendUrl + "index/data/get_most_profitable_selected_peroiod.php", {
         params: {

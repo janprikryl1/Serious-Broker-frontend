@@ -1,11 +1,11 @@
 import { FC } from "react";
 import { Outlet } from "react-router-dom";
-import { Sidebar } from "../../components/modules/admin/Sidebar.tsx";
+import { AdminSidebar } from "../../components/modules/admin/AdminSidebar.tsx";
 
 export const Admin: FC = () => {
     return (
         <div style={{ display: 'flex' }}>
-            <Sidebar />
+            <AdminSidebar />
             <main className="container" style={{ flex: 1 }}>
                 <Outlet />
             </main>

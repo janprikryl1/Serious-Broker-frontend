@@ -59,6 +59,7 @@ export type MostProfitableCoinsLastSevenDays = {
 export type MostVolatileData = {
     asset_label: string;
     symbol_name: string;
+    photo: string;
     percent_volatility: number;
     graph_data: number[];
 };

@@ -7,7 +7,7 @@ export const FirmData:FC = () => {
     const {t} = useTranslation();
     const {userDetails, handleChange} = useUserDetails();
 
-    if (userDetails !== null) {
+    if (userDetails !== undefined) {
         return (
             <Accordion className="mb-4">
                 <Accordion.Item eventKey="0">

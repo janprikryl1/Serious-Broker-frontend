@@ -721,5 +721,7 @@
     "Highlight deleted successfully": "Highlight byl úspěšně smazán",
     "Error while deleting highlight": "Chyba při mazání highlightu",
     "Highlight deleted": "Highlight smazán",
-    "Highlight successfully deleted": "Highlight byl úspěšně smazán"
+    "Highlight successfully deleted": "Highlight byl úspěšně smazán",
+    "About": "O assetu",
+    "Binance indexes management": "Správa dat binance_index"
 }

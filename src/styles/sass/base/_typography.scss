@@ -396,13 +396,16 @@ button {
   border-radius: 50px;
   overflow: hidden;
   background-color: #6f675e;
-  padding: 2px;
+  padding: 4px;
   height: 42px;
   margin-left: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .season-button {
-  padding: 10px 20px;
+  padding: 8.5px 20px;
   border: none;
   background-color: transparent;
   color: #fff;
@@ -411,7 +414,12 @@ button {
   cursor: pointer;
   transition: background-color 0.3s ease, color 0.3s ease;
   border-radius: 50px;
-  margin: 0 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  text-align: center;
+  min-width: 20px;
 }
 
 .season-button.active {
@@ -650,17 +658,14 @@ button {
   }
 
   .season-button {
-    padding: 5px 10px;
-    border: none;
-    background-color: transparent;
-    color: #fff;
+    padding: 7px 10px;
     font-size: 14px;
-    font-weight: 400;
-    cursor: pointer;
-    transition: background-color 0.3s ease, color 0.3s ease;
-    border-radius: 50px;
-    margin: 0 2px;
     max-width: 100px;
+  }
+
+  .season-button-group {
+    width: 100%;
+    margin-bottom: 10px;
   }
 
   .chart-type {
@@ -669,8 +674,8 @@ button {
   }
 
   .season-gains {
-    max-width: 350px;
-    min-width: 350px;
+    max-width: 250px;
+    min-width: 250px;
   }
 }
 
@@ -786,6 +791,7 @@ button {
 
 .font-footer {
   font-size: 16px;
+  color: $text-color-2;
 }
 
 @media (max-width: 767px) {
@@ -800,4 +806,9 @@ button {
 
 .chart-cell > div {
   display: inline-block;
+}
+
+.index-title {
+  font-size: 35px;
+  margin-bottom: 20px;
 }

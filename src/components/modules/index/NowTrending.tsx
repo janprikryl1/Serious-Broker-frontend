@@ -7,7 +7,7 @@ export const NowTrending:FC = () => {
     
     return (
         <div className="cta-dark">
-            <h2 style={{fontSize: "35px"}}>{t("Now Trending")}</h2>
+            <h2 className="index-title">{t("Now Trending")}</h2>
             <TrendingSwiper />
         </div>
     );

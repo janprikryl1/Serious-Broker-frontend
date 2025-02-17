@@ -40,7 +40,7 @@ export const CoinSettings: FC = () => {
         }));
     };
 
-    const handleTextChange = (id: number, value: string, field: 'name' | 'symbol') => {
+    const handleTextChange = (id: number, value: string, field: 'name' | 'symbol' | 'about') => {
         setCryptocurrencies((prevCryptocurrencies) => prevCryptocurrencies.map((cryptocurrency) => {
             if (cryptocurrency.id === id) {
                 return {

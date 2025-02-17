@@ -15,7 +15,7 @@ export const PersonalDataEdit:FC = () => {
         }));
     };
 
-    if (userDetails !== null) {
+    if (userDetails !== undefined) {
         return (
             <Form>
                 <h3>{t("Profile")}</h3>

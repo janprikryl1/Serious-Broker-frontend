@@ -11,7 +11,7 @@ type Props = {
 export const CryptoCurrencyTableInput:FC<Props> = ({id, value = "", onChange, field}) => {
     return (
         <Form.Control
-            style={{ marginTop:5 }}
+            style={{ marginTop:5, height: 40 }}
             value={value}
             onChange={(e) => onChange(id, e.target.value, field)}
         />

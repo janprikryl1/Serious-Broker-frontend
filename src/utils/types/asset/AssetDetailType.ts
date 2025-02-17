@@ -1,6 +1,7 @@
 export type AssetDetailType = {
     label: string;
     name: string;
+    about: string;
     description?: string;
     assets: Assets[];
     COINS: string;

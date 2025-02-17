@@ -3,7 +3,7 @@ import Skeleton from 'react-loading-skeleton';
 
 export const ArticleSkeleton: FC = () => {
     return (
-        <div className="blog-details__item-inner">
+        <div className="container blog-details__item-inner">
             <Skeleton height={40} width="50%" style={{ marginBottom: '20px' }} />
             <Skeleton height={20} width="80%" style={{ marginBottom: '10px' }} />
             <Skeleton height={20} width="75%" style={{ marginBottom: '10px' }} />

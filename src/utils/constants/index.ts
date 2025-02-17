@@ -90,6 +90,7 @@ export const routes = {
         demo: "demo/:id",
         editDemo: "demos/edit/:id",
         newDemo: "demos/edit",
+        binanceIndexAbout: "binance_index_about",
     },
     demos: "/demos",
     demo: "/demo/:id",
@@ -124,6 +125,7 @@ export const adminURLS = {
     qr: "/admin/qr",
     demos: "/admin/demos",
     newDemo: "/admin/demos/edit",
+    binanceIndexAbout: "/admin/binance_index_about",
 }
 
 export const registeredUserNavbarURLs: NavbarURLs = {

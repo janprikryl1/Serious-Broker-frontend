@@ -37,7 +37,7 @@ export const RecommendationDetails:FC = () => {
                             <div className="service-details__wrapper">
                                 <div className="service-details__item">
                                     <div className="service-details__item-inner mb-5">
-                                            <h5 className="10 style2">{t("Quote currencies: ")}{detailsData.quote_currencies}</h5>
+                                            <h5 className="index-title">{t("Quote currencies: ")}{detailsData.quote_currencies}</h5>
                                             {detailsData.all_pos !== null &&
                                                 <p>{t("Best of all index: ")}{detailsData.all_pos}</p>}
                                             {detailsData.all_sug !== null &&

@@ -6,7 +6,7 @@ export const CreatedLastEdited = () => {
     const {t} = useTranslation();
     const {userDetails} = useUserDetails();
 
-    if (userDetails !== null) {
+    if (userDetails !== undefined) {
         return (
             <>
                 <h3>{t("Created and last changes")}</h3>

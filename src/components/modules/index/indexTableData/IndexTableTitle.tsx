@@ -21,7 +21,7 @@ export const IndexTableTitle: FC = () => {
 
     return (
         <div className="text-light">
-            <h2 style={{fontSize: "35px"}}>{t("Biggest Movers")}</h2>
+            <h2 className="index-title">{t("Biggest Movers")}</h2>
             {date && <p>{t("Date: ")} {toCzechDate(date)}</p>}
             <p className="mt-3 index-table-title">
                 {t("Explore which coins gained or lost the most in a specified period.")}

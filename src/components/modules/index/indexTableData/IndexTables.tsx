@@ -1,5 +1,5 @@
 import {FC, lazy} from "react";
-import {IndexSeason} from "../../../../utils/enums/IndexSeasonEnum.ts";
+import {IndexSeasonExtended} from "../../../../utils/enums/IndexSeasonEnum.ts";
 import {NotAuthenticatedIndexTable} from "./NotAuthenticatedIndexTable.tsx";
 import {useUserContext} from "../../../../utils/providers/providerUser.tsx";
 import {useIndexDataContext} from "../../../../utils/providers/IndexDataProvider.tsx";
@@ -14,7 +14,7 @@ export const IndexTables:FC = () => {
     
     return (
         <>
-            {!user && season !== IndexSeason.WEEK ? (
+            {!user && season !== IndexSeasonExtended.WEEK ? (
                 <NotAuthenticatedIndexTable />
             ) : (
                 <>

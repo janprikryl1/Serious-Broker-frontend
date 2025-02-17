@@ -19,7 +19,7 @@ export const TypographyWithPopover:FC<Props> = ({children, popover, style}) => {
     const open = Boolean(anchorEl);
     
     return (
-        <div style={{...style, marginBottom: -25}}>
+        <div style={{...style, marginBottom: -10, marginLeft: "2%"}}>
             <Typography
                 aria-owns={open ? 'mouse-over-popover' : undefined}
                 aria-haspopup="true"

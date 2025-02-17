@@ -31,7 +31,7 @@ export const PopularCoins: FC = () => {
     
     return (
         <>
-            <h2 style={{fontSize: "35px"}}>{t("Top Coins by Market Capitalization")}</h2>
+            <h2 className="index-title">{t("Top Coins by Market Capitalization")}</h2>
             <p style={{marginBottom:-20}}>{t("A list of top 10 cryptocurrencies by market cap.")}</p>
             <div className="p-4 rounded">
                 <table className="table-index-light">
