@@ -9,6 +9,7 @@ import {AssetGraphCurrencyCard} from "../../components/modules/graphs/asset/Asse
 import {AssetGraphPieChart} from "../../components/modules/graphs/asset/AssetGraphPieChart.tsx";
 import {AssetGraphDetails} from "../../components/modules/graphs/asset/AssetGraphDetails.tsx";
 import {AssetAnalysisGraph} from "../../components/modules/graphs/asset/AssetAnalysisGraph.tsx";
+import {Highlight} from "../../components/modules/highlights/Highlight.tsx";
 
 export const AssetGraph: FC = () => {
     const { t } = useTranslation();
@@ -46,7 +47,15 @@ export const AssetGraph: FC = () => {
                                                     <AssetGraphDetails asset={asset}/>  
                                                 </div>
                                             </div>
-                                            <h2 className="asset-title">{t("Index composition")}</h2>
+                                            <div className="row">
+                                                <div className="col-sm-8">
+                                                    <h2 className="asset-title">{t("About")}</h2>
+                                                </div>
+                                                <div className="col-sm-4">
+                                                    <Highlight/>
+                                                </div>
+                                            </div>
+                                                <h2 className="asset-title">{t("Index composition")}</h2>
                                             <div className="row">
                                                 <div className="col-sm-8">
                                                     <div className="row">

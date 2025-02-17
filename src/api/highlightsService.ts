@@ -11,25 +11,48 @@ export const getHighlights = async () => {
             Authorization2: `Bearer ${token}`        
         }
     });
-    
 }
 
 export const getRandomHighlight = async () => {
     return await axios.get(`${backendUrl}highlights/random_highlight.php`);
 }
 
-export const getHighlightById = async (id: number) => {
-    return await axios.get(`${backendUrl}highlights/get_highlight_by_id.php?id=${id}`);
+export const getHighlightById = async (id: string) => {
+    const token = localStorage.getItem("token");
+    if (!token) return;
+    return await axios.get(`${backendUrl}highlights/highlight.php?id=${id}`, {
+        headers: {
+            Authorization2: `Bearer ${token}`
+        }
+    });
 }
 
 export const createHighlight = async (data: HighlightType) => {
-    
+    const token = localStorage.getItem("token");
+    if (!token) return;
+    return await axios.post(`${backendUrl}highlights/highlight.php`, data, {
+        headers: {
+            Authorization2: `Bearer ${token}`
+        }
+    });
 }
 
-export const updateHighlight = async (id: number, data: HighlightType) => {
-    
+export const updateExistingHighlight = async (id: string, data: HighlightType) => {
+    const token = localStorage.getItem("token");
+    if (!token) return;
+    return await axios.put(`${backendUrl}highlights/highlight.php?id=${id}`, data, {
+        headers: {
+            Authorization2: `Bearer ${token}`
+        }
+    });
 }
 
 export const deleteHighlight = async (id: number) => {
-    
+    const token = localStorage.getItem("token");
+    if (!token) return;
+    return await axios.delete(`${backendUrl}highlights/highlight.php?id=${id}`, {
+        headers: {
+            Authorization2: `Bearer ${token}`
+        }
+    });
 }

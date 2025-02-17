@@ -1,6 +1,7 @@
 import {NavbarURLs, NavLink} from "../types/NavLink.ts";
 import {DemoType} from "../types/demos/demoType.ts";
 import {Assets} from "../types/asset/AssetDetailType.ts";
+import {HighlightType} from "../types/highlights/HighlightType.ts";
 
 export const domain = "https://serious.broker";
 export const PROTECTED_ROUTES = ['/admin', '/profile', '/assets', '/graphs', '/most_profitable_assets', '/asset_graph/:id', '/editor'];
@@ -70,7 +71,9 @@ export const routes = {
         translations: "translations/:articleId",
         translationsEdit: "translations/:articleId/:id",
         postEdit: "post/edit/:articleId/:id?",
-        highlitsEditor: "highlits/editor",
+        highlights: "highlights",
+        highlitsEditor: "highlits/editor/:id",
+        highlightsNew: "highlits/editor",
     },
     admin: {
         index: "",
@@ -104,6 +107,7 @@ export const editorURLS = {
     translations: "/editor/translations/",
     translationsEdit: "/editor/translations/",
     postEdit: "/editor/post/edit/",
+    highlights: "/editor/highlights",
     highlitsEditor: "/editor/highlits/editor",
 }
 
@@ -173,6 +177,15 @@ export const defaultNewMyPortfolioAsset: Assets = {
     status: true,
     photo: "",
     name: "",
+}
+
+export const defaultHighlight: HighlightType = {
+    id: -1,
+    title_cs: "",
+    title: "",
+    description_cs: "",
+    description: "",
+    created: "",
 }
 
 const graphColor = {

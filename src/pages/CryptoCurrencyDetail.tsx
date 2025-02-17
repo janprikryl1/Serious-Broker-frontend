@@ -9,6 +9,7 @@ import { ArticleSkeleton } from "../components/modules/article/ArticleSkeleton.t
 import { useTranslation } from "react-i18next";
 import {coinURL, routes} from "../utils/constants";
 import {Button, ButtonColor} from "../components/Button.tsx";
+import {Highlight} from "../components/modules/highlights/Highlight.tsx";
 
 export const CryptoCurrencyDetail: FC = () => {
     const { id } = useParams();
@@ -79,10 +80,13 @@ export const CryptoCurrencyDetail: FC = () => {
                                 <div className="sidebar">
                                     <div className="row g-4">
                                         <div className="col-12">
-                                            <SidebarSearch />
+                                            <SidebarSearch/>
                                         </div>
                                         <div className="col-12">
-                                            <RecentPost />
+                                            <RecentPost/>
+                                        </div>
+                                        <div className="col-12">
+                                            <Highlight/>
                                         </div>
                                     </div>
                                 </div>

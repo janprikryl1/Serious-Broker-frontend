@@ -1,26 +1,68 @@
 import {FC} from "react";
-import {coinURL, routes} from "../../../utils/constants";
+import {editorURLS} from "../../../utils/constants";
 import {Link} from "react-router-dom";
+import {useTranslation} from "react-i18next";
+import {IoIosInformationCircleOutline} from "react-icons/io";
+import {HighlightType} from "../../../utils/types/highlights/HighlightType.ts";
+import {toCzechDateFormat} from "../../../utils/constants/functions.ts";
+import {Button} from "react-bootstrap";
+import {FaRegTrashAlt} from "react-icons/fa";
+import Swal from "sweetalert2";
+import {deleteHighlight} from "../../../api/highlightsService.ts";
 
-export const HighlightCard:FC = () => {
+type Props = {
+    highlightData: HighlightType;
+    fetchHighlights: () => void;
+};
+
+export const HighlightCard:FC<Props> = ({highlightData, fetchHighlights}) => {
+    const {t, i18n} = useTranslation();
+    
+    const handleDelete = async (id: number) => {
+        try {
+            const response = await deleteHighlight(id);
+            if (response?.status === 200) {
+                Swal.fire({
+                    icon: "success",
+                    title: t("Highlight deleted"),
+                    text: t("Highlight deleted successfully"),
+                }).then(() => fetchHighlights());
+            }
+        } catch (error) {
+            console.error("Error deleting highlight:", error);
+            Swal.fire({
+                icon: "error",
+                title: t("Error"),
+                text: t("Error while deleting highlight"),
+            });
+        }
+    }
+    
     return (
-        <div className="col-sm-3 asset-graph-currency-card" style={{height: 75, width: 300, color: "black"}}>
-            <div className="row d-flex align-items-center">
-                <div className="col-sm-2 d-flex flex-column align-items-center" style={{marginLeft: "10px"}}>
-                    <img src={`${coinURL}${singleAsset.photo}`} alt={singleAsset.asset_label}
-                         style={{width: 40, maxWidth: "50px", marginBottom: "10px"}}/>
-                </div>
-                <div className="col-sm d-flex flex-column align-items-center"
-                     style={{fontSize: "15px", textAlign: "center", lineHeight: 1.4, marginTop: 5}}>
-                    <Link to={`${routes.assetGraphDetail}/${singleAsset.id}`} className="link-underline-none"
-                          style={{fontSize: "20px", fontWeight: "bold"}}>{singleAsset.asset_label}</Link>
-                    <p>{singleAsset.name}</p>
-                </div>
-                <div className="col-sm d-flex flex-column align-items-center"
-                     style={{fontSize: "15px", textAlign: "center", lineHeight: 0.5}}>
-                    <p style={{fontSize: "20px", fontWeight: "bold"}}>{singleAsset.allocation * 100}%</p>
-                    <p>{t("Contribution")}</p>
-                    {singleAsset.status === false && <i>{t("Not counted")}</i>}
+        <div className="col-sm-6">
+            <div className="blog__item" data-aos="fade-up" data-aos-duration="1000">
+                <div className="blog__item-inner" style={{margin: "20px"}}>
+                    <Link to={`${editorURLS.highlitsEditor}/${highlightData.id}`} className="link-underline-none">
+                        <h2 style={{fontSize: "35px"}}>{i18n.language == "cs" ? highlightData.title_cs : highlightData.title}</h2>
+                        <div className="row">
+                            <div className="col-2">
+                                <IoIosInformationCircleOutline/>
+                            </div>
+                            <div className="col-sm">
+                                <p style={{fontSize: "15px"}}>{i18n.language == "cs" ? highlightData.description_cs : highlightData.description}</p>
+                            </div>
+                        </div>
+                    </Link>
+                    <div className="blog__writer-designation d-flex align-items-center">
+                        <p className="mb-0">{toCzechDateFormat(highlightData.created)}</p>
+                        <Button
+                            variant="danger"
+                            className="ms-2 p-1"
+                            onClick={() => handleDelete(highlightData.id)}
+                        >
+                            <FaRegTrashAlt />
+                        </Button>
+                    </div>
                 </div>
             </div>
         </div>

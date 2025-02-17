@@ -145,6 +145,7 @@
     "Title in czech": "Titulek CZ",
     "Answer": "Odpověď",
     "Answer in czech": "Odpověď v češtině",
+    "Description (cs)": "Popis v češtině",
     "Delete": "Odebrat",
     "Edit": "Upravit",
     "Save": "Uložit",
@@ -711,5 +712,14 @@
     "Index composition": "Rozložení indexu",
     "Contribution": "Zastoupení",
     "Statistics": "Statistiky",
-    "Highlights": "Highlighty"
+    "Highlights": "Highlighty",
+    "New highlight": "Nový highlight",
+    "Highlights Editor": "Editor highlightů",
+    "Highlight successfully update": "Highlight byl úspěšně aktualizován",
+    "Error while saving changes": "Chyba při ukládání změn",
+    "Highlight deleted:": "Highlight smazán:",
+    "Highlight deleted successfully": "Highlight byl úspěšně smazán",
+    "Error while deleting highlight": "Chyba při mazání highlightu",
+    "Highlight deleted": "Highlight smazán",
+    "Highlight successfully deleted": "Highlight byl úspěšně smazán"
 }

@@ -10,7 +10,7 @@ type Props = {
 }
 
 type UserContextType = {
-    user: UserType | null;
+    user: UserType | undefined;
     setUser: (user: UserType) => void;
     logout: () => void;
 }
@@ -20,7 +20,7 @@ const UserContext = createContext<UserContextType | undefined>(undefined);
 export const ProviderUser: FC<Props> = ({ children }) => {
     const navigate = useNavigate();
     const location = useLocation();
-    const [user, setUser] = useState<UserType | null>(null);
+    const [user, setUser] = useState<UserType>();
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -44,14 +44,14 @@ export const ProviderUser: FC<Props> = ({ children }) => {
             const currentPath = location.pathname;
             const isProtected = PROTECTED_ROUTES.some(route => currentPath.startsWith(route.replace(':id', '')));
 
-            if (isProtected && user === null) {
+            if (isProtected && user === undefined) {
                 navigate(routes.home);
             }
         }
     }, [loading, user, location.pathname, navigate]);
 
     const logout = () => {
-        setUser(null);
+        setUser(undefined);
         localStorage.removeItem('token');
         navigate(routes.home);
     };
