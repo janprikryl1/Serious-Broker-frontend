@@ -506,6 +506,9 @@ button {
   border-radius: 16px;
   margin: 1%;
   padding: 1%;
+  height: 75px;
+  width: 342px;
+  color: black;
 }
 
 .title-save-crypto-safely {
@@ -573,13 +576,12 @@ button {
     padding-right: 0 !important;    
   }
   .asset-graph-currency-card {
-    background-color: #454a4e;
-    border-radius: 24px;
     font-size: 15px;
     margin: 2%;
     padding: 3%;
-    max-width: 250px;
+    max-width: 90%;
     margin-left: 10px;
+    height: 250px;
   }
 
   .admin-section-title {

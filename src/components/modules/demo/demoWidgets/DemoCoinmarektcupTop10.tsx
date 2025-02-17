@@ -110,8 +110,8 @@ export const DemoCoinmarektcupTop10: FC = () => {
                         options={options}
                         series={allSeries}
                         type="candlestick"
-                        height={height}
-                        width={width}
+                        height={height-50}
+                        width={width-150}
                     />
                 </Suspense>
             ) : (

@@ -7,9 +7,11 @@ import Skeleton from "react-loading-skeleton";
 type Props = {
     name: string;
     data: number[];
+    width?: number;
+    height?: number;
 };
 
-export const IndexTableChart: FC<Props> = ({ name, data }) => {
+export const IndexTableChart: FC<Props> = ({ name, data, width = 100, height = 30 }) => {
     const options: ApexOptions = useMemo(() => ({
         chart: {
             type: "line",
@@ -71,8 +73,8 @@ export const IndexTableChart: FC<Props> = ({ name, data }) => {
                     },
                 ]}
                 type="line"
-                height={30}
-                width={100}
+                height={height}
+                width={width}
             />
         </Suspense>
     );
