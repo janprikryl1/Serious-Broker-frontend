@@ -8,7 +8,7 @@ import {toCzechDateFormat} from "../../../utils/constants/functions.ts";
 import {Button} from "react-bootstrap";
 import {FaRegTrashAlt} from "react-icons/fa";
 import Swal from "sweetalert2";
-import {deleteHighlight} from "../../../api/highlightsService.ts";
+import {deleteHighlight} from "../../../utils/api/highlightsService.ts";
 
 type Props = {
     highlightData: HighlightType;

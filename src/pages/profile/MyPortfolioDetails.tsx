@@ -1,6 +1,5 @@
 import {FC, useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
-import {getMyPortfolioDetailsGraph} from "../../api/myPortfolioService.ts";
 import {Assets} from "../../utils/types/asset/AssetDetailType.ts";
 import {AssetGraphCurrencyCard} from "../../components/modules/graphs/asset/AssetGraphCurrencyCard.tsx";
 import {AssetGraphPieChart} from "../../components/modules/graphs/asset/AssetGraphPieChart.tsx";
@@ -9,6 +8,7 @@ import {useTranslation} from "react-i18next";
 import {AssetGraphDetails} from "../../components/modules/graphs/asset/AssetGraphDetails.tsx";
 import {toCzechDate} from "../../utils/constants/functions.ts";
 import {MyPortfolioEditButton} from "../../components/modules/profile/myPortfolio/myPortfolioEdit/MyPortfolioEditButton.tsx";
+import {getMyPortfolioDetailsGraph} from "../../utils/api/myPortfolioService.ts";
 
 export const MyPortfolioDetails:FC = () => {
     const { t } = useTranslation();

@@ -3,8 +3,8 @@ import {GlossaryItemOverview} from "../../reusable/GlossaryItemOverview.tsx";
 import {GlossaryType} from "../../../../utils/types/GlossaryType.ts";
 import Swal from "sweetalert2";
 import {useTranslation} from "react-i18next";
-import {getGlossaryByName} from "../../../../api/glossaryService.ts";
 import Skeleton from "react-loading-skeleton";
+import {getGlossaryByName} from "../../../../utils/api/glossaryService.ts";
 
 type Props = {
     title: string;

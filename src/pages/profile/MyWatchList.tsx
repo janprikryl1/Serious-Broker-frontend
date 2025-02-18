@@ -3,8 +3,8 @@ import {WatchListType} from "../../utils/types/watchList/WatchListType.ts";
 import {WatchListTable} from "../../components/modules/profile/watchList/WatchListTable.tsx";
 import {WatchListSkeleton} from "../../components/modules/profile/watchList/WatchListSkeleton.tsx";
 import {NoItemsInWatchList} from "../../components/modules/profile/watchList/NoItemsInWatchList.tsx";
-import {getMyWatchList} from "../../api/watchListService.ts";
 import {useTranslation} from "react-i18next";
+import {getMyWatchList} from "../../utils/api/watchListService.ts";
 
 export const MyWatchList:FC = () => {
     const {t} = useTranslation();

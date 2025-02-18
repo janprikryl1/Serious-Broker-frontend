@@ -4,7 +4,7 @@ import {AssetGraphCurrencyCard} from "../../graphs/asset/AssetGraphCurrencyCard.
 import {AssetGraphPieChart} from "../../graphs/asset/AssetGraphPieChart.tsx";
 import {AssetDetailSkeleton} from "../../graphs/asset/AssetDetailSkeleton.tsx";
 import {useTranslation} from "react-i18next";
-import {getAssetByIndexLabel} from "../../../../api/binanceIndexAssets.ts";
+import {getAssetByIndexLabel} from "../../../../utils/api/binanceIndexAssets.ts";
 
 type Props = {
     index_label: string;

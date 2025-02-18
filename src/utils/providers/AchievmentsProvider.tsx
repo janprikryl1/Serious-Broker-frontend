@@ -1,8 +1,8 @@
 import React, {createContext, useContext, useState, useEffect, ReactNode, Dispatch, SetStateAction, lazy, Suspense} from 'react';
 import { AchievementType } from '../types/AchievementType.ts';
-import { getAchievements, markReadAchievment } from '../../api/achievementService.ts';
 import {useUserContext} from "./providerUser.tsx";
 import {useTranslation} from "react-i18next";
+import {getAchievements, markReadAchievment} from "../api/achievementService.ts";
 const AchievmentAnimation = lazy(() => import('../../components/achievment/AchievmentAnimation.tsx').then(module => ({ default: module.AchievmentAnimation })));
 
 type AchievmentsContextType = {

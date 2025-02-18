@@ -1,9 +1,9 @@
 import {createContext, useContext, useState, useEffect, ReactNode, FC} from 'react';
 import { UserType } from "../types/user/userTypes.ts";
-import { isAuthenticated } from "../../api/authenticateService.ts";
 import { useNavigate, useLocation } from "react-router-dom";
 import {PROTECTED_ROUTES, routes} from "../constants";
 import {Preloader} from "../../Preloader.tsx";
+import {isAuthenticated} from "../api/authenticateService.ts";
 
 type Props = {
     children: ReactNode 

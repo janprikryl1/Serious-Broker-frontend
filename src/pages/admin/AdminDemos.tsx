@@ -1,13 +1,13 @@
 import {FC, useEffect, useState} from "react";
 import {useTranslation} from "react-i18next";
 import {DemoType} from "../../utils/types/demos/demoType.ts";
-import {getAllDemos} from "../../api/demosService.ts";
 import Swal from "sweetalert2";
 import {Link} from "react-router-dom";
 import {adminURLS} from "../../utils/constants";
 import {ArticlesSkeleton} from "../../components/modules/articles/ArticlesSkeleton.tsx";
 import {DemoAdminCard} from "../../components/modules/admin/demos/DemoAdminCard.tsx";
 import {Button} from "../../components/Button.tsx";
+import {getAllDemos} from "../../utils/api/demosService.ts";
 
 export const AdminDemos:FC = () => {
     const {t} = useTranslation();

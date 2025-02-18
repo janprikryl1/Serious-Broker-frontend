@@ -4,8 +4,8 @@ import {useTranslation} from "react-i18next";
 import {ShareLink} from "../../components/modules/admin/share/ShareLink.tsx";
 import {ShareSkeleton} from "../../components/modules/admin/share/ShareSkeleton.tsx";
 import {ShareItems} from "../../components/modules/admin/share/ShareItems.tsx";
-import {getArticlePosts} from "../../api/articlePostService.ts";
 import {ArticlePostListResponseResponse} from "../../utils/types/ArticlePostListResponse.ts";
+import {getArticlePosts} from "../../utils/api/articlePostService.ts";
 
 export const ArticleShare:FC = () => {
     const {id} = useParams();

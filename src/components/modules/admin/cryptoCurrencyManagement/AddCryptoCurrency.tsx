@@ -2,12 +2,12 @@ import {ChangeEvent, FC, FormEvent, useState} from "react";
 import {useTranslation} from "react-i18next";
 import {CryptoCurrencyNewType} from "../../../../utils/types/CryptoCurrencyType.ts";
 import {CryptoCurrencyInput} from "./CryptoCurrencyInput.tsx";
-import { cryptoCurrencyAdd } from "../../../../api/adminCryptocurrencyService.ts";
 import Swal from "sweetalert2";
 import {defaultNewCurrency} from "../../../../utils/constants";
 import Form from "react-bootstrap/Form";
 import {InputGroup} from "react-bootstrap";
 import {Button} from "../../../Button.tsx";
+import {cryptoCurrencyAdd} from "../../../../utils/api/adminCryptocurrencyService.ts";
 
 export const AddCryptoCurrency:FC = () => {
     const {t} = useTranslation();

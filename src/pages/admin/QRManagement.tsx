@@ -3,10 +3,10 @@ import {useForm} from "react-hook-form";
 import {Col, Form, Row} from "react-bootstrap";
 import {useTranslation} from "react-i18next";
 import {QRCodeType} from "../../utils/types/QRCodeType";
-import {getQR, saveQRCode} from "../../api/qrService";
 import Swal from "sweetalert2";
 import {qrCodeImagesURL} from "../../utils/constants";
 import {Button} from "../../components/Button.tsx";
+import {getQR, saveQRCode} from "../../utils/api/qrService.ts";
 
 export const QRManagement: FC = () => {
     const { t } = useTranslation();

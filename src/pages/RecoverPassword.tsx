@@ -3,11 +3,11 @@ import {useNavigate, useParams} from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { LoginRegisterInput } from "../components/modules/signIn/LoginRegisterInput";
 import Swal from "sweetalert2";
-import {setSubmitNewPassword, verifySecureKeys} from "../api/forgottenPasswordService.ts";
 import {Spinner} from "react-bootstrap";
 import {FaExclamationTriangle} from "react-icons/fa";
 import {routes} from "../utils/constants";
 import {Button} from "../components/Button.tsx";
+import {setSubmitNewPassword, verifySecureKeys} from "../utils/api/forgottenPasswordService.ts";
 
 export const RecoverPassword: FC = () => {
     const { t } = useTranslation();

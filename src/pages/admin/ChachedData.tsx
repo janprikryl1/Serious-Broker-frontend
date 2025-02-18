@@ -3,10 +3,10 @@ import {useTranslation} from "react-i18next";
 import {TableLogSkeleton} from "../../components/modules/admin/TableLogSkeleton.tsx";
 import {toCzechDateFormat} from "../../utils/constants/functions.ts";
 import {ChachedDataType} from "../../utils/types/ChachedDataType.ts";
-import {deleteChachedData, downloadFile, getAllChachedData} from "../../api/chachedDataAPI.ts";
 import {FaRegTrashAlt} from "react-icons/fa";
 import Swal from "sweetalert2";
 import {Button, ButtonColor} from "../../components/Button.tsx";
+import {deleteChachedData, downloadFile, getAllChachedData} from "../../utils/api/chachedDataAPI.ts";
 
 export const ChachedData:FC = () => {
     const { t } = useTranslation();

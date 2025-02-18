@@ -2,8 +2,8 @@ import {FC, FormEvent, useState} from "react";
 import {useTranslation} from "react-i18next";
 import {LoginRegisterInput} from "../components/modules/signIn/LoginRegisterInput.tsx";
 import Swal from "sweetalert2";
-import {sendForgottenPassword} from "../api/forgottenPasswordService.ts";
 import {Button} from "../components/Button.tsx";
+import {sendForgottenPassword} from "../utils/api/forgottenPasswordService.ts";
 
 export const ForgottenPassword:FC = () => {
     const {t} = useTranslation();

@@ -1,10 +1,10 @@
 import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { FeedbackStoredType } from "../../utils/types/feedback/FeedbackStoredType.ts";
-import { getAllFeedbacks } from "../../api/feedbackService.ts";
 import { Accordion } from "react-bootstrap";
 import {toCzechDateFormat} from "../../utils/constants/functions.ts";
 import {Pagination} from "../../components/Pagiation.tsx";
+import {getAllFeedbacks} from "../../utils/api/feedbackService.ts";
 
 const PAGE_SIZE = 10;
 

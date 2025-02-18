@@ -3,11 +3,11 @@ import { useParams } from "react-router-dom";
 import { ArticleProps } from "../utils/types/article/ArticleProps.ts";
 import { ArticleCard } from "../components/modules/articles/ArticleCard.tsx";
 import { ArticlesSkeleton } from "../components/modules/articles/ArticlesSkeleton.tsx";
-import { getSearchArticles } from "../api/articleService.ts";
 import { TitleHeader } from "../components/modules/about/TitleHeader.tsx";
 import { SidebarSearch } from "../components/modules/article/SidebarSearch.tsx";
 import { RecentPost } from "../components/modules/article/RecentPost.tsx";
 import { useTranslation } from "react-i18next";
+import {getSearchArticles} from "../utils/api/articleService.ts";
 
 export const SearchArticles: FC = () => {
     const { text } = useParams();

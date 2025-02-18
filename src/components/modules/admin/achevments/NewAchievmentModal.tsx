@@ -9,9 +9,9 @@ import {useTranslation} from "react-i18next";
 import {Input} from "@mui/joy";
 import {Transition} from "../../reusable/Transition.tsx";
 import {PaperComponent} from "../../reusable/PaperComponent.tsx";
-import {adminAddAchievement} from "../../../../api/achievementService.ts";
 import Swal from "sweetalert2";
 import {Button, ButtonColor} from "../../../Button.tsx";
+import {adminAddAchievement} from "../../../../utils/api/achievementService.ts";
 
 type Props = {
     selectedUser?: UserType;

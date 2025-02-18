@@ -4,9 +4,9 @@ import {ArticleProps} from "../../../utils/types/article/ArticleProps.ts";
 import {useTranslation} from "react-i18next";
 import {toCzechDateFormat} from "../../../utils/constants/functions.ts";
 import {FaBookmark, FaRegBookmark} from "react-icons/fa";
-import {addToWatchList, removeFromWatchList} from "../../../api/watchListService.ts";
 import {WatchListEnum} from "../../../utils/enums/WatchListEnum.ts";
 import {useUserContext} from "../../../utils/providers/providerUser.tsx";
+import {addToWatchList, removeFromWatchList} from "../../../utils/api/watchListService.ts";
 
 type Props = {
     data: ArticleProps;

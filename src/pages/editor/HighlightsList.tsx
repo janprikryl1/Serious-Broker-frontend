@@ -1,12 +1,12 @@
 import {FC, useCallback, useEffect, useState} from "react";
 import {HighlightsListSkeleton} from "../../components/modules/highlights/HighlightsListSkeleton.tsx";
-import {getHighlights} from "../../api/highlightsService.ts";
 import {HighlightType} from "../../utils/types/highlights/HighlightType.ts";
 import {HighlightCard} from "../../components/modules/highlights/HighlightCard.tsx";
 import {Button} from "../../components/Button.tsx";
 import {useTranslation} from "react-i18next";
 import {editorURLS} from "../../utils/constants";
 import {useNavigate} from "react-router-dom";
+import {getHighlights} from "../../utils/api/highlightsService.ts";
 
 export const HighlightsList:FC = () => {
     const { t } = useTranslation();

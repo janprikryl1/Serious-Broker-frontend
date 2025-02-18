@@ -1,6 +1,5 @@
 import {FC, useEffect, useState} from "react";
 import {BinanceIndexType} from "../../utils/types/graphs/BinanceIndexType.ts";
-import {getBinanceIndexAbouts, updateBinanceIndexAbout} from "../../api/binanceIndexAboutService.ts";
 import {DataGrid, GridRenderCellParams} from "@mui/x-data-grid";
 import {useTranslation} from "react-i18next";
 import {Button} from "../../components/Button.tsx";
@@ -8,6 +7,7 @@ import {FaRegSave} from "react-icons/fa";
 import Form from "react-bootstrap/Form";
 import Swal from "sweetalert2";
 import {BinanceIndexTableFilter} from "../../components/modules/admin/binanceIndexAbout/BinanceIndexAboutFilter.tsx";
+import {getBinanceIndexAbouts, updateBinanceIndexAbout} from "../../utils/api/binanceIndexAboutService.ts";
 
 export const BinanceIndexAbout: FC = () => {
     const {t} = useTranslation();

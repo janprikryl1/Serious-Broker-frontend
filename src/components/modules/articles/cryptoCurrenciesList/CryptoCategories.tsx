@@ -1,7 +1,7 @@
 import {FC, useEffect, useState} from "react";
 import {CategoryType} from "../../../../utils/types/CategoryType.ts";
-import {getAllCategories} from "../../../../api/CryptocurrencyService.ts";
 import {CryptoCurrenciesSkeleton} from "./CryptoCurrenciesSkeleton.tsx";
+import {getAllCategories} from "../../../../utils/api/CryptocurrencyService.ts";
 
 export const CryptoCategories:FC = () => {
     const [categories, setCategories] = useState<CategoryType[]>();

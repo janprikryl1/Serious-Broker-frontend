@@ -1,9 +1,9 @@
 import {FC, useEffect, useState} from "react";
 import {DemoType} from "../utils/types/demos/demoType.ts";
-import {getAllDemos} from "../api/demosService.ts";
 import Swal from "sweetalert2";
 import {useTranslation} from "react-i18next";
 import {DemoLinkCard} from "../components/modules/demo/DemoLinkCard.tsx";
+import {getAllDemos} from "../utils/api/demosService.ts";
 
 export const Demos:FC = () => {
     const {t} = useTranslation();

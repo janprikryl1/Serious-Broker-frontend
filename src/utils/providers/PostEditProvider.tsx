@@ -3,8 +3,8 @@ import {useParams} from "react-router-dom";
 import Swal from "sweetalert2";
 import {useTranslation} from "react-i18next";
 import {ArticlePost} from "../types/ArticlePostListResponse.ts";
-import {createPost, getArticlePostDetail} from "../../api/articlePostService.ts";
 import {PostOptionType} from "../options/PostOption.ts";
+import {createPost, getArticlePostDetail} from "../api/articlePostService.ts";
 
 type Props = {
     children: ReactNode;

@@ -3,11 +3,11 @@ import {useTranslation} from "react-i18next";
 import {Link} from "react-router-dom";
 import {ArticlesSkeleton} from "../../components/modules/articles/ArticlesSkeleton.tsx";
 import {ArticleProps} from "../../utils/types/article/ArticleProps.ts";
-import {getAllArticlesAdmin} from "../../api/articleService.ts";
 import Swal from "sweetalert2";
 import {ArticleAdminCard} from "../../components/modules/admin/articleManagement/ArticleAdminCard.tsx";
 import {editorURLS} from "../../utils/constants";
 import {Button, ButtonColor} from "../../components/Button.tsx";
+import {getAllArticlesAdmin} from "../../utils/api/articleService.ts";
 
 export const ArticleManagement: FC = () => {
     const { t } = useTranslation();

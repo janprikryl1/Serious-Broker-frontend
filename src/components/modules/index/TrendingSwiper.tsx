@@ -7,7 +7,7 @@ import { GrLinkNext, GrLinkPrevious } from "react-icons/gr";
 import { TrendingSwiperSkeleton } from "./TrendingSwiperSkeleton.tsx";
 import '../../../styles/css/swiper-bundle.min.css';
 import { MostProfitable } from "../../../utils/types/indexPage/IndexDataStructure.ts";
-import { getLatestCoinmarketcupCoins } from "../../../api/indexDataService.ts";
+import {getLatestCoinmarketcupCoins} from "../../../utils/api/indexDataService.ts";
 
 export const TrendingSwiper = () => {
     const swiperRef = useRef<SwiperCore | null>(null);

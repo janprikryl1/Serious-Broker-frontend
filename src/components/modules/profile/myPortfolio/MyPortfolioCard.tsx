@@ -3,7 +3,7 @@ import {Link} from "react-router-dom";
 import {Button} from "react-bootstrap";
 import {FaRegEdit, FaRegTrashAlt} from "react-icons/fa";
 import {MyPortfolioType} from "../../../../utils/types/myPortfolio/MyPortfolioType.ts";
-import {deleteMyPortfolio} from "../../../../api/myPortfolioService.ts";
+import {deleteMyPortfolio} from "../../../../utils/api/myPortfolioService.ts";
 
 type Props = {
     data: MyPortfolioType;

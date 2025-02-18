@@ -3,8 +3,8 @@ import {useTranslation} from "react-i18next";
 import {useParams} from "react-router-dom";
 import {HighlightType} from "../types/highlights/HighlightType.ts";
 import {defaultHighlight} from "../constants";
-import {createHighlight, getHighlightById, updateExistingHighlight} from "../../api/highlightsService.ts";
 import Swal from "sweetalert2";
+import {createHighlight, getHighlightById, updateExistingHighlight} from "../api/highlightsService.ts";
 
 type Props = {
     children: ReactNode;

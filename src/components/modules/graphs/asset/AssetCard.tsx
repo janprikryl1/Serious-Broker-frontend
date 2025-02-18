@@ -7,9 +7,9 @@ import {FaBookmark, FaRegBookmark} from "react-icons/fa";
 import "./AssetGraphStyles.scss";
 import {Button} from "../../../Button.tsx";
 import {AssetType} from "../../../../utils/types/asset/AssetType.ts";
-import {addToWatchList, removeFromWatchList} from "../../../../api/watchListService.ts";
 import {WatchListEnum} from "../../../../utils/enums/WatchListEnum.ts";
 import {MostProfitableAssetDetailType} from "../../../../utils/types/graphs/MostProfitableAssetDetailType.ts";
+import {addToWatchList, removeFromWatchList} from "../../../../utils/api/watchListService.ts";
 
 type Props = {
     index: number;

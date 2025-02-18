@@ -1,11 +1,11 @@
 import { FC, useEffect, useState } from "react";
 import { MembershipTypes } from "../../../../utils/types/user/userTypes.ts";
-import {addMembership, editMembership, getMembershipByUserId} from "../../../../api/membershipService.ts";
 import { MembershipComponent } from "./MembershipComponent.tsx";
 import { useTranslation } from "react-i18next";
 import { NewMembership } from "./NewMembership.tsx";
 import { MembershipLoadingSkeleton } from "./MembershipLoadingSkeleton.tsx";
 import {Button, ButtonColor} from "../../../Button.tsx";
+import {addMembership, editMembership, getMembershipByUserId} from "../../../../utils/api/membershipService.ts";
 
 type Props = {
     userId: number;

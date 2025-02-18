@@ -1,5 +1,4 @@
 import React, {Dispatch, ReactNode, SetStateAction, useContext, useEffect, useState} from "react";
-import {createArticle, getArticleByIdAdmin, updateArticle} from "../../api/articleService";
 import Swal from "sweetalert2";
 import {useTranslation} from "react-i18next";
 import {ArticleCreateProps} from "../types/article/ArticleCreateProps.ts";
@@ -7,6 +6,7 @@ import {SubjectType} from "../types/article/SubjectType.ts";
 import {ContentType} from "../types/article/ContentType.ts";
 import {useParams} from "react-router-dom";
 import {ArticleUpdateType} from "../types/article/ArticleUpdateType.ts";
+import {createArticle, getArticleByIdAdmin, updateArticle} from "../api/articleService.ts";
 
 type Props = {
     children: ReactNode;

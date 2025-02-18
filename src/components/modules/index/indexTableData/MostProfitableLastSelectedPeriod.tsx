@@ -6,9 +6,9 @@ import {AssetProfitData} from "../../../../utils/types/indexPage/IndexDataStruct
 import { calculateProfit } from "../../../../utils/constants/functions.ts";
 import { GainSeasonTh } from "./GainSeasonTh.tsx";
 import {IndexSeasonExtended} from "../../../../utils/enums/IndexSeasonEnum.ts";
-import { getMostProfitableSelectedPeriod} from "../../../../api/indexDataService.ts";
 import {IndexTableSkeleton} from "./IndexTableSkeleton.tsx";
 import {coinURL} from "../../../../utils/constants";
+import {getMostProfitableSelectedPeriod} from "../../../../utils/api/indexDataService.ts";
 
 
 export const MostProfitableLastSelectedPeriod: FC = () => {

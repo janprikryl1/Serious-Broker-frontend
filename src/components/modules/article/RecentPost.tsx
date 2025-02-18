@@ -1,9 +1,9 @@
 import {FC, useEffect, useState} from "react";
 import {Link} from "react-router-dom";
 import {useTranslation} from "react-i18next";
-import {getRecentArticles} from "../../../api/articleService.ts";
 import {RecentArticleProps} from "../../../utils/types/article/RecentArticleProps.ts";
 import {routes} from "../../../utils/constants";
+import {getRecentArticles} from "../../../utils/api/articleService.ts";
 
 export const RecentPost:FC = () => {
     const {t} = useTranslation();

@@ -2,11 +2,11 @@ import React, {Dispatch, ReactNode, SetStateAction, useContext, useEffect, useSt
 import {SubjectType} from "../types/article/SubjectType.ts";
 import {ContentType} from "../types/article/ContentType.ts";
 import {useParams} from "react-router-dom";
-import {createTranslation, getArticleTranslateByIdAdmin, updateTranslation} from "../../api/translateService.ts";
 import {ArticleNewTranslateEditType, ArticleTranslateEditType} from "../types/article/translate/ArticleTranslateEditType.ts";
-import {getArticleByIdAdmin} from "../../api/articleService.ts";
 import Swal from "sweetalert2";
 import {useTranslation} from "react-i18next";
+import {createTranslation, getArticleTranslateByIdAdmin, updateTranslation} from "../api/translateService.ts";
+import {getArticleByIdAdmin} from "../api/articleService.ts";
 
 type Props = {
     children: ReactNode;

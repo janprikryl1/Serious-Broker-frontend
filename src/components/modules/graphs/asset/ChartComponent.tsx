@@ -3,13 +3,13 @@ const ReactApexChart = lazy(() => import("react-apexcharts"));
 import Skeleton from "react-loading-skeleton";
 import { useThemeContext } from "../../../../utils/providers/ThemeProvider";
 import { useTranslation } from "react-i18next";
-import { getBinanceAssetGraphData } from "../../../../api/binanceAPIService";
 import { ChartOptions } from "./ChartOptions";
 import { PeriodSelector } from "./PeriodSelector";
 import { DateRangeSelector } from "./DateRangeSelector";
 import { CandlestickData, KlineGraphData } from "../../../../utils/types/KlineData.ts";
 import { ChartAssetPeriodEnum } from "../../../../utils/enums/ChartAssetPeriodEnum.ts";
 import {MAX_RANGES} from "../../../../utils/constants";
+import {getBinanceAssetGraphData} from "../../../../utils/api/binanceAPIService.ts";
 
 type Props = {
     width?: number;

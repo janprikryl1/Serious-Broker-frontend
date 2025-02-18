@@ -1,6 +1,5 @@
 import { FC, useEffect, useState } from "react";
 import {UserRole, UserType} from "../../utils/types/user/userTypes.ts";
-import { getAllUsers, updateUser } from "../../api/adminService.ts";
 import { useTranslation } from "react-i18next";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { UserEditModal } from "../../components/modules/admin/userManagment/UserEditModal.tsx";
@@ -10,6 +9,7 @@ import {Button, ButtonColor} from "../../components/Button.tsx";
 import {useUserContext} from "../../utils/providers/providerUser.tsx";
 import {routes} from "../../utils/constants";
 import {useNavigate} from "react-router-dom";
+import {getAllUsers, updateUser} from "../../utils/api/adminService.ts";
 
 export const UserManagment: FC = () => {
     const { t } = useTranslation();

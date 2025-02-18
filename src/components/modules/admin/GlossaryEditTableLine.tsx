@@ -2,12 +2,12 @@ import {ChangeEvent, FC, useState} from "react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faTrash} from "@fortawesome/free-solid-svg-icons";
 import {GlossaryType} from "../../../utils/types/GlossaryType.ts";
-import {deleteGlossary, editGlossary} from "../../../api/glossaryService.ts";
 import Swal from "sweetalert2";
 import {useTranslation} from "react-i18next";
 import {Button, ButtonColor} from "../../Button.tsx";
 import {Link} from "react-router-dom";
 import {glossaryImagesURL} from "../../../utils/constants";
+import {deleteGlossary, editGlossary} from "../../../utils/api/glossaryService.ts";
 
 type Props = {
     glossary: GlossaryType;

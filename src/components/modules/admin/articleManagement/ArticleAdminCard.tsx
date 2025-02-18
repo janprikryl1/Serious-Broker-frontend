@@ -6,9 +6,9 @@ import {Button} from "react-bootstrap";
 import {FaComment, FaRegTrashAlt, FaShareAlt} from "react-icons/fa";
 import Swal from "sweetalert2";
 import {useTranslation} from "react-i18next";
-import {deleteArticle} from "../../../../api/articleService.ts";
 import {MdOutlineTranslate} from "react-icons/md";
 import {toCzechDateFormat} from "../../../../utils/constants/functions.ts";
+import {deleteArticle} from "../../../../utils/api/articleService.ts";
 
 type Props = {
     data: ArticleProps;

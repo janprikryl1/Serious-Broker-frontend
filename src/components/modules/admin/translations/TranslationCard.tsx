@@ -4,9 +4,9 @@ import {TranslationsOverview} from "../../../../utils/types/article/Translations
 import {Button} from "react-bootstrap";
 import {FaRegTrashAlt} from "react-icons/fa";
 import {useTranslation} from "react-i18next";
-import {deleteTranslation} from "../../../../api/translateService.ts";
 import Swal from "sweetalert2";
 import {editorURLS} from "../../../../utils/constants";
+import {deleteTranslation} from "../../../../utils/api/translateService.ts";
 
 type Props = {
     articleId: string;

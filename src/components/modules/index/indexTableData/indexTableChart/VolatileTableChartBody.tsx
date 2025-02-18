@@ -9,8 +9,6 @@ type Props = {
     coin: MostVolatileData;
     index: number;
 }
-const coinIcon = getFiatCoin( "OMUSDT");
-console.log(coinIcon);
 
 export const VolatileTableChartBody:FC<Props> = ({coin, index}) => {
     return (

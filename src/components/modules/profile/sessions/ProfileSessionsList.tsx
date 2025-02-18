@@ -1,11 +1,11 @@
 import { FC, useEffect, useState } from "react";
 import { Table, TableBody, TableCell, TableHead, TableRow, useMediaQuery } from "@mui/material";
 import { SessionType } from "../../../../utils/types/user/sessionType";
-import {getProfileSessions, logoutEverywhere, logoutSession} from "../../../../api/profileSessionService";
 import { useThemeContext } from "../../../../utils/providers/ThemeProvider";
 import {Button} from "../../../Button.tsx";
 import {useTranslation} from "react-i18next";
 import {useUserContext} from "../../../../utils/providers/providerUser.tsx";
+import {getProfileSessions, logoutEverywhere, logoutSession} from "../../../../utils/api/profileSessionService.ts";
 
 export const ProfileSessionsList: FC = () => {
     const { t } = useTranslation();
@@ -40,7 +40,7 @@ export const ProfileSessionsList: FC = () => {
     const handleLogoutEverywhere = async () => {
        await logoutEverywhere();
        setSessions([]);
-        logout();
+       logout();
     };
 
     return (

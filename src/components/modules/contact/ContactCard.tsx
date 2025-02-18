@@ -3,7 +3,6 @@ import { useTranslation } from "react-i18next";
 import { LeftFloatingContactDetailsItem } from "./LeftFloatingContactDetailsItem.tsx";
 import { SocialLinkIcon } from "./SocialLinkIcon.tsx";
 import shibaInu from "../../../utils/icons/cta/shiba_inu.webp";
-import { addFeedback } from "../../../api/feedbackService.ts";
 import Swal from "sweetalert2";
 import {
   contactEmail,
@@ -14,6 +13,7 @@ import {
   twitterURL,
   youtubeURL
 } from "../../../utils/constants";
+import {addFeedback} from "../../../utils/api/feedbackService.ts";
 
 export const ContactCard: FC = () => {
   const { t } = useTranslation();

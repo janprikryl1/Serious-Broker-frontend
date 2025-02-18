@@ -2,7 +2,6 @@ import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { CryptoCurrencyType } from "../../utils/types/CryptoCurrencyType.ts";
 import {DataGrid, GridRenderCellParams} from "@mui/x-data-grid";
-import {cryptoCurrencyUpdate, deleteCryptocurrency, getAllCryptocurrencies} from "../../api/adminCryptocurrencyService.ts";
 import {CryptoCurrencyTableInput} from "../../components/modules/admin/cryptoCurrencyManagement/CryptoCurrencyTableInput.tsx";
 import {CryptoCurrencyFileUpload} from "../../components/modules/admin/cryptoCurrencyManagement/CryptoCurrencyFileUpload.tsx";
 import {CryptoCurrencyIconLink} from "../../components/modules/admin/cryptoCurrencyManagement/CryptoCurrencyIconLink.tsx";
@@ -11,6 +10,11 @@ import {AdminTableFilter} from "../../components/modules/reusable/AdminTableFilt
 import {AddCryptoCurrency} from "../../components/modules/admin/cryptoCurrencyManagement/AddCryptoCurrency.tsx";
 import {Button} from "../../components/Button.tsx";
 import {logURL} from "../../utils/constants";
+import {
+    cryptoCurrencyUpdate,
+    deleteCryptocurrency,
+    getAllCryptocurrencies
+} from "../../utils/api/adminCryptocurrencyService.ts";
 
 export const CoinSettings: FC = () => {
     const { t } = useTranslation();

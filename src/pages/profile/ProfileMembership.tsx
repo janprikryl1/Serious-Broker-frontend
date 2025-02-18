@@ -1,12 +1,12 @@
 import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { QRPayment } from "../../components/modules/profile/membershipDetails/QRPayment";
-import { getMemberships } from "../../api/membershipService";
 import { MembershipTypes } from "../../utils/types/user/userTypes";
 import { toCzechDate } from "../../utils/constants/functions";
 import {Table, TableBody, TableCell, TableHead, TableRow, Chip, useMediaQuery} from "@mui/material";
 import { useThemeContext } from "../../utils/providers/ThemeProvider.tsx";
 import {MembershipDetailsSkeleton} from "../../components/modules/profile/membershipDetails/MembershipDetailsSkeleton.tsx";
+import {getMemberships} from "../../utils/api/membershipService.ts";
 
 export const ProfileMembership: FC = () => {
     const { t } = useTranslation();

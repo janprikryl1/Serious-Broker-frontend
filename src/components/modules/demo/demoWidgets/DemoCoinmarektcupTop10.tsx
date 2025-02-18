@@ -1,12 +1,12 @@
 import { FC, lazy, Suspense, useEffect, useMemo, useState } from "react";
-import { getTop10CoinmarketcupCoins } from "../../../../api/demosService.ts";
 import { ConimarketCupCoinsListType } from "../../../../utils/types/demos/ConimarketCupCoinsListType.tsx";
 import { CandlestickData } from "../../../../utils/types/KlineData.ts";
 import Skeleton from "react-loading-skeleton";
 import { ChartOptions } from "../../graphs/asset/ChartOptions.ts";
 import { useThemeContext } from "../../../../utils/providers/ThemeProvider.tsx";
 import { useTranslation } from "react-i18next";
-import { getBinanceAssetGraphData } from "../../../../api/binanceAPIService.ts";
+import {getTop10CoinmarketcupCoins} from "../../../../utils/api/demosService.ts";
+import {getBinanceAssetGraphData} from "../../../../utils/api/binanceAPIService.ts";
 const ReactApexChart = lazy(() => import("react-apexcharts"));
 
 const width = 1200;

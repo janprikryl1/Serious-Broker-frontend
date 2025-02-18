@@ -1,13 +1,13 @@
 import { FC, useEffect, useState, useRef, useCallback } from "react";
 import { TitleHeader } from "../components/modules/about/TitleHeader.tsx";
 import { ArticleCard } from "../components/modules/articles/ArticleCard.tsx";
-import { getAllArticles } from "../api/articleService.ts";
 import Swal from "sweetalert2";
 import { useTranslation } from "react-i18next";
 import { ArticleProps } from "../utils/types/article/ArticleProps.ts";
 import { ArticlesSkeleton } from "../components/modules/articles/ArticlesSkeleton.tsx";
 import { CryptoCurrenciesLinkCard } from "../components/modules/articles/cryptoCurrenciesList/CryptoCurrenciesLinkCard.tsx";
 import { DictionaryLinkCard } from "../components/modules/articles/dictionary/DictionaryLinkCard.tsx";
+import {getAllArticles} from "../utils/api/articleService.ts";
 
 export const Articles: FC = () => {
     const { t } = useTranslation();

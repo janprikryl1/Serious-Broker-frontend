@@ -2,10 +2,10 @@ import { FC, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 import { useTranslation } from "react-i18next";
-import { verifyAccount } from "../api/verifyAccountService.ts";
 import { Spinner } from "react-bootstrap";
 import { FaCheckCircle, FaExclamationTriangle } from "react-icons/fa";
 import {useUserContext} from "../utils/providers/providerUser.tsx";
+import {verifyAccount} from "../utils/api/verifyAccountService.ts";
 
 export const VerifyAccount: FC = () => {
     const { t } = useTranslation();

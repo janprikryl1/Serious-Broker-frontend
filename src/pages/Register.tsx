@@ -6,12 +6,12 @@ import {registerUserType} from "../utils/types/user/registerUserType.ts";
 import {LoginRegisterInput} from "../components/modules/signIn/LoginRegisterInput.tsx";
 import {Accordion, Form} from "react-bootstrap";
 import {CountrySelect} from "../components/modules/signIn/CountrySelect.tsx";
-import {register} from "../api/authenticateService.ts";
 import {useUserContext} from "../utils/providers/providerUser.tsx";
 import {routes} from "../utils/constants";
 import {LanguageSelect} from "../components/modules/signIn/LanguageSelect.tsx";
 import PasswordStrengthBar from "react-password-strength-bar";
 import {Button} from "../components/Button.tsx";
+import {register} from "../utils/api/authenticateService.ts";
 
 
 export const Register:FC = () => {

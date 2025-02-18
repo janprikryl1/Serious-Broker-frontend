@@ -5,7 +5,7 @@ import {Link} from "react-router-dom";
 import {WatchListEnum} from "../../../../utils/enums/WatchListEnum.ts";
 import {Button} from "../../../Button.tsx";
 import {LuTrash} from "react-icons/lu";
-import {removeFromWatchList} from "../../../../api/watchListService.ts";
+import {removeFromWatchList} from "../../../../utils/api/watchListService.ts";
 
 type Props = {
     watchList: WatchListType[];

@@ -1,12 +1,12 @@
 import { FC, useEffect, useState, useRef, useCallback } from "react";
 import { TitleHeader } from "../../components/modules/about/TitleHeader.tsx";
-import { getAllAssets } from "../../api/binanceIndexAssets.ts";
 import { AssetType } from "../../utils/types/asset/AssetType.ts";
 import { AssetSkeleton } from "../../components/modules/graphs/asset/AssetSkeleton.tsx";
 import { AssetCard } from "../../components/modules/graphs/asset/AssetCard.tsx";
 import { useTranslation } from "react-i18next";
 import { SeasonButton } from "../../components/modules/index/SeasonButton.tsx";
 import { AssetOrder } from "../../utils/enums/AssetOrderEnum.ts";
+import {getAllAssets} from "../../utils/api/binanceIndexAssets.ts";
 
 export const Assets: FC = () => {
     const { t } = useTranslation();

@@ -1,8 +1,8 @@
 import {Form, InputGroup} from "react-bootstrap";
 import {useTranslation} from "react-i18next";
 import {useArticleTranslate} from "../../../../../../utils/providers/ArticleTranslateProvider.tsx";
-import {translate} from "../../../../../../api/translateService.ts";
 import {Button} from "../../../../../Button.tsx";
+import {translate} from "../../../../../../utils/api/translateService.ts";
 
 export const TranslateTextField = () => {
     const { t } = useTranslation();

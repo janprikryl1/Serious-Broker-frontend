@@ -1,7 +1,7 @@
 import {FC, useEffect, useState} from "react";
 import { useTranslation } from "react-i18next";
 import { toCzechDate } from "../../../../utils/constants/functions.ts";
-import {getIndexData} from "../../../../api/indexDataService.ts";
+import {getIndexData} from "../../../../utils/api/indexDataService.ts";
 
 export const IndexTableTitle: FC = () => {
     const { t } = useTranslation();

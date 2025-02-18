@@ -3,7 +3,7 @@ import {UserType} from "../types/user/userTypes";
 import Swal from "sweetalert2";
 import {useTranslation} from "react-i18next";
 import {useUserContext} from "./providerUser.tsx";
-import {updateUserDetails} from "../../api/authenticateService.ts";
+import {updateUserDetails} from "../api/authenticateService.ts";
 
 type Props = {
     children: ReactNode;

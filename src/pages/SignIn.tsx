@@ -4,9 +4,9 @@ import {useTranslation} from "react-i18next";
 import Swal from "sweetalert2";
 import {LoginRegisterInput} from "../components/modules/signIn/LoginRegisterInput.tsx";
 import {useUserContext} from "../utils/providers/providerUser.tsx";
-import {login} from "../api/authenticateService.ts";
 import {routes} from "../utils/constants";
 import {Button, ButtonColor} from "../components/Button.tsx";
+import {login} from "../utils/api/authenticateService.ts";
 
 export const SignIn: FC = () => {
     const {t} = useTranslation();

@@ -3,7 +3,7 @@ import {useTranslation} from "react-i18next";
 import {useUserContext} from "../utils/providers/providerUser.tsx";
 import {useLocation} from "react-router-dom";
 import {CiWarning} from "react-icons/ci";
-import {sendVerificationEmailAgain} from "../api/verifyAccountService.ts";
+import {sendVerificationEmailAgain} from "../utils/api/verifyAccountService.ts";
 
 export const UnverifiedHeaderInfo:FC = () => {
     const {t} = useTranslation();

@@ -2,12 +2,12 @@ import {FC, useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 import {TranslationsOverview} from "../../utils/types/article/TranslationsOverview.ts";
 import {useTranslation} from "react-i18next";
-import {getTranslations} from "../../api/translationsService.ts";
 import {ArticlesSkeleton} from "../../components/modules/articles/ArticlesSkeleton.tsx";
 import {TranslationCard} from "../../components/modules/admin/translations/TranslationCard.tsx";
 import {ArticleDetailProps} from "../../utils/types/article/ArticleDetailProps.ts";
 import {editorURLS} from "../../utils/constants";
 import {Button} from "../../components/Button.tsx";
+import {getTranslations} from "../../utils/api/translationsService.ts";
 
 export const ArticleTranslate:FC = () => {
     const {id} = useParams();

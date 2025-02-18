@@ -6,7 +6,7 @@ import { coinURL } from "../../../../utils/constants";
 import {IndexTableChart} from "./indexTableChart/IndexTableChart.tsx";
 import {useMediaQuery} from "@mui/material";
 import {MostProfitableCoinsLastSevenDays} from "../../../../utils/types/indexPage/IndexDataStructure.ts";
-import {getLastCoinmarketcupCoinsSevenDays} from "../../../../api/indexDataService.ts";
+import {getLastCoinmarketcupCoinsSevenDays} from "../../../../utils/api/indexDataService.ts";
 
 export const PopularCoins: FC = () => {
     const { t } = useTranslation();

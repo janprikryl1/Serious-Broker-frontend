@@ -3,7 +3,7 @@ import {useTranslation} from "react-i18next";
 import {NewPortfolioButton} from "../../components/modules/profile/myPortfolio/NewPortfolioButton.tsx";
 import {MyPortfolioCard} from "../../components/modules/profile/myPortfolio/MyPortfolioCard.tsx";
 import {MyPortfolioType} from "../../utils/types/myPortfolio/MyPortfolioType.ts";
-import {getMyPortfolios} from "../../api/myPortfolioService.ts";
+import {getMyPortfolios} from "../../utils/api/myPortfolioService.ts";
 
 export const MyPortfolio:FC = () => {
     const { t } = useTranslation();

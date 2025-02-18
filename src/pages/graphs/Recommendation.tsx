@@ -1,7 +1,6 @@
 import { ChangeEvent, FC, useEffect, useState, useRef, useCallback } from "react";
 import { TitleHeader } from "../../components/modules/about/TitleHeader.tsx";
 import { BinanceIndexAssetRecomBestPreviousType } from "../../utils/types/graphs/BinanceIndexAssetRecomBestPreviousType.ts";
-import { getBinanceIndexAssetRecomBestPrevious } from "../../api/GraphsService.ts";
 import { PositionGraphComponent } from "../../components/modules/graphs/PositionGraphComponent.tsx";
 import { RecomDetail } from "../../components/modules/graphs/RecomDetail.tsx";
 import { RecommendationSkeleton } from "./RecommendationSkeleton.tsx";
@@ -9,6 +8,7 @@ import Form from "react-bootstrap/Form";
 import { Col, Row } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { v4 as uuidv4 } from "uuid";
+import {getBinanceIndexAssetRecomBestPrevious} from "../../utils/api/GraphsService.ts";
 
 export const Recommendation: FC = () => {
     const { t } = useTranslation();

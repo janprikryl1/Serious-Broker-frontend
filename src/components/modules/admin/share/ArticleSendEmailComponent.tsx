@@ -1,10 +1,10 @@
 import {ChangeEvent, FC, useEffect, useState} from "react";
-import {getNewslettersEmailsService} from "../../../../api/newslettersEmailsService.ts";
 import {Form} from "react-bootstrap";
 import {useTranslation} from "react-i18next";
 import {MdOutlineEmail} from "react-icons/md";
 import {useNavigate} from "react-router-dom";
 import {Button, ButtonColor} from "../../../Button.tsx";
+import {getNewslettersEmailsService} from "../../../../utils/api/newslettersEmailsService.ts";
 
 type Props = {
     url: string;

@@ -2,10 +2,10 @@ import { createContext, ReactNode, useContext, useState, useEffect, Dispatch, Se
 import { useTranslation } from "react-i18next";
 import { useParams, useNavigate } from "react-router-dom";
 import { AvailableCoinType } from "../types/myPortfolio/availableCoinType.ts";
-import { getAvaliableCoins, getMyPortfolioDetails, saveMyPortfolio } from "../../api/myPortfolioService.ts";
 import {MyPortfolioType} from "../types/myPortfolio/MyPortfolioType.ts";
 import Swal from "sweetalert2";
 import {Assets} from "../types/asset/AssetDetailType.ts";
+import {getAvaliableCoins, getMyPortfolioDetails, saveMyPortfolio} from "../api/myPortfolioService.ts";
 
 type Props = {
     children: ReactNode;

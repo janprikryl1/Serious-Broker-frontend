@@ -5,7 +5,7 @@ import { Faq } from "../components/modules/articles/dictionary/Faq.tsx";
 import { useTranslation } from "react-i18next";
 import { GlossaryItem } from "../components/modules/articles/dictionary/GlossaryItem.tsx";
 import { GlossaryType } from "../utils/types/GlossaryType.ts";
-import { getGlossary } from "../api/glossaryService.ts";
+import {getGlossary} from "../utils/api/glossaryService.ts";
 
 export const Glossary: FC = () => {
     const { t } = useTranslation();

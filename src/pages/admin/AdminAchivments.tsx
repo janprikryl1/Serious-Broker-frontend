@@ -3,9 +3,9 @@ import {Form, InputGroup} from "react-bootstrap";
 import {DataGrid, GridCellParams} from "@mui/x-data-grid";
 import {useTranslation} from "react-i18next";
 import {UserType} from "../../utils/types/user/userTypes.ts";
-import {getAllUsers} from "../../api/adminService.ts";
 import {UserAchievmentDetails} from "../../components/modules/admin/achevments/UserAchievmentDetails.tsx";
 import {Button, ButtonColor} from "../../components/Button.tsx";
+import {getAllUsers} from "../../utils/api/adminService.ts";
 
 
 export const AdminAchivments:FC = () => {

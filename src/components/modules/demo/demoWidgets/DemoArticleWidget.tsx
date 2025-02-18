@@ -3,9 +3,9 @@ import {ArticleDetails} from "../../article/ArticleDetails.tsx";
 import {ArticleSkeleton} from "../../article/ArticleSkeleton.tsx";
 import {TranslationsOverview} from "../../../../utils/types/article/TranslationsOverview.ts";
 import {ArticleDetailProps} from "../../../../utils/types/article/ArticleDetailProps.ts";
-import {getArticleDetails} from "../../../../api/articleService.ts";
 import Swal from "sweetalert2";
 import {useTranslation} from "react-i18next";
+import {getArticleDetails} from "../../../../utils/api/articleService.ts";
 
 type Props = {
     articleId: string;

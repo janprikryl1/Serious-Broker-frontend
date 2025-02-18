@@ -2,7 +2,6 @@ import {FC, useEffect, useMemo, useState} from "react";
 import { useTranslation } from "react-i18next";
 import { useParams } from "react-router-dom";
 import { TitleHeader } from "../../components/modules/about/TitleHeader.tsx";
-import { getAssetByIdGraphData } from "../../api/binanceIndexAssets.ts";
 import { Assets } from "../../utils/types/asset/AssetDetailType.ts";
 import { EarningIn } from "./earningIn/EarningIn.tsx";
 import { AssetGraphCurrencyDetailSkeleton } from "../../components/modules/graphs/asset/AssetGraphCurrencyDetailSkeleton.tsx";
@@ -12,8 +11,9 @@ import {CandlestickData} from "../../utils/types/KlineData.ts";
 import {CoinGraph} from "../../components/modules/demo/demoWidgets/CoinGraph.tsx";
 import {Button} from "../../components/Button.tsx";
 import {FaBookmark, FaRegBookmark} from "react-icons/fa";
-import {addToWatchList, removeFromWatchList} from "../../api/watchListService.ts";
 import {WatchListEnum} from "../../utils/enums/WatchListEnum.ts";
+import {getAssetByIdGraphData} from "../../utils/api/binanceIndexAssets.ts";
+import {addToWatchList, removeFromWatchList} from "../../utils/api/watchListService.ts";
 
 export const AssetGraphCurrencyDetail: FC = () => {
     const { t } = useTranslation();

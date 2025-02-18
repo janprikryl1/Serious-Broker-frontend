@@ -1,8 +1,8 @@
 import {FC, useState} from "react";
 import {useTranslation} from "react-i18next";
 import Swal from "sweetalert2";
-import {addNewsletter} from "../../../api/newsletterService.ts";
 import { Button, ButtonColor } from "../../Button.tsx";
+import {addNewsletter} from "../../../utils/api/newsletterService.ts";
 
 export const Newsletter: FC = () => {
   const {t} = useTranslation();

@@ -1,10 +1,10 @@
 import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { TableLogType } from "../../utils/types/TableLogType.ts";
-import { getAllLogs } from "../../api/adminService.ts";
 import {Pagination} from "../../components/Pagiation.tsx";
 import {TableLogSkeleton} from "../../components/modules/admin/TableLogSkeleton.tsx";
 import {toCzechDateFormat} from "../../utils/constants/functions.ts";
+import {getAllLogs} from "../../utils/api/adminService.ts";
 
 export const LogTable: FC = () => {
     const { t } = useTranslation();

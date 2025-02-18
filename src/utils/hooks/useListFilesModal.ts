@@ -3,7 +3,7 @@ import {useDropzone} from "react-dropzone";
 import {useTranslation} from "react-i18next";
 import Swal from "sweetalert2";
 import {ImageListItemDto} from "../types/article/ImageListItemDto.ts";
-import {getImages, uploadImage} from "../../api/imageService.ts";
+import {getImages, uploadImage} from "../api/imageService.ts";
 
 export const useListFilesModal = (handleSetPath: (path: string) => void) => {
     const { t } = useTranslation();

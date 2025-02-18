@@ -3,8 +3,8 @@ import {useArticleTranslate} from "../../../../utils/providers/ArticleTranslateP
 import {Form, InputGroup} from "react-bootstrap";
 import {languages} from "../../../../utils/options/languages.ts";
 import {useTranslation} from "react-i18next";
-import {translate} from "../../../../api/translateService.ts";
 import {Button} from "../../../Button.tsx";
+import {translate} from "../../../../utils/api/translateService.ts";
 
 export const NewTranslationPagesTitleDescriptionLanguage:FC = () => {
     const {t} = useTranslation();

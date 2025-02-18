@@ -1,11 +1,11 @@
 import { FC, useEffect, useState, useRef, useCallback } from "react";
 import { CryptoCurrencyType } from "../../../../utils/types/CryptoCurrencyType.ts";
-import { getAllCryptocurrencies, getSearchCryptocurrencies } from "../../../../api/CryptocurrencyService.ts";
 import { CryptoCurrencyLink } from "./CryptoCurrencyLink.tsx";
 import { CryptoCurrenciesSkeleton } from "./CryptoCurrenciesSkeleton.tsx";
 import { useTranslation } from "react-i18next";
 import { Col, Row } from "react-bootstrap";
 import { Button, ButtonColor } from "../../../Button.tsx";
+import {getAllCryptocurrencies, getSearchCryptocurrencies} from "../../../../utils/api/CryptocurrencyService.ts";
 
 const PAGE_SIZE = 50;
 

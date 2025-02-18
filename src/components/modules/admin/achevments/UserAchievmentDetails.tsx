@@ -3,11 +3,11 @@ import {UserType} from "../../../../utils/types/user/userTypes.ts";
 import {UserAchievmentSkeleton} from "./UserAchievmentSkeleton.tsx";
 import {AchievementType} from "../../../../utils/types/AchievementType.ts";
 import Swal from "sweetalert2";
-import {adminUserAchievements} from "../../../../api/achievementService.ts";
 import {useTranslation} from "react-i18next";
 import {NewAchievmentModal} from "./NewAchievmentModal.tsx";
 import {TimeLineComponent} from "../../reusable/TimeLineComponent.tsx";
 import {Button} from "../../../Button.tsx";
+import {adminUserAchievements} from "../../../../utils/api/achievementService.ts";
 
 type Props = {
     selectedUser?: UserType;

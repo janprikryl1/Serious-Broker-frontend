@@ -1,6 +1,5 @@
 import { FC, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getAssetByIndexLabel } from "../../api/binanceIndexAssets.ts";
 import { TitleHeader } from "../../components/modules/about/TitleHeader.tsx";
 import { AssetDetailSkeleton } from "../../components/modules/graphs/asset/AssetDetailSkeleton.tsx";
 import {AssetDetailType, Assets} from "../../utils/types/asset/AssetDetailType.ts";
@@ -10,6 +9,7 @@ import {AssetGraphPieChart} from "../../components/modules/graphs/asset/AssetGra
 import {AssetGraphDetails} from "../../components/modules/graphs/asset/AssetGraphDetails.tsx";
 import {AssetAnalysisGraph} from "../../components/modules/graphs/asset/AssetAnalysisGraph.tsx";
 import {Highlight} from "../../components/modules/highlights/Highlight.tsx";
+import {getAssetByIndexLabel} from "../../utils/api/binanceIndexAssets.ts";
 
 export const AssetGraph: FC = () => {
     const { t } = useTranslation();

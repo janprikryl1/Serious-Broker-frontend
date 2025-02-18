@@ -6,7 +6,7 @@ import {Button} from "react-bootstrap";
 import {FaRegEdit, FaRegTrashAlt} from "react-icons/fa";
 import {adminURLS} from "../../../../utils/constants";
 import {DemoType} from "../../../../utils/types/demos/demoType.ts";
-import {deleteDemo} from "../../../../api/demosService.ts";
+import {deleteDemo} from "../../../../utils/api/demosService.ts";
 
 type Props = {
     data: DemoType;

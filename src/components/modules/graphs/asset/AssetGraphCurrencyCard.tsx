@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { coinURL, routes } from "../../../../utils/constants";
 import {IndexTableChart} from "../../index/indexTableData/indexTableChart/IndexTableChart.tsx";
 import Skeleton from "react-loading-skeleton";
-import {getAssetGraphPreviewDate} from "../../../../api/assetGraphPreviewService.ts";
+import {getAssetGraphPreviewDate} from "../../../../utils/api/assetGraphPreviewService.ts";
 
 type Props = {
     singleAsset: Assets;
@@ -35,7 +35,7 @@ export const AssetGraphCurrencyCard: FC<Props> = ({ singleAsset }) => {
                          style={{width: 40, maxWidth: "50px", marginBottom: "10px"}}/>
                 </div>
                 <div className="col-sm d-flex flex-column align-items-center"
-                     style={{fontSize: "15px", textAlign: "center", lineHeight: 1.4, marginTop: 5}}>
+                     style={{fontSize: "15px", textAlign: "center", lineHeight: 1.4, marginTop: 5, maxWidth:90}}>
                     <Link to={`${routes.assetGraphDetail}/${singleAsset.id}`} className="link-underline-none"
                           style={{fontSize: "20px", fontWeight: "bold"}}>{singleAsset.asset_label}</Link>
                     <p>{singleAsset.name}</p>
