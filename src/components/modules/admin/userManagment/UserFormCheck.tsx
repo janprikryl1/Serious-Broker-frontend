@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 
 type UserFormInputProps = {
     label: string;
-    value: string | number | null;
+    value: boolean;
     readOnly?: boolean;
     onChange?: ChangeEventHandler<HTMLInputElement>;
 };
@@ -17,7 +17,7 @@ export const UserFormCheck: FC<UserFormInputProps> = ({ label, value, readOnly =
                 <h3>{t(label)}</h3>
             </div>
             <div className="col-md-2">
-                <Form.Check type="switch" checked={value == 1} readOnly={readOnly} onChange={onChange}/>
+                <Form.Check type="switch" checked={value} readOnly={readOnly} onChange={onChange}/>
             </div>
     </div>
 );

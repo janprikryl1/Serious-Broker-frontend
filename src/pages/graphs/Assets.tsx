@@ -88,7 +88,8 @@ export const Assets: FC = () => {
 
                         <div className="row g-4">
                             {assets.map((asset) => (
-                                <AssetCard label={asset.name} details={asset.label} key={asset.id} data={asset.profit_list} />
+                                // @ts-ignore
+                                <AssetCard index={asset.id} label={asset.name} details={asset.label} key={asset.id} data={asset.profit_list} inWatchList={asset.in_watchlist} setAssets={setAssets}/>
                             ))}
                         </div>
 

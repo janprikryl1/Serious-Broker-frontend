@@ -13,15 +13,15 @@ export const NewsletterEdit: FC = () => {
         setUserDetails((prevDetails) => {
             const updatedDetails = { ...prevDetails! };
             if (name === "newsletter_subscription") {
-                updatedDetails.newsletter_subscription = checked ? 1 : 0;
+                updatedDetails.newsletter_subscription = checked;
                 if (checked) {
-                    updatedDetails.receive_messages = 0;
+                    updatedDetails.receive_messages = false;
                 }
             }
             if (name === "receive_messages") {
-                updatedDetails.receive_messages = checked ? 1 : 0;
+                updatedDetails.receive_messages = checked;
                 if (checked) {
-                    updatedDetails.newsletter_subscription = 0;
+                    updatedDetails.newsletter_subscription = false;
                 }
             }
             return updatedDetails;
@@ -32,14 +32,14 @@ export const NewsletterEdit: FC = () => {
         <Form className="padding-bottom">
             <h3>{t("Newsletter")}</h3>
             <Form.Check
-                checked={userDetails!.newsletter_subscription == 1}
+                checked={userDetails!.newsletter_subscription}
                 type="switch"
                 label={t("Subscribe to newsletter")}
                 name="newsletter_subscription"
                 onChange={handleChange}
             />
             <Form.Check
-                checked={userDetails!.receive_messages == 1}
+                checked={userDetails!.receive_messages}
                 type="switch"
                 label={t("I don't want any messages")}
                 name="receive_messages"

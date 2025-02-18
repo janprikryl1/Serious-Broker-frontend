@@ -92,8 +92,8 @@ export const ArticleCreateProvider = ({children}: Props) => {
                 setPublicateFrom(response.data.publicationFrom);
                 setPublicateTo(response.data.publicationTo);
                 setPublicateFromDays(response.data.publicationFromDays);
-                setPremiumOnly(response.data.premiumOnly !== "0");
-                setAllowComments(response.data.allowComments !== "0");
+                setPremiumOnly(response.data.premiumOnly);
+                setAllowComments(response.data.allowComments);
                 setContent(response.data.content);
                 setSubjects(response.data.subjects);
                 setTitleImage(response.data.titleImage);

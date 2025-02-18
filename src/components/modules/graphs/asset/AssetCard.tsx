@@ -1,24 +1,52 @@
-import { FC } from "react";
-import { Link } from "react-router-dom";
-import { routes } from "../../../../utils/constants";
-import { LineChart } from "@mui/x-charts";
-import { useTranslation } from "react-i18next";
-import { FaRegBookmark } from "react-icons/fa";
+import {Dispatch, FC, SetStateAction} from "react";
+import {Link} from "react-router-dom";
+import {routes} from "../../../../utils/constants";
+import {LineChart} from "@mui/x-charts";
+import {useTranslation} from "react-i18next";
+import {FaBookmark, FaRegBookmark} from "react-icons/fa";
 import "./AssetGraphStyles.scss";
+import {Button} from "../../../Button.tsx";
+import {AssetType} from "../../../../utils/types/asset/AssetType.ts";
+import {addToWatchList, removeFromWatchList} from "../../../../api/watchListService.ts";
+import {WatchListEnum} from "../../../../utils/enums/WatchListEnum.ts";
+import {MostProfitableAssetDetailType} from "../../../../utils/types/graphs/MostProfitableAssetDetailType.ts";
 
 type Props = {
+    index: number;
     label: string;
     details: string;
     data: number[];
+    inWatchList: boolean;
+    setAssets: Dispatch<SetStateAction<AssetType[] | MostProfitableAssetDetailType[]>>;
 };
 
-export const AssetCard: FC<Props> = ({ label, details, data }) => {
+export const AssetCard: FC<Props> = ({ index, label, details, data, inWatchList, setAssets }) => {
     const { t } = useTranslation();
     const hasData = data.length > 0;
 
-    const handleAddToWatchlist = () => {
-        console.log("Add to watchlist");
+    const handleAddToWatchlist = async () => {
+        try {
+            const response = await addToWatchList(index, WatchListEnum.Asset);
+            if (response?.status === 200) {
+                // @ts-ignore
+                setAssets((prevState) => prevState.map((assetItem) => assetItem.id === index ? {...assetItem, in_watchlist: true} : assetItem));
+            }
+        } catch (e) {
+            console.error(e);
+        }
     };
+    
+    const handleRemoveFromWatchList = async () => {
+        try {
+            const response = await removeFromWatchList(index);
+            if (response?.status === 200) {
+                // @ts-ignore
+                setAssets((prevState) => prevState.map((assetItem) => assetItem.id === index ? {...assetItem, in_watchlist: false} : assetItem));
+            }
+        } catch (e) {
+            console.error(e);
+        }
+    }
 
     return (
         <div className="col-sm blog__item asset-card" data-aos="fade-up" data-aos-duration="1000">
@@ -55,9 +83,10 @@ export const AssetCard: FC<Props> = ({ label, details, data }) => {
                         {label}
                     </Link>
                     <p className="details">{details}</p>
-                    <button className="watchlist-button" onClick={handleAddToWatchlist}>
+                    <button className="watchlist-button">
                         <p>
-                            <FaRegBookmark /> {t("Add to watchlist")}
+                            
+                            <Button className="mb-3">{!inWatchList ? <><FaRegBookmark onClick={handleAddToWatchlist} /> {t("Add to watchlist")}</> : <><FaBookmark onClick={handleRemoveFromWatchList} />{t("Remove from watchlist")}</>}</Button>
                         </p>
                     </button>
                 </div>

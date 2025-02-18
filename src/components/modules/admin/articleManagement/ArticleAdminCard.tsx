@@ -60,7 +60,7 @@ export const ArticleAdminCard: FC<Props> = ({data, link = "article", setArticles
                             >
                                 <FaRegTrashAlt />
                             </Button>
-                            {data.allowComments !== "0" && (
+                            {data.allowComments && (
                                 <Link to={`${editorURLS.articleComments}${data.id}`} className="link-underline-none">
                                     <Button
                                         variant="warning"

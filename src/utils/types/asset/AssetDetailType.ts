@@ -49,4 +49,5 @@ export type Assets = {
     changed?: string;
     created?: string;
     photo: string;
+    in_watchlist?: boolean;
 };

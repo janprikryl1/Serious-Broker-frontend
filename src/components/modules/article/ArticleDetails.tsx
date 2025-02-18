@@ -57,7 +57,7 @@ export const ArticleDetails: FC<Props> = ({ article, translations, language, set
                                             <ArticleVariant4 image={article.titleImage}/> :
                                             null}
                     </div>
-                    {article?.allowComments !== "0" ? (
+                    {article?.allowComments ? (
                         <>
                             <Comments articleId={article.id} setComments={setComments} comments={comments}/>
                             {user && <CommentForm articleId={article.id} setComments={setComments}/>}

@@ -27,9 +27,9 @@ export type UserType = {
     password?: string;
     changed: string;
     created: string;
-    newsletter_subscription: number;
-    receive_messages: number;
-    verified: number;
+    newsletter_subscription: boolean;
+    receive_messages: boolean;
+    verified: boolean;
     language: string;
 }
 

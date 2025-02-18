@@ -27,3 +27,16 @@ export const addToWatchList = async (itemId: number, itemType: WatchListEnum) =>
         }
     });
 }
+
+
+export const removeFromWatchList = async (itemId: number) => {
+    const token = localStorage.getItem("token");
+    if (!token) return;
+
+    return await axios.delete(`${backendUrl}watchlist/remove_from_watchlist.php`, {
+        headers: {
+            Authorization2: `Bearer ${token}`
+        },
+        data: { item_id: itemId }
+    });
+};

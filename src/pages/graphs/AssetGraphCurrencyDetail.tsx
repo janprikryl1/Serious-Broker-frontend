@@ -11,7 +11,9 @@ import {AssetGraphCurrencyDetailTextItem} from "../../components/modules/graphs/
 import {CandlestickData} from "../../utils/types/KlineData.ts";
 import {CoinGraph} from "../../components/modules/demo/demoWidgets/CoinGraph.tsx";
 import {Button} from "../../components/Button.tsx";
-import {FaRegBookmark} from "react-icons/fa";
+import {FaBookmark, FaRegBookmark} from "react-icons/fa";
+import {addToWatchList, removeFromWatchList} from "../../api/watchListService.ts";
+import {WatchListEnum} from "../../utils/enums/WatchListEnum.ts";
 
 export const AssetGraphCurrencyDetail: FC = () => {
     const { t } = useTranslation();
@@ -32,6 +34,30 @@ export const AssetGraphCurrencyDetail: FC = () => {
         };
         getGraphData();
     }, [index_label]);
+    
+    const handleAddToWatchList = async () => {
+        if (!asset) return;
+        try {
+            const response = await addToWatchList(asset.id, WatchListEnum.Coin);
+            if (response?.status === 200) {
+                setAsset({...asset, in_watchlist: true});
+            }
+        } catch (error) {
+            console.error(error);
+        }
+    }
+    
+    const handleRemoveFromWatchList = async () => {
+        if (!asset) return;
+        try {
+            const response = await removeFromWatchList(asset.id);
+            if (response?.status === 200) {
+                setAsset({...asset, in_watchlist: false});
+            }
+        } catch (error) {
+            console.error(error);
+        }
+    }
 
     return (
         <>
@@ -43,7 +69,7 @@ export const AssetGraphCurrencyDetail: FC = () => {
                             <div className="service-details__item-inner">
                                 <div data-aos="fade-up" data-aos-duration="1000" style={{textAlign:"center"}}>
                                     <AssetGraphCurrencyDetailTextItem text={<h1>{t("GraphAssetData - details about asset and graph")}</h1>} marginBottom="20px" fontSize="80px" />
-                                    <Button className="mb-3" ><FaRegBookmark /></Button>
+                                    <Button className="mb-3">{!asset.in_watchlist ? <FaRegBookmark onClick={handleAddToWatchList}/> : <FaBookmark onClick={handleRemoveFromWatchList} />}</Button>
                                     <AssetGraphCurrencyDetailTextItem text={<span>{t("Currency: ")} <strong>{asset.asset_label}</strong></span>} />
                                     <AssetGraphCurrencyDetailTextItem text={<span>{t("Allocation: ")} <strong>{asset.allocation * 100}%</strong></span>} />
                                     <AssetGraphCurrencyDetailTextItem text={<span>{t("Changed")}: <strong>{toCzechDateFormat(asset.changed!)}</strong></span>} />

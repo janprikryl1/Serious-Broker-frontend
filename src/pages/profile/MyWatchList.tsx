@@ -34,7 +34,7 @@ export const MyWatchList:FC = () => {
                     <h2 className="index-title">{t("My watch list")}</h2>
                     {watchList === undefined ? <WatchListSkeleton /> :
                      watchList.length === 0 ? <NoItemsInWatchList /> :
-                     <WatchListTable watchList={watchList}/>
+                     <WatchListTable watchList={watchList} setWatchList={setWatchList}/>
                     }
                 </div>
             </div>

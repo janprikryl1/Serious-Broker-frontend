@@ -38,7 +38,7 @@ export const UnverifiedHeaderInfo:FC = () => {
     };
 
 
-    if (user?.verified == 0 && !isVerifyAccountPage) {
+    if (user?.verified == false && !isVerifyAccountPage) {
         return (
             <header className="header-section" style={{backgroundColor:"red"}}>
                 <div className="header-bottom">

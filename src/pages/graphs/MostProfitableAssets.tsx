@@ -64,7 +64,8 @@ export const MostProfitableAssets: FC = () => {
                     <div className="blog__wrapper">
                         <div className="row g-4">
                             {assets.map((asset) => (
-                                <AssetCard label={asset.name} details={asset.assets} key={asset.name} data={asset.profit_list} />
+                                // @ts-ignore
+                                <AssetCard index={asset.id} label={asset.name} details={asset.assets} key={asset.name} data={asset.profit_list} setAssets={setAssets} inWatchList={asset.in_watchlist} />
                             ))}
                         </div>
                         <div ref={loaderRef}>

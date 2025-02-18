@@ -7,8 +7,9 @@ export type ArticleProps = {
     description: string;
     created: string;
     changed: string;
-    allowComments: string;
+    allowComments: boolean;
     articleTypeOption: string;
-    premiumOnly: string;
+    premiumOnly: boolean;
     banner: string;
+    in_watchlist: boolean;
 }

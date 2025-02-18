@@ -38,9 +38,9 @@ export const UserEditModal: FC<Props> = ({ open, handleClose, selectedUser, hand
     const [town, setTown] = useState("");
     const [country, setCountry] = useState("");
     const [language, setLanguage] = useState("");
-    const [newsletterSubscription, setNewsletterSubscription] = useState(selectedUser?.newsletter_subscription || 0);
-    const [receiveMessages, setReceiveMessages] = useState(selectedUser?.receive_messages || 0);
-    const [verified, setVerified] = useState(selectedUser?.verified || 0);
+    const [newsletterSubscription, setNewsletterSubscription] = useState(selectedUser?.newsletter_subscription || false);
+    const [receiveMessages, setReceiveMessages] = useState(selectedUser?.receive_messages || false);
+    const [verified, setVerified] = useState(selectedUser?.verified ?? false);
     const [newPassword, setNewPassword] = useState<string>();
 
     useEffect(() => {
@@ -61,9 +61,9 @@ export const UserEditModal: FC<Props> = ({ open, handleClose, selectedUser, hand
             setTown(selectedUser.town ?? "");
             setCountry(selectedUser.country ?? "");
             setLanguage(selectedUser.language ?? "");
-            setNewsletterSubscription(selectedUser.newsletter_subscription ?? 0);
-            setReceiveMessages(selectedUser.receive_messages ?? 0);
-            setVerified(selectedUser.verified ?? 0);
+            setNewsletterSubscription(selectedUser.newsletter_subscription ?? false);
+            setReceiveMessages(selectedUser.receive_messages ?? false);
+            setVerified(selectedUser.verified ?? false);
         }
     }, [selectedUser]);
 
@@ -94,22 +94,23 @@ export const UserEditModal: FC<Props> = ({ open, handleClose, selectedUser, hand
                 password: newPassword,
             };
             handleUpdateUser(updatedUser);
+            handleClose();
         }
     };
 
     const handleReceiveMessagesChange = (e: ChangeEvent<HTMLInputElement>) => {
         const isChecked = e.target.checked;
-        setReceiveMessages(isChecked ? 1 : 0);
+        setReceiveMessages(isChecked);
         if (isChecked) {
-            setNewsletterSubscription(0);
+            setNewsletterSubscription(false);
         }
     };
     
     const handleRecieveNewsletterChange = (e: ChangeEvent<HTMLInputElement>) => {
         const isChecked = e.target.checked;
-        setNewsletterSubscription(isChecked ? 1 : 0);
+        setNewsletterSubscription(isChecked);
         if (isChecked) {
-            setReceiveMessages(0);
+            setReceiveMessages(false);
         }
     };
 
@@ -156,7 +157,7 @@ export const UserEditModal: FC<Props> = ({ open, handleClose, selectedUser, hand
                                 value={receiveMessages}
                                 onChange={handleReceiveMessagesChange}
                             />
-                            <UserFormCheck label="Verified" value={verified} onChange={(e) => setVerified(e.target.checked ? 1 : 0)} />
+                            <UserFormCheck label="Verified" value={verified} onChange={(e) => setVerified(e.target.checked)} />
                             <UserFormInput label="Changed" value={toCzechDateFormat(selectedUser.changed)} readOnly />
                             <UserFormInput label="Created" value={toCzechDateFormat(selectedUser.created)} readOnly />
                             <InputGroup className="mb-3">
