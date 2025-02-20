@@ -10,16 +10,21 @@ type Props = {
     columns: {field: string; headerName: string; flex: number; editable: boolean; renderCell?: undefined }[] | { field: string; headerName: string; flex: number; }[];
 }
 
-
 export const AdminTableFilter:FC<Props> = ({cryptocurrencies, setFilteredCoins, columns}) => {
     const { t } = useTranslation();
     const [searchTerm, setSearchTerm] = useState('');
-    const [searchColumn, setSearchColumn] = useState<string>('email');
+    const [searchColumn, setSearchColumn] = useState<keyof CryptoCurrencyType>('name');
 
     const handleSearch = () => {
-        const results = cryptocurrencies.filter((coin) =>
-            coin[searchColumn as keyof CryptoCurrencyType]?.toString().toLowerCase().includes(searchTerm.toLowerCase())
-        );
+        const results = cryptocurrencies.filter((coin) => {
+            const value = coin[searchColumn];
+            if (value === null || value === undefined) {
+                return false;
+            }
+            const stringValue = value.toString().toLowerCase();
+            const searchTermLower = searchTerm.toLowerCase();
+            return stringValue.includes(searchTermLower);
+        });
         setFilteredCoins(results);
     };
 
@@ -27,13 +32,13 @@ export const AdminTableFilter:FC<Props> = ({cryptocurrencies, setFilteredCoins, 
         setSearchTerm('');
         setFilteredCoins(cryptocurrencies);
     };
-    
+
     return (
         <InputGroup className="mb-3 mt-3">
             <InputGroup.Text id="inputGroup-sizing-sm">{t("Column")}</InputGroup.Text>
             <Form.Select
                 value={searchColumn}
-                onChange={(e) => setSearchColumn(e.target.value)}
+                onChange={(e) => setSearchColumn(e.target.value as keyof CryptoCurrencyType)}
                 aria-label={t("Search Column")}
             >
                 {columns.map((column) => (
