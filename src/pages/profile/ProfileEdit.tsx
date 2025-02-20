@@ -1,11 +1,11 @@
 import {FC} from "react";
 import {UserDetailsProvider} from "../../utils/providers/UserDetailsProvider.tsx";
-import {PersonalDataEdit} from "../../components/modules/profile/userDetails/PersonalDataEdit.tsx";
-import {LocationData} from "../../components/modules/profile/userDetails/LocationData.tsx";
-import {FirmData} from "../../components/modules/profile/userDetails/FirmData.tsx";
-import {CreatedLastEdited} from "../../components/modules/profile/userDetails/CreatedLastEdited.tsx";
-import {UploadChangesButton} from "../../components/modules/profile/userDetails/UploadChangesButton.tsx";
-import {NewsletterEdit} from "../../components/modules/profile/userDetails/NewsletterEdit.tsx";
+import {PersonalDataEdit} from "../../components/profile/userDetails/PersonalDataEdit.tsx";
+import {LocationData} from "../../components/profile/userDetails/LocationData.tsx";
+import {FirmData} from "../../components/profile/userDetails/FirmData.tsx";
+import {NewsletterEdit} from "../../components/profile/userDetails/NewsletterEdit.tsx";
+import {CreatedLastEdited} from "../../components/profile/userDetails/CreatedLastEdited.tsx";
+import {UploadChangesButton} from "../../components/profile/userDetails/UploadChangesButton.tsx";
 
 export const ProfileEdit:FC = () => {
     return (

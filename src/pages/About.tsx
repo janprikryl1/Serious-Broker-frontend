@@ -1,8 +1,8 @@
 import {FC} from 'react'
-import {TitleHeader} from "../components/modules/about/TitleHeader.tsx";
-import {AboutUs} from "../components/modules/about/AboutUs.tsx";
-import {Newsletter} from "../components/modules/index/Newsletter.tsx";
-import {HelpSection} from "../components/modules/about/HelpSection.tsx";
+import {TitleHeader} from "../components/about/TitleHeader.tsx";
+import {AboutUs} from "../components/about/AboutUs.tsx";
+import {HelpSection} from "../components/about/HelpSection.tsx";
+import {Newsletter} from "../components/index/Newsletter.tsx";
 
 export const About:FC = () => {
     return (

@@ -3,14 +3,14 @@ import {Link, useNavigate} from "react-router-dom";
 import {useTranslation} from "react-i18next";
 import Swal from "sweetalert2";
 import {registerUserType} from "../utils/types/user/registerUserType.ts";
-import {LoginRegisterInput} from "../components/modules/signIn/LoginRegisterInput.tsx";
+import {LoginRegisterInput} from "../components/signIn/LoginRegisterInput.tsx";
 import {Accordion, Form} from "react-bootstrap";
-import {CountrySelect} from "../components/modules/signIn/CountrySelect.tsx";
+import {CountrySelect} from "../components/signIn/CountrySelect.tsx";
 import {useUserContext} from "../utils/providers/providerUser.tsx";
 import {routes} from "../utils/constants";
-import {LanguageSelect} from "../components/modules/signIn/LanguageSelect.tsx";
+import {LanguageSelect} from "../components/signIn/LanguageSelect.tsx";
 import PasswordStrengthBar from "react-password-strength-bar";
-import {Button} from "../components/Button.tsx";
+import {Button} from "../components/reusable/Button.tsx";
 import {register} from "../utils/api/authenticateService.ts";
 
 

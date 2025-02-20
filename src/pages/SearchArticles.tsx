@@ -1,13 +1,13 @@
 import { FC, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { ArticleProps } from "../utils/types/article/ArticleProps.ts";
-import { ArticleCard } from "../components/modules/articles/ArticleCard.tsx";
-import { ArticlesSkeleton } from "../components/modules/articles/ArticlesSkeleton.tsx";
-import { TitleHeader } from "../components/modules/about/TitleHeader.tsx";
-import { SidebarSearch } from "../components/modules/article/SidebarSearch.tsx";
-import { RecentPost } from "../components/modules/article/RecentPost.tsx";
 import { useTranslation } from "react-i18next";
 import {getSearchArticles} from "../utils/api/articleService.ts";
+import {TitleHeader} from "../components/about/TitleHeader.tsx";
+import {ArticlesSkeleton} from "../components/articles/ArticlesSkeleton.tsx";
+import {ArticleCard} from "../components/articles/ArticleCard.tsx";
+import {SidebarSearch} from "../components/article/SidebarSearch.tsx";
+import {RecentPost} from "../components/article/RecentPost.tsx";
 
 export const SearchArticles: FC = () => {
     const { text } = useParams();
@@ -44,7 +44,7 @@ export const SearchArticles: FC = () => {
                             <div className="col-lg-8">
                                 <div className="row">
                                     {isLoading ? (
-                                        <ArticlesSkeleton /> // Pokud se načítá, zobrazíme skeleton
+                                        <ArticlesSkeleton />
                                     ) : articleResults.length > 0 ? (
                                         articleResults.map((item) => (
                                             <div key={item.id} className="col-sm-6 col-lg-4">

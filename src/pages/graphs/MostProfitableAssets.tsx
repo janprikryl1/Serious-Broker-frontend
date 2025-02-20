@@ -1,9 +1,9 @@
 import { FC, useEffect, useState, useRef, useCallback } from "react";
-import { TitleHeader } from "../../components/modules/about/TitleHeader.tsx";
-import { AssetSkeleton } from "../../components/modules/graphs/asset/AssetSkeleton.tsx";
-import { AssetCard } from "../../components/modules/graphs/asset/AssetCard.tsx";
 import { MostProfitableAssetDetailType } from "../../utils/types/graphs/MostProfitableAssetDetailType.ts";
 import {getMostProfitableAssets} from "../../utils/api/binanceIndexAssets.ts";
+import {TitleHeader} from "../../components/about/TitleHeader.tsx";
+import {AssetCard} from "../../components/graphs/asset/AssetCard.tsx";
+import {AssetSkeleton} from "../../components/graphs/asset/AssetSkeleton.tsx";
 
 export const MostProfitableAssets: FC = () => {
     const [assets, setAssets] = useState<MostProfitableAssetDetailType[]>([]);

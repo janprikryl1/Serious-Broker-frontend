@@ -1,10 +1,10 @@
 import {FC} from "react";
-import {AdminOverviewCard} from "../../components/modules/admin/AdminOverviewCard.tsx";
 import {useTranslation} from "react-i18next";
 import {useAchievmentsContext} from "../../utils/providers/AchievmentsProvider.tsx";
 import {useUserContext} from "../../utils/providers/providerUser.tsx";
 import {toCzechDateFormat} from "../../utils/constants/functions.ts";
-import {Highlight} from "../../components/modules/highlights/Highlight.tsx";
+import {AdminOverviewCard} from "../../components/admin/AdminOverviewCard.tsx";
+import {Highlight} from "../../components/highlights/Highlight.tsx";
 
 export const ProfileOverview:FC = () => {
     const {t} = useTranslation();

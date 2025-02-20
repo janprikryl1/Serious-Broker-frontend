@@ -1,14 +1,14 @@
 import {FC, useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 import {Assets} from "../../utils/types/asset/AssetDetailType.ts";
-import {AssetGraphCurrencyCard} from "../../components/modules/graphs/asset/AssetGraphCurrencyCard.tsx";
-import {AssetGraphPieChart} from "../../components/modules/graphs/asset/AssetGraphPieChart.tsx";
-import {AssetDetailSkeleton} from "../../components/modules/graphs/asset/AssetDetailSkeleton.tsx";
 import {useTranslation} from "react-i18next";
-import {AssetGraphDetails} from "../../components/modules/graphs/asset/AssetGraphDetails.tsx";
 import {toCzechDate} from "../../utils/constants/functions.ts";
-import {MyPortfolioEditButton} from "../../components/modules/profile/myPortfolio/myPortfolioEdit/MyPortfolioEditButton.tsx";
 import {getMyPortfolioDetailsGraph} from "../../utils/api/myPortfolioService.ts";
+import {MyPortfolioEditButton} from "../../components/profile/myPortfolio/myPortfolioEdit/MyPortfolioEditButton.tsx";
+import {AssetGraphDetails} from "../../components/graphs/asset/AssetGraphDetails.tsx";
+import {AssetGraphCurrencyCard} from "../../components/graphs/asset/AssetGraphCurrencyCard.tsx";
+import {AssetGraphPieChart} from "../../components/graphs/asset/AssetGraphPieChart.tsx";
+import {AssetDetailSkeleton} from "../../components/graphs/asset/AssetDetailSkeleton.tsx";
 
 export const MyPortfolioDetails:FC = () => {
     const { t } = useTranslation();

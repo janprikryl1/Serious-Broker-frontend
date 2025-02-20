@@ -8,10 +8,6 @@ import {routes, adminURLS, editorURLS} from "./utils/constants";
 import { ThemeProvider } from "./utils/providers/ThemeProvider.tsx";
 import { ProviderUser } from "./utils/providers/providerUser.tsx";
 import { AchievmentsProvider } from "./utils/providers/AchievmentsProvider.tsx";
-import { UnverifiedHeaderInfo } from "./components/UnverifiedHeaderInfo.tsx";
-import { Header } from "./components/modules/navbar/Header.tsx";
-import { Footer } from "./components/modules/navbar/Footer.tsx";
-import {PageLoader} from "./components/PageLoader.tsx";
 const Index = lazy(() => import("./pages/Index.tsx").then(module => ({ default: module.Index })));
 const About = lazy(() => import("./pages/About.tsx").then(module => ({ default: module.About })));
 const Contact = lazy(() => import("./pages/Contact.tsx").then(module => ({ default: module.Contact })));
@@ -40,8 +36,8 @@ const AdminDemos = lazy(() => import("./pages/admin/AdminDemos.tsx").then(module
 const AdminDemoEdit = lazy(() => import("./pages/admin/AdminDemoEdit.tsx").then(module => ({ default: module.AdminDemoEdit })));
 const Admin = lazy(() => import("./pages/admin/Admin.tsx").then(module => ({ default: module.Admin })));
 const AdminOverview = lazy(() => import("./pages/admin/AdminOverview.tsx").then(module => ({ default: module.AdminOverview })));
-const UserManagment = lazy(() => import("./pages/admin/UserManagment.tsx").then(module => ({ default: module.UserManagment })));
-const NewsletterOverview = lazy(() => import("./pages/admin/NewsletterOverview.tsx").then(module => ({ default: module.NewsletterOverview })));
+const UserManagment = lazy(() => import("./pages/admin/AdminUserManagement.tsx").then(module => ({ default: module.AdminUserManagement })));
+const NewsletterOverview = lazy(() => import("./pages/admin/AdminNewsletterOverview.tsx").then(module => ({ default: module.AdminNewsletterOverview })));
 const ArticleManagement = lazy(() => import("./pages/editor/ArticleManagement.tsx").then(module => ({ default: module.ArticleManagement })));
 const EditArticle = lazy(() => import("./pages/editor/EditArticle.tsx").then(module => ({ default: module.EditArticle })));
 const ArticleComments = lazy(() => import("./pages/editor/ArticleComments.tsx").then(module => ({ default: module.ArticleComments })));
@@ -49,13 +45,13 @@ const ArticleShare = lazy(() => import("./pages/editor/ArticleShare.tsx").then(m
 const ArticleTranslate = lazy(() => import("./pages/editor/ArticleTranslate.tsx").then(module => ({ default: module.ArticleTranslate })));
 const TranslateEdit = lazy(() => import("./pages/editor/TranslateEdit.tsx").then(module => ({ default: module.TranslateEdit })));
 const PostEdit = lazy(() => import("./pages/editor/PostEdit.tsx").then(module => ({ default: module.PostEdit })));
-const GlossaryManagement = lazy(() => import("./pages/admin/GlossaryManagement.tsx").then(module => ({ default: module.GlossaryManagement })));
-const LogTable = lazy(() => import("./pages/admin/LogTable.tsx").then(module => ({ default: module.LogTable })));
-const Feedbacks = lazy(() => import("./pages/admin/Feedbacks.tsx").then(module => ({ default: module.Feedbacks })));
-const AdminAchivments = lazy(() => import("./pages/admin/AdminAchivments.tsx").then(module => ({ default: module.AdminAchivments })));
-const CoinSettings = lazy(() => import("./pages/admin/CoinSettings.tsx").then(module => ({ default: module.CoinSettings })));
-const ChachedData = lazy(() => import("./pages/admin/ChachedData.tsx").then(module => ({ default: module.ChachedData })));
-const QRManagement = lazy(() => import("./pages/admin/QRManagement.tsx").then(module => ({ default: module.QRManagement })));
+const GlossaryManagement = lazy(() => import("./pages/admin/AdminGlossaryManagement.tsx").then(module => ({ default: module.AdminGlossaryManagement })));
+const LogTable = lazy(() => import("./pages/admin/AdminTableLog.tsx").then(module => ({ default: module.AdminTableLog })));
+const Feedbacks = lazy(() => import("./pages/admin/AdminFeedbackManagement.tsx").then(module => ({ default: module.AdminFeedbackManagement })));
+const AdminAchivments = lazy(() => import("./pages/admin/AdminAchievements.tsx").then(module => ({ default: module.AdminAchievements })));
+const CoinSettings = lazy(() => import("./pages/admin/AdminCoinSettings.tsx").then(module => ({ default: module.AdminCoinSettings })));
+const ChachedData = lazy(() => import("./pages/admin/AdminChachedData.tsx").then(module => ({ default: module.AdminChachedData })));
+const QRManagement = lazy(() => import("./pages/admin/AdminQRManagement.tsx").then(module => ({ default: module.AdminQRManagement })));
 const MyPortfolio = lazy(() => import("./pages/profile/MyPortfolio.tsx").then(module => ({ default: module.MyPortfolio })));
 const EditMyPortfolio = lazy(() => import("./pages/profile/EditMyPortfolio.tsx").then(module => ({ default: module.EditMyPortfolio })));
 const MyPortfolioDetails = lazy(() => import("./pages/profile/MyPortfolioDetails.tsx").then(module => ({ default: module.MyPortfolioDetails })));
@@ -68,9 +64,13 @@ const ProfileSessions = lazy(() => import("./pages/profile/ProfileSessions.tsx")
 const EditorIndex = lazy(() => import("./pages/editor/EditorIndex.tsx").then(module => ({ default: module.EditorIndex })));
 const HighlightsList = lazy(() => import("./pages/editor/HighlightsList.tsx").then(module => ({ default: module.HighlightsList })));
 const HighlightsEditor = lazy(() => import("./pages/editor/HighlightsEditor.tsx").then(module => ({ default: module.HighlightsEditor })));
-const BinanceIndexAbout = lazy(() => import("./pages/admin/BinanceIndexAbout.tsx").then(module => ({ default: module.BinanceIndexAbout })));
+const BinanceIndexAbout = lazy(() => import("./pages/admin/AdminBinanceIndexAbout.tsx").then(module => ({ default: module.AdminBinanceIndexAbout })));
 const MyWatchList = lazy(() => import("./pages/profile/MyWatchList.tsx").then(module => ({ default: module.MyWatchList })));
 import {EditorOverview} from "./pages/editor/EditorOverview.tsx";
+import {UnverifiedHeaderInfo} from "./components/navbar/UnverifiedHeaderInfo.tsx";
+import {Header} from "./components/navbar/Header.tsx";
+import {PageLoader} from "./components/reusable/PageLoader.tsx";
+import {Footer} from "./components/navbar/Footer.tsx";
 
 // Disable automatic CSS addition for Font Awesome
 config.autoAddCss = false;

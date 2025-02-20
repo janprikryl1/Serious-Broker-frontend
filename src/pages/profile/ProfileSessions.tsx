@@ -1,5 +1,5 @@
 import {FC} from "react";
-import {ProfileSessionsList} from "../../components/modules/profile/sessions/ProfileSessionsList.tsx";
+import {ProfileSessionsList} from "../../components/profile/sessions/ProfileSessionsList.tsx";
 
 export const ProfileSessions: FC = () => {
     return (

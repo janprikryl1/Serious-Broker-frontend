@@ -1,5 +1,5 @@
 import {FC} from "react";
-import {UserAchievmentsTimeLine} from "../../components/modules/profile/userAchievments/UserAchievmentsTimeLine.tsx";
+import {UserAchievmentsTimeLine} from "../../components/profile/userAchievments/UserAchievmentsTimeLine.tsx";
 
 export const ProfileAchievements:FC = () => {
     return (

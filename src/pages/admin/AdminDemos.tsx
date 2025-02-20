@@ -4,10 +4,10 @@ import {DemoType} from "../../utils/types/demos/demoType.ts";
 import Swal from "sweetalert2";
 import {Link} from "react-router-dom";
 import {adminURLS} from "../../utils/constants";
-import {ArticlesSkeleton} from "../../components/modules/articles/ArticlesSkeleton.tsx";
-import {DemoAdminCard} from "../../components/modules/admin/demos/DemoAdminCard.tsx";
-import {Button} from "../../components/Button.tsx";
 import {getAllDemos} from "../../utils/api/demosService.ts";
+import {Button} from "../../components/reusable/Button.tsx";
+import {ArticlesSkeleton} from "../../components/articles/ArticlesSkeleton.tsx";
+import {DemoAdminCard} from "../../components/admin/demos/DemoAdminCard.tsx";
 
 export const AdminDemos:FC = () => {
     const {t} = useTranslation();

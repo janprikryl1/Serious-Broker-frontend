@@ -1,12 +1,12 @@
 import {FC} from "react";
 import {useTranslation} from "react-i18next";
-import {TitleHeader} from "../../components/modules/about/TitleHeader.tsx";
 import step1 from "../../utils/icons/howToCreateArticle/step1.webp";
 import step2 from "../../utils/icons/howToCreateArticle/step2.webp";
 import step3 from "../../utils/icons/howToCreateArticle/step3.webp";
 import step4 from "../../utils/icons/howToCreateArticle/step4.webp";
 import step5 from "../../utils/icons/howToCreateArticle/step5.webp";
 import step7 from "../../utils/icons/howToCreateArticle/step7.webp";
+import {TitleHeader} from "../../components/about/TitleHeader.tsx";
 
 export const EditorIndex:FC = () => {
     const {t} = useTranslation();

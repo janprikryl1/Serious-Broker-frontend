@@ -1,6 +1,6 @@
 import {FC} from "react";
-import {ContactCard} from "../components/modules/contact/ContactCard.tsx";
-import {TitleHeader} from "../components/modules/about/TitleHeader.tsx";
+import {TitleHeader} from "../components/about/TitleHeader.tsx";
+import {ContactCard} from "../components/contact/ContactCard.tsx";
 
 export const Contact:FC = () => {
   return (

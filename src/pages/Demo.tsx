@@ -1,9 +1,9 @@
 import {FC, useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 import {DemoType} from "../utils/types/demos/demoType.ts";
-import {DemoItem} from "../components/modules/demo/DemoItem.tsx";
 import Skeleton from "react-loading-skeleton";
 import {getDemoById} from "../utils/api/demosService.ts";
+import {DemoItem} from "../components/demo/DemoItem.tsx";
 
 export const Demo:FC = () => {
     const {id} = useParams();

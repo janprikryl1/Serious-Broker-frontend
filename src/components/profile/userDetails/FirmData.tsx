@@ -1,0 +1,50 @@
+import {FC} from "react";
+import {useTranslation} from "react-i18next";
+import {Accordion, Form} from "react-bootstrap";
+import {useUserDetails} from "../../../utils/providers/UserDetailsProvider.tsx";
+
+export const FirmData:FC = () => {
+    const {t} = useTranslation();
+    const {userDetails, handleChange} = useUserDetails();
+
+    if (userDetails !== undefined) {
+        return (
+            <Accordion className="mb-4">
+                <Accordion.Item eventKey="0">
+                    <Accordion.Header className="custom-accordion-header">{t("Firm")}</Accordion.Header>
+                    <Accordion.Body>
+                        <Form>
+                            <Form.Group controlId="firmName" className="mb-4">
+                                <Form.Label>{t("Firm name")}</Form.Label>
+                                <Form.Control
+                                    type="text"
+                                    name="firm_name"
+                                    value={userDetails.firm_name}
+                                    onChange={handleChange}
+                                />
+                            </Form.Group>
+                            <Form.Group controlId="firmId" className="mb-4">
+                                <Form.Label>{t("Firm id")}</Form.Label>
+                                <Form.Control
+                                    type="text"
+                                    name="firm_id"
+                                    value={userDetails.firm_id}
+                                    onChange={handleChange}
+                                />
+                            </Form.Group>
+                            <Form.Group controlId="firmVat" className="mb-4">
+                                <Form.Label>{t("Firm VAT")}</Form.Label>
+                                <Form.Control
+                                    type="text"
+                                    name="firm_vat"
+                                    value={userDetails.firm_vat}
+                                    onChange={handleChange}
+                                />
+                            </Form.Group>
+                        </Form>
+                    </Accordion.Body>
+                </Accordion.Item>
+            </Accordion>
+        );
+    }
+}

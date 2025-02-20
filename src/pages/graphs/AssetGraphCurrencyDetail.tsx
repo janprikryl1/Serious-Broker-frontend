@@ -1,19 +1,19 @@
 import {FC, useEffect, useMemo, useState} from "react";
 import { useTranslation } from "react-i18next";
 import { useParams } from "react-router-dom";
-import { TitleHeader } from "../../components/modules/about/TitleHeader.tsx";
 import { Assets } from "../../utils/types/asset/AssetDetailType.ts";
-import { EarningIn } from "./earningIn/EarningIn.tsx";
-import { AssetGraphCurrencyDetailSkeleton } from "../../components/modules/graphs/asset/AssetGraphCurrencyDetailSkeleton.tsx";
 import { toCzechDateFormat } from "../../utils/constants/functions.ts";
-import {AssetGraphCurrencyDetailTextItem} from "../../components/modules/graphs/asset/AssetGraphCurrencyDetailTextItem.tsx";
 import {CandlestickData} from "../../utils/types/KlineData.ts";
-import {CoinGraph} from "../../components/modules/demo/demoWidgets/CoinGraph.tsx";
-import {Button} from "../../components/Button.tsx";
 import {FaBookmark, FaRegBookmark} from "react-icons/fa";
 import {WatchListEnum} from "../../utils/enums/WatchListEnum.ts";
 import {getAssetByIdGraphData} from "../../utils/api/binanceIndexAssets.ts";
 import {addToWatchList, removeFromWatchList} from "../../utils/api/watchListService.ts";
+import {TitleHeader} from "../../components/about/TitleHeader.tsx";
+import {AssetGraphCurrencyDetailTextItem} from "../../components/graphs/asset/AssetGraphCurrencyDetailTextItem.tsx";
+import {Button} from "../../components/reusable/Button.tsx";
+import {CoinGraph} from "../../components/demo/demoWidgets/CoinGraph.tsx";
+import {EarningIn} from "../../components/graphs/earningIn/EarningIn.tsx";
+import {AssetGraphCurrencyDetailSkeleton} from "../../components/graphs/asset/AssetGraphCurrencyDetailSkeleton.tsx";
 
 export const AssetGraphCurrencyDetail: FC = () => {
     const { t } = useTranslation();

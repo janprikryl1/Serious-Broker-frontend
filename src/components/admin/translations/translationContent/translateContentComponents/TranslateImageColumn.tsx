@@ -1,0 +1,39 @@
+import {Dispatch, FC, SetStateAction} from "react";
+import {InputGroup} from "react-bootstrap";
+import {useTranslation} from "react-i18next";
+import {useArticleTranslate} from "../../../../../utils/providers/ArticleTranslateProvider.tsx";
+import {Button} from "../../../../reusable/Button.tsx";
+
+type Props = {
+    currentContent: number;
+    setCurrentContent: Dispatch<SetStateAction<number | undefined>>;
+    setCurrentTask: Dispatch<SetStateAction<number | undefined>>;
+    openFileModal: () => void;
+};
+
+export const TranslateImageColumn:FC<Props> = ({currentContent, setCurrentContent, setCurrentTask, openFileModal}) => {
+    const { t } = useTranslation();
+    const { content } = useArticleTranslate();
+    
+    return (
+        <div className="col-sm-4">
+            <h4>{t("Image")}</h4>
+            {content[currentContent].tasks.map((task, taskIndex) => (
+                <div key={task.id}>
+                    <InputGroup className="mb-3">
+                        <InputGroup.Text>{t("Image")}</InputGroup.Text>
+                        <Button
+                            onClick={() => {
+                                setCurrentContent(currentContent);
+                                setCurrentTask(taskIndex);
+                                openFileModal();
+                            }}
+                        >
+                            {task.image || t("Choose image")}
+                        </Button>
+                    </InputGroup>
+                </div>
+            ))}
+        </div>
+    );
+}

@@ -1,13 +1,13 @@
 import {FC, useCallback, useEffect, useRef, useState} from "react";
 import {useTranslation} from "react-i18next";
 import {Link} from "react-router-dom";
-import {ArticlesSkeleton} from "../../components/modules/articles/ArticlesSkeleton.tsx";
 import {ArticleProps} from "../../utils/types/article/ArticleProps.ts";
 import Swal from "sweetalert2";
-import {ArticleAdminCard} from "../../components/modules/admin/articleManagement/ArticleAdminCard.tsx";
 import {editorURLS} from "../../utils/constants";
-import {Button, ButtonColor} from "../../components/Button.tsx";
 import {getAllArticlesAdmin} from "../../utils/api/articleService.ts";
+import {Button, ButtonColor} from "../../components/reusable/Button.tsx";
+import {ArticleAdminCard} from "../../components/admin/articleManagement/ArticleAdminCard.tsx";
+import {ArticlesSkeleton} from "../../components/articles/ArticlesSkeleton.tsx";
 
 export const ArticleManagement: FC = () => {
     const { t } = useTranslation();

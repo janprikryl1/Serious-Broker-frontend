@@ -3,8 +3,8 @@ import {useNavigate, useParams} from "react-router-dom";
 import {useTranslation} from "react-i18next";
 import {CommentType} from "../../utils/types/CommentType.ts";
 import {toCzechDateFormat} from "../../utils/constants/functions.ts";
-import {Button} from "../../components/Button.tsx";
 import {getArticleComments} from "../../utils/api/commentsService.ts";
+import {Button} from "../../components/reusable/Button.tsx";
 
 export const ArticleComments:FC = () => {
     const {id} = useParams();

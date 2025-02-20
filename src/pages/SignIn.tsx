@@ -2,11 +2,11 @@ import {ChangeEventHandler, FC, FormEventHandler, useEffect, useState} from "rea
 import {Link, useNavigate} from "react-router-dom";
 import {useTranslation} from "react-i18next";
 import Swal from "sweetalert2";
-import {LoginRegisterInput} from "../components/modules/signIn/LoginRegisterInput.tsx";
 import {useUserContext} from "../utils/providers/providerUser.tsx";
 import {routes} from "../utils/constants";
-import {Button, ButtonColor} from "../components/Button.tsx";
 import {login} from "../utils/api/authenticateService.ts";
+import {LoginRegisterInput} from "../components/signIn/LoginRegisterInput.tsx";
+import {Button, ButtonColor} from "../components/reusable/Button.tsx";
 
 export const SignIn: FC = () => {
     const {t} = useTranslation();

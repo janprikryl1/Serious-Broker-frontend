@@ -1,8 +1,8 @@
 import {FC} from "react";
 import {Link} from "react-router-dom";
-import {TitleHeader} from "../components/modules/about/TitleHeader.tsx";
 import {useTranslation} from "react-i18next";
 import {routes} from "../utils/constants";
+import {TitleHeader} from "../components/about/TitleHeader.tsx";
 
 export const ErrorPage:FC = () => {
   const {t} = useTranslation();

@@ -1,13 +1,13 @@
 import {FC, FormEvent, useEffect, useState} from "react";
 import {useNavigate, useParams} from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { LoginRegisterInput } from "../components/modules/signIn/LoginRegisterInput";
 import Swal from "sweetalert2";
 import {Spinner} from "react-bootstrap";
 import {FaExclamationTriangle} from "react-icons/fa";
 import {routes} from "../utils/constants";
-import {Button} from "../components/Button.tsx";
 import {setSubmitNewPassword, verifySecureKeys} from "../utils/api/forgottenPasswordService.ts";
+import {LoginRegisterInput} from "../components/signIn/LoginRegisterInput.tsx";
+import {Button} from "../components/reusable/Button.tsx";
 
 export const RecoverPassword: FC = () => {
     const { t } = useTranslation();

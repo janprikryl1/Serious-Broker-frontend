@@ -1,9 +1,9 @@
 import { FC } from "react";
 import { routes } from "../../utils/constants";
 import { useTranslation } from "react-i18next";
-import { TitleHeader } from "../../components/modules/about/TitleHeader.tsx";
 import { Nav } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import {TitleHeader} from "../../components/about/TitleHeader.tsx";
 
 export const GraphsOverview: FC = () => {
     const { t } = useTranslation();

@@ -1,8 +1,8 @@
 import {FC, useState} from "react";
-import {TitleHeader} from "../components/modules/about/TitleHeader.tsx";
-import {CryptoCurrencyViewSwitch} from "../components/modules/articles/cryptoCurrenciesList/CryptoCurrencyViewSwitch.tsx";
-import {CryptoCategories} from "../components/modules/articles/cryptoCurrenciesList/CryptoCategories.tsx";
-import {CryptoCurrencies} from "../components/modules/articles/cryptoCurrenciesList/CryptoCurrencies.tsx";
+import {TitleHeader} from "../components/about/TitleHeader.tsx";
+import {CryptoCurrencyViewSwitch} from "../components/articles/cryptoCurrenciesList/CryptoCurrencyViewSwitch.tsx";
+import {CryptoCategories} from "../components/articles/cryptoCurrenciesList/CryptoCategories.tsx";
+import {CryptoCurrencies} from "../components/articles/cryptoCurrenciesList/CryptoCurrencies.tsx";
 
 export const CryptoCurrenciesList:FC = () => {
     const [showCategory, setShowCategory] = useState(false);

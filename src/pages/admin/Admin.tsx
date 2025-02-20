@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { Outlet } from "react-router-dom";
-import { AdminSidebar } from "../../components/modules/admin/AdminSidebar.tsx";
+import {AdminSidebar} from "../../components/admin/AdminSidebar.tsx";
 
 export const Admin: FC = () => {
     return (

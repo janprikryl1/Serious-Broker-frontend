@@ -1,10 +1,10 @@
 import {FC, useEffect, useState} from "react";
 import {WatchListType} from "../../utils/types/watchList/WatchListType.ts";
-import {WatchListTable} from "../../components/modules/profile/watchList/WatchListTable.tsx";
-import {WatchListSkeleton} from "../../components/modules/profile/watchList/WatchListSkeleton.tsx";
-import {NoItemsInWatchList} from "../../components/modules/profile/watchList/NoItemsInWatchList.tsx";
 import {useTranslation} from "react-i18next";
 import {getMyWatchList} from "../../utils/api/watchListService.ts";
+import {WatchListSkeleton} from "../../components/profile/watchList/WatchListSkeleton.tsx";
+import {NoItemsInWatchList} from "../../components/profile/watchList/NoItemsInWatchList.tsx";
+import {WatchListTable} from "../../components/profile/watchList/WatchListTable.tsx";
 
 export const MyWatchList:FC = () => {
     const {t} = useTranslation();
