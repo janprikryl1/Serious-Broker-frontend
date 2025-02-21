@@ -40,14 +40,14 @@ export const WatchListTable: FC<Props> = ({ watchList, setWatchList }) => {
                     <thead>
                     <tr>
                         <th>{t("Link")}</th>
-                        <th>{t("Date of creation")}</th>
+                        <th>{t("Created")}</th>
                         <th>{t("Action")}</th>
                     </tr>
                     </thead>
                     <tbody>
                     {items.map((item) => (
                         <tr key={item.id}>
-                            <td><Link to={item.type === WatchListEnum.Asset ? `${routes.assetGraphURL}${item.title}` : item.type === WatchListEnum.Coin ? `${routes.assetGraphDetail}/${item.item_id}` : `${routes.articleURL}${item.item_id}`}>{item.title}</Link></td>
+                            <td style={{width: "33%"}}><Link to={item.type === WatchListEnum.Asset ? `${routes.assetGraphURL}${item.title}` : item.type === WatchListEnum.Coin ? `${routes.assetGraphDetail}/${item.item_id}` : `${routes.articleURL}${item.item_id}`}>{item.title}</Link></td>
                             <td>{new Date(item.created).toLocaleDateString()}</td>
                             <td><Button onClick={() => handleRemoveFromWatchList(item)}><LuTrash /></Button></td>
                         </tr>
