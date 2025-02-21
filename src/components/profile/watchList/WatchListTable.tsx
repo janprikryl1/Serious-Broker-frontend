@@ -6,6 +6,7 @@ import {WatchListType} from "../../../utils/types/watchList/WatchListType.ts";
 import {removeFromWatchList} from "../../../utils/api/watchListService.ts";
 import {WatchListEnum} from "../../../utils/enums/WatchListEnum.ts";
 import {Button} from "../../reusable/Button.tsx";
+import {routes} from "../../../utils/constants";
 
 type Props = {
     watchList: WatchListType[];
@@ -46,7 +47,7 @@ export const WatchListTable: FC<Props> = ({ watchList, setWatchList }) => {
                     <tbody>
                     {items.map((item) => (
                         <tr key={item.id}>
-                            <td><Link to={item.type === WatchListEnum.Asset ? `/asset_graph/${item.title}` : item.type === WatchListEnum.Coin ? `/asset_graph_detail/${item.item_id}` : `/article/${item.item_id}`}>{item.title}</Link></td>
+                            <td><Link to={item.type === WatchListEnum.Asset ? `${routes.assetGraphURL}${item.title}` : item.type === WatchListEnum.Coin ? `${routes.assetGraphDetail}/${item.item_id}` : `${routes.articleURL}${item.item_id}`}>{item.title}</Link></td>
                             <td>{new Date(item.created).toLocaleDateString()}</td>
                             <td><Button onClick={() => handleRemoveFromWatchList(item)}><LuTrash /></Button></td>
                         </tr>

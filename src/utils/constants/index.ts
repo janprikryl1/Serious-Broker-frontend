@@ -224,8 +224,3 @@ export const MAX_RANGES = {
     "1w": 2 * 365 * 24 * 60 * 60 * 1000,
     "1M": NaN
 };
-
-export const howDoWeEvaluateReportingPeriodArticle = "/article/20";
-export const whatIsPurposeOfReportingPeriodArticle = "/article/21";
-export const whatIsMarketCapitalizationArticle = "/article/22";
-export const areEstablishedCryptocurrenciesOrNewcomersToTheMarketBetterArticle = "/article/23";
