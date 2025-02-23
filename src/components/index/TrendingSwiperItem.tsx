@@ -2,7 +2,7 @@ import { FC } from "react";
 import { BsCoin } from "react-icons/bs";
 import {MostProfitable} from "../../utils/types/indexPage/IndexDataStructure.ts";
 import {coinURL} from "../../utils/constants";
-import {toPercentTwoDecimal} from "../../utils/constants/functions.ts";
+import {toPercentTwoDecimal} from "../../utils/functions/functions.ts";
 
 type Props = {
     item: MostProfitable;

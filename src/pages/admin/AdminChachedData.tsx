@@ -1,12 +1,12 @@
 import {FC, useEffect, useState} from "react";
 import {useTranslation} from "react-i18next";
-import {toCzechDateFormat} from "../../utils/constants/functions.ts";
 import {ChachedDataType} from "../../utils/types/ChachedDataType.ts";
 import {FaRegTrashAlt} from "react-icons/fa";
 import Swal from "sweetalert2";
 import {deleteChachedData, downloadFile, getAllChachedData} from "../../utils/api/chachedDataAPI.ts";
 import {TableLogSkeleton} from "../../components/admin/TableLogSkeleton.tsx";
 import {Button, ButtonColor} from "../../components/reusable/Button.tsx";
+import {toCzechDateFormat} from "../../utils/functions/dateFunctions.ts";
 
 export const AdminChachedData:FC = () => {
     const { t } = useTranslation();

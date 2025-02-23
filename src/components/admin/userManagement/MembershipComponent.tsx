@@ -2,8 +2,8 @@ import {FC} from "react";
 import Typography from "@mui/material/Typography";
 import {useTranslation} from "react-i18next";
 import {MembershipTypes} from "../../../utils/types/user/userTypes.ts";
-import {toCzechDate} from "../../../utils/constants/functions.ts";
 import {Button, ButtonColor} from "../../reusable/Button.tsx";
+import {toCzechDate} from "../../../utils/functions/dateFunctions.ts";
 
 type Props = {
     membership: MembershipTypes;

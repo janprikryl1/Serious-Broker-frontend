@@ -1,10 +1,10 @@
 import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { TableLogType } from "../../utils/types/TableLogType.ts";
-import {toCzechDateFormat} from "../../utils/constants/functions.ts";
 import {getAllLogs} from "../../utils/api/adminService.ts";
 import {TableLogSkeleton} from "../../components/admin/TableLogSkeleton.tsx";
 import {Pagination} from "../../components/reusable/Pagiation.tsx";
+import {toCzechDateFormat} from "../../utils/functions/dateFunctions.ts";
 
 export const AdminTableLog: FC = () => {
     const { t } = useTranslation();

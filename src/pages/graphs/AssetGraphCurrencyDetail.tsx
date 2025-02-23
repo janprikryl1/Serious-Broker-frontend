@@ -2,7 +2,6 @@ import {FC, useEffect, useMemo, useState} from "react";
 import { useTranslation } from "react-i18next";
 import { useParams } from "react-router-dom";
 import { Assets } from "../../utils/types/asset/AssetDetailType.ts";
-import { toCzechDateFormat } from "../../utils/constants/functions.ts";
 import {CandlestickData} from "../../utils/types/KlineData.ts";
 import {FaBookmark, FaRegBookmark} from "react-icons/fa";
 import {WatchListEnum} from "../../utils/enums/WatchListEnum.ts";
@@ -14,6 +13,7 @@ import {Button} from "../../components/reusable/Button.tsx";
 import {CoinGraph} from "../../components/demo/demoWidgets/CoinGraph.tsx";
 import {EarningIn} from "../../components/graphs/earningIn/EarningIn.tsx";
 import {AssetGraphCurrencyDetailSkeleton} from "../../components/graphs/asset/AssetGraphCurrencyDetailSkeleton.tsx";
+import {toCzechDateFormat} from "../../utils/functions/dateFunctions.ts";
 
 export const AssetGraphCurrencyDetail: FC = () => {
     const { t } = useTranslation();

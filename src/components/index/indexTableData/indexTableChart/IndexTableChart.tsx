@@ -2,7 +2,7 @@ import {FC, lazy, Suspense, useMemo} from "react";
 const ReactApexChart = lazy(() => import("react-apexcharts"));
 import { ApexOptions } from "apexcharts";
 import Skeleton from "react-loading-skeleton";
-import {randomColor} from "../../../../utils/constants/functions.ts";
+import {randomColor} from "../../../../utils/functions/getColorFunctions.ts";
 
 type Props = {
     name: string;

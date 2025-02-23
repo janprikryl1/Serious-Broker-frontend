@@ -1,7 +1,8 @@
 import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { AssetDetailType } from "../../../utils/types/asset/AssetDetailType";
-import { toCzechDate, toPercentTwoDecimal } from "../../../utils/constants/functions";
+import {toPercentTwoDecimal} from "../../../utils/functions/functions.ts";
+import {toCzechDate} from "../../../utils/functions/dateFunctions.ts";
 
 type Props = {
     asset: AssetDetailType;

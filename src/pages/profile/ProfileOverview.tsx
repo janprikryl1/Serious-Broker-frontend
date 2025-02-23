@@ -2,9 +2,9 @@ import {FC} from "react";
 import {useTranslation} from "react-i18next";
 import {useAchievmentsContext} from "../../utils/providers/AchievmentsProvider.tsx";
 import {useUserContext} from "../../utils/providers/providerUser.tsx";
-import {toCzechDateFormat} from "../../utils/constants/functions.ts";
 import {AdminOverviewCard} from "../../components/admin/AdminOverviewCard.tsx";
 import {Highlight} from "../../components/highlights/Highlight.tsx";
+import {toCzechDateFormat} from "../../utils/functions/dateFunctions.ts";
 
 export const ProfileOverview:FC = () => {
     const {t} = useTranslation();

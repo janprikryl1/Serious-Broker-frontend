@@ -1,11 +1,9 @@
 import {FC} from "react";
 import {Link} from "react-router-dom";
 import {useTranslation} from "react-i18next";
-import {
-    BinanceIndexAssetRecomBestPreviousType
-} from "../../utils/types/graphs/BinanceIndexAssetRecomBestPreviousType.ts";
+import {BinanceIndexAssetRecomBestPreviousType} from "../../utils/types/graphs/BinanceIndexAssetRecomBestPreviousType.ts";
 import {routes} from "../../utils/constants";
-import {toPercentTwoDecimal} from "../../utils/constants/functions.ts";
+import {toPercentTwoDecimal} from "../../utils/functions/functions.ts";
 
 type Props = {
     data: BinanceIndexAssetRecomBestPreviousType;

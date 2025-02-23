@@ -6,7 +6,7 @@ import {ArticleProps} from "../../utils/types/article/ArticleProps.ts";
 import {useUserContext} from "../../utils/providers/providerUser.tsx";
 import {addToWatchList, removeFromWatchList} from "../../utils/api/watchListService.ts";
 import {WatchListEnum} from "../../utils/enums/WatchListEnum.ts";
-import {toCzechDateFormat} from "../../utils/constants/functions.ts";
+import {toCzechDateFormat} from "../../utils/functions/dateFunctions.ts";
 
 type Props = {
     data: ArticleProps;

@@ -2,11 +2,12 @@ import {FC, useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 import {BinanceIndexAssetRecomBestPreviousDetails} from "../../utils/types/graphs/BinanceIndexAssetRecomBestPreviousDetails.ts";
 import {useTranslation} from "react-i18next";
-import {convertUTCToLocalTime, getDayName, getYear, toPercentTwoDecimal} from "../../utils/constants/functions.ts";
 import {getBinanceIndexAssetRecomBestPreviousDetail} from "../../utils/api/GraphsService.ts";
 import {TitleHeader} from "../../components/about/TitleHeader.tsx";
 import {SeasonButton} from "../../components/index/SeasonButton.tsx";
 import {RecommendationDetailsSkeleton} from "../../components/graphs/RecommendationDetailsSkeleton.tsx";
+import {toPercentTwoDecimal} from "../../utils/functions/functions.ts";
+import {convertUTCToLocalTime, getDayName, getYear} from "../../utils/functions/dateFunctions.ts";
 
 export const RecommendationDetails:FC = () => {
     const {t} = useTranslation();

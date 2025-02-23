@@ -5,10 +5,10 @@ import { GainSeasonTh } from "./GainSeasonTh.tsx";
 import {useIndexDataContext} from "../../../utils/providers/IndexDataProvider.tsx";
 import {AssetProfitData} from "../../../utils/types/indexPage/IndexDataStructure.ts";
 import {getMostProfitableSelectedPeriod} from "../../../utils/api/indexDataService.ts";
-import {calculateProfit} from "../../../utils/constants/functions.ts";
 import {coinURL} from "../../../utils/constants";
 import {IndexSeasonExtended} from "../../../utils/enums/IndexSeasonEnum.ts";
 import {IndexTableSkeleton} from "./skeletons/IndexTableSkeleton.tsx";
+import {calculateProfit} from "../../../utils/functions/functions.ts";
 
 
 export const MostProfitableLastSelectedPeriod: FC = () => {

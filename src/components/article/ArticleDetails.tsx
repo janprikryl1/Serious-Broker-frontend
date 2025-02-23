@@ -14,7 +14,7 @@ import {ArticleDetailProps} from "../../utils/types/article/ArticleDetailProps.t
 import {TranslationsOverview} from "../../utils/types/article/TranslationsOverview.ts";
 import {useUserContext} from "../../utils/providers/providerUser.tsx";
 import {CommentType} from "../../utils/types/CommentType.ts";
-import {toCzechDateFormat} from "../../utils/constants/functions.ts";
+import {toCzechDateFormat} from "../../utils/functions/dateFunctions.ts";
 
 type Props = {
     article: ArticleDetailProps;

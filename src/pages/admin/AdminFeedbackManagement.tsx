@@ -2,9 +2,9 @@ import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { FeedbackStoredType } from "../../utils/types/feedback/FeedbackStoredType.ts";
 import { Accordion } from "react-bootstrap";
-import {toCzechDateFormat} from "../../utils/constants/functions.ts";
 import {getAllFeedbacks} from "../../utils/api/feedbackService.ts";
 import {Pagination} from "../../components/reusable/Pagiation.tsx";
+import {toCzechDateFormat} from "../../utils/functions/dateFunctions.ts";
 
 const PAGE_SIZE = 10;
 

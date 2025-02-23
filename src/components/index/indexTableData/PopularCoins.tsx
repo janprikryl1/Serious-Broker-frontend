@@ -6,7 +6,7 @@ import {useMediaQuery} from "@mui/material";
 import {getLastCoinmarketcupCoinsSevenDays} from "../../../utils/api/indexDataService.ts";
 import {MostProfitableCoinsLastSevenDays} from "../../../utils/types/indexPage/IndexDataStructure.ts";
 import {coinURL} from "../../../utils/constants";
-import {formatLargeCurrency} from "../../../utils/constants/functions.ts";
+import {formatLargeCurrency} from "../../../utils/functions/functions.ts";
 
 export const PopularCoins: FC = () => {
     const { t } = useTranslation();

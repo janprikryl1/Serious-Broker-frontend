@@ -10,8 +10,8 @@ import { InputGroup } from "react-bootstrap";
 import {UserFormCheck} from "./UserFormCheck.tsx";
 import {MembershipManagement} from "./MembershipManagement.tsx";
 import {UserRole, UserType} from "../../../utils/types/user/userTypes.ts";
-import {toCzechDateFormat} from "../../../utils/constants/functions.ts";
 import {Button} from "../../reusable/Button.tsx";
+import {toCzechDateFormat} from "../../../utils/functions/dateFunctions.ts";
 
 type Props = {
     open: boolean;

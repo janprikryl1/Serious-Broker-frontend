@@ -2,9 +2,9 @@ import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { NewsletterType } from "../../utils/types/NewslwtterType.ts";
 import {v4 as uuidv4} from "uuid";
-import {toCzechDateFormat} from "../../utils/constants/functions.ts";
 import {getAllNewsletters} from "../../utils/api/newsletterService.ts";
 import {Button} from "../../components/reusable/Button.tsx";
+import {toCzechDateFormat} from "../../utils/functions/dateFunctions.ts";
 
 export const AdminNewsletterOverview: FC = () => {
     const { t } = useTranslation();

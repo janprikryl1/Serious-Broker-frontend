@@ -1,12 +1,3 @@
-const colors = [
-    "#aa0000",
-    "#2E7D32"
-];
-
-export const getRandomColor = () => {
-    return colors[Math.floor(Math.random() * colors.length)];
-};
-
 export const toCzechDateFormat = (dateRaw: string): string => {
     const date = new Date(dateRaw);
 
@@ -43,25 +34,3 @@ export const convertUTCToLocalTime = (utcHour: number) => {
 export const getYear = (yearNumber: number) => {
     return 2024 - yearNumber;
 }
-
-export const randomColor = () => {
-    return colors[Math.floor(Math.random() * colors.length)];
-};
-
-
-export const calculateProfit = (profit: number | null): number | null =>
-    profit !== null ? (profit - 1) * 100 : null;
-
-export const toPercentTwoDecimal = (profit: number) => {
-    return Math.round((profit * 100) * 100)/100;
-}
-
-export const formatLargeCurrency = (number: number | string, multiplier = 1) => {
-    const scaledNumber = Number(number) * multiplier;
-    return `$${scaledNumber.toLocaleString('en-US')}`;
-}
-
-export const generateColor = (index: number) => {
-    const hue = (index * 137.508) % 360;
-    return `hsl(${hue}, 70%, 50%)`;
-};

@@ -7,8 +7,8 @@ import {useTranslation} from "react-i18next";
 import {MdOutlineTranslate} from "react-icons/md";
 import {ArticleProps} from "../../../utils/types/article/ArticleProps.ts";
 import {deleteArticle} from "../../../utils/api/articleService.ts";
-import {toCzechDateFormat} from "../../../utils/constants/functions.ts";
 import {editorURLS} from "../../../utils/constants";
+import {toCzechDateFormat} from "../../../utils/functions/dateFunctions.ts";
 
 type Props = {
     data: ArticleProps;

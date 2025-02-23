@@ -1,6 +1,6 @@
 import {useTranslation} from "react-i18next";
 import {useUserDetails} from "../../../utils/providers/UserDetailsProvider.tsx";
-import {toCzechDateFormat} from "../../../utils/constants/functions.ts";
+import {toCzechDateFormat} from "../../../utils/functions/dateFunctions.ts";
 
 export const CreatedLastEdited = () => {
     const {t} = useTranslation();

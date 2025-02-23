@@ -69,7 +69,7 @@ export const CryptoCurrencyDetail: FC = () => {
                                         {cryptocurrency.twitter && <p><strong>{t("Twitter: ")}</strong> <a className="link-underline-none" href={cryptocurrency.twitter}>{cryptocurrency.twitter}</a></p>}
                                         {cryptocurrency.telegram && <p><strong>{t("Telegram: ")}</strong> <a className="link-underline-none" href={cryptocurrency.telegram}>{cryptocurrency.telegram}</a></p>}
                                         <p><strong>{t("CMC rank: ")}</strong> {cryptocurrency.cmc_rank}</p>
-                                        <p><strong>{t("Categories: ")}</strong> {cryptocurrency.categories}</p>
+                                        {cryptocurrency.categories && <p><strong>{t("Categories: ")}</strong> {cryptocurrency.categories}</p>}
                                         <Button className="trk-btn trk-btn--large trk-btn--secondary2" style={{ marginTop: 30 }} onClick={goBack} color={ButtonColor.white}>
                                             {t("Back")}
                                         </Button>

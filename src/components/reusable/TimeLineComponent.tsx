@@ -10,7 +10,7 @@ import Timeline from "@mui/lab/Timeline";
 import { useTranslation } from "react-i18next";
 import { AchievementType } from "../../utils/types/AchievementType";
 import {achievmentColors} from "../../utils/constants/achievmentColors.ts";
-import {toCzechDateFormat} from "../../utils/constants/functions.ts";
+import {toCzechDateFormat} from "../../utils/functions/dateFunctions.ts";
 
 type Props = {
     achievements: AchievementType[];

@@ -8,7 +8,7 @@ import Swal from "sweetalert2";
 import {HighlightType} from "../../utils/types/highlights/HighlightType.ts";
 import {deleteHighlight} from "../../utils/api/highlightsService.ts";
 import {editorURLS} from "../../utils/constants";
-import {toCzechDateFormat} from "../../utils/constants/functions.ts";
+import {toCzechDateFormat} from "../../utils/functions/dateFunctions.ts";
 
 type Props = {
     highlightData: HighlightType;
