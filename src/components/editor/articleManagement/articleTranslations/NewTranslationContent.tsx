@@ -4,8 +4,7 @@ import {NewTranslationVariant1} from "./translationContent/NewTranslationVariant
 import {NewTranslationVariant2} from "./translationContent/NewTranslationVariant2.tsx";
 import {NewTranslationVariant3} from "./translationContent/NewTranslationVariant3.tsx";
 import {NewTranslationVariant4} from "./translationContent/NewTranslationVariant4.tsx";
-import {useArticleTranslate} from "../../../utils/providers/ArticleTranslateProvider.tsx";
-
+import {useArticleTranslate} from "../../../../utils/providers/ArticleTranslateProvider.tsx";
 
 export const NewTranslationContent:FC = () => {
     const {template} = useArticleTranslate();

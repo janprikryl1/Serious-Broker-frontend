@@ -1761,7 +1761,7 @@ export const AchievmentAnimation:FC<Props> = ({onClose}) => {
                         transform="translate(433,207)"/>
                     <AchievmentAnimatedPath />
                 </svg>
-                <h1 className="text-achievment-collected">{t("Achievment earned")}</h1>
+                <h3 className="text-achievment-collected">{t("Achievment earned")}</h3>
             </>
         </Modal>
     );

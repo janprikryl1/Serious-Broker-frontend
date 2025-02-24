@@ -5,10 +5,10 @@ import {IoIosInformationCircleOutline} from "react-icons/io";
 import {Button} from "react-bootstrap";
 import {FaRegTrashAlt} from "react-icons/fa";
 import Swal from "sweetalert2";
-import {HighlightType} from "../../utils/types/highlights/HighlightType.ts";
-import {deleteHighlight} from "../../utils/api/highlightsService.ts";
-import {editorURLS} from "../../utils/constants";
-import {toCzechDateFormat} from "../../utils/functions/dateFunctions.ts";
+import {deleteHighlight} from "../../../utils/api/highlightsService.ts";
+import {editorURLS} from "../../../utils/constants";
+import {toCzechDateFormat} from "../../../utils/functions/dateFunctions.ts";
+import {HighlightType} from "../../../utils/types/highlights/HighlightType.ts";
 
 type Props = {
     highlightData: HighlightType;

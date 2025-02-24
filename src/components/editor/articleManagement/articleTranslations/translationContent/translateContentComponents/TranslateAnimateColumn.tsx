@@ -2,8 +2,8 @@ import {FC} from "react";
 import {Form, InputGroup} from "react-bootstrap";
 import {FaTrash} from "react-icons/fa";
 import {useTranslation} from "react-i18next";
-import {useArticleTranslate} from "../../../../../utils/providers/ArticleTranslateProvider.tsx";
-import {Button, ButtonColor} from "../../../../reusable/Button.tsx";
+import {useArticleTranslate} from "../../../../../../utils/providers/ArticleTranslateProvider.tsx";
+import {Button, ButtonColor} from "../../../../../reusable/Button.tsx";
 
 export const TranslateAnimateColumn:FC = () => {
     const { t } = useTranslation();

@@ -1,8 +1,8 @@
 import {FC} from "react";
 import {useTranslation} from "react-i18next";
 import {useNavigate} from "react-router-dom";
-import {usePostEdit} from "../../../utils/providers/PostEditProvider.tsx";
-import {Button, ButtonColor} from "../../reusable/Button.tsx";
+import {usePostEdit} from "../../../../utils/providers/PostEditProvider.tsx";
+import {Button, ButtonColor} from "../../../reusable/Button.tsx";
 
 export const ArticlePostSend:FC = () => {
     const {t} = useTranslation();

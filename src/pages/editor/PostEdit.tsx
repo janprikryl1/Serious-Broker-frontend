@@ -1,11 +1,11 @@
 import {PostEditProvider} from "../../utils/providers/PostEditProvider.tsx";
 import {useTranslation} from "react-i18next";
-import {ArticlePostType} from "../../components/admin/articlePost/ArticlePostType.tsx";
-import {ArticlePostLanguage} from "../../components/admin/articlePost/ArticlePostLanguage.tsx";
-import {ArticlePostTitle} from "../../components/admin/articlePost/ArticlePostTitle.tsx";
-import {ArticlePostDescription} from "../../components/admin/articlePost/ArticlePostDescription.tsx";
-import {ArticlePostContent} from "../../components/admin/articlePost/ArticlePostContent.tsx";
-import {ArticlePostSend} from "../../components/admin/articlePost/ArticlePostSend.tsx";
+import {ArticlePostType} from "../../components/editor/articleManagement/articlePost/ArticlePostType.tsx";
+import {ArticlePostLanguage} from "../../components/editor/articleManagement/articlePost/ArticlePostLanguage.tsx";
+import {ArticlePostTitle} from "../../components/editor/articleManagement/articlePost/ArticlePostTitle.tsx";
+import {ArticlePostDescription} from "../../components/editor/articleManagement/articlePost/ArticlePostDescription.tsx";
+import {ArticlePostContent} from "../../components/editor/articleManagement/articlePost/ArticlePostContent.tsx";
+import {ArticlePostSend} from "../../components/editor/articleManagement/articlePost/ArticlePostSend.tsx";
 
 export const PostEdit = () => {
     const {t} = useTranslation();

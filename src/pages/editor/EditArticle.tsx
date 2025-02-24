@@ -1,9 +1,9 @@
 import {FC} from "react";
 import {ButtonToolbar} from "react-bootstrap";
 import {ArticleCreateProvider} from "../../utils/providers/ArticleCreateProvider.tsx";
-import {NewArticlePages} from "../../components/admin/articleManagement/newArticle/newArticlePages/NewArticlePages.tsx";
-import {NewPage} from "../../components/admin/articleManagement/newArticle/newArticleButtons/NewArticleNewtPage.tsx";
-import {NewArticleUploadButton} from "../../components/admin/articleManagement/newArticle/newArticleButtons/NewArticleUploadButton.tsx";
+import {NewArticlePages} from "../../components/editor/articleManagement/newArticle/newArticlePages/NewArticlePages.tsx";
+import {NewPage} from "../../components/editor/articleManagement/newArticle/newArticleButtons/NewArticleNewtPage.tsx";
+import {NewArticleUploadButton} from "../../components/editor/articleManagement/newArticle/newArticleButtons/NewArticleUploadButton.tsx";
 
 export const EditArticle:FC = () => {
     return (

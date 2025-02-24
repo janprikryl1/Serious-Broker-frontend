@@ -4,9 +4,9 @@ import {useTranslation} from "react-i18next";
 import {editorURLS} from "../../utils/constants";
 import {useNavigate} from "react-router-dom";
 import {getHighlights} from "../../utils/api/highlightsService.ts";
-import {HighlightsListSkeleton} from "../../components/highlights/HighlightsListSkeleton.tsx";
 import {Button} from "../../components/reusable/Button.tsx";
-import {HighlightCard} from "../../components/highlights/HighlightCard.tsx";
+import {HighlightsListSkeleton} from "../../components/editor/highlights/HighlightsListSkeleton.tsx";
+import {HighlightCard} from "../../components/editor/highlights/HighlightCard.tsx";
 
 export const HighlightsList:FC = () => {
     const { t } = useTranslation();

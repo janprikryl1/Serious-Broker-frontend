@@ -2,9 +2,8 @@ import {FC} from "react";
 import {useTranslation} from "react-i18next";
 import Form from 'react-bootstrap/Form';
 import {InputGroup} from "react-bootstrap";
-import {usePostEdit} from "../../../utils/providers/PostEditProvider.tsx";
-import {PostOption, PostOptionType} from "../../../utils/options/PostOption.ts";
-
+import {PostOption, PostOptionType} from "../../../../utils/options/PostOption.ts";
+import {usePostEdit} from "../../../../utils/providers/PostEditProvider.tsx";
 
 export const ArticlePostType:FC = () => {
     const {t} = useTranslation();

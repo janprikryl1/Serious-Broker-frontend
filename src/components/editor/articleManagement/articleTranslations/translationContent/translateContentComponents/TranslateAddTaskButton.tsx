@@ -1,6 +1,6 @@
 import {FC} from "react";
-import {useArticleTranslate} from "../../../../../utils/providers/ArticleTranslateProvider.tsx";
-import {Button} from "../../../../reusable/Button.tsx";
+import {useArticleTranslate} from "../../../../../../utils/providers/ArticleTranslateProvider.tsx";
+import {Button} from "../../../../../reusable/Button.tsx";
 
 export const TranslateAddTaskButton:FC = () => {
     const { setContent, currentContent } = useArticleTranslate();

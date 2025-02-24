@@ -9,7 +9,7 @@ import {Button, ButtonColor} from "../components/reusable/Button.tsx";
 import {SidebarSearch} from "../components/article/SidebarSearch.tsx";
 import {RecentPost} from "../components/article/RecentPost.tsx";
 import {ArticleSkeleton} from "../components/article/ArticleSkeleton.tsx";
-import {Highlight} from "../components/highlights/Highlight.tsx";
+import {Highlight} from "../components/editor/highlights/Highlight.tsx";
 
 export const CryptoCurrencyDetail: FC = () => {
     const { id } = useParams();

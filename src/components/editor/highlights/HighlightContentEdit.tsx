@@ -2,9 +2,9 @@ import { FC, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { Input } from "@mui/joy";
-import {useHighlightContext} from "../../utils/providers/HighlightProvider.tsx";
-import {HighlightType} from "../../utils/types/highlights/HighlightType.ts";
-import {Button} from "../reusable/Button.tsx";
+import {useHighlightContext} from "../../../utils/providers/HighlightProvider.tsx";
+import {HighlightType} from "../../../utils/types/highlights/HighlightType.ts";
+import {Button} from "../../reusable/Button.tsx";
 
 export const HighlightContentEdit: FC = () => {
     const { t } = useTranslation();
@@ -63,7 +63,6 @@ export const HighlightContentEdit: FC = () => {
                 />
                 {errors.description_cs && <span>{errors.description_cs.message}</span>}
             </div>
-
             <Button type="submit" className="mt-4 mb-5">{t("Save")}</Button>
         </form>
     );

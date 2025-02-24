@@ -1,15 +1,15 @@
 import {FC, useState} from "react";
-import {ListFilesModal} from "../../articleManagement/newArticle/newArticlePages/NewArticleContent/imageUpload/ListFilesModal.tsx";
 import {TranslateTextField} from "./translateContentComponents/TranslateTextField.tsx";
-import {TranslateImageColumn} from "./translateContentComponents/TranslateImageColumn.tsx";
 import {TranslateTaskColumn} from "./translateContentComponents/TranslateTaskColumn.tsx";
+import {TranslateImageColumn} from "./translateContentComponents/TranslateImageColumn.tsx";
 import {TranslateAnimateColumn} from "./translateContentComponents/TranslateAnimateColumn.tsx";
 import {TranslateAddTaskButton} from "./translateContentComponents/TranslateAddTaskButton.tsx";
 import {TranslateContentNavigation} from "./translateContentComponents/TranslateContentNavigation.tsx";
-import {useArticleTranslate} from "../../../../utils/providers/ArticleTranslateProvider.tsx";
-import {useModal} from "../../../../utils/hooks/useModal.tsx";
+import {useArticleTranslate} from "../../../../../utils/providers/ArticleTranslateProvider.tsx";
+import {useModal} from "../../../../../utils/hooks/useModal.tsx";
+import {ListFilesModal} from "../../newArticle/newArticlePages/NewArticleContent/imageUpload/ListFilesModal.tsx";
 
-export const TranslateVariant0Content: FC = () => {
+export const TranslationVariant1Content:FC = () => {
     const { setContent, currentContent } = useArticleTranslate();
     const { isOpen: isFileModalOpen, openModal: openFileModal, closeModal: closeFileModal } = useModal();
     const [currentTask, setCurrentTask] = useState<number>();
@@ -45,12 +45,12 @@ export const TranslateVariant0Content: FC = () => {
             />
             <TranslateTextField />
             <div className="row">
-                <TranslateImageColumn currentContent={currentContent} setCurrentContent={setCurrrentContent} setCurrentTask={setCurrentTask} openFileModal={openFileModal} />
                 <TranslateTaskColumn />
+                <TranslateImageColumn currentContent={currentContent} setCurrentContent={setCurrrentContent} setCurrentTask={setCurrentTask} openFileModal={openFileModal} />
                 <TranslateAnimateColumn />
             </div>
             <TranslateAddTaskButton />
             <TranslateContentNavigation />
         </>
     );
-};
+}

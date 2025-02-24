@@ -7,7 +7,7 @@ import {editorURLS} from "../../utils/constants";
 import {getTranslations} from "../../utils/api/translationsService.ts";
 import {Button} from "../../components/reusable/Button.tsx";
 import {ArticlesSkeleton} from "../../components/articles/ArticlesSkeleton.tsx";
-import {TranslationCard} from "../../components/admin/translations/TranslationCard.tsx";
+import {TranslationCard} from "../../components/editor/articleManagement/articleTranslations/TranslationCard.tsx";
 
 export const ArticleTranslate:FC = () => {
     const {id} = useParams();
@@ -47,7 +47,7 @@ export const ArticleTranslate:FC = () => {
                                             {translations === undefined ? (
                                                     <ArticlesSkeleton />
                                             ) : translations.length === 0 ? (
-                                                <p>{t("No translations")}</p>
+                                                <p>{t("No articleTranslations")}</p>
                                             ) : (
                                                 translations.map((item) => (
                                                     <div key={item.id} className="col-sm-6 col-lg-4">

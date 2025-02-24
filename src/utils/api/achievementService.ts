@@ -69,3 +69,7 @@ export const adminAddAchievement = async (userId: number, achievmentText: string
         );
     return response;
 };
+
+export const giveAchievmentsForLongPeriod = async () => {
+    return await axios.get(backendUrl + "achievement/give_achievments.php");
+}

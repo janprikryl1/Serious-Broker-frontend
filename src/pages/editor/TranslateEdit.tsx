@@ -1,8 +1,8 @@
 import {FC} from "react";
 import {ArticleTranslateProvider} from "../../utils/providers/ArticleTranslateProvider.tsx";
-import {NewTranslationPagesTitleDescriptionLanguage} from "../../components/admin/translations/NewTranslationPagesTitleDescriptionLanguage.tsx";
-import {NewTranslationContent} from "../../components/admin/translations/NewTranslationContent.tsx";
-import {TranslateUpdateButton} from "../../components/admin/translations/TranslateUpdateButton.tsx";
+import {NewTranslationPagesTitleDescriptionLanguage} from "../../components/editor/articleManagement/articleTranslations/NewTranslationPagesTitleDescriptionLanguage.tsx";
+import {NewTranslationContent} from "../../components/editor/articleManagement/articleTranslations/NewTranslationContent.tsx";
+import {TranslateUpdateButton} from "../../components/editor/articleManagement/articleTranslations/TranslateUpdateButton.tsx";
 
 export const TranslateEdit:FC = () => {
     return (

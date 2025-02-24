@@ -1,9 +1,9 @@
 import {FC} from "react";
 import {Form, InputGroup} from "react-bootstrap";
 import {useTranslation} from "react-i18next";
-import {useArticleTranslate} from "../../../../utils/providers/ArticleTranslateProvider.tsx";
-import {translate} from "../../../../utils/api/translateService.ts";
-import {Button} from "../../../reusable/Button.tsx";
+import {useArticleTranslate} from "../../../../../utils/providers/ArticleTranslateProvider.tsx";
+import {translate} from "../../../../../utils/api/translateService.ts";
+import {Button} from "../../../../reusable/Button.tsx";
 
 export const TranslateSubjects:FC = () => {
     const {t} = useTranslation();

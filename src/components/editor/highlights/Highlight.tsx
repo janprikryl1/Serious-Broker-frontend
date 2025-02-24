@@ -1,9 +1,8 @@
 import {FC, useEffect, useState} from "react";
 import {IoIosInformationCircleOutline} from "react-icons/io";
 import {useTranslation} from "react-i18next";
-import {getRandomHighlight} from "../../utils/api/highlightsService.ts";
-import {HighlightType} from "../../utils/types/highlights/HighlightType.ts";
-
+import {getRandomHighlight} from "../../../utils/api/highlightsService.ts";
+import {HighlightType} from "../../../utils/types/highlights/HighlightType.ts";
 
 export const Highlight:FC = () => {
     const {i18n} = useTranslation();

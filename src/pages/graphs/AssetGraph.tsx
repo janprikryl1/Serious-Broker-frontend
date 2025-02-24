@@ -8,8 +8,8 @@ import {AssetAnalysisGraph} from "../../components/graphs/asset/AssetAnalysisGra
 import {AssetGraphDetails} from "../../components/graphs/asset/AssetGraphDetails.tsx";
 import {AssetGraphCurrencyCard} from "../../components/graphs/asset/AssetGraphCurrencyCard.tsx";
 import {AssetGraphPieChart} from "../../components/graphs/asset/AssetGraphPieChart.tsx";
-import {Highlight} from "../../components/highlights/Highlight.tsx";
 import {AssetDetailSkeleton} from "../../components/graphs/asset/AssetDetailSkeleton.tsx";
+import {Highlight} from "../../components/editor/highlights/Highlight.tsx";
 
 export const AssetGraph: FC = () => {
     const { t } = useTranslation();

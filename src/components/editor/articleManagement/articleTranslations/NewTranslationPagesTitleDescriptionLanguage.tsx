@@ -1,10 +1,10 @@
 import {Dispatch, FC, SetStateAction} from "react";
 import {Form, InputGroup} from "react-bootstrap";
 import {useTranslation} from "react-i18next";
-import {useArticleTranslate} from "../../../utils/providers/ArticleTranslateProvider.tsx";
-import {translate} from "../../../utils/api/translateService.ts";
-import {Button} from "../../reusable/Button.tsx";
-import {languages} from "../../../utils/options/languages.ts";
+import {useArticleTranslate} from "../../../../utils/providers/ArticleTranslateProvider.tsx";
+import {translate} from "../../../../utils/api/translateService.ts";
+import {Button} from "../../../reusable/Button.tsx";
+import {languages} from "../../../../utils/options/languages.ts";
 
 export const NewTranslationPagesTitleDescriptionLanguage:FC = () => {
     const {t} = useTranslation();

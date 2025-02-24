@@ -12,7 +12,7 @@ import {ArticleDetails} from "../components/article/ArticleDetails.tsx";
 import {ArticleSkeleton} from "../components/article/ArticleSkeleton.tsx";
 import {SidebarSearch} from "../components/article/SidebarSearch.tsx";
 import {RecentPost} from "../components/article/RecentPost.tsx";
-import {Highlight} from "../components/highlights/Highlight.tsx";
+import {Highlight} from "../components/editor/highlights/Highlight.tsx";
 
 export const Article: FC = () => {
     const { id, language } = useParams();

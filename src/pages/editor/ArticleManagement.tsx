@@ -6,8 +6,8 @@ import Swal from "sweetalert2";
 import {editorURLS} from "../../utils/constants";
 import {getAllArticlesAdmin} from "../../utils/api/articleService.ts";
 import {Button, ButtonColor} from "../../components/reusable/Button.tsx";
-import {ArticleAdminCard} from "../../components/admin/articleManagement/ArticleAdminCard.tsx";
 import {ArticlesSkeleton} from "../../components/articles/ArticlesSkeleton.tsx";
+import {ArticleAdminCard} from "../../components/editor/articleManagement/ArticleAdminCard.tsx";
 
 export const ArticleManagement: FC = () => {
     const { t } = useTranslation();
