@@ -16,7 +16,7 @@ const AchievmentContext = createContext<AchievmentsContextType | undefined>(unde
 
 export const AchievmentsProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     const {t} = useTranslation();
-    const {user} = useUserContext();
+    const {user, setUser} = useUserContext();
     const [achievements, setAchievements] = useState<AchievementType[]>([]);
     const [unreadAchievements, setUnreadAchievements] = useState<AchievementType[]>([]);
     const [showAnimation, setShowAnimation] = useState(false);
@@ -29,9 +29,12 @@ export const AchievmentsProvider: React.FC<{ children: ReactNode }> = ({ childre
                 const result = await getAchievements();
                 if (!result || result.status !== 200) return;
                 setAchievements(result.data);
-            } catch (error) {
+            } catch (error: any) {
                 console.error(error);
                 setAchievements([]);
+                if (error.response.status === 401) {
+                    setUser(undefined);
+                }
             }
         };
         loadAchievements();

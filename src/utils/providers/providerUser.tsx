@@ -11,7 +11,7 @@ type Props = {
 
 type UserContextType = {
     user: UserType | undefined;
-    setUser: (user: UserType) => void;
+    setUser: (user: UserType | undefined) => void;
     logout: () => void;
 }
 
