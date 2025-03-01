@@ -696,6 +696,7 @@
     "MonthlyProfit": "Měsíční profit",
     "No data": "Žádná data",
     "Add to watchlist": "Přidat do seznamu sledovaných",
+    "Remove from watchlist": "Odebrat ze seznamu sledovaných",
     "Help for editors": "Nápověda pro editory",
     "How to create new article?": "Jak vytvořit nový článek?",
     "First of all, you need to be an editor. If you are not, please contact us.": "Nejprve musíte být editorem. Pokud nejste, kontaktujte nás.",
@@ -730,5 +731,6 @@
     "You can add asset, coin or article to your watchlist": "Můžete přidat asset, mince nebo článek do watchlistu",
     "Link": "Odkaz",
     "Give achievements for long period of time": "Udělit úspěchy za dlouhou dobu aktivního profilu",
-    "Activity checked": "Aktivita zkontrolována"
+    "Activity checked": "Aktivita zkontrolována",
+    "How to avoid big losses": "Jak se vyhnout z velkým ztrátám"
 }
