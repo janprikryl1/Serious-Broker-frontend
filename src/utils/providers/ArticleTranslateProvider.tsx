@@ -28,8 +28,8 @@ type ArticleTranslateProviderProps = {
     setCurrentContent: Dispatch<SetStateAction<number>>;
     saved: boolean;
     setSaved: Dispatch<SetStateAction<boolean>>;
-    template: string;
-    setTemplate: Dispatch<SetStateAction<string>>;
+    template: number;
+    setTemplate: Dispatch<SetStateAction<number>>;
 }
 
 const ArticleTranslateContext = React.createContext<ArticleTranslateProviderProps | undefined>(undefined);
@@ -46,7 +46,7 @@ export const ArticleTranslateProvider = ({children}: Props) => {
     const [subjects, setSubjects] = useState<SubjectType[]>([{id: 0, title: "", text: ""}]);
     const [currentContent, setCurrentContent] = useState(0);
     const [saved, setSaved] = useState(false);
-    const [template, setTemplate] = useState("0");
+    const [template, setTemplate] = useState(0);
 
     const getEditedTranslate = async () => {
         if (id === undefined) return;

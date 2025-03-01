@@ -3,6 +3,8 @@ import {backendUrl} from "../../env.ts";
 import {AssetOrder} from "../enums/AssetOrderEnum.ts";
 import {AssetType} from "../types/asset/AssetType.ts";
 import {ChartAssetBuyEnum} from "../enums/ChartAssetBuyEnum.ts";
+import {QuotedCurrency} from "../types/graphs/QuotedCurrency.ts";
+import {QuotedCurrenciesPeriod} from "../options/QuotedCurrenciesPeriod.ts";
 
 export const getAllAssets = async (page: number, limit: number, orderType: AssetOrder) => {
     const token = localStorage.getItem("token");
@@ -105,4 +107,18 @@ export const getAssetBuys = async (asset_id: number, period: ChartAssetBuyEnum) 
         });
         return await response;
     }
+}
+
+export const getAssetGraphData = async (currencies: QuotedCurrency[], period: QuotedCurrenciesPeriod) => {
+    const token = localStorage.getItem("token");
+    if(!token) return;
+    
+    return await axios.post(backendUrl + "graphs/binance_index_assets/asset_graph_data.php", {
+        currencies: currencies,
+        period: period
+    }, {
+        headers: {
+            Authorization2: `Bearer ${token}`
+        }
+    });
 }

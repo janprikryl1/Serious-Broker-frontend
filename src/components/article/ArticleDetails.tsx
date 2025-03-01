@@ -41,19 +41,19 @@ export const ArticleDetails: FC<Props> = ({ article, translations, language, set
                         <p>{article.description}</p>
                         <i>{toCzechDateFormat(article.changed)}</i>
                         <br/><br/>
-                        {article.templateId === "0" ?
+                        {article.templateId === 0 ?
                             <ArticleVariant0 setTask={setTask} content={article.content} task={task} subjects={article.subjects}
                                              category={category} setCategory={setCategory}/> :
-                            article.templateId === "1" ?
+                            article.templateId === 1 ?
                                 <ArticleVariant1 setTask={setTask} content={article.content} task={task} subjects={article.subjects}
                                                  category={category} setCategory={setCategory}/> :
-                                article.templateId === "2" ?
+                                article.templateId === 2 ?
                                     <ArticleVariant2 setTask={setTask} content={article.content} task={task} subjects={article.subjects}
                                                      category={category} setCategory={setCategory}
                                                      image={article.titleImage}/> :
-                                    article.templateId === "3" ?
+                                    article.templateId === 3 ?
                                         <ArticleVariant3 subjects={article.subjects}/> :
-                                        article.templateId === "4" ?
+                                        article.templateId === 4 ?
                                             <ArticleVariant4 image={article.titleImage}/> :
                                             null}
                     </div>

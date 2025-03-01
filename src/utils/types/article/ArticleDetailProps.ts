@@ -11,6 +11,6 @@ export type ArticleDetailProps = ArticleProps & {
     publicationFromDays: number;
     premiumOnly: boolean;
     articleTypeOption: string;
-    templateId: string;
+    templateId: number;
     titleImage: string;
 }

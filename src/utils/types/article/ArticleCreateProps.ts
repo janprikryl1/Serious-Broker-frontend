@@ -3,7 +3,7 @@ export type ArticleCreateProps = {
     title: string,
     description: string,
     premiumOnly: boolean,
-    templateId: string,
+    templateId: number,
     publicationType: number,
     publicationFrom: string,
     content: string,

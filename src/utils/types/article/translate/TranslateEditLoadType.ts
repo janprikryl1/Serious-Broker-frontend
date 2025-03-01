@@ -9,5 +9,5 @@ export type TranslateEditLoadType = {
     language: string;
     content: ContentType[];
     subjects: SubjectType[];
-    templateId: string;
+    templateId: number;
 }

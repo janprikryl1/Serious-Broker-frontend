@@ -1,4 +1,5 @@
 export type AssetDetailType = {
+    id: number;
     label: string;
     name: string;
     about: string;
@@ -6,6 +7,7 @@ export type AssetDetailType = {
     assets: Assets[];
     COINS: string;
     last_update: string;
+    in_watchlist: boolean;
     week_all_profit: number;
     week_0_profit: number;
     week_1_profit: number;

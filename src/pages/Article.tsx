@@ -38,7 +38,10 @@ export const Article: FC = () => {
                 setArticle(response.data.article);
             }
             setInitialLoad(false);
-        } catch (error) {
+        } catch (error: any) {
+            if (error.response.status === 403) {
+                navigate(routes.home);
+            }
             Swal.fire({
                 icon: "error",
                 title: t("Loading failed"),

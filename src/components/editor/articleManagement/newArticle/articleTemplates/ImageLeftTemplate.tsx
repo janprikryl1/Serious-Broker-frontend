@@ -5,7 +5,7 @@ import {Button, ButtonColor} from "../../../../reusable/Button.tsx";
 export const ImageLeftTemplate: FC<templateProps> = ({ selected, index }) => {
     return (
         <Button color={ButtonColor.transparent}>
-            <svg fill={selected===index.toString() ? "#ff9f00" : "gray"}
+            <svg fill={selected===index ? "#ff9f00" : "gray"}
                  width="50mm"
                  height="70mm">
                 <g>

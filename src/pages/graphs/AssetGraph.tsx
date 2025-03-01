@@ -10,6 +10,9 @@ import {AssetGraphCurrencyCard} from "../../components/graphs/asset/AssetGraphCu
 import {AssetGraphPieChart} from "../../components/graphs/asset/AssetGraphPieChart.tsx";
 import {AssetDetailSkeleton} from "../../components/graphs/asset/AssetDetailSkeleton.tsx";
 import {Highlight} from "../../components/editor/highlights/Highlight.tsx";
+import {QuotedCurrency} from "../../utils/types/graphs/QuotedCurrency.ts";
+import {addToWatchList, removeFromWatchList} from "../../utils/api/watchListService.ts";
+import {WatchListEnum} from "../../utils/enums/WatchListEnum.ts";
 
 export const AssetGraph: FC = () => {
     const { t } = useTranslation();
@@ -25,6 +28,25 @@ export const AssetGraph: FC = () => {
         };
         getGraphData();
     }, [name]);
+    
+    const handleToggleWatchList = async () => {
+        if (!asset) return;
+        if (asset.in_watchlist) {
+            try {
+                const response = await removeFromWatchList(asset.id);
+                if (response?.status === 200) {
+                    setAsset({...asset, in_watchlist: false});
+                }
+            } catch (e) {
+                console.error(e);
+            }
+        } else {
+            const response = await addToWatchList(asset.id, WatchListEnum.Asset);
+            if (response?.status === 200) {
+                setAsset({...asset, in_watchlist: true});
+            }
+        }
+    };
 
     return (
         <>
@@ -41,7 +63,14 @@ export const AssetGraph: FC = () => {
                                             <h2 className="asset-title">{t("Analytics")}</h2>
                                             <div className="row">
                                                 <div className="col-sm-8">
-                                                    <AssetAnalysisGraph />
+                                                    <AssetAnalysisGraph
+                                                        currencies={asset.assets.map((assetDetail) => ({
+                                                            asset_label: assetDetail.asset_label,
+                                                            allocation: assetDetail.allocation
+                                                        })) as QuotedCurrency[]}
+                                                        isInWatchList={asset.in_watchlist}
+                                                        handleToggleWatchList={handleToggleWatchList}
+                                                    />
                                                 </div>
                                                 <div className="col-sm-4">
                                                     <AssetGraphDetails asset={asset}/>  

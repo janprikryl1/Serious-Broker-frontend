@@ -1,4 +1,4 @@
 export type templateProps = {
-    selected: string;
-    index: string;
+    selected: number;
+    index: number;
 }

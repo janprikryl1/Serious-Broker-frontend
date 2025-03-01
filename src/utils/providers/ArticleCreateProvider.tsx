@@ -15,8 +15,8 @@ type Props = {
 type ArticleCreateProviderProps = {
     page: number;
     setPage: Dispatch<SetStateAction<number>>;
-    template: string;
-    setTemplate: Dispatch<SetStateAction<string>>;
+    template: number;
+    setTemplate: Dispatch<SetStateAction<number>>;
     name: string;
     setName: Dispatch<SetStateAction<string>>;
     description: string;
@@ -60,7 +60,7 @@ export const ArticleCreateProvider = ({children}: Props) => {
     const {t} = useTranslation();
     const [articleId, setArticleId] = useState<number>();
     const [page, setPage] = useState(0);
-    const [template, setTemplate] = useState("0");
+    const [template, setTemplate] = useState(0);
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
     const [language, setLanguage] = useState("cs");

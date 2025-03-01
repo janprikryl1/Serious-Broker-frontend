@@ -11,11 +11,11 @@ export const NewTranslationContent:FC = () => {
 
     return (
         <div style={{marginBottom: 10}}>
-            {template === "0" ? <NewTranslationVariant0 />
-            : template === "1" ? <NewTranslationVariant1 />
-            : template === "2" ? <NewTranslationVariant2 />
-            : template === "3" ? <NewTranslationVariant3 />
-            : template === "4" ? <NewTranslationVariant4 />
+            {template === 0 ? <NewTranslationVariant0 />
+            : template === 1 ? <NewTranslationVariant1 />
+            : template === 2 ? <NewTranslationVariant2 />
+            : template === 3 ? <NewTranslationVariant3 />
+            : template === 4 ? <NewTranslationVariant4 />
             : null}
         </div>
     )
