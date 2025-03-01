@@ -3,9 +3,10 @@ import { useTranslation } from "react-i18next";
 import { AssetDetailType } from "../../../utils/types/asset/AssetDetailType";
 import {toPercentTwoDecimal} from "../../../utils/functions/functions.ts";
 import {toCzechDate} from "../../../utils/functions/dateFunctions.ts";
+import {MyPortfolioType} from "../../../utils/types/asset/MyPortfolioType.ts";
 
 type Props = {
-    asset: AssetDetailType;
+    asset: AssetDetailType | MyPortfolioType;
 };
 
 export const AssetGraphDetails: FC<Props> = ({ asset }) => {

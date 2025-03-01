@@ -2,7 +2,6 @@ export enum IndexSeason {
     WEEK = "Week",
     MONTH = "Month",
     QUARTER = "Quarter",
-
 }
 
 export enum IndexSeasonExtended  {

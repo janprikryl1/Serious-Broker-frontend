@@ -113,10 +113,11 @@ export const getAssetGraphData = async (currencies: QuotedCurrency[], period: Qu
     const token = localStorage.getItem("token");
     if(!token) return;
     
-    return await axios.post(backendUrl + "graphs/binance_index_assets/asset_graph_data.php", {
-        currencies: currencies,
-        period: period
-    }, {
+    return await axios.get(backendUrl + "graphs/binance_index_assets/asset_graph_data.php", {
+        params: {
+            currencies: JSON.stringify(currencies),
+            period: period
+        },
         headers: {
             Authorization2: `Bearer ${token}`
         }

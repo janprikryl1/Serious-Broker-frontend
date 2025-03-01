@@ -9,3 +9,8 @@ export const formatLargeCurrency = (number: number | string, multiplier = 1) => 
     const scaledNumber = Number(number) * multiplier;
     return `$${scaledNumber.toLocaleString('en-US')}`;
 }
+
+export const formatCurrency = (number: number | string) => {
+    const price = Number(number);
+    return `${price.toFixed(2)} €`;
+}
