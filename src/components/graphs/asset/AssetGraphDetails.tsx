@@ -106,7 +106,7 @@ export const AssetGraphDetails: FC<Props> = ({ asset }) => {
     };
 
     return (
-        <div className="service-details__content mb-5" style={{border: "0.5px solid #3e3a32", borderRadius: "16px", padding: "20px", color:"white"}}>
+        <div className="service-details__content mb-5" style={{border: "0.5px solid #3e3a32", borderRadius: "16px", padding: "20px", color:"white", height: "90%"}}>
             <p style={{fontSize: "25px", fontWeight:"bold"}}>{t("Statistics")}</p>
             <p style={{fontSize: "15px"}}>{t("Last update: ")} {toCzechDate(asset.last_update)}</p>
 
