@@ -224,3 +224,7 @@ export const MAX_RANGES = {
     "1w": 2 * 365 * 24 * 60 * 60 * 1000,
     "1M": NaN
 };
+
+export const defaultContent = [{id: 0, title: "", tasks: [{id: 0, task: "", image: "", animateTo: {from: {x: 0, y: 0}, to: {x: 0, y: 0}}}]}];
+    
+export const defaultSubjects = [{id: 0, title: "", text: ""}];

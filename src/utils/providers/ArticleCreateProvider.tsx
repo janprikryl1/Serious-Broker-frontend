@@ -7,6 +7,7 @@ import {ContentType} from "../types/article/ContentType.ts";
 import {useParams} from "react-router-dom";
 import {ArticleUpdateType} from "../types/article/ArticleUpdateType.ts";
 import {createArticle, getArticleByIdAdmin, updateArticle} from "../api/articleService.ts";
+import {defaultContent, defaultSubjects} from "../constants";
 
 type Props = {
     children: ReactNode;
@@ -73,8 +74,8 @@ export const ArticleCreateProvider = ({children}: Props) => {
     const [premiumOnly, setPremiumOnly] = useState(false);
     const [allowComments, setAllowComments] = useState(true);
     const [titleImage, setTitleImage] = useState("");
-    const [content, setContent] = useState<ContentType[]>([{id: 0, title: "", tasks: [{id: 0, task: "", image: "", animateTo: {from: {x: 0, y: 0}, to: {x: 0, y: 0}}}]}]);
-    const [subjects, setSubjects] = useState<SubjectType[]>([{id: 0, title: "", text: ""}]);
+    const [content, setContent] = useState<ContentType[]>(defaultContent);
+    const [subjects, setSubjects] = useState<SubjectType[]>(defaultSubjects);
     const [currentContent, setCurrentContent] = useState(0);
     const [saved, setSaved] = useState(false);
 
