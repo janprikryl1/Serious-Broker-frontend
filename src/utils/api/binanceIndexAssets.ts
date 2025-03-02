@@ -17,8 +17,7 @@ export const getAllAssets = async (page: number, limit: number, orderType: Asset
             order: orderType
         },
         headers:{
-            Authorization2: `Bearer ${token}`,
-                'Content-Type': 'application/json'
+            Authorization2: `Bearer ${token}`
         },
     });
     return await response;
