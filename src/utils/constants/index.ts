@@ -2,6 +2,8 @@ import {NavbarURLs, NavLink} from "../types/NavLink.ts";
 import {DemoType} from "../types/demos/demoType.ts";
 import {Assets} from "../types/asset/AssetDetailType.ts";
 import {HighlightType} from "../types/highlights/HighlightType.ts";
+// @ts-ignore
+import Freecurrencyapi from '@everapi/freecurrencyapi-js';
 
 export const domain = "https://serious.broker";
 export const PROTECTED_ROUTES = ['/admin', '/profile', '/assets', '/graphs', '/most_profitable_assets', '/asset_graph/:id', '/editor'];
@@ -20,6 +22,9 @@ export const twitterURL = "https://x.com/SeriousBroker";
 
 export const phoneNumber = "+420 735 838 972";
 export const contactEmail = "brokerserious@gmail.com";
+
+export const freecurrencyapi = new Freecurrencyapi('fca_live_tMDn3hFf3kZtFQuBrCmsqlLwAEmgSJUtXoNJEASX');
+
 
 export const routes = {
     home: "/",

@@ -12,5 +12,5 @@ export const formatLargeCurrency = (number: number | string, multiplier = 1) => 
 
 export const formatCurrency = (number: number | string) => {
     const price = Number(number);
-    return `${price.toFixed(2)} €`;
+    return price.toFixed(2);
 }
