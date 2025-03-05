@@ -41,6 +41,7 @@ export const AssetAnalysisGraph: FC<Props> = ({currencies, isInWatchList, handle
                 if (!response) return;
                 setGraphData(response.data);
                 setCurrencyPrice(formatCurrency(response.data.price));
+                setCurrency(Currencies.EUR);
             } catch (e) {
                 console.error(e);
             }
