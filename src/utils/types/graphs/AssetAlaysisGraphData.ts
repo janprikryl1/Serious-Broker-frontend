@@ -1,4 +1,4 @@
 export type AssetAlaysisGraphData = {
     price: number;
-    data: number[];
+    data: Record<string, number>;
 }

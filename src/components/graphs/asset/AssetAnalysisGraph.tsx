@@ -100,12 +100,12 @@ export const AssetAnalysisGraph: FC<Props> = ({currencies, isInWatchList, handle
                 </div>
             </div>
             {graphData ? (
-                <div style={{marginLeft: "-50px"}}>
-                    {graphData.data ? (
+                <div style={{ width: "100%", overflowX: "auto" }}>
+                    {graphData.data && Object.keys(graphData.data).length > 0 ? (
                         <LineChart
                             series={[
                                 {
-                                    data: graphData.data,
+                                    data: Object.values(graphData.data),
                                     color: "green",
                                     showMark: false,
                                     curve: "catmullRom",
@@ -113,17 +113,34 @@ export const AssetAnalysisGraph: FC<Props> = ({currencies, isInWatchList, handle
                             ]}
                             width={undefined}
                             height={400}
-                            tooltip={{trigger: "none"}}
+                            xAxis={[
+                                {
+                                    scaleType: "point",
+                                    data: Object.keys(graphData.data).map((dateStr) =>
+                                        new Date(dateStr).toLocaleString()
+                                    ),
+                                },
+                            ]}
+                            tooltip={{ trigger: "axis" }}
                             sx={{
                                 backgroundColor: "transparent",
                                 "& .MuiChartsAxis-root": {
-                                    display: "none",
-                                }
+                                    display: "inline",
+                                },
+                                "& .MuiChartsAxis-tickLabel": {
+                                    fontSize: "1px",
+                                },
                             }}
+                            margin={{ left: 50, right: 0, top: 20, bottom: 30 }}
                         />
-                    ) : <div className="no-data">{t("No data")}</div>}
+                    ) : (
+                        <div className="no-data">{t("No data")}</div>
+                    )}
                 </div>
-            ) : <GraphDataSkeleton/>}
+            ) : (
+                <GraphDataSkeleton />
+            )}
+
         </div>
     );
 };
