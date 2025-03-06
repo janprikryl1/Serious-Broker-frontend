@@ -32,7 +32,8 @@ export const AssetAnalysisGraph: FC<Props> = ({currencies, isInWatchList, handle
     const [graphData, setGraphData] = useState<AssetAlaysisGraphData>();
     const [currency, setCurrency] = useState<Currencies>(Currencies.EUR);
     const [currencyPrice, setCurrencyPrice] = useState<string>();
-
+    const [currencyValue, setCurrencyValue] = useState<number>(1);
+    
     useEffect(() => {
         const getGraphData = async () => {
             try {
@@ -68,6 +69,7 @@ export const AssetAnalysisGraph: FC<Props> = ({currencies, isInWatchList, handle
             if (graphData && response.data[newCurrency]) {
                 setCurrencyPrice(formatCurrency(response.data[newCurrency] * graphData.price));
                 setCurrency(newCurrency);
+                setCurrencyValue(response.data[newCurrency]);
             }
         } catch (error) {
             console.error("Error fetching currency data:", error);
@@ -109,6 +111,7 @@ export const AssetAnalysisGraph: FC<Props> = ({currencies, isInWatchList, handle
                                     color: "green",
                                     showMark: false,
                                     curve: "catmullRom",
+                                    valueFormatter: (value) => `${formatCurrency((value ?? 0) * (currencyValue))} ${currency}`,
                                 },
                             ]}
                             width={undefined}
@@ -119,6 +122,7 @@ export const AssetAnalysisGraph: FC<Props> = ({currencies, isInWatchList, handle
                                     data: Object.keys(graphData.data).map((dateStr) =>
                                         new Date(dateStr).toLocaleString()
                                     ),
+                                    valueFormatter: (value) => value,
                                 },
                             ]}
                             tooltip={{ trigger: "axis" }}
