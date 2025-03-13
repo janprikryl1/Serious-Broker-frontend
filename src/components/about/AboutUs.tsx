@@ -38,7 +38,7 @@ export const AboutUs: FC = () => {
             <TeamMemberCard name="Ing. Radoslav Fasuga, Ph.D." position="Coordinator"
                             description="10+ years of experience" image={radoslavFasuga}/>
             <TeamMemberCard name="Jan Přikryl" position="Developer"/>
-            <TeamMemberCard name="Adéla Fedorová" position="Designer"/>
+            <TeamMemberCard name="Adela Fedorová" position="Designer"/>
           </div>
         </div>
       </div>
