@@ -44,7 +44,7 @@ export const CryptoCurrencyDetail: FC = () => {
         <>
             <TitleHeader title={cryptocurrency?.name ?? "Cryptocurrency"} />
             {cryptocurrency ? (
-                <div className="blog-details mt-4 padding-bottom section-bg-color">
+                <div className="blog-details mt-4 padding-bottom">
                     <div className="container">
                         <div className="row g-5">
                             <div className="col-lg-8">

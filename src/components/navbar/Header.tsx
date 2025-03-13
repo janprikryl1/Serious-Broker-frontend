@@ -25,36 +25,40 @@ export const Header: FC = () => {
     }, [location.pathname]);
 
     return (
-        <header className="container header-section">
-                <div className="header-wrapper">
-                    <div className="d-flex align-items-center">
-                        <div className="logo">
-                            <Link to={routes.home}>
-                                <img className="logo-dark" src={Logo} alt="logo" />
-                            </Link>
-                        </div>
-                        <NavbarDesktopMenu className="ml-4" />
-                    </div>
-
-                    <div className="d-flex align-items-center">
-                        <div className="mx-2 mobile-hide">
-                            <ChangeLanguageIcon />
-                        </div>
-                        {user === null && !isMobile && (
-                            <div className="border-start px-3" style={{ color: "white", fontWeight: "bold" }}>
-                                <SignUpIcon />
+        <header>
+            <div className="header-wrapper">
+                <div className="container">
+                    <div className="d-flex align-items-center justify-content-between">
+                        <div className="d-flex align-items-center">
+                            <div className="logo">
+                                <Link to={routes.home}>
+                                    <img className="logo-dark" src={Logo} alt="logo"/>
+                                </Link>
                             </div>
-                        )}
-                        <div className="mx-2">
-                            <SignInIcon />
+                            <NavbarDesktopMenu className="ml-4"/>
                         </div>
-                        <div className="header-bar" onClick={toggleMobileMenu} style={{ padding: 10 }}>
-                            <span></span>
-                            <span></span>
-                            <span></span>
+
+                        <div className="d-flex align-items-center flex-nowrap">
+                            <div className="mx-2 mobile-hide">
+                                <ChangeLanguageIcon/>
+                            </div>
+                            {user === null && !isMobile && (
+                                <div className="border-start px-3" style={{ color: "white", fontWeight: "bold" }}>
+                                    <SignUpIcon/>
+                                </div>
+                            )}
+                            <div className="mx-2">
+                                <SignInIcon/>
+                            </div>
+                            <div className="header-bar" onClick={toggleMobileMenu} style={{ padding: 10 }}>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
                         </div>
                     </div>
                 </div>
+            </div>
             {isMobileMenuOpen && <MobileMenu toggleMobileMenu={toggleMobileMenu} />}
         </header>
     );

@@ -3,23 +3,22 @@
         @extend %py-15,
         %px-20;
         box-shadow: -40px 40px 60px 0px rgba(5, 30, 54, 0.05);
-        border-radius: 16px;
+        border-radius: 3px;
+        max-height: 80px;
+        text-align: center;
         & {
-            background-color: $floating-content-bg-color;
-            border: 1px solid $floating-content-border-color;
+            background: rgba(0, 0, 0, 0.5);
         }
 
         @include breakpoint(md) {
-            padding: 24px 32px;
+            padding-left: 20px;
+            padding-right: 20px;
         }
 
-        h3 {
-            @extend %mb-5,
-            %text-bold;
-            font-family: $text-font;
-            line-height: 32px;
+        h4 {
+            line-height: 22px;
             color: $secondary-color;
-
+            font-weight: normal;
             &.style2 {
                 color: $thm-brand-color;
             }
@@ -28,13 +27,12 @@
         p {
             @extend %mb-0,
             %text-regular;
-            @include font-size(20px);
+            @include font-size(18px);
             & {
                 color: $title-color;
             }
 
             &.style2 {
-                @extend %text-bold;
                 @include font-size(18px);
             }
         }
@@ -78,7 +76,6 @@
 
             p {
                 @extend
-                %text-bold,
                 %text-left;
                 max-inline-size: 18ch;
             }
@@ -444,12 +441,12 @@
 
             @include breakpoint(lg) {
                 right: 45px;
-                bottom: 2px;
+                bottom: 20px;
             }
 
             @include breakpoint(xl) {
                 right: 23px;
-                bottom: 40px;
+                bottom: 80px;
             }
         }
     }

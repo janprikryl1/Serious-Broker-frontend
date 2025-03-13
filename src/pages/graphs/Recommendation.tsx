@@ -74,7 +74,7 @@ export const Recommendation: FC = () => {
     return (
         <>
             <TitleHeader title="Recommendation" />
-            <div className="blog padding-top padding-bottom section-bg-color">
+            <div className="blog padding-top padding-bottom">
                 <div className="container">
                     <Row className="justify-content-center align-items-center">
                         <Col xs="auto">

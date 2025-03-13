@@ -78,8 +78,12 @@ export const AssetGraph: FC = () => {
                                             </div>
                                             <div className="row">
                                                 <div className="col-sm-8">
-                                                    <h2 className="asset-title">{t("About")}</h2>
-                                                    <p>{asset.about}</p>
+                                                    {asset.about && 
+                                                        <>
+                                                            <h2 className="asset-title">{t("About")}</h2>
+                                                            <p>{asset.about}</p>
+                                                        </>
+                                                    }
                                                 </div>
                                                 <div className="col-sm-4">
                                                     <Highlight/>

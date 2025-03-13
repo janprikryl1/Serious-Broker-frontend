@@ -64,7 +64,7 @@ export const Assets: FC = () => {
     return (
         <>
             <TitleHeader title="Assets" />
-            <div className="blog padding-top padding-bottom section-bg-color">
+            <div className="blog padding-top padding-bottom">
                 <div className="container">
                     <div className="blog__wrapper">
                         <p className="text-white">

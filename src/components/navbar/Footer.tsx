@@ -16,8 +16,8 @@ export const Footer:FC = () => {
   const {t} = useTranslation();
   
   return (
-    <footer className="container cta footer">
-        <div className="footer__top--style1 cta__wrapper">
+    <footer className="container">
+        <div className="footer__top--style1">
           <div className="row">
             <div className="col-md-6 font-footer">
                 <p>
@@ -41,7 +41,7 @@ export const Footer:FC = () => {
             </div>
           </div>
         </div>
-        <div className="footer__end cta__wrapper">
+        <div className="footer__end">
           <div>
             <p>© 2024 - 2025</p>
             <p>VŠB - Technical University of Ostrava</p>

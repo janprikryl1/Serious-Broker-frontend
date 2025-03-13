@@ -11,13 +11,12 @@ export const TitleHeader: FC<Props> = ({ title, text = "" }) => {
   const {t} = useTranslation();
 
   return (
-      <div className="container">
         <section
             className="page-header bg--cover"
             style={{ backgroundImage: `url(${HeaderImage})` }}
         >
           <div
-              className="page-header__content"
+              className="container page-header__content"
               data-aos="fade-right"
               data-aos-duration="1000"
           >
@@ -25,6 +24,5 @@ export const TitleHeader: FC<Props> = ({ title, text = "" }) => {
             <small>{t(text)}</small>
           </div>
         </section>
-      </div>
   );
 };
