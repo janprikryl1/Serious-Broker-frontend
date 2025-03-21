@@ -12,24 +12,24 @@ export const UnverifiedHeaderInfo:FC = () => {
     const isVerifyAccountPage = /^\/verify_account\/[^/]+\/[^/]+$/.test(location.pathname);
 
     const handleSendVerificationAgain = async () => {
-        const Swal = (await import("sweetalert2")).default;
+        const CustomSwal = (await import("../../utils/functions/customSwal.ts")).CustomSwal;
         try {
             const response = await sendVerificationEmailAgain();
             if (!response) return;
             if (response.data.status === "verification email sent") {
-                Swal.fire({
+                CustomSwal.fire({
                     icon: "success",
                     title: t("Email sent"),
                 });
             } else {
-                Swal.fire({
+                CustomSwal.fire({
                     icon: "error",
                     title: t("Error"),
                 });
             }
         } catch (e) {
             console.error(e);
-            Swal.fire({
+            CustomSwal.fire({
                 icon: "error",
                 title: t("Error"),
                 text: t("Check internet connection"),

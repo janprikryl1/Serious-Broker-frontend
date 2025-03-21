@@ -1,7 +1,6 @@
 import {ChangeEvent, ChangeEventHandler, FC, FormEventHandler, useEffect, useState} from "react";
 import {Link, useNavigate} from "react-router-dom";
 import {useTranslation} from "react-i18next";
-import Swal from "sweetalert2";
 import {registerUserType} from "../utils/types/user/registerUserType.ts";
 import {LoginRegisterInput} from "../components/signIn/LoginRegisterInput.tsx";
 import {Accordion, Form} from "react-bootstrap";
@@ -11,7 +10,8 @@ import {routes} from "../utils/constants";
 import {LanguageSelect} from "../components/signIn/LanguageSelect.tsx";
 import PasswordStrengthBar from "react-password-strength-bar";
 import {Button} from "../components/reusable/Button.tsx";
-import {register} from "../utils/api/authenticateService.ts";
+import {register, verifyEmail} from "../utils/api/authenticateService.ts";
+import {CustomSwal} from "../utils/functions/customSwal.ts";
 
 
 export const Register:FC = () => {
@@ -19,6 +19,9 @@ export const Register:FC = () => {
     const navigate = useNavigate();
     const {setUser, user} = useUserContext();
     const [sending, setSending] = useState(false);
+    const [passwordAgain, setPasswordAgain] = useState("");
+    const [emailValid, setEmailValid] = useState<boolean | null>(null);
+    const [emailCheckTimeout, setEmailCheckTimeout] = useState<NodeJS.Timeout | null>(null);
 
     useEffect(() => {
         if (user) navigate(routes.profile.profileURL);    
@@ -44,16 +47,37 @@ export const Register:FC = () => {
         newsletter_subscription: true,
         education_emails: true
     });
-    const [passwordAgain, setPasswordAgain] = useState("");
 
     const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
-        setRegisterData({...registerData, [e.target.name]: e.target.value })
+        const { name, value } = e.target;
+        setRegisterData(prev => ({ ...prev, [name]: value }));
+
+        if (name === "email") {
+            setEmailValid(null);
+
+            if (emailCheckTimeout) clearTimeout(emailCheckTimeout);
+            const timeout = setTimeout(async () => {
+                const response = await verifyEmail(value);
+                setEmailValid(response.data.data.mx_found);
+            }, 1000);
+            setEmailCheckTimeout(timeout);
+        }
     }
+
 
     const handleSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
         e.preventDefault();
+        if (emailValid === false) {
+            CustomSwal.fire({
+                icon: "error",
+                title: t("Error"),
+                text: t("Please enter a valid email"),
+            });
+            setSending(false);
+            return;
+        }
         if (registerData.password !== passwordAgain) {
-            Swal.fire({
+            CustomSwal.fire({
                 icon: "error",
                 title: t("Error"),
                 text: t("Passwords do not match"),
@@ -64,7 +88,7 @@ export const Register:FC = () => {
         try{
             const response = await register(registerData);
             if (response.status === "success") {
-                Swal.fire({
+                CustomSwal.fire({
                     icon: "success",
                     title: t("Registration Successful"),
                     text: t("Check your email address to verify your account"),
@@ -75,13 +99,13 @@ export const Register:FC = () => {
             } else if (response.status === "error") {
                 setSending(false);
                 if (response.message === "Email already used") {
-                    Swal.fire({
+                    CustomSwal.fire({
                         icon: "error",
                         title: t("Error"),
                         text: t("Email already used"),
                     });
                 } else {
-                    Swal.fire({
+                    CustomSwal.fire({
                         icon: "error",
                         title: t("Error"),
                         text: t("Registration failed"),
@@ -90,7 +114,7 @@ export const Register:FC = () => {
             }
         } catch (error) {
             console.error(error);
-            Swal.fire({
+            CustomSwal.fire({
                 icon: "error",
                 title: "Error",
                 text: t("An error occurred during registration"),
@@ -131,8 +155,16 @@ export const Register:FC = () => {
                                                             name="midlename"/>
                                         <LoginRegisterInput handleChange={handleChange} placeholder="Surname"
                                                             name="surname" required/>
-                                        <LoginRegisterInput handleChange={handleChange} placeholder="Email" name="email"
-                                                            type="email" required/>
+                                        <div className="position-relative">
+                                            <LoginRegisterInput
+                                                handleChange={handleChange}
+                                                placeholder="Email"
+                                                name="email"
+                                                type="email"
+                                                required
+                                                className={emailValid === false ? "is-invalid" : ""}
+                                            />
+                                        </div>
                                         <LoginRegisterInput handleChange={handleChange} placeholder="Password"
                                                             name="password" type="password" required/>
                                         <PasswordStrengthBar password={registerData.password} minLength={8}
@@ -150,7 +182,7 @@ export const Register:FC = () => {
                                                 onChange={(e) => setPasswordAgain(e.target.value)}
                                             />
                                         </div>
-                                        
+
                                         <LoginRegisterInput handleChange={handleChange} placeholder="Title before"
                                                             name="title_before"/>
                                         <LoginRegisterInput handleChange={handleChange} placeholder="Title after"
@@ -203,8 +235,8 @@ export const Register:FC = () => {
                                         </Form>
                                         <div className="d-flex justify-content-center">
                                             <Button type="submit"
-                                                className="btn  btn-block btn-lg"
-                                                disabled={sending}>{t("Register")}</Button>
+                                                    className="btn  btn-block btn-lg"
+                                                    disabled={sending}>{t("Register")}</Button>
                                         </div>
                                     </form>
 

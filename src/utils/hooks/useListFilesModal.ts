@@ -1,9 +1,9 @@
 import {useCallback, useEffect, useState} from "react";
 import {useDropzone} from "react-dropzone";
 import {useTranslation} from "react-i18next";
-import Swal from "sweetalert2";
 import {ImageListItemDto} from "../types/article/ImageListItemDto.ts";
 import {getImages, uploadImage} from "../api/imageService.ts";
+import {CustomSwal} from "../functions/customSwal.ts";
 
 export const useListFilesModal = (handleSetPath: (path: string) => void) => {
     const { t } = useTranslation();
@@ -20,7 +20,7 @@ export const useListFilesModal = (handleSetPath: (path: string) => void) => {
             setListOfImages(res.data);
         } catch (error) {
             setListOfImages([]);
-            Swal.fire({
+            CustomSwal.fire({
                 title: t("Error"),
                 text: t("An error occurred while loading saved images"),
                 icon: 'error',
@@ -53,7 +53,7 @@ export const useListFilesModal = (handleSetPath: (path: string) => void) => {
 
         try {
             await uploadImage(bodyFormData);
-            Swal.fire({
+            CustomSwal.fire({
                 title: t("Success"),
                 text: `${t("Successfully saved image")} ${element.name}!`,
                 icon: 'success',
@@ -61,7 +61,7 @@ export const useListFilesModal = (handleSetPath: (path: string) => void) => {
             });
             await loadSavedImages();
         } catch (error) {
-            Swal.fire({
+            CustomSwal.fire({
                 title: t("Error"),
                 text: t("An error occurred while saving this image"),
                 icon: 'error',

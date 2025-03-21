@@ -58,7 +58,7 @@ export const AdminTableLog: FC = () => {
                                                     <th>Id</th>
                                                     <th>{t("Table")}</th>
                                                     <th>{t("Action")}</th>
-                                                    <th>{t("Created")}</th>
+                                                    <th>{t("Done")}</th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>

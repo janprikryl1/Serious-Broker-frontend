@@ -7,11 +7,11 @@ import {useTranslation} from "react-i18next";
 import {Input} from "@mui/joy";
 import {Transition} from "../../reusable/Transition.tsx";
 import {PaperComponent} from "../../reusable/PaperComponent.tsx";
-import Swal from "sweetalert2";
 import {UserType} from "../../../utils/types/user/userTypes.ts";
 import {AchievementType} from "../../../utils/types/AchievementType.ts";
 import {adminAddAchievement} from "../../../utils/api/achievementService.ts";
 import {Button, ButtonColor} from "../../reusable/Button.tsx";
+import {CustomSwal} from "../../../utils/functions/customSwal.ts";
 
 type Props = {
     selectedUser?: UserType;
@@ -37,7 +37,7 @@ export const NewAchievmentModal: FC<Props> = ({ selectedUser, setAchievements, o
             handleClose();
         } catch (error) {
             console.error(error);
-            Swal.fire({
+            CustomSwal.fire({
                 title: t('Error'),
                 text: t('Something went wrong!'),
                 icon: 'error',

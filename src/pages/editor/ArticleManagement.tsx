@@ -2,12 +2,12 @@ import {FC, useCallback, useEffect, useRef, useState} from "react";
 import {useTranslation} from "react-i18next";
 import {Link} from "react-router-dom";
 import {ArticleProps} from "../../utils/types/article/ArticleProps.ts";
-import Swal from "sweetalert2";
 import {editorURLS} from "../../utils/constants";
 import {getAllArticlesAdmin} from "../../utils/api/articleService.ts";
 import {Button, ButtonColor} from "../../components/reusable/Button.tsx";
 import {ArticlesSkeleton} from "../../components/articles/ArticlesSkeleton.tsx";
 import {ArticleAdminCard} from "../../components/editor/articleManagement/ArticleAdminCard.tsx";
+import {CustomSwal} from "../../utils/functions/customSwal.ts";
 
 export const ArticleManagement: FC = () => {
     const { t } = useTranslation();
@@ -31,7 +31,7 @@ export const ArticleManagement: FC = () => {
             setArticles((prev) => (reset ? response.data.data : [...prev, ...response.data.data]));
             setTotalPages(response.data.totalPages);
         } catch (error) {
-            Swal.fire({
+            CustomSwal.fire({
                 icon: "error",
                 title: t("Loading failed"),
                 text: t("Please try again later"),

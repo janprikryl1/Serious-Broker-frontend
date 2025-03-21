@@ -33,6 +33,14 @@ export const register = async (formData: registerUserType) => {
     return response.data;
 }
 
+export const verifyEmail = async (email: string) => {
+    return await axios.get(backendUrl+"email/verify_email.php", {
+        params: {
+            email
+        }
+    });
+}
+
 
 export const updateUserDetails = async (userDetails: UserType) => {
     const token = localStorage.getItem("token");

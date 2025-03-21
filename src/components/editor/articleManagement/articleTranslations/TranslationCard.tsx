@@ -3,10 +3,10 @@ import {Dispatch, FC, SetStateAction} from "react";
 import {Button} from "react-bootstrap";
 import {FaRegTrashAlt} from "react-icons/fa";
 import {useTranslation} from "react-i18next";
-import Swal from "sweetalert2";
 import {deleteTranslation} from "../../../../utils/api/translateService.ts";
 import {editorURLS} from "../../../../utils/constants";
 import {TranslationsOverview} from "../../../../utils/types/article/TranslationsOverview.ts";
+import {CustomSwal} from "../../../../utils/functions/customSwal.ts";
 
 type Props = {
     articleId: string;
@@ -19,7 +19,7 @@ export const TranslationCard:FC<Props> = ({articleId, translation, setTranslatio
     const handleDelete = async (id: number) => {
         const response = await deleteTranslation(id);
         if (response !== undefined && response.data.message === 'Translate deleted successfully') {
-            Swal.fire({
+            CustomSwal.fire({
                 icon: "success",
                 title: t("Translation deleted"),
                 text: t("Translation deleted"),

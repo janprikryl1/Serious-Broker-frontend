@@ -1,5 +1,4 @@
 import { FC, useEffect, useState } from "react";
-import Swal from "sweetalert2";
 import { ArticleDetailProps } from "../utils/types/article/ArticleDetailProps.ts";
 import {useParams, useNavigate, useLocation} from "react-router-dom";
 import { useTranslation } from "react-i18next";
@@ -13,6 +12,7 @@ import {ArticleSkeleton} from "../components/article/ArticleSkeleton.tsx";
 import {SidebarSearch} from "../components/article/SidebarSearch.tsx";
 import {RecentPost} from "../components/article/RecentPost.tsx";
 import {Highlight} from "../components/editor/highlights/Highlight.tsx";
+import {CustomSwal} from "../utils/functions/customSwal.ts";
 
 export const Article: FC = () => {
     const { id, language } = useParams();
@@ -42,7 +42,7 @@ export const Article: FC = () => {
             if (error.response.status === 403) {
                 navigate(routes.home);
             }
-            Swal.fire({
+            CustomSwal.fire({
                 icon: "error",
                 title: t("Loading failed"),
                 text: t("Please try again later"),
@@ -72,7 +72,7 @@ export const Article: FC = () => {
                 setArticle(response.data);
                 navigate(`${routes.articleURL}${id}/${selectedLanguage}`, { replace: true });
             } catch (error) {
-                Swal.fire({
+                CustomSwal.fire({
                     icon: "error",
                     title: t("Loading failed"),
                     text: t("Please try again later"),

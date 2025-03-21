@@ -1,13 +1,13 @@
 import {FC, useEffect, useState} from "react";
 import {useTranslation} from "react-i18next";
 import {DemoType} from "../../utils/types/demos/demoType.ts";
-import Swal from "sweetalert2";
 import {Link} from "react-router-dom";
 import {adminURLS} from "../../utils/constants";
 import {getAllDemos} from "../../utils/api/demosService.ts";
 import {Button} from "../../components/reusable/Button.tsx";
 import {ArticlesSkeleton} from "../../components/articles/ArticlesSkeleton.tsx";
 import {DemoAdminCard} from "../../components/admin/demos/DemoAdminCard.tsx";
+import {CustomSwal} from "../../utils/functions/customSwal.ts";
 
 export const AdminDemos:FC = () => {
     const {t} = useTranslation();
@@ -19,7 +19,7 @@ export const AdminDemos:FC = () => {
                 const response = await getAllDemos();
                 setDemos(response.data);
             } catch (error) {
-                Swal.fire({
+                CustomSwal.fire({
                     title: t('Error'),
                     text: t('Something went wrong!'),
                     icon: 'error',

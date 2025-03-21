@@ -1,8 +1,8 @@
 import {FC, useState} from "react";
 import {useTranslation} from "react-i18next";
-import Swal from "sweetalert2";
 import {addNewsletter} from "../../utils/api/newsletterService.ts";
 import {Button, ButtonColor} from "../reusable/Button.tsx";
+import {CustomSwal} from "../../utils/functions/customSwal.ts";
 
 export const Newsletter: FC = () => {
   const {t} = useTranslation();
@@ -12,7 +12,7 @@ export const Newsletter: FC = () => {
     if (!email) return;
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
-      Swal.fire({
+      CustomSwal.fire({
         icon: "error",
         title: t("Error"),
         text: t("Invalid email"),
@@ -24,14 +24,14 @@ export const Newsletter: FC = () => {
       try {
         const response = await addNewsletter({email});
         if (response.data.message === "Email successfully added") {
-          Swal.fire({
+          CustomSwal.fire({
             icon: "success",
             title: t("Success"),
             text: t("Your newsletter has been sent successfully."),
           });
           setEmail("");
         } else if (response.data.message === "Email already exists") {
-          Swal.fire({
+          CustomSwal.fire({
             icon: "error",
             title: t("Error"),
             text: t("This email is already subscribed."),
@@ -39,7 +39,7 @@ export const Newsletter: FC = () => {
         }
       } catch (error) {
         console.error(error);
-        Swal.fire({
+        CustomSwal.fire({
           icon: "error",
           title: t("Failed"),
           text: t("Please try again later."),

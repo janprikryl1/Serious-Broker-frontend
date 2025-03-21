@@ -3,7 +3,6 @@ import { useTranslation } from "react-i18next";
 import { LeftFloatingContactDetailsItem } from "./LeftFloatingContactDetailsItem.tsx";
 import { SocialLinkIcon } from "./SocialLinkIcon.tsx";
 import shibaInu from "../../utils/icons/cta/shiba_inu.webp";
-import Swal from "sweetalert2";
 import {addFeedback} from "../../utils/api/feedbackService.ts";
 import {
   contactEmail,
@@ -14,6 +13,7 @@ import {
   twitterURL,
   youtubeURL
 } from "../../utils/constants";
+import {CustomSwal} from "../../utils/functions/customSwal.ts";
 
 export const ContactCard: FC = () => {
   const { t } = useTranslation();
@@ -28,7 +28,7 @@ export const ContactCard: FC = () => {
     try {
       const response = await addFeedback({ name, email, message });
       if (response.data.message === "Message created") {
-        Swal.fire({
+        CustomSwal.fire({
           icon: "success",
           title: t("Success"),
           text: t("Message sent"),
@@ -37,7 +37,7 @@ export const ContactCard: FC = () => {
       }
     } catch (error) {
       console.error(error);
-      Swal.fire({
+      CustomSwal.fire({
         icon: "error",
         title: t("Failed"),
         text: t("Please try again later"),

@@ -4,11 +4,11 @@ import {useTranslation} from "react-i18next";
 import {IoIosInformationCircleOutline} from "react-icons/io";
 import {Button} from "react-bootstrap";
 import {FaRegTrashAlt} from "react-icons/fa";
-import Swal from "sweetalert2";
 import {deleteHighlight} from "../../../utils/api/highlightsService.ts";
 import {editorURLS} from "../../../utils/constants";
 import {toCzechDateFormat} from "../../../utils/functions/dateFunctions.ts";
 import {HighlightType} from "../../../utils/types/highlights/HighlightType.ts";
+import {CustomSwal} from "../../../utils/functions/customSwal.ts";
 
 type Props = {
     highlightData: HighlightType;
@@ -22,7 +22,7 @@ export const HighlightCard:FC<Props> = ({highlightData, fetchHighlights}) => {
         try {
             const response = await deleteHighlight(id);
             if (response?.status === 200) {
-                Swal.fire({
+                CustomSwal.fire({
                     icon: "success",
                     title: t("Highlight deleted"),
                     text: t("Highlight deleted successfully"),
@@ -30,7 +30,7 @@ export const HighlightCard:FC<Props> = ({highlightData, fetchHighlights}) => {
             }
         } catch (error) {
             console.error("Error deleting highlight:", error);
-            Swal.fire({
+            CustomSwal.fire({
                 icon: "error",
                 title: t("Error"),
                 text: t("Error while deleting highlight"),

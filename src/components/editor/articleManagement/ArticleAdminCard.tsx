@@ -2,13 +2,13 @@ import {Dispatch, FC, SetStateAction} from "react";
 import {Link} from "react-router-dom";
 import {Button} from "react-bootstrap";
 import {FaComment, FaRegTrashAlt, FaShareAlt} from "react-icons/fa";
-import Swal from "sweetalert2";
 import {useTranslation} from "react-i18next";
 import {MdOutlineTranslate} from "react-icons/md";
 import {ArticleProps} from "../../../utils/types/article/ArticleProps.ts";
 import {deleteArticle} from "../../../utils/api/articleService.ts";
 import {editorURLS} from "../../../utils/constants";
 import {toCzechDateFormat} from "../../../utils/functions/dateFunctions.ts";
+import {CustomSwal} from "../../../utils/functions/customSwal.ts";
 
 type Props = {
     data: ArticleProps;
@@ -23,7 +23,7 @@ export const ArticleAdminCard: FC<Props> = ({data, link = "article", setArticles
         try {
             const response = await deleteArticle(id);
             if (response !== undefined && response.data.message === "Article marked as deleted successfully") {
-                Swal.fire({
+                CustomSwal.fire({
                     icon: "success",
                     title: t("Article deleted"),
                     text: t("Article deleted successfully"),
@@ -31,7 +31,7 @@ export const ArticleAdminCard: FC<Props> = ({data, link = "article", setArticles
                 setArticles((articles) => articles.filter(item => item.id !== id));
             }
         } catch (error) {
-            Swal.fire({
+            CustomSwal.fire({
                 icon: "error",
                 title: t("Error"),
                 text: t("Error while deleting article"),

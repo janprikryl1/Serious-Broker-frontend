@@ -2,7 +2,6 @@ import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { CryptoCurrencyType } from "../../utils/types/CryptoCurrencyType.ts";
 import {DataGrid, GridRenderCellParams} from "@mui/x-data-grid";
-import Swal from "sweetalert2";
 import {logURL} from "../../utils/constants";
 import {cryptoCurrencyUpdate, deleteCryptocurrency, getAllCryptocurrencies} from "../../utils/api/adminCryptocurrencyService.ts";
 import {CryptoCurrencyTableInput} from "../../components/admin/cryptoCurrencyManagement/CryptoCurrencyTableInput.tsx";
@@ -11,6 +10,7 @@ import {CryptoCurrencyIconLink} from "../../components/admin/cryptoCurrencyManag
 import {AddCryptoCurrency} from "../../components/admin/cryptoCurrencyManagement/AddCryptoCurrency.tsx";
 import {Button} from "../../components/reusable/Button.tsx";
 import {AdminTableFilter} from "../../components/reusable/AdminTableFilter.tsx";
+import {CustomSwal} from "../../utils/functions/customSwal.ts";
 
 export const AdminCoinSettings: FC = () => {
     const { t } = useTranslation();
@@ -65,13 +65,13 @@ export const AdminCoinSettings: FC = () => {
                 const result = await cryptoCurrencyUpdate(updateObject);
                 if (!result) throw ("Not sent");
                 if (result.data.status === "success") {
-                    Swal.fire({
+                    CustomSwal.fire({
                         icon: "success",
                         title: t("Updated"),
                         text: t("Coin detail updated"),
                     });
                 } else if (result.data.status === "error") {
-                    Swal.fire({
+                    CustomSwal.fire({
                         icon: "error",
                         title: t("Error"),
                         text: t(result.data.message),
@@ -79,7 +79,7 @@ export const AdminCoinSettings: FC = () => {
                 }
             } catch (e) {
                 console.error(e);
-                Swal.fire({
+                CustomSwal.fire({
                     icon: "error",
                     title: t("Updating failed"),
                     text: t("Please try again later"),
@@ -96,13 +96,13 @@ export const AdminCoinSettings: FC = () => {
             if (response !== undefined && response.data.stauts === "success") {
                 setCryptocurrencies((cryptocurrencies) => cryptocurrencies.filter(item => item.id !== id));
                 setFilteredCoins(cryptocurrencies);
-                Swal.fire({
+                CustomSwal.fire({
                     icon: "success",
                     title: t("Coin deleted")
                 });
             }
         } catch (error) {
-            Swal.fire({
+            CustomSwal.fire({
                 icon: "error",
                 title: t("Error"),
                 text: t("Error while deleting cryptocurrency"),

@@ -1,13 +1,13 @@
 import {ChangeEvent, FC, useState} from "react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faTrash} from "@fortawesome/free-solid-svg-icons";
-import Swal from "sweetalert2";
 import {useTranslation} from "react-i18next";
 import {Link} from "react-router-dom";
 import {GlossaryType} from "../../utils/types/GlossaryType.ts";
 import {deleteGlossary, editGlossary} from "../../utils/api/glossaryService.ts";
 import {glossaryImagesURL} from "../../utils/constants";
 import {Button, ButtonColor} from "../reusable/Button.tsx";
+import {CustomSwal} from "../../utils/functions/customSwal.ts";
 
 type Props = {
     glossary: GlossaryType;
@@ -32,7 +32,7 @@ export const GlossaryEditTableLine: FC<Props> = ({ glossary, onUpdate, onDelete 
         try {
             const result = await deleteGlossary(glossary.id);
             if (!result) return;
-            Swal.fire({
+            CustomSwal.fire({
                 title: t("Glossary deleted"),
                 text: t("The glossary was successfully deleted."),
                 icon: "success",
@@ -40,7 +40,7 @@ export const GlossaryEditTableLine: FC<Props> = ({ glossary, onUpdate, onDelete 
             onDelete(glossary.id);
         } catch (error) {
             console.error("Error deleting glossary:", error);
-            Swal.fire({
+            CustomSwal.fire({
                 title: t("Glossary deletion failed"),
                 text: t("Try again later."),
                 icon: "error",
@@ -58,13 +58,13 @@ export const GlossaryEditTableLine: FC<Props> = ({ glossary, onUpdate, onDelete 
             const result = await editGlossary(updatedGlossary, localImage);
             if (!result) return;
             if (result.data.status === "success") {
-                Swal.fire({
+                CustomSwal.fire({
                     title: t("Glossary updated"),
                     text: t("The glossary was successfully updated."),
                     icon: "success",
                 });
             } else {
-                Swal.fire({
+                CustomSwal.fire({
                     title: t("Glossary update failed"),
                     text: t("Try again later."),
                     icon: "error",
@@ -72,7 +72,7 @@ export const GlossaryEditTableLine: FC<Props> = ({ glossary, onUpdate, onDelete 
             }
         } catch (error) {
             console.error("Error updating glossary:", error);
-            Swal.fire({
+            CustomSwal.fire({
                 title: t("Glossary update failed"),
                 text: t("Try again later."),
                 icon: "error",

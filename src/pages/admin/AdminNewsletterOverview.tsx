@@ -5,6 +5,7 @@ import {v4 as uuidv4} from "uuid";
 import {getAllNewsletters} from "../../utils/api/newsletterService.ts";
 import {Button} from "../../components/reusable/Button.tsx";
 import {toCzechDateFormat} from "../../utils/functions/dateFunctions.ts";
+import {MdOutlineVerifiedUser} from "react-icons/md";
 
 export const AdminNewsletterOverview: FC = () => {
     const { t } = useTranslation();
@@ -51,7 +52,7 @@ export const AdminNewsletterOverview: FC = () => {
                                 {newsletters.map((newsletter) => (
                                     <tr key={uuidv4()}>
                                         <td>{newsletter.id}</td>
-                                        <td><a href={`mailto:${newsletter.email}`}>{newsletter.email}</a></td>
+                                        <td><a href={`mailto:${newsletter.email}`}>{newsletter.email} {newsletter.verified && <MdOutlineVerifiedUser />}</a></td>
                                         <td>{toCzechDateFormat(newsletter.created)}</td>
                                     </tr>
                                 ))}

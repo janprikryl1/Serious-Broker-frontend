@@ -1,12 +1,12 @@
 import {ChangeEventHandler, FC, FormEventHandler, useEffect, useState} from "react";
 import {Link, useNavigate} from "react-router-dom";
 import {useTranslation} from "react-i18next";
-import Swal from "sweetalert2";
 import {useUserContext} from "../utils/providers/providerUser.tsx";
 import {routes} from "../utils/constants";
 import {login} from "../utils/api/authenticateService.ts";
 import {LoginRegisterInput} from "../components/signIn/LoginRegisterInput.tsx";
 import {Button, ButtonColor} from "../components/reusable/Button.tsx";
+import {CustomSwal} from "../utils/functions/customSwal.ts";
 
 export const SignIn: FC = () => {
     const {t} = useTranslation();
@@ -32,30 +32,30 @@ export const SignIn: FC = () => {
             const response = await login(formData);
             const data = response.data;
             if (data.status === "success") {
-                Swal.fire({
-                    icon: "success", title: t("Login Successful"), text: t("Welcome back!"),
+                CustomSwal.fire({
+                    icon: "success", title: t("Login Successful"), text: t("Welcome back!")
                 }).then(() => {
                     setUser(response.data.user);
                     navigate(routes.profile.profileURL);
                 });
             } else if (data.status === "error") {
                 if (data.message === "invalid") {
-                    Swal.fire({
+                    CustomSwal.fire({
                         icon: "error", title: t("Login Failed"), text: data.attempts > 0 ? `${t("Invalid email or password. Remaining attempts:")} ${data.attempts}` : t("Too many wrong attempts. Try again after hour"),
                     });
                 } else if (data.message === "Too many wrong attempts") {
-                    Swal.fire({
+                    CustomSwal.fire({
                         icon: "error", title: t("Login Failed"), text: `${t("Too many wrong attempts. Remaining time:")} ${60 - data.time} ${t("minutes")}`,
                     });
                 } else {
-                    Swal.fire({
+                    CustomSwal.fire({
                         icon: "error", title: t("Login Failed"), text: t("Login Failed"),
                     });
                 }
             }
         } catch (error) {
             console.error(error);
-            Swal.fire({
+            CustomSwal.fire({
                 icon: "error", title: t("Login Failed"), text: t("Invalid email or password. Please try again"),
             });
         }

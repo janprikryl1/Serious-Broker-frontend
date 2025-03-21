@@ -1,9 +1,9 @@
 import {FC, useEffect, useState} from "react";
 import {DemoType} from "../utils/types/demos/demoType.ts";
-import Swal from "sweetalert2";
 import {useTranslation} from "react-i18next";
 import {getAllDemos} from "../utils/api/demosService.ts";
 import {DemoLinkCard} from "../components/demo/DemoLinkCard.tsx";
+import {CustomSwal} from "../utils/functions/customSwal.ts";
 
 export const Demos:FC = () => {
     const {t} = useTranslation();
@@ -15,7 +15,7 @@ export const Demos:FC = () => {
                 const response = await getAllDemos();
                 setDemos(response.data);
             } catch (error) {
-                Swal.fire({
+                CustomSwal.fire({
                     title: t('Error'),
                     text: t('Something went wrong!'),
                     icon: 'error',

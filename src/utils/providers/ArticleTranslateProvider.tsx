@@ -3,10 +3,10 @@ import {SubjectType} from "../types/article/SubjectType.ts";
 import {ContentType} from "../types/article/ContentType.ts";
 import {useParams} from "react-router-dom";
 import {ArticleNewTranslateEditType, ArticleTranslateEditType} from "../types/article/translate/ArticleTranslateEditType.ts";
-import Swal from "sweetalert2";
 import {useTranslation} from "react-i18next";
 import {createTranslation, getArticleTranslateByIdAdmin, updateTranslation} from "../api/translateService.ts";
 import {getArticleByIdAdmin} from "../api/articleService.ts";
+import {CustomSwal} from "../functions/customSwal.ts";
 
 type Props = {
     children: ReactNode;
@@ -107,7 +107,7 @@ export const ArticleTranslateProvider = ({children}: Props) => {
             const response = await createTranslation(article);
             if (response !== undefined && response.data.message === "Translate created successfully") {
                 setTranslateId(response.data.translateId);
-                Swal.fire({
+                CustomSwal.fire({
                     icon: "success",
                     title: t("Translation created"),
                     text: t("Translation created"),
@@ -115,7 +115,7 @@ export const ArticleTranslateProvider = ({children}: Props) => {
             }
             setSaved(true);
         } catch (error) {
-            Swal.fire({
+            CustomSwal.fire({
                 icon: "error",
                 title: t("Error"),
                 text: t("Error while creating translation"),
@@ -137,7 +137,7 @@ export const ArticleTranslateProvider = ({children}: Props) => {
         try {
             const response = await updateTranslation(article);
             if (response !== undefined && response.data.message === "Translate updated successfully") {
-                Swal.fire({
+                CustomSwal.fire({
                     icon: "success",
                     title: t("Translation edited"),
                     text: t("Translation edited successfully"),
@@ -145,7 +145,7 @@ export const ArticleTranslateProvider = ({children}: Props) => {
             }
             setSaved(true);
         } catch (error) {
-            Swal.fire({
+            CustomSwal.fire({
                 icon: "error",
                 title: t("Error"),
                 text: t("Error while editing translation"),

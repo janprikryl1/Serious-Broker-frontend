@@ -1,5 +1,4 @@
 import React, {Dispatch, ReactNode, SetStateAction, useContext, useEffect, useState} from "react";
-import Swal from "sweetalert2";
 import {useTranslation} from "react-i18next";
 import {ArticleCreateProps} from "../types/article/ArticleCreateProps.ts";
 import {SubjectType} from "../types/article/SubjectType.ts";
@@ -8,6 +7,7 @@ import {useParams} from "react-router-dom";
 import {ArticleUpdateType} from "../types/article/ArticleUpdateType.ts";
 import {createArticle, getArticleByIdAdmin, updateArticle} from "../api/articleService.ts";
 import {defaultContent, defaultSubjects} from "../constants";
+import {CustomSwal} from "../functions/customSwal.ts";
 
 type Props = {
     children: ReactNode;
@@ -152,7 +152,7 @@ export const ArticleCreateProvider = ({children}: Props) => {
             const response = await createArticle(article);
             if (response !== undefined && response.data.message === "Article created successfully") {
                 setArticleId(response.data.article_id);
-                Swal.fire({
+                CustomSwal.fire({
                     icon: "success",
                     title: t("Article created"),
                     text: t("Article created"),
@@ -160,7 +160,7 @@ export const ArticleCreateProvider = ({children}: Props) => {
             }
             setSaved(true);
         } catch (error) {
-            Swal.fire({
+            CustomSwal.fire({
                 icon: "error",
                 title: t("Error"),
                 text: t("Error while creating article"),
@@ -191,7 +191,7 @@ export const ArticleCreateProvider = ({children}: Props) => {
         try {
             const response = await updateArticle(article);
             if (response !== undefined && response.data.message === "Article updated successfully") {
-                Swal.fire({
+                CustomSwal.fire({
                     icon: "success",
                     title: t("Article edited"),
                     text: t("Article edited successfully"),
@@ -199,7 +199,7 @@ export const ArticleCreateProvider = ({children}: Props) => {
             }
             setSaved(true);
         } catch (error) {
-            Swal.fire({
+            CustomSwal.fire({
                 icon: "error",
                 title: t("Error"),
                 text: t("Error while editing article"),

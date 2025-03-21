@@ -3,6 +3,7 @@ import { AchievementType } from '../types/AchievementType.ts';
 import {useUserContext} from "./providerUser.tsx";
 import {useTranslation} from "react-i18next";
 import {getAchievements, markReadAchievment} from "../api/achievementService.ts";
+import {CustomSwal} from "../functions/customSwal.ts";
 const AchievmentAnimation = lazy(() => import('../../components/achievment/AchievmentAnimation.tsx').then(module => ({ default: module.AchievmentAnimation })));
 
 type AchievmentsContextType = {
@@ -57,10 +58,19 @@ export const AchievmentsProvider: React.FC<{ children: ReactNode }> = ({ childre
 
     const markAchievementAsRead = async (id: number) => {
         try {
+            try {
             const result = await markReadAchievment(id);
             if (!result) return;
             setAchievements(result.data);
             setUnreadAchievements(result.data.filter((achievement) => achievement.read == 0));
+            } catch (e) {
+                CustomSwal.fire({
+                    icon: 'error',
+                    title: t('Error'),
+                    text: t('Error while deleting achievement'),
+                });
+                console.error(e);
+            }
         } catch (error) {
             console.error(error);
         }

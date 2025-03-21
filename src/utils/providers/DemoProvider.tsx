@@ -2,9 +2,9 @@ import {createContext, ReactNode, useContext, useState, useEffect} from "react";
 import {useTranslation} from "react-i18next";
 import {useParams} from "react-router-dom";
 import {DemoType} from "../types/demos/demoType.ts";
-import Swal from "sweetalert2";
 import {defaultNewDemo} from "../constants";
 import {getDemoById, saveDemo} from "../api/demosService.ts";
+import {CustomSwal} from "../functions/customSwal.ts";
 
 type Props = {
     children: ReactNode;
@@ -44,7 +44,7 @@ export const DemoProvider = ({children}: Props) => {
         if (!demo) return;
         try {
             await saveDemo(demo);
-            Swal.fire({
+            CustomSwal.fire({
                 title: t("Successfully saved"),
                 text: t("Demo successfully saved"),
                 icon: "success",

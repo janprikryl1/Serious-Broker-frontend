@@ -1,11 +1,11 @@
 import { FC, useEffect, useState, ChangeEvent, FormEvent } from "react";
 import { GlossaryType } from "../../utils/types/GlossaryType.ts";
 import { useTranslation } from "react-i18next";
-import Swal from "sweetalert2";
 import {addGlossary, getGlossary} from "../../utils/api/glossaryService.ts";
 import {Button} from "../../components/reusable/Button.tsx";
 import {GlossaryEditTableLine} from "../../components/admin/GlossaryEditTableLine.tsx";
 import {TableLogSkeleton} from "../../components/admin/TableLogSkeleton.tsx";
+import {CustomSwal} from "../../utils/functions/customSwal.ts";
 
 export const AdminGlossaryManagement: FC = () => {
     const { t } = useTranslation();
@@ -72,13 +72,13 @@ export const AdminGlossaryManagement: FC = () => {
                     image: null,
                     imageFile: null,
                 });
-                Swal.fire({
+                CustomSwal.fire({
                     title: t("Glossary added"),
                     text: t("The glossary was successfully added."),
                     icon: "success",
                 });
             } else {
-                Swal.fire({
+                CustomSwal.fire({
                     title: t("Glossary addition failed"),
                     text: t("Try again later."),
                     icon: "error",
@@ -86,7 +86,7 @@ export const AdminGlossaryManagement: FC = () => {
             }
         } catch (error) {
             console.error("Error adding glossary:", error);
-            Swal.fire({
+            CustomSwal.fire({
                 title: t("Glossary addition failed"),
                 text: t("Try again later."),
                 icon: "error",

@@ -3,10 +3,10 @@ import {useForm} from "react-hook-form";
 import {Col, Form, Row} from "react-bootstrap";
 import {useTranslation} from "react-i18next";
 import {QRCodeType} from "../../utils/types/QRCodeType";
-import Swal from "sweetalert2";
 import {qrCodeImagesURL} from "../../utils/constants";
 import {getQR, saveQRCode} from "../../utils/api/qrService.ts";
 import {Button} from "../../components/reusable/Button.tsx";
+import {CustomSwal} from "../../utils/functions/customSwal.ts";
 
 export const AdminQRManagement: FC = () => {
     const { t } = useTranslation();
@@ -47,13 +47,13 @@ export const AdminQRManagement: FC = () => {
         try {
             const response = await saveQRCode(data, image);
             if (response) {
-                Swal.fire({
+                CustomSwal.fire({
                     title: t("QR Code updated"),
                     text: t("QR Code updated successfully"),
                     icon: "success",
                 });
             } else {
-                Swal.fire({
+                CustomSwal.fire({
                     title: t("Error"),
                     text: t("Failed to update QR Code"),
                     icon: "error",
@@ -61,7 +61,7 @@ export const AdminQRManagement: FC = () => {
             }
         } catch (error) {
             console.error(t("Error saving QR Code"), error);
-            Swal.fire({
+            CustomSwal.fire({
                 title: t("Error"),
                 text: t("Failed to update QR Code"),
                 icon: "error",

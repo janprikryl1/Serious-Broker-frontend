@@ -1,11 +1,11 @@
 import { FC, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import Swal from "sweetalert2";
 import { useTranslation } from "react-i18next";
 import { Spinner } from "react-bootstrap";
 import { FaCheckCircle, FaExclamationTriangle } from "react-icons/fa";
 import {useUserContext} from "../utils/providers/providerUser.tsx";
 import {verifyAccount} from "../utils/api/verifyAccountService.ts";
+import {CustomSwal} from "../utils/functions/customSwal.ts";
 
 export const VerifyAccount: FC = () => {
     const { t } = useTranslation();
@@ -24,7 +24,7 @@ export const VerifyAccount: FC = () => {
             try {
                 const response = await verifyAccount(user_id, token);
                 if (response.status === 200) {
-                    Swal.fire({
+                    CustomSwal.fire({
                         icon: "success",
                         title: t("Verification is successful")
                     }).then(() => {
@@ -36,7 +36,7 @@ export const VerifyAccount: FC = () => {
                 }
             } catch (e) {
                 console.error(e);
-                Swal.fire({
+                CustomSwal.fire({
                     icon: "error",
                     title: t("Verification failed"),
                     text: t("Link is invalid or user doesn't exist"),

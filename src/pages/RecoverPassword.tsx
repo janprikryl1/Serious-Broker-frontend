@@ -1,13 +1,13 @@
 import {FC, FormEvent, useEffect, useState} from "react";
 import {useNavigate, useParams} from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import Swal from "sweetalert2";
 import {Spinner} from "react-bootstrap";
 import {FaExclamationTriangle} from "react-icons/fa";
 import {routes} from "../utils/constants";
 import {setSubmitNewPassword, verifySecureKeys} from "../utils/api/forgottenPasswordService.ts";
 import {LoginRegisterInput} from "../components/signIn/LoginRegisterInput.tsx";
 import {Button} from "../components/reusable/Button.tsx";
+import {CustomSwal} from "../utils/functions/customSwal.ts";
 
 export const RecoverPassword: FC = () => {
     const { t } = useTranslation();
@@ -46,7 +46,7 @@ export const RecoverPassword: FC = () => {
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
         if (newPassword !== typeAgainNewPassword) {
-            Swal.fire({
+            CustomSwal.fire({
                 icon: "error",
                 title: t("Passwords do not match"),
                 text: t("Please make sure the passwords match"),
@@ -57,7 +57,7 @@ export const RecoverPassword: FC = () => {
         try {
             const response = await setSubmitNewPassword(secret_key_1!, secret_key_2!, Number(user_id), newPassword);
             if (response.data.status === "success") {
-                Swal.fire({
+                CustomSwal.fire({
                     icon: "success",
                     title: t("Password updated"),
                     text: t("Your password has been successfully updated."),
@@ -65,7 +65,7 @@ export const RecoverPassword: FC = () => {
                     navigate(routes.profile.profileURL);
                 });
             } else {
-                Swal.fire({
+                CustomSwal.fire({
                     icon: "error",
                     title: t("Error"),
                     text: t("Failed to update the password. Please try again."),
@@ -73,7 +73,7 @@ export const RecoverPassword: FC = () => {
             }
         } catch (error) {
             console.error("Error setting new password:", error);
-            Swal.fire({
+            CustomSwal.fire({
                 icon: "error",
                 title: t("Error"),
                 text: t("Something went wrong. Please try again."),

@@ -3,8 +3,8 @@ import { useTranslation } from "react-i18next";
 import { Button } from "../reusable/Button.tsx";
 import "../../styles/sass/components/ContactUs.scss";
 import {addFeedback} from "../../utils/api/feedbackService.ts";
-import Swal from "sweetalert2";
 import dotMesh from "../../utils/icons/about/dot_mesh.svg";
+import {CustomSwal} from "../../utils/functions/customSwal.ts";
 
 export const ContactUs: FC = () => {
     const { t } = useTranslation();
@@ -19,7 +19,7 @@ export const ContactUs: FC = () => {
         try {
             const response = await addFeedback({ name, email, message });
             if (response.data.message === "Message created") {
-                Swal.fire({
+                CustomSwal.fire({
                     icon: "success",
                     title: t("Success"),
                     text: t("Message sent"),
@@ -28,7 +28,7 @@ export const ContactUs: FC = () => {
             }
         } catch (error) {
             console.error(error);
-            Swal.fire({
+            CustomSwal.fire({
                 icon: "error",
                 title: t("Failed"),
                 text: t("Please try again later"),

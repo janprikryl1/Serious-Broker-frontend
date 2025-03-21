@@ -1,13 +1,13 @@
 import {ChangeEvent, FC, FormEvent, useState} from "react";
 import {useTranslation} from "react-i18next";
 import {CryptoCurrencyInput} from "./CryptoCurrencyInput.tsx";
-import Swal from "sweetalert2";
 import Form from "react-bootstrap/Form";
 import {InputGroup} from "react-bootstrap";
 import {CryptoCurrencyNewType} from "../../../utils/types/CryptoCurrencyType.ts";
 import {cryptoCurrencyAdd} from "../../../utils/api/adminCryptocurrencyService.ts";
 import {defaultNewCurrency} from "../../../utils/constants";
 import {Button} from "../../reusable/Button.tsx";
+import {CustomSwal} from "../../../utils/functions/customSwal.ts";
 
 export const AddCryptoCurrency:FC = () => {
     const {t} = useTranslation();
@@ -31,18 +31,18 @@ export const AddCryptoCurrency:FC = () => {
             const response = await cryptoCurrencyAdd(newCryptoCurrency);
             if (!response) return;
             if (response.data.status === "success") {
-                Swal.fire({
+                CustomSwal.fire({
                     icon: "success", title: t("Coin created"),
                 });
                 setNewCryptoCurrency(defaultNewCurrency);
             } else if (response.data.status === "error") {
-                Swal.fire({
+                CustomSwal.fire({
                     icon: "error", title: t("Error"), text: t(response.data.message),
                 });
             }
         } catch (error) {
             console.error(error);
-            Swal.fire({
+            CustomSwal.fire({
                 icon: "error", title: t("Error"), text: t("Failed to add cryptocurrency"),
             });
         }

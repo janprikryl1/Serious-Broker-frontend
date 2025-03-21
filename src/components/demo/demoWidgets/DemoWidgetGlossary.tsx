@@ -1,10 +1,10 @@
 import {FC, useEffect, useState} from "react";
 import {GlossaryItemOverview} from "../../reusable/GlossaryItemOverview.tsx";
-import Swal from "sweetalert2";
 import {useTranslation} from "react-i18next";
 import Skeleton from "react-loading-skeleton";
 import {GlossaryType} from "../../../utils/types/GlossaryType.ts";
 import {getGlossaryByName} from "../../../utils/api/glossaryService.ts";
+import {CustomSwal} from "../../../utils/functions/customSwal.ts";
 
 type Props = {
     title: string;
@@ -21,7 +21,7 @@ export const DemoWidgetGlossary:FC<Props> = ({title}) => {
                 setGlossaryData(response.data);
             } catch (exception) {
                 console.error(exception);
-                Swal.fire({
+                CustomSwal.fire({
                     icon: "error",
                     title: t("Loading failed"),
                     text: t("Please try again later"),

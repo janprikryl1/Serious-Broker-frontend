@@ -1,10 +1,10 @@
 import React, {Dispatch, ReactNode, SetStateAction, useContext, useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
-import Swal from "sweetalert2";
 import {useTranslation} from "react-i18next";
 import {ArticlePost} from "../types/ArticlePostListResponse.ts";
 import {PostOptionType} from "../options/PostOption.ts";
 import {createPost, getArticlePostDetail} from "../api/articlePostService.ts";
+import {CustomSwal} from "../functions/customSwal.ts";
 
 type Props = {
     children: ReactNode;
@@ -79,7 +79,7 @@ export const PostEditProvider = ({children}: Props) => {
             const response = await createPost(post);
             if (response !== undefined && response.data.message === "Post created successfully") {
                 setPostId(response.data.translateId);
-                Swal.fire({
+                CustomSwal.fire({
                     icon: "success",
                     title: t("Post created"),
                     text: t("Post created"),
@@ -87,7 +87,7 @@ export const PostEditProvider = ({children}: Props) => {
             }
             setSaved(true);
         } catch (error) {
-            Swal.fire({
+            CustomSwal.fire({
                 icon: "error",
                 title: t("Error"),
                 text: t("Error while creating post"),

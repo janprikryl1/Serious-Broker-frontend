@@ -1,9 +1,9 @@
 import React, {ChangeEvent, Dispatch, ReactNode, SetStateAction, useContext, useState} from "react";
 import {UserType} from "../types/user/userTypes";
-import Swal from "sweetalert2";
 import {useTranslation} from "react-i18next";
 import {useUserContext} from "./providerUser.tsx";
 import {updateUserDetails} from "../api/authenticateService.ts";
+import {CustomSwal} from "../functions/customSwal.ts";
 
 type Props = {
     children: ReactNode;
@@ -39,13 +39,13 @@ export const UserDetailsProvider = ({children}: Props) => {
             if (response.data.status === "success") {
                 setUserDetails(response.data.user);
                 setUser(response.data.user);
-                Swal.fire({
+                CustomSwal.fire({
                     icon: "success",
                     title: t("Updated"),
                     text: t("User details updated"),
                 });
             } else if (response.data.status === "error" && response.data.message === "Email is already in use by another user") {
-                Swal.fire({
+                CustomSwal.fire({
                     icon: "error",
                     title: t("Error"),
                     text: t("Email already used"),
@@ -53,7 +53,7 @@ export const UserDetailsProvider = ({children}: Props) => {
             }
         } catch(error){
             console.error(error);
-            Swal.fire({
+            CustomSwal.fire({
                 icon: "error",
                 title: t("Update Failed"),
                 text: t("Please try again"),

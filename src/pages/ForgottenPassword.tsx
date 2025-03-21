@@ -1,9 +1,9 @@
 import {FC, FormEvent, useState} from "react";
 import {useTranslation} from "react-i18next";
-import Swal from "sweetalert2";
 import {sendForgottenPassword} from "../utils/api/forgottenPasswordService.ts";
 import {LoginRegisterInput} from "../components/signIn/LoginRegisterInput.tsx";
 import {Button} from "../components/reusable/Button.tsx";
+import {CustomSwal} from "../utils/functions/customSwal.ts";
 
 export const ForgottenPassword:FC = () => {
     const {t} = useTranslation();
@@ -18,19 +18,19 @@ export const ForgottenPassword:FC = () => {
             try {
                 const result = await sendForgottenPassword(email);
                 if (result.data.status === "reset password email sent") {
-                    Swal.fire({
+                    CustomSwal.fire({
                         icon: "success", title: t("Email sent"), text: t("Check your email address!"),
                     });
                     setEmail("");
                 } else if (result.data.status === "user not found") {
-                    Swal.fire({
+                    CustomSwal.fire({
                         icon: "error", title: t("Submit failed"), text: t("User not found"),
                     });
                 }
                 setSending(false);
             } catch (e) {
                 console.error(e);
-                Swal.fire({
+                CustomSwal.fire({
                     icon: "error", title: t("Submit failed"), text: t("Please try again"),
                 });
                 setSending(false);

@@ -3,9 +3,9 @@ import { useTranslation } from "react-i18next";
 import { useParams, useNavigate } from "react-router-dom";
 import { AvailableCoinType } from "../types/myPortfolio/availableCoinType.ts";
 import {MyPortfolioType} from "../types/myPortfolio/MyPortfolioType.ts";
-import Swal from "sweetalert2";
 import {Assets} from "../types/asset/AssetDetailType.ts";
 import {getAvaliableCoins, getMyPortfolioDetails, saveMyPortfolio} from "../api/myPortfolioService.ts";
+import {CustomSwal} from "../functions/customSwal.ts";
 
 type Props = {
     children: ReactNode;
@@ -76,7 +76,7 @@ export const MyPortfolioProvider = ({ children }: Props) => {
 
     const saveChanges = async () => {
         if (!name.trim()) {
-            Swal.fire({
+            CustomSwal.fire({
                 title: t('Error, portfolio name is required'),
                 text: t('Please enter portfolio name'),
                 icon: 'error',
@@ -85,7 +85,7 @@ export const MyPortfolioProvider = ({ children }: Props) => {
         }
 
         if (!asset.length) {
-            Swal.fire({
+            CustomSwal.fire({
                 title: t('Error, portfolio asset is required'),
                 text: t('Please add at least one asset to portfolio'),
                 icon: 'error',
@@ -104,7 +104,7 @@ export const MyPortfolioProvider = ({ children }: Props) => {
             };
 
             const response = await saveMyPortfolio(portfolioData);
-            Swal.fire({
+            CustomSwal.fire({
                 title: t('Portfolio saved'),
                 text: t('Portfolio saved successfully'),
                 icon: 'success',
@@ -115,7 +115,7 @@ export const MyPortfolioProvider = ({ children }: Props) => {
             }
         } catch (error) {
             console.error('Error saving portfolio:', error);
-            Swal.fire({
+            CustomSwal.fire({
                 title: t('Error while saving portfolio'),
                 text: t('Error while saving portfolio, please try again'),
                 icon: 'error',

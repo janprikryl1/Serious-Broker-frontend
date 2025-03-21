@@ -3,8 +3,8 @@ import {useTranslation} from "react-i18next";
 import {useParams} from "react-router-dom";
 import {HighlightType} from "../types/highlights/HighlightType.ts";
 import {defaultHighlight} from "../constants";
-import Swal from "sweetalert2";
 import {createHighlight, getHighlightById, updateExistingHighlight} from "../api/highlightsService.ts";
+import {CustomSwal} from "../functions/customSwal.ts";
 
 type Props = {
     children: ReactNode;
@@ -39,13 +39,13 @@ export const HighlightProvider = ({children}: Props) => {
     const saveChanges = async (data: HighlightType) => {         
         const response = await (id ? updateExistingHighlight(id, data) : createHighlight(data));
         if(response?.status === 200) {
-            Swal.fire({
+            CustomSwal.fire({
                 title: t("Successfully saved"),
                 text: t("Highlight successfully update"),
                 icon: "success",
             });
         } else {
-            Swal.fire({
+            CustomSwal.fire({
                 title: t("Error"),
                 text: t("Error while saving changes"),
                 icon: "error",

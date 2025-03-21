@@ -1,6 +1,5 @@
 import {FC, useEffect, useState} from "react";
 import {UserAchievmentSkeleton} from "./UserAchievmentSkeleton.tsx";
-import Swal from "sweetalert2";
 import {useTranslation} from "react-i18next";
 import {NewAchievmentModal} from "./NewAchievmentModal.tsx";
 import {TimeLineComponent} from "../../reusable/TimeLineComponent.tsx";
@@ -8,6 +7,7 @@ import {UserType} from "../../../utils/types/user/userTypes.ts";
 import {AchievementType} from "../../../utils/types/AchievementType.ts";
 import {adminUserAchievements} from "../../../utils/api/achievementService.ts";
 import {Button} from "../../reusable/Button.tsx";
+import {CustomSwal} from "../../../utils/functions/customSwal.ts";
 
 type Props = {
     selectedUser?: UserType;
@@ -27,7 +27,7 @@ export const UserAchievmentDetails:FC<Props> = ({selectedUser}) => {
                 setAchievements(response.data);
             } catch (error) {
                 console.error(error);
-                Swal.fire({
+                CustomSwal.fire({
                     title: 'Error',
                     text: 'Something went wrong!',
                     icon: 'error',

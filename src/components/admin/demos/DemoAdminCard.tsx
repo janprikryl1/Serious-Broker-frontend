@@ -1,12 +1,12 @@
 import {Dispatch, FC, SetStateAction} from "react";
 import {useTranslation} from "react-i18next";
-import Swal from "sweetalert2";
 import {Link} from "react-router-dom";
 import {Button} from "react-bootstrap";
 import {FaRegEdit, FaRegTrashAlt} from "react-icons/fa";
 import {DemoType} from "../../../utils/types/demos/demoType.ts";
 import {deleteDemo} from "../../../utils/api/demosService.ts";
 import {adminURLS} from "../../../utils/constants";
+import {CustomSwal} from "../../../utils/functions/customSwal.ts";
 
 type Props = {
     data: DemoType;
@@ -19,14 +19,14 @@ export const DemoAdminCard:FC<Props> = ({data, setDemos}) => {
     const handleDelete = async (id: number) => {
         try {
             await deleteDemo(id);
-            Swal.fire({
+            CustomSwal.fire({
                 icon: "success",
                 title: t("Demo deleted"),
                 text: t("Demo deleted successfully"),
             });
             setDemos((demo) => demo.filter(item => item.id !== id));
         } catch (error) {
-            Swal.fire({
+            CustomSwal.fire({
                 icon: "error",
                 title: t("Error"),
                 text: t("Error while deleting demo"),

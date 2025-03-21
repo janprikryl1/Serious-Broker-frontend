@@ -2,11 +2,11 @@ import {FC, useEffect, useState} from "react";
 import {useTranslation} from "react-i18next";
 import {ChachedDataType} from "../../utils/types/ChachedDataType.ts";
 import {FaRegTrashAlt} from "react-icons/fa";
-import Swal from "sweetalert2";
 import {deleteChachedData, downloadFile, getAllChachedData} from "../../utils/api/chachedDataAPI.ts";
 import {TableLogSkeleton} from "../../components/admin/TableLogSkeleton.tsx";
 import {Button, ButtonColor} from "../../components/reusable/Button.tsx";
 import {toCzechDateFormat} from "../../utils/functions/dateFunctions.ts";
+import {CustomSwal} from "../../utils/functions/customSwal.ts";
 
 export const AdminChachedData:FC = () => {
     const { t } = useTranslation();
@@ -43,7 +43,7 @@ export const AdminChachedData:FC = () => {
                 URL.revokeObjectURL(link.href);
             }
         } catch (error) {
-            Swal.fire({
+            CustomSwal.fire({
                 icon: "error",
                 title: t("Error"),
                 text: t("Failed to download chached data"),
@@ -57,7 +57,7 @@ export const AdminChachedData:FC = () => {
         try {
             const response = await deleteChachedData(name);
             if (response !== undefined && response.status === 200) {
-                Swal.fire({
+                CustomSwal.fire({
                     icon: "success",
                     title: t("Chached data deleted"),
                     text: t("Chached data deleted successfully"),
@@ -65,7 +65,7 @@ export const AdminChachedData:FC = () => {
                 setLogs(logs.filter(item => item.name !== name));
             }
         } catch (error) {
-            Swal.fire({
+            CustomSwal.fire({
                 icon: "error",
                 title: t("Error"),
                 text: t("Failed to delete chached data"),

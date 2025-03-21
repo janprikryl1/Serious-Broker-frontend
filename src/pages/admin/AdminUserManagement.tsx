@@ -2,7 +2,6 @@ import { FC, useEffect, useState } from "react";
 import {UserRole, UserType} from "../../utils/types/user/userTypes.ts";
 import { useTranslation } from "react-i18next";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
-import Swal from "sweetalert2";
 import { Form, InputGroup } from "react-bootstrap";
 import {useUserContext} from "../../utils/providers/providerUser.tsx";
 import {routes} from "../../utils/constants";
@@ -10,6 +9,7 @@ import {useNavigate} from "react-router-dom";
 import {getAllUsers, updateUser} from "../../utils/api/adminService.ts";
 import {Button, ButtonColor} from "../../components/reusable/Button.tsx";
 import {UserEditModal} from "../../components/admin/userManagement/UserEditModal.tsx";
+import {CustomSwal} from "../../utils/functions/customSwal.ts";
 
 export const AdminUserManagement: FC = () => {
     const { t } = useTranslation();
@@ -66,9 +66,9 @@ export const AdminUserManagement: FC = () => {
             await updateUser(updatedUser);
             setUsers(users.map((user) => (user.id === updatedUser.id ? updatedUser : user)));
             setFilteredUsers(filteredUsers.map((user) => (user.id === updatedUser.id ? updatedUser : user)));
-            Swal.fire(t("Success"), t("User updated successfully"), "success");
+            CustomSwal.fire(t("Success"), t("User updated successfully"), "success");
         } catch (error) {
-            Swal.fire(t("Error"), t("Failed to update user"), "error");
+            CustomSwal.fire(t("Error"), t("Failed to update user"), "error");
             console.error(error);
         }
     };

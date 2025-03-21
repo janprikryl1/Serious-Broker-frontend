@@ -4,10 +4,10 @@ import {DataGrid, GridRenderCellParams} from "@mui/x-data-grid";
 import {useTranslation} from "react-i18next";
 import {FaRegSave} from "react-icons/fa";
 import Form from "react-bootstrap/Form";
-import Swal from "sweetalert2";
 import {getBinanceIndexAbouts, updateBinanceIndexAbout} from "../../utils/api/binanceIndexAboutService.ts";
 import {Button} from "../../components/reusable/Button.tsx";
 import {BinanceIndexTableFilter} from "../../components/admin/binanceIndexAbout/BinanceIndexAboutFilter.tsx";
+import {CustomSwal} from "../../utils/functions/customSwal.ts";
 
 export const AdminBinanceIndexAbout: FC = () => {
     const {t} = useTranslation();
@@ -37,7 +37,7 @@ export const AdminBinanceIndexAbout: FC = () => {
             const response = await updateBinanceIndexAbout(id, index.about);
             if (response?.status === 200) {
                 setEditModeRows(prev => ({ ...prev, [id]: false }));
-                Swal.fire({
+                CustomSwal.fire({
                     icon: "success",
                     title: t("Success"),
                     text: t("Successfully saved"),

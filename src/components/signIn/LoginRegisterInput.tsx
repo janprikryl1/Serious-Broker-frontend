@@ -7,9 +7,10 @@ type Props = {
     placeholder: string;
     type?: string;
     required?: boolean;
+    className?: string;
 }
 
-export const LoginRegisterInput:FC<Props> = ({handleChange, name, placeholder, type = "text", required = false}) => {
+export const LoginRegisterInput:FC<Props> = ({handleChange, name, placeholder, type = "text", required = false, className}) => {
     const {t} = useTranslation();
 
     return (
@@ -19,7 +20,7 @@ export const LoginRegisterInput:FC<Props> = ({handleChange, name, placeholder, t
                 type={type}
                 name={name}
                 placeholder={t(placeholder) + "..."}
-                className="form-control form-control-lg"
+                className={`${className} form-control form-control-lg`}
                 onChange={handleChange}
                 required={required}
                 minLength={type === "password" ? 8 : 1}

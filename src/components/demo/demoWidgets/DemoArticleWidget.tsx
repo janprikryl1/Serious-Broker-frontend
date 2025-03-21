@@ -1,11 +1,11 @@
 import {FC, useEffect, useState} from "react";
 import {ArticleDetails} from "../../article/ArticleDetails.tsx";
 import {ArticleSkeleton} from "../../article/ArticleSkeleton.tsx";
-import Swal from "sweetalert2";
 import {useTranslation} from "react-i18next";
 import {ArticleDetailProps} from "../../../utils/types/article/ArticleDetailProps.ts";
 import {TranslationsOverview} from "../../../utils/types/article/TranslationsOverview.ts";
 import {getArticleDetails} from "../../../utils/api/articleService.ts";
+import {CustomSwal} from "../../../utils/functions/customSwal.ts";
 
 type Props = {
     articleId: string;
@@ -28,7 +28,7 @@ export const DemoArticleWidget:FC<Props> = ({articleId}) => {
                     setArticle(response.data.article);
                 }
             } catch (error) {
-                Swal.fire({
+                CustomSwal.fire({
                     icon: "error",
                     title: t("Loading failed"),
                     text: t("Please try again later"),

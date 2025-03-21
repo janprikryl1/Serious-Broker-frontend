@@ -1,5 +1,4 @@
 import { FC, useEffect, useState, useRef, useCallback } from "react";
-import Swal from "sweetalert2";
 import { useTranslation } from "react-i18next";
 import { ArticleProps } from "../utils/types/article/ArticleProps.ts";
 import {getAllArticles} from "../utils/api/articleService.ts";
@@ -8,6 +7,7 @@ import {DictionaryLinkCard} from "../components/articles/dictionary/DictionaryLi
 import {CryptoCurrenciesLinkCard} from "../components/articles/cryptoCurrenciesList/CryptoCurrenciesLinkCard.tsx";
 import {ArticleCard} from "../components/articles/ArticleCard.tsx";
 import {ArticlesSkeleton} from "../components/articles/ArticlesSkeleton.tsx";
+import {CustomSwal} from "../utils/functions/customSwal.ts";
 
 export const Articles: FC = () => {
     const { t } = useTranslation();
@@ -30,7 +30,7 @@ export const Articles: FC = () => {
             setArticles((prev) => (reset ? response.data.data : [...prev, ...response.data.data]));
             setTotalPages(response.data.totalPages);
         } catch (error) {
-            Swal.fire({
+            CustomSwal.fire({
                 icon: "error",
                 title: t("Loading failed"),
                 text: t("Please try again later"),
