@@ -3,6 +3,7 @@ import {useTranslation} from "react-i18next";
 import {addNewsletter} from "../../utils/api/newsletterService.ts";
 import {Button, ButtonColor} from "../reusable/Button.tsx";
 import {CustomSwal} from "../../utils/functions/customSwal.ts";
+import {verifyEmail} from "../../utils/api/authenticateService.ts";
 
 export const Newsletter: FC = () => {
   const {t} = useTranslation();
@@ -21,13 +22,21 @@ export const Newsletter: FC = () => {
     }
     
     const sendNewsletter = async () => {
+      const isValid = await verifyEmail(email);
+      if (isValid.data.data.mx_found === false) {
+        CustomSwal.fire({
+          icon: "error",
+          title: t("Error"),
+          text: t("Invalid email"),
+        });
+        return;
+      }
       try {
         const response = await addNewsletter({email});
         if (response.data.message === "Email successfully added") {
           CustomSwal.fire({
             icon: "success",
-            title: t("Success"),
-            text: t("Your newsletter has been sent successfully."),
+            title: t("Your newsletter has been sent successfully.")
           });
           setEmail("");
         } else if (response.data.message === "Email already exists") {

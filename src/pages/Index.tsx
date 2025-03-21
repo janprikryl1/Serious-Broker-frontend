@@ -16,7 +16,7 @@ export const Index: FC = () => {
             <Page />
             <NowTrending />
             <NewToInvesting />
-            {user === null && (
+            {!user && (
                 <Newsletter/>
             )}
             <Suspense><IndexTableData /></Suspense>

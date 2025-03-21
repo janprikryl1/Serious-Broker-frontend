@@ -22,7 +22,8 @@ export const Register:FC = () => {
     const [passwordAgain, setPasswordAgain] = useState("");
     const [emailValid, setEmailValid] = useState<boolean | null>(null);
     const [emailCheckTimeout, setEmailCheckTimeout] = useState<NodeJS.Timeout | null>(null);
-
+    const [suggestedDomain, setSuggestedDomain] = useState<string | null>(null);
+    
     useEffect(() => {
         if (user) navigate(routes.profile.profileURL);    
     }, [user]);
@@ -59,6 +60,11 @@ export const Register:FC = () => {
             const timeout = setTimeout(async () => {
                 const response = await verifyEmail(value);
                 setEmailValid(response.data.data.mx_found);
+                if (response.data.data.domain_suggestion) {
+                    setSuggestedDomain(response.data.data.domain_suggestion);
+                } else {
+                    setSuggestedDomain(null);
+                }
             }, 1000);
             setEmailCheckTimeout(timeout);
         }
@@ -164,6 +170,9 @@ export const Register:FC = () => {
                                                 required
                                                 className={emailValid === false ? "is-invalid" : ""}
                                             />
+                                            {suggestedDomain && (
+                                                <div style={{marginBottom:20}}>{t("Did you mean")} <span style={{fontWeight: "bold"}}>{suggestedDomain}</span>?</div>
+                                            )}
                                         </div>
                                         <LoginRegisterInput handleChange={handleChange} placeholder="Password"
                                                             name="password" type="password" required/>
