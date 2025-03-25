@@ -57,11 +57,11 @@ export const MyPortfolioAsset: FC<Props> = ({ asset, index }) => {
         );
     };
 
-    const handleSliderChange = (_: Event, newValue: number | number[]) => {console.log(newValue)
+    const handleSliderChange = (_: Event, newValue: number | number[]) => {
         if (typeof newValue === "number") {
             setAsset((prevAssets) => {
                 const maxAllowed = calculateMaxAllocation(prevAssets, index);
-                const finalValue = Math.min(newValue, maxAllowed);console.log(finalValue)
+                const finalValue = Math.min(newValue, maxAllowed);
 
                 return prevAssets.map((item, i) =>
                     i === index ? { ...item, allocation: finalValue / 100 } : item

@@ -1,30 +1,47 @@
-import {useTranslation} from "react-i18next";
-import {ChangeEventHandler, FC} from "react";
+import { FC } from "react";
+import { useTranslation } from "react-i18next";
+import { UseFormRegister, FieldError } from "react-hook-form";
 
 type Props = {
-    handleChange: ChangeEventHandler<HTMLInputElement>;
+    register: UseFormRegister<any>;
     name: string;
     placeholder: string;
     type?: string;
     required?: boolean;
     className?: string;
-}
+    error?: FieldError;
+};
 
-export const LoginRegisterInput:FC<Props> = ({handleChange, name, placeholder, type = "text", required = false, className}) => {
-    const {t} = useTranslation();
+export const LoginRegisterInput: FC<Props> = ({
+                                                  register,
+                                                  name,
+                                                  placeholder,
+                                                  type = "text",
+                                                  required = false,
+                                                  className,
+                                                  error,
+                                              }) => {
+    const { t } = useTranslation();
 
     return (
         <div className="form-outline mb-4">
-            <label htmlFor="name" className="form-label">{t(placeholder)}</label>
+            <label htmlFor={name} className="form-label">
+                {t(placeholder)}
+            </label>
             <input
+                {...register(name)}
+                id={name}
                 type={type}
-                name={name}
                 placeholder={t(placeholder) + "..."}
-                className={`${className} form-control form-control-lg`}
-                onChange={handleChange}
+                className={`form-control form-control-lg ${className || ""} ${error ? "is-invalid" : ""}`}
                 required={required}
                 minLength={type === "password" ? 8 : 1}
             />
+            {error && (
+                <div className="invalid-feedback" style={{ display: "block" }}>
+                    {t(error.message || "This field is invalid")}
+                </div>
+            )}
         </div>
     );
 };

@@ -748,5 +748,18 @@
     "Done": "Provedeno",
     "Another languages": "Další jazyky",
     "Your newsletter has been sent successfully.": "Váš newsletter byl úspěšně odeslán.",
-    "Did you mean": "Máte na mysli"
+    "Did you mean": "Máte na mysli",
+    "Please make sure the passwords match": "Prosím ujistěte se, že hesla se shodují",
+    "Nickname is required": "Přezdívka je povinná",
+    "First name is required": "Jméno je povinné",
+    "Surname is required": "Příjmení je povinné",
+    "Email is required": "Email je povinný",
+    "Password is required": "Heslo je povinné",
+    "Password again is required": "Heslo znovu je povinné",
+    "Street is required": "Ulice je povinná",
+    "Street number is required": "Číslo popisné je povinné",
+    "Invalid email address": "Neplatný email",
+    "Password must be at least 8 characters long": "Heslo musí mít alespoň 8 znaků",
+    "Please confirm your password": "Prosím potvrďte své heslo",
+    "Email is already in use": "Email je již použit"
 }

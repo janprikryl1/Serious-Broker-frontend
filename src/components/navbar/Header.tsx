@@ -42,7 +42,7 @@ export const Header: FC = () => {
                             <div className="mx-2 mobile-hide">
                                 <ChangeLanguageIcon/>
                             </div>
-                            {user === null && !isMobile && (
+                            {!user && !isMobile && (
                                 <div className="border-start px-3" style={{ color: "white", fontWeight: "bold" }}>
                                     <SignUpIcon/>
                                 </div>

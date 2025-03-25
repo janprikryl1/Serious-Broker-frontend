@@ -53,7 +53,7 @@ export const ArticleCard:FC<Props> = ({data, link = "article", setData}) => {
                                     Premium
                                 </span>
                             }
-                            <button style={{background:"none", border:"none"}} disabled={user === undefined}>{!data.in_watchlist ? <FaRegBookmark style={{marginLeft: 10, marginBottom: 5}} onClick={handleAddToWatchList}/> : <FaBookmark style={{marginLeft: 10, marginBottom: 5}} onClick={handleRemoveFromWatchList} />}</button>
+                            <button style={{background:"none", border:"none"}} disabled={!user}>{!data.in_watchlist ? <FaRegBookmark style={{marginLeft: 10, marginBottom: 5}} onClick={handleAddToWatchList}/> : <FaBookmark style={{marginLeft: 10, marginBottom: 5}} onClick={handleRemoveFromWatchList} />}</button>
                         </div>
                         <h5 className="10 style2">
                             <Link to={`/${link}/${data.id}`} className="link-underline-none">{data.title}</Link>

@@ -21,7 +21,7 @@ export const Index: FC = () => {
             )}
             <Suspense><IndexTableData /></Suspense>
             <Suspense><LookingForMoreInDepthStatistics /></Suspense>
-            {user === null && (
+            {!user && (
                 <SignUpBanner />
             )}
         </div>

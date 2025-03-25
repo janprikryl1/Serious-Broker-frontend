@@ -21,7 +21,7 @@ export const saveQRCode = async (formData: Partial<QRCodeType>, image: File | nu
     formImageData.append("description", formData.description || "");
     formImageData.append("network", formData.network || "");
     formImageData.append("address_of_deposit", formData.address_of_deposit || "");
-    if (image) {console.log(image, image.type, typeof image);
+    if (image) {
         formImageData.append("image", image);
     }
 

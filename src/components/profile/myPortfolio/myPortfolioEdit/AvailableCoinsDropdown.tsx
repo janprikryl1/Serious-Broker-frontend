@@ -18,7 +18,7 @@ export const AvailableCoinsDropdown: FC<Props> = ({ coin, index }) => {
         (c) => !asset.some((asset) => asset.asset_label === c.name)
     );
 
-    const handleChange = (selected: Option[]) => {console.log(selected);
+    const handleChange = (selected: Option[]) => {
         setAsset((prevAsset) =>
             prevAsset.map((item, i) =>
                 i === index

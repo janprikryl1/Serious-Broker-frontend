@@ -1,44 +1,52 @@
-import {FC, FormEvent, useState} from "react";
-import {useTranslation} from "react-i18next";
-import {sendForgottenPassword} from "../utils/api/forgottenPasswordService.ts";
-import {LoginRegisterInput} from "../components/signIn/LoginRegisterInput.tsx";
-import {Button} from "../components/reusable/Button.tsx";
-import {CustomSwal} from "../utils/functions/customSwal.ts";
+import { FC } from "react";
+import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
+import { sendForgottenPassword } from "../utils/api/forgottenPasswordService.ts";
+import { LoginRegisterInput } from "../components/signIn/LoginRegisterInput.tsx";
+import { Button } from "../components/reusable/Button.tsx";
+import { CustomSwal } from "../utils/functions/customSwal.ts";
 
-export const ForgottenPassword:FC = () => {
-    const {t} = useTranslation();
-    const [email, setEmail] = useState("");
-    const [sending, setSending] = useState(false);
-    
-    const handleSubmitForgottenPassword = (e: FormEvent) => {
-        e.preventDefault();
-        setSending(true);
-        if (!email) return;
-        const submitForgottenPassword = async () => {
-            try {
-                const result = await sendForgottenPassword(email);
-                if (result.data.status === "reset password email sent") {
-                    CustomSwal.fire({
-                        icon: "success", title: t("Email sent"), text: t("Check your email address!"),
-                    });
-                    setEmail("");
-                } else if (result.data.status === "user not found") {
-                    CustomSwal.fire({
-                        icon: "error", title: t("Submit failed"), text: t("User not found"),
-                    });
-                }
-                setSending(false);
-            } catch (e) {
-                console.error(e);
+type FormValues = {
+    email: string;
+};
+
+export const ForgottenPassword: FC = () => {
+    const { t } = useTranslation();
+
+    const {
+        register,
+        handleSubmit,
+        reset,
+        formState: { isSubmitting }
+    } = useForm<FormValues>();
+
+    const onSubmit = async ({ email }: FormValues) => {
+        try {
+            const result = await sendForgottenPassword(email);
+            if (result.data.status === "reset password email sent") {
                 CustomSwal.fire({
-                    icon: "error", title: t("Submit failed"), text: t("Please try again"),
+                    icon: "success",
+                    title: t("Email sent"),
+                    text: t("Check your email address!")
                 });
-                setSending(false);
+                reset();
+            } else if (result.data.status === "user not found") {
+                CustomSwal.fire({
+                    icon: "error",
+                    title: t("Submit failed"),
+                    text: t("User not found")
+                });
             }
+        } catch (e) {
+            console.error(e);
+            CustomSwal.fire({
+                icon: "error",
+                title: t("Submit failed"),
+                text: t("Please try again")
+            });
         }
-        submitForgottenPassword();
-    }
-    
+    };
+
     return (
         <section className="account padding-bottom mt-3">
             <div className="container">
@@ -54,11 +62,22 @@ export const ForgottenPassword:FC = () => {
                                     <h2>{t("We are happy to see you back!")}</h2>
                                     <p>{t("Please enter your email and we will send you link to recover your password")}</p>
                                 </div>
-                                <form onSubmit={handleSubmitForgottenPassword}>
-                                    <LoginRegisterInput handleChange={(e) => setEmail(e.target.value)}
-                                                        placeholder="Email" name="email" type="email" required={true}/>
+                                <form onSubmit={handleSubmit(onSubmit)}>
+                                    <LoginRegisterInput
+                                        register={register}
+                                        name="email"
+                                        placeholder="Email"
+                                        type="email"
+                                        required
+                                    />
                                     <div className="d-flex justify-content-center mt-4">
-                                        <Button type="submit" className="btn btn-outline-warning btn-block btn-lg gradient-custom-4 text-body" disabled={sending}>{t("Submit")}</Button>
+                                        <Button
+                                            type="submit"
+                                            className="btn btn-outline-warning btn-block btn-lg gradient-custom-4 text-body"
+                                            disabled={isSubmitting}
+                                        >
+                                            {t("Submit")}
+                                        </Button>
                                     </div>
                                 </form>
                             </div>
@@ -67,5 +86,5 @@ export const ForgottenPassword:FC = () => {
                 </div>
             </div>
         </section>
-    )
+    );
 };

@@ -1,13 +1,19 @@
-import {FC, FormEvent, useEffect, useState} from "react";
-import {useNavigate, useParams} from "react-router-dom";
+import { FC, useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import {Spinner} from "react-bootstrap";
-import {FaExclamationTriangle} from "react-icons/fa";
-import {routes} from "../utils/constants";
-import {setSubmitNewPassword, verifySecureKeys} from "../utils/api/forgottenPasswordService.ts";
-import {LoginRegisterInput} from "../components/signIn/LoginRegisterInput.tsx";
-import {Button} from "../components/reusable/Button.tsx";
-import {CustomSwal} from "../utils/functions/customSwal.ts";
+import { Spinner } from "react-bootstrap";
+import { FaExclamationTriangle } from "react-icons/fa";
+import { routes } from "../utils/constants";
+import { setSubmitNewPassword, verifySecureKeys } from "../utils/api/forgottenPasswordService.ts";
+import { LoginRegisterInput } from "../components/signIn/LoginRegisterInput.tsx";
+import { Button } from "../components/reusable/Button.tsx";
+import { CustomSwal } from "../utils/functions/customSwal.ts";
+
+type RecoverPasswordForm = {
+    newPassword: string;
+    typeAgainNewPassword: string;
+};
 
 export const RecoverPassword: FC = () => {
     const { t } = useTranslation();
@@ -15,18 +21,18 @@ export const RecoverPassword: FC = () => {
     const navigate = useNavigate();
     const [loading, setLoading] = useState(true);
     const [verified, setVerified] = useState(false);
-    const [newPassword, setNewPassword] = useState("");
-    const [typeAgainNewPassword, setTypeAgainNewPassword] = useState("");
+
+    const {
+        register,
+        handleSubmit,
+        setError,
+    } = useForm<RecoverPasswordForm>();
 
     useEffect(() => {
         const verifyTokens = async () => {
             try {
                 const response = await verifySecureKeys(secret_key_1!, secret_key_2!, Number(user_id));
-                if (response.data.status === "success") {
-                    setVerified(true);
-                } else {
-                    setVerified(false);
-                }
+                setVerified(response.data.status === "success");
             } catch (error) {
                 console.error("Verification failed:", error);
                 setVerified(false);
@@ -43,9 +49,11 @@ export const RecoverPassword: FC = () => {
         }
     }, [user_id, secret_key_1, secret_key_2]);
 
-    const handleSubmit = async (e: FormEvent) => {
-        e.preventDefault();
-        if (newPassword !== typeAgainNewPassword) {
+    const onSubmit = async (data: RecoverPasswordForm) => {
+        if (data.newPassword !== data.typeAgainNewPassword) {
+            setError("typeAgainNewPassword", {
+                message: t("Passwords do not match")
+            });
             CustomSwal.fire({
                 icon: "error",
                 title: t("Passwords do not match"),
@@ -55,7 +63,7 @@ export const RecoverPassword: FC = () => {
         }
 
         try {
-            const response = await setSubmitNewPassword(secret_key_1!, secret_key_2!, Number(user_id), newPassword);
+            const response = await setSubmitNewPassword(secret_key_1!, secret_key_2!, Number(user_id), data.newPassword);
             if (response.data.status === "success") {
                 CustomSwal.fire({
                     icon: "success",
@@ -91,25 +99,27 @@ export const RecoverPassword: FC = () => {
                 </div>
             ) : !verified ? (
                 <div className="text-center mt-5 min-vh-100">
-                    <FaExclamationTriangle size={50} color="red"/>
+                    <FaExclamationTriangle size={50} color="red" />
                     <h2 className="mt-3">{t("Verification failed")}</h2>
                     <p>{t("Link is invalid or user doesn't exist")}</p>
                 </div>
             ) : (
                 <div className="text-center mt-5 min-vh-100 container">
                     <h1>{t("Recover password")}</h1>
-                    <form onSubmit={handleSubmit}>
+                    <form onSubmit={handleSubmit(onSubmit)}>
                         <LoginRegisterInput
-                            handleChange={(e) => setNewPassword(e.target.value)}
-                            placeholder={t("New password")}
+                            register={register}
                             name="newPassword"
+                            placeholder={t("New password")}
                             type="password"
+                            required
                         />
                         <LoginRegisterInput
-                            handleChange={(e) => setTypeAgainNewPassword(e.target.value)}
-                            placeholder={t("Enter password again")}
+                            register={register}
                             name="typeAgainNewPassword"
+                            placeholder={t("Enter password again")}
                             type="password"
+                            required
                         />
                         <div className="d-flex justify-content-center mt-4">
                             <Button
