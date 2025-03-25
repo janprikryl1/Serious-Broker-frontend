@@ -19,7 +19,7 @@ export const addArticleComment = async (articleId: number, comment: string) => {
             text: comment,
         }, {
             headers:{
-                Authorization2: `Bearer ${token}`,
+                Authorization: `Bearer ${token}`,
                 'Content-Type': 'application/json'
             },
     });

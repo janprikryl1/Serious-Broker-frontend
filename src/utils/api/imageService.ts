@@ -10,7 +10,7 @@ export const uploadImage = async (bodyFormData: FormData) => {
         image: bodyFormData.get("image") as File,
     }, {
         headers: {
-            Authorization2: `Bearer ${token}`,
+            Authorization: `Bearer ${token}`,
             'Content-Type': 'multipart/form-data',
         }
     });
@@ -22,7 +22,7 @@ export const getImages = async () => {
     if (!token) return;
     const res = axios.get<ImageListItemDto[]>(backendUrl + "article/images.php", {
         headers: {
-            Authorization2: `Bearer ${token}`,
+            Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json',
         },
     });

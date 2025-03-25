@@ -14,7 +14,7 @@ export const getArticleDetails = async (id: string) => {
             id: id,
         },
         headers:{
-            Authorization2: `Bearer ${token}`,
+            Authorization: `Bearer ${token}`,
         },
     });
 
@@ -29,7 +29,7 @@ export const getAllArticles = async (page: number) => {
             page: page,
         },
         headers:{
-            Authorization2: `Bearer ${token}`,
+            Authorization: `Bearer ${token}`,
         }
     });
 
@@ -40,7 +40,7 @@ export const getRecentArticles = async () => {
     const token = localStorage.getItem("token");
     const res = axios.get<RecentArticleProps[]>(backendUrl+"/article/recent_articles.php", {
         headers:{
-            Authorization2: `Bearer ${token}`,
+            Authorization: `Bearer ${token}`,
         },
     });
     return await res;
@@ -53,7 +53,7 @@ export const getSearchArticles = async (text: string) => {
             text: text,
         },
         headers:{
-            Authorization2: `Bearer ${token}`,
+            Authorization: `Bearer ${token}`,
         },
     });
 
@@ -66,7 +66,7 @@ export const createArticle = async (article: ArticleCreateProps) => {
 
     const res = axios.post<{message:string;article_id:number}>(backendUrl+"/article/edit_article.php", article, {
         headers:{
-            Authorization2: `Bearer ${token}`,
+            Authorization: `Bearer ${token}`,
         },
     });
 
@@ -82,7 +82,7 @@ export const getAllArticlesAdmin = async (page: number) => {
             page: page,
         },
         headers:{
-            Authorization2: `Bearer ${token}`,
+            Authorization: `Bearer ${token}`,
         }
     });
 
@@ -98,7 +98,7 @@ export const getArticleByIdAdmin = async (id: string) => {
             id: id,
         },
         headers:{
-            Authorization2: `Bearer ${token}`,
+            Authorization: `Bearer ${token}`,
         },
     });
 
@@ -111,7 +111,7 @@ export const updateArticle = async (article: ArticleUpdateType) => {
 
     const res = axios.put<{message:string}>(backendUrl+"/article/edit_article.php", article, {
         headers: {
-            Authorization2: `Bearer ${token}`,
+            Authorization: `Bearer ${token}`,
         },
     });
 
@@ -127,7 +127,7 @@ export const deleteArticle = async (id: number) => {
             id: id,
         },
         headers:{
-            Authorization2: `Bearer ${token}`,
+            Authorization: `Bearer ${token}`,
         },
     });
 

@@ -10,7 +10,7 @@ export const isAuthenticated = async () => {
 
     const response = axios.get<{status: string;admin: boolean;user: UserType}>(backendUrl + "user/is_authenticated.php", {
         headers: {
-            Authorization2: `Bearer ${token}`
+            Authorization: `Bearer ${token}`
         }
     });
 
@@ -49,7 +49,7 @@ export const updateUserDetails = async (userDetails: UserType) => {
     const res = axios.put<registerUserTypeResponse>(backendUrl + "user/update_user_details.php",
         userDetails, {
         headers:{
-            Authorization2: `Bearer ${token}`,
+            Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json'
         },
     });

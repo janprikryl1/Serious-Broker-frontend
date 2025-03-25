@@ -24,7 +24,7 @@ export const deleteDemo = async (id: number) => {
             id: id,
         },
         headers:{
-            Authorization2: `Bearer ${token}`,
+            Authorization: `Bearer ${token}`,
         },
     });
 
@@ -38,7 +38,7 @@ export const saveDemo = async (demo: DemoType) => {
     const res = await axios.post<DemoType>(`${backendUrl}/demo/save_demo.php`, 
         demo, {
         headers: {
-            Authorization2: `Bearer ${token}`,
+            Authorization: `Bearer ${token}`,
         },
     });
 

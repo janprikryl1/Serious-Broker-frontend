@@ -8,7 +8,7 @@ export const getBinanceIndexAbouts = async () => {
     
     return await axios.get<BinanceIndexType[]>(`${backendUrl}binance_index_about/index_abouts.php`, {
         headers: {
-            Authorization2: `Bearer ${token}`
+            Authorization: `Bearer ${token}`
         }
     });
 }
@@ -21,7 +21,7 @@ export const updateBinanceIndexAbout = async (id: number, about: string) => {
         about: about
     }, {
         headers: {
-            Authorization2: `Bearer ${token}`
+            Authorization: `Bearer ${token}`
         }
     });
 }

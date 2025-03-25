@@ -5,7 +5,7 @@ import {MembershipTypes} from "../types/user/userTypes.ts";
 export const getMemberships = async () => {
     const res = axios.get<MembershipTypes[]>(`${backendUrl}membership/get_user_membership.php`, {
         headers: {
-            Authorization2: `Bearer ${localStorage.getItem("token")}`,
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
     });
     return await res;
@@ -17,7 +17,7 @@ export const getMembershipByUserId = async (userId: number) => {
             user_id: userId,
         },
         headers: {
-            Authorization2: `Bearer ${localStorage.getItem("token")}`,
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
     });
     return await res;
@@ -30,7 +30,7 @@ export const addMembership = async (userId: number, price: number, dateTimeEnd: 
         date_time_end: dateTimeEnd,
     }, {
         headers: {
-            Authorization2: `Bearer ${localStorage.getItem("token")}`,
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
     });
     return await res;
@@ -44,7 +44,7 @@ export const editMembership = async (userId: number, membershipId: number, price
         date_time_end: dateTimeEnd,
     }, {
         headers: {
-            Authorization2: `Bearer ${localStorage.getItem("token")}`,
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
     });
     return await res;

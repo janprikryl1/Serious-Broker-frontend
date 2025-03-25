@@ -9,7 +9,7 @@ export const getMyWatchList = async () => {
     
     return await axios.get<WatchListType[]>(`${backendUrl}watchlist/get_user_watchlist.php`, {
         headers: {
-            Authorization2: `Bearer ${token}`
+            Authorization: `Bearer ${token}`
         }
     });
 }
@@ -23,7 +23,7 @@ export const addToWatchList = async (itemId: number, itemType: WatchListEnum) =>
         item_type: itemType
     }, {
         headers: {
-            Authorization2: `Bearer ${token}`
+            Authorization: `Bearer ${token}`
         }
     });
 }
@@ -35,7 +35,7 @@ export const removeFromWatchList = async (itemId: number) => {
 
     return await axios.delete(`${backendUrl}watchlist/remove_from_watchlist.php`, {
         headers: {
-            Authorization2: `Bearer ${token}`
+            Authorization: `Bearer ${token}`
         },
         data: { item_id: itemId }
     });

@@ -10,7 +10,7 @@ export const getPopularCoins = async () => {
     const token = localStorage.getItem("token");
     const res = await axios.get<LastCoinmarketCupCoinsType[]>(backendUrl + "index/last_coinmarketcup_coins.php", {
         headers: {
-            Authorization2: `Bearer ${token}`,
+            Authorization: `Bearer ${token}`,
         }
     });
     return await res;
@@ -20,7 +20,7 @@ export const getLastMostProfitable = async () => {
     const token = localStorage.getItem("token");
     const res = await axios.get<LastMostProfitableCoins[]>(backendUrl + "index/last_most_profitable.php", {
         headers: {
-            Authorization2: `Bearer ${token}`,
+            Authorization: `Bearer ${token}`,
         }
     })
     return await res;
@@ -38,7 +38,7 @@ export const getMostProfitableSelectedPeriod = async (season: IndexSeasonExtende
             order: chartType
         },
         headers: {
-            Authorization2: `Bearer ${token}`,
+            Authorization: `Bearer ${token}`,
         }
     })
     return await res;
@@ -68,7 +68,7 @@ export const getTopMostProfitableAssets = async () => {
     const token = localStorage.getItem("token");
     const response = axios.get(backendUrl+"index/data/top_most_profitable_assets.php", {
         headers: {
-            Authorization2: `Bearer ${token}`,
+            Authorization: `Bearer ${token}`,
         }
     });
     return await response;

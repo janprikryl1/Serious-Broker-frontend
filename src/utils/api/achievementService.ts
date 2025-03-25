@@ -7,7 +7,7 @@ export const getAchievements = async () => {
     if (!token) return;
     const response = axios.get<AchievementType[]>(backendUrl + "/achievement/achievements.php", {
         headers: {
-            Authorization2: `Bearer ${token}`,
+            Authorization: `Bearer ${token}`,
         },
     });
     return await response;
@@ -24,7 +24,7 @@ export const markReadAchievment = async (id: number) => {
             },
             {
                 headers: {
-                    Authorization2: `Bearer ${token}`,
+                    Authorization: `Bearer ${token}`,
                 },
             }
         );
@@ -42,7 +42,7 @@ export const adminUserAchievements = async (userId: number) => {
     const response = axios.get<AchievementType[]>(backendUrl + "achievement/achivments-list.php",
         {
             headers: {
-                Authorization2: `Bearer ${token}`,
+                Authorization: `Bearer ${token}`,
             },
             params: {
                 user_id: userId,
@@ -63,7 +63,7 @@ export const adminAddAchievement = async (userId: number, achievmentText: string
             },
             {
                 headers: {
-                    Authorization2: `Bearer ${token}`,
+                    Authorization: `Bearer ${token}`,
                 },
             }
         );

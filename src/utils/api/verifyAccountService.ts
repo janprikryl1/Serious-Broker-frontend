@@ -14,7 +14,7 @@ export const sendVerificationEmailAgain = async () => {
     if (!token) return;
     const response = axios.post(`${backendUrl}email/templates/verify_account_again.php`, {},{
         headers: {
-            Authorization2: `Bearer ${token}`,
+            Authorization: `Bearer ${token}`,
         },
     });
     return await response;

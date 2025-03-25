@@ -13,7 +13,7 @@ export const getAllFeedbacks = async (page: number, pageSize: number) => {
     if (!token) return;
     return await axios.get<{data: FeedbackStoredType[]; totalPages: number}>(backendUrl + "/feedback/feedbacks.php", {
         headers: {
-            Authorization2: `Bearer ${token}`,
+            Authorization: `Bearer ${token}`,
         },
         params: {
             page,

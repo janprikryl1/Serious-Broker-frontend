@@ -8,7 +8,7 @@ export const getProfileSessions = async () => {
     
     return await axios.get<SessionType[]>(backendUrl + "user/sessions/get_user_sessions.php", {
         headers: {
-            Authorization2: `Bearer ${token}`
+            Authorization: `Bearer ${token}`
         }
     });
 };
@@ -19,7 +19,7 @@ export const logoutSession = async (sessionId: number) => {
     
     return await axios.delete(`${backendUrl}user/sessions/logout.php`, {
         headers: {
-            Authorization2: `Bearer ${token}`
+            Authorization: `Bearer ${token}`
         },
         data: { id: sessionId }
     });
@@ -31,7 +31,7 @@ export const logoutEverywhere = async () => {
     
     await axios.delete(`${backendUrl}user/sessions/logout_everywhere.php`, {
         headers: {
-            Authorization2: `Bearer ${token}`
+            Authorization: `Bearer ${token}`
         }
     });
 };

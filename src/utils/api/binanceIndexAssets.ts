@@ -17,7 +17,7 @@ export const getAllAssets = async (page: number, limit: number, orderType: Asset
             order: orderType
         },
         headers:{
-            Authorization2: `Bearer ${token}`
+            Authorization: `Bearer ${token}`
         },
     });
     return await response;
@@ -33,7 +33,7 @@ export const getAssetByIndexLabel = async (index_label: string) => {
             name: index_label
         },
         headers: {
-            Authorization2: `Bearer ${token}`
+            Authorization: `Bearer ${token}`
         }
     });
     return await response;
@@ -48,7 +48,7 @@ export const getAssetByIdGraphData = async (asset_id: number) => {
             asset_id: asset_id
         },
         headers: {
-            Authorization2: `Bearer ${token}`
+            Authorization: `Bearer ${token}`
         }
     });
     return await response;
@@ -65,7 +65,7 @@ export const getAssetBuysBetween = async (asset_id: number, time_from: string, t
             time_to: time_to.toString()
         },
         headers: {
-            Authorization2: `Bearer ${token}`,
+            Authorization: `Bearer ${token}`,
             'Content-Type':
                 'application/json',
         }
@@ -82,7 +82,7 @@ export const getMostProfitableAssets = async (page: number, limit: number) => {
             limit: limit
         },
         headers:{
-            Authorization2: `Bearer ${token}`,
+            Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json'
         },
     });
@@ -99,7 +99,7 @@ export const getAssetBuys = async (asset_id: number, period: ChartAssetBuyEnum) 
                 asset_id: asset_id
             },
             headers: {
-                Authorization2: `Bearer ${token}`,
+                Authorization: `Bearer ${token}`,
                 'Content-Type':
                     'application/json',
             }
@@ -118,7 +118,7 @@ export const getAssetGraphData = async (currencies: QuotedCurrency[], period: Qu
             period: period
         },
         headers: {
-            Authorization2: `Bearer ${token}`
+            Authorization: `Bearer ${token}`
         }
     });
 }

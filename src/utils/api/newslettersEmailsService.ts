@@ -6,7 +6,7 @@ export const getNewslettersEmailsService = async () => {
     if (!token) return;
     return await axios.get(backendUrl + "article/article_post/get_emails.php", {
         headers: {
-            Authorization2: `Bearer ${token}`
+            Authorization: `Bearer ${token}`
         }
     });
 }

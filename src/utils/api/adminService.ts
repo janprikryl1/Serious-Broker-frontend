@@ -10,7 +10,7 @@ export const getDashboardData = async () => {
 
     const res = axios.get<DashboardDataType>(backendUrl + "user/admin_dashboard_details.php", {
         headers: {
-            Authorization2: `Bearer ${token}`,
+            Authorization: `Bearer ${token}`,
         },
     });
 
@@ -23,7 +23,7 @@ export const getAllUsers = async () => {
 
     const res = axios.get<UserType[]>(backendUrl + "user/all_users.php", {
         headers: {
-            Authorization2: `Bearer ${token}`,
+            Authorization: `Bearer ${token}`,
         },
     });
 
@@ -36,7 +36,7 @@ export const getAllLogs = async (page: number = 1) => {
 
     const res = axios.get<{ data: TableLogType[], totalPages: number }>(backendUrl + "table_log/get_all_logs.php", {
         headers: {
-            Authorization2: `Bearer ${token}`,
+            Authorization: `Bearer ${token}`,
         },
         params: {
             page,
@@ -51,7 +51,7 @@ export const updateUser = async (user: UserType) => {
 
     const res = axios.post(backendUrl + "user/admin_update.php", user, {
         headers: {
-            Authorization2: `Bearer ${token}`,
+            Authorization: `Bearer ${token}`,
         },
     });
 

@@ -14,7 +14,7 @@ export const getBinanceAssetGraphData = async (coin: string, interval: string, s
             endTime: endTime,
         },
         headers: {
-            Authorization2: `Bearer ${token}`,
+            Authorization: `Bearer ${token}`,
         }
     });
     return response.data;

@@ -7,7 +7,7 @@ export const getQR = async () => {
     if (!token) return;
     const response = axios.get(backendUrl + "qr_codes/get_qr_code.php", {
         headers: {
-            Authorization2: "Bearer " + token 
+            Authorization: "Bearer " + token 
         }
     });
     return await response;
@@ -27,7 +27,7 @@ export const saveQRCode = async (formData: Partial<QRCodeType>, image: File | nu
 
     const response = axios.post(backendUrl + "qr_codes/update_qr_code.php", formImageData, {
         headers: {
-            Authorization2: `Bearer ${token}`,
+            Authorization: `Bearer ${token}`,
         },
     });
     return await response;

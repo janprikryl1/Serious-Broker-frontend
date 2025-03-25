@@ -11,7 +11,7 @@ export const getArticlePosts = async (id: string) => {
             $article_id: id
         },
         headers: {
-            Authorization2: `Bearer ${token}`
+            Authorization: `Bearer ${token}`
         }
     });
     return await response;
@@ -26,7 +26,7 @@ export const getArticlePostDetail = async (id: string) => {
             id: id
         },
         headers: {
-            Authorization2: `Bearer ${token}`
+            Authorization: `Bearer ${token}`
         }
     });
     return await response;
@@ -38,7 +38,7 @@ export const createPost = async (post: ArticlePost) => {
     
     const response = axios.post(backendUrl + "article/article_post/post.php", post, {
         headers: {
-            Authorization2: `Bearer ${token}`
+            Authorization: `Bearer ${token}`
         }
     });
     return await response;

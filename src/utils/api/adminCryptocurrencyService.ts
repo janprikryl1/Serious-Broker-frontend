@@ -8,7 +8,7 @@ export const getAllCryptocurrencies = async () => {
     
     const res = axios.get<CryptoCurrencyAdminType[]>(backendUrl + "cryptocurrency_list/admin_get_all_currencies.php", {
         headers: {
-            Authorization2: `Bearer ${token}`,
+            Authorization: `Bearer ${token}`,
         },
     });
     return await res;
@@ -27,7 +27,7 @@ export const cryptoCurrencyUpdate = async (post: CryptoCurrencyAdminType) => {
     }
     const response = axios.post(backendUrl + "cryptocurrency_list/upload_image.php", formData, {
         headers: {
-            Authorization2: `Bearer ${token}`,
+            Authorization: `Bearer ${token}`,
             'Content-Type': 'multipart/form-data'
         }
     });
@@ -61,7 +61,7 @@ export const cryptoCurrencyAdd = async (post: CryptoCurrencyNewType) => {
 
     const response = axios.post(backendUrl + "cryptocurrency_list/new_cryptocurrency.php", formData, {
         headers: {
-            Authorization2: `Bearer ${token}`,
+            Authorization: `Bearer ${token}`,
             'Content-Type': 'multipart/form-data'
         }
     });
@@ -75,7 +75,7 @@ export const deleteCryptocurrency = async (id: number) => {
 
     const response = axios.delete(backendUrl + "cryptocurrency_list/delete_cryptocurrency.php", {
         headers: {
-            Authorization2: `Bearer ${token}`,
+            Authorization: `Bearer ${token}`,
         },
         params: {
             id: id

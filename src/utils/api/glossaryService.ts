@@ -27,7 +27,7 @@ export const editGlossary = async (glossary: GlossaryType, file: File | null) =>
     try {
         const response = await axios.post(`${backendUrl}glossary/glossary_edit.php`, formData, {
             headers: {
-                Authorization2: `Bearer ${token}`,
+                Authorization: `Bearer ${token}`,
             },
         });
         return response;
@@ -48,7 +48,7 @@ export const deleteGlossary = async (id: number) => {
             id: id,
         },
         headers: {
-            Authorization2: `Bearer ${token}`,
+            Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
         },
     });
@@ -70,7 +70,7 @@ export const addGlossary = async (glossary: Partial<GlossaryType & { imageFile?:
 
     const response = await axios.post(`${backendUrl}glossary/glossary_add.php`, formData, {
         headers: {
-            Authorization2: `Bearer ${token}`,
+            Authorization: `Bearer ${token}`,
         },
     });
     return response;

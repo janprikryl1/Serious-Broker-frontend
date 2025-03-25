@@ -12,7 +12,7 @@ export const getAllNewsletters = async () => {
     if (!token) return;
     return await axios.get<NewsletterType[]>(backendUrl + "newsletter/newsletters.php", {
         headers: {
-            Authorization2: `Bearer ${token}`
+            Authorization: `Bearer ${token}`
         }
     });
 }

@@ -12,7 +12,7 @@ export const getTranslations = async (articleId: string) => {
             articleId: articleId,
         },
         headers:{
-            Authorization2: `Bearer ${token}`,
+            Authorization: `Bearer ${token}`,
         },
     });
 

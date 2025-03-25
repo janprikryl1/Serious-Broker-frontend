@@ -8,7 +8,7 @@ export const getHighlights = async () => {
     
     return await axios.get(`${backendUrl}highlights/all_highlights.php`, {
         headers: {
-            Authorization2: `Bearer ${token}`        
+            Authorization: `Bearer ${token}`        
         }
     });
 }
@@ -22,7 +22,7 @@ export const getHighlightById = async (id: string) => {
     if (!token) return;
     return await axios.get(`${backendUrl}highlights/highlight.php?id=${id}`, {
         headers: {
-            Authorization2: `Bearer ${token}`
+            Authorization: `Bearer ${token}`
         }
     });
 }
@@ -32,7 +32,7 @@ export const createHighlight = async (data: HighlightType) => {
     if (!token) return;
     return await axios.post(`${backendUrl}highlights/highlight.php`, data, {
         headers: {
-            Authorization2: `Bearer ${token}`
+            Authorization: `Bearer ${token}`
         }
     });
 }
@@ -42,7 +42,7 @@ export const updateExistingHighlight = async (id: string, data: HighlightType) =
     if (!token) return;
     return await axios.put(`${backendUrl}highlights/highlight.php?id=${id}`, data, {
         headers: {
-            Authorization2: `Bearer ${token}`
+            Authorization: `Bearer ${token}`
         }
     });
 }
@@ -52,7 +52,7 @@ export const deleteHighlight = async (id: number) => {
     if (!token) return;
     return await axios.delete(`${backendUrl}highlights/highlight.php?id=${id}`, {
         headers: {
-            Authorization2: `Bearer ${token}`
+            Authorization: `Bearer ${token}`
         }
     });
 }
