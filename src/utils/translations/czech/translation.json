@@ -709,7 +709,7 @@
     "5. Fill in the form containing subjects and the article content.": "5. Vyplňte formulář obsahující předměty a obsah článku.",
     "3. Click on the \"Create\" button.": "3. Klikněte na tlačítko \"Vytvořit\".",
     "Now you can edit, translate, delete or share your article.": "Nyní můžete upravit, přeložit, odstranit nebo sdílet svůj článek.",
-    "Analytics": "Analtika",
+    "Analytics": "Analytika",
     "Index composition": "Rozložení indexu",
     "Contribution": "Zastoupení",
     "Statistics": "Statistiky",
@@ -728,7 +728,10 @@
     "My watch list": "Můj watchlist",
     "No items in your watchlist": "Žádné položky v watchlistu",
     "Start by clicking on watchlist icon": "Začněte kliknutím na ikonu watchlistu",
-    "You can add asset, coin or article to your watchlist": "Můžete přidat asset, mince nebo článek do watchlistu",
+    "You can add": "Můžete přidat",
+    "coin": "mince",
+    "or article": "nebo článek",
+    "to your watchlist": "do watchlistu",
     "Link": "Odkaz",
     "Give achievements for long period of time": "Udělit úspěchy za dlouhou dobu aktivního profilu",
     "Activity checked": "Aktivita zkontrolována",
@@ -761,5 +764,6 @@
     "Invalid email address": "Neplatný email",
     "Password must be at least 8 characters long": "Heslo musí mít alespoň 8 znaků",
     "Please confirm your password": "Prosím potvrďte své heslo",
-    "Email is already in use": "Email je již použit"
+    "Email is already in use": "Email je již použit",
+    "Details": "Detaily"
 }

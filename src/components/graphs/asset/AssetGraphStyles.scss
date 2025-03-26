@@ -1,7 +1,7 @@
 .asset-card {
-  width: 300px;
-  height: 200px;
-  margin-bottom: 100px;
+  min-width: 350px;
+  height: 100px;
+  margin-bottom: 200px;
 
   .card-container {
     background-color: #d4c6a9;
@@ -28,6 +28,7 @@
   .card-footer {
     background-color: #ae9747;
     padding: 5px;
+    height: 120px;
 }
 
   .asset-link {
@@ -51,13 +52,28 @@
     text-overflow: ellipsis;
     display: block;
 }
-
-  .watchlist-button {
-    background: transparent;
-    border: none;
-    p {
-      color: black;
-      font-size: 15px;
+  
+  button {
+    margin-top: -20px;
+    font-size: 13px;
   }
 }
+
+.daily-change {
+  font-weight: bold;
+  font-size: 16px;
+  position: absolute;
+  right: 15px;
+  top: 30%;
+
+  .label {
+    display: block;
+    font-size: 12px;
+    font-weight: normal;
+    color: black;
+  }
+}
+
+.card-footer {
+  position: relative;
 }

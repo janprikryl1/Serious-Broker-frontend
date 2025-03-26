@@ -79,10 +79,6 @@
     }
   }
 
-  .logo {
-    filter: drop-shadow(0 0 1em $brand-color);
-  }
-
   .menu-area {
     @extend %d-flex;
     justify-items: left;
@@ -515,6 +511,9 @@
   @extend %p-rel, %of-hidden;
   padding-block: 70px;
   position: relative;
+  background-repeat: no-repeat;
+  background-position: top 10px center;
+  background-color: rgb(49, 46, 40);
 
   @include breakpoint(lg) {
     padding-block: 100px;
@@ -534,10 +533,11 @@
     position: relative;
     z-index: 1;
     padding-left: 2vw;
+    //height: 30px;
 
     h2 {
-      @extend %mb-15;
       color: $bg-white;
+      margin-top: -5%;
 
       @include breakpoint(lg) {
         margin-bottom: 15px;

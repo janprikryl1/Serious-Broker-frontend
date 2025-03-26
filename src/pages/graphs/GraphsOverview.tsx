@@ -18,16 +18,6 @@ export const GraphsOverview: FC = () => {
                             {t("Recommendation")}
                         </Link>
                     </Nav.Item>
-                    <Nav.Item className="padding-top">
-                        <Link to={routes.assets} className="text-decoration-none">
-                            {t("Assets")}
-                        </Link>
-                    </Nav.Item>
-                    <Nav.Item className="padding-top padding-bottom">
-                        <Link to={routes.mostProfitableAssets} className="text-decoration-none">
-                            {t("Most profitable assets")}
-                        </Link>
-                    </Nav.Item>
                 </div>
             </Nav>
         </>

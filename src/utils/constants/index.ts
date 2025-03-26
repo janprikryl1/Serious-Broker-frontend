@@ -138,13 +138,17 @@ export const registeredUserNavbarURLs: NavbarURLs = {
     articles: { title: "Articles", link: routes.articles },
     graphs: {
         title: "Graphs",
+        link: routes.graphs
+    },
+    assets: { 
+        title: "Assets",
         subLinks: {
-            graphs: { title: "Graphs", link: routes.graphs },
             assets: { title: "Assets", link: routes.assets },
             mostProfitableAssets: { title: "Most profitable assets", link: routes.mostProfitableAssets }
-        },
+        }
     },
     myWatchList: { title: "My watch list", link: routes.profile.myWatchList },
+    aboutUs: { title: "About us", link: routes.about },
 };
 
 export const notRegisteredUserNavbarURLs: Record<string, NavLink> = {

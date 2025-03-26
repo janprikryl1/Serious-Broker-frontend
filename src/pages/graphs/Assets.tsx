@@ -7,6 +7,7 @@ import {TitleHeader} from "../../components/about/TitleHeader.tsx";
 import {SeasonButton} from "../../components/index/SeasonButton.tsx";
 import {AssetSkeleton} from "../../components/graphs/asset/AssetSkeleton.tsx";
 import {AssetCard} from "../../components/graphs/asset/AssetCard.tsx";
+import {pageLimit} from "../../utils/constants";
 
 export const Assets: FC = () => {
     const { t } = useTranslation();
@@ -25,7 +26,7 @@ export const Assets: FC = () => {
         isFetchingRef.current = true;
         setLoading(true);
 
-        const response = await getAllAssets(reset ? 1 : page, 10, orderType);
+        const response = await getAllAssets(reset ? 1 : page, pageLimit, orderType);
         if (response) {
             setAssets((prev) => (reset ? response.data.data : [...prev, ...response.data.data]));
             setTotalPages(response.data.totalPages);
@@ -71,7 +72,7 @@ export const Assets: FC = () => {
                             {t("Crypto indices provide a way to measure a performance of a selection of cryptocurrencies")}
                         </p>
                         <p>{t("Order by")}</p>
-                        <div className="col-sm season-button-group chart-type mb-3" style={{ minWidth: 430 }}>
+                        <div className="col-sm season-button-group chart-type mb-3" style={{ minWidth: 370 }}>
                             {Object.values(AssetOrder).map((orderTypeItem) => (
                                 <SeasonButton
                                     key={orderTypeItem}
@@ -86,10 +87,10 @@ export const Assets: FC = () => {
                             ))}
                         </div>
 
-                        <div className="row g-4">
+                        <div className="row g-8">
                             {assets.map((asset) => (
                                 // @ts-ignore
-                                <AssetCard index={asset.id} label={asset.name} details={asset.label} key={asset.id} data={asset.profit_list} inWatchList={asset.in_watchlist} setAssets={setAssets}/>
+                                <AssetCard index={asset.id} label={asset.name} details={asset.label} key={asset.id} data={asset.profit_list} inWatchList={asset.in_watchlist} setAssets={setAssets} dailyChange={asset.daily_change} />
                             ))}
                         </div>
 

@@ -1,54 +1,32 @@
-import {ChangeEvent, FC, useEffect, useState} from "react";
-import {QuotedCurrency} from "../../../utils/types/graphs/QuotedCurrency.ts";
+import {ChangeEvent, Dispatch, FC, SetStateAction} from "react";
 import {GraphDataSkeleton} from "./GraphDataSkeleton.tsx";
-import {getAssetGraphData} from "../../../utils/api/binanceIndexAssets.ts";
 import {QuotedCurrenciesPeriod} from "../../../utils/options/QuotedCurrenciesPeriod.ts";
 import {FaBookmark, FaRegBookmark} from "react-icons/fa";
-import {AssetAlaysisGraphData} from "../../../utils/types/graphs/AssetAlaysisGraphData.ts";
 import {AssetAnalyticsGraphPeriodSelection} from "./AssetAnalyticsGraphPeriodSelection.tsx";
 import Skeleton from "react-loading-skeleton";
 import {LineChart} from "@mui/x-charts";
 import {formatCurrency} from "../../../utils/functions/functions.ts";
 import {useTranslation} from "react-i18next";
 import {freecurrencyapi} from "../../../utils/constants";
+import {Currencies} from "../../../utils/enums/CurrenciesEnum.ts";
+import {AssetAlaysisGraphData} from "../../../utils/types/graphs/AssetAlaysisGraphData.ts";
 
 type Props = {
-    currencies: QuotedCurrency[];
     isInWatchList?: boolean;
     handleToggleWatchList?: () => void;
+    selectedPeriod: QuotedCurrenciesPeriod;
+    setSelectedPeriod: Dispatch<SetStateAction<QuotedCurrenciesPeriod>>;
+    graphData: AssetAlaysisGraphData | undefined;
+    currency: Currencies;
+    setCurrency: Dispatch<SetStateAction<Currencies>>;
+    currencyPrice: string | undefined;
+    setCurrencyPrice: Dispatch<SetStateAction<string | undefined>>;
+    currencyValue: number;
+    setCurrencyValue: Dispatch<SetStateAction<number>>;
 };
 
-enum Currencies {
-    EUR = "EUR",
-    CZK = "CZK",
-    PLN = "PLN",
-    HUF = "HUF",
-    USD = "USD"
-}
-
-export const AssetAnalysisGraph: FC<Props> = ({currencies, isInWatchList, handleToggleWatchList}) => {
+export const AssetAnalysisGraph: FC<Props> = ({isInWatchList, handleToggleWatchList, selectedPeriod, setSelectedPeriod, graphData, currencyValue, setCurrencyValue, setCurrency, setCurrencyPrice, currencyPrice, currency}) => {
     const {t} = useTranslation();
-    const [selectedPeriod, setSelectedPeriod] = useState(QuotedCurrenciesPeriod.month);
-    const [graphData, setGraphData] = useState<AssetAlaysisGraphData>();
-    const [currency, setCurrency] = useState<Currencies>(Currencies.EUR);
-    const [currencyPrice, setCurrencyPrice] = useState<string>();
-    const [currencyValue, setCurrencyValue] = useState<number>(1);
-    
-    useEffect(() => {
-        const getGraphData = async () => {
-            try {
-                setGraphData(undefined);
-                const response = await getAssetGraphData(currencies, selectedPeriod);
-                if (!response) return;
-                setGraphData(response.data);
-                setCurrencyPrice(formatCurrency(response.data.price));
-                setCurrency(Currencies.EUR);
-            } catch (e) {
-                console.error(e);
-            }
-        };
-        getGraphData();
-    }, [selectedPeriod]);
 
     const handleSwitchCurrency = async (e: ChangeEvent<HTMLSelectElement>) => {
         if (!graphData) return;
@@ -116,15 +94,14 @@ export const AssetAnalysisGraph: FC<Props> = ({currencies, isInWatchList, handle
                             ]}
                             width={undefined}
                             height={400}
-                            xAxis={[
-                                {
-                                    scaleType: "point",
-                                    data: Object.keys(graphData.data).map((dateStr) =>
-                                        new Date(dateStr).toLocaleString()
-                                    ),
-                                    valueFormatter: (value) => value,
-                                },
-                            ]}
+                            xAxis={[{
+                                scaleType: "point",
+                                data: Object.keys(graphData.data).map((dateStr) =>
+                                    (selectedPeriod === QuotedCurrenciesPeriod.day || selectedPeriod === QuotedCurrenciesPeriod.week) ? new Date(dateStr).toLocaleString() : new Date(dateStr).toLocaleDateString()
+                                ),
+                                valueFormatter: (value) => value,
+                            }]}
+
                             tooltip={{ trigger: "axis" }}
                             sx={{
                                 backgroundColor: "transparent",
@@ -144,7 +121,6 @@ export const AssetAnalysisGraph: FC<Props> = ({currencies, isInWatchList, handle
             ) : (
                 <GraphDataSkeleton />
             )}
-
         </div>
     );
 };

@@ -18,9 +18,10 @@ type Props = {
     data: number[];
     inWatchList: boolean;
     setAssets: Dispatch<SetStateAction<AssetType[] | MostProfitableAssetDetailType[]>>;
+    dailyChange?: number;
 };
 
-export const AssetCard: FC<Props> = ({ index, label, details, data, inWatchList, setAssets }) => {
+export const AssetCard: FC<Props> = ({ index, label, details, data, inWatchList, setAssets, dailyChange }) => {
     const { t } = useTranslation();
     const hasData = data.length > 0;
 
@@ -79,15 +80,31 @@ export const AssetCard: FC<Props> = ({ index, label, details, data, inWatchList,
                 </div>
 
                 <div className="card-footer">
-                    <Link to={`${routes.assetGraphURL}${encodeURIComponent(label)}`} className="link-underline-none asset-link">
+                    <Link to={`${routes.assetGraphURL}${encodeURIComponent(label)}`}
+                          className="link-underline-none asset-link">
                         {label}
                     </Link>
                     <p className="details">{details}</p>
-                    <button className="watchlist-button">
-                        <p>
-                            <Button className="mb-3">{!inWatchList ? <><FaRegBookmark onClick={handleAddToWatchlist} /> {t("Add to watchlist")}</> : <><FaBookmark onClick={handleRemoveFromWatchList} />{t("Remove from watchlist")}</>}</Button>
+                    {dailyChange !== undefined && (
+                        <p className="daily-change" style={{color: dailyChange > 0 ? "green" : "#8f372d"}}>
+                            {dailyChange > 0 && "+"}
+                            {dailyChange}%
+                            <span className="label">{t("Daily Change")}</span>
                         </p>
-                    </button>
+                    )}
+                    <Button>
+                        {!inWatchList ? (
+                            <>
+                                <FaRegBookmark onClick={handleAddToWatchlist} style={{marginRight: 5}}/>
+                                {t("Add to watchlist")}
+                            </>
+                        ) : (
+                            <>
+                                <FaBookmark onClick={handleRemoveFromWatchList} style={{marginRight: 5}}/>
+                                {t("Remove from watchlist")}
+                            </>
+                        )}
+                    </Button>
                 </div>
             </div>
         </div>

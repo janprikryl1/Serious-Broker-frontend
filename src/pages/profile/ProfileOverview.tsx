@@ -5,6 +5,7 @@ import {useUserContext} from "../../utils/providers/providerUser.tsx";
 import {AdminOverviewCard} from "../../components/admin/AdminOverviewCard.tsx";
 import {toCzechDateFormat} from "../../utils/functions/dateFunctions.ts";
 import {Highlight} from "../../components/editor/highlights/Highlight.tsx";
+import {AchievmentHelp} from "../../components/about/AchievmentHelp.tsx";
 
 export const ProfileOverview:FC = () => {
     const {t} = useTranslation();
@@ -26,6 +27,7 @@ export const ProfileOverview:FC = () => {
                         <Highlight/>
                     </div>
                 </div>
+                <AchievmentHelp />
             </div>
         </div>
     );

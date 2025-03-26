@@ -6,4 +6,5 @@ export type AssetType = {
     created: string;
     profit_list: number[];
     in_watchlist: boolean;
+    daily_change: number;
 }

@@ -20,9 +20,11 @@ export const Index: FC = () => {
                 <Newsletter/>
             )}
             <Suspense><IndexTableData /></Suspense>
-            <Suspense><LookingForMoreInDepthStatistics /></Suspense>
             {!user && (
-                <SignUpBanner />
+                <>
+                    <Suspense><LookingForMoreInDepthStatistics /></Suspense>
+                    <SignUpBanner />
+                </>
             )}
         </div>
     );

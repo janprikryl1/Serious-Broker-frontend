@@ -398,7 +398,6 @@ button {
   background-color: #6f675e;
   padding: 4px;
   height: 42px;
-  margin-left: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -813,4 +812,31 @@ button {
 .index-title {
   font-size: 35px;
   margin-bottom: 12px;
+}
+
+.active-yellow {
+  color: #ffc107 !important;
+}
+
+.logo-with-circle {
+  position: relative;
+  width: 50px;
+  height: 50px;
+}
+
+.background-circle {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  background-color: #b89b5e;
+  border-radius: 50%;
+}
+
+.logo-sb {
+  position: relative;
+  z-index: 1;
+  left: -50%;
+  top: 10%;
+  width: 40px;
+  height: 40px;
 }

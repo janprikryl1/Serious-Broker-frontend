@@ -9,11 +9,12 @@ import {TitleHeader} from "../../components/about/TitleHeader.tsx";
 import {RecommendationSkeleton} from "../../components/graphs/RecommendationSkeleton.tsx";
 import {PositionGraphComponent} from "../../components/graphs/PositionGraphComponent.tsx";
 import {RecomDetail} from "../../components/graphs/RecomDetail.tsx";
+import {RecommendationGraphEnum} from "../../utils/enums/RecommendationGraphEnum.tsx";
 
 export const Recommendation: FC = () => {
     const { t } = useTranslation();
     const [data, setData] = useState<BinanceIndexAssetRecomBestPreviousType[]>([]);
-    const [orderBy, setOrderBy] = useState<string>("");
+    const [orderBy, setOrderBy] = useState<RecommendationGraphEnum>(RecommendationGraphEnum.CMC_RANK);
     const [currentPage, setCurrentPage] = useState<number>(1);
     const [totalPages, setTotalPages] = useState<number>(1);
     const [loading, setLoading] = useState<boolean>(false);
@@ -66,7 +67,7 @@ export const Recommendation: FC = () => {
     }, [loading, totalPages, currentPage]);
 
     const handleOrderBy = (e: ChangeEvent<HTMLSelectElement>) => {
-        setOrderBy(e.target.value);
+        setOrderBy(e.target.value as RecommendationGraphEnum);
         setCurrentPage(1);
         setData([]);
     };
@@ -80,12 +81,12 @@ export const Recommendation: FC = () => {
                         <Col xs="auto">
                             <Form.Select aria-label="Default select example" onChange={handleOrderBy} defaultValue={orderBy}>
                                 <option value="">{t("Order by")}</option>
-                                <option value="all_pos">{t("All positions")}</option>
-                                <option value="cmc_rank">{t("cmc_rank")}</option>
-                                <option value="all_sug">{t("All suggestions")}</option>
-                                <option value="week_sug">{t("Week suggestions")}</option>
-                                <option value="week_all">{t("Week all")}</option>
-                                <option value="week_all_profit">{t("Week all profit")}</option>
+                                <option value={RecommendationGraphEnum.ALL_SUG}>{t("All positions")}</option>
+                                <option value={RecommendationGraphEnum.CMC_RANK}>{t("cmc_rank")}</option>
+                                <option value={RecommendationGraphEnum.ALL_SUG}>{t("All suggestions")}</option>
+                                <option value={RecommendationGraphEnum.WEEK_SUG}>{t("Week suggestions")}</option>
+                                <option value={RecommendationGraphEnum.WEEK_ALL}>{t("Week all")}</option>
+                                <option value={RecommendationGraphEnum.WEEK_ALL_PROFIT}>{t("Week all profit")}</option>
                             </Form.Select>
                         </Col>
                     </Row>

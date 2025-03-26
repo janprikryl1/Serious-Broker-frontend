@@ -10,14 +10,24 @@ import {AssetGraphPieChart} from "../../components/graphs/asset/AssetGraphPieCha
 import {AssetDetailSkeleton} from "../../components/graphs/asset/AssetDetailSkeleton.tsx";
 import {toCzechDate} from "../../utils/functions/dateFunctions.ts";
 import {AssetAnalysisGraph} from "../../components/graphs/asset/AssetAnalysisGraph.tsx";
-import {QuotedCurrency} from "../../utils/types/graphs/QuotedCurrency.ts";
 import {MyPortfolioType} from "../../utils/types/asset/MyPortfolioType.ts";
+import {QuotedCurrenciesPeriod} from "../../utils/options/QuotedCurrenciesPeriod.ts";
+import {Currencies} from "../../utils/enums/CurrenciesEnum.ts";
+import {AssetAlaysisGraphData} from "../../utils/types/graphs/AssetAlaysisGraphData.ts";
+import {QuotedCurrency} from "../../utils/types/graphs/QuotedCurrency.ts";
+import {getAssetGraphData} from "../../utils/api/binanceIndexAssets.ts";
+import {formatCurrency} from "../../utils/functions/functions.ts";
 
 export const MyPortfolioDetails:FC = () => {
     const { t } = useTranslation();
     const {id} = useParams();
     const [portfolio, setPortfolio] = useState<MyPortfolioType>();
-    
+    const [selectedPeriod, setSelectedPeriod] = useState(QuotedCurrenciesPeriod.month);
+    const [currency, setCurrency] = useState<Currencies>(Currencies.EUR);
+    const [currencyPrice, setCurrencyPrice] = useState<string>();
+    const [currencyValue, setCurrencyValue] = useState<number>(1);
+    const [graphData, setGraphData] = useState<AssetAlaysisGraphData>();
+
     useEffect(() => {
         if (!id) return;
         const fetchPortfolio = async () => {
@@ -30,6 +40,27 @@ export const MyPortfolioDetails:FC = () => {
         };
         fetchPortfolio();
     }, []);
+
+    useEffect(() => {
+        if (!portfolio) return;
+        const getGraphData = async () => {
+            try {
+                setGraphData(undefined);
+                const currencies = portfolio.asset.filter((assetDetail) => assetDetail.status).map((assetDetail) => ({
+                    asset_label: assetDetail.asset_label,
+                    allocation: assetDetail.allocation
+                })) as QuotedCurrency[]
+                const response = await getAssetGraphData(currencies, selectedPeriod);
+                if (!response) return;
+                setGraphData(response.data);
+                setCurrencyPrice(formatCurrency(response.data.price));
+                setCurrency(Currencies.EUR);
+            } catch (e) {
+                console.error(e);
+            }
+        };
+        getGraphData();
+    }, [selectedPeriod, portfolio]);
     
     return (
         <div className="padding-bottom">
@@ -49,22 +80,26 @@ export const MyPortfolioDetails:FC = () => {
                                     <div className="row">
                                         <div className="col-sm-8">
                                             <AssetAnalysisGraph
-                                                currencies={portfolio.asset.filter((assetDetail) => assetDetail.status).map((assetDetail) => ({
-                                                    asset_label: assetDetail.asset_label,
-                                                    allocation: assetDetail.allocation
-                                                })) as QuotedCurrency[]}
+                                                currencyValue={currencyValue}
+                                                setCurrencyValue={setCurrencyValue}
+                                                setCurrency={setCurrency}
+                                                setCurrencyPrice={setCurrencyPrice}
+                                                currencyPrice={currencyPrice}
+                                                currency={currency}
+                                                graphData={graphData}
+                                                selectedPeriod={selectedPeriod}
+                                                setSelectedPeriod={setSelectedPeriod}
                                             />
                                         </div>
                                         <div className="col-sm-4">
-                                            <AssetGraphDetails asset={portfolio}/>
+                                            <AssetGraphDetails asset={portfolio} currencyValue={currencyValue} selectedPeriod={selectedPeriod} currency={currency}/>
                                         </div>
                                     </div>
                                     <div className="row">
                                         <div className="col-sm-8">
                                             <div className="row">
                                                 {portfolio.asset.map((singleAsset) => (
-                                                    <AssetGraphCurrencyCard singleAsset={singleAsset as Assets}
-                                                                            key={singleAsset.id}/>
+                                                    <AssetGraphCurrencyCard singleAsset={singleAsset as Assets} key={singleAsset.id}/>
                                                 ))}
                                             </div>
                                         </div>

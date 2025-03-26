@@ -12,20 +12,12 @@ type Props = {
     error?: FieldError;
 };
 
-export const LoginRegisterInput: FC<Props> = ({
-                                                  register,
-                                                  name,
-                                                  placeholder,
-                                                  type = "text",
-                                                  required = false,
-                                                  className,
-                                                  error,
-                                              }) => {
+export const LoginRegisterInput: FC<Props> = ({register, name, placeholder, type = "text", required = false, className, error}) => {
     const { t } = useTranslation();
 
     return (
         <div className="form-outline mb-4">
-            <label htmlFor={name} className="form-label">
+            <label htmlFor={name} className="form-label" style={{fontWeight: required ? "bold" : "normal"}}>
                 {t(placeholder)}
             </label>
             <input

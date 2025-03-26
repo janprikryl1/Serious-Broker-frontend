@@ -4,6 +4,7 @@ import {getMostProfitableAssets} from "../../utils/api/binanceIndexAssets.ts";
 import {TitleHeader} from "../../components/about/TitleHeader.tsx";
 import {AssetCard} from "../../components/graphs/asset/AssetCard.tsx";
 import {AssetSkeleton} from "../../components/graphs/asset/AssetSkeleton.tsx";
+import {pageLimit} from "../../utils/constants";
 
 export const MostProfitableAssets: FC = () => {
     const [assets, setAssets] = useState<MostProfitableAssetDetailType[]>([]);
@@ -21,7 +22,7 @@ export const MostProfitableAssets: FC = () => {
         isFetchingRef.current = true;
         setLoading(true);
 
-        const response = await getMostProfitableAssets(reset ? 1 : page, 10);
+        const response = await getMostProfitableAssets(reset ? 1 : page, pageLimit);
         if (response) {
             setAssets((prev) => (reset ? response.data.data : [...prev, ...response.data.data]));
             setTotalPages(response.data.totalPages);
