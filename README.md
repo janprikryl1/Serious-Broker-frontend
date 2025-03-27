@@ -26,6 +26,7 @@ Spuštění lokálního serveru (poběží localhost:5173)
 ```bash
   npm run start
 ```
+To ale většina IDEček (napřklad Webstorm) umí přes nějaké tlačítko
 
 Pokud budeš chtít vyvíjet s loálně spuštěným backendem, tak v souboru `src/env.ts` změň `backendUrl` z  `"https://api.serious.broker/"` na `"https://localhost/bakalarska_prace_backend"`
 
