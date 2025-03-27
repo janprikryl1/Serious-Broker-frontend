@@ -27,6 +27,8 @@ Spuštění lokálního serveru (poběží localhost:5173)
   npm run start
 ```
 
+Pokud budeš chtít vyvíjet s loálně spuštěným backendem, tak v souboru `src/env.ts` změň `backendUrl` z  `"https://api.serious.broker/"` na `"https://localhost/bakalarska_prace_backend"`
+
 Sestavení pro produkci
 
 ```bash
