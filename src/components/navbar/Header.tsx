@@ -32,10 +32,7 @@ export const Header: FC = () => {
                         <div className="d-flex align-items-center">
                             <div className="logo">
                                 <Link to={routes.home}>
-                                    <div className="logo-with-circle">
-                                        <div className="background-circle"></div>
-                                        <img src={Logo} alt="logo" className="logo-sb"/>
-                                    </div>
+                                    <img className="logo-dark" src={Logo} alt="logo"/>
                                 </Link>
                             </div>
                             <NavbarDesktopMenu className="ml-4"/>
