@@ -35,7 +35,7 @@ export const Header: FC = () => {
                                     <img className="logo-dark" src={Logo} alt="logo"/>
                                 </Link>
                             </div>
-                            <NavbarDesktopMenu className="ml-4"/>
+                            <NavbarDesktopMenu />
                         </div>
 
                         <div className="d-flex align-items-center flex-nowrap">

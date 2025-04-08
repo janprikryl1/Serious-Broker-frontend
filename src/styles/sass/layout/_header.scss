@@ -81,26 +81,27 @@
 
   .menu-area {
     @extend %d-flex;
-    justify-items: left;
 
-    .header-btn {
-      margin-right: 20px;
-      @include breakpoint(max-md) {
-        display: none;
-      }
+    ul {
+      display: flex;
+      flex-wrap: nowrap;
+      white-space: nowrap;
+      padding: 0;
+      margin-left: 10px;
+      list-style: none;
+    }
 
-      @extend %d-flex;
-      @extend %align-i-center;
-      & {
-        column-gap: 20px;
-      }
+    li {
+      flex-shrink: 0;
+      white-space: nowrap;
+    }
 
-      .switch-btn {
-        max-width: 30px;
-        cursor: pointer;
-      }
+    .dropdown-menu {
+      position: absolute !important;
+      z-index: 9999;
     }
   }
+
 
   &--style2 {
     border-bottom: 1px solid $border-color-9;

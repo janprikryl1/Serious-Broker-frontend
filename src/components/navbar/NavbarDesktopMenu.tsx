@@ -5,11 +5,7 @@ import { useUserContext } from "../../utils/providers/providerUser.tsx";
 import { notRegisteredUserNavbarURLs, registeredUserNavbarURLs } from "../../utils/constants";
 import { NavDropdown } from "react-bootstrap";
 
-interface NavbarDesktopMenuProps {
-    className?: string;
-}
-
-export const NavbarDesktopMenu: FC<NavbarDesktopMenuProps> = ({ className }) => {
+export const NavbarDesktopMenu: FC = () => {
     const { t } = useTranslation();
     const { user } = useUserContext();
     const location = useLocation();
@@ -17,7 +13,7 @@ export const NavbarDesktopMenu: FC<NavbarDesktopMenuProps> = ({ className }) => 
     const isActive = (path: string) => location.pathname.startsWith(path);
 
     return (
-        <div className={`menu-area ${className}`}>
+        <div className="menu-area ml-4">
             <ul className="menu menu--style1 d-flex align-items-center">
                 {user
                     ? Object.keys(registeredUserNavbarURLs).map((key) => {
@@ -29,7 +25,7 @@ export const NavbarDesktopMenu: FC<NavbarDesktopMenuProps> = ({ className }) => 
                             );
 
                             return (
-                                <li className="me-3" style={{ marginLeft: "20px" }} key={key}>
+                                <li className="me-3" style={{marginLeft: "20px"}} key={key}>
                                     <NavDropdown
                                         title={t(item.title)}
                                         id={`nav-dropdown-${key}`}
