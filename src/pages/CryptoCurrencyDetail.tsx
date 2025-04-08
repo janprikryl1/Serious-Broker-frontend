@@ -2,7 +2,7 @@ import { FC, useEffect, useState } from "react";
 import {useLocation, useNavigate, useParams} from "react-router-dom";
 import { CryptoCurrencyDetailType } from "../utils/types/CryptoCurrencyType.ts";
 import { useTranslation } from "react-i18next";
-import {coinURL, routes} from "../utils/constants";
+import {coinURL} from "../utils/constants";
 import {getCryptocurrencyById} from "../utils/api/CryptocurrencyService.ts";
 import {TitleHeader} from "../components/about/TitleHeader.tsx";
 import {Button, ButtonColor} from "../components/reusable/Button.tsx";
@@ -37,7 +37,7 @@ export const CryptoCurrencyDetail: FC = () => {
     }, [id]);
 
     const goBack = () => {
-        navigate(routes.cryptocurrenciesList);
+        navigate(-1);
     };
 
     return (

@@ -765,5 +765,6 @@
     "Password must be at least 8 characters long": "Heslo musí mít alespoň 8 znaků",
     "Please confirm your password": "Prosím potvrďte své heslo",
     "Email is already in use": "Email je již použit",
-    "Details": "Detaily"
+    "Details": "Detaily",
+    "Daily Change": "Změna za den"
 }

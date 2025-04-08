@@ -62,6 +62,7 @@ export type MostVolatileData = {
     photo: string;
     percent_volatility: number;
     graph_data: number[];
+    id: number;
 };
 
 export type MostVolatile = {

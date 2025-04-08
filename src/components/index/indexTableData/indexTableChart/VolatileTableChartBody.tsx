@@ -2,8 +2,9 @@ import {FC} from "react";
 import {IndexTableChart} from "./IndexTableChart.tsx";
 import Skeleton from "react-loading-skeleton";
 import {MostVolatileData} from "../../../../utils/types/indexPage/IndexDataStructure.ts";
-import {coinURL} from "../../../../utils/constants";
+import {coinURL, routes} from "../../../../utils/constants";
 import {getFiatCoin} from "../../../../utils/constants/pairIcons.ts";
+import {Link} from "react-router-dom";
 
 type Props = {
     coin: MostVolatileData;
@@ -19,7 +20,7 @@ export const VolatileTableChartBody:FC<Props> = ({coin, index}) => {
                 <img style={{marginLeft:-10}} src={getFiatCoin(coin.symbol_name)} alt={`Fiat coin image: ${coin.asset_label}`} width={30}/>
                 <strong>{coin.asset_label}</strong>
             </td>
-            <td>{coin.symbol_name}</td>
+            <td><Link to={routes.cryptocurrencyDetailURL+coin.id} style={{fontWeight:"inherit", fontSize:"inherit", color: "inherit"}}>{coin.symbol_name}</Link></td>
             <td>{coin.percent_volatility} %</td>
             <td className="chart-cell">
                 {coin.graph_data ? <IndexTableChart
