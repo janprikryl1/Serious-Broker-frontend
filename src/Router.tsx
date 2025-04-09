@@ -10,8 +10,6 @@ const Articles = lazy(() => import("./pages/Articles.tsx").then(module => ({ def
 const Article = lazy(() => import("./pages/Article.tsx").then(module => ({ default: module.Article })));
 const SearchArticles = lazy(() => import("./pages/SearchArticles.tsx").then(module => ({ default: module.SearchArticles })));
 const Assets = lazy(() => import("./pages/graphs/Assets.tsx").then(module => ({ default: module.Assets })));
-const GraphsOverview = lazy(() => import("./pages/graphs/GraphsOverview.tsx").then(module => ({ default: module.GraphsOverview })));
-const MostProfitableAssets = lazy(() => import("./pages/graphs/MostProfitableAssets.tsx").then(module => ({ default: module.MostProfitableAssets })));
 const AssetGraph = lazy(() => import("./pages/graphs/AssetGraph.tsx").then(module => ({ default: module.AssetGraph })));
 const AssetGraphCurrencyDetail = lazy(() => import("./pages/graphs/AssetGraphCurrencyDetail.tsx").then(module => ({ default: module.AssetGraphCurrencyDetail })));
 const Recommendation = lazy(() => import("./pages/graphs/Recommendation.tsx").then(module => ({ default: module.Recommendation })));
@@ -73,8 +71,6 @@ export const Router:FC = () => {
             <Route path={routes.article} element={<PageLoader><Article /></PageLoader>} />
             <Route path={routes.search} element={<PageLoader><SearchArticles /></PageLoader>} />
             <Route path={routes.assets} element={<PageLoader><Assets /></PageLoader>} />
-            <Route path={routes.graphs} element={<PageLoader><GraphsOverview /></PageLoader>} />
-            <Route path={routes.mostProfitableAssets} element={<PageLoader><MostProfitableAssets /></PageLoader>} />
             <Route path={routes.assetGraph} element={<PageLoader><AssetGraph /></PageLoader>} />
             <Route path={routes.assetGraphCurrencyDetail} element={<PageLoader><AssetGraphCurrencyDetail /></PageLoader>} />
             <Route path={routes.recommendation} element={<PageLoader><Recommendation /></PageLoader>} />

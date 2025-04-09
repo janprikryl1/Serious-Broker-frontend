@@ -6,7 +6,7 @@ import {HighlightType} from "../types/highlights/HighlightType.ts";
 import Freecurrencyapi from '@everapi/freecurrencyapi-js';
 
 export const domain = "https://serious.broker";
-export const PROTECTED_ROUTES = ['/admin', '/profile', '/assets', '/graphs', '/most_profitable_assets', '/asset_graph/:id', '/editor'];
+export const PROTECTED_ROUTES = ['/admin', '/profile', '/assets', '/graphs', '/asset_graph/:id', '/editor'];
 export const pageLimit = 9;
 export const imageURL = "https://api.serious.broker/article/images/";
 export const coinURL = "https://api.serious.broker/cryptocurrency_list/images/";
@@ -35,9 +35,7 @@ export const routes = {
     article: "/article/:id/:language?",
     searchURL: "/articles/search/",
     search: "/articles/search/:text",
-    graphs: "/graphs",
     assets: "/assets",
-    mostProfitableAssets: "/most_profitable_assets",
     assetGraphURL: "/asset_graph/",
     assetGraphDetail: "/asset_graph/detail",
     assetGraphCurrencyDetail: "/asset_graph/detail/:index_label",
@@ -136,16 +134,13 @@ export const adminURLS = {
 
 export const registeredUserNavbarURLs: NavbarURLs = {
     articles: { title: "Articles", link: routes.articles },
-    graphs: {
-        title: "Graphs",
-        link: routes.graphs
-    },
     assets: { 
         title: "Assets",
-        subLinks: {
-            assets: { title: "Assets", link: routes.assets },
-            mostProfitableAssets: { title: "Most profitable assets", link: routes.mostProfitableAssets }
-        }
+        link: routes.assets
+    },
+    graphs: {
+        title: "Recommendation",
+        link: routes.recommendation
     },
     myWatchList: { title: "My watch list", link: routes.profile.myWatchList },
     aboutUs: { title: "About us", link: routes.about },
