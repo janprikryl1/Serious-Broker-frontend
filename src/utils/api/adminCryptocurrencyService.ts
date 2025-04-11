@@ -6,12 +6,11 @@ export const getAllCryptocurrencies = async () => {
     const token = localStorage.getItem("token");
     if (!token) return;
     
-    const res = axios.get<CryptoCurrencyAdminType[]>(backendUrl + "cryptocurrency_list/admin_get_all_currencies.php", {
+    return await axios.get<CryptoCurrencyAdminType[]>(backendUrl + "cryptocurrency_list/admin_get_all_currencies.php", {
         headers: {
             Authorization: `Bearer ${token}`,
         },
     });
-    return await res;
 }
 
 export const cryptoCurrencyUpdate = async (post: CryptoCurrencyAdminType) => {
@@ -25,14 +24,12 @@ export const cryptoCurrencyUpdate = async (post: CryptoCurrencyAdminType) => {
     if (post.photo) {
         formData.append('photo', post.photo);
     }
-    const response = axios.post(backendUrl + "cryptocurrency_list/upload_image.php", formData, {
+    return await axios.post(backendUrl + "cryptocurrency_list/upload_image.php", formData, {
         headers: {
             Authorization: `Bearer ${token}`,
             'Content-Type': 'multipart/form-data'
         }
     });
-
-    return await response;
 };
 
 
@@ -59,21 +56,19 @@ export const cryptoCurrencyAdd = async (post: CryptoCurrencyNewType) => {
         formData.append('photo', post.photo);
     }
 
-    const response = axios.post(backendUrl + "cryptocurrency_list/new_cryptocurrency.php", formData, {
+    return await axios.post(backendUrl + "cryptocurrency_list/new_cryptocurrency.php", formData, {
         headers: {
             Authorization: `Bearer ${token}`,
             'Content-Type': 'multipart/form-data'
         }
     });
-
-    return await response;
 };
 
 export const deleteCryptocurrency = async (id: number) => {
     const token = localStorage.getItem("token");
     if (!token) return;
 
-    const response = axios.delete(backendUrl + "cryptocurrency_list/delete_cryptocurrency.php", {
+    return await axios.delete(backendUrl + "cryptocurrency_list/delete_cryptocurrency.php", {
         headers: {
             Authorization: `Bearer ${token}`,
         },
@@ -81,6 +76,4 @@ export const deleteCryptocurrency = async (id: number) => {
             id: id
         }
     });
-
-    return await response;
 }

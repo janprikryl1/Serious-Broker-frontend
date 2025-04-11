@@ -10,7 +10,7 @@ export const getAllAssets = async (page: number, limit: number, orderType: Asset
     const token = localStorage.getItem("token");
     if(!token) return;
     
-    const response = axios.get<{totalPages: number; data: AssetType[]}>(backendUrl + "graphs/binance_index_assets/get_all_assets.php", {
+    return await axios.get<{totalPages: number; data: AssetType[]}>(backendUrl + "graphs/binance_index_assets/get_all_assets.php", {
         params: {
             page: page,
             limit: limit,
@@ -20,7 +20,6 @@ export const getAllAssets = async (page: number, limit: number, orderType: Asset
             Authorization: `Bearer ${token}`
         },
     });
-    return await response;
 };
 
 
@@ -28,7 +27,7 @@ export const getAssetByIndexLabel = async (index_label: string) => {
     const token = localStorage.getItem("token");
     if(!token) return;
     
-    const response = axios.get( backendUrl + "graphs/binance_index_assets/get_asset_by_id.php", {
+    return await axios.get( backendUrl + "graphs/binance_index_assets/get_asset_by_id.php", {
         params: {
             name: index_label
         },
@@ -36,14 +35,13 @@ export const getAssetByIndexLabel = async (index_label: string) => {
             Authorization: `Bearer ${token}`
         }
     });
-    return await response;
 };
 
 export const getAssetByIdGraphData = async (asset_id: number) => {
     const token = localStorage.getItem("token");
     if(!token) return;
     
-    const response = axios.get(backendUrl + "graphs/binance_index_assets/get_asset_by_id_graph_data.php", {
+    return await axios.get(backendUrl + "graphs/binance_index_assets/get_asset_by_id_graph_data.php", {
         params: {
             asset_id: asset_id
         },
@@ -51,7 +49,6 @@ export const getAssetByIdGraphData = async (asset_id: number) => {
             Authorization: `Bearer ${token}`
         }
     });
-    return await response;
 };
 
 export const getAssetGraphData = async (currencies: QuotedCurrency[], period: QuotedCurrenciesPeriod) => {

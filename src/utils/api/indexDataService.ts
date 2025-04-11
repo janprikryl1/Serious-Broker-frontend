@@ -10,7 +10,7 @@ export const getIndexData = async () => {
 
 export const getMostProfitableSelectedPeriod = async (season: IndexSeasonExtended, chartType: IndexChartsType) => {
     const token = localStorage.getItem("token");
-    const res = axios.get<AssetProfitData[]>(backendUrl + "index/data/get_most_profitable_selected_peroiod.php", {
+    return await axios.get<AssetProfitData[]>(backendUrl + "index/data/get_most_profitable_selected_peroiod.php", {
         params: {
             season: season,
             order: chartType
@@ -19,7 +19,6 @@ export const getMostProfitableSelectedPeriod = async (season: IndexSeasonExtende
             Authorization: `Bearer ${token}`,
         }
     })
-    return await res;
 }
 
 export const getMostVolatileData = async () => {

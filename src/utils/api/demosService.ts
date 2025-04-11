@@ -34,15 +34,13 @@ export const deleteDemo = async (id: number) => {
 export const saveDemo = async (demo: DemoType) => {
     const token = localStorage.getItem("token");
     if (!token) return;
-    
-    const res = await axios.post<DemoType>(`${backendUrl}/demo/save_demo.php`, 
-        demo, {
-        headers: {
-            Authorization: `Bearer ${token}`,
-        },
-    });
 
-    return await res;
+    return await axios.post<DemoType>(`${backendUrl}/demo/save_demo.php`,
+        demo, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        });
 }
 
 export const getTop10CoinmarketcupCoins = async () => {

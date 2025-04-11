@@ -1,22 +1,18 @@
 import axios from "axios";
 import {backendUrl} from "../../env.ts";
 import {TranslateEditLoadType} from "../types/article/translate/TranslateEditLoadType.ts";
-import {
-    ArticleNewTranslateEditType,
-    ArticleTranslateEditType
-} from "../types/article/translate/ArticleTranslateEditType.ts";
+import {ArticleNewTranslateEditType, ArticleTranslateEditType} from "../types/article/translate/ArticleTranslateEditType.ts";
 import {TranslateReturnType} from "../types/TranslateReturnType.ts";
 import {ArticleDetailProps} from "../types/article/ArticleDetailProps.ts";
 
 export const getArticleTranslateByIdAdmin = async (id: string) => {
     const token = localStorage.getItem("token");
     if (!token) return;
-    const res = await axios.get<TranslateEditLoadType>(backendUrl + "article/edit_translate.php?id=" + id, {
-        headers:{
+    return await axios.get<TranslateEditLoadType>(backendUrl + "article/edit_translate.php?id=" + id, {
+        headers: {
             Authorization: `Bearer ${token}`,
         },
     });
-    return res;
 }
 
 export const createTranslation = async (article: ArticleNewTranslateEditType) => {

@@ -7,7 +7,7 @@ export const getTranslations = async (articleId: string) => {
     const token = localStorage.getItem("token");
     if(!token) return;
     
-    const res = axios.get<{article: ArticleDetailProps; translations: TranslationsOverview[]}>(backendUrl+"article/admin_translations.php",{
+    return await axios.get<{article: ArticleDetailProps; translations: TranslationsOverview[]}>(backendUrl+"article/admin_translations.php",{
         params:{
             articleId: articleId,
         },
@@ -15,6 +15,4 @@ export const getTranslations = async (articleId: string) => {
             Authorization: `Bearer ${token}`,
         },
     });
-
-    return await res;
 }

@@ -8,13 +8,11 @@ export const isAuthenticated = async () => {
     const token = localStorage.getItem("token");
     if (!token) return;
 
-    const response = axios.get<{status: string;admin: boolean;user: UserType}>(backendUrl + "user/is_authenticated.php", {
+    return await axios.get<{status: string;admin: boolean;user: UserType}>(backendUrl + "user/is_authenticated.php", {
         headers: {
             Authorization: `Bearer ${token}`
         }
     });
-
-    return await response;
 }
 
 export const login = async (formData: loginType) => {
@@ -46,13 +44,11 @@ export const updateUserDetails = async (userDetails: UserType) => {
     const token = localStorage.getItem("token");
     if(!token) return;
 
-    const res = axios.put<registerUserTypeResponse>(backendUrl + "user/update_user_details.php",
+    return await axios.put<registerUserTypeResponse>(backendUrl + "user/update_user_details.php",
         userDetails, {
         headers:{
             Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json'
         },
     });
-
-    return await res;
 }

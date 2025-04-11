@@ -6,7 +6,7 @@ export const uploadImage = async (bodyFormData: FormData) => {
     const token = localStorage.getItem("token");
     if (!token) return;
     
-    const res = axios.post<string>(backendUrl + "article/upload_image.php", {
+    return await axios.post<string>(backendUrl + "article/upload_image.php", {
         image: bodyFormData.get("image") as File,
     }, {
         headers: {
@@ -14,18 +14,15 @@ export const uploadImage = async (bodyFormData: FormData) => {
             'Content-Type': 'multipart/form-data',
         }
     });
-    return await res;
 };
 
 export const getImages = async () => {
     const token = localStorage.getItem("token");
     if (!token) return;
-    const res = axios.get<ImageListItemDto[]>(backendUrl + "article/images.php", {
+    return await axios.get<ImageListItemDto[]>(backendUrl + "article/images.php", {
         headers: {
             Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json',
         },
     });
-
-    return await res;
 };

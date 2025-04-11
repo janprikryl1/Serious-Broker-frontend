@@ -25,12 +25,11 @@ export const editGlossary = async (glossary: GlossaryType, file: File | null) =>
     }
 
     try {
-        const response = await axios.post(`${backendUrl}glossary/glossary_edit.php`, formData, {
+        return await axios.post(`${backendUrl}glossary/glossary_edit.php`, formData, {
             headers: {
                 Authorization: `Bearer ${token}`,
             },
         });
-        return response;
     } catch (error) {
         console.error("Error updating glossary:", error);
         throw error;
@@ -68,17 +67,11 @@ export const addGlossary = async (glossary: Partial<GlossaryType & { imageFile?:
         formData.append("image", glossary.imageFile);
     }
 
-    const response = await axios.post(`${backendUrl}glossary/glossary_add.php`, formData, {
+    return await axios.post(`${backendUrl}glossary/glossary_add.php`, formData, {
         headers: {
             Authorization: `Bearer ${token}`,
         },
     });
-    return response;
-};
-
-
-export const randomGlossary = async () => {
-    return await axios.get<GlossaryType[]>(backendUrl+"glossary/random_glossaries.php");
 };
 
 export const getGlossaryByName = async (title: string) => {
