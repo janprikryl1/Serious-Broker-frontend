@@ -11,7 +11,7 @@ type Props = {
     height?: number;
 };
 
-export const IndexTableChart: FC<Props> = ({ name, data, width = 100, height = 30 }) => {
+export const OverviewTableChart: FC<Props> = ({ name, data, width = 100, height = 30 }) => {
     const options: ApexOptions = useMemo(() => ({
         chart: {
             type: "line",

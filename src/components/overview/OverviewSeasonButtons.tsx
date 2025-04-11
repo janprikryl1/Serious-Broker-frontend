@@ -4,7 +4,7 @@ import {useMediaQuery} from "@mui/material";
 import {useIndexDataContext} from "../../utils/providers/IndexDataProvider.tsx";
 import {IndexSeason, IndexSeasonExtended} from "../../utils/enums/IndexSeasonEnum.ts";
 
-export const IndexSeasonButtons:FC = () => {
+export const OverviewSeasonButtons:FC = () => {
     const { season, handleSelect } = useIndexDataContext();
     const isMobile = useMediaQuery('(max-width:768px)');
 

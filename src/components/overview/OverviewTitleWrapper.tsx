@@ -6,7 +6,7 @@ type Props = {
     variant: "h1" | "p";
 }
 
-export const IndexTitleWrapper:FC<Props> = ({children, color = "#fac900", variant}) => {
+export const OverviewTitleWrapper:FC<Props> = ({children, color = "#fac900", variant}) => {
     return (
         <div style={{textAlign: "center"}}>
             {variant === "h1" ? (

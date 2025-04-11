@@ -29,13 +29,14 @@ export const freecurrencyapi = new Freecurrencyapi('fca_live_tMDn3hFf3kZtFQuBrCm
 export const routes = {
     home: "/",
     about: "/about",
+    overview: "/overview",
     contact: "/contact",
     articles: "/articles",
     articleURL: "/article/",
     article: "/article/:id/:language?",
     searchURL: "/articles/search/",
     search: "/articles/search/:text",
-    assets: "/assets",
+    assets: "/asset_list",
     assetGraphURL: "/asset_graph/",
     assetGraphDetail: "/asset_graph/detail",
     assetGraphCurrencyDetail: "/asset_graph/detail/:index_label",
@@ -134,20 +135,16 @@ export const adminURLS = {
 
 export const registeredUserNavbarURLs: NavbarURLs = {
     articles: { title: "Articles", link: routes.articles },
-    assets: { 
-        title: "Assets",
-        link: routes.assets
-    },
-    graphs: {
-        title: "Recommendation",
-        link: routes.recommendation
-    },
+    overview: { title: "Overview", link: routes.overview },
+    assets: {title: "Assets", link: routes.assets},
+    graphs: {title: "Recommendation", link: routes.recommendation},
     myWatchList: { title: "My watch list", link: routes.profile.myWatchList },
     aboutUs: { title: "About us", link: routes.about },
 };
 
 export const notRegisteredUserNavbarURLs: Record<string, NavLink> = {
     learn: { title: "Learn", link: routes.articles },
+    overview: { title: "Overview", link: routes.overview },
     aboutUs: { title: "About us", link: routes.about },
 };
 

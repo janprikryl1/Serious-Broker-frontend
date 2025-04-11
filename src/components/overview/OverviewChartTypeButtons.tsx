@@ -3,7 +3,7 @@ import {SeasonButton} from "./SeasonButton.tsx";
 import {useIndexDataContext} from "../../utils/providers/IndexDataProvider.tsx";
 import {IndexChartsType} from "../../utils/enums/IndexChartsTypeEnum.ts";
 
-export const IndexChartTypeButtons:FC = () => {
+export const OverviewChartTypeButtons:FC = () => {
     const { chartType, handleSelectChartType } = useIndexDataContext();
 
     return (

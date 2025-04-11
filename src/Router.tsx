@@ -59,13 +59,14 @@ const HighlightsList = lazy(() => import("./pages/editor/HighlightsList.tsx").th
 const HighlightsEditor = lazy(() => import("./pages/editor/HighlightsEditor.tsx").then(module => ({ default: module.HighlightsEditor })));
 const BinanceIndexAbout = lazy(() => import("./pages/admin/AdminBinanceIndexAbout.tsx").then(module => ({ default: module.AdminBinanceIndexAbout })));
 const MyWatchList = lazy(() => import("./pages/profile/MyWatchList.tsx").then(module => ({ default: module.MyWatchList })));
-
+const Overview = lazy(() => import("./pages/Overview.tsx").then(module => ({ default: module.Overview })));
 
 export const Router:FC = () => {
     return (
         <Routes>
             <Route path={routes.home} element={<PageLoader><Index /></PageLoader>} />
             <Route path={routes.about} element={<PageLoader><About /></PageLoader>} />
+            <Route path={routes.overview} element={<PageLoader><Overview /></PageLoader>} />
             <Route path={routes.contact} element={<PageLoader><Contact /></PageLoader>} />
             <Route path={routes.articles} element={<PageLoader><Articles /></PageLoader>} />
             <Route path={routes.article} element={<PageLoader><Article /></PageLoader>} />

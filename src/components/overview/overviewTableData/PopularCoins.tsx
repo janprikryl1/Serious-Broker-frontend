@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import {FC, useDeferredValue, useEffect, useState, useTransition} from "react";
 import { PopularCoinsSkeleton } from "./skeletons/PopularCoinsSkeleton.tsx";
-import {IndexTableChart} from "./indexTableChart/IndexTableChart.tsx";
+import {OverviewTableChart} from "./overviewTableChart/OverviewTableChart.tsx";
 import {useMediaQuery} from "@mui/material";
 import {getLastCoinmarketcupCoinsSevenDays} from "../../../utils/api/indexDataService.ts";
 import {MostProfitableCoinsLastSevenDays} from "../../../utils/types/indexPage/IndexDataStructure.ts";
@@ -63,7 +63,7 @@ export const PopularCoins: FC = () => {
                                 {!isMobile && <td>{coin.name}</td>}
                                 <td>{formatLargeCurrency(coin.price)}</td>
                                 <td className="chart-cell">
-                                    <IndexTableChart
+                                    <OverviewTableChart
                                         name={coin.asset_label}
                                         data={coin.graph_data}
                                     />

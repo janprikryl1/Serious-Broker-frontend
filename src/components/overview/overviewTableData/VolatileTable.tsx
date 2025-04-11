@@ -1,6 +1,6 @@
 import {FC} from "react";
 import {useTranslation} from "react-i18next";
-import {VolatileTableChartBody} from "./indexTableChart/VolatileTableChartBody.tsx";
+import {VolatileTableChartBody} from "./overviewTableChart/VolatileTableChartBody.tsx";
 import {MostVolatileData} from "../../../utils/types/indexPage/IndexDataStructure.ts";
 
 type Props = {

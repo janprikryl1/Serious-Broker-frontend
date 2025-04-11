@@ -1,11 +1,11 @@
 import {FC, useEffect, useState} from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
-import {IndexTableChart} from "../../index/indexTableData/indexTableChart/IndexTableChart.tsx";
 import Skeleton from "react-loading-skeleton";
 import {Assets} from "../../../utils/types/asset/AssetDetailType.ts";
 import {getAssetGraphPreviewDate} from "../../../utils/api/assetGraphPreviewService.ts";
 import {coinURL, routes} from "../../../utils/constants";
+import {OverviewTableChart} from "../../overview/overviewTableData/overviewTableChart/OverviewTableChart.tsx";
 
 type Props = {
     singleAsset: Assets;
@@ -43,7 +43,7 @@ export const AssetGraphCurrencyCard: FC<Props> = ({ singleAsset }) => {
                 <div className="col-sm d-flex flex-column align-items-center"
                      style={{fontSize: "15px", textAlign: "center", lineHeight: 1.4, marginTop: 5, marginBottom:10}}>
                     {coinGraphData ? 
-                        <IndexTableChart
+                        <OverviewTableChart
                             name={singleAsset.asset_label}
                             data={coinGraphData}
                             width={70}

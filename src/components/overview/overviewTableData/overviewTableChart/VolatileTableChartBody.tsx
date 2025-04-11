@@ -1,5 +1,5 @@
 import {FC} from "react";
-import {IndexTableChart} from "./IndexTableChart.tsx";
+import {OverviewTableChart} from "./OverviewTableChart.tsx";
 import Skeleton from "react-loading-skeleton";
 import {MostVolatileData} from "../../../../utils/types/indexPage/IndexDataStructure.ts";
 import {coinURL, routes} from "../../../../utils/constants";
@@ -23,7 +23,7 @@ export const VolatileTableChartBody:FC<Props> = ({coin, index}) => {
             <td><Link to={routes.cryptocurrencyDetailURL+coin.id} style={{fontWeight:"inherit", fontSize:"inherit", color: "inherit"}}>{coin.symbol_name}</Link></td>
             <td>{coin.percent_volatility} %</td>
             <td className="chart-cell">
-                {coin.graph_data ? <IndexTableChart
+                {coin.graph_data ? <OverviewTableChart
                     name={coin.asset_label}
                     data={coin.graph_data}
                 /> : <Skeleton />}

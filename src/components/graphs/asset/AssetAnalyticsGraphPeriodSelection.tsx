@@ -1,6 +1,6 @@
 import {FC} from "react";
-import {SeasonButton} from "../../index/SeasonButton.tsx";
 import {QuotedCurrenciesPeriod} from "../../../utils/options/QuotedCurrenciesPeriod.ts";
+import {SeasonButton} from "../../overview/SeasonButton.tsx";
 
 type Props = {
     season: QuotedCurrenciesPeriod;

@@ -1,6 +1,6 @@
 import {FC, useEffect, useMemo, useState, useTransition} from "react";
 import { useTranslation } from "react-i18next";
-import { IndexTableChart } from "./indexTableChart/IndexTableChart.tsx";
+import { OverviewTableChart } from "./overviewTableChart/OverviewTableChart.tsx";
 import { GainSeasonTh } from "./GainSeasonTh.tsx";
 import {useIndexDataContext} from "../../../utils/providers/IndexDataProvider.tsx";
 import {AssetProfitData} from "../../../utils/types/indexPage/IndexDataStructure.ts";
@@ -98,7 +98,7 @@ export const MostProfitableLastSelectedPeriod: FC = () => {
                                 }
                             </td>
                             <td className="chart-cell">
-                                <IndexTableChart
+                                <OverviewTableChart
                                     name={coin.asset_label}
                                     data={getProfitData(coin)}
                                 />

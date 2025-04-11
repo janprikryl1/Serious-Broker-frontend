@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import {getIndexData} from "../../../utils/api/indexDataService.ts";
 import {toCzechDate} from "../../../utils/functions/dateFunctions.ts";
 
-export const IndexTableTitle: FC = () => {
+export const OverviewTableTitle: FC = () => {
     const { t } = useTranslation();
     const [date, setDate] = useState("");
 

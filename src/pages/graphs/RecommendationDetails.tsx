@@ -4,10 +4,10 @@ import {BinanceIndexAssetRecomBestPreviousDetails} from "../../utils/types/graph
 import {useTranslation} from "react-i18next";
 import {getBinanceIndexAssetRecomBestPreviousDetail} from "../../utils/api/GraphsService.ts";
 import {TitleHeader} from "../../components/about/TitleHeader.tsx";
-import {SeasonButton} from "../../components/index/SeasonButton.tsx";
 import {RecommendationDetailsSkeleton} from "../../components/graphs/RecommendationDetailsSkeleton.tsx";
 import {toPercentTwoDecimal} from "../../utils/functions/functions.ts";
 import {convertUTCToLocalTime, getDayName, getYear} from "../../utils/functions/dateFunctions.ts";
+import {SeasonButton} from "../../components/overview/SeasonButton.tsx";
 
 export const RecommendationDetails:FC = () => {
     const {t} = useTranslation();

@@ -4,10 +4,10 @@ import { useTranslation } from "react-i18next";
 import { AssetOrder } from "../../utils/enums/AssetOrderEnum.ts";
 import {getAllAssets} from "../../utils/api/binanceIndexAssets.ts";
 import {TitleHeader} from "../../components/about/TitleHeader.tsx";
-import {SeasonButton} from "../../components/index/SeasonButton.tsx";
 import {AssetSkeleton} from "../../components/graphs/asset/AssetSkeleton.tsx";
 import {AssetCard} from "../../components/graphs/asset/AssetCard.tsx";
 import {pageLimit} from "../../utils/constants";
+import {SeasonButton} from "../../components/overview/SeasonButton.tsx";
 
 export const Assets: FC = () => {
     const { t } = useTranslation();
