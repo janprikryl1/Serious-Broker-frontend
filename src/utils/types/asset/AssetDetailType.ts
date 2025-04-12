@@ -4,7 +4,7 @@ export type AssetDetailType = {
     name: string;
     about: string;
     description?: string;
-    assets: Assets[];
+    assets: Assets[] | null;
     COINS: string;
     last_update: string;
     in_watchlist: boolean;

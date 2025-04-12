@@ -1,11 +1,11 @@
 import {FC} from "react";
-import {Page} from "../components/index/Page.tsx";
+import {SliderPage} from "../components/index/SliderPage.tsx";
 
 export const Index: FC = () => {
     
     return (
         <>
-            <Page />
+            <SliderPage />
 
         </>
     );

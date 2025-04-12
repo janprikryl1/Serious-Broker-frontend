@@ -62,7 +62,7 @@ export const AssetGraph: FC = () => {
         const getGraphData = async () => {
             try {
                 setGraphData(undefined);
-                const currencies = asset.assets.map((assetDetail) => ({
+                const currencies = asset.assets?.map((assetDetail) => ({
                     asset_label: assetDetail.asset_label,
                     allocation: assetDetail.allocation
                 })) as QuotedCurrency[];
@@ -124,19 +124,21 @@ export const AssetGraph: FC = () => {
                                                 </div>
                                             </div>
                                             <h2 className="asset-title">{t("Index composition")}</h2>
-                                            <div className="row">
-                                                <div className="col-sm-8">
-                                                    <div className="row">
-                                                        {asset.assets.map((singleAsset: Assets) => (
-                                                            <AssetGraphCurrencyCard singleAsset={singleAsset}
-                                                                                    key={singleAsset.id}/>
-                                                        ))}
+                                            {asset.assets !== null && (
+                                                <div className="row">
+                                                    <div className="col-sm-8">
+                                                        <div className="row">
+                                                            {asset.assets.map((singleAsset: Assets) => (
+                                                                <AssetGraphCurrencyCard singleAsset={singleAsset}
+                                                                                        key={singleAsset.id}/>
+                                                            ))}
+                                                        </div>
+                                                    </div>
+                                                    <div className="col-sm-4">
+                                                        <AssetGraphPieChart assets={asset.assets}/>  
                                                     </div>
                                                 </div>
-                                                <div className="col-sm-4">
-                                                    <AssetGraphPieChart assets={asset.assets}/>  
-                                                </div>
-                                            </div>
+                                            )}
                                         </div>
                                     </div>
                                 </div>

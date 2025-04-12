@@ -58,7 +58,7 @@
         <loc>https://serious.broker/graphs/recommendation/detail/</loc>
     </url>
 
-    <!-- Error Page -->
+    <!-- Error SliderPage -->
     <url>
         <loc>https://serious.broker/404</loc>
     </url>

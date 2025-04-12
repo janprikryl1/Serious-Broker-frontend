@@ -730,19 +730,17 @@ button {
   }
 }
 
-.page-container {
+.shared-slide-layout {
   position: relative;
   height: 50vh;
   background-color: #120c06;
-  background-size: cover;
+  background-size: 70%;
   background-repeat: no-repeat;
-  background-position: calc(100% - 30vh) calc(100% + 40vh);
+  background-position: calc(100% - 60vh) calc(100% + 30vh);
   display: flex;
-  justify-content: right;
   align-items: center;
   color: #fff;
   letter-spacing: 10px;
-  background-image: url("/public/crypto-hand2_light.webp");
 
   .overlay {
     position: absolute;
@@ -755,27 +753,54 @@ button {
   .content {
     position: relative;
     z-index: 2;
-    padding-right: 2rem;
+    margin-left: 48%;
+    max-width: 40vw;
+    
+    .logo-container {
+      text-align: right;
+      margin-bottom: 3vh;
+    }
+    
+    .logo-dark {
+      max-width: 400px;
+    }
+    
+    .slide-title {
+      font-size: 5rem;
+      margin-top: 3vh;
+      line-height: 1.4;
+      text-align: right;
+    }
 
-    &.mobile {
-      padding-right: 5vw;
+    .slide-tagline {
+      font-size: 1.75rem;
+      margin-top: 3vh;
+      line-height: 1.4;
+      text-align: right;
+    }
+    button {
+      margin-right: 10px;
     }
   }
+}
 
-  .logo-container {
-    text-align: right;
-    margin-bottom: 4vh;
-  }
 
-  .title-save-crypto-safely {
-    font-weight: bold;
-    font-size: 1.5rem;
-  }
-  
-  @media (max-width: 768px) {
-    height: 40vh;
-    background-position: calc(100% - 20vh) calc(100% + 15vh);
-  }
+.main-slider-container .swiper-pagination-bullet {
+  width: 40px !important;
+  height: 4px !important;
+  border-radius: 10px !important;
+  opacity: 1 !important;
+  margin: 0 5px !important;
+  display: inline-block !important;
+  transition: background-color 0.3s ease;
+}
+
+:root {
+  --swiper-theme-color: #ffffff;
+  --swiper-pagination-bullet-inactive-color: rgba(255, 255, 255, 0.2);
+}
+.main-slider-container .swiper-pagination-bullet-active {
+  background-color: white !important;
 }
 
 .min-w-30-min-h-30 {
