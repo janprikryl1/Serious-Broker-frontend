@@ -22,7 +22,7 @@ const ForgottenPassword = lazy(() => import("./pages/ForgottenPassword.tsx").the
 const RecoverPassword = lazy(() => import("./pages/RecoverPassword.tsx").then(module => ({ default: module.RecoverPassword })));
 const SignIn = lazy(() => import("./pages/SignIn.tsx").then(module => ({ default: module.SignIn })));
 const Register = lazy(() => import("./pages/Register.tsx").then(module => ({ default: module.Register })));
-const ErrorPage = lazy(() => import("./pages/ErrorPage.tsx").then(module => ({ default: module.ErrorPage })));
+const ErrorPage = lazy(() => import("./pages/NotFoundErrorPage.tsx").then(module => ({ default: module.NotFoundErrorPage })));
 const Demos = lazy(() => import("./pages/Demos.tsx").then(module => ({ default: module.Demos })));
 const Demo = lazy(() => import("./pages/Demo.tsx").then(module => ({ default: module.Demo })));
 const AdminDemos = lazy(() => import("./pages/admin/AdminDemos.tsx").then(module => ({ default: module.AdminDemos })));

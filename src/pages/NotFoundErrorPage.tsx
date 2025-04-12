@@ -4,7 +4,7 @@ import {useTranslation} from "react-i18next";
 import {routes} from "../utils/constants";
 import {TitleHeader} from "../components/about/TitleHeader.tsx";
 
-export const ErrorPage:FC = () => {
+export const NotFoundErrorPage:FC = () => {
   const {t} = useTranslation();
   
   return (

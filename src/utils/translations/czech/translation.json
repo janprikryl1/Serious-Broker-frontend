@@ -765,5 +765,9 @@
     "Email is already in use": "Email je již použit",
     "Details": "Detaily",
     "Daily Change": "Změna za den",
-    "Overview": "Přehled"
+    "Overview": "Přehled",
+    "There was an error": "Došlo k chybě",
+    "We are working on resolving this issue. Please try again later.": "Pracujeme na vyřešení této chyby. Zkuste to prosím později.",
+    "Show error details": "Zobrazit detaily chyby",
+    "Hide details": "Skrýt detaily"
 }
