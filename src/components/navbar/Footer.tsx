@@ -17,6 +17,7 @@ export const Footer:FC = () => {
   
   return (
     <footer className="container">
+        <div className="footer-mob">
         <div className="footer__top--style1">
           <div className="row">
             <div className="col-md-6 font-footer">
@@ -46,6 +47,7 @@ export const Footer:FC = () => {
             <p>© 2024 - 2025</p>
             <p>VŠB - Technical University of Ostrava</p>
           </div>
+        </div>
         </div>
     </footer>
   );
