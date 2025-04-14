@@ -69,7 +69,7 @@ export const MostProfitableLastSelectedPeriod: FC = () => {
     return (
         <div className="p-4 rounded">
             {!isPending && data ? (
-                <table className="table-index-light mb-3">
+                <table className="table-overview-light mb-3">
                     <thead>
                     <tr>
                         <th>#</th>

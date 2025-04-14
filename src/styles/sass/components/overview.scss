@@ -1,0 +1,148 @@
+.trending-swiper-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+}
+
+.trending-swiper {
+  flex-grow: 1;
+  max-width: 1100px;
+  overflow: hidden;
+}
+
+.crypto-card {
+  background-color: #d5c6aa;
+  border-radius: 8px;
+  text-align: center;
+  padding: 10px;
+  color: black;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  max-width: 200px;
+  margin: 0 auto;
+}
+
+.crypto-logo {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+
+.crypto-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 1;
+}
+
+.crypto-name {
+  font-weight: bold;
+  overflow: hidden;
+  max-height: 20px;
+}
+
+.percentage {
+  color: #074007;
+  font-weight: bold;
+  overflow: hidden;
+  max-height: 20px;
+  padding-left: 15px;
+}
+
+.swiper-button {
+  background-color: #b1964d;
+  border: none;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px;
+}
+
+.table-overview-light {
+  background-color: #d3c6a9;
+  border-radius: 15px;
+  color: #333;
+  width: 100%;
+  max-width: 70vw;
+}
+
+.table-overview-light th,
+.table-overview-light td {
+  text-align: center;
+}
+.table-overview-light td {
+  padding: 15px;
+}
+
+.table-overview-light th {
+  font-size: 15px;
+  font-weight: normal;
+  padding: 5px;
+}
+
+.table-overview-light tbody tr:not(:last-child) td {
+  border-bottom: 1px solid #aaa;
+}
+
+.table-overview-light thead th {
+  border-bottom: 1px solid #aaa;
+}
+
+.coin-symbol {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.season-gains {
+  max-width: 480px;
+  min-width: 490px;
+}
+
+.index-table-title {
+  font-size: 20px;
+  font-weight: 400;
+}
+
+@media (max-width: 768px) {
+  .table-overview-light th,
+  .table-overview-light td {
+    padding: 10px;
+    font-size: 0.8rem;
+  }
+  
+  .table-overview-light {
+    margin-left: -28px;
+    margin-right: 0;
+    width: 100%;
+    max-width: 100vw;
+    background-color: #d3c6a9;
+    border-radius: 15px;
+    color: #333;
+    min-width: 350px;
+  }
+  
+  .table-overview-light th:first-child,
+  .table-overview-light td:first-child {
+    display: none;
+  }
+  
+  .table-overview-light td {
+    overflow: hidden;
+    white-space: nowrap;
+    max-width: 30vw;
+  }
+
+  .season-gains {
+    max-width: 250px;
+    min-width: 250px;
+  }
+}

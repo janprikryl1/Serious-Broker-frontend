@@ -15,7 +15,7 @@ import {IndexMobileSliderFiveMinutes} from "./indexMobileSlider/IndexMobileSlide
 
 
 export const SliderPage: FC = () => {
-    const isMobile = useMediaQuery('(max-width:768px)');console.log(isMobile);
+    const isMobile = useMediaQuery('(max-width:768px)');
     
     return (
         <Swiper
@@ -49,11 +49,9 @@ export const SliderPage: FC = () => {
                     <SwiperSlide>
                         <SliderPageSeriousBroker />
                     </SwiperSlide>
-
                     <SwiperSlide>
                         <SliderPageBitcoin />
                     </SwiperSlide>
-
                     <SwiperSlide>
                         <SliderPage5Minutes />
                     </SwiperSlide>

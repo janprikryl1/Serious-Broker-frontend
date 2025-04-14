@@ -7,9 +7,9 @@ import {FaBars, FaRegBookmark, FaUserEdit} from "react-icons/fa";
 import {MdDevicesOther, MdOutlineSubscriptions} from "react-icons/md";
 import { GrAchievement } from "react-icons/gr";
 import { RiCoinsLine } from "react-icons/ri";
-
 import { useUserContext } from "../../utils/providers/providerUser";
 import {routes} from "../../utils/constants";
+
 export const ProfileSidebar: FC = () => {
     const { t } = useTranslation();
     const { user, logout } = useUserContext();

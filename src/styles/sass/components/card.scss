@@ -1,0 +1,13 @@
+.card-title {
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+  color: white;
+  font-size: 40px;
+  font-weight: bold;
+}
+
+.card-img-overlay {
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.3) 50%, rgba(0, 0, 0, 0) 100%);
+  padding: 20px;
+  display: flex;
+  align-items: flex-end;
+}

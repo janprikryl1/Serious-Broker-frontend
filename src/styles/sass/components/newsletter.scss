@@ -1,0 +1,53 @@
+.cta__newsletter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.newsletter-list {
+  list-style: none;
+  padding-left: 5px;
+
+  li {
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 15px;
+
+    &::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 20px;
+      height: 20px;
+      background-image: url("/public/check-mark-svgrepo-com.svg");
+      background-size: cover;
+      background-repeat: no-repeat;
+  }
+  }
+}
+
+.register-button {
+  border-radius:3px;
+  font-size:20px;
+  border:none;
+}
+
+.register-input {
+  background-color:white;
+  border:none;
+  border-radius:3px;
+  max-width:500px;
+  color:black;
+}
+
+.guide-title {
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+.newsletter-wrapper {
+  margin-right:30px;
+  margin-top:1%;
+}

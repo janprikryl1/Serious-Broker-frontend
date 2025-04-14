@@ -1,5 +1,6 @@
 import {FC} from "react";
 import {useTranslation} from "react-i18next";
+import "../../styles/sass/components/newsletter.scss";
 
 export const LookingForMoreInDepthStatistics:FC = () => {
     const {t} = useTranslation();

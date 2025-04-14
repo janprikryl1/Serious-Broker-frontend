@@ -13,6 +13,7 @@
 // 3. Base stuff
 @import 'base/fonts',
 'base/typography',
+'base/index',
 'base/animations',
 'base/common',
 'base/helpers';
@@ -42,7 +43,11 @@
 'components/nav',
 'components/comment',
 'components/accordion',
-'components/about';
+'components/about',
+'components/table',
+'components/card',
+'components/header',
+'components/menu';
 
 
 // 8. Themes

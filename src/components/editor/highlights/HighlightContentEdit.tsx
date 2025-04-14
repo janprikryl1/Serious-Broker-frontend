@@ -5,7 +5,7 @@ import { Input } from "@mui/joy";
 import {useHighlightContext} from "../../../utils/providers/HighlightProvider.tsx";
 import {HighlightType} from "../../../utils/types/highlights/HighlightType.ts";
 import {Button} from "../../reusable/Button.tsx";
-import "../../../styles/sass/components/ContactUs.scss";
+import "../../../styles/sass/components/contact_us.scss";
 
 export const HighlightContentEdit: FC = () => {
     const { t } = useTranslation();

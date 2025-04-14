@@ -94,15 +94,6 @@ ol {
   font-family: "Raleway", sans-serif !important;
 }
 
-.language-switch-btn {
-  padding: 14px;
-  border-radius: 10px;
-}
-
-.swal2-title {
-  font-family: "Raleway", sans-serif !important;
-}
-
 .accordion-button:not(.collapsed) {
   background-color: #ae9647;
 }
@@ -115,65 +106,12 @@ ol {
   text-decoration: none;
 }
 
-.cta__newsletter {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.cta-form__inner {
-  justify-content: center;
-}
-
-.no-border-row tr td[rowspan] {
-  border-bottom: none !important;
-}
-
 .background-gray {
   background-color: #5c636a;
 }
 
-.card-title {
-  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
-  color: white;
-  font-size: 40px;
-  font-weight: bold;
-}
-
 .asset-font {
   font-size: 25px;
-}
-
-.card-img-overlay {
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.3) 50%, rgba(0, 0, 0, 0) 100%);
-  padding: 20px;
-  display: flex;
-  align-items: flex-end;
-}
-
-.logo-dark {
-  filter: brightness(0) invert(100%);
-}
-
-.pagination-container {
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
-}
-
-.pagination-list {
-  display: flex;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.pagination-list li {
-  margin: 0 5px;
-}
-
-.pagination-ellipsis {
-  line-height: 1.5;
 }
 
 button {
@@ -181,215 +119,9 @@ button {
   font-size: 14px;
 }
 
-.modal-container {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: #fff;
-  color: #000;
-  border-radius: 2px;
-  box-shadow: 0px 24px 48px rgba(0, 0, 0, 0.2);
-  padding: 20px;
-}
-
-.mobile-menu {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-  background: #0e0a05;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-}
-
-.close-button {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  background: none;
-  border: none;
-  font-size: 32px;
-  color: white;
-  cursor: pointer;
-}
-
-.mobile-menu-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-}
-
-.mobile-menu-list li {
-  padding: 20px;
-}
-
-.mobile-menu-list li a {
-  font-size: 24px;
-  color: white;
-  text-decoration: none;
-}
-
-.overview-graphs-container {
-  font-size: 25px;
-  color: #ae9647;
-  .content {
-    margin-left: 3vw;
-  }
-}
-
-@media (max-width: 900px) {
-  .menu-area, .mobile-hide {
-    display: none;
-  }
-
-  .mobile-menu {
-    display: block;
-  }
-
-  .header-bar {
-    display: flex;
-    width: 2px;
-    height: 2px;
-    cursor: pointer;
-  }
-}
-
-@media (min-width: 900px) {
-  .header-bar {
-    display: none;
-  }
-}
-
-.blur-background {
-  backdrop-filter: blur(10px);
-  padding: 10px 20px;
-  background-color: rgba(255, 255, 255, 0.3);
-  border-radius: 8px;
-  display: inline-block;
-}
-
-.index-links-container {
-  margin: 5%;
-  display: flex;
-  gap: 30px;
-}
-
-.highlight-bar {
-  position: absolute;
-  left: -20px;
-  top: 50%;
-  width: 30px;
-  height: 2px;
-  background-color: #ffa602;
-  transform: translateY(-50%);
-}
-
 .custom-switch .form-check-input:checked {
   background-color: #ffca2c !important;
   border-color: #ffca2c !important;
-}
-
-.newsletter-list {
-  list-style: none;
-  padding-left: 5px;
-
-  li {
-    position: relative;
-    padding-left: 35px;
-    margin-bottom: 15px;
-
-    &::before {
-      content: "";
-      position: absolute;
-      left: 0;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 20px;
-      height: 20px;
-      background-image: url("/public/check-mark-svgrepo-com.svg");
-      background-size: cover;
-      background-repeat: no-repeat;
-    }
-  }
-}
-
-.trending-swiper-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  position: relative;
-}
-
-.trending-swiper {
-  flex-grow: 1;
-  max-width: 1100px;
-  overflow: hidden;
-}
-
-.crypto-card {
-  background-color: #d5c6aa;
-  border-radius: 8px;
-  text-align: center;
-  padding: 10px;
-  color: black;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-  max-width: 200px;
-  margin: 0 auto;
-}
-
-.crypto-logo {
-  width: 40px;
-  height: 40px;
-  object-fit: contain;
-}
-
-.crypto-info {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  flex-grow: 1;
-}
-
-.crypto-name {
-  font-weight: bold;
-  overflow: hidden;
-  max-height: 20px;
-}
-
-.percentage {
-  color: #074007;
-  font-weight: bold;
-  overflow: hidden;
-  max-height: 20px;
-  padding-left: 15px;
-}
-
-.swiper-button {
-  background-color: #b1964d;
-  border: none;
-  width: 45px; /* Set width */
-  height: 45px; /* Set height to match width for perfect circle */
-  border-radius: 50%; /* Makes the button circular */
-  display: flex;
-  justify-content: center; /* Horizontally centers the icon */
-  align-items: center; /* Vertically centers the icon */
-  margin: 10px;
 }
 
 .season-button-group {
@@ -428,130 +160,17 @@ button {
   border-radius: 50px;
 }
 
-.table-index-light {
-  background-color: #d3c6a9;
-  border-radius: 15px;
-  color: #333;
-  width: 100%;
-  max-width: 70vw;
-}
-
-.table-index-light th,
-.table-index-light td {
-  text-align: center;
-}
-.table-index-light td {
-  padding: 15px;
-}
-
-.table-index-light th {
-  font-size: 15px;
-  font-weight: normal;
-  padding: 5px;
-}
-
-.table-index-light tbody tr:not(:last-child) td {
-  border-bottom: 1px solid #aaa;
-}
-
-.table-index-light thead th {
-  border-bottom: 1px solid #aaa;
-}
-
-.link-yellow {
-  color: #ae9647;
-  font-weight: bold;
-  font-size: 20px;
-}
-
 .asset-title {
   font-size: 35px;
-}
-
-.coin-symbol {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.profit-cell {
-  color: #228B22;
-  font-weight: bold;
 }
 
 .article-font-size {
   font-size: 20px;
 }
 
-.admin-section-title {
-  font-size: 60px;
-  color: white;
-  margin-bottom: 30px;
-}
-
-.admin-container {
-  margin-left: 3vw;
-  margin-right: 3vw;
-  margin-top: 0.1vw;
-}
-
-.title-serious-broker {
-  width: 30vw;
-  margin: 0;
-}
-
-.asset-graph-currency-card {
-  background-color: #d4c6a9;
-  border-radius: 16px;
-  margin: 1%;
-  padding: 1%;
-  height: 75px;
-  width: 342px;
-  color: black;
-}
-
-.title-save-crypto-safely {
-  font-size: 3vw;
-  margin-left: 8rem;
-}
-
-.season-gains {
-  max-width: 480px;
-  min-width: 490px;
-}
-
 .chart-type {
   margin-right: 50px;
   max-width: 180px;
-}
-
-.register-button {
-  border-radius:3px;
-  font-size:20px;
-  border:none;
-}
-
-.register-input {
-  background-color:white;
-  border:none;
-  border-radius:3px;
-  max-width:500px;
-  color:black;
-}
-
-.guide-title {
-  font-size: 28px;
-  margin-bottom: 20px;
-}
-
-.newsletter-wrapper {
-  margin-right:30px;
-  margin-top:1%;
-}
-
-.index-table-title {
-  font-size: 20px;
-  font-weight: 400;
 }
 
 .table-template {
@@ -574,34 +193,11 @@ button {
     padding-left: 0 !important;
     padding-right: 0 !important;    
   }
-  .asset-graph-currency-card {
-    font-size: 15px;
-    margin: 2%;
-    padding: 3%;
-    max-width: 90%;
-    margin-left: 10px;
-    height: 250px;
-  }
-
-  .admin-section-title {
-    font-size: 30px;
-  }
-
-  .admin-container {
-    margin-left: -17vw;
-    max-width: 90vw;
-  }
-
+  
   .title-serious-broker {
     width: 200px;
   }
-
-  .title-save-crypto-safely {
-    font-size: 20px;
-    letter-spacing: 0.5px;
-    margin-left: 1rem;
-  }
-
+  
   .card-title {
     font-size: 30px;
   }
@@ -610,15 +206,7 @@ button {
     font-size: 15px;
   }
 
-  .index-links-container {
-    gap: 20px;
-  }
 
-  .table-index-light th,
-  .table-index-light td {
-    padding: 10px;
-    font-size: 0.8rem;
-  }
 
   .coin-logo {
     width: 20px;
@@ -629,26 +217,6 @@ button {
     font-size: 30px;
   }
 
-  .table-index-light {
-    margin-left: -28px;
-    margin-right: 0;
-    width: 100%;
-    max-width: 100vw;
-    background-color: #d3c6a9;
-    border-radius: 15px;
-    color: #333;
-    min-width: 350px;
-  }
-  .table-index-light th:first-child,
-  .table-index-light td:first-child {
-    display: none;
-  }
-  .table-index-light td {
-    overflow: hidden;
-    white-space: nowrap;
-    max-width: 30vw;
-  }
-
   .table th:first-child,
   .table td:first-child {
     display: none;
@@ -656,6 +224,8 @@ button {
 
   .season-button-group {
     height: 35px;
+    width: 100%;
+    margin-bottom: 10px;
   }
 
   .season-button {
@@ -664,224 +234,12 @@ button {
     max-width: 100px;
   }
 
-  .season-button-group {
-    width: 100%;
-    margin-bottom: 10px;
-  }
-
   .chart-type {
     margin-right: 50px;
     max-width: 130px;
-  }
-
-  .season-gains {
-    max-width: 250px;
-    min-width: 250px;
   }
 }
 
 .css-1wvake5 {
   border-right: 0 !important;
-}
-
-.custom-sidebar {
-  max-height: 100%;
-  transition: transform 0.3s ease-in-out;
-
-  @media (max-width: 768px) {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 250px;
-    transform: translateX(-100%);
-    z-index: 1000;
-    background-color: #333;
-  }
-
-  &.mobile-visible {
-    transform: translateX(0);
-  }
-}
-
-.mobile-sidebar-toggle {
-  position: fixed;
-  top: 15px;
-  left: 15px;
-  z-index: 1100;
-  background-color: #ab9641;
-  color: black;
-  border: none;
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 24px;
-  cursor: pointer;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-
-  &:hover {
-    background-color: #967c2f;
-  }
-
-  @media (min-width: 769px) {
-    display: none;
-  }
-}
-
-.shared-slide-layout {
-  position: relative;
-  height: 50vh;
-  background-color: #120c06;
-  background-size: 70%;
-  background-repeat: no-repeat;
-  background-position: calc(100% - 60vh) calc(100% + 30vh);
-  display: flex;
-  align-items: center;
-  color: #fff;
-  letter-spacing: 10px;
-
-  .overlay {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.2);
-    z-index: 1;
-  }
-
-  .content {
-    position: relative;
-    z-index: 2;
-    margin-left: 48%;
-    max-width: 40vw;
-    
-    .logo-container {
-      text-align: right;
-      margin-bottom: 3vh;
-    }
-    
-    .logo-dark {
-      max-width: 400px;
-    }
-    
-    .slide-title {
-      font-size: 5rem;
-      margin-top: 3vh;
-      line-height: 1.4;
-      text-align: right;
-    }
-
-    .slide-tagline {
-      font-size: 1.75rem;
-      margin-top: 3vh;
-      line-height: 1.4;
-      text-align: right;
-    }
-    button {
-      margin-right: 10px;
-    }
-  }
-}
-
-
-.main-slider-container .swiper-pagination-bullet {
-  width: 40px !important;
-  height: 4px !important;
-  border-radius: 10px !important;
-  opacity: 1 !important;
-  margin: 0 5px !important;
-  display: inline-block !important;
-  transition: background-color 0.3s ease;
-}
-
-:root {
-  --swiper-theme-color: #ffffff;
-  --swiper-pagination-bullet-inactive-color: rgba(255, 255, 255, 0.2);
-}
-.main-slider-container .swiper-pagination-bullet-active {
-  background-color: white !important;
-}
-
-.min-w-30-min-h-30 {
-  min-width: 30px;
-  min-height: 30px;
-}
-
-.accordion-button {
-   background-color: transparent !important;
-   box-shadow: none !important;
-   color: #fff !important;
-   font-size: 30px !important;
-}
-
-.font-footer {
-  font-size: 16px;
-  color: $text-color-2;
-}
-
-@media (max-width: 767px) {
-  .mobile-margin {
-    margin-left: -50px;
-  }
-}
-
-.chart-cell {
-  text-align: center;
-}
-
-.chart-cell > div {
-  display: inline-block;
-}
-
-.index-title {
-  font-size: 35px;
-  margin-bottom: 12px;
-}
-
-.active-yellow {
-  color: #ffc107 !important;
-}
-
-.img-start-investing-with-serious-broker {
-  width: 150px;
-  display: block;
-  margin: 0 auto;
-}
-
-.step-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: 100%;
-  min-height: 300px;
-  justify-content: flex-start;
-}
-
-.step-content {
-  margin-top: auto;
-  text-align: center;
-}
-
-.index-step-number {
-  font-size: 25px;
-  background-color: #5f5448;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  line-height: 40px;
-  text-align: center;
-  margin: 10px auto;
-  color: white;
-}
-
-.step-description {
-  font-size: 25px;
-  height: 50px;
-}
-
-.step-title {
-  font-size: 25px;
-  color: white;
-  font-weight: bold;
 }

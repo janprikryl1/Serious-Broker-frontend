@@ -6,6 +6,7 @@ import {Assets} from "../../../utils/types/asset/AssetDetailType.ts";
 import {getAssetGraphPreviewDate} from "../../../utils/api/assetGraphPreviewService.ts";
 import {coinURL, routes} from "../../../utils/constants";
 import {OverviewTableChart} from "../../overview/overviewTableData/overviewTableChart/OverviewTableChart.tsx";
+import "../../../styles/sass/components/asset_graph.scss";
 
 type Props = {
     singleAsset: Assets;

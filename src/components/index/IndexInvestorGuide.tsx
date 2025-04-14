@@ -1,21 +1,30 @@
 import {FC} from "react";
 import LaptopAndBook from "../../utils/icons/index/laptop and book no plant.png";
 import {Button} from "../reusable/Button.tsx";
+import {useTranslation} from "react-i18next";
 
 export const IndexInvestorGuide:FC = () => {
+    const {t} = useTranslation();
+    
     return (
         <div style={{backgroundColor: "#221f1c"}} className="py-5">
             <div className="container">
-                <div className="row justify-content-center align-items-center">
+                <div className="row justify-content-center align-items-center gx-0">
                     <div className="col-sm-5 text-center text-sm-end mb-4 mb-sm-0">
-                        <img src={LaptopAndBook} alt="Graph no bg" className="img-fluid" />
+                        <div className="position-relative d-inline-block">
+                            <img src={LaptopAndBook} alt="Graph no bg" className="img-fluid index-section-image" />
+                            <div 
+                                className="index-section-image-blurred-color-graphh" 
+                                style={{background: "radial-gradient(ellipse at center, #d5bea5 0%, transparent 50%)"}}
+                            />
+                        </div>
                     </div>
-                    <div className="col-sm-4 text-center text-sm-start" style={{marginLeft: "5%"}}>
-                        <h1 className="index-title" style={{color: "#ae9749"}}>Investor's guide</h1>
-                        <h3 style={{fontSize:25, color: "#aaa7a0"}}>For Learners</h3>
-                        <p style={{color: "white" ,fontSize:20}}>Clear and concise educational articles covering everything essential for independent investing.</p>
+                    <div className="col-sm-4 text-center text-sm-start ms-sm-4 ms-lg-5"> {/* Adjust values as needed */}
+                        <h1 className="index-title index-section-title">{t("Investor's guide")}</h1>
+                        <h3 className="index-section-for">{t("For Learners")}</h3>
+                        <p className="index-section-content">{t("Clear and concise educational articles covering everything essential for independent investing")}.</p>
                         <div className="text-center mt-3">
-                            <Button style={{fontWeight: 700}}>Learn Learning</Button>
+                            <Button className="index-section-button">{t("Start Learning")}</Button>
                         </div>
                     </div>
                 </div>

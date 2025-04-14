@@ -1,0 +1,22 @@
+.admin-section-title {
+  font-size: 60px;
+  color: white;
+  margin-bottom: 30px;
+}
+
+.admin-container {
+  margin-left: 3vw;
+  margin-right: 3vw;
+  margin-top: 0.1vw;
+}
+
+@media (max-width: 768px) {
+  .admin-section-title {
+    font-size: 30px;
+  }
+
+  .admin-container {
+    margin-left: -17vw;
+    max-width: 90vw;
+  }
+}

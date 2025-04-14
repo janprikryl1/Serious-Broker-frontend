@@ -52,8 +52,7 @@
 
          &-content {
              p {
-                 @extend %mb-0,
-                 %text-semibold;
+                 @extend %mb-0;
              }
          }
      }

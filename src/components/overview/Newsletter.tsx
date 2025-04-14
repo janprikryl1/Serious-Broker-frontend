@@ -4,6 +4,8 @@ import {addNewsletter} from "../../utils/api/newsletterService.ts";
 import {Button, ButtonColor} from "../reusable/Button.tsx";
 import {CustomSwal} from "../../utils/functions/customSwal.ts";
 import {verifyEmail} from "../../utils/api/authenticateService.ts";
+import "../../styles/sass/components/newsletter.scss";
+
 
 export const Newsletter: FC = () => {
   const {t} = useTranslation();

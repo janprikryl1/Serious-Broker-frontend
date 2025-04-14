@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { Button } from "../reusable/Button.tsx";
-import "../../styles/sass/components/ContactUs.scss";
+import "../../styles/sass/components/contact_us.scss";
 import {addFeedback} from "../../utils/api/feedbackService.ts";
 import dotMesh from "../../utils/icons/about/dot_mesh.svg";
 import {CustomSwal} from "../../utils/functions/customSwal.ts";

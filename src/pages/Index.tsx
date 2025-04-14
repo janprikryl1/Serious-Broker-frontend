@@ -9,7 +9,6 @@ import {WhyToInvestInCryptocurrencies} from "../components/index/WhyToInvestInCr
 import {BitcoinProfitCalculator} from "../components/index/BitcoinProfitCalculator.tsx";
 
 export const Index: FC = () => {
-    
     return (
         <>
             <SliderPage />
