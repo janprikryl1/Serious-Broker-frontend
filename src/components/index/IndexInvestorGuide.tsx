@@ -2,6 +2,8 @@ import {FC} from "react";
 import LaptopAndBook from "../../utils/icons/index/laptop and book no plant.png";
 import {Button} from "../reusable/Button.tsx";
 import {useTranslation} from "react-i18next";
+import {Link} from "react-router-dom";
+import {routes} from "../../utils/constants";
 
 export const IndexInvestorGuide:FC = () => {
     const {t} = useTranslation();
@@ -24,7 +26,7 @@ export const IndexInvestorGuide:FC = () => {
                         <h3 className="index-section-for">{t("For Learners")}</h3>
                         <p className="index-section-content">{t("Clear and concise educational articles covering everything essential for independent investing")}.</p>
                         <div className="text-center mt-3">
-                            <Button className="index-section-button">{t("Start Learning")}</Button>
+                            <Button className="index-section-button"><Link to={routes.articles}>{t("Start Learning")}</Link></Button>
                         </div>
                     </div>
                 </div>

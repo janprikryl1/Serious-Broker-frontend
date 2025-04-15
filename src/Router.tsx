@@ -1,6 +1,6 @@
 import {FC, lazy} from "react";
 import {Route, Routes} from "react-router-dom";
-import {adminURLS, editorURLS, routes} from "./utils/constants";
+import {adminURLS, editorURLS, guideURLS, routes} from "./utils/constants";
 import {PageLoader} from "./components/reusable/PageLoader.tsx";
 import {EditorOverview} from "./pages/editor/EditorOverview.tsx";
 const Index = lazy(() => import("./pages/Index.tsx").then(module => ({ default: module.Index })));
@@ -60,6 +60,10 @@ const HighlightsEditor = lazy(() => import("./pages/editor/HighlightsEditor.tsx"
 const BinanceIndexAbout = lazy(() => import("./pages/admin/AdminBinanceIndexAbout.tsx").then(module => ({ default: module.AdminBinanceIndexAbout })));
 const MyWatchList = lazy(() => import("./pages/profile/MyWatchList.tsx").then(module => ({ default: module.MyWatchList })));
 const Overview = lazy(() => import("./pages/Overview.tsx").then(module => ({ default: module.Overview })));
+const Guide = lazy(() => import("./pages/guide/Guide.tsx").then(module => ({ default: module.Guide })));
+const GuidedInvestControlGuide = lazy(() => import ("./pages/guide/GuidedInvestControlGuide.tsx").then(module => ({ default: module.GuidedInvestControlGuide })));
+const PersonalStrategyGuide = lazy(() => import ("./pages/guide/PersonalStrategyGuide.tsx").then(module => ({ default: module.PersonalStrategyGuide })));
+
 
 export const Router:FC = () => {
     return (
@@ -128,6 +132,10 @@ export const Router:FC = () => {
                 <Route path={routes.admin.editDemo} element={<PageLoader><AdminDemoEdit /></PageLoader>} />
                 <Route path={routes.admin.newDemo} element={<PageLoader><AdminDemoEdit /></PageLoader>} />
                 <Route path={routes.admin.binanceIndexAbout} element={<PageLoader><BinanceIndexAbout /></PageLoader>} />
+            </Route>
+            <Route path={guideURLS.index} element={<PageLoader><Guide /></PageLoader>}>
+                <Route path={routes.guides.guidedInvestControl} element={<PageLoader><GuidedInvestControlGuide /></PageLoader>} />
+                <Route path={routes.guides.personalStrategy} element={<PageLoader><PersonalStrategyGuide /></PageLoader>} />
             </Route>
             <Route path="*" element={<PageLoader><ErrorPage /></PageLoader>} />
         </Routes>

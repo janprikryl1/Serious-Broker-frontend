@@ -97,6 +97,11 @@ export const routes = {
         newDemo: "demos/edit",
         binanceIndexAbout: "binance_index_about",
     },
+    guides: {
+        index: "",
+        guidedInvestControl: "guided_invest_control",
+        personalStrategy: "personal_strategy",
+    },
     demos: "/demos",
     demo: "/demo/:id",
     
@@ -131,6 +136,12 @@ export const adminURLS = {
     demos: "/admin/demos",
     newDemo: "/admin/demos/edit",
     binanceIndexAbout: "/admin/binance_index_about",
+}
+
+export const guideURLS = {
+    index: "/guide",
+    guidedInvestControl: "/guide/guided_invest_control",
+    personalStrategy: "/guide/personal_strategy",
 }
 
 export const registeredUserNavbarURLs: NavbarURLs = {

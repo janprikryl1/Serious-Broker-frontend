@@ -2,6 +2,8 @@ import {FC} from "react";
 import GraphNoBg from "../../utils/icons/index/graph_no_bg2.png";
 import {Button} from "../reusable/Button.tsx";
 import {useTranslation} from "react-i18next";
+import {Link} from "react-router-dom";
+import {guideURLS} from "../../utils/constants";
 
 export const IndexPersonalStrategy:FC = () => {
     const { t } = useTranslation();
@@ -24,7 +26,7 @@ export const IndexPersonalStrategy:FC = () => {
                         <h3 className="index-section-for">{t("For Individuals")}</h3>
                         <p className="index-section-content">{t("Personalized investment recommendations tailored to individual needs and market trends")}.</p>
                         <div className="text-center mt-3">
-                            <Button className="index-section-button">{t("Learn More")}</Button>
+                            <Button className="index-section-button"><Link to={guideURLS.personalStrategy}>{t("Learn More")}</Link></Button>
                         </div>
                     </div>
                 </div>

@@ -1,10 +1,12 @@
-import { FC } from "react";
+import {FC} from "react";
 import DotMeshImage from "../../utils/icons/index/dot_mesh_lighter.svg";
-import { Button } from "../reusable/Button.tsx";
-import { useTranslation } from "react-i18next";
+import {Button} from "../reusable/Button.tsx";
+import {useTranslation} from "react-i18next";
 import {useMediaQuery} from "@mui/material";
+import {Link} from "react-router-dom";
+import {guideURLS} from "../../utils/constants";
 
-const GuidedInvestControlBgImage:FC = () => (
+export const GuidedInvestControlBgImage: FC = () => (
     <img
         src={DotMeshImage}
         alt="Graph no bg"
@@ -13,14 +15,14 @@ const GuidedInvestControlBgImage:FC = () => (
 );
 
 export const GuidedInvestControl: FC = () => {
-    const { t } = useTranslation();
+    const {t} = useTranslation();
     const isMobile = useMediaQuery('(max-width:900px)');
 
     return (
         <div className="py-5 position-relative" style={{backgroundColor: "#3c3936"}}>
             {!isMobile && (
                 <div className="index-guided-dotted-image">
-                    <GuidedInvestControlBgImage />
+                    <GuidedInvestControlBgImage/>
                     <div className="index-guided-dotted-square"/>
                 </div>
             )}
@@ -38,7 +40,8 @@ export const GuidedInvestControl: FC = () => {
                             {t("Professional investment management, investing on behalf of clients using their financial resources")}.
                         </p>
                         <div className="text-center mt-3">
-                            <Button className="index-section-button">{t("Learn More")}</Button>
+                            <Button className="index-section-button"><Link
+                                to={guideURLS.guidedInvestControl}>{t("Learn More")}</Link></Button>
                         </div>
                     </div>
                 </div>

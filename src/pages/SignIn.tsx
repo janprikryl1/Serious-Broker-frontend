@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate, Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useUserContext } from "../utils/providers/providerUser.tsx";
-import { routes } from "../utils/constants";
+import {guideURLS, routes} from "../utils/constants";
 import { login } from "../utils/api/authenticateService.ts";
 import { LoginRegisterInput } from "../components/signIn/LoginRegisterInput.tsx";
 import { Button, ButtonColor } from "../components/reusable/Button.tsx";
@@ -43,7 +43,7 @@ export const SignIn: FC = () => {
                     text: t("Welcome back!")
                 }).then(() => {
                     setUser(resData.user);
-                    navigate(routes.profile.profileURL);
+                    navigate(guideURLS.personalStrategy);
                 });
             } else if (resData.status === "error") {
                 if (resData.message === "invalid") {
