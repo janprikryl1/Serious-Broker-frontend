@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { BsCoin } from "react-icons/bs";
-import {MostProfitable} from "../../utils/types/indexPage/IndexDataStructure.ts";
+import {MostProfitable} from "../../utils/types/overviewTypes/IndexDataStructure.ts";
 import {coinURL} from "../../utils/constants";
 import {toPercentTwoDecimal} from "../../utils/functions/functions.ts";
 

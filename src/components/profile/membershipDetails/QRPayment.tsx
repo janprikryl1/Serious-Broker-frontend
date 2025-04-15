@@ -1,9 +1,9 @@
 import {FC, useEffect, useState} from "react";
 import {useTranslation} from "react-i18next";
 import {ImageModal} from "../../article/articleVariants/ImageModal.tsx";
-import {QRCodeType} from "../../../utils/types/QRCodeType.ts";
 import {getQR} from "../../../utils/api/qrService.ts";
 import {qrCodeImagesURL} from "../../../utils/constants";
+import {QRCodeType} from "../../../utils/types/admin/QRCodeType.ts";
 
 export const QRPayment:FC = () => {
     const {t} = useTranslation();

@@ -1,6 +1,6 @@
 import {FC, useMemo, useState} from "react";
 import {CoinGraph} from "./CoinGraph.tsx";
-import {CandlestickData} from "../../../utils/types/KlineData.ts";
+import {CandlestickData} from "../../../utils/types/asset/KlineData.ts";
 
 type Props = {
     index_label: string;

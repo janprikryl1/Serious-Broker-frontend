@@ -2,11 +2,11 @@ import {ChangeEvent, FC, useEffect, useState} from "react";
 import {useForm} from "react-hook-form";
 import {Col, Form, Row} from "react-bootstrap";
 import {useTranslation} from "react-i18next";
-import {QRCodeType} from "../../utils/types/QRCodeType";
 import {qrCodeImagesURL} from "../../utils/constants";
 import {getQR, saveQRCode} from "../../utils/api/qrService.ts";
 import {Button} from "../../components/reusable/Button.tsx";
 import {CustomSwal} from "../../utils/functions/customSwal.ts";
+import {QRCodeType} from "../../utils/types/admin/QRCodeType.ts";
 
 export const AdminQRManagement: FC = () => {
     const { t } = useTranslation();

@@ -3,9 +3,9 @@ import { CryptoCurrencyLink } from "./CryptoCurrencyLink.tsx";
 import { CryptoCurrenciesSkeleton } from "./CryptoCurrenciesSkeleton.tsx";
 import { useTranslation } from "react-i18next";
 import { Col, Row } from "react-bootstrap";
-import {CryptoCurrencyType} from "../../../utils/types/CryptoCurrencyType.ts";
 import {getAllCryptocurrencies, getSearchCryptocurrencies} from "../../../utils/api/CryptocurrencyService.ts";
 import {Button, ButtonColor} from "../../reusable/Button.tsx";
+import {CryptoCurrencyType} from "../../../utils/types/asset/CryptoCurrencyType.ts";
 
 const PAGE_SIZE = 50;
 

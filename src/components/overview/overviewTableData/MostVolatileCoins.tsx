@@ -2,7 +2,7 @@ import { useTranslation } from "react-i18next";
 import {FC, useEffect, useState, useTransition} from "react";
 import {VolatileTable} from "./VolatileTable.tsx";
 import {MostVolatileCoinsSkeleton} from "./skeletons/MostVolatileCoinsSkeleton.tsx";
-import {MostVolatile} from "../../../utils/types/indexPage/IndexDataStructure.ts";
+import {MostVolatile} from "../../../utils/types/overviewTypes/IndexDataStructure.ts";
 import {getMostVolatileData} from "../../../utils/api/indexDataService.ts";
 import {TypographyWithPopover} from "../../reusable/TypographyWithPopover.tsx";
 

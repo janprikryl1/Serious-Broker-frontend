@@ -2,9 +2,9 @@ import {FC, useEffect, useState} from "react";
 import {GlossaryItemOverview} from "../../reusable/GlossaryItemOverview.tsx";
 import {useTranslation} from "react-i18next";
 import Skeleton from "react-loading-skeleton";
-import {GlossaryType} from "../../../utils/types/GlossaryType.ts";
 import {getGlossaryByName} from "../../../utils/api/glossaryService.ts";
 import {CustomSwal} from "../../../utils/functions/customSwal.ts";
+import {GlossaryType} from "../../../utils/types/article/GlossaryType.ts";
 
 type Props = {
     title: string;

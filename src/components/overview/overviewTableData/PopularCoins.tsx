@@ -4,7 +4,7 @@ import { PopularCoinsSkeleton } from "./skeletons/PopularCoinsSkeleton.tsx";
 import {OverviewTableChart} from "./overviewTableChart/OverviewTableChart.tsx";
 import {useMediaQuery} from "@mui/material";
 import {getLastCoinmarketcupCoinsSevenDays} from "../../../utils/api/indexDataService.ts";
-import {MostProfitableCoinsLastSevenDays} from "../../../utils/types/indexPage/IndexDataStructure.ts";
+import {MostProfitableCoinsLastSevenDays} from "../../../utils/types/overviewTypes/IndexDataStructure.ts";
 import {coinURL} from "../../../utils/constants";
 import {formatLargeCurrency} from "../../../utils/functions/functions.ts";
 

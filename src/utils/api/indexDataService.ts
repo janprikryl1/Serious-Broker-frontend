@@ -1,6 +1,6 @@
 import axios from "axios";
 import {backendUrl} from "../../env.ts";
-import {AssetProfitData, IndexDataStructure} from "../types/indexPage/IndexDataStructure.ts";
+import {AssetProfitData, IndexDataStructure} from "../types/overviewTypes/IndexDataStructure.ts";
 import {IndexSeasonExtended} from "../enums/IndexSeasonEnum.ts";
 import {IndexChartsType} from "../enums/IndexChartsTypeEnum.ts";
 

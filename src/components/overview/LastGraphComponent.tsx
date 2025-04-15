@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { v4 as uuidv4 } from 'uuid';
 import { LineChart } from "@mui/x-charts";
-import {LastMostProfitableCoins} from "../../utils/types/indexPage/LastMostProfitableCoins.ts";
+import {LastMostProfitableCoins} from "../../utils/types/overviewTypes/LastMostProfitableCoins.ts";
 import {useThemeContext} from "../../utils/providers/ThemeProvider.tsx";
 import {getRandomColor} from "../../utils/functions/getColorFunctions.ts";
 

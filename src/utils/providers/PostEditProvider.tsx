@@ -1,10 +1,10 @@
 import React, {Dispatch, ReactNode, SetStateAction, useContext, useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 import {useTranslation} from "react-i18next";
-import {ArticlePost} from "../types/ArticlePostListResponse.ts";
 import {PostOptionType} from "../options/PostOption.ts";
 import {createPost, getArticlePostDetail} from "../api/articlePostService.ts";
 import {CustomSwal} from "../functions/customSwal.ts";
+import {ArticlePost} from "../types/article/ArticlePostListResponse.ts";
 
 type Props = {
     children: ReactNode;

@@ -1,6 +1,6 @@
 import axios from "axios";
-import {KlineData} from "../types/KlineData.ts";
 import {backendUrl} from "../../env.ts";
+import {KlineData} from "../types/asset/KlineData.ts";
 
 export const getBinanceAssetGraphData = async (coin: string, interval: string, startTime: number, endTime: number) => {
     const token = localStorage.getItem("token");

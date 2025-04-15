@@ -1,6 +1,6 @@
 import axios from "axios";
 import {backendUrl} from "../../env.ts";
-import {ChachedDataType} from "../types/ChachedDataType.ts";
+import {ChachedDataType} from "../types/admin/ChachedDataType.ts";
 
 export const getAllChachedData = async () => {
     const token = localStorage.getItem("token");

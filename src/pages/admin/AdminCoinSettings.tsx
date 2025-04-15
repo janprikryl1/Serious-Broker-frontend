@@ -1,6 +1,5 @@
 import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { CryptoCurrencyType } from "../../utils/types/CryptoCurrencyType.ts";
 import {DataGrid, GridRenderCellParams} from "@mui/x-data-grid";
 import {logURL} from "../../utils/constants";
 import {cryptoCurrencyUpdate, deleteCryptocurrency, getAllCryptocurrencies} from "../../utils/api/adminCryptocurrencyService.ts";
@@ -11,6 +10,7 @@ import {AddCryptoCurrency} from "../../components/admin/cryptoCurrencyManagement
 import {Button} from "../../components/reusable/Button.tsx";
 import {AdminTableFilter} from "../../components/reusable/AdminTableFilter.tsx";
 import {CustomSwal} from "../../utils/functions/customSwal.ts";
+import {CryptoCurrencyType} from "../../utils/types/asset/CryptoCurrencyType.ts";
 
 export const AdminCoinSettings: FC = () => {
     const { t } = useTranslation();

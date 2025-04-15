@@ -1,11 +1,11 @@
 import axios from "axios";
 import {backendUrl} from "../../env.ts";
-import {TranslationsOverview} from "../types/article/TranslationsOverview.ts";
 import {ArticleDetailProps} from "../types/article/ArticleDetailProps.ts";
 import {ArticleProps} from "../types/article/ArticleProps.ts";
 import {RecentArticleProps} from "../types/article/RecentArticleProps.ts";
 import {ArticleCreateProps} from "../types/article/ArticleCreateProps.ts";
 import {ArticleUpdateType} from "../types/article/ArticleUpdateType.ts";
+import {TranslationsOverview} from "../types/article/translate/TranslationsOverview.ts";
 
 export const getArticleDetails = async (id: string) => {
     const token = localStorage.getItem("token");

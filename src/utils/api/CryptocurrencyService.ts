@@ -1,6 +1,6 @@
 import axios from "axios";
-import {CryptoCurrencyDetailType, CryptoCurrencyType} from "../types/CryptoCurrencyType.ts";
 import {backendUrl} from "../../env.ts";
+import {CryptoCurrencyDetailType, CryptoCurrencyType} from "../types/asset/CryptoCurrencyType.ts";
 
 export type DataPagination = {
     data: CryptoCurrencyType[];
@@ -15,13 +15,11 @@ export const getAllCryptocurrencies = async (page: number, pageSize: number) => 
 }
 
 export const getAllCategories = async () => {
-    const res = axios.get(backendUrl + "/cryptocurrency_list/get_all_categories.php");
-    return await res;
+    return await axios.get(backendUrl + "/cryptocurrency_list/get_all_categories.php");
 }
 
 export const getCryptocurrencyById = async (id: string) => {
-    const res = axios.get<CryptoCurrencyDetailType>(backendUrl + `cryptocurrency_list/get_cryptocurrency_by_id.php?id=${id}`);
-    return await res;
+    return await axios.get<CryptoCurrencyDetailType>(backendUrl + `cryptocurrency_list/get_cryptocurrency_by_id.php?id=${id}`);
 }
 
 export const getSearchCryptocurrencies = async (searchValue: string, page: number, pageSize: number) => {

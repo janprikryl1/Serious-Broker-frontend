@@ -1,10 +1,10 @@
 import {Dispatch, FC, SetStateAction, useState} from "react";
 import {useTranslation} from "react-i18next";
-import {CommentType} from "../../utils/types/CommentType.ts";
 import {useUserContext} from "../../utils/providers/providerUser.tsx";
 import {addArticleComment} from "../../utils/api/commentsService.ts";
 import {useAchievmentsContext} from "../../utils/providers/AchievmentsProvider.tsx";
 import {routes} from "../../utils/constants";
+import {CommentType} from "../../utils/types/article/CommentType.ts";
 
 type Props = {
     articleId: number;

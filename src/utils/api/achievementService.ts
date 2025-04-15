@@ -1,6 +1,6 @@
 import axios from "axios";
 import {backendUrl} from "../../env.ts";
-import {AchievementType} from "../types/AchievementType.ts";
+import {AchievementType} from "../types/user/AchievementType.ts";
 
 export const getAchievements = async () => {
     const token = localStorage.getItem("token");

@@ -1,8 +1,8 @@
 import axios from "axios";
 import {backendUrl} from "../../env.ts";
-import {DashboardDataType} from "../types/DashboardDataType.ts";
 import {UserType} from "../types/user/userTypes.ts";
-import {TableLogType} from "../types/TableLogType.ts";
+import {DashboardDataType} from "../types/user/DashboardDataType.ts";
+import {TableLogType} from "../types/admin/TableLogType.ts";
 
 export const getDashboardData = async () => {
     const token = localStorage.getItem("token");

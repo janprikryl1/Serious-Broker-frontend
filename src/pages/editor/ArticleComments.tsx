@@ -1,10 +1,10 @@
 import {FC, useEffect, useState} from "react";
 import {useNavigate, useParams} from "react-router-dom";
 import {useTranslation} from "react-i18next";
-import {CommentType} from "../../utils/types/CommentType.ts";
 import {getArticleComments} from "../../utils/api/commentsService.ts";
 import {Button} from "../../components/reusable/Button.tsx";
 import {toCzechDateFormat} from "../../utils/functions/dateFunctions.ts";
+import {CommentType} from "../../utils/types/article/CommentType.ts";
 
 export const ArticleComments:FC = () => {
     const {id} = useParams();

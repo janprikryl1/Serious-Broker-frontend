@@ -6,10 +6,10 @@ import { useTranslation } from "react-i18next";
 import { ChartOptions } from "./ChartOptions";
 import { PeriodSelector } from "./PeriodSelector";
 import { DateRangeSelector } from "./DateRangeSelector";
-import { CandlestickData, KlineGraphData } from "../../../utils/types/KlineData.ts";
 import { ChartAssetPeriodEnum } from "../../../utils/enums/ChartAssetPeriodEnum.ts";
 import {MAX_RANGES} from "../../../utils/constants";
 import {getBinanceAssetGraphData} from "../../../utils/api/binanceAPIService.ts";
+import {CandlestickData, KlineGraphData} from "../../../utils/types/asset/KlineData.ts";
 
 type Props = {
     width?: number;

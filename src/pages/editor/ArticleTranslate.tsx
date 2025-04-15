@@ -1,6 +1,5 @@
 import {FC, useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
-import {TranslationsOverview} from "../../utils/types/article/TranslationsOverview.ts";
 import {useTranslation} from "react-i18next";
 import {ArticleDetailProps} from "../../utils/types/article/ArticleDetailProps.ts";
 import {editorURLS} from "../../utils/constants";
@@ -8,6 +7,7 @@ import {getTranslations} from "../../utils/api/translationsService.ts";
 import {Button} from "../../components/reusable/Button.tsx";
 import {ArticlesSkeleton} from "../../components/articles/ArticlesSkeleton.tsx";
 import {TranslationCard} from "../../components/editor/articleManagement/articleTranslations/TranslationCard.tsx";
+import {TranslationsOverview} from "../../utils/types/article/translate/TranslationsOverview.ts";
 
 export const ArticleTranslate:FC = () => {
     const {id} = useParams();

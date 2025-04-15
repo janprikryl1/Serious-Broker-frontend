@@ -1,6 +1,6 @@
 import axios from "axios";
 import {backendUrl} from "../../env.ts";
-import {CryptoCurrencyAdminType, CryptoCurrencyNewType} from "../types/CryptoCurrencyType.ts";
+import {CryptoCurrencyAdminType, CryptoCurrencyNewType} from "../types/asset/CryptoCurrencyType.ts";
 
 export const getAllCryptocurrencies = async () => {
     const token = localStorage.getItem("token");

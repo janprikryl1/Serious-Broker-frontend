@@ -12,12 +12,6 @@ export type ArticlePostListResponseResponse = {
     created: string;
 }
 
-
-export type ArticlePostListResponseData = {
-    article_posts: ArticlePost[];
-    article_name: string;
-}
-
 export type ArticlePost = {
     id?: string;
     article_id: string;

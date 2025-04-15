@@ -1,8 +1,8 @@
 import {Dispatch, FC, SetStateAction, useState} from "react";
 import {Form, InputGroup} from "react-bootstrap";
 import {useTranslation} from "react-i18next";
-import {CryptoCurrencyType} from "../../utils/types/CryptoCurrencyType.ts";
 import {Button, ButtonColor} from "./Button.tsx";
+import {CryptoCurrencyType} from "../../utils/types/asset/CryptoCurrencyType.ts";
 
 type Props = {
     cryptocurrencies: CryptoCurrencyType[];

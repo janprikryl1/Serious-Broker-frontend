@@ -1,6 +1,5 @@
 import { FC, useEffect, useState } from "react";
 import {useLocation, useNavigate, useParams} from "react-router-dom";
-import { CryptoCurrencyDetailType } from "../utils/types/CryptoCurrencyType.ts";
 import { useTranslation } from "react-i18next";
 import {coinURL} from "../utils/constants";
 import {getCryptocurrencyById} from "../utils/api/CryptocurrencyService.ts";
@@ -10,6 +9,7 @@ import {SidebarSearch} from "../components/article/SidebarSearch.tsx";
 import {RecentPost} from "../components/article/RecentPost.tsx";
 import {ArticleSkeleton} from "../components/article/ArticleSkeleton.tsx";
 import {Highlight} from "../components/editor/highlights/Highlight.tsx";
+import {CryptoCurrencyDetailType} from "../utils/types/asset/CryptoCurrencyType.ts";
 
 export const CryptoCurrencyDetail: FC = () => {
     const { id } = useParams();

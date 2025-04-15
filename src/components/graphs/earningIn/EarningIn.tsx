@@ -6,9 +6,9 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
 import { useTranslation } from "react-i18next";
-import { CandlestickData } from "../../../utils/types/KlineData.ts";
 import { csCZ } from "@mui/x-date-pickers/locales";
 import {graphColors} from "../../../utils/constants";
+import {CandlestickData} from "../../../utils/types/asset/KlineData.ts";
 
 dayjs.extend(isBetweenPlugin);
 dayjs.locale('cs');

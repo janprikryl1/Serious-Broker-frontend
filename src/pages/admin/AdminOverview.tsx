@@ -1,9 +1,9 @@
 import {FC, useEffect, useState} from 'react';
-import {DashboardDataType} from "../../utils/types/DashboardDataType.ts";
 import {useTranslation} from "react-i18next";
 import {getDashboardData} from "../../utils/api/adminService.ts";
 import {AdminOverviewCard} from "../../components/admin/AdminOverviewCard.tsx";
 import {toCzechDateFormat} from "../../utils/functions/dateFunctions.ts";
+import {DashboardDataType} from "../../utils/types/user/DashboardDataType.ts";
 
 export const AdminOverview: FC = () => {
     const {t} = useTranslation();

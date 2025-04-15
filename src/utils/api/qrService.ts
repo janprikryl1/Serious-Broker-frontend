@@ -1,6 +1,6 @@
 import axios from "axios";
 import {backendUrl} from "../../env.ts";
-import {QRCodeType} from "../types/QRCodeType.ts";
+import {QRCodeType} from "../types/admin/QRCodeType.ts";
 
 export const getQR = async () => {
     const token = localStorage.getItem("token");

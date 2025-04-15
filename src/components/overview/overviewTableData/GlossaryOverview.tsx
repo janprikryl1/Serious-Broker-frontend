@@ -1,7 +1,7 @@
 import {FC, useEffect, useState} from "react";
 import {GlossaryItemOverview} from "../../reusable/GlossaryItemOverview.tsx";
-import {GlossaryType} from "../../../utils/types/GlossaryType.ts";
 import {getGlossaryOverview} from "../../../utils/api/indexDataService.ts";
+import {GlossaryType} from "../../../utils/types/article/GlossaryType.ts";
 
 export const GlossaryOverview:FC = () => {
     const [DYOR, setDyor] = useState<GlossaryType>();

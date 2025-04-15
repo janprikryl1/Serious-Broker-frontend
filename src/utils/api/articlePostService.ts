@@ -1,6 +1,6 @@
 import axios from "axios";
 import {backendUrl} from "../../env.ts";
-import {ArticlePost, ArticlePostListResponse} from "../types/ArticlePostListResponse.ts";
+import {ArticlePost, ArticlePostListResponse} from "../types/article/ArticlePostListResponse.ts";
 
 export const getArticlePosts = async (id: string) => {
     const token = localStorage.getItem("token");

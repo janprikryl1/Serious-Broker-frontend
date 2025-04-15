@@ -1,8 +1,8 @@
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
-import {GlossaryType} from "../../../utils/types/GlossaryType.ts";
 import {TypographyWithPopover} from "../../reusable/TypographyWithPopover.tsx";
 import {glossaryImagesURL} from "../../../utils/constants";
+import {GlossaryType} from "../../../utils/types/article/GlossaryType.ts";
 
 type Props = {
     glossary: GlossaryType;

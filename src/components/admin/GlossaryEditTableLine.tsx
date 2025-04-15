@@ -3,11 +3,11 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faTrash} from "@fortawesome/free-solid-svg-icons";
 import {useTranslation} from "react-i18next";
 import {Link} from "react-router-dom";
-import {GlossaryType} from "../../utils/types/GlossaryType.ts";
 import {deleteGlossary, editGlossary} from "../../utils/api/glossaryService.ts";
 import {glossaryImagesURL} from "../../utils/constants";
 import {Button, ButtonColor} from "../reusable/Button.tsx";
 import {CustomSwal} from "../../utils/functions/customSwal.ts";
+import {GlossaryType} from "../../utils/types/article/GlossaryType.ts";
 
 type Props = {
     glossary: GlossaryType;

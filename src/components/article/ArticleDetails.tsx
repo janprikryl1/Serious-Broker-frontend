@@ -11,10 +11,10 @@ import {ArticleVariant4} from "./articleVariants/ArticleVariant4.tsx";
 import {ArticleLanguagesSelect} from "./ArticleLanguagesSelect.tsx";
 import {ArticleBanner} from "./ArticleBanner.tsx";
 import {ArticleDetailProps} from "../../utils/types/article/ArticleDetailProps.ts";
-import {TranslationsOverview} from "../../utils/types/article/TranslationsOverview.ts";
 import {useUserContext} from "../../utils/providers/providerUser.tsx";
-import {CommentType} from "../../utils/types/CommentType.ts";
 import {toCzechDateFormat} from "../../utils/functions/dateFunctions.ts";
+import {TranslationsOverview} from "../../utils/types/article/translate/TranslationsOverview.ts";
+import {CommentType} from "../../utils/types/article/CommentType.ts";
 
 type Props = {
     article: ArticleDetailProps;

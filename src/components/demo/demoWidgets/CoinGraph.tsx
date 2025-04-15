@@ -1,6 +1,6 @@
 import {Dispatch, FC, SetStateAction} from "react";
 import {ChartComponent} from "../../graphs/asset/ChartComponent.tsx";
-import {CandlestickData} from "../../../utils/types/KlineData.ts";
+import {CandlestickData} from "../../../utils/types/asset/KlineData.ts";
 
 type Props = {
     asset_label: string;

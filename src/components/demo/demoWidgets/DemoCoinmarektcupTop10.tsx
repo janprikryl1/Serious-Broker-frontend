@@ -6,7 +6,7 @@ import {useThemeContext} from "../../../utils/providers/ThemeProvider.tsx";
 import {ConimarketCupCoinsListType} from "../../../utils/types/demos/ConimarketCupCoinsListType.tsx";
 import {getTop10CoinmarketcupCoins} from "../../../utils/api/demosService.ts";
 import {getBinanceAssetGraphData} from "../../../utils/api/binanceAPIService.ts";
-import {CandlestickData} from "../../../utils/types/KlineData.ts";
+import {CandlestickData} from "../../../utils/types/asset/KlineData.ts";
 const ReactApexChart = lazy(() => import("react-apexcharts"));
 
 const width = 1200;

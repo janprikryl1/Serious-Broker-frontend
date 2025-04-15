@@ -1,11 +1,11 @@
 import { FC, useEffect, useState, ChangeEvent, FormEvent } from "react";
-import { GlossaryType } from "../../utils/types/GlossaryType.ts";
 import { useTranslation } from "react-i18next";
 import {addGlossary, getGlossary} from "../../utils/api/glossaryService.ts";
 import {Button} from "../../components/reusable/Button.tsx";
 import {GlossaryEditTableLine} from "../../components/admin/GlossaryEditTableLine.tsx";
 import {TableLogSkeleton} from "../../components/admin/TableLogSkeleton.tsx";
 import {CustomSwal} from "../../utils/functions/customSwal.ts";
+import {GlossaryType} from "../../utils/types/article/GlossaryType.ts";
 
 export const AdminGlossaryManagement: FC = () => {
     const { t } = useTranslation();

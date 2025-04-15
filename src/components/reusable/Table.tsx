@@ -1,5 +1,5 @@
 import { FC, ReactNode } from "react";
-import {MostProfitable} from "../../utils/types/indexPage/IndexDataStructure.ts";
+import {MostProfitable} from "../../utils/types/overviewTypes/IndexDataStructure.ts";
 
 type TableProps<T> = {
     data: T[];

@@ -5,8 +5,8 @@ import {FaRegTrashAlt} from "react-icons/fa";
 import {useTranslation} from "react-i18next";
 import {deleteTranslation} from "../../../../utils/api/translateService.ts";
 import {editorURLS} from "../../../../utils/constants";
-import {TranslationsOverview} from "../../../../utils/types/article/TranslationsOverview.ts";
 import {CustomSwal} from "../../../../utils/functions/customSwal.ts";
+import {TranslationsOverview} from "../../../../utils/types/article/translate/TranslationsOverview.ts";
 
 type Props = {
     articleId: string;

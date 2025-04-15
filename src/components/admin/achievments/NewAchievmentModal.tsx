@@ -8,10 +8,10 @@ import {Input} from "@mui/joy";
 import {Transition} from "../../reusable/Transition.tsx";
 import {PaperComponent} from "../../reusable/PaperComponent.tsx";
 import {UserType} from "../../../utils/types/user/userTypes.ts";
-import {AchievementType} from "../../../utils/types/AchievementType.ts";
 import {adminAddAchievement} from "../../../utils/api/achievementService.ts";
 import {Button, ButtonColor} from "../../reusable/Button.tsx";
 import {CustomSwal} from "../../../utils/functions/customSwal.ts";
+import {AchievementType} from "../../../utils/types/user/AchievementType.ts";
 
 type Props = {
     selectedUser?: UserType;

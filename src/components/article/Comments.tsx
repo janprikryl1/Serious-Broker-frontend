@@ -1,8 +1,8 @@
 import {Dispatch, FC, SetStateAction, useEffect} from "react";
 import {useTranslation} from "react-i18next";
-import {CommentType} from "../../utils/types/CommentType.ts";
 import {getArticleComments} from "../../utils/api/commentsService.ts";
 import {toCzechDateFormat} from "../../utils/functions/dateFunctions.ts";
+import {CommentType} from "../../utils/types/article/CommentType.ts";
 
 type Props = {
     articleId: number;

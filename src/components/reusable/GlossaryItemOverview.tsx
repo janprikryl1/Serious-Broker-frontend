@@ -1,9 +1,9 @@
 import {FC} from "react";
 import {Link} from "react-router-dom";
 import {useTranslation} from "react-i18next";
-import {GlossaryType} from "../../utils/types/GlossaryType.ts";
 import {TableTemplate} from "./TableTemplate.tsx";
 import {glossaryImagesURL, routes} from "../../utils/constants";
+import {GlossaryType} from "../../utils/types/article/GlossaryType.ts";
 
 type Props = {
     data: GlossaryType;

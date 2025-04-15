@@ -1,4 +1,4 @@
-import {TableLogType} from "./TableLogType.ts";
+import {TableLogType} from "../admin/TableLogType.ts";
 
 export type DashboardDataType = {
     article_count: number,

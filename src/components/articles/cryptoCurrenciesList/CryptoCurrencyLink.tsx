@@ -1,7 +1,7 @@
 import {FC} from "react";
 import {Link} from "react-router-dom";
-import {CryptoCurrencyType} from "../../../utils/types/CryptoCurrencyType.ts";
 import {routes} from "../../../utils/constants";
+import {CryptoCurrencyType} from "../../../utils/types/asset/CryptoCurrencyType.ts";
 
 type Props = {
     cryptocurrency: CryptoCurrencyType;

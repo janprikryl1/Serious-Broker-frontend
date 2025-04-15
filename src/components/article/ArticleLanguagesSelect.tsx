@@ -1,6 +1,6 @@
 import {ChangeEvent, Dispatch, FC, SetStateAction} from "react";
 import {useTranslation} from "react-i18next";
-import {TranslationsOverview} from "../../utils/types/article/TranslationsOverview.ts";
+import {TranslationsOverview} from "../../utils/types/article/translate/TranslationsOverview.ts";
 
 type Props = {
     translations: TranslationsOverview[];

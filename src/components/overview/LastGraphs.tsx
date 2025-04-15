@@ -2,7 +2,7 @@ import { ChangeEvent, FC, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { v4 as uuidv4 } from 'uuid';
 import { LastGraphComponent } from "./LastGraphComponent.tsx";
-import {LastMostProfitableCoins} from "../../utils/types/indexPage/LastMostProfitableCoins.ts";
+import {LastMostProfitableCoins} from "../../utils/types/overviewTypes/LastMostProfitableCoins.ts";
 import {IndexLastGraphsOptions} from "../../utils/options/IndexLastGraphsOptions.ts";
 
 type Props = {

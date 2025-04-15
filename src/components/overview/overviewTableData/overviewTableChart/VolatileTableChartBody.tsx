@@ -1,7 +1,7 @@
 import {FC} from "react";
 import {OverviewTableChart} from "./OverviewTableChart.tsx";
 import Skeleton from "react-loading-skeleton";
-import {MostVolatileData} from "../../../../utils/types/indexPage/IndexDataStructure.ts";
+import {MostVolatileData} from "../../../../utils/types/overviewTypes/IndexDataStructure.ts";
 import {coinURL, routes} from "../../../../utils/constants";
 import {getFiatCoin} from "../../../../utils/constants/pairIcons.ts";
 import {Link} from "react-router-dom";

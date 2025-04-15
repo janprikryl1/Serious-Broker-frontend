@@ -1,11 +1,11 @@
 import { FC, useEffect, useState } from "react";
 import glossaryOfTermsImage from "../utils/icons/glossaryOfTerms/glossary_of_terms.webp";
 import { useTranslation } from "react-i18next";
-import { GlossaryType } from "../utils/types/GlossaryType.ts";
 import {getGlossary} from "../utils/api/glossaryService.ts";
 import {TitleHeader} from "../components/about/TitleHeader.tsx";
 import {GlossaryItem} from "../components/articles/dictionary/GlossaryItem.tsx";
 import {Faq} from "../components/articles/dictionary/Faq.tsx";
+import {GlossaryType} from "../utils/types/article/GlossaryType.ts";
 
 export const Glossary: FC = () => {
     const { t } = useTranslation();

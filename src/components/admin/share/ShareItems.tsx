@@ -2,9 +2,9 @@ import {FC} from "react";
 import {ShareItemCard} from "./ShareItemCard.tsx";
 import {useTranslation} from "react-i18next";
 import {Link, useParams} from "react-router-dom";
-import {ArticlePostListResponseResponse} from "../../../utils/types/ArticlePostListResponse.ts";
 import {editorURLS} from "../../../utils/constants";
 import {Button} from "../../reusable/Button.tsx";
+import {ArticlePostListResponseResponse} from "../../../utils/types/article/ArticlePostListResponse.ts";
 
 type Props = {
     articlePosts: ArticlePostListResponseResponse[];

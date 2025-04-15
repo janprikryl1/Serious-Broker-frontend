@@ -2,7 +2,6 @@ import { FC, useEffect, useState } from "react";
 import { ArticleDetailProps } from "../utils/types/article/ArticleDetailProps.ts";
 import {useParams, useNavigate, useLocation} from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { TranslationsOverview } from "../utils/types/article/TranslationsOverview.ts";
 import {routes} from "../utils/constants";
 import {getArticleDetails} from "../utils/api/articleService.ts";
 import {getTranslatedArticle} from "../utils/api/translateService.ts";
@@ -13,6 +12,7 @@ import {SidebarSearch} from "../components/article/SidebarSearch.tsx";
 import {RecentPost} from "../components/article/RecentPost.tsx";
 import {Highlight} from "../components/editor/highlights/Highlight.tsx";
 import {CustomSwal} from "../utils/functions/customSwal.ts";
+import {TranslationsOverview} from "../utils/types/article/translate/TranslationsOverview.ts";
 
 export const Article: FC = () => {
     const { id, language } = useParams();

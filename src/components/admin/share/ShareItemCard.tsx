@@ -1,8 +1,8 @@
 import {FC} from "react";
 import {Link} from "react-router-dom";
-import {ArticlePostListResponseResponse} from "../../../utils/types/ArticlePostListResponse.ts";
 import {editorURLS} from "../../../utils/constants";
 import {toCzechDateFormat} from "../../../utils/functions/dateFunctions.ts";
+import {ArticlePostListResponseResponse} from "../../../utils/types/article/ArticlePostListResponse.ts";
 
 type Props = {
     articlePost: ArticlePostListResponseResponse;

@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { OverviewTableChart } from "./overviewTableChart/OverviewTableChart.tsx";
 import { GainSeasonTh } from "./GainSeasonTh.tsx";
 import {useIndexDataContext} from "../../../utils/providers/IndexDataProvider.tsx";
-import {AssetProfitData} from "../../../utils/types/indexPage/IndexDataStructure.ts";
+import {AssetProfitData} from "../../../utils/types/overviewTypes/IndexDataStructure.ts";
 import {getMostProfitableSelectedPeriod} from "../../../utils/api/indexDataService.ts";
 import {coinURL} from "../../../utils/constants";
 import {IndexSeasonExtended} from "../../../utils/enums/IndexSeasonEnum.ts";

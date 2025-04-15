@@ -1,11 +1,11 @@
 import {FC, useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 import {useTranslation} from "react-i18next";
-import {ArticlePostListResponseResponse} from "../../utils/types/ArticlePostListResponse.ts";
 import {getArticlePosts} from "../../utils/api/articlePostService.ts";
 import {ShareLink} from "../../components/admin/share/ShareLink.tsx";
 import {ShareItems} from "../../components/admin/share/ShareItems.tsx";
 import {ShareSkeleton} from "../../components/admin/share/ShareSkeleton.tsx";
+import {ArticlePostListResponseResponse} from "../../utils/types/article/ArticlePostListResponse.ts";
 
 export const ArticleShare:FC = () => {
     const {id} = useParams();

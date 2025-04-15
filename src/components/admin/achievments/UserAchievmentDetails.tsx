@@ -4,10 +4,10 @@ import {useTranslation} from "react-i18next";
 import {NewAchievmentModal} from "./NewAchievmentModal.tsx";
 import {TimeLineComponent} from "../../reusable/TimeLineComponent.tsx";
 import {UserType} from "../../../utils/types/user/userTypes.ts";
-import {AchievementType} from "../../../utils/types/AchievementType.ts";
 import {adminUserAchievements} from "../../../utils/api/achievementService.ts";
 import {Button} from "../../reusable/Button.tsx";
 import {CustomSwal} from "../../../utils/functions/customSwal.ts";
+import {AchievementType} from "../../../utils/types/user/AchievementType.ts";
 
 type Props = {
     selectedUser?: UserType;

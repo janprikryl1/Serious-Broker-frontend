@@ -3,9 +3,9 @@ import {ArticleDetails} from "../../article/ArticleDetails.tsx";
 import {ArticleSkeleton} from "../../article/ArticleSkeleton.tsx";
 import {useTranslation} from "react-i18next";
 import {ArticleDetailProps} from "../../../utils/types/article/ArticleDetailProps.ts";
-import {TranslationsOverview} from "../../../utils/types/article/TranslationsOverview.ts";
 import {getArticleDetails} from "../../../utils/api/articleService.ts";
 import {CustomSwal} from "../../../utils/functions/customSwal.ts";
+import {TranslationsOverview} from "../../../utils/types/article/translate/TranslationsOverview.ts";
 
 type Props = {
     articleId: string;
