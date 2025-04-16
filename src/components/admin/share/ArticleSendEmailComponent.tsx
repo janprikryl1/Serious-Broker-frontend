@@ -57,8 +57,7 @@ export const ArticleSendEmailComponent: FC<Props> = ({ url }) => {
                 onChange={handleTextChange}
             />
             <Button
-                className="mt-3"
-                style={{marginRight: 10}}
+                className="mt-3 me-2"
                 onClick={sendEmails}
             >
                 <MdOutlineEmail /> {t("Send")}

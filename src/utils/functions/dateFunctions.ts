@@ -34,3 +34,17 @@ export const convertUTCToLocalTime = (utcHour: number) => {
 export const getYear = (yearNumber: number) => {
     return 2024 - yearNumber;
 }
+
+export const formatDateForDisplay = (isoDate: string): string => {
+    if (!isoDate || !isoDate.includes('-')) return isoDate;
+    try {
+        const date = new Date(isoDate + 'T00:00:00');
+        const day = String(date.getDate()).padStart(2, '0');
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const year = date.getFullYear();
+        return `${day}. ${month}. ${year}`;
+    } catch (e) {
+        console.error("Error formatting date:", e);
+        return isoDate;
+    }
+};

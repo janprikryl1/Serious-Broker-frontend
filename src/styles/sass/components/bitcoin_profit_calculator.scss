@@ -1,0 +1,141 @@
+.bitcoin-profit-calculator-container {
+  background-color: #4f4c48;
+  overflow-x: hidden;
+}
+
+.bitcoin-profit-calculator-row {
+  background-color: #6a6661;
+}
+
+.bitcoin-profit-calculator-calculate-section {
+  background-color: #706b64;
+}
+
+.bitcoin-profit-calculator-amount-input {
+  background-color: #fff4e5;
+  border: none;
+  color: #3c3936;
+  margin-right: 20px;
+  border-radius: 0;
+  font-size: 1.2rem;
+  max-width: 60vw;
+}
+
+.bitcoin-profit-calculator-currency-select {
+  background-color: #fff4e5;
+  border: none;
+  color: #3c3936;
+  max-width: 100px;
+  border-radius: 0;
+  font-size: 1.2rem;
+}
+
+.bitcoin-profit-calculator-purchase-date-input {
+  background-color: #fff4e5;
+  border: none;
+  color: black;
+  border-radius: 0;
+}
+
+.bitcoin-profit-calculator-submit-button {
+  background-color: #e5d1a2;
+  border-color: #e5d1a2;
+  color: black;
+  border-radius: 0;
+}
+
+.bitcoin-profit-calculator-result-text {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+.bitcoin-profit-calculator-amount-description {
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+  color: #d1cdc7;
+}
+
+.bitcoin-profit-calculator-info-section {
+  background-color: #5b5752;
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+.bitcoin-profit-calculator-info-list {
+  padding-left: 20px;
+  list-style: disc;
+  margin-bottom: 20px;
+  
+  strong {
+    color: #e5e1d8;
+  }
+}
+
+.bitcoin-profit-calculator-info-small {
+  font-size: 0.85rem;
+  opacity: 0.7;
+}
+
+.p18 {
+  font-size: 18px;
+}
+
+.bitcoin-profit-calculator-amount-input,
+.bitcoin-profit-calculator-currency-select {
+  font-size: 1.2rem;
+  background-color: #fff4e5;
+  border: none;
+  color: #3c3936;
+  border-radius: 0;
+}
+
+@media (max-width: 768px) {
+  .bitcoin-profit-calculator-amount-input {
+    max-width: 100%;
+    font-size: 1rem;
+    margin-right: 0;
+  }
+
+  .bitcoin-profit-calculator-currency-select {
+    max-width: 100%;
+    font-size: 1rem;
+    margin-top: 0.5rem;
+  }
+
+  .bitcoin-profit-calculator-submit-button {
+    width: 100%;
+  }
+
+  .bitcoin-profit-calculator-row {
+    flex-direction: column;
+  }
+
+  .bitcoin-profit-calculator-info-section {
+    padding: 20px;
+  }
+
+  .bitcoin-profit-calculator-container {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
+
+.input-group {
+  flex-wrap: wrap;
+
+  .form-control,
+  .form-select {
+    height: 45px;
+    font-size: 1rem;
+    border-radius: 0;
+  }
+
+  @media (max-width: 768px) {
+    .form-control,
+    .form-select {
+      width: 100%;
+      margin-bottom: 0.5rem;
+    }
+  }
+}

@@ -17,7 +17,7 @@ export const ArticlePostSend:FC = () => {
         <>
             {postId === undefined ? (
                 <>
-                    <Button style={{marginRight:20}} onClick={uploadPost}>{t("Publish")}</Button>
+                    <Button className="me-2" onClick={uploadPost}>{t("Publish")}</Button>
                     <Button color={ButtonColor.red} onClick={goBack}>{t("Back")}</Button>
                 </>
             ) : (

@@ -120,9 +120,7 @@ export const GlossaryEditTableLine: FC<Props> = ({ glossary, onUpdate, onDelete 
                 {glossary.image && !localImage && (
                     <Link to={`${glossaryImagesURL}${glossary.image}`}>{glossary.image}</Link>
                 )}
-                {localImage && (
-                    <div style={{ marginTop: "10px" }}>{localImage.name}</div>
-                )}
+                {localImage && localImage.name}
             </td>
             <td>
                 <Button color={ButtonColor.red} onClick={handleDelete}>

@@ -5,6 +5,7 @@ import { Form } from "react-bootstrap";
 import {useDemoContext} from "../../../utils/providers/DemoProvider.tsx";
 import {widgets, WidgetsType} from "../../../utils/types/demos/demoType.ts";
 import {Button, ButtonColor} from "../../reusable/Button.tsx";
+import "../../../styles/sass/components/demo.scss";
 
 export const DemoWidgetsEdit: FC = () => {
     const { t } = useTranslation();
@@ -50,8 +51,7 @@ export const DemoWidgetsEdit: FC = () => {
                 <div key={index} className="mb-3">
                     <div className="d-flex align-items-center mb-2">
                         <select
-                            className="form-select me-2"
-                            style={{height:50}}
+                            className="form-select me-2 demo-input-height"
                             value={widget.type}
                             onChange={(e) =>
                                 handleWidgetChange(index, {
@@ -68,8 +68,7 @@ export const DemoWidgetsEdit: FC = () => {
                         </select>
                         <input
                             type="text"
-                            className="form-control me-2"
-                            style={{height:50}}
+                            className="form-control me-2 demo-input-height"
                             value={widget.propertyId}
                             onChange={(e) =>
                                 handleWidgetChange(index, {
@@ -118,8 +117,7 @@ export const DemoWidgetsEdit: FC = () => {
             <h4>{t("Add New Widget")}</h4>
             <div className="d-flex align-items-center mb-3">
                 <select
-                    className="form-select me-2"
-                    style={{height:50}}
+                    className="form-select me-2 demo-input-height"
                     value={newWidget.type}
                     onChange={(e) =>
                         setNewWidget({
@@ -136,14 +134,13 @@ export const DemoWidgetsEdit: FC = () => {
                 </select>
                 <input
                     type="text"
-                    className="form-control me-2"
-                    style={{height:50}}
+                    className="form-control me-2 demo-input-height"
                     value={newWidget.propertyId}
                     onChange={(e) =>
                         setNewWidget({ ...newWidget, propertyId: e.target.value })
                     }
                 />
-                <Button onClick={handleAddWidget} style={{height:50}}>
+                <Button onClick={handleAddWidget} className="demo-input-height">
                     {t("Add Widget")}
                 </Button>
             </div>

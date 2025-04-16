@@ -11,12 +11,6 @@
             padding: 100px;
         }
     }
-    &__thumb{
-        img{
-            border-radius: 16px;
-            @extend %mb-30;
-        }
-    }
 
     &__content {
         h2 {

@@ -34,7 +34,7 @@ export const AboutUs: FC = () => {
             <p>{t("Investing can often feel overwhelming, especially for those with little or no experience. Our mission is to make the world of investments more accessible and easier to understand, even for beginners.")}</p>
           </div>
           <h2 className="index-title mb-4">{t("Our team")}</h2>
-          <div style={{display: "flex", gap: "40px", flexWrap: "wrap", justifyContent: "center"}}>
+          <div className="about-team-member">
             <TeamMemberCard name="Ing. Radoslav Fasuga, Ph.D." position="Coordinator"
                             description="10+ years of experience" image={radoslavFasuga}/>
             <TeamMemberCard name="Jan Přikryl" position="Developer"/>

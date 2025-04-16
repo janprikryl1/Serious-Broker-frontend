@@ -15,7 +15,7 @@ export const VolatileTableChartBody:FC<Props> = ({coin, index}) => {
     return (
         <tr>
             <td>{index + 1}</td>
-            <td style={{textAlign: "left"}}>
+            <td className="text-left">
                 <img src={`${coinURL}${coin.photo}`} alt={`Coin image: ${coin.asset_label}`} width={30}/>
                 <img style={{marginLeft:-10}} src={getFiatCoin(coin.symbol_name)} alt={`Fiat coin image: ${coin.asset_label}`} width={30}/>
                 <strong>{coin.asset_label}</strong>

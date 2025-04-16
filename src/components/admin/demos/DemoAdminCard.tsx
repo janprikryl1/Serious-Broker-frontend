@@ -43,7 +43,7 @@ export const DemoAdminCard:FC<Props> = ({data, setDemos}) => {
                         <Link to={`/demo/${data.id}`} className="link-underline-none">{data.name}</Link>
                     </h5>
 
-                    <p className="mb-15" style={{height: 100}}>{data.description}</p>
+                    <p className="mb-15">{data.description}</p>
 
                     <div className="blog__writer">
                         <div className="blog__writer-designation d-flex align-items-center">

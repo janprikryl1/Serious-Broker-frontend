@@ -8,6 +8,7 @@ import {Button, ButtonColor} from "../../components/reusable/Button.tsx";
 import {ArticlesSkeleton} from "../../components/articles/ArticlesSkeleton.tsx";
 import {ArticleAdminCard} from "../../components/editor/articleManagement/ArticleAdminCard.tsx";
 import {CustomSwal} from "../../utils/functions/customSwal.ts";
+import "../../styles/sass/components/articles.scss";
 
 export const ArticleManagement: FC = () => {
     const { t } = useTranslation();
@@ -77,8 +78,8 @@ export const ArticleManagement: FC = () => {
                         <Link to={editorURLS.articleNew}>
                             <Button style={{ fontSize: 20 }}>{t("New article")}</Button>
                         </Link>
-                        <Link to={editorURLS.index}><Button color={ButtonColor.gray} style={{ fontSize: 20, marginLeft:10 }}>{t("Help")}</Button></Link>
-                        <Link to={editorURLS.highlights}><Button color={ButtonColor.gray} style={{ fontSize: 20, marginLeft:10 }}>{t("Highlights")}</Button></Link>
+                        <Link to={editorURLS.index}><Button color={ButtonColor.gray} className="article-management-link">{t("Help")}</Button></Link>
+                        <Link to={editorURLS.highlights}><Button color={ButtonColor.gray} className="article-management-link">{t("Highlights")}</Button></Link>
                         <div className="padding-top padding-bottom">
                             <div className="blog__wrapper">
                                 <div className="row g-4">

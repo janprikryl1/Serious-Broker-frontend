@@ -25,7 +25,7 @@ export const NavbarDesktopMenu: FC = () => {
                             );
 
                             return (
-                                <li className="me-3" style={{marginLeft: "20px"}} key={key}>
+                                <li className="me-3 ml-5" key={key}>
                                     <NavDropdown
                                         title={t(item.title)}
                                         id={`nav-dropdown-${key}`}

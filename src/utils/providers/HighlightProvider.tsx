@@ -2,9 +2,9 @@ import {createContext, ReactNode, useContext, useEffect, useState} from "react";
 import {useTranslation} from "react-i18next";
 import {useParams} from "react-router-dom";
 import {HighlightType} from "../types/highlights/HighlightType.ts";
-import {defaultHighlight} from "../constants";
 import {createHighlight, getHighlightById, updateExistingHighlight} from "../api/highlightsService.ts";
 import {CustomSwal} from "../functions/customSwal.ts";
+import {defaultHighlight} from "../constants/defaultContent.ts";
 
 type Props = {
     children: ReactNode;

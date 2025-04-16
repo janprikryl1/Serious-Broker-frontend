@@ -4,10 +4,10 @@ import {CryptoCurrencyInput} from "./CryptoCurrencyInput.tsx";
 import Form from "react-bootstrap/Form";
 import {InputGroup} from "react-bootstrap";
 import {cryptoCurrencyAdd} from "../../../utils/api/adminCryptocurrencyService.ts";
-import {defaultNewCurrency} from "../../../utils/constants";
 import {Button} from "../../reusable/Button.tsx";
 import {CustomSwal} from "../../../utils/functions/customSwal.ts";
 import {CryptoCurrencyNewType} from "../../../utils/types/asset/CryptoCurrencyType.ts";
+import {defaultNewCurrency} from "../../../utils/constants/defaultContent.ts";
 
 export const AddCryptoCurrency:FC = () => {
     const {t} = useTranslation();

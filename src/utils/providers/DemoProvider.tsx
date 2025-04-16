@@ -2,9 +2,9 @@ import {createContext, ReactNode, useContext, useState, useEffect} from "react";
 import {useTranslation} from "react-i18next";
 import {useParams} from "react-router-dom";
 import {DemoType} from "../types/demos/demoType.ts";
-import {defaultNewDemo} from "../constants";
 import {getDemoById, saveDemo} from "../api/demosService.ts";
 import {CustomSwal} from "../functions/customSwal.ts";
+import {defaultNewDemo} from "../constants/defaultContent.ts";
 
 type Props = {
     children: ReactNode;

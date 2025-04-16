@@ -22,7 +22,6 @@
             @extend %p-25,
             %d-inline-flex;
             border-radius: 99px;
-            // background-color: $bg-color-2;
             background-color: $wh-color;
             box-shadow: 0px 8px 24px rgba(12, 52, 91, 0.04);
         }
@@ -89,52 +88,6 @@
 
                     &-thumb {
                         background-color: $wh-color;
-                    }
-
-                    &-content {
-                        h5 {
-                            a {
-                                color: $title-color;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-        &--style3 {
-            .service__item {
-
-                &-inner {
-                    @include add-prefix(transition, $transition);
-                    & {
-                        background-color: $service-item-bg-color;
-                    }
-                }
-
-                &-thumb {
-                    @include add-prefix(transition, $transition);
-                    & {
-                        background-color: $bg-color-10;
-                    }
-                }
-
-                &-content {
-                    h5 {
-                        @extend %text-semibold;
-                    }
-                }
-            }
-
-            &:hover {
-                .service__item {
-                    &-inner {
-                        transform: translateY(-5px);
-                        background-color: $bg-color-10;
-                    }
-
-                    &-thumb {
-                        background-color: $thm-wh-color;
                     }
 
                     &-content {

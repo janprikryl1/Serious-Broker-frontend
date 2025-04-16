@@ -15,7 +15,7 @@ export const CryptoCurrencyFileUpload: FC<Props> = ({ handleFileChange, handleSu
     const { t } = useTranslation();
 
     return (
-        <Form.Group style={{ display: 'flex', alignItems: 'center', gap: '8px', marginTop: 5 }}>
+        <Form.Group className="crypto-currency-upload-file-section">
             <Form.Control
                 type="file"
                 accept="image/*"

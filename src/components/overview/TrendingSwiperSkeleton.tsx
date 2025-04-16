@@ -3,6 +3,7 @@ import {Swiper, SwiperSlide} from "swiper/react";
 import {Navigation} from "swiper/modules";
 import Skeleton from "react-loading-skeleton";
 import '../../styles/css/swiper-bundle.min.css';
+import "../../styles/sass/components/recommendation-details-skeleton.scss";
 
 export const TrendingSwiperSkeleton:FC = () => {
     return (
@@ -25,7 +26,7 @@ export const TrendingSwiperSkeleton:FC = () => {
                                     <Skeleton circle={true} height={50} width={50}/>
                                 </div>
                                 <div className="col-md-8">
-                                    <Skeleton height={20} width={80} style={{marginTop: "10px"}}/>
+                                    <Skeleton height={20} width={80} className="recommendation-details-skeleton-mb-small"/>
                                     <Skeleton height={15} width={60}/>
                                 </div>
                             </div>

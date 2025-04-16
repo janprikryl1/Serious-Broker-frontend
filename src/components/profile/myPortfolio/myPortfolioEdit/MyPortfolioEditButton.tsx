@@ -7,6 +7,6 @@ export const MyPortfolioEditButton:FC = () => {
     const {id} = useParams();
     
     return (
-        <Button type="link" to={`/profile/edit_my_portfolio/${id}`} className="btn btn-outline-warning" style={{marginLeft: 10}}><CiEdit /></Button>
+        <Button type="link" to={`/profile/edit_my_portfolio/${id}`} className="btn btn-outline-warning"><CiEdit /></Button>
     )
 }

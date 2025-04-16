@@ -10,7 +10,7 @@ export const NewTranslationContent:FC = () => {
     const {template} = useArticleTranslate();
 
     return (
-        <div style={{marginBottom: 10}}>
+        <div className="mt-3">
             {template === 0 ? <NewTranslationVariant0 />
             : template === 1 ? <NewTranslationVariant1 />
             : template === 2 ? <NewTranslationVariant2 />

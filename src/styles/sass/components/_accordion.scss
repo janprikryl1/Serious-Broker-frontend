@@ -6,7 +6,6 @@
             box-shadow: none;
         }
 
-
         &::after {
             width: 30px;
             height: 30px;
@@ -99,7 +98,6 @@
             &__button {
                 @extend %py-20;
                 background-color: $bg-color-3;
-                // modify bootstrap
                 color: $title-color;
 
                 &:not(.collapsed) {
@@ -116,121 +114,6 @@
                 border-bottom: none;
                 &:focus {
                     outline: none;
-                }
-            }
-        }
-    }
-
-    &--style2 {
-        .accordion {
-            &__item {
-                border-radius: 16px;
-                background-color: $faq-bg-color;
-                box-shadow: 0px 16px 48px 0px rgba(6, 35, 63, 0.03), 0px -16px 48px 0px rgba(6, 35, 63, 0.03);
-
-                @include breakpoint(sm) {
-                    margin-block-end: 5px;
-                }
-
-                @include breakpoint(xl) {
-                    margin-block-end: 10px;
-                }
-            }
-
-            &__button {
-                @extend %p-25;
-                background-color: $bg-color-5;
-                color: $secondary-color;
-
-                &.collapsed {
-                    color: $title-color;
-                }
-
-                &:not(.collapsed) {
-                    padding-block-end: 8px;
-                }
-
-                &-plusicon {
-                    &::before {
-                        @include add-prefix(transform, translateY(-50%));
-                        & {
-                            content: "";
-                            width: 14px;
-                            height: 2px;
-                            top: 50%;
-                            left: 5px;
-                            background-color: $secondary-color;
-                        }
-                    }
-                }
-            }
-
-            &__body {
-                @extend %px-25,
-                %pb-25;
-                background-color: $bg-color-5;
-            }
-        }
-    }
-
-    &--style3 {
-        [class^="col"] {
-            &:not(:last-child) {
-                .accordion__item {
-                    border-bottom: 1px solid $border-color-10;
-                }
-            }
-        }
-
-        .accordion {
-            &__item {
-                border-radius: 0 !important;
-            }
-
-            &__button {
-                @extend %py-20,
-                %px-20;
-                background-color: $bg-color-3;
-                border-top-right-radius: 4px;
-                border-top-left-radius: 4px;
-                color: $title-color;
-                
-                @include breakpoint(xl) {
-                    padding-inline: 24px;
-                }
-
-                &:not(.collapsed) {
-                    color: $thm-title-color;
-                    background-color: $bg-color-10;
-                    padding-block-end: 8px;
-                }
-
-                &--style2 {
-                    background-color: $tertiary-color3;
-                }
-            }
-
-            &__header {
-                border-bottom: none;
-
-                &:focus {
-                    outline: none;
-                }
-            }
-
-            &__body {
-                @extend %px-20;
-                border-bottom: 1px solid transparent;
-                background-color: $bg-color-10;
-                border-bottom-left-radius: 4px;
-                border-bottom-right-radius: 4px;
-
-                @include breakpoint(xl) {
-                    padding-inline: 24px;
-                }
-
-                p {
-                    color: $thm-title-color;
                 }
             }
         }

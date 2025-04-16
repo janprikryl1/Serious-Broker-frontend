@@ -32,7 +32,7 @@ export const TranslateAddTaskButton:FC = () => {
 
     return (
         <div className="row">
-            <div className="col-sm-16" style={{textAlign: "center"}}>
+            <div className="col-sm-16 text-center">
                 <Button onClick={handleAddTask}>
                     +
                 </Button>

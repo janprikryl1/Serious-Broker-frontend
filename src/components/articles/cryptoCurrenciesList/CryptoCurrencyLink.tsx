@@ -9,7 +9,7 @@ type Props = {
 
 export const CryptoCurrencyLink:FC<Props> = ({cryptocurrency}) => {
     return (
-        <div className="blog__writer" style={{marginTop: 50}}>
+        <div className="blog__writer mt-5">
             <div className="blog__writer-designation">
                 <Link to={`${routes.cryptocurrencyDetailURL}${cryptocurrency.id}`} className="link-underline-none">
                     {cryptocurrency.name}

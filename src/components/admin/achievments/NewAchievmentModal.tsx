@@ -12,6 +12,7 @@ import {adminAddAchievement} from "../../../utils/api/achievementService.ts";
 import {Button, ButtonColor} from "../../reusable/Button.tsx";
 import {CustomSwal} from "../../../utils/functions/customSwal.ts";
 import {AchievementType} from "../../../utils/types/user/AchievementType.ts";
+import "../../../styles/sass/components/achievment.scss";
 
 type Props = {
     selectedUser?: UserType;
@@ -54,11 +55,11 @@ export const NewAchievmentModal: FC<Props> = ({ selectedUser, setAchievements, o
             aria-describedby="alert-dialog-slide-description"
             PaperComponent={PaperComponent}
         >
-            <DialogTitle style={{ cursor: "move", color: "white", fontSize:40 }} id="draggable-dialog-title">
+            <DialogTitle className="new-achievement-dialog-title" id="draggable-dialog-title">
                 {t("Add new achievement")}
             </DialogTitle>
             <DialogContent>
-                <p style={{ color: "white" }} id="alert-dialog-slide-description">
+                <p className="new-achievement-dialog-text" id="alert-dialog-slide-description">
                     {t("Text for new achievement")}
                 </p>
                 <Input

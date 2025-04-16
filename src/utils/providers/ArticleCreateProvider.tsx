@@ -6,8 +6,8 @@ import {ContentType} from "../types/article/ContentType.ts";
 import {useParams} from "react-router-dom";
 import {ArticleUpdateType} from "../types/article/ArticleUpdateType.ts";
 import {createArticle, getArticleByIdAdmin, updateArticle} from "../api/articleService.ts";
-import {defaultContent, defaultSubjects} from "../constants";
 import {CustomSwal} from "../functions/customSwal.ts";
+import {defaultContent, defaultSubjects} from "../constants/defaultContent.ts";
 
 type Props = {
     children: ReactNode;

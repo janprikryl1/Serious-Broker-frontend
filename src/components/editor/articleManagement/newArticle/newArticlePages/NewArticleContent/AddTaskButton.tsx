@@ -32,8 +32,8 @@ export const AddTaskButton:FC = () => {
     
     return (
         <div className="row">
-            <div className="col-sm-16" style={{textAlign: "center"}}>
-                <Button style={{fontSize:15, fontWeight:"bold"}} onClick={handleAddTask}>
+            <div className="col-sm-16 text-center text-bold">
+                <Button style={{fontSize:15}} onClick={handleAddTask}>
                     +
                 </Button>
             </div>

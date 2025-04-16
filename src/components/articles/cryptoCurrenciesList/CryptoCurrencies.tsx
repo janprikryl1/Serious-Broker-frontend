@@ -2,10 +2,10 @@ import { FC, useEffect, useState, useRef, useCallback } from "react";
 import { CryptoCurrencyLink } from "./CryptoCurrencyLink.tsx";
 import { CryptoCurrenciesSkeleton } from "./CryptoCurrenciesSkeleton.tsx";
 import { useTranslation } from "react-i18next";
-import { Col, Row } from "react-bootstrap";
 import {getAllCryptocurrencies, getSearchCryptocurrencies} from "../../../utils/api/CryptocurrencyService.ts";
 import {Button, ButtonColor} from "../../reusable/Button.tsx";
 import {CryptoCurrencyType} from "../../../utils/types/asset/CryptoCurrencyType.ts";
+import "../../../styles/sass/components/crypto_currencies.scss";
 
 const PAGE_SIZE = 50;
 
@@ -52,7 +52,6 @@ export const CryptoCurrencies: FC = () => {
 
     useEffect(() => {
         if (!loaderRef.current) return;
-
         observerRef.current = new IntersectionObserver(
             (entries) => {
                 if (entries[0].isIntersecting && !loading && currentPage < totalPages) {
@@ -61,9 +60,7 @@ export const CryptoCurrencies: FC = () => {
             },
             { root: null, rootMargin: "100px", threshold: 1.0 }
         );
-
         observerRef.current.observe(loaderRef.current);
-
         return () => observerRef.current?.disconnect();
     }, [loading, totalPages, currentPage]);
 
@@ -74,40 +71,39 @@ export const CryptoCurrencies: FC = () => {
 
     return (
         <>
-            <Row className="justify-content-center align-items-center" style={{ marginTop: 30 }}>
-                <Col xs="auto">
-                    <div className="cta-form d-sm-flex align-items-center justify-content-center">
+            <div className="d-flex justify-content-center mb-3 mt-15">
+                <div className="d-flex align-items-center gap-2 cta-form">
+                    <div className="cta-form">
                         <input
                             type="text"
-                            className="form-control form-control--style2 mb-sm-0"
-                            style={{ height: 40 }}
+                            className="form-control form-control--style2 crypto-currency-search-input"
                             placeholder="Bitcoin"
                             value={searchValue}
                             onChange={(e) => setSearchValue(e.target.value)}
                         />
-                        <Button
-                            className="trk-btn trk-btn--secondary2"
-                            onClick={handleSearch}
-                            color={ButtonColor.white}
-                            style={{ paddingRight: 50, height: 40 }}
-                        >
-                            {t("Search")}
-                        </Button>
                     </div>
-                </Col>
-            </Row>
+                    <Button
+                        className="trk-btn crypto-currency-search-button"
+                        onClick={handleSearch}
+                        color={ButtonColor.white}
+                    >
+                        {t("Search")}
+                    </Button>
+                </div>
+            </div>
+
 
             <div className="crypto-list">
-                {cryptocurrencies.length > 0 ? (
+                {cryptocurrencies?.length > 0 ? (
                     cryptocurrencies.map((cryptocurrency) => (
-                        <CryptoCurrencyLink cryptocurrency={cryptocurrency} key={cryptocurrency.id} />
+                        <CryptoCurrencyLink cryptocurrency={cryptocurrency} key={cryptocurrency.id}/>
                     ))
                 ) : (
-                    <CryptoCurrenciesSkeleton />
+                    <CryptoCurrenciesSkeleton/>
                 )}
             </div>
-            <div ref={loaderRef} style={{ height: 40, marginTop: 20, textAlign: "center" }}>
-                {loading && <CryptoCurrenciesSkeleton />}
+            <div ref={loaderRef} className="crypto-currency-loading-ref">
+                {loading && <CryptoCurrenciesSkeleton/>}
             </div>
         </>
     );

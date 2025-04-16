@@ -67,7 +67,7 @@ export const AssetGraphCurrencyDetail: FC = () => {
                     <div className="service-details__wrapper">
                         <div className="service-details__item">
                             <div className="service-details__item-inner">
-                                <div data-aos="fade-up" data-aos-duration="1000" style={{textAlign:"center"}}>
+                                <div data-aos="fade-up" data-aos-duration="1000" className="text-center">
                                     <AssetGraphCurrencyDetailTextItem text={<h1>{t("GraphAssetData - details about asset and graph")}</h1>} marginBottom="20px" fontSize="80px" />
                                     <Button className="mb-3">{!asset.in_watchlist ? <FaRegBookmark onClick={handleAddToWatchList}/> : <FaBookmark onClick={handleRemoveFromWatchList} />}</Button>
                                     <AssetGraphCurrencyDetailTextItem text={<span>{t("Currency: ")} <strong>{asset.asset_label}</strong></span>} />

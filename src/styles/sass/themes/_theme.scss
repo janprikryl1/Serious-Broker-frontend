@@ -68,8 +68,6 @@ html[data-bs-theme='dark'] {
   .blog {
     &__item {
       &-inner {
-        // background-color: $thm-bg-color-6-dark;
-
         &:hover {
           box-shadow: 0px 24px 60px rgba(13, 14, 16, 0.5);
         }

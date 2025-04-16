@@ -10,7 +10,7 @@ export const NewArticleContent:FC = () => {
     const {template} = useArticleCreate();
     
     return (
-        <div style={{marginBottom: 10}}>
+        <div className="mt-3">
             {template === 0 ? <NewArticleVariant0 />
             : template === 1 ? <NewArticleVariant1 />
             : template === 2 ? <NewArticleVariant2 />    

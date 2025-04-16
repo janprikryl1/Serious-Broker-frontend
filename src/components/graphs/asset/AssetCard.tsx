@@ -95,12 +95,12 @@ export const AssetCard: FC<Props> = ({ index, label, details, data, inWatchList,
                     <Button>
                         {!inWatchList ? (
                             <>
-                                <FaRegBookmark onClick={handleAddToWatchlist} style={{marginRight: 5}}/>
+                                <FaRegBookmark onClick={handleAddToWatchlist} className="me-2"/>
                                 {t("Add to watchlist")}
                             </>
                         ) : (
                             <>
-                                <FaBookmark onClick={handleRemoveFromWatchList} style={{marginRight: 5}}/>
+                                <FaBookmark onClick={handleRemoveFromWatchList} className="me-2"/>
                                 {t("Remove from watchlist")}
                             </>
                         )}

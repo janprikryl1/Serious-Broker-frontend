@@ -7,8 +7,8 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
 import { useTranslation } from "react-i18next";
 import { csCZ } from "@mui/x-date-pickers/locales";
-import {graphColors} from "../../../utils/constants";
 import {CandlestickData} from "../../../utils/types/asset/KlineData.ts";
+import {graphColors} from "../../../utils/constants/qraphConstants.ts";
 
 dayjs.extend(isBetweenPlugin);
 dayjs.locale('cs');
@@ -72,7 +72,7 @@ export const EarningIn: FC<Props> = ({ series, startDate, endDate }) => {
     return (
         <div className="padding-bottom padding-top asset-font" data-aos="fade-up" data-aos-duration="1000">
             <div className="row justify-content-center align-items-center mt-3">
-                <h2 style={{textAlign: "center"}}>{t("If I started investing at some point")}</h2>
+                <h2 className="text-center">{t("If I started investing at some point")}</h2>
                 <div
                     className="cta-form d-flex align-items-center justify-content-center gap-2 mt-5 mb-5 w-100"
                     style={{maxWidth: "300px"}}
@@ -92,7 +92,7 @@ export const EarningIn: FC<Props> = ({ series, startDate, endDate }) => {
                 <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="cs" localeText={csCZ.components.MuiLocalizationProvider.defaultProps.localeText}>
                     <div className="row g-3 justify-content-center mb-4">
                         <div className="col-12 col-md-6 mobile-margin">
-                            <p style={{fontWeight: "bold"}}>{t("Buy Date")}</p>
+                            <p className="text-bold">{t("Buy Date")}</p>
                             <DateCalendar
                                 value={buyDate}
                                 onChange={handleBuyDateChange}
@@ -113,7 +113,7 @@ export const EarningIn: FC<Props> = ({ series, startDate, endDate }) => {
                             />
                         </div>
                         <div className="col-12 col-md-6 mobile-margin">
-                            <p style={{fontWeight: "bold"}}>{t("Sell Date")}</p>
+                            <p className="text-bold">{t("Sell Date")}</p>
                             <DateCalendar
                                 value={sellDate}
                                 onChange={handleSellDateChange}
@@ -135,11 +135,9 @@ export const EarningIn: FC<Props> = ({ series, startDate, endDate }) => {
                         </div>
                     </div>
                 </LocalizationProvider>
-                <h4 style={{
-                    color: gain > 0 ? "green" : gain < 0 ? "red" : "gray",
-                    fontWeight: "bold",
-                    fontSize: "35px"
-                }}>{t("Gain: ")}{gain.toFixed(2)}$ ({percentage.toFixed(2)}%)</h4>
+                <h4 className="text-bold" style={{color: gain > 0 ? "green" : gain < 0 ? "red" : "gray", fontSize: "35px"}}>
+                    {t("Gain: ")}{gain.toFixed(2)}$ ({percentage.toFixed(2)}%)
+                </h4>
             </div>
         </div>
     );

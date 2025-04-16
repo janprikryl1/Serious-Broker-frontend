@@ -17,4 +17,4 @@ const resources = {
 i18next
     .use(initReactI18next)
     .use(LanguageDetector)
-    .init({resources, fallbackLng:"cs"})
+    .init({resources})

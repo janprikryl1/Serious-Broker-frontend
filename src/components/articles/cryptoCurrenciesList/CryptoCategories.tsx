@@ -19,13 +19,13 @@ export const CryptoCategories:FC = () => {
     }, []);
     
     return (
-        categories  ? (
+        categories ? (
             categories.map((category) => (
-                <div className="blog__writer" style={{marginTop: 50}}>
+                <div className="blog__writer mt-5">
                     <div className="blog__writer-designation">
                         <div>
                             <strong>{category.name}</strong>
-                            <span style={{marginLeft: 10}}>{category.currencies}</span>
+                            <span className="ms-2">{category.currencies}</span>
                         </div>
                     </div>
                 </div>

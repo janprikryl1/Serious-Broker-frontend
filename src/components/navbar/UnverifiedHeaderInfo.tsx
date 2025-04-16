@@ -4,6 +4,7 @@ import {useLocation} from "react-router-dom";
 import {CiWarning} from "react-icons/ci";
 import {useUserContext} from "../../utils/providers/providerUser.tsx";
 import {sendVerificationEmailAgain} from "../../utils/api/verifyAccountService.ts";
+import "../../styles/sass/components/unverified_header.scss";
 
 export const UnverifiedHeaderInfo:FC = () => {
     const {t} = useTranslation();
@@ -37,10 +38,9 @@ export const UnverifiedHeaderInfo:FC = () => {
         }
     };
 
-
     if (user?.verified == false && !isVerifyAccountPage) {
         return (
-            <header className="header-section" style={{backgroundColor:"#0e0a05"}}>
+            <header className="header-section unverified-header-container">
                 <div className="header-bottom">
                     <div className="container">
                         <div className="header-wrapper d-flex">
@@ -49,7 +49,7 @@ export const UnverifiedHeaderInfo:FC = () => {
                             </div>
                             <div className="menu-area d-flex">
                                 <h3>{t("Your email is not verified yet.")}</h3>
-                                <h3 style={{marginLeft:40, cursor: "pointer"}} onClick={handleSendVerificationAgain}>{t("Send again")}</h3>
+                                <h3 className="unverified-header-send-again-button" onClick={handleSendVerificationAgain}>{t("Send again")}</h3>
                             </div>
                         </div>
                     </div>
