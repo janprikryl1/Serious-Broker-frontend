@@ -3,7 +3,7 @@ import {Button} from "../../reusable/Button.tsx";
 import {Link} from "react-router-dom";
 import {routes} from "../../../utils/constants";
 import {useTranslation} from "react-i18next";
-import HourglassFiveMinutesIcon from "../../../utils/icons/index/hourglass_enhanced_no_bg2_darker.png";
+import HourglassFiveMinutesIcon from "../../../utils/icons/index/hourglass_enhanced_no_bg2_darker.webp";
 
 export const IndexMobileSliderFiveMinutes: FC = () => {
     const { t } = useTranslation();

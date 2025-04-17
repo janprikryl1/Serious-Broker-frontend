@@ -1,5 +1,5 @@
 import {FC} from "react";
-import HourglassFiveMinutesIcon from "../../utils/icons/index/hourglass_enhanced_no_bg2_darker.png";
+import HourglassFiveMinutesIcon from "../../utils/icons/index/hourglass_enhanced_no_bg2_darker.webp";
 import {SharedSlideLayout} from "./indexSliderPages/SharedSlideLayout.tsx";
 import {Link} from "react-router-dom";
 import {routes} from "../../utils/constants";

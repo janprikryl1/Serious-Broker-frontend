@@ -4,7 +4,7 @@ import {useMediaQuery} from "@mui/material";
 import {BlurredImage} from "./BlurredImage.tsx";
 import dotSphere from "../../utils/icons/about/dot_sphere.svg";
 import {TeamMemberCard} from "./TeamMemberCard.tsx";
-import radoslavFasuga from "../../utils/icons/about/radoslav_fasuga.jpeg";
+import radoslavFasuga from "../../utils/icons/about/radoslav_fasuga.webp";
 
 export const AboutUs: FC = () => {
   const {t} = useTranslation();

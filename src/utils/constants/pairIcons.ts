@@ -1,7 +1,7 @@
-import eur from "../icons/fiatCoins/eur.png";
-import usd from "../icons/fiatCoins/usd.png";
-import usdt from "../icons/fiatCoins/usd.png";
-import unknown_coin from "../icons/fiatCoins/unknown_coin.png";
+import eur from "../icons/fiatCoins/eur.webp";
+import usd from "../icons/fiatCoins/usd.webp";
+import usdt from "../icons/fiatCoins/usdt.webp";
+import unknown_coin from "../icons/fiatCoins/unknown_coin.webp";
 
 const fiatCoins: Record<string, string> = {
     USDT: usdt,

@@ -1,5 +1,5 @@
 import {FC} from "react";
-import LaptopAndBook from "../../utils/icons/index/laptop and book no plant.png";
+import LaptopAndBook from "../../utils/icons/index/laptop and book no plant.webp";
 import {Button} from "../reusable/Button.tsx";
 import {useTranslation} from "react-i18next";
 import {Link} from "react-router-dom";

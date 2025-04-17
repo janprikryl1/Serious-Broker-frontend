@@ -1,5 +1,5 @@
 import {FC} from "react";
-import GraphNoBg from "../../utils/icons/index/graph_no_bg2.png";
+import GraphNoBg from "../../utils/icons/index/graph_no_bg2.webp";
 import {Button} from "../reusable/Button.tsx";
 import {useTranslation} from "react-i18next";
 import {Link} from "react-router-dom";
