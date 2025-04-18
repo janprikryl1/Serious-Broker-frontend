@@ -6,6 +6,8 @@ import {AdminOverviewCard} from "../../components/admin/AdminOverviewCard.tsx";
 import {toCzechDateFormat} from "../../utils/functions/dateFunctions.ts";
 import {Highlight} from "../../components/editor/highlights/Highlight.tsx";
 import {AchievmentHelp} from "../../components/about/AchievmentHelp.tsx";
+import {MyLastPortfolioGraphs} from "../../components/profile/myPortfolio/MyLastPortfolioGraphs.tsx";
+import {RecommendedAssets} from "../../components/profile/myPortfolio/RecommendedAssets.tsx";
 
 export const ProfileOverview:FC = () => {
     const {t} = useTranslation();
@@ -14,7 +16,9 @@ export const ProfileOverview:FC = () => {
     
     return (
         <div className="padding-bottom" style={{minHeight: "50vh"}}>             
-            <h3 className="admin-section-title">{t("Profile overview")}</h3>
+            <h3 className="admin-section-title">{t("Profile overview")}</h3>             
+            <MyLastPortfolioGraphs />
+            <RecommendedAssets />
             <div className="row">
                 <AdminOverviewCard title={t("Achievments count")}
                                    value={`${t("You have")} ${achievements.length} ${t("achievements")}`}

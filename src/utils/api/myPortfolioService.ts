@@ -52,3 +52,12 @@ export const deleteMyPortfolio = async (id: number) => {
         }
     });
 }
+
+export const getLastPortfolioGraphs = async () => {
+    const token = localStorage.getItem('token');
+    return await axios.get(`${backendUrl}/my_portfolio/my_tree_portfolios_graph_data.php`, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    });
+}

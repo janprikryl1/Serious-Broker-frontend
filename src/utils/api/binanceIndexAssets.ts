@@ -5,6 +5,7 @@ import {AssetType} from "../types/asset/AssetType.ts";
 import {QuotedCurrency} from "../types/graphs/QuotedCurrency.ts";
 import {QuotedCurrenciesPeriod} from "../options/QuotedCurrenciesPeriod.ts";
 import {AssetGraphPriceDetailsType} from "../types/graphs/AssetGraphPriceDetailsType.ts";
+import {RecommendedProfileAssetType} from "../types/asset/RecommendedProfileAssetType.ts";
 
 export const getAllAssets = async (page: number, limit: number, orderType: AssetOrder) => {
     const token = localStorage.getItem("token");
@@ -78,4 +79,8 @@ export const getAssetGraphPriceDetails = async (name: string) => {
             Authorization: `Bearer ${token}`
         }
     });
+}
+
+export const getThreeLastAssetsGraphData = async () => {
+    return await axios.get<RecommendedProfileAssetType[]>(backendUrl + "graphs/binance_index_assets/get_three_assets.php");
 }

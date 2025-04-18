@@ -1,9 +1,24 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
 import { visualizer } from "rollup-plugin-visualizer";
 import preload from "vite-plugin-preload";
 
-// https://vitejs.dev/config/
+const excludedPaths = [
+    '/admin',
+    '/editor',
+    '/Admin',
+    '/Editor',
+    '/EditArticle',
+    '/HighlightsEditor'
+];
+
 export default defineConfig({
-  plugins: [react(), visualizer(), preload()],
-})
+    plugins: [
+        react(),
+        visualizer(),
+        preload({
+            shouldPreload: (module) => 
+                !excludedPaths.some(path => module.fileName.includes(path))
+        }),
+    ],
+});
