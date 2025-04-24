@@ -4,152 +4,18 @@ import {FaTrash} from "react-icons/fa";
 import {useTranslation} from "react-i18next";
 import {useArticleTranslate} from "../../../../../../utils/providers/ArticleTranslateProvider.tsx";
 import {Button, ButtonColor} from "../../../../../reusable/Button.tsx";
+import {useTranslateAnimate} from "../../../../../../utils/hooks/useTranslateAnimate.ts";
 
 export const TranslateAnimateColumn:FC = () => {
     const { t } = useTranslation();
-    const { content, currentContent, setContent } = useArticleTranslate();
-
-    const handleSetContentAnimateToX = (
-        e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-        contentIndex: number,
-        taskIndex: number
-    ) => {
-        setContent((prevState) =>
-            prevState.map((category, i) => {
-                if (i === contentIndex) {
-                    return {
-                        ...category,
-                        tasks: category.tasks.map((task, j) => {
-                            if (j === taskIndex) {
-                                return {
-                                    ...task,
-                                    animateTo: {
-                                        ...task.animateTo,
-                                        to: {
-                                            ...task.animateTo.to,
-                                            x: parseInt(e.target.value),
-                                        },
-                                    },
-                                };
-                            }
-                            return task;
-                        }),
-                    };
-                }
-                return category;
-            })
-        );
-    };
-
-    const handleSetContentAnimateToY = (
-        e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-        contentIndex: number,
-        taskIndex: number
-    ) => {
-        setContent((prevState) =>
-            prevState.map((category, i) => {
-                if (i === contentIndex) {
-                    return {
-                        ...category,
-                        tasks: category.tasks.map((task, j) => {
-                            if (j === taskIndex) {
-                                return {
-                                    ...task,
-                                    animateTo: {
-                                        ...task.animateTo,
-                                        to: {
-                                            ...task.animateTo.to,
-                                            y: parseInt(e.target.value),
-                                        },
-                                    },
-                                };
-                            }
-                            return task;
-                        }),
-                    };
-                }
-                return category;
-            })
-        );
-    };
-
-    const handleSetContentAnimateFromX = (
-        e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-        contentIndex: number,
-        taskIndex: number
-    ) => {
-        setContent((prevState) =>
-            prevState.map((category, i) => {
-                if (i === contentIndex) {
-                    return {
-                        ...category,
-                        tasks: category.tasks.map((task, j) => {
-                            if (j === taskIndex) {
-                                return {
-                                    ...task,
-                                    animateTo: {
-                                        ...task.animateTo,
-                                        from: {
-                                            ...task.animateTo.from,
-                                            x: parseInt(e.target.value),
-                                        },
-                                    },
-                                };
-                            }
-                            return task;
-                        }),
-                    };
-                }
-                return category;
-            })
-        );
-    };
-
-    const handleSetContentAnimateFromY = (
-        e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-        contentIndex: number,
-        taskIndex: number
-    ) => {
-        setContent((prevState) =>
-            prevState.map((category, i) => {
-                if (i === contentIndex) {
-                    return {
-                        ...category,
-                        tasks: category.tasks.map((task, j) => {
-                            if (j === taskIndex) {
-                                return {
-                                    ...task,
-                                    animateTo: {
-                                        ...task.animateTo,
-                                        from: {
-                                            ...task.animateTo.from,
-                                            y: parseInt(e.target.value),
-                                        },
-                                    },
-                                };
-                            }
-                            return task;
-                        }),
-                    };
-                }
-                return category;
-            })
-        );
-    };
-
-    const handleRemoveTask = (contentIndex: number, taskIndex: number) => {
-        setContent((prevState) =>
-            prevState.map((category, i) => {
-                if (i === contentIndex) {
-                    return {
-                        ...category,
-                        tasks: category.tasks.filter((_, j) => j !== taskIndex),
-                    };
-                }
-                return category;
-            })
-        );
-    };
+    const { content, currentContent } = useArticleTranslate();
+    const {
+        handleRemoveTask,
+        handleSetContentAnimateToX,
+        handleSetContentAnimateToY,
+        handleSetContentAnimateFromX,
+        handleSetContentAnimateFromY
+    } = useTranslateAnimate();
 
     return (
         <div className="col-sm">

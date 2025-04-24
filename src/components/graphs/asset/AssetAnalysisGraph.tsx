@@ -9,14 +9,14 @@ import {formatCurrency} from "../../../utils/functions/functions.ts";
 import {useTranslation} from "react-i18next";
 import {freecurrencyapi} from "../../../utils/constants";
 import {Currencies} from "../../../utils/enums/CurrenciesEnum.ts";
-import {AssetAlaysisGraphData} from "../../../utils/types/graphs/AssetAlaysisGraphData.ts";
+import {AssetAnalysisGraphData} from "../../../utils/types/graphs/AssetAnalysisGraphData.ts";
 
 type Props = {
     isInWatchList?: boolean;
     handleToggleWatchList?: () => void;
     selectedPeriod: QuotedCurrenciesPeriod;
     setSelectedPeriod: Dispatch<SetStateAction<QuotedCurrenciesPeriod>>;
-    graphData: AssetAlaysisGraphData | undefined;
+    graphData: AssetAnalysisGraphData | undefined;
     currency: Currencies;
     setCurrency: Dispatch<SetStateAction<Currencies>>;
     currencyPrice: string | undefined;

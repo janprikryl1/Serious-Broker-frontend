@@ -1,6 +1,5 @@
 import {ArticleCreateProps} from "../ArticleCreateProps.ts";
 
-
 export type ArticleNewTranslateEditType = {
     articleId: number;
     language: string;

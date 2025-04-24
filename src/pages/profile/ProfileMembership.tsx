@@ -51,11 +51,7 @@ export const ProfileMembership: FC = () => {
                         <>
                             <h2 className="asset-title">{t("My memberships")}</h2>
                             <p>{t("History of my memberships")}</p>
-                            <Table sx={{
-                                '& th, & td': {
-                                    color: theme === 'dark' ? '#ffffff' : 'inherit',
-                                },
-                            }}>
+                            <Table sx={{'& th, & td': {color: theme === 'dark' ? '#ffffff' : 'inherit'}}}>
                                 <TableHead>
                                     <TableRow>
                                         {!isMobile && <TableCell>{t("No.")}</TableCell>}

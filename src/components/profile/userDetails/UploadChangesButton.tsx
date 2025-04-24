@@ -5,9 +5,9 @@ import {Button} from "../../reusable/Button.tsx";
 
 export const UploadChangesButton:FC = () => {
     const {t} = useTranslation();
-    const {sumbitChanges} = useUserDetails();
+    const {submitChanges} = useUserDetails();
 
     return (
-        <Button type="submit" className="mt-4" onClick={sumbitChanges}>{t("Upload changes")}</Button>
+        <Button type="submit" className="mt-4" onClick={submitChanges}>{t("Upload changes")}</Button>
     );
 }

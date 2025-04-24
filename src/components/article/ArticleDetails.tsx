@@ -63,7 +63,7 @@ export const ArticleDetails: FC<Props> = ({ article, translations, language, set
                             {user && <CommentForm articleId={article.id} setComments={setComments}/>}
                         </>
                     ) : (
-                        <p>{t("Komentáře nejsou povoleny")}</p>
+                        <p>{t("Comments are not allowed")}</p>
                     )}
                 </div>
             )}

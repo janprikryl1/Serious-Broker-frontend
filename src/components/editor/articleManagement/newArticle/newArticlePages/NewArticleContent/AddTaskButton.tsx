@@ -1,6 +1,7 @@
 import {FC} from "react";
 import {useArticleCreate} from "../../../../../../utils/providers/ArticleCreateProvider.tsx";
 import {Button} from "../../../../../reusable/Button.tsx";
+import {defaultTask} from "../../../../../../utils/constants/defaultContent.ts";
 
 export const AddTaskButton:FC = () => {
     const { setContent, currentContent } = useArticleCreate();
@@ -11,18 +12,7 @@ export const AddTaskButton:FC = () => {
                 if (i === currentContent) {
                     return {
                         ...category,
-                        tasks: [
-                            ...category.tasks,
-                            {
-                                id: category.tasks.length,
-                                task: "",
-                                image: "",
-                                animateTo: {
-                                    from: { x: 0, y: 0 },
-                                    to: { x: 0, y: 0 }
-                                },
-                            },
-                        ],
+                        tasks: [...category.tasks, {...defaultTask, id: category.tasks.length}]
                     };
                 }
                 return category;

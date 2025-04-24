@@ -1,4 +1,4 @@
-import {ChangeEvent, FC, useEffect, useState} from "react";
+import {FC, useEffect, useState} from "react";
 import {Form} from "react-bootstrap";
 import {useTranslation} from "react-i18next";
 import {MdOutlineEmail} from "react-icons/md";
@@ -37,10 +37,6 @@ export const ArticleSendEmailComponent: FC<Props> = ({ url }) => {
         setText(`Dobrý den,\nS radostí oznamujeme, že vyšel nový článek. Naleznete ho tady: ${url}\nPěkný den, s pozdravem Serious Broker tým.`);
     }, [url]);
 
-    const handleTextChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        setText(e.target.value);
-    };
-
     const sendEmails = () => {
         const emailAddresses = emails.join(",");
         const encodedText = encodeURIComponent(text).replace(/%0A/g, "%0D%0A");
@@ -54,7 +50,7 @@ export const ArticleSendEmailComponent: FC<Props> = ({ url }) => {
                 as="textarea"
                 rows={5}
                 value={text}
-                onChange={handleTextChange}
+                onChange={(e) => setText(e.target.value)}
             />
             <Button
                 className="mt-3 me-2"

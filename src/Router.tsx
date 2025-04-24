@@ -29,7 +29,7 @@ const AdminDemos = lazy(() => import("./pages/admin/AdminDemos.tsx").then(module
 const AdminDemoEdit = lazy(() => import("./pages/admin/AdminDemoEdit.tsx").then(module => ({ default: module.AdminDemoEdit })));
 const Admin = lazy(() => import("./pages/admin/Admin.tsx").then(module => ({ default: module.Admin })));
 const AdminOverview = lazy(() => import("./pages/admin/AdminOverview.tsx").then(module => ({ default: module.AdminOverview })));
-const UserManagment = lazy(() => import("./pages/admin/AdminUserManagement.tsx").then(module => ({ default: module.AdminUserManagement })));
+const UserManagement = lazy(() => import("./pages/admin/AdminUserManagement.tsx").then(module => ({ default: module.AdminUserManagement })));
 const NewsletterOverview = lazy(() => import("./pages/admin/AdminNewsletterOverview.tsx").then(module => ({ default: module.AdminNewsletterOverview })));
 const ArticleManagement = lazy(() => import("./pages/editor/ArticleManagement.tsx").then(module => ({ default: module.ArticleManagement })));
 const EditArticle = lazy(() => import("./pages/editor/EditArticle.tsx").then(module => ({ default: module.EditArticle })));
@@ -41,9 +41,9 @@ const PostEdit = lazy(() => import("./pages/editor/PostEdit.tsx").then(module =>
 const GlossaryManagement = lazy(() => import("./pages/admin/AdminGlossaryManagement.tsx").then(module => ({ default: module.AdminGlossaryManagement })));
 const LogTable = lazy(() => import("./pages/admin/AdminTableLog.tsx").then(module => ({ default: module.AdminTableLog })));
 const Feedbacks = lazy(() => import("./pages/admin/AdminFeedbackManagement.tsx").then(module => ({ default: module.AdminFeedbackManagement })));
-const AdminAchivments = lazy(() => import("./pages/admin/AdminAchievements.tsx").then(module => ({ default: module.AdminAchievements })));
+const AdminAchivements = lazy(() => import("./pages/admin/AdminAchievements.tsx").then(module => ({ default: module.AdminAchievements })));
 const CoinSettings = lazy(() => import("./pages/admin/AdminCoinSettings.tsx").then(module => ({ default: module.AdminCoinSettings })));
-const ChachedData = lazy(() => import("./pages/admin/AdminChachedData.tsx").then(module => ({ default: module.AdminChachedData })));
+const CachedData = lazy(() => import("./pages/admin/AdminChachedData.tsx").then(module => ({ default: module.AdminChachedData })));
 const QRManagement = lazy(() => import("./pages/admin/AdminQRManagement.tsx").then(module => ({ default: module.AdminQRManagement })));
 const MyPortfolio = lazy(() => import("./pages/profile/MyPortfolio.tsx").then(module => ({ default: module.MyPortfolio })));
 const EditMyPortfolio = lazy(() => import("./pages/profile/EditMyPortfolio.tsx").then(module => ({ default: module.EditMyPortfolio })));
@@ -119,14 +119,14 @@ export const Router:FC = () => {
             </Route>
             <Route path={adminURLS.index} element={<PageLoader><Admin /></PageLoader>}>
                 <Route path={routes.admin.index} element={<PageLoader><AdminOverview /></PageLoader>} />
-                <Route path={routes.admin.users} element={<PageLoader><UserManagment /></PageLoader>} />
+                <Route path={routes.admin.users} element={<PageLoader><UserManagement /></PageLoader>} />
                 <Route path={routes.admin.newsletter} element={<PageLoader><NewsletterOverview /></PageLoader>} />
                 <Route path={routes.admin.glossary} element={<PageLoader><GlossaryManagement /></PageLoader>} />
                 <Route path={routes.admin.logTable} element={<PageLoader><LogTable /></PageLoader>} />
                 <Route path={routes.admin.feedbacks} element={<PageLoader><Feedbacks /></PageLoader>} />
-                <Route path={routes.admin.achievements} element={<PageLoader><AdminAchivments /></PageLoader>} />
+                <Route path={routes.admin.achievements} element={<PageLoader><AdminAchivements /></PageLoader>} />
                 <Route path={routes.admin.coinSettings} element={<PageLoader><CoinSettings /></PageLoader>} />
-                <Route path={routes.admin.chachedData} element={<PageLoader><ChachedData /></PageLoader>} />
+                <Route path={routes.admin.chachedData} element={<PageLoader><CachedData /></PageLoader>} />
                 <Route path={routes.admin.qr} element={<PageLoader><QRManagement /></PageLoader>} />
                 <Route path={routes.admin.demos} element={<PageLoader><AdminDemos /></PageLoader>} />
                 <Route path={routes.admin.editDemo} element={<PageLoader><AdminDemoEdit /></PageLoader>} />

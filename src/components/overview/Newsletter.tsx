@@ -1,64 +1,13 @@
-import {FC, useState} from "react";
+import {FC} from "react";
 import {useTranslation} from "react-i18next";
-import {addNewsletter} from "../../utils/api/newsletterService.ts";
 import {Button, ButtonColor} from "../reusable/Button.tsx";
-import {CustomSwal} from "../../utils/functions/customSwal.ts";
-import {verifyEmail} from "../../utils/api/authenticateService.ts";
 import "../../styles/sass/components/newsletter.scss";
+import {useNewsletter} from "../../utils/hooks/useNewsletter.ts";
 
 
 export const Newsletter: FC = () => {
   const {t} = useTranslation();
-  const [email, setEmail] = useState("");
-  
-  const handleAddNewsletter = () => {
-    if (!email) return;
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      CustomSwal.fire({
-        icon: "error",
-        title: t("Error"),
-        text: t("Invalid email"),
-      });
-      return;
-    }
-    
-    const sendNewsletter = async () => {
-      const isValid = await verifyEmail(email);
-      if (isValid.data.data.mx_found === false) {
-        CustomSwal.fire({
-          icon: "error",
-          title: t("Error"),
-          text: t("Invalid email"),
-        });
-        return;
-      }
-      try {
-        const response = await addNewsletter({email});
-        if (response.data.message === "Email successfully added") {
-          CustomSwal.fire({
-            icon: "success",
-            title: t("Your newsletter has been sent successfully.")
-          });
-          setEmail("");
-        } else if (response.data.message === "Email already exists") {
-          CustomSwal.fire({
-            icon: "error",
-            title: t("Error"),
-            text: t("This email is already subscribed."),
-          });
-        }
-      } catch (error) {
-        console.error(error);
-        CustomSwal.fire({
-          icon: "error",
-          title: t("Failed"),
-          text: t("Please try again later."),
-        });
-      }
-    };
-    sendNewsletter();
-  };
+  const {handleAddNewsletter, email, setEmail} = useNewsletter();
   
   return (
       <section className="cta padding-top padding-bottom bg-color">

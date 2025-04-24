@@ -12,13 +12,7 @@ type FormValues = {
 
 export const ForgottenPassword: FC = () => {
     const { t } = useTranslation();
-
-    const {
-        register,
-        handleSubmit,
-        reset,
-        formState: { isSubmitting }
-    } = useForm<FormValues>();
+    const {register, handleSubmit, reset, formState: { isSubmitting }} = useForm<FormValues>();
 
     const onSubmit = async ({ email }: FormValues) => {
         try {

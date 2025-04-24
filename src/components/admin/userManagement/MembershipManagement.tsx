@@ -42,7 +42,6 @@ export const MembershipManagement: FC<Props> = ({ userId }) => {
         } catch (err) {
             console.error(err);
         }
-        
     };
 
     const handleEditMembership = (id: number) => {

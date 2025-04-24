@@ -1,49 +1,13 @@
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
-import {useArticleCreate} from "../../../../../../../utils/providers/ArticleCreateProvider.tsx";
 import {Button, ButtonColor} from "../../../../../../reusable/Button.tsx";
+import {useArticleCreate} from "../../../../../../../utils/providers/ArticleCreateProvider.tsx";
+import {useArticleHandleCategory} from "../../../../../../../utils/hooks/edit/useArticleHandleCategory.ts";
 
 export const ContentNavigation: FC = () => {
     const { t } = useTranslation();
-    const { content, setContent, currentContent, setCurrentContent } = useArticleCreate();
-
-    const handleIncreaseCategory = () => {
-        if (currentContent === content.length - 1) {
-            const newCategory = {
-                id: content.length,
-                title: "",
-                tasks: [
-                    {
-                        id: 0,
-                        task: "",
-                        image: "",
-                        animateTo: { 
-                            from: { x: 0, y: 0 },
-                            to: { x: 0, y: 0 }
-                        },
-                    },
-                ],
-            };
-            setContent((prevState) => [...prevState, newCategory]);
-        }
-        setCurrentContent(currentContent + 1);
-    };
-
-    const handleDecreaseCategory = () => {
-        if (currentContent > 0) {
-            setCurrentContent(currentContent - 1);
-        }
-    };
-
-    const handleDeleteCategory = () => {
-        setContent((prevState) => prevState.filter((_, i) => i !== currentContent));
-
-        // Move to the previous category if not on the first one
-        if (currentContent > 0) {
-            setCurrentContent(currentContent - 1);
-        }
-        
-    };
+    const { content, currentContent } = useArticleCreate();
+    const {handleIncreaseCategory, handleDecreaseCategory, handleDeleteCategory} = useArticleHandleCategory();
 
     return (
         <>

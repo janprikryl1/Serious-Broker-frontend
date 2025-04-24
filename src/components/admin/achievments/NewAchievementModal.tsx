@@ -5,7 +5,6 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import {useTranslation} from "react-i18next";
 import {Input} from "@mui/joy";
-import {Transition} from "../../reusable/Transition.tsx";
 import {PaperComponent} from "../../reusable/PaperComponent.tsx";
 import {UserType} from "../../../utils/types/user/userTypes.ts";
 import {adminAddAchievement} from "../../../utils/api/achievementService.ts";
@@ -18,24 +17,20 @@ type Props = {
     selectedUser?: UserType;
     setAchievements: Dispatch<SetStateAction<AchievementType[]>>;
     open: boolean;
-    setOpen: Dispatch<SetStateAction<boolean>>;
+    closeModal: () => void;
 };
 
-export const NewAchievmentModal: FC<Props> = ({ selectedUser, setAchievements, open, setOpen }) => {
+export const NewAchievementModal: FC<Props> = ({ selectedUser, setAchievements, open, closeModal }) => {
     const { t } = useTranslation();
-    const [achievmentText, setAchievmentText] = useState("");
-
-    const handleClose = () => {
-        setOpen(false);
-    };
+    const [achievementText, setAchievementText] = useState("");
 
     const handleAddAchievement = async () => {
         try {
-            const response = await adminAddAchievement(selectedUser!.id, achievmentText);
+            const response = await adminAddAchievement(selectedUser!.id, achievementText);
             if (!response) return;
             setAchievements((prev: AchievementType[]) => [...prev, response.data]);
-            setAchievmentText("");
-            handleClose();
+            setAchievementText("");
+            closeModal();
         } catch (error) {
             console.error(error);
             CustomSwal.fire({
@@ -47,14 +42,7 @@ export const NewAchievmentModal: FC<Props> = ({ selectedUser, setAchievements, o
     };
 
     return (
-        <Dialog
-            open={open}
-            TransitionComponent={Transition}
-            keepMounted
-            onClose={handleClose}
-            aria-describedby="alert-dialog-slide-description"
-            PaperComponent={PaperComponent}
-        >
+        <Dialog open={open} keepMounted onClose={closeModal} PaperComponent={PaperComponent}>
             <DialogTitle className="new-achievement-dialog-title" id="draggable-dialog-title">
                 {t("Add new achievement")}
             </DialogTitle>
@@ -65,12 +53,12 @@ export const NewAchievmentModal: FC<Props> = ({ selectedUser, setAchievements, o
                 <Input
                     type="text"
                     placeholder={t("Enter text for new achievement")}
-                    value={achievmentText}
-                    onChange={(e) => setAchievmentText(e.target.value)}
+                    value={achievementText}
+                    onChange={(e) => setAchievementText(e.target.value)}
                 />
             </DialogContent>
             <DialogActions>
-                <Button color={ButtonColor.gray} onClick={handleClose}>{t("Close")}</Button>
+                <Button color={ButtonColor.gray} onClick={closeModal}>{t("Close")}</Button>
                 <Button onClick={handleAddAchievement}>{t("Add")}</Button>
             </DialogActions>
         </Dialog>

@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 
 type UserFormInputProps = {
     label: string;
-    value: string | number | null;
+    value: string | number | null | undefined;
     readOnly?: boolean;
     onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
 };

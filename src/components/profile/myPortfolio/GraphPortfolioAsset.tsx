@@ -1,6 +1,7 @@
 import { FC } from "react";
 import { LineChart } from "@mui/x-charts";
 import {useTranslation} from "react-i18next";
+import "../../../styles/sass/components/graph-portfolio-asset.scss";
 
 type Props = {
     title: string;
@@ -32,11 +33,11 @@ export const GraphPortfolioAsset: FC<Props> = ({ title, data }) => {
                     sx={{"& .MuiChartsAxis-root": {display: "none"}}}
                 />
             ) : (
-                <div style={{ width: 350, height: 200, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                <div className="graph-portfolio-asset-no-data-container">
                     {t("No data")}
                 </div>
             )}
-            <p style={{ textAlign: 'center', marginTop: '8px', fontWeight: 'bold' }}>{title}</p>
+            <p className="graph-portfolio-asset-title">{title}</p>
         </div>
     );
 };

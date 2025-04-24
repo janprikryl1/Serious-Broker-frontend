@@ -14,6 +14,7 @@ type Props = {
 export const ImageColumn:FC<Props> = ({currentContent, setCurrentContent, setCurrentTask, openFileModal}) => {
     const { t } = useTranslation();
     const { content } = useArticleCreate();
+    
     return (
         <div className="col-sm-4">
             <h4>{t("Image")}</h4>

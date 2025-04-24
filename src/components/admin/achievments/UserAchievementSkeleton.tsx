@@ -1,7 +1,7 @@
 import {FC} from "react";
 import Skeleton from "react-loading-skeleton";
 
-export const UserAchievmentSkeleton: FC = () => {
+export const UserAchievementSkeleton: FC = () => {
     return (
         <div className="cta__subscribe padding-bottom padding-top">
             <Skeleton width={150} height={40} className="mb-4" />

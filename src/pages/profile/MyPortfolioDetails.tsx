@@ -13,7 +13,7 @@ import {AssetAnalysisGraph} from "../../components/graphs/asset/AssetAnalysisGra
 import {MyPortfolioType} from "../../utils/types/asset/MyPortfolioType.ts";
 import {QuotedCurrenciesPeriod} from "../../utils/options/QuotedCurrenciesPeriod.ts";
 import {Currencies} from "../../utils/enums/CurrenciesEnum.ts";
-import {AssetAlaysisGraphData} from "../../utils/types/graphs/AssetAlaysisGraphData.ts";
+import {AssetAnalysisGraphData} from "../../utils/types/graphs/AssetAnalysisGraphData.ts";
 import {QuotedCurrency} from "../../utils/types/graphs/QuotedCurrency.ts";
 import {getAssetGraphData} from "../../utils/api/binanceIndexAssets.ts";
 import {formatCurrency} from "../../utils/functions/functions.ts";
@@ -26,7 +26,7 @@ export const MyPortfolioDetails:FC = () => {
     const [currency, setCurrency] = useState<Currencies>(Currencies.EUR);
     const [currencyPrice, setCurrencyPrice] = useState<string>();
     const [currencyValue, setCurrencyValue] = useState<number>(1);
-    const [graphData, setGraphData] = useState<AssetAlaysisGraphData>();
+    const [graphData, setGraphData] = useState<AssetAnalysisGraphData>();
 
     useEffect(() => {
         if (!id) return;

@@ -1,25 +1,26 @@
 import { Modal } from "@mui/joy";
-import {FC, useEffect, useState} from "react";
+import {FC, useEffect} from "react";
 import {useTranslation} from "react-i18next";
 import '../../styles/css/AchievmentWrapper.css';
 import {AchievmentAnimatedPath} from "./AchievmentAnimatedPath.tsx";
+import {useModal} from "../../utils/hooks/useModal.tsx";
 
 type Props = {
     onClose: () => void;
 };
 
-export const AchievmentAnimation:FC<Props> = ({onClose}) => {
+export const AchievementAnimation:FC<Props> = ({onClose}) => {
     const {t} = useTranslation();
-    const [open, setOpen] = useState(true);
+    const {isOpen: open, closeModal} = useModal();
     
     const handleClose = () => {
-        setOpen(false);
+        closeModal();
         onClose();
     };
     
     useEffect(() => {
         setTimeout(() => {
-            setOpen(false);
+            closeModal();
         }, 11000);
     }, []);
     

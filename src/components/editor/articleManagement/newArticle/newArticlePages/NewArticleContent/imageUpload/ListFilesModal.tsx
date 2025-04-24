@@ -4,7 +4,6 @@ import {ListOfImagesAndDropZone} from "./ListOfImagesAndDropZone.tsx";
 import {ListOfDroppedImages} from "./ListOfDroppedImages.tsx";
 import {useListFilesModal} from "../../../../../../../utils/hooks/useListFilesModal.ts";
 
-
 type Props = {
     isOpen: boolean;
     handleModalClose: () => void;

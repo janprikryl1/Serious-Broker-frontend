@@ -1,17 +1,19 @@
-import {ChangeEvent, FC, useEffect, useState} from "react";
+import {FC, useEffect, useState} from "react";
 import Modal from "@mui/material/Modal";
 import { useTranslation } from "react-i18next";
 import ModalDialog from "@mui/joy/ModalDialog";
 import ModalClose from "@mui/joy/ModalClose";
 import DialogTitle from "@mui/joy/DialogTitle";
 import { List } from "@mui/joy";
-import { UserFormInput } from "./UserFormInput";
 import { InputGroup } from "react-bootstrap";
-import {UserFormCheck} from "./UserFormCheck.tsx";
-import {MembershipManagement} from "./MembershipManagement.tsx";
-import {UserRole, UserType} from "../../../utils/types/user/userTypes.ts";
-import {Button} from "../../reusable/Button.tsx";
-import {toCzechDateFormat} from "../../../utils/functions/dateFunctions.ts";
+import { useForm, Controller } from "react-hook-form";
+import { UserFormInput } from "./UserFormInput";
+import { UserFormCheck } from "./UserFormCheck.tsx";
+import { MembershipManagement } from "./MembershipManagement.tsx";
+import { UserRole, UserType } from "../../../utils/types/user/userTypes.ts";
+import { Button } from "../../reusable/Button.tsx";
+import { toCzechDateFormat } from "../../../utils/functions/dateFunctions.ts";
+import {editUserDefaultValues} from "../../../utils/constants/defaultContent.ts";
 
 type Props = {
     open: boolean;
@@ -22,95 +24,27 @@ type Props = {
 
 export const UserEditModal: FC<Props> = ({ open, handleClose, selectedUser, handleUpdateUser }) => {
     const { t } = useTranslation();
-    const [nickname, setNickname] = useState("");
-    const [email, setEmail] = useState("");
-    const [titleBefore, setTitleBefore] = useState("");
-    const [firstname, setFirstname] = useState("");
-    const [midlename, setMidlename] = useState("");
-    const [surname, setSurname] = useState("");
-    const [firmId, setFirmId] = useState("");
-    const [firmName, setFirmName] = useState("");
-    const [firmVat, setFirmVat] = useState("");
-    const [titleAfter, setTitleAfter] = useState("");
-    const [role, setRole] = useState<UserRole>(UserRole.Default);
-    const [street, setStreet] = useState("");
-    const [streetNumber, setStreetNumber] = useState("");
-    const [town, setTown] = useState("");
-    const [country, setCountry] = useState("");
-    const [language, setLanguage] = useState("");
-    const [newsletterSubscription, setNewsletterSubscription] = useState(selectedUser?.newsletter_subscription || false);
-    const [receiveMessages, setReceiveMessages] = useState(selectedUser?.receive_messages || false);
-    const [verified, setVerified] = useState(selectedUser?.verified ?? false);
-    const [newPassword, setNewPassword] = useState<string>();
+    const { control, handleSubmit, reset } = useForm<UserType>({defaultValues: editUserDefaultValues});
+    const [showPasswordField, setShowPasswordField] = useState(false);
 
     useEffect(() => {
         if (selectedUser) {
-            setNickname(selectedUser.nickname ?? "");
-            setEmail(selectedUser.email ?? "");
-            setTitleBefore(selectedUser.title_before ?? "");
-            setFirstname(selectedUser.firstname ?? "");
-            setMidlename(selectedUser.midlename ?? "");
-            setSurname(selectedUser.surname ?? "");
-            setFirmId(selectedUser.firm_id ?? "");
-            setFirmName(selectedUser.firm_name ?? "");
-            setFirmVat(selectedUser.firm_vat ?? "");
-            setTitleAfter(selectedUser.title_after ?? "");
-            setRole(selectedUser.role ?? "");
-            setStreet(selectedUser.street ?? "");
-            setStreetNumber(selectedUser.street_number ?? "");
-            setTown(selectedUser.town ?? "");
-            setCountry(selectedUser.country ?? "");
-            setLanguage(selectedUser.language ?? "");
-            setNewsletterSubscription(selectedUser.newsletter_subscription ?? false);
-            setReceiveMessages(selectedUser.receive_messages ?? false);
-            setVerified(selectedUser.verified ?? false);
+            reset({
+                ...selectedUser,
+                password: undefined
+            });
+            setShowPasswordField(false);
         }
-    }, [selectedUser]);
+    }, [selectedUser, reset]);
 
-
-    const handleSaveChanges = () => {
+    const onSubmit = (data: UserType) => {
         if (selectedUser) {
             const updatedUser: UserType = {
                 ...selectedUser,
-                nickname,
-                email,
-                title_before: titleBefore,
-                firstname,
-                midlename,
-                surname,
-                firm_id: firmId,
-                firm_name: firmName,
-                firm_vat: firmVat,
-                title_after: titleAfter,
-                role,
-                street,
-                street_number: streetNumber,
-                town,
-                country,
-                language,
-                newsletter_subscription: newsletterSubscription,
-                receive_messages: receiveMessages,
-                verified,
-                password: newPassword,
+                ...data,
             };
             handleUpdateUser(updatedUser);
             handleClose();
-        }
-    };
-
-    const handleReceiveMessagesChange = (e: ChangeEvent<HTMLInputElement>) => {
-        const isChecked = e.target.checked;
-        setReceiveMessages(isChecked);
-        if (isChecked) {
-            setNewsletterSubscription(false);
-        }
-    };
-    
-    const handleRecieveNewsletterChange = (e: ChangeEvent<HTMLInputElement>) => {
-        const isChecked = e.target.checked;
-        setNewsletterSubscription(isChecked);
-        if (isChecked) {
-            setReceiveMessages(false);
         }
     };
 
@@ -119,57 +53,190 @@ export const UserEditModal: FC<Props> = ({ open, handleClose, selectedUser, hand
             <ModalDialog layout="fullscreen" style={{ backgroundColor: "#101214" }}>
                 <ModalClose onClick={handleClose} />
                 <DialogTitle style={{ color: "white" }}>{t("Edit user")}</DialogTitle>
-                <List
-                    sx={[
-                        {
-                            mx: "calc(-1 * var(--ModalDialog-padding))",
-                            px: "var(--ModalDialog-padding)",
-                        },
-                        !scroll ? {overflow: 'initial'} : {overflow: 'scroll'},
-                    ]}
+                <List sx={[{mx: "calc(-1 * var(--ModalDialog-padding))", px: "var(--ModalDialog-padding)"}, { overflow: 'auto' }]}
                 >
                     {selectedUser ? (
-                        <>
+                        <form onSubmit={handleSubmit(onSubmit)}>
                             <UserFormInput label="Id" value={selectedUser.id} readOnly />
-                            <UserFormInput label="Nickname" value={nickname} onChange={(e) => setNickname(e.target.value)} />
-                            <UserFormInput label="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
-                            <UserFormInput label="Title before" value={titleBefore} onChange={(e) => setTitleBefore(e.target.value)} />
-                            <UserFormInput label="Name" value={firstname} onChange={(e) => setFirstname(e.target.value)} />
-                            <UserFormInput label="Middle name" value={midlename} onChange={(e) => setMidlename(e.target.value)} />
-                            <UserFormInput label="Surname" value={surname} onChange={(e) => setSurname(e.target.value)} />
-                            <UserFormInput label="Firm ID" value={firmId} onChange={(e) => setFirmId(e.target.value)} />
-                            <UserFormInput label="Firm name" value={firmName} onChange={(e) => setFirmName(e.target.value)} />
-                            <UserFormInput label="Firm VAT" value={firmVat} onChange={(e) => setFirmVat(e.target.value)} />
-                            <UserFormInput label="Title after" value={titleAfter} onChange={(e) => setTitleAfter(e.target.value)} />
-                            <UserFormInput label="Role" value={role} onChange={(e) => setRole(e.target.value as UserRole)} />
-                            <UserFormInput label="Street" value={street} onChange={(e) => setStreet(e.target.value)} />
-                            <UserFormInput label="Street number" value={streetNumber} onChange={(e) => setStreetNumber(e.target.value)} />
-                            <UserFormInput label="Town" value={town} onChange={(e) => setTown(e.target.value)} />
-                            <UserFormInput label="Country" value={country} onChange={(e) => setCountry(e.target.value)} />
-                            <UserFormInput label="Language" value={language} onChange={(e) => setLanguage(e.target.value)} />
-                            <UserFormCheck
-                                label="Newsletter"
-                                value={newsletterSubscription}
-                                onChange={handleRecieveNewsletterChange}
+                            <Controller
+                                name="nickname"
+                                control={control}
+                                render={({ field }) => (
+                                    <UserFormInput label="Nickname" value={field.value} onChange={field.onChange} />
+                                )}
                             />
-                            <UserFormCheck
-                                label="I don't want any messages"
-                                value={receiveMessages}
-                                onChange={handleReceiveMessagesChange}
+                            <Controller
+                                name="email"
+                                control={control}
+                                render={({ field }) => (
+                                    <UserFormInput label="Email" value={field.value} onChange={field.onChange} />
+                                )}
                             />
-                            <UserFormCheck label="Verified" value={verified} onChange={(e) => setVerified(e.target.checked)} />
-                            <UserFormInput label="Changed" value={toCzechDateFormat(selectedUser.changed)} readOnly />
-                            <UserFormInput label="Created" value={toCzechDateFormat(selectedUser.created)} readOnly />
+                            <Controller
+                                name="title_before"
+                                control={control}
+                                render={({ field }) => (
+                                    <UserFormInput label="Title before" value={field.value} onChange={field.onChange} />
+                                )}
+                            />
+                            <Controller
+                                name="firstname"
+                                control={control}
+                                render={({ field }) => (
+                                    <UserFormInput label="Name" value={field.value} onChange={field.onChange} />
+                                )}
+                            />
+                            <Controller
+                                name="midlename"
+                                control={control}
+                                render={({ field }) => (
+                                    <UserFormInput label="Middle name" value={field.value} onChange={field.onChange} />
+                                )}
+                            />
+                            <Controller
+                                name="surname"
+                                control={control}
+                                render={({ field }) => (
+                                    <UserFormInput label="Surname" value={field.value} onChange={field.onChange} />
+                                )}
+                            />
+                            <Controller
+                                name="firm_id"
+                                control={control}
+                                render={({ field }) => (
+                                    <UserFormInput label="Firm ID" value={field.value} onChange={field.onChange} />
+                                )}
+                            />
+                            <Controller
+                                name="firm_name"
+                                control={control}
+                                render={({ field }) => (
+                                    <UserFormInput label="Firm name" value={field.value} onChange={field.onChange} />
+                                )}
+                            />
+                            <Controller
+                                name="firm_vat"
+                                control={control}
+                                render={({ field }) => (
+                                    <UserFormInput label="Firm VAT" value={field.value} onChange={field.onChange} />
+                                )}
+                            />
+                            <Controller
+                                name="title_after"
+                                control={control}
+                                render={({ field }) => (
+                                    <UserFormInput label="Title after" value={field.value} onChange={field.onChange} />
+                                )}
+                            />
+                            <Controller
+                                name="role"
+                                control={control}
+                                render={({ field }) => (
+                                    <UserFormInput
+                                        label="Role"
+                                        value={field.value}
+                                        onChange={(e) => field.onChange(e.target.value as UserRole)}
+                                    />
+                                )}
+                            />
+                            <Controller
+                                name="street"
+                                control={control}
+                                render={({ field }) => (
+                                    <UserFormInput label="Street" value={field.value} onChange={field.onChange} />
+                                )}
+                            />
+                            <Controller
+                                name="street_number"
+                                control={control}
+                                render={({ field }) => (
+                                    <UserFormInput label="Street number" value={field.value} onChange={field.onChange} />
+                                )}
+                            />
+                            <Controller
+                                name="town"
+                                control={control}
+                                render={({ field }) => (
+                                    <UserFormInput label="Town" value={field.value} onChange={field.onChange} />
+                                )}
+                            />
+                            <Controller
+                                name="country"
+                                control={control}
+                                render={({ field }) => (
+                                    <UserFormInput label="Country" value={field.value} onChange={field.onChange} />
+                                )}
+                            />
+                            <Controller
+                                name="language"
+                                control={control}
+                                render={({ field }) => (
+                                    <UserFormInput label="Language" value={field.value} onChange={field.onChange} />
+                                )}
+                            />
+                            <Controller
+                                name="newsletter_subscription"
+                                control={control}
+                                render={({ field }) => (
+                                    <UserFormCheck
+                                        label="Newsletter"
+                                        value={field.value}
+                                        onChange={(e) => field.onChange(e.target.checked)}
+                                    />
+                                )}
+                            />
+                            <Controller
+                                name="receive_messages"
+                                control={control}
+                                render={({ field }) => (
+                                    <UserFormCheck
+                                        label="I don't want any messages"
+                                        value={field.value}
+                                        onChange={(e) => field.onChange(e.target.checked)}
+                                    />
+                                )}
+                            />
+                            <Controller
+                                name="verified"
+                                control={control}
+                                render={({ field }) => (
+                                    <UserFormCheck
+                                        label="Verified"
+                                        value={field.value}
+                                        onChange={(e) => field.onChange(e.target.checked)}
+                                    />
+                                )}
+                            />
+                            <UserFormInput
+                                label="Changed"
+                                value={toCzechDateFormat(selectedUser.changed)}
+                                readOnly
+                            />
+                            <UserFormInput
+                                label="Created"
+                                value={toCzechDateFormat(selectedUser.created)}
+                                readOnly
+                            />
                             <InputGroup className="mb-3">
-                                {newPassword === undefined ? <Button onClick={() => setNewPassword("")}>Změna hesla</Button> : <UserFormInput label="Password" value={newPassword} onChange={(e) => setNewPassword(e.target.value)}/>}
+                                {!showPasswordField ? (
+                                    <Button onClick={() => setShowPasswordField(true)}>Změna hesla</Button>
+                                ) : (
+                                    <Controller
+                                        name="password"
+                                        control={control}
+                                        render={({ field }) => (
+                                            <UserFormInput label="Password" value={field.value || ""} onChange={field.onChange} />
+                                        )}
+                                    />
+                                )}
                             </InputGroup>
-                            <MembershipManagement userId={selectedUser.id}/>
+                            <MembershipManagement userId={selectedUser.id} />
                             <InputGroup className="mb-3">
-                                <Button onClick={handleSaveChanges}>
+                                <Button type="submit">
                                     {t("Update")}
                                 </Button>
                             </InputGroup>
-                        </>
+                        </form>
                     ) : (
                         <p>{t("No user selected")}</p>
                     )}

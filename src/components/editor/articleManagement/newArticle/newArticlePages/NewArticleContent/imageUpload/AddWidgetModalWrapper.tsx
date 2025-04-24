@@ -20,5 +20,5 @@ export const AddWidgetModalWrapper:FC<Props> = ({children, isOpen, handleModalCl
                 {children}
             </Modal.Body>
         </Modal>
-)
+    )
 }

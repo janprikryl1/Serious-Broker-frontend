@@ -3,7 +3,7 @@ import {Link} from "react-router-dom";
 import {LineChart} from "@mui/x-charts";
 import {useTranslation} from "react-i18next";
 import {FaBookmark, FaRegBookmark} from "react-icons/fa";
-import "./AssetGraphStyles.scss";
+import "../../../styles/sass/components/asset-graph-styles.scss";
 import {AssetType} from "../../../utils/types/asset/AssetType.ts";
 import {MostProfitableAssetDetailType} from "../../../utils/types/graphs/MostProfitableAssetDetailType.ts";
 import {addToWatchList, removeFromWatchList} from "../../../utils/api/watchListService.ts";

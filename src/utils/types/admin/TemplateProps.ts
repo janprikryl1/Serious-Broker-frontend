@@ -1,4 +1,4 @@
-export type templateProps = {
+export type TemplateProps = {
     selected: number;
     index: number;
 }

@@ -1,4 +1,4 @@
-import {Dispatch, FC, SetStateAction} from "react";
+import {FC} from "react";
 import {Modal} from "react-bootstrap";
 import {useTranslation} from "react-i18next";
 import {Button, ButtonColor} from "../../reusable/Button.tsx";
@@ -7,19 +7,18 @@ import "../../../styles/sass/components/image-modal.scss";
 type Props = {
     isModalOpen: boolean;
     selectedImage: string;
-    setModalOpen: Dispatch<SetStateAction<boolean>>;
+    closeModal: () => void;
 };
 
-export const ImageModal: FC<Props> = ({ isModalOpen, selectedImage, setModalOpen }) => {
+export const ImageModal: FC<Props> = ({ isModalOpen, selectedImage, closeModal }) => {
     const { t } = useTranslation();
     
     return (
         <Modal
             show={isModalOpen}
-            onHide={() => setModalOpen(false)}
+            onHide={closeModal}
             size="lg"
             centered
-            aria-labelledby="gallery-modal"
         >
             <Modal.Body className="p-0">
                 <img
@@ -29,7 +28,7 @@ export const ImageModal: FC<Props> = ({ isModalOpen, selectedImage, setModalOpen
                 />
             </Modal.Body>
             <Modal.Footer>
-                <Button color={ButtonColor.gray} onClick={() => setModalOpen(false)}>
+                <Button color={ButtonColor.gray} onClick={closeModal}>
                     {t("Close")}
                 </Button>
             </Modal.Footer>

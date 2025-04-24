@@ -4,18 +4,18 @@ import {useTranslation} from "react-i18next";
 import {getAchievements, markReadAchievment} from "../api/achievementService.ts";
 import {CustomSwal} from "../functions/customSwal.ts";
 import {AchievementType} from "../types/user/AchievementType.ts";
-const AchievmentAnimation = lazy(() => import('../../components/achievment/AchievmentAnimation.tsx').then(module => ({ default: module.AchievmentAnimation })));
+const AchievementAnimation = lazy(() => import('../../components/achievment/AchievementAnimation.tsx').then(module => ({ default: module.AchievementAnimation })));
 
-type AchievmentsContextType = {
+type AchievementsContextType = {
     achievements: AchievementType[];
     setAchievements: Dispatch<SetStateAction<AchievementType[]>>;
     unreadAchievements: AchievementType[];
     markAchievementAsRead: (id: number) => Promise<void>;
 };
 
-const AchievmentContext = createContext<AchievmentsContextType | undefined>(undefined);
+const AchievementContext = createContext<AchievementsContextType | undefined>(undefined);
 
-export const AchievmentsProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+export const AchievementsProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     const {t} = useTranslation();
     const {user, setUser} = useUserContext();
     const [achievements, setAchievements] = useState<AchievementType[]>([]);
@@ -83,17 +83,17 @@ export const AchievmentsProvider: React.FC<{ children: ReactNode }> = ({ childre
     };
 
     return (
-        <AchievmentContext.Provider value={{ achievements, setAchievements, unreadAchievements, markAchievementAsRead }}>
+        <AchievementContext.Provider value={{ achievements, setAchievements, unreadAchievements, markAchievementAsRead }}>
             {children}
-            {showAnimation && <Suspense fallback={t("Loading...")}><AchievmentAnimation onClose={handleMarkLastAchievementAsRead}/></Suspense>}
-        </AchievmentContext.Provider>
+            {showAnimation && <Suspense fallback={t("Loading...")}><AchievementAnimation onClose={handleMarkLastAchievementAsRead}/></Suspense>}
+        </AchievementContext.Provider>
     );
 };
 
-export const useAchievmentsContext = () => {
-    const context = useContext(AchievmentContext);
+export const useAchievementsContext = () => {
+    const context = useContext(AchievementContext);
     if (!context) {
-        throw new Error('useAchievmentsContext must be used within a AchievmentsProvider');
+        throw new Error('useAchievementsContext must be used within a AchievementsProvider');
     }
     return context;
 };

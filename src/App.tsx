@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import "./i18n";
 import { ThemeProvider } from "./utils/providers/ThemeProvider.tsx";
 import { ProviderUser } from "./utils/providers/providerUser.tsx";
-import { AchievmentsProvider } from "./utils/providers/AchievmentsProvider.tsx";
+import { AchievementsProvider } from "./utils/providers/AchievementsProvider.tsx";
 import {UnverifiedHeaderInfo} from "./components/navbar/UnverifiedHeaderInfo.tsx";
 import {Header} from "./components/navbar/Header.tsx";
 import {Footer} from "./components/navbar/Footer.tsx";
@@ -23,12 +23,12 @@ function App() {
         <BrowserRouter>
             <ThemeProvider>
                 <ProviderUser>
-                    <AchievmentsProvider>
+                    <AchievementsProvider>
                         <UnverifiedHeaderInfo />
                         <Header />
                         <Router />
                         <Footer />
-                    </AchievmentsProvider>
+                    </AchievementsProvider>
                 </ProviderUser>
             </ThemeProvider>
         </BrowserRouter>

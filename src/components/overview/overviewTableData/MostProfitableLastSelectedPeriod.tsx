@@ -1,70 +1,16 @@
-import {FC, useEffect, useMemo, useState, useTransition} from "react";
+import {FC} from "react";
 import { useTranslation } from "react-i18next";
 import { OverviewTableChart } from "./overviewTableChart/OverviewTableChart.tsx";
 import { GainSeasonTh } from "./GainSeasonTh.tsx";
-import {useIndexDataContext} from "../../../utils/providers/IndexDataProvider.tsx";
-import {AssetProfitData} from "../../../utils/types/overviewTypes/IndexDataStructure.ts";
-import {getMostProfitableSelectedPeriod} from "../../../utils/api/indexDataService.ts";
 import {coinURL} from "../../../utils/constants";
 import {IndexSeasonExtended} from "../../../utils/enums/IndexSeasonEnum.ts";
 import {IndexTableSkeleton} from "./skeletons/IndexTableSkeleton.tsx";
-import {calculateProfit} from "../../../utils/functions/functions.ts";
+import {useMostProfitableLastSelectedPeriod} from "../../../utils/hooks/useMostProfitableLastSelectedPeriod.ts";
 
 
 export const MostProfitableLastSelectedPeriod: FC = () => {
     const { t } = useTranslation();
-    const { season, chartType } = useIndexDataContext();
-    const [data, setData] = useState<AssetProfitData[]>();
-    const [isPending, startTransition] = useTransition();
-
-    useEffect(() => {
-        const fetchData = async () => {
-            setData(undefined);
-            try {
-                const result = await getMostProfitableSelectedPeriod(season, chartType);
-                setData(result.data);
-            } catch (error) {
-                console.error(error);
-            }
-        };
-        startTransition(() => {
-            fetchData();
-        });
-    }, [season, chartType]);
-
-    const getProfitData = useMemo(() => {
-        const profitMap = (coin: AssetProfitData) => ({
-            Week: [
-                coin.week_3_profit ? calculateProfit(coin.week_3_profit) : undefined,
-                coin.week_2_profit ? calculateProfit(coin.week_2_profit) : undefined,
-                coin.week_1_profit ? calculateProfit(coin.week_1_profit) : undefined,
-                coin.week_0_profit ? calculateProfit(coin.week_0_profit) : undefined,
-            ].filter((value) => value !== undefined && value !== null),
-            Month: [
-                coin.month_2_profit ? calculateProfit(coin.month_2_profit) : undefined,
-                coin.month_1_profit ? calculateProfit(coin.month_1_profit) : undefined,
-                coin.month_0_profit ? calculateProfit(coin.month_0_profit) : undefined,
-            ].filter((value) => value !== undefined && value !== null),
-            Quarter: [
-                coin.quarter_3_profit ? calculateProfit(coin.quarter_3_profit) : undefined,
-                coin.quarter_2_profit ? calculateProfit(coin.quarter_2_profit) : undefined,
-                coin.quarter_1_profit ? calculateProfit(coin.quarter_1_profit) : undefined,
-                coin.quarter_0_profit ? calculateProfit(coin.quarter_0_profit) : undefined,
-            ].filter((value) => value !== undefined && value !== null),
-            Year: [
-                coin.year_2_profit ? calculateProfit(coin.year_2_profit) : undefined,
-                coin.year_1_profit ? calculateProfit(coin.year_1_profit) : undefined,
-                coin.year_0_profit ? calculateProfit(coin.year_0_profit) : undefined,
-            ].filter((value) => value !== undefined && value !== null),
-            Smart: [
-                coin.max_2_profit ? calculateProfit(coin.max_2_profit) : undefined,
-                coin.max_1_profit ? calculateProfit(coin.max_1_profit) : undefined,
-                coin.max_0_profit ? calculateProfit(coin.max_0_profit) : undefined,
-            ].filter((value) => value !== undefined && value !== null),
-        });
-        return (coin: AssetProfitData) => profitMap(coin)[season as keyof typeof profitMap];
-    }, [season]);
-
+    const {data, isPending, getProfitData, season} = useMostProfitableLastSelectedPeriod();
 
     return (
         <div className="p-4 rounded">

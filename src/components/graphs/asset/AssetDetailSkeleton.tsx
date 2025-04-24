@@ -9,9 +9,8 @@ export const AssetDetailSkeleton:FC = () => {
                     <div className="col-sm-3 mb-2" key={i}>  
                     <Skeleton height={50} width={250}/>
                     </div>
-                    ))}
+                ))}
             </div>
-            
             <Skeleton height={150} width={350}/>
         </div>
     );

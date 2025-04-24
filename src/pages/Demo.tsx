@@ -23,7 +23,7 @@ export const Demo:FC = () => {
     }, [id]);
     
     return (
-        <div className="padding-bottom" style={{height: "100vh"}}>
+        <div className="padding-bottom" style={{minHeight: "100vh"}}>
             <div className="container">
                 <div className="service-details__wrapper">
                     <div className="service-details__item">

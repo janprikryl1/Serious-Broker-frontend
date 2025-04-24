@@ -1,4 +1,4 @@
-import {FC} from "react";
+import {ChangeEvent, FC} from "react";
 import {Form, InputGroup} from "react-bootstrap";
 import {useTranslation} from "react-i18next";
 import {useArticleTranslate} from "../../../../../../utils/providers/ArticleTranslateProvider.tsx";
@@ -9,11 +9,7 @@ export const TranslateTaskColumn:FC = () => {
     const { t } = useTranslation();
     const { content, currentContent, setContent, language } = useArticleTranslate();
 
-    const handleSetContentTask = (
-        e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-        contentIndex: number,
-        taskIndex: number
-    ) => {
+    const handleSetContentTask = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, contentIndex: number, taskIndex: number) => {
         setContent((prevState) =>
             prevState.map((category, i) => {
                 if (i === contentIndex) {

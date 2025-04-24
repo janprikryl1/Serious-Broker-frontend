@@ -2,65 +2,49 @@ import { FC, useEffect, useState, useRef, useCallback } from "react";
 import { AssetType } from "../../utils/types/asset/AssetType.ts";
 import { useTranslation } from "react-i18next";
 import { AssetOrder } from "../../utils/enums/AssetOrderEnum.ts";
-import {getAllAssets} from "../../utils/api/binanceIndexAssets.ts";
-import {TitleHeader} from "../../components/about/TitleHeader.tsx";
-import {AssetSkeleton} from "../../components/graphs/asset/AssetSkeleton.tsx";
-import {AssetCard} from "../../components/graphs/asset/AssetCard.tsx";
-import {pageLimit} from "../../utils/constants";
-import {SeasonButton} from "../../components/overview/SeasonButton.tsx";
+import { getAllAssets } from "../../utils/api/binanceIndexAssets.ts";
+import { TitleHeader } from "../../components/about/TitleHeader.tsx";
+import { AssetSkeleton } from "../../components/graphs/asset/AssetSkeleton.tsx";
+import { AssetCard } from "../../components/graphs/asset/AssetCard.tsx";
+import { pageLimit } from "../../utils/constants";
+import { SeasonButton } from "../../components/overview/SeasonButton.tsx";
+import {useInfiniteScroll} from "../../utils/hooks/useInfiniteScroll.ts";
 
 export const Assets: FC = () => {
     const { t } = useTranslation();
     const [assets, setAssets] = useState<AssetType[]>([]);
-    const [page, setPage] = useState<number>(1);
     const [totalPages, setTotalPages] = useState<number>(1);
     const [loading, setLoading] = useState<boolean>(false);
     const [orderType, setOrderType] = useState<AssetOrder>(AssetOrder.WeeklyProfit);
-    const observerRef = useRef<IntersectionObserver | null>(null);
-    const loaderRef = useRef<HTMLDivElement | null>(null);
     const isFetchingRef = useRef<boolean>(false);
-    
-    const getAssets = useCallback(async (reset: boolean = false) => {
-        if (isFetchingRef.current || (page > totalPages && !reset)) return;
+    const { currentPage, loaderRef, resetPage } = useInfiniteScroll({totalPages, loading});
 
+    const getAssets = useCallback(async (reset: boolean = false) => {
+        if (isFetchingRef.current || (currentPage > totalPages && !reset)) return;
         isFetchingRef.current = true;
         setLoading(true);
-
-        const response = await getAllAssets(reset ? 1 : page, pageLimit, orderType);
+        const response = await getAllAssets(reset ? 1 : currentPage, pageLimit, orderType);
         if (response) {
             setAssets((prev) => (reset ? response.data.data : [...prev, ...response.data.data]));
             setTotalPages(response.data.totalPages);
         }
-
         setLoading(false);
         isFetchingRef.current = false;
-    }, [page, orderType]);
+    }, [currentPage, orderType, totalPages]);
+
+    useEffect(() => {
+        getAssets(true);
+    }, [orderType]);
 
     useEffect(() => {
         getAssets();
-    }, [page, orderType]);
+    }, [currentPage]);
 
-    useEffect(() => {
-        if (!loaderRef.current) return;
-
-        observerRef.current = new IntersectionObserver(
-            (entries) => {
-                const target = entries[0];
-                if (target.isIntersecting && !loading && page < totalPages) {
-                    setPage((prev) => prev + 1);
-                }
-            },
-            {
-                root: null,
-                rootMargin: "100px",
-                threshold: 1.0,
-            }
-        );
-
-        observerRef.current.observe(loaderRef.current);
-
-        return () => observerRef.current?.disconnect();
-    }, [loading, totalPages, page]);
+    const handleOrderTypeChange = (orderTypeItem: AssetOrder) => {
+        setAssets([]);
+        resetPage();
+        setOrderType(orderTypeItem);
+    };
 
     return (
         <>
@@ -78,11 +62,7 @@ export const Assets: FC = () => {
                                     key={orderTypeItem}
                                     seasonValue={orderTypeItem}
                                     isActive={orderTypeItem === orderType}
-                                    onSelect={() => {
-                                        setAssets([]);
-                                        setPage(1);
-                                        setOrderType(orderTypeItem);
-                                    }}
+                                    onSelect={() => handleOrderTypeChange(orderTypeItem)}
                                 />
                             ))}
                         </div>

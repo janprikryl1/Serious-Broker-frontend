@@ -6,34 +6,12 @@ import Slider from "@mui/material/Slider";
 import {Assets} from "../../../../utils/types/asset/AssetDetailType.ts";
 import {useMyPortfolioContext} from "../../../../utils/providers/MyPortfolioProvider.tsx";
 import {Button, ButtonColor} from "../../../reusable/Button.tsx";
+import {marks} from "../../../../utils/constants/marks.ts";
 
 type Props = {
     asset: Assets;
     index: number;
 };
-
-const marks = [
-    {
-        value: 0,
-        label: '0 %',
-    },
-    {
-        value: 25,
-        label: '25 %',
-    },
-    {
-        value: 50,
-        label: '50 %',
-    },
-    {
-        value: 75,
-        label: '75 %',
-    },
-    {
-        value: 100,
-        label: '100 %',
-    },
-];
 
 export const MyPortfolioAsset: FC<Props> = ({ asset, index }) => {
     const { t } = useTranslation();

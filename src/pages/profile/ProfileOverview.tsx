@@ -1,6 +1,6 @@
 import {FC} from "react";
 import {useTranslation} from "react-i18next";
-import {useAchievmentsContext} from "../../utils/providers/AchievmentsProvider.tsx";
+import {useAchievementsContext} from "../../utils/providers/AchievementsProvider.tsx";
 import {useUserContext} from "../../utils/providers/providerUser.tsx";
 import {AdminOverviewCard} from "../../components/admin/AdminOverviewCard.tsx";
 import {toCzechDateFormat} from "../../utils/functions/dateFunctions.ts";
@@ -11,7 +11,7 @@ import {RecommendedAssets} from "../../components/profile/myPortfolio/Recommende
 
 export const ProfileOverview:FC = () => {
     const {t} = useTranslation();
-    const {achievements, unreadAchievements} = useAchievmentsContext();
+    const {achievements, unreadAchievements} = useAchievementsContext();
     const {user} = useUserContext();
     
     return (

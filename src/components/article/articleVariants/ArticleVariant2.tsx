@@ -39,7 +39,7 @@ export const ArticleVariant2:FC<Props> = ({content, category, setCategory, task,
                     <br /><br />
                 </>
             ) : (
-                <p>{t("Na návodu se pracuje")}</p>
+                <p>{t("We are working on guide")}</p>
             )}
         </>
     )

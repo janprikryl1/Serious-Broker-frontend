@@ -1,4 +1,4 @@
-export type AssetAlaysisGraphData = {
+export type AssetAnalysisGraphData = {
     price: number;
     data: Record<string, number>;
 }

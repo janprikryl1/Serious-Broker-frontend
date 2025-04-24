@@ -1,12 +1,12 @@
 import axios from "axios";
 import {backendUrl} from "../../env.ts";
-import {ChachedDataType} from "../types/admin/ChachedDataType.ts";
+import {CachedDataType} from "../types/admin/CachedDataType.ts";
 
 export const getAllChachedData = async () => {
     const token = localStorage.getItem("token");
     if (!token) return;
     
-    return await axios.get<ChachedDataType[]>(backendUrl+'binance/get_chached_data.php', {
+    return await axios.get<CachedDataType[]>(backendUrl+'binance/get_chached_data.php', {
         headers: {
             Authorization: `Bearer ${token}`,
         }

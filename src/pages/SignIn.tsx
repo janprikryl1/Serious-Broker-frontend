@@ -1,82 +1,14 @@
-import { FC, useEffect } from "react";
-import { useForm } from "react-hook-form";
-import { useNavigate, Link } from "react-router-dom";
+import { FC } from "react";
+import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { useUserContext } from "../utils/providers/providerUser.tsx";
-import {guideURLS, routes} from "../utils/constants";
-import { login } from "../utils/api/authenticateService.ts";
+import {routes} from "../utils/constants";
 import { LoginRegisterInput } from "../components/signIn/LoginRegisterInput.tsx";
 import { Button, ButtonColor } from "../components/reusable/Button.tsx";
-import { CustomSwal } from "../utils/functions/customSwal.ts";
-
-type LoginFormInputs = {
-    email: string;
-    password: string;
-};
+import {useSignIn} from "../utils/hooks/useSignIn.ts";
 
 export const SignIn: FC = () => {
     const { t } = useTranslation();
-    const navigate = useNavigate();
-    const { setUser, user } = useUserContext();
-
-    const {
-        register,
-        handleSubmit,
-        formState: { isSubmitting }
-    } = useForm<LoginFormInputs>();
-
-    useEffect(() => {
-        if (user) {
-            navigate(routes.profile.profileURL);
-        }
-    }, [user]);
-
-    const onSubmit = async (data: LoginFormInputs) => {
-        try {
-            const response = await login(data);
-            const resData = response.data;
-
-            if (resData.status === "success") {
-                CustomSwal.fire({
-                    icon: "success",
-                    title: t("Login Successful"),
-                    text: t("Welcome back!")
-                }).then(() => {
-                    setUser(resData.user);
-                    navigate(guideURLS.personalStrategy);
-                });
-            } else if (resData.status === "error") {
-                if (resData.message === "invalid") {
-                    CustomSwal.fire({
-                        icon: "error",
-                        title: t("Login Failed"),
-                        text: resData.attempts > 0
-                            ? `${t("Invalid email or password. Remaining attempts:")} ${resData.attempts}`
-                            : t("Too many wrong attempts. Try again after hour")
-                    });
-                } else if (resData.message === "Too many wrong attempts") {
-                    CustomSwal.fire({
-                        icon: "error",
-                        title: t("Login Failed"),
-                        text: `${t("Too many wrong attempts. Remaining time:")} ${60 - resData.time} ${t("minutes")}`
-                    });
-                } else {
-                    CustomSwal.fire({
-                        icon: "error",
-                        title: t("Login Failed"),
-                        text: t("Login Failed")
-                    });
-                }
-            }
-        } catch (error) {
-            console.error(error);
-            CustomSwal.fire({
-                icon: "error",
-                title: t("Login Failed"),
-                text: t("Invalid email or password. Please try again")
-            });
-        }
-    };
+    const {handleSubmit, onSubmit, register, isSubmitting} = useSignIn();
 
     return (
         <section className="account padding-bottom mt-3">

@@ -17,5 +17,5 @@ export const ArticlePostTitle:FC = () => {
                 disabled={postId !== undefined}
             />
         </InputGroup>  
-        );
+    );
 };

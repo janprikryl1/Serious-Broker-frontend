@@ -1,13 +1,14 @@
-import {ChangeEvent, FC, useState} from "react";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faTrash} from "@fortawesome/free-solid-svg-icons";
-import {useTranslation} from "react-i18next";
-import {Link} from "react-router-dom";
-import {deleteGlossary, editGlossary} from "../../utils/api/glossaryService.ts";
-import {glossaryImagesURL} from "../../utils/constants";
-import {Button, ButtonColor} from "../reusable/Button.tsx";
-import {CustomSwal} from "../../utils/functions/customSwal.ts";
-import {GlossaryType} from "../../utils/types/article/GlossaryType.ts";
+import { FC, useEffect } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
+import { useForm, Controller } from "react-hook-form";
+import { deleteGlossary, editGlossary } from "../../utils/api/glossaryService.ts";
+import { glossaryImagesURL } from "../../utils/constants";
+import { Button, ButtonColor } from "../reusable/Button.tsx";
+import { CustomSwal } from "../../utils/functions/customSwal.ts";
+import { GlossaryType } from "../../utils/types/article/GlossaryType.ts";
 
 type Props = {
     glossary: GlossaryType;
@@ -17,14 +18,48 @@ type Props = {
 
 export const GlossaryEditTableLine: FC<Props> = ({ glossary, onUpdate, onDelete }) => {
     const { t } = useTranslation();
-    const [localImage, setLocalImage] = useState<File | null>(null);
+    const {
+        control,
+        handleSubmit,
+        watch,
+        register,
+        reset
+    } = useForm<GlossaryType & { imageFile?: File }>({
+        defaultValues: {
+            ...glossary,
+            imageFile: undefined,
+        },
+    });
+    const imageFile = watch("imageFile");
 
-    const handleInputChange = (e: ChangeEvent<HTMLInputElement>, field: keyof GlossaryType) => {
-        if (field === "image") {
-            const file = e.target.files?.[0] || null;
-            setLocalImage(file); // Update local state with the selected file
-        } else {
-            onUpdate({ ...glossary, [field]: e.target.value });
+    useEffect(() => {
+        reset(glossary);
+    }, [glossary]);
+
+    const onSubmit = async (data: GlossaryType & { imageFile?: File }) => {
+        try {
+            const updatedGlossary: GlossaryType = {
+                ...glossary,
+                ...data,
+                image: data.imageFile ? data.imageFile.name : glossary.image,
+            };
+            const result = await editGlossary(updatedGlossary, data.imageFile || null);
+            if (result?.data.status === "success") {
+                CustomSwal.fire({
+                    title: t("Glossary updated"),
+                    text: t("The glossary was successfully updated."),
+                    icon: "success",
+                });
+                onUpdate(updatedGlossary);
+            } else {
+                throw new Error("Update failed");
+            }
+        } catch (error) {
+            CustomSwal.fire({
+                title: t("Glossary update failed"),
+                text: t("Try again later."),
+                icon: "error",
+            });
         }
     };
 
@@ -39,7 +74,6 @@ export const GlossaryEditTableLine: FC<Props> = ({ glossary, onUpdate, onDelete 
             });
             onDelete(glossary.id);
         } catch (error) {
-            console.error("Error deleting glossary:", error);
             CustomSwal.fire({
                 title: t("Glossary deletion failed"),
                 text: t("Try again later."),
@@ -48,79 +82,33 @@ export const GlossaryEditTableLine: FC<Props> = ({ glossary, onUpdate, onDelete 
         }
     };
 
-    const handleSave = async () => {
-        try {
-            const updatedGlossary = {
-                ...glossary,
-                image: localImage ? localImage.name : glossary.image,
-            };
-
-            const result = await editGlossary(updatedGlossary, localImage);
-            if (!result) return;
-            if (result.data.status === "success") {
-                CustomSwal.fire({
-                    title: t("Glossary updated"),
-                    text: t("The glossary was successfully updated."),
-                    icon: "success",
-                });
-            } else {
-                CustomSwal.fire({
-                    title: t("Glossary update failed"),
-                    text: t("Try again later."),
-                    icon: "error",
-                });
-            }
-        } catch (error) {
-            console.error("Error updating glossary:", error);
-            CustomSwal.fire({
-                title: t("Glossary update failed"),
-                text: t("Try again later."),
-                icon: "error",
-            });
-        }
-    };
-
     return (
         <tr>
+            <td><input {...register("title")} className="contact-input" /></td>
+            <td><input {...register("title_cs")} className="contact-input" /></td>
+            <td><input {...register("answer")} className="contact-input" /></td>
+            <td><input {...register("answer_cs")} className="contact-input" /></td>
             <td>
-                <input
-                    type="text"
-                    value={glossary.title}
-                    onChange={(e) => handleInputChange(e, "title")}
+                <Controller
+                    control={control}
+                    name="imageFile"
+                    render={({ field }) => (
+                        <>
+                            <input
+                                type="file"
+                                accept="image/*"
+                                className="form-control"
+                                onChange={(e) => field.onChange(e.target.files?.[0])}
+                            />
+                            {glossary.image && !imageFile && (
+                                <Link to={`${glossaryImagesURL}${glossary.image}`}>
+                                    {glossary.image}
+                                </Link>
+                            )}
+                            {imageFile && imageFile.name}
+                        </>
+                    )}
                 />
-            </td>
-            <td>
-                <input
-                    type="text"
-                    value={glossary.title_cs}
-                    onChange={(e) => handleInputChange(e, "title_cs")}
-                />
-            </td>
-            <td>
-                <input
-                    type="text"
-                    value={glossary.answer}
-                    onChange={(e) => handleInputChange(e, "answer")}
-                />
-            </td>
-            <td>
-                <input
-                    type="text"
-                    value={glossary.answer_cs}
-                    onChange={(e) => handleInputChange(e, "answer_cs")}
-                />
-            </td>
-            <td>
-                <input
-                    type="file"
-                    onChange={(e) => handleInputChange(e, "image")}
-                    accept="image/*"
-                    className="form-control"
-                />
-                {glossary.image && !localImage && (
-                    <Link to={`${glossaryImagesURL}${glossary.image}`}>{glossary.image}</Link>
-                )}
-                {localImage && localImage.name}
             </td>
             <td>
                 <Button color={ButtonColor.red} onClick={handleDelete}>
@@ -128,7 +116,7 @@ export const GlossaryEditTableLine: FC<Props> = ({ glossary, onUpdate, onDelete 
                 </Button>
             </td>
             <td>
-                <Button onClick={handleSave}>
+                <Button onClick={handleSubmit(onSubmit)}>
                     {t("Save")}
                 </Button>
             </td>

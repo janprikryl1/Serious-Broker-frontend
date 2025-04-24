@@ -1,32 +1,29 @@
-import { FC, useEffect, useState, useRef, useCallback } from "react";
+import { FC, useState, useRef, useCallback, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { ArticleProps } from "../utils/types/article/ArticleProps.ts";
-import {getAllArticles} from "../utils/api/articleService.ts";
-import {TitleHeader} from "../components/about/TitleHeader.tsx";
-import {DictionaryLinkCard} from "../components/articles/dictionary/DictionaryLinkCard.tsx";
-import {CryptoCurrenciesLinkCard} from "../components/articles/cryptoCurrenciesList/CryptoCurrenciesLinkCard.tsx";
-import {ArticleCard} from "../components/articles/ArticleCard.tsx";
-import {ArticlesSkeleton} from "../components/articles/ArticlesSkeleton.tsx";
-import {CustomSwal} from "../utils/functions/customSwal.ts";
+import { getAllArticles } from "../utils/api/articleService.ts";
+import { TitleHeader } from "../components/about/TitleHeader.tsx";
+import { DictionaryLinkCard } from "../components/articles/dictionary/DictionaryLinkCard.tsx";
+import { CryptoCurrenciesLinkCard } from "../components/articles/cryptoCurrenciesList/CryptoCurrenciesLinkCard.tsx";
+import { ArticleCard } from "../components/articles/ArticleCard.tsx";
+import { ArticlesSkeleton } from "../components/articles/ArticlesSkeleton.tsx";
+import { CustomSwal } from "../utils/functions/customSwal.ts";
+import {useInfiniteScroll} from "../utils/hooks/useInfiniteScroll.ts";
 
 export const Articles: FC = () => {
     const { t } = useTranslation();
     const [articles, setArticles] = useState<ArticleProps[]>([]);
-    const [page, setPage] = useState<number>(1);
     const [totalPages, setTotalPages] = useState<number>(1);
     const [loading, setLoading] = useState<boolean>(false);
-    const observerRef = useRef<IntersectionObserver | null>(null);
-    const loaderRef = useRef<HTMLDivElement | null>(null);
     const isFetchingRef = useRef<boolean>(false);
+    const { currentPage, loaderRef } = useInfiniteScroll({totalPages, loading});
 
     const fetchArticles = useCallback(async (reset: boolean = false) => {
-        if (isFetchingRef.current || (page > totalPages && !reset)) return;
-
+        if (isFetchingRef.current || (currentPage > totalPages && !reset)) return;
         isFetchingRef.current = true;
         setLoading(true);
-
         try {
-            const response = await getAllArticles(reset ? 1 : page);
+            const response = await getAllArticles(reset ? 1 : currentPage);
             setArticles((prev) => (reset ? response.data.data : [...prev, ...response.data.data]));
             setTotalPages(response.data.totalPages);
         } catch (error) {
@@ -37,10 +34,9 @@ export const Articles: FC = () => {
             });
             console.error("Error fetching articles:", error);
         }
-
         setLoading(false);
         isFetchingRef.current = false;
-    }, [page, t]);
+    }, [currentPage, t, totalPages]);
 
     useEffect(() => {
         fetchArticles(true);
@@ -48,24 +44,7 @@ export const Articles: FC = () => {
 
     useEffect(() => {
         fetchArticles();
-    }, [page]);
-
-    useEffect(() => {
-        if (!loaderRef.current) return;
-
-        observerRef.current = new IntersectionObserver(
-            (entries) => {
-                if (entries[0].isIntersecting && !loading && page < totalPages) {
-                    setPage((prev) => prev + 1);
-                }
-            },
-            { root: null, rootMargin: "100px", threshold: 1.0 }
-        );
-
-        observerRef.current.observe(loaderRef.current);
-
-        return () => observerRef.current?.disconnect();
-    }, [loading, totalPages, page]);
+    }, [currentPage]);
 
     return (
         <>

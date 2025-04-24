@@ -26,7 +26,6 @@ export const TranslateTextField = () => {
         const translatedText = response.data.translated_text;
         handleSetContentTitle(translatedText, currentContent);
     }
-    
 
     return (
         <>

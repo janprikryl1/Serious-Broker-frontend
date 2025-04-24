@@ -7,11 +7,7 @@ export const Faq:FC = () => {
     const {t} = useTranslation();
     
     return (
-        <div
-            className="mt-55"
-            data-aos="fade-up"
-            data-aos-duration="1000"
-        >
+        <div className="mt-55" data-aos="fade-up" data-aos-duration="1000">
             <div className="faq">
                 <h1>FAQ</h1>
                     <Accordion className="accordion--style1" defaultActiveKey="">

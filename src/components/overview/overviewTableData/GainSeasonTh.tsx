@@ -8,6 +8,10 @@ export const GainSeasonTh:FC = () => {
     const {season} = useIndexDataContext();
     
     return (
-        <th>{t(`${season === IndexSeasonExtended.WEEK ? "Week" : season === IndexSeasonExtended.MONTH ? "Month" : season === IndexSeasonExtended.QUARTER ? "Quarter" : season === IndexSeasonExtended.SMART ? "Smart" : "Year"} 0 profit: `)}</th>
+        <th>{t(`${season === IndexSeasonExtended.WEEK ? "Week" :
+                       season === IndexSeasonExtended.MONTH ? "Month" :
+                       season === IndexSeasonExtended.QUARTER ? "Quarter" :
+                       season === IndexSeasonExtended.SMART ? "Smart" : "Year"} 0 profit: `)}
+        </th>
     );
 }

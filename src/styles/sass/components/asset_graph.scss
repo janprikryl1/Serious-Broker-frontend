@@ -3,9 +3,44 @@
   border-radius: 16px;
   margin: 1%;
   padding: 1%;
-  height: 75px;
   width: 342px;
   color: black;
+}
+
+.asset-graph-currency-card-img {
+  width: 40px;
+  max-width: 50px;
+}
+
+.asset-graph-currency-card-coin-name {
+  font-size: 15px;
+  text-align: center;
+  line-height: 1.4;
+  margin-top: 5px;
+  max-width: 90px;
+}
+
+.asset-graph-currency-card-coin-name-link {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.asset-graph-currency-card-graph {
+  font-size: 15px;
+  text-align: center;
+  line-height: 1.4;
+  margin-top: 5px; 
+}
+
+.asset-graph-currency-card-price-container {
+  font-size: 15px;
+  text-align: center;
+  line-height: 0.5;
+}
+
+.asset-graph-currency-card-price-container-text {
+  font-size: 20px;
+  font-weight: bold;
 }
 
 @media (max-width: 768px) {

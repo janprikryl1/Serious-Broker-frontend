@@ -3,17 +3,18 @@ import {Form, InputGroup} from "react-bootstrap";
 import {useTranslation} from "react-i18next";
 import {BinanceIndexType} from "../../../utils/types/graphs/BinanceIndexType.ts";
 import {Button, ButtonColor} from "../../reusable/Button.tsx";
+import {BinanceIndexAboutFilterColumnsType} from "../../../utils/types/admin/BinanceIndexAboutFilterColumnsType.ts";
 
 type Props = {
     binanceIndexes: BinanceIndexType[];
     setFilteredIndexes: Dispatch<SetStateAction<BinanceIndexType[]>>
-    columns: {field: string; headerName: string; flex: number; editable: boolean; renderCell?: undefined }[] | { field: string; headerName: string; flex: number; }[];
+    columns: BinanceIndexAboutFilterColumnsType[];
 }
 
 export const BinanceIndexTableFilter:FC<Props> = ({binanceIndexes, setFilteredIndexes, columns}) => {
     const { t } = useTranslation();
     const [searchTerm, setSearchTerm] = useState('');
-    const [searchColumn, setSearchColumn] = useState<string>('id');
+    const [searchColumn, setSearchColumn] = useState('id');
 
     const handleSearch = () => {
         const results = binanceIndexes.filter((binanceIndex) =>

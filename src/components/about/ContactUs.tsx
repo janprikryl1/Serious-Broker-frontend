@@ -1,4 +1,4 @@
-import { FC } from "react";
+import {FC, FormEvent} from "react";
 import { useTranslation } from "react-i18next";
 import { Button } from "../reusable/Button.tsx";
 import "../../styles/sass/components/contact_us.scss";
@@ -9,7 +9,7 @@ import {CustomSwal} from "../../utils/functions/customSwal.ts";
 export const ContactUs: FC = () => {
     const { t } = useTranslation();
 
-    const handleSendMessage = async (event: React.FormEvent<HTMLFormElement>) => {
+    const handleSendMessage = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         const formData = new FormData(event.currentTarget);
         const name = (formData.get("name") ?? "").toString();

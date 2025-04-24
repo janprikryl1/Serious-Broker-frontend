@@ -4,10 +4,11 @@ import {ImageModal} from "../../article/articleVariants/ImageModal.tsx";
 import {getQR} from "../../../utils/api/qrService.ts";
 import {qrCodeImagesURL} from "../../../utils/constants";
 import {QRCodeType} from "../../../utils/types/admin/QRCodeType.ts";
+import {useModal} from "../../../utils/hooks/useModal.tsx";
 
 export const QRPayment:FC = () => {
     const {t} = useTranslation();
-    const [isModalOpen, setModalOpen] = useState(false);
+    const {isOpen: isModalOpen, closeModal, openModal} = useModal();
     const [qrData, setQrData] = useState<QRCodeType>();
 
     useEffect(() => {
@@ -25,7 +26,7 @@ export const QRPayment:FC = () => {
                 <h1>{t("To access premium articles, you need to pay with a cryptocurrency")}</h1>
                 <div className="row">
                     <div className="col-sm-2">
-                        <img src={qrCodeImagesURL+qrData.image} alt="QR Code" style={{width: "40vw", height:"40vh"}} className="mb-3" onClick={() => setModalOpen(true)}/>
+                        <img src={qrCodeImagesURL+qrData.image} alt="QR Code" className="mb-3" onClick={openModal}/>
                     </div>
                     <div className="col-sm-6" style={{fontSize: "25px"}}>
                         <p>{t("Description")}: {t(qrData.description)}</p>
@@ -33,7 +34,7 @@ export const QRPayment:FC = () => {
                         <p>{t("Address of deposit")}: {qrData.address_of_deposit}</p>
                     </div>
                 </div>
-                <ImageModal isModalOpen={isModalOpen} selectedImage={qrCodeImagesURL+qrData.image} setModalOpen={setModalOpen} />
+                <ImageModal isModalOpen={isModalOpen} selectedImage={qrCodeImagesURL+qrData.image} closeModal={closeModal} />
             </div>
         );
     }

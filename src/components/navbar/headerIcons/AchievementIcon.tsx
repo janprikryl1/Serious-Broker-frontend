@@ -7,13 +7,13 @@ import Badge from '@mui/material/Badge';
 import {GiConfirmed} from "react-icons/gi";
 import {AchievmentMenuListItem} from "./AchievmentMenuListItem.tsx";
 import {useUserContext} from "../../../utils/providers/providerUser.tsx";
-import {useAchievmentsContext} from "../../../utils/providers/AchievmentsProvider.tsx";
+import {useAchievementsContext} from "../../../utils/providers/AchievementsProvider.tsx";
 import {routes} from "../../../utils/constants";
 
 export const AchievementIcon: FC = () => {
     const { user } = useUserContext();
     const { t } = useTranslation();
-    const {unreadAchievements} = useAchievmentsContext();
+    const {unreadAchievements} = useAchievementsContext();
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
 

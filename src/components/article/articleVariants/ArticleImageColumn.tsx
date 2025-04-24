@@ -4,6 +4,8 @@ import { TbHandFinger } from "react-icons/tb";
 import {ImageModal} from "./ImageModal.tsx";
 import {ContentType} from "../../../utils/types/article/ContentType.ts";
 import {imageURL} from "../../../utils/constants";
+import {useModal} from "../../../utils/hooks/useModal.tsx";
+import {defaultSpring} from "../../../utils/constants/defaultContent.ts";
 
 type Props = {
     task: number;
@@ -12,11 +14,8 @@ type Props = {
 };
 
 export const ArticleImageColumn: FC<Props> = ({ task, category, content }) => {
-    const [springs, api] = useSpring(() => ({
-        from: { x: 0, y: 0 },
-    }));
-
-    const [isModalOpen, setModalOpen] = useState(false);
+    const [springs, api] = useSpring(() => defaultSpring);
+    const { isOpen: isModalOpen, openModal: openModal, closeModal: closeModal } = useModal();
     const [selectedImage, setSelectedImage] = useState("");
 
     useEffect(() => {
@@ -42,7 +41,7 @@ export const ArticleImageColumn: FC<Props> = ({ task, category, content }) => {
 
     const handleImageClick = (imgSrc: string) => {
         setSelectedImage(imgSrc);
-        setModalOpen(true);
+        openModal();
     };
 
     return (
@@ -65,7 +64,7 @@ export const ArticleImageColumn: FC<Props> = ({ task, category, content }) => {
                     <TbHandFinger style={{ color: "red" }} />
                 </animated.div>
             )}
-            <ImageModal isModalOpen={isModalOpen} selectedImage={selectedImage} setModalOpen={setModalOpen} />
+            <ImageModal isModalOpen={isModalOpen} selectedImage={selectedImage} closeModal={closeModal} />
         </div>
     );
 }

@@ -2,10 +2,11 @@ import { FC, useEffect, useState, useRef, useCallback } from "react";
 import { CryptoCurrencyLink } from "./CryptoCurrencyLink.tsx";
 import { CryptoCurrenciesSkeleton } from "./CryptoCurrenciesSkeleton.tsx";
 import { useTranslation } from "react-i18next";
-import {getAllCryptocurrencies, getSearchCryptocurrencies} from "../../../utils/api/CryptocurrencyService.ts";
-import {Button, ButtonColor} from "../../reusable/Button.tsx";
-import {CryptoCurrencyType} from "../../../utils/types/asset/CryptoCurrencyType.ts";
+import { getAllCryptocurrencies, getSearchCryptocurrencies } from "../../../utils/api/CryptocurrencyService.ts";
+import { Button, ButtonColor } from "../../reusable/Button.tsx";
+import { CryptoCurrencyType } from "../../../utils/types/asset/CryptoCurrencyType.ts";
 import "../../../styles/sass/components/crypto_currencies.scss";
+import {useInfiniteScroll} from "../../../utils/hooks/useInfiniteScroll.ts";
 
 const PAGE_SIZE = 50;
 
@@ -13,25 +14,19 @@ export const CryptoCurrencies: FC = () => {
     const { t } = useTranslation();
     const [cryptocurrencies, setCryptocurrencies] = useState<CryptoCurrencyType[]>([]);
     const [searchValue, setSearchValue] = useState("");
-    const [currentPage, setCurrentPage] = useState<number>(1);
     const [totalPages, setTotalPages] = useState<number>(1);
     const [loading, setLoading] = useState<boolean>(false);
-
-    const observerRef = useRef<IntersectionObserver | null>(null);
-    const loaderRef = useRef<HTMLDivElement | null>(null);
     const isFetchingRef = useRef<boolean>(false);
+    const { currentPage, loaderRef, resetPage } = useInfiniteScroll({totalPages, loading});
 
     const fetchData = useCallback(async (reset: boolean = false) => {
         if (isFetchingRef.current || (currentPage > totalPages && !reset)) return;
-
         isFetchingRef.current = true;
         setLoading(true);
-
         try {
             const res = searchValue
                 ? await getSearchCryptocurrencies(searchValue, reset ? 1 : currentPage, PAGE_SIZE)
                 : await getAllCryptocurrencies(reset ? 1 : currentPage, PAGE_SIZE);
-
             setCryptocurrencies((prev) => (reset ? res.data.data : [...prev, ...res.data.data]));
             setTotalPages(res.data.totalPages || 1);
         } catch (e) {
@@ -40,7 +35,7 @@ export const CryptoCurrencies: FC = () => {
 
         setLoading(false);
         isFetchingRef.current = false;
-    }, [currentPage, searchValue]);
+    }, [currentPage, searchValue, totalPages]);
 
     useEffect(() => {
         fetchData(true);
@@ -50,22 +45,8 @@ export const CryptoCurrencies: FC = () => {
         fetchData();
     }, [currentPage]);
 
-    useEffect(() => {
-        if (!loaderRef.current) return;
-        observerRef.current = new IntersectionObserver(
-            (entries) => {
-                if (entries[0].isIntersecting && !loading && currentPage < totalPages) {
-                    setCurrentPage((prev) => prev + 1);
-                }
-            },
-            { root: null, rootMargin: "100px", threshold: 1.0 }
-        );
-        observerRef.current.observe(loaderRef.current);
-        return () => observerRef.current?.disconnect();
-    }, [loading, totalPages, currentPage]);
-
     const handleSearch = () => {
-        setCurrentPage(1);
+        resetPage();
         setCryptocurrencies([]);
     };
 

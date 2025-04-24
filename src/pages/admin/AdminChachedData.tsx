@@ -6,11 +6,11 @@ import {TableLogSkeleton} from "../../components/admin/TableLogSkeleton.tsx";
 import {Button, ButtonColor} from "../../components/reusable/Button.tsx";
 import {toCzechDateFormat} from "../../utils/functions/dateFunctions.ts";
 import {CustomSwal} from "../../utils/functions/customSwal.ts";
-import {ChachedDataType} from "../../utils/types/admin/ChachedDataType.ts";
+import {CachedDataType} from "../../utils/types/admin/CachedDataType.ts";
 
 export const AdminChachedData:FC = () => {
     const { t } = useTranslation();
-    const [logs, setLogs] = useState<ChachedDataType[]>([]);
+    const [logs, setLogs] = useState<CachedDataType[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
 
     useEffect(() => {

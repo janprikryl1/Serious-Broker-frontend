@@ -1,11 +1,11 @@
 import { FC } from "react";
 import {useTranslation} from "react-i18next";
 import {TimeLineComponent} from "../../reusable/TimeLineComponent.tsx";
-import {useAchievmentsContext} from "../../../utils/providers/AchievmentsProvider.tsx";
+import {useAchievementsContext} from "../../../utils/providers/AchievementsProvider.tsx";
 
-export const UserAchievmentsTimeLine: FC = () => {
+export const UserAchievementsTimeLine: FC = () => {
     const {t} = useTranslation();
-    const { achievements } = useAchievmentsContext();
+    const { achievements } = useAchievementsContext();
 
     return (
         <div className="cta__subscribe">

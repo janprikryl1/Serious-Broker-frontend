@@ -12,7 +12,7 @@ type Props = {
 type UserDetailsProviderProps = {
     userDetails: UserType | undefined;
     setUserDetails: Dispatch<SetStateAction<UserType | undefined>>;
-    sumbitChanges: () => Promise<void>;
+    submitChanges: () => Promise<void>;
     handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
@@ -31,7 +31,7 @@ export const UserDetailsProvider = ({children}: Props) => {
         }));
     };
 
-    const sumbitChanges = async () => {
+    const submitChanges = async () => {
         if (userDetails === undefined || userDetails.email === "") return;
         try {
             const response = await updateUserDetails(userDetails);
@@ -64,7 +64,7 @@ export const UserDetailsProvider = ({children}: Props) => {
     const value = {
         userDetails,
         setUserDetails,
-        sumbitChanges,
+        submitChanges,
         handleChange
     }
 

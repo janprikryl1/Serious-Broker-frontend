@@ -47,9 +47,7 @@ export const ArticleAdminCard: FC<Props> = ({data, link = "article", setArticles
                     <h5 className="style2">
                         <Link to={`${link}${data.id}`} className="link-underline-none">{data.title}</Link>
                     </h5>
-
                     <p className="mb-15" style={{height: 100}}>{data.description}</p>
-
                     <div className="blog__writer">
                         <div className="blog__writer-designation d-flex align-items-center">
                             <p className="mb-0">{data.user_firstname} {data.user_surname} <span>{toCzechDateFormat(data.changed)}</span></p>

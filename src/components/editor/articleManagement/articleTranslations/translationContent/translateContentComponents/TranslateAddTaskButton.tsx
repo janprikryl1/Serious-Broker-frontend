@@ -1,6 +1,7 @@
 import {FC} from "react";
 import {useArticleTranslate} from "../../../../../../utils/providers/ArticleTranslateProvider.tsx";
 import {Button} from "../../../../../reusable/Button.tsx";
+import {defaultTask} from "../../../../../../utils/constants/defaultContent.ts";
 
 export const TranslateAddTaskButton:FC = () => {
     const { setContent, currentContent } = useArticleTranslate();
@@ -13,15 +14,7 @@ export const TranslateAddTaskButton:FC = () => {
                         ...category,
                         tasks: [
                             ...category.tasks,
-                            {
-                                id: category.tasks.length,
-                                task: "",
-                                image: "",
-                                animateTo: {
-                                    from: { x: 0, y: 0 },
-                                    to: { x: 0, y: 0 }
-                                },
-                            },
+                            {...defaultTask, id: category.tasks.length}
                         ],
                     };
                 }

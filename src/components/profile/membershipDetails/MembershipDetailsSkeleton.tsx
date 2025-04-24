@@ -1,6 +1,7 @@
 import {FC} from "react";
 import Skeleton from "react-loading-skeleton";
 import {useThemeContext} from "../../../utils/providers/ThemeProvider.tsx";
+import "../../../styles/sass/components/membership-skeleton.scss";
 
 export const MembershipDetailsSkeleton:FC = () => {
     const {theme} = useThemeContext();
@@ -9,16 +10,8 @@ export const MembershipDetailsSkeleton:FC = () => {
         <div className="padding-bottom">
             <div className="cta__wrapper">
                 <div
-                    className="text-center"
-                    style={{
-                        maxWidth: "500px",
-                        gap: "30px",
-                        backgroundColor: theme === 'dark' ? "#343a40" : "#f5f8fb",
-                        borderRadius: 24,
-                        padding: "30px",
-                        zIndex: 2,
-                        position: 'relative',
-                    }}
+                    className="text-center membership-skeleton-container"
+                    style={{backgroundColor: theme === 'dark' ? "#343a40" : "#f5f8fb"}}
                     data-aos="fade-up"
                     data-aos-duration="1000"
                 >

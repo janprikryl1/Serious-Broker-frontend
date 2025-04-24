@@ -13,9 +13,7 @@ export const Pagination: FC<PaginationProps> = ({ currentPage, totalPages, onPag
     const range = 1;
     const startPage = Math.max(1, currentPage - range);
     const endPage = Math.min(totalPages, currentPage + range);
-    const pagesToShow = [
-        ...Array(endPage - startPage + 1).keys()
-    ].map(i => startPage + i);
+    const pagesToShow = [...Array(endPage - startPage + 1).keys()].map(i => startPage + i);
 
     return (
         <div className="paginations" data-aos="fade-up" data-aos-duration="1200">

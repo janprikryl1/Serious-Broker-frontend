@@ -18,7 +18,7 @@ createRoot(document.getElementById('root')!).render(
               console.error(error, info);
           }}
       >
-    <App />
+        <App />
       </ErrorBoundary>
   </StrictMode>,
 )

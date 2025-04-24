@@ -1,5 +1,5 @@
 import {FC} from "react";
-import {UserAchievmentsTimeLine} from "../../components/profile/userAchievments/UserAchievmentsTimeLine.tsx";
+import {UserAchievementsTimeLine} from "../../components/profile/userAchievments/UserAchievementsTimeLine.tsx";
 
 export const ProfileAchievements:FC = () => {
     return (
@@ -11,7 +11,7 @@ export const ProfileAchievements:FC = () => {
                         data-aos="fade-up"
                         data-aos-duration="900"
                     >
-                        <UserAchievmentsTimeLine />
+                        <UserAchievementsTimeLine />
                     </div>
                 </div>
             </div>

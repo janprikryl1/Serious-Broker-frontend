@@ -1,51 +1,19 @@
 import {FC} from "react";
 import {Form, InputGroup} from "react-bootstrap";
 import {useTranslation} from "react-i18next";
-import {useArticleTranslate} from "../../../../../utils/providers/ArticleTranslateProvider.tsx";
-import {translate} from "../../../../../utils/api/translateService.ts";
 import {Button} from "../../../../reusable/Button.tsx";
+import {useTranslateSubjects} from "../../../../../utils/hooks/useTranslateSubjects.ts";
 
 export const TranslateSubjects:FC = () => {
     const {t} = useTranslation();
-    const {setSubjects, subjects, language} = useArticleTranslate();
-
-    const handleSetSubjectTitle = (value: string, index: number) => {
-        setSubjects((prevState) => prevState.map((subject, i) => {
-            if (i === index) {
-                return {...subject, title: value}
-            }
-            return subject;
-        }))
-    }
-
-    const handleSetSubjectText = (value: string, index: number) => {
-        setSubjects((prevState) => prevState.map((subject, i) => {
-            if (i === index) {
-                return {...subject, text: value}
-            }
-            return subject;
-        }))
-    }
-
-    const handleAddSubject = () => {
-        setSubjects((prevState) => [...prevState, {id: prevState.length, title: "", text: ""}]);
-    }
-    
-    const handleTranslateSubjectTitle = async (index: number) => {
-        const subjectTitle = subjects[index].title;
-        const response = await translate(subjectTitle, language);
-        if (!response) return;
-        const translatedText = response.data.translated_text;
-        handleSetSubjectTitle(translatedText, index);
-    }
-    
-    const handleTranslateSubjectText = async (index: number) => {
-        const subjectText = subjects[index].text;
-        const response = await translate(subjectText, language);
-        if (!response) return;
-        const translatedText = response.data.translated_text;
-        handleSetSubjectText(translatedText, index);
-    }
+    const {
+        subjects,
+        handleSetSubjectTitle,
+        handleTranslateSubjectText,
+        handleAddSubject,
+        handleTranslateSubjectTitle,
+        handleSetSubjectText
+    } = useTranslateSubjects();
 
     return (
         <>

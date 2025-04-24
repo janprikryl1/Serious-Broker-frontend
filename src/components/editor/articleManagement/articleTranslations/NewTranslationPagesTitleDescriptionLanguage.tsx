@@ -13,7 +13,8 @@ export const NewTranslationPagesTitleDescriptionLanguage:FC = () => {
         description, 
         setDescription,
         language,
-        setLanguage} = useArticleTranslate();
+        setLanguage
+    } = useArticleTranslate();
     
     const handleTranslate = async (text: string, setter: Dispatch<SetStateAction<string>>) => {
         const response = await translate(text, language);

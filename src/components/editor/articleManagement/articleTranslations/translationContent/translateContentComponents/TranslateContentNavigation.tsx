@@ -37,12 +37,9 @@ export const TranslateContentNavigation: FC = () => {
 
     const handleDeleteCategory = () => {
         setContent((prevState) => prevState.filter((_, i) => i !== currentContent));
-
-        // Move to the previous category if not on the first one
         if (currentContent > 0) {
             setCurrentContent(currentContent - 1);
         }
-
     };
 
     return (

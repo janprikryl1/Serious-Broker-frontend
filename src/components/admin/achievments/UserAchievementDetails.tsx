@@ -1,22 +1,23 @@
 import {FC, useEffect, useState} from "react";
-import {UserAchievmentSkeleton} from "./UserAchievmentSkeleton.tsx";
+import {UserAchievementSkeleton} from "./UserAchievementSkeleton.tsx";
 import {useTranslation} from "react-i18next";
-import {NewAchievmentModal} from "./NewAchievmentModal.tsx";
+import {NewAchievementModal} from "./NewAchievementModal.tsx";
 import {TimeLineComponent} from "../../reusable/TimeLineComponent.tsx";
 import {UserType} from "../../../utils/types/user/userTypes.ts";
 import {adminUserAchievements} from "../../../utils/api/achievementService.ts";
 import {Button} from "../../reusable/Button.tsx";
 import {CustomSwal} from "../../../utils/functions/customSwal.ts";
 import {AchievementType} from "../../../utils/types/user/AchievementType.ts";
+import {useModal} from "../../../utils/hooks/useModal.tsx";
 
 type Props = {
     selectedUser?: UserType;
 }
 
-export const UserAchievmentDetails:FC<Props> = ({selectedUser}) => {
+export const UserAchievementDetails:FC<Props> = ({selectedUser}) => {
     const {t} = useTranslation();
     const [achievements, setAchievements] = useState<AchievementType[]>([]);
-    const [newAchievmentModalOpen, setNewAchievmentModalOpen] = useState(false);
+    const {isOpen: newAchievementModalOpen, closeModal: closeNewAchievementModal, openModal: openNewAchievementModal} = useModal();
     
     useEffect(() => {
         if (!selectedUser) return;
@@ -42,13 +43,18 @@ export const UserAchievmentDetails:FC<Props> = ({selectedUser}) => {
         <div className="cta__subscribe padding-bottom padding-top">
             {selectedUser && achievements ? (
                 <>
-                    <Button onClick={() => setNewAchievmentModalOpen(true)}>{t("Add new achievement")}</Button>
+                    <Button onClick={openNewAchievementModal}>{t("Add new achievement")}</Button>
                     <TimeLineComponent achievements={achievements} />
                 </>
             ) : (
-              <UserAchievmentSkeleton />  
+              <UserAchievementSkeleton />  
             )}
-            <NewAchievmentModal open={newAchievmentModalOpen} setOpen={setNewAchievmentModalOpen} selectedUser={selectedUser} setAchievements={setAchievements}/>
+            <NewAchievementModal 
+                open={newAchievementModalOpen}
+                closeModal={closeNewAchievementModal}
+                selectedUser={selectedUser}
+                setAchievements={setAchievements}
+            />
         </div>
     );
 };

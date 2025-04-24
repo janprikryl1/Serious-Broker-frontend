@@ -2,7 +2,7 @@ import { FC } from "react";
 import { Form } from "react-bootstrap";
 import Typography from "@mui/material/Typography";
 import {useTranslation} from "react-i18next";
-import "./DateRangeSelector.scss";
+import "../../../styles/sass/components/date-range-selector.scss";
 
 type Props = {
     startDate: string;

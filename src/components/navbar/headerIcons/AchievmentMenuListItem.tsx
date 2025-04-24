@@ -2,7 +2,7 @@ import {FC} from "react";
 import {MenuItem} from "@mui/joy";
 import AchievmentSvg from "../../../utils/icons/achievment_icon.svg";
 import {useTranslation} from "react-i18next";
-import {useAchievmentsContext} from "../../../utils/providers/AchievmentsProvider.tsx";
+import {useAchievementsContext} from "../../../utils/providers/AchievementsProvider.tsx";
 import {AchievementType} from "../../../utils/types/user/AchievementType.ts";
 
 type Props = {
@@ -12,7 +12,7 @@ type Props = {
 
 export const AchievmentMenuListItem:FC<Props> = ({achievment, handleClose}) => {
     const {t} = useTranslation();
-    const {markAchievementAsRead} = useAchievmentsContext();
+    const {markAchievementAsRead} = useAchievementsContext();
     
     const handleMarkAsRead = async () => {
         await markAchievementAsRead(achievment.id);

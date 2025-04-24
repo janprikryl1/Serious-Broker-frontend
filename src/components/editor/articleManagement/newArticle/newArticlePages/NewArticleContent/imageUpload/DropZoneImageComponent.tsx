@@ -10,10 +10,7 @@ type Props = {
 
 export const DropZoneImageComponent: FC<Props> = ({ item, handleClickOnImage }) => {
     return (
-        <div
-            key={uuidv4()}
-            style={{width: "200px", height: "200px"}}
-        >
+        <div key={uuidv4()} style={{width: "200px", height: "200px"}}>
             <img
                 onClick={() => {
                     handleClickOnImage(item.image);

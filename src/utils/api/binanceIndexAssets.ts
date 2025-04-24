@@ -67,6 +67,21 @@ export const getAssetGraphData = async (currencies: QuotedCurrency[], period: Qu
     });
 }
 
+export const getAssetGraphDataPreparedAssets = async (asset_label: string, selectedPeriod: QuotedCurrenciesPeriod) => {
+    const token = localStorage.getItem("token");
+    if(!token) return;
+    
+    return await axios.get(backendUrl + "graphs/binance_index_assets/asset_graph_data_prepared_asset.php", {
+        params: {
+            name: asset_label,
+            period: selectedPeriod
+        },
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    });
+}
+
 export const getAssetGraphPriceDetails = async (name: string) => {
     const token = localStorage.getItem("token");
     if(!token) return;

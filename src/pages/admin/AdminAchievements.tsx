@@ -1,74 +1,28 @@
-import {FC, useEffect, useState} from "react";
+import {FC} from "react";
 import {Form, InputGroup} from "react-bootstrap";
-import {DataGrid, GridCellParams} from "@mui/x-data-grid";
+import {DataGrid} from "@mui/x-data-grid";
 import {useTranslation} from "react-i18next";
-import {UserType} from "../../utils/types/user/userTypes.ts";
-import {getAllUsers} from "../../utils/api/adminService.ts";
 import {Button, ButtonColor} from "../../components/reusable/Button.tsx";
-import {UserAchievmentDetails} from "../../components/admin/achievments/UserAchievmentDetails.tsx";
-import {toast} from "react-toastify";
+import {UserAchievementDetails} from "../../components/admin/achievments/UserAchievementDetails.tsx";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
-import {giveAchievmentsForLongPeriod} from "../../utils/api/achievementService.ts";
-
+import {useAdminAchievements} from "../../utils/hooks/admin/useAdminAchievements.ts";
 
 export const AdminAchievements:FC = () => {
     const {t} = useTranslation();
-    const [users, setUsers] = useState<UserType[]>([]);
-    const [selectedUser, setSelectedUser] = useState<UserType>();
-    const [searchTerm, setSearchTerm] = useState('');
-    const [searchColumn, setSearchColumn] = useState<string>('email');
-    const [filteredUsers, setFilteredUsers] = useState<UserType[]>(users);
-
-    const handleSelectUser = (e: GridCellParams) => {
-        setSelectedUser(users.find((user) => user.id == e.id));
-    };
-
-    useEffect(() => {
-        const getUsers = async () => {
-            try {
-                const response = await getAllUsers();
-                if (!response) return;
-                setUsers(response.data);
-                setFilteredUsers(response.data);
-            } catch (error) {
-                console.error(error);
-            }
-        };
-        getUsers();
-    }, []);
-
-    const columns = [
-        { field: 'id', headerName: "Id", flex: 1, headerClassName: 'background-gray' },
-        { field: 'nickname', headerName: t("Nickname"), flex: 1, headerClassName: 'background-gray' },
-        { field: 'email', headerName: t("Email"), flex: 1, headerClassName: 'background-gray' },
-        { field: 'firstname', headerName: t("Name"), flex: 1, headerClassName: 'background-gray' },
-        { field: 'surname', headerName: t("Surname"), flex: 1, headerClassName: 'background-gray' }
-    ];
-
-    const handleSearch = () => {
-        const results = users.filter((user) =>
-            user[searchColumn as keyof UserType]?.toString().toLowerCase().includes(searchTerm.toLowerCase())
-        );
-        setFilteredUsers(results);
-    };
-
-    const handleClearFilters = () => {
-        setSearchTerm('');
-        setFilteredUsers(users);
-    };
-    
-    const handleAddLongPeriodOfTimeAcheivements = async () => {
-        try {
-            const response = await giveAchievmentsForLongPeriod();
-            if (response.status === 200) {
-                toast.success(t("Activity checked"));
-            }
-        } catch (error) {
-            console.error(error);
-            toast.error(t("Error"));
-        }
-    };
+    const {
+        handleAddLongPeriodOfTimeAchievements,
+        searchColumn,
+        setSearchColumn,
+        searchTerm,
+        setSearchTerm,
+        filteredUsers,
+        columns,
+        handleSearch,
+        handleClearFilters,
+        selectedUser,
+        handleSelectUser
+    } = useAdminAchievements();
     
     return (
         <div className="padding-bottom">
@@ -82,7 +36,7 @@ export const AdminAchievements:FC = () => {
                         >
                             <h1 className="admin-section-title">{t("Achievments management")}</h1>
                             <p>{t("Click on user to load and edit achievements")}</p>
-                            <Button className="mb-3" onClick={handleAddLongPeriodOfTimeAcheivements}>{t("Give achievements for long period of time")}</Button>
+                            <Button className="mb-3" onClick={handleAddLongPeriodOfTimeAchievements}>{t("Give achievements for long period of time")}</Button>
                             <InputGroup className="mb-3">
                                 <InputGroup.Text id="inputGroup-sizing-sm">{t("Column")}</InputGroup.Text>
                                 <Form.Select
@@ -119,7 +73,7 @@ export const AdminAchievements:FC = () => {
                                 onCellClick={handleSelectUser}
                                 sx={{border: 0, color:"#fff"}}
                             />
-                            <UserAchievmentDetails selectedUser={selectedUser}/>
+                            <UserAchievementDetails selectedUser={selectedUser}/>
                         </div>
                     </div>
                 </div>

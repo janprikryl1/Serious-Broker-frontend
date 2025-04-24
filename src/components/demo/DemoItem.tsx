@@ -15,16 +15,13 @@ type Props = {
 
 export const DemoItem: FC<Props> = ({ widgets, time_of_replace }) => {
     const [currentIndex, setCurrentIndex] = useState(0);
-
     const visibleWidgets = widgets.filter(widget => widget.visible);
 
     useEffect(() => {
         if (visibleWidgets.length === 0) return;
-
         const interval = setInterval(() => {
             setCurrentIndex((prevIndex) => (prevIndex + 1) % visibleWidgets.length);
         }, time_of_replace * 1000);
-
         return () => clearInterval(interval);
     }, [time_of_replace, visibleWidgets.length]);
 
