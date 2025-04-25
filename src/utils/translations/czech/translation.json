@@ -838,5 +838,11 @@
     "Active portfolio management": "Aktivní správa portfolia",
     "We invest for you based on a defined strategy and current market developments.": "Investujeme za vás na základě definované strategie a aktuálního vývoje na trzích.",
     "We consider your investment profile and goals.": "Zohledňení vášeho investičního profilu a cílů.",
-    "We are working on guide": "Na návodu se pracuje"
+    "We are working on guide": "Na návodu se pracuje",
+    "Reset coordinates": "Resetovat souřadnice",
+    "Start coordinates": "Poč. souřadnice",
+    "End coordinates": "Konc. souřadnice",
+    "Set coordinates of animation": "Nastavit souřadnice animace",
+    "Click on the images to set the start and end points (percentages)": "Klikněte na místo na obrázku, kde chcete nastavit bod najetí (procentní)",
+    "No article translations": "Žádné překlady článku"
 }

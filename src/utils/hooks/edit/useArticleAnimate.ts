@@ -1,8 +1,12 @@
-import {ChangeEvent} from "react";
+import {ChangeEvent, useState} from "react";
 import {useArticleCreate} from "../../providers/ArticleCreateProvider.tsx";
+import {useModal} from "../useModal.tsx";
+import {ContentSection} from "../../types/article/ContentType.ts";
 
 export const useArticleAnimate = () => {
-    const { setContent } = useArticleCreate();
+    const { setContent, content } = useArticleCreate();
+    const [controlImage, setControlImage] = useState<ContentSection>();
+    const {isOpen:isControlImageModalOpen, openModal, closeModal} = useModal();
 
     const handleSetContentAnimateToX = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, contentIndex: number, taskIndex: number) => {
         setContent((prevState) =>
@@ -32,11 +36,7 @@ export const useArticleAnimate = () => {
         );
     };
 
-    const handleSetContentAnimateToY = (
-        e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-        contentIndex: number,
-        taskIndex: number
-    ) => {
+    const handleSetContentAnimateToY = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, contentIndex: number, taskIndex: number) => {
         setContent((prevState) =>
             prevState.map((category, i) => {
                 if (i === contentIndex) {
@@ -64,11 +64,7 @@ export const useArticleAnimate = () => {
         );
     };
 
-    const handleSetContentAnimateFromX = (
-        e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-        contentIndex: number,
-        taskIndex: number
-    ) => {
+    const handleSetContentAnimateFromX = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, contentIndex: number, taskIndex: number) => {
         setContent((prevState) =>
             prevState.map((category, i) => {
                 if (i === contentIndex) {
@@ -96,11 +92,7 @@ export const useArticleAnimate = () => {
         );
     };
 
-    const handleSetContentAnimateFromY = (
-        e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-        contentIndex: number,
-        taskIndex: number
-    ) => {
+    const handleSetContentAnimateFromY = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, contentIndex: number, taskIndex: number) => {
         setContent((prevState) =>
             prevState.map((category, i) => {
                 if (i === contentIndex) {
@@ -142,11 +134,21 @@ export const useArticleAnimate = () => {
         );
     };
     
+    const handleOpenAdjustCoordinatesModal = (contentIndex: number, taskIndex: number) => {
+        setControlImage(content[contentIndex].tasks.find((_, index) => index === taskIndex));
+        openModal();
+    }
+    
     return {
      handleRemoveTask,
      handleSetContentAnimateToX,
      handleSetContentAnimateToY,
      handleSetContentAnimateFromX,
-     handleSetContentAnimateFromY
+     handleSetContentAnimateFromY,
+        
+        handleOpenAdjustCoordinatesModal,
+        controlImage,
+        isControlImageModalOpen,
+        closeModal
     }
 }

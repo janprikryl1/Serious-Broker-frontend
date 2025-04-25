@@ -1,11 +1,12 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useEffect, useState, useRef } from "react";
 import { animated, useSpring } from "@react-spring/web";
 import { TbHandFinger } from "react-icons/tb";
-import {ImageModal} from "./ImageModal.tsx";
-import {ContentType} from "../../../utils/types/article/ContentType.ts";
-import {imageURL} from "../../../utils/constants";
-import {useModal} from "../../../utils/hooks/useModal.tsx";
-import {defaultSpring} from "../../../utils/constants/defaultContent.ts";
+import { ImageModal } from "./ImageModal.tsx";
+import { ContentType } from "../../../utils/types/article/ContentType.ts";
+import { imageURL } from "../../../utils/constants";
+import { useModal } from "../../../utils/hooks/useModal.tsx";
+import {defaultImageDimensions, defaultSpring} from "../../../utils/constants/defaultContent.ts";
+import "../../../styles/sass/components/control-image-modal.scss"
 
 type Props = {
     task: number;
@@ -14,30 +15,90 @@ type Props = {
 };
 
 export const ArticleImageColumn: FC<Props> = ({ task, category, content }) => {
+    const [imageDimensions, setImageDimensions] = useState(defaultImageDimensions);
     const [springs, api] = useSpring(() => defaultSpring);
-    const { isOpen: isModalOpen, openModal: openModal, closeModal: closeModal } = useModal();
+    const imageRef = useRef<HTMLImageElement>(null);
     const [selectedImage, setSelectedImage] = useState("");
+    const { isOpen: isModalOpen, openModal: openModal, closeModal: closeModal } = useModal();
+
+    const taskData = content?.[category]?.tasks?.[task];
+    const imageUrl = taskData?.image ? `${imageURL}${taskData.image}` : '';
+    const animateData = taskData?.animateTo;
+    
+    const handleLoad = () => {
+        if (imageRef.current) {
+            setImageDimensions({
+                width: imageRef.current.offsetWidth,
+                height: imageRef.current.offsetHeight,
+            });
+        }    
+    }
+    
+    const handleError = () => {
+        setImageDimensions(defaultImageDimensions);
+    }
 
     useEffect(() => {
-        if (!content) return;
-        const taskData = content[category]?.tasks[task];
-        const animate = taskData?.animateTo;
+        if (!imageUrl) {
+            setImageDimensions(defaultImageDimensions);
+            return;
+        }
 
-        if (animate && typeof animate.to.x && typeof animate.to.y) {
+        const imgElement = imageRef.current;
+
+        if (imgElement) {
+            imgElement.addEventListener('load', handleLoad);
+            imgElement.addEventListener('error', handleError);
+            if (imgElement.complete && imgElement.naturalWidth > 0) {
+                handleLoad();
+            }
+        }
+        
+        return () => {
+            if (imgElement) {
+                imgElement.removeEventListener('load', handleLoad);
+                imgElement.removeEventListener('error', handleError);
+            }
+        };
+    }, [imageUrl]);
+    
+    useEffect(() => {
+        if (
+            animateData &&
+            typeof animateData.from?.x === 'number' && typeof animateData.from?.y === 'number' &&
+            typeof animateData.to?.x === 'number' && typeof animateData.to?.y === 'number' &&
+            imageDimensions.width > 0 && imageDimensions.height > 0
+        ) {
+            // Calculate pixel coordinates from percentages
+            const fromXpx = (animateData.from.x / 100) * imageDimensions.width;
+            const fromYpx = (animateData.from.y / 100) * imageDimensions.height;
+            const toXpx = (animateData.to.x / 100) * imageDimensions.width;
+            const toYpx = (animateData.to.y / 100) * imageDimensions.height;
+            
             api.start({
                 from: {
-                    x: animate.from.x,
-                    y: animate.from.y
+                    left: fromXpx,
+                    top: fromYpx
                 },
                 to: {
-                    x: animate.to.x - 150,
-                    y: animate.to.y + 50
+                    left: toXpx,
+                    top: toYpx
                 },
                 loop: true,
-                delay: 1000
+                delay: 1000,
+                config: { duration: 1500 },
+                reset: true
             });
+        } else {
+            api.stop();
         }
-    }, [task, category, content]);
+
+        // Cleanup function
+        return () => {
+            api.stop();
+        };
+
+    }, [animateData, api, imageDimensions]);
 
     const handleImageClick = (imgSrc: string) => {
         setSelectedImage(imgSrc);
@@ -45,26 +106,30 @@ export const ArticleImageColumn: FC<Props> = ({ task, category, content }) => {
     };
 
     return (
-        <div className="col-sm-4">
-            <img
-                src={`${imageURL}${content[category].tasks[task].image}`}
-                alt={`Task ${task + 1}`}
-                onClick={() => handleImageClick(`${imageURL}${content[category].tasks[task].image}`)}
-                style={{ cursor: 'pointer' }}
-            />
-            {content[category].tasks[task].animateTo.to.x !== 0 && content[category].tasks[task].animateTo.to.y !== 0 && (
-                <animated.div
-                    style={{
-                        ...springs,
-                        zIndex: 1,
-                        top: springs.y,
-                        left: springs.x,
-                    }}
-                >
-                    <TbHandFinger style={{ color: "red" }} />
-                </animated.div>
-            )}
-            <ImageModal isModalOpen={isModalOpen} selectedImage={selectedImage} closeModal={closeModal} />
+        <div className="col-sm-4 d-flex flex-column align-items-center">
+            <div className="article-image-column-container">
+                <img
+                    ref={imageRef}
+                    src={imageUrl}
+                    alt={imageUrl ? `Task ${task + 1}` : 'Loading task image'}
+                    onClick={() => imageUrl && handleImageClick(imageUrl)}
+                    style={{cursor: imageUrl ? 'pointer' : 'default'}}
+                    className="article-image-column-img"
+                />
+                {animateData && (animateData.to?.x !== 0 || animateData.to?.y !== 0) && (
+                    <animated.div
+                        className="article-image-column-animation"
+                        style={{
+                            opacity: springs.left.to(l => (l === -9999 ? 0 : 1)),
+                            left: springs.left,
+                            top: springs.top
+                        }}
+                    >
+                        <TbHandFinger size={24} />
+                    </animated.div>
+                )}
+            </div>
+            {imageUrl && <ImageModal isModalOpen={isModalOpen} selectedImage={selectedImage} closeModal={closeModal} />}
         </div>
     );
 }

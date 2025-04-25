@@ -5,6 +5,7 @@ import {PostOptionType} from "../options/PostOption.ts";
 import {createPost, getArticlePostDetail} from "../api/articlePostService.ts";
 import {CustomSwal} from "../functions/customSwal.ts";
 import {ArticlePost} from "../types/article/ArticlePostListResponse.ts";
+import {domain} from "../constants";
 
 type Props = {
     children: ReactNode;
@@ -37,7 +38,7 @@ export const PostEditProvider = ({children}: Props) => {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [language, setLanguage] = useState("cs");
-    const [content, setContent] = useState<string>("");
+    const [content, setContent] = useState<string>(`Podívej se na příspěvek ${domain}/article/${articleId}`);
     const [saved, setSaved] = useState(false);
 
     const getEditedPost = async () => {
@@ -59,11 +60,7 @@ export const PostEditProvider = ({children}: Props) => {
 
     useEffect(() => {
         setSaved(false);
-    }, [title,
-        description,
-        language,
-        content,
-    ]);
+    }, [title, description, language, content]);
 
     const uploadNewPost = async () => {
         if (!articleId || !type || !content) return;

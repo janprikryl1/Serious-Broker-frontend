@@ -2,6 +2,7 @@ import {DemoType, WidgetsType} from "../types/demos/demoType.ts";
 import {Assets} from "../types/asset/AssetDetailType.ts";
 import {HighlightType} from "../types/highlights/HighlightType.ts";
 import {UserRole} from "../types/user/userTypes.ts";
+import {Coordinates} from "../types/article/Coordinates.ts";
 
 export const defaultNewCurrency = {
     id: 0,
@@ -93,5 +94,11 @@ export const defaultNewGlossaryItem = {
 };
 
 export const defaultSpring = {
-    from: { x: 0, y: 0 },
+    left: 0,
+    top: 0,
+    config: { tension: 120, friction: 14 },
 };
+
+export const defaultCoordinates: Coordinates = { x: 0, y: 0 };
+
+export const defaultImageDimensions = { width: 0, height: 0 };

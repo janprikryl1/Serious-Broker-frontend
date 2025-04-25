@@ -5,6 +5,8 @@ import {useTranslation} from "react-i18next";
 import {useArticleCreate} from "../../../../../../utils/providers/ArticleCreateProvider.tsx";
 import {Button, ButtonColor} from "../../../../../reusable/Button.tsx";
 import {useArticleAnimate} from "../../../../../../utils/hooks/edit/useArticleAnimate.ts";
+import {VscSettings} from "react-icons/vsc";
+import {ControlImageModal} from "./ControlImageModal.tsx";
 
 export const AnimateColumn:FC = () => {
     const { t } = useTranslation();
@@ -14,7 +16,12 @@ export const AnimateColumn:FC = () => {
         handleSetContentAnimateToX,
         handleSetContentAnimateToY,
         handleSetContentAnimateFromX,
-        handleSetContentAnimateFromY
+        handleSetContentAnimateFromY,
+
+        handleOpenAdjustCoordinatesModal,
+        controlImage,
+        isControlImageModalOpen,
+        closeModal
     } = useArticleAnimate();
     
     return (
@@ -24,6 +31,7 @@ export const AnimateColumn:FC = () => {
                 <div key={task.id}>
                     <InputGroup className="mb-3">
                         <InputGroup.Text>{t("From")}</InputGroup.Text>
+                        <Button onClick={() => handleOpenAdjustCoordinatesModal(currentContent, taskIndex)}><VscSettings /></Button>
                         <Form.Control
                             placeholder="0"
                             value={task.animateTo.from.x}
@@ -51,6 +59,7 @@ export const AnimateColumn:FC = () => {
                     </InputGroup>
                 </div>
             ))}
+            <ControlImageModal controlImage={controlImage} isControlImageModalOpen={isControlImageModalOpen} closeModal={closeModal} />
         </div>
     );
 }

@@ -60,7 +60,7 @@ export const Article: FC = () => {
         if (!id || !selectedLanguage || initialLoad) return;
         const isOriginalLanguage = translations.length > 0 && selectedLanguage === translations[0].language;
         if (isOriginalLanguage) {
-            navigate(`${routes.articleURL}${id}`, { replace: true }); // Update the URL
+            navigate(`${routes.articleURL}${id}`, { replace: true });
             fetchArticle();
             return;
         }

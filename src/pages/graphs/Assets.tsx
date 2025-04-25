@@ -15,7 +15,7 @@ export const Assets: FC = () => {
     const [assets, setAssets] = useState<AssetType[]>([]);
     const [totalPages, setTotalPages] = useState<number>(1);
     const [loading, setLoading] = useState<boolean>(false);
-    const [orderType, setOrderType] = useState<AssetOrder>(AssetOrder.WeeklyProfit);
+    const [orderType, setOrderType] = useState<AssetOrder>(AssetOrder.MonthlyProfit);
     const isFetchingRef = useRef<boolean>(false);
     const { currentPage, loaderRef, resetPage } = useInfiniteScroll({totalPages, loading});
 

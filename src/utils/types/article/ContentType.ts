@@ -4,7 +4,7 @@ export type ContentType = {
     tasks: ContentSection[];
 }
 
-type ContentSection = {
+export type ContentSection = {
     id: number;
     task: string;
     image: string;

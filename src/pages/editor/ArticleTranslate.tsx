@@ -47,7 +47,7 @@ export const ArticleTranslate:FC = () => {
                                             {translations === undefined ? (
                                                     <ArticlesSkeleton />
                                             ) : translations.length === 0 ? (
-                                                <p>{t("No articleTranslations")}</p>
+                                                <p>{t("No article translations")}</p>
                                             ) : (
                                                 translations.map((item) => (
                                                     <div key={item.id} className="col-sm-6 col-lg-4">
