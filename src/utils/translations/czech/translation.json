@@ -844,5 +844,10 @@
     "End coordinates": "Konc. souřadnice",
     "Set coordinates of animation": "Nastavit souřadnice animace",
     "Click on the images to set the start and end points (percentages)": "Klikněte na místo na obrázku, kde chcete nastavit bod najetí (procentní)",
-    "No article translations": "Žádné překlady článku"
+    "No article translations": "Žádné překlady článku",
+    "Market capitalisation: ": "Kapitalizace tržního obchodu: ",
+    "Last price: ": "Poslední cena: ",
+    "Daily high: ": "Denní maximální hodnota: ",
+    "Daily low: ": "Denní minimální hodnota: ",
+    "Loading...": "Načítání..."
 }

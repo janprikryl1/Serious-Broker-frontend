@@ -58,7 +58,7 @@ export const AssetGraphPriceDetails:FC<Props> = ({currency, currencyValue}) => {
                         <span
                             style={{fontWeight: "bold"}}>{toPercentTwoDecimal(assetGraphPriceDetails.marketcap)} $</span>
                     </div>
-                    {renderRow(t("Current price: "), assetGraphPriceDetails.current_price)}
+                    {renderRow(t("Last price: "), assetGraphPriceDetails.current_price)}
                     {renderRow(t("Daily high: "), assetGraphPriceDetails.daily_high)}
                     {renderRow(t("Daily low: "), assetGraphPriceDetails.daily_low)}
                 </div>
