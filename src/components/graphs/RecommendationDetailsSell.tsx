@@ -29,9 +29,9 @@ export const RecommendationDetailsSell:FC<Props> = ({detailsData}) => {
             {detailsData.sell_quarter_0_week_day && detailsData.sell_quarter_0_hour &&
                 <p>{t("Recommendations for the last quarter: ")} {t("Quarter: ")} {detailsData.sell_quarter_0_week_day} {convertUTCToLocalTime(detailsData.sell_quarter_0_hour)}</p>}
             {detailsData.sell_quarter_1_week_day && detailsData.sell_quarter_1_hour &&
-                <p>{t("Recommendations for the previous quarter: ")} {t("Quarter: ")} {detailsData.sell_quarter_1_week_day} {convertUTCToLocalTime(detailsData.sell_quarter_1_hour)}</p>}
+                <p>{t("Recommendations for the previous quarter:")} {t("Quarter: ")} {detailsData.sell_quarter_1_week_day} {convertUTCToLocalTime(detailsData.sell_quarter_1_hour)}</p>}
             {detailsData.sell_quarter_2_week_day && detailsData.sell_quarter_2_hour &&
-                <p>{t("Recommendations for the previous quarter")} {t("Quarter: ")} {detailsData.sell_quarter_2_week_day} {convertUTCToLocalTime(detailsData.sell_quarter_2_hour)}</p>}
+                <p>{t("Recommendations for the previous quarter:")} {t("Quarter: ")} {detailsData.sell_quarter_2_week_day} {convertUTCToLocalTime(detailsData.sell_quarter_2_hour)}</p>}
             {detailsData.sell_quarter_3_week_day && detailsData.sell_quarter_3_hour &&
                 <p>{t("Recommendations for the quarter before previous: ")} {t("Quarter: ")} {detailsData.sell_quarter_3_week_day} {convertUTCToLocalTime(detailsData.sell_quarter_3_hour)}</p>}
             {detailsData.sell_year_0_week_day && detailsData.sell_year_0_hour &&
