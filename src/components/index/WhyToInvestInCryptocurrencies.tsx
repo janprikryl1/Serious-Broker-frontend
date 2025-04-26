@@ -9,8 +9,8 @@ export const WhyToInvestInCryptocurrencies: FC = () => {
     const { t } = useTranslation();
 
     return (
-        <div className="why-to-invest-container">
-            <h2 className="index-section-head-title" style={{marginLeft:"16vw"}}>{t("Why to Invest in Cryptocurrencies")}</h2>
+        <div className="why-to-invest-container container">
+            <h2 className="index-section-head-title" style={{marginLeft:"1vw"}}>{t("Why to Invest in Cryptocurrencies")}</h2>
             <div className="invest-items-wrapper">
                 <div className="invest-item">
                     <img

@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { SharedSlideLayout } from "./SharedSlideLayout";
 import Logo from "../../../utils/icons/logo/SB2.svg";
-import BrokerBg from "/public/crypto-hand2_light.webp";
+import BrokerBg from "../../../utils/icons/index/crypto-hand2_light.webp";
 import {useTranslation} from "react-i18next";
 
 export const SliderPageSeriousBroker: FC = () => {
