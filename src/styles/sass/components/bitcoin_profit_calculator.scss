@@ -21,6 +21,20 @@
   max-width: 60vw;
 }
 
+.bitcoin-profit-calculator-amount-input:focus {
+  background-color: #fff4e5;
+  border: none;
+  color: #3c3936;
+  box-shadow: none;
+}
+
+.bitcoin-profit-calculator-purchase-date-input:focus {
+  background-color: #fff4e5;
+  border: none;
+  color: #3c3936;
+  box-shadow: none;
+}
+
 .bitcoin-profit-calculator-currency-select {
   background-color: #fff4e5;
   border: none;

@@ -4,9 +4,9 @@ import { Link } from "react-router-dom";
 import { routes } from "../../utils/constants";
 import { useTranslation } from "react-i18next";
 import { useMediaQuery } from "@mui/material";
-import { GuidedInvestControlBgImage } from "../../components/index/GuidedInvestControl.tsx";
 import { useUserContext } from "../../utils/providers/providerUser.tsx";
 import {GuideInvestControlWhyToJoin} from "../../components/guide/GuideInvestControlWhyToJoin.tsx";
+import guidedInvestControlPhoneIcon from "../../utils/icons/index/guidedInvestControllPhoneIcon.png";
 
 export const GuidedInvestControlGuide: FC = () => {
     const { t } = useTranslation();
@@ -15,14 +15,9 @@ export const GuidedInvestControlGuide: FC = () => {
 
     return (
         <>
-            <div className="py-5 position-relative" style={{ backgroundColor: "#3c3936" }}>
-                {!isMobile && (
-                    <div className="index-guided-dotted-image">
-                        <GuidedInvestControlBgImage />
-                        <div className="index-guided-dotted-square" style={{ marginLeft: "3vw" }} />
-                    </div>
-                )}
+            <div className="py-2 position-relative" style={{ backgroundColor: "#3c3936" }}>
                 <div className="container pt-5 pb-5">
+                    <div className="row align-items-center">
                     <div className="col-12 col-sm-8 col-md-6 col-lg-4 text-center text-sm-start ms-sm-4 ms-lg-5">
                         <h1 className="index-title index-section-title">
                             {t("Guided Invest Control")}
@@ -45,7 +40,25 @@ export const GuidedInvestControlGuide: FC = () => {
                             )}
                         </div>
                     </div>
+                        {!isMobile && (
+                            <div className="col-12 col-md-6 text-center text-md-end mt-4 mt-md-0">
+                                <div className="position-relative d-inline-block" style={{ overflow: 'hidden' }}>
+                                    <img
+                                        src={guidedInvestControlPhoneIcon}
+                                        alt="Graph no bg"
+                                        className="img-fluid index-section-image"
+                                    />
+                                    <div
+                                        className="index-section-image-blurred-color-graphh"
+                                        style={{
+                                            background: "radial-gradient(ellipse at center, white 0%, transparent 30%)"
+                                        }}
+                                    />
+                                </div>
+                            </div>
+                        )}
                 </div>
+            </div>
             </div>
             <GuideInvestControlWhyToJoin />
         </>
