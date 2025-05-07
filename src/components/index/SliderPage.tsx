@@ -12,6 +12,8 @@ import {useMediaQuery} from "@mui/material";
 import {IndexMobileSliderPage} from "./indexMobileSlider/IndexMobileSliderPage.tsx";
 import {IndexMobileSliderBitcoin} from "./indexMobileSlider/IndexMobileSliderBitcoin.tsx";
 import {IndexMobileSliderFiveMinutes} from "./indexMobileSlider/IndexMobileSliderFiveMinutes.tsx";
+import {IndexMobileSliderYourMoney} from "./indexMobileSlider/IndexMobileSliderYourMoney.tsx";
+import {SliderPageYourMoney} from "./indexSliderPages/SliderPageYourMoney.tsx";
 
 
 export const SliderPage: FC = () => {
@@ -25,7 +27,7 @@ export const SliderPage: FC = () => {
             pagination={{ clickable: true }}
             loop={true}
             autoplay={{
-                delay: 70000,
+                delay: 5000,
                 disableOnInteraction: false,
             }}
             effect="fade"
@@ -43,6 +45,9 @@ export const SliderPage: FC = () => {
                     <SwiperSlide>
                         <IndexMobileSliderFiveMinutes />
                     </SwiperSlide>
+                    <SwiperSlide>
+                        <IndexMobileSliderYourMoney />
+                    </SwiperSlide>
                 </>
             ) : (
                 <>
@@ -54,6 +59,9 @@ export const SliderPage: FC = () => {
                     </SwiperSlide>
                     <SwiperSlide>
                         <SliderPage5Minutes />
+                    </SwiperSlide>
+                    <SwiperSlide>
+                        <SliderPageYourMoney />
                     </SwiperSlide>
                 </>
             )}
