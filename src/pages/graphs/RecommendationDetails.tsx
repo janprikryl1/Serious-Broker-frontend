@@ -43,7 +43,7 @@ export const RecommendationDetails:FC = () => {
                         <div className="service-details__wrapper">
                             <div className="service-details__item">
                                 <div className="service-details__item-inner mb-5">
-                                    <h5 className="index-title">{t("Quote currencies: ")}{detailsData.quote_currencies}</h5>
+                                    <h5 className="index-title" style={{overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap"}}>{t("Quote currencies: ")}{detailsData.quote_currencies}</h5>
                                     {detailsData.all_pos !== null && <p>{t("Best of all index: ")}{detailsData.all_pos}</p>}
                                     {detailsData.all_sug !== null && <p>{t("All suggestions: ")}{detailsData.all_sug}</p>}
                                     {detailsData.cmc_rank !== null && <p>{t("cmc_rank")}: {detailsData.cmc_rank}</p>}

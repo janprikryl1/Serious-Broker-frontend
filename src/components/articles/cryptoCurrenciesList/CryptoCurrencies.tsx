@@ -53,16 +53,15 @@ export const CryptoCurrencies: FC = () => {
     return (
         <>
             <div className="d-flex justify-content-center mb-3 mt-15">
-                <div className="d-flex align-items-center gap-2 cta-form">
-                    <div className="cta-form">
-                        <input
-                            type="text"
-                            className="form-control form-control--style2 crypto-currency-search-input"
-                            placeholder="Bitcoin"
-                            value={searchValue}
-                            onChange={(e) => setSearchValue(e.target.value)}
-                        />
-                    </div>
+                <div className="d-flex align-items-center gap-2">
+                    <input
+                        type="text"
+                        className="form-control form-control--style2 crypto-currency-search-input"
+                        style={{backgroundColor: "#fff", borderRadius: "3px", border: "none", color: "#000"}}
+                        placeholder="Bitcoin"
+                        value={searchValue}
+                        onChange={(e) => setSearchValue(e.target.value)}
+                    />
                     <Button
                         className="trk-btn crypto-currency-search-button"
                         onClick={handleSearch}

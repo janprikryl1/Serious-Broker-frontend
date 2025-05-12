@@ -568,7 +568,7 @@
     "Loss": "Ztráta",
     "Gain": "Výdělek",
     "Membership": "Členství",
-    "QR payment management": "Zpráva QR platby",
+    "QR payment management": "Správa QR platby",
     "Network": "Síť",
     "Address of deposit": "Adresa vkladu",
     "Payment to binance": "Platba na Binance",
@@ -610,7 +610,7 @@
     "ASSET_GRAPHS": "Graf aktiva",
     "GLOSSARY": "Slovník",
     "Visible": "Viditelné",
-    "COINMARKETCUP_TOP_10": "TOP 10 minců na Coinmarketcup",
+    "COINMARKETCUP_TOP_10": "TOP 10 mincí na Coinmarketcup",
     "Available only for members": "Dostupné pouze pro členy",
     "To access advanced data, login or register for free": "Tyto funkce a podrobnější statistiky jsou přístupné pouze přihlášeným uživatelům.",
     "Would you like to join a free educational program with information sent usually once a week?": "Chcete vstoupit bezplatně do vzdělávacího programu s informacemi zasílanými obvykle jednou týdně?",
@@ -851,5 +851,6 @@
     "Daily low: ": "Denní minimální hodnota: ",
     "Loading...": "Načítání...",
     "Your Money,": "Vaše peníze,",
-    "Your Rules": "Vaše pravidla"
+    "Your Rules": "Vaše pravidla",
+    "Week suggestions": "Týdenní doporučení"
 }

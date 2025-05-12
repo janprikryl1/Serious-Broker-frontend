@@ -11,7 +11,7 @@ type Props = {
 
 export const AchievementAnimation:FC<Props> = ({onClose}) => {
     const {t} = useTranslation();
-    const {isOpen: open, closeModal} = useModal();
+    const {isOpen: open, closeModal} = useModal(true);
     
     const handleClose = () => {
         closeModal();

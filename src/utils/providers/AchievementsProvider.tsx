@@ -1,10 +1,10 @@
-import React, {createContext, useContext, useState, useEffect, ReactNode, Dispatch, SetStateAction, lazy, Suspense} from 'react';
+import React, {createContext, useContext, useState, useEffect, ReactNode, Dispatch, SetStateAction} from 'react';
 import {useUserContext} from "./providerUser.tsx";
 import {useTranslation} from "react-i18next";
 import {getAchievements, markReadAchievment} from "../api/achievementService.ts";
 import {CustomSwal} from "../functions/customSwal.ts";
 import {AchievementType} from "../types/user/AchievementType.ts";
-const AchievementAnimation = lazy(() => import('../../components/achievment/AchievementAnimation.tsx').then(module => ({ default: module.AchievementAnimation })));
+import {AchievementAnimation} from "../../components/achievment/AchievementAnimation.tsx";
 
 type AchievementsContextType = {
     achievements: AchievementType[];
@@ -85,7 +85,7 @@ export const AchievementsProvider: React.FC<{ children: ReactNode }> = ({ childr
     return (
         <AchievementContext.Provider value={{ achievements, setAchievements, unreadAchievements, markAchievementAsRead }}>
             {children}
-            {showAnimation && <Suspense fallback={t("Loading...")}><AchievementAnimation onClose={handleMarkLastAchievementAsRead}/></Suspense>}
+            {showAnimation && <AchievementAnimation onClose={handleMarkLastAchievementAsRead}/>}
         </AchievementContext.Provider>
     );
 };
