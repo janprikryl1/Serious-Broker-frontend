@@ -60,7 +60,6 @@ export const CryptoCurrencyDetail: FC = () => {
                                                 className="mb-3"
                                             />
                                         )}
-                                        <p><strong>{t("Price: ")}</strong> {cryptocurrency.price}$</p>
                                         <p><strong>{t("Website:")}</strong> <a className="link-underline-none" href={cryptocurrency.website}>{cryptocurrency.website}</a></p>
                                         <p><strong>{t("Marketcup: ")}</strong> {cryptocurrency.marketcap}</p>
                                         {cryptocurrency.max_supply !== 0 && <p><strong>{t("Total supply: ")}</strong>{cryptocurrency.max_supply}{" "}{t("coins")}</p>}
