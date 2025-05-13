@@ -81,7 +81,7 @@ export type BinanceIndexAssetRecomBestPreviousDetails = {
     sell_week_1_hour: number | null,
     sell_week_2_profit: number | null,
     sell_week_2_week_day: number | null,
-    sell_weekr_2_hour: number | null,
+    sell_week_2_hour: number | null,
     sell_week_3_profit: number | null,
     sell_week_3_week_day: number | null,
     sell_week_3_hour: number | null,
