@@ -93,6 +93,10 @@ export const routes = {
         editDemo: "demos/edit/:id",
         newDemo: "demos/edit",
         binanceIndexAbout: "binance_index_about",
+        genericTableData: "generic_table_data",
+        newGenericTableData: "generic_table_data/edit",
+        editGenericTableData: "generic_table_data/edit/:id",
+        genericsTableData: "generic_table_results/:id",
     },
     guides: {
         index: "",
@@ -133,6 +137,9 @@ export const adminURLS = {
     demos: "/admin/demos",
     newDemo: "/admin/demos/edit",
     binanceIndexAbout: "/admin/binance_index_about",
+    genericTableData: "/admin/generic_table_data",
+    newGenericTableData: "/admin/generic_table_data/edit",
+    genericsTableData: "/admin/generic_table_results/:id",
 }
 
 export const guideURLS = {

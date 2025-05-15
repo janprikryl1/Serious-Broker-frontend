@@ -15,6 +15,7 @@ import {FaTable} from "react-icons/fa6";
 import {useUserContext} from "../../utils/providers/providerUser.tsx";
 import {adminURLS, routes} from "../../utils/constants";
 import {UserRole} from "../../utils/types/user/userTypes.ts";
+import {CgDatabase} from "react-icons/cg";
 
 export const AdminSidebar: FC = () => {
     const { t } = useTranslation();
@@ -113,6 +114,9 @@ export const AdminSidebar: FC = () => {
                     </MenuItem>
                     <MenuItem icon={<MdOutlineScreenshotMonitor />} component={<NavLink to={adminURLS.demos} />} className="sidebar-item">
                         {t("Demos")}
+                    </MenuItem>
+                    <MenuItem icon={<CgDatabase />} component={<NavLink to={adminURLS.genericTableData} />} className="sidebar-item">
+                        {t("Generic data")}
                     </MenuItem>
                     <MenuItem icon={<CiLogout />} onClick={logout} className="sidebar-item">
                         {t("Logout")}

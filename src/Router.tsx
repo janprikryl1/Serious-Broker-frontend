@@ -63,7 +63,9 @@ const Overview = lazy(() => import("./pages/Overview.tsx").then(module => ({ def
 const Guide = lazy(() => import("./pages/guide/Guide.tsx").then(module => ({ default: module.Guide })));
 const GuidedInvestControlGuide = lazy(() => import ("./pages/guide/GuidedInvestControlGuide.tsx").then(module => ({ default: module.GuidedInvestControlGuide })));
 const PersonalStrategyGuide = lazy(() => import ("./pages/guide/PersonalStrategyGuide.tsx").then(module => ({ default: module.PersonalStrategyGuide })));
-
+const AdminGenericTableData = lazy(() => import ("./pages/admin/AdminGenericTableData.tsx").then(module => ({ default: module.AdminGenericTableData })));
+const AdminGenericTableDataEdit = lazy(() => import ("./pages/admin/AdminGenericTableDataEdit.tsx").then(module => ({ default: module.AdminGenericTableDataEdit })));
+const AdminGenericTableResults = lazy(() => import ("./pages/admin/AdminGenericTableResults.tsx").then(module => ({ default: module.AdminGenericTableResults })));
 
 export const Router:FC = () => {
     return (
@@ -132,6 +134,10 @@ export const Router:FC = () => {
                 <Route path={routes.admin.editDemo} element={<PageLoader><AdminDemoEdit /></PageLoader>} />
                 <Route path={routes.admin.newDemo} element={<PageLoader><AdminDemoEdit /></PageLoader>} />
                 <Route path={routes.admin.binanceIndexAbout} element={<PageLoader><BinanceIndexAbout /></PageLoader>} />
+                <Route path={routes.admin.genericTableData} element={<PageLoader><AdminGenericTableData /></PageLoader>} />
+                <Route path={routes.admin.newGenericTableData} element={<PageLoader><AdminGenericTableDataEdit /></PageLoader>} />
+                <Route path={routes.admin.editGenericTableData} element={<PageLoader><AdminGenericTableDataEdit /></PageLoader>} />
+                <Route path={routes.admin.genericsTableData} element={<PageLoader><AdminGenericTableResults /></PageLoader>} />
             </Route>
             <Route path={guideURLS.index} element={<PageLoader><Guide /></PageLoader>}>
                 <Route path={routes.guides.guidedInvestControl} element={<PageLoader><GuidedInvestControlGuide /></PageLoader>} />
