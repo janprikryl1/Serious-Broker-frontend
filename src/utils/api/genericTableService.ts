@@ -14,7 +14,7 @@ export const getMySelects = async () => {
 };
 
 export const deleteMySelect = async (id: number) => {
-    return await axios.delete(`${backendUrl}generic_table/select_detail.php`, {
+    return await axios.delete(`${backendUrl}generic_table/select.php`, {
         params: { id },
         headers: {
             'Authorization': `Bearer ${token()}`,
@@ -53,6 +53,15 @@ export const saveQuery = async (query: Partial<TableSelect>, id?: string) => {
 export const getTableSchema = async (table: string) => {
     return await axios.get<GenericTableSchema[]>(`${backendUrl}generic_table/table_schema.php`, {
         params: { table },
+        headers: {
+            'Authorization': `Bearer ${token()}`,
+        }
+    });
+};
+
+export const getTableContent = async (tableId: string) => {
+    return await axios.get(`${backendUrl}generic_table/table_content.php`, {
+        params: { id: tableId },
         headers: {
             'Authorization': `Bearer ${token()}`,
         }

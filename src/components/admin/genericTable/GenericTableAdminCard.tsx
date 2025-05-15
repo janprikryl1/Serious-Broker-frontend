@@ -7,6 +7,7 @@ import {Button} from "react-bootstrap";
 import {FaRegEdit, FaRegTrashAlt} from "react-icons/fa";
 import {adminURLS} from "../../../utils/constants";
 import {deleteMySelect} from "../../../utils/api/genericTableService.ts";
+import {toCzechDate} from "../../../utils/functions/dateFunctions.ts";
 
 type Props = {
     data: TableSelect;
@@ -42,7 +43,7 @@ export const GenericTableAdminCard:FC<Props> = ({data, setSelects}) => {
                     <h5 className="10 style2">
                         <Link to={`${adminURLS.genericsTableData}/${data.id}`} className="link-underline-none">{data.query}</Link>
                     </h5>
-                    <p className="mb-15">{t("Last update: ")}{data.updated}</p>
+                    <p className="mb-15">{t("Last update: ")}{toCzechDate(data.updated)}</p>
                     <div className="blog__writer">
                         <div className="blog__writer-designation d-flex align-items-center">
                             <Button

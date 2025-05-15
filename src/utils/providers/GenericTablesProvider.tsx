@@ -23,6 +23,7 @@ type GenericTablesProviderProps = {
     setTable: (table: string) => void;
     generatedQuery: string;
     updateQuery: () => void;
+    setGeneratedQuery: Dispatch<SetStateAction<string>>;
 };
 
 export enum GenericTablesSteps {
@@ -52,7 +53,11 @@ export const GenericTablesProvider = ({ children }: Props) => {
         try {
             const response = await getQueryById(id);
             if (response.status === 200) {
-                const queryData = parseSQLToTableQuery(response.data.query);console.log(queryData);
+                const queryData = parseSQLToTableQuery(response.data.query);
+                if (queryData === null) {
+                    setGeneratedQuery(response.data.query);
+                    setStep(GenericTablesSteps.SUMMARY);
+                }
 
                 if (queryData?.tableName) {
                     setTable(queryData.tableName);
@@ -80,7 +85,7 @@ export const GenericTablesProvider = ({ children }: Props) => {
 
             await saveQuery(dataToSave, id);
             CustomSwal.fire({
-                title: t("Successfully saved"),
+                title: t("Query successfully saved"),
                 text: t("Query was successfully saved."),
                 icon: "success",
             });
@@ -113,6 +118,7 @@ export const GenericTablesProvider = ({ children }: Props) => {
         setTable,
         generatedQuery,
         updateQuery,
+        setGeneratedQuery
     };
 
     return (

@@ -139,7 +139,7 @@ export const adminURLS = {
     binanceIndexAbout: "/admin/binance_index_about",
     genericTableData: "/admin/generic_table_data",
     newGenericTableData: "/admin/generic_table_data/edit",
-    genericsTableData: "/admin/generic_table_results/:id",
+    genericsTableData: "/admin/generic_table_results",
 }
 
 export const guideURLS = {

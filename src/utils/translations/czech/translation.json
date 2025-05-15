@@ -874,5 +874,7 @@
     "Connecting Conditions": "Spojení podmínek",
     "Select deleted": "Záznam smazán",
     "Select deleted successfully": "Záznam byl úspěšně smazán",
-    "Error while deleting select": "Chyba při mazání záznamu"
+    "Error while deleting select": "Chyba při mazání záznamu",
+    "Generic table results": "Výsledky generického dotazu",
+    "Query successfully saved": "Dotaz byl úspěšně uložen"
 }
