@@ -876,5 +876,6 @@
     "Select deleted successfully": "Záznam byl úspěšně smazán",
     "Error while deleting select": "Chyba při mazání záznamu",
     "Generic table results": "Výsledky generického dotazu",
-    "Query successfully saved": "Dotaz byl úspěšně uložen"
+    "Query successfully saved": "Dotaz byl uložen",
+    "Query was successfully saved.": "Dotaz byl úspěšně uložen."
 }

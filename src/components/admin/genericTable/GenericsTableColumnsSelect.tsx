@@ -144,19 +144,22 @@ export const GenericsTableColumnsSelect: FC = () => {
             operatorsForUI = [{value: "IS TRUE", label: "IS TRUE"}, {value: "IS FALSE", label: "IS FALSE"}];
         } else if (isNumericType(colSchema.Type)) {
             operatorsForUI = [
-                {value: "=", label: "="}, {value: "!=", label: "!="}, {value: ">", label: ">"},
-                {value: "<", label: "<"}, {value: ">=", label: ">="}, {value: "<=", label: "<="},
-                {value: "IN", label: "IN (seznam)"}
+                {value: "=", label: "="}, {value: "!=", label: "!="}, {value: "<>", label: "<>"}, // Přidáno <>
+                {value: ">", label: ">"}, {value: "<", label: "<"},
+                {value: ">=", label: ">="}, {value: "<=", label: "<="}, // Přidáno >= a <=
+                {value: "IN", label: "IN (seznam)"}, {value: "NOT IN", label: "NOT IN (seznam)"} // Přidáno NOT IN
             ];
         } else if (isStringType(colSchema.Type)) {
             operatorsForUI = [
-                {value: "=", label: "="}, {value: "!=", label: "!="}, {value: "LIKE", label: "LIKE"},
-                {value: "NOT LIKE", label: "NOT LIKE"}, {value: "IN", label: "IN (seznam)"}
+                {value: "=", label: "="}, {value: "!=", label: "!="}, {value: "<>", label: "<>"}, // Přidáno <>
+                {value: "LIKE", label: "LIKE"}, {value: "NOT LIKE", label: "NOT LIKE"},
+                {value: "IN", label: "IN (seznam)"}, {value: "NOT IN", label: "NOT IN (seznam)"} // Přidáno NOT IN
             ];
         } else if (isDateType(colSchema.Type)) {
             operatorsForUI = [
-                {value: "=", label: "="}, {value: "!=", label: "!="}, {value: ">", label: ">"},
-                {value: "<", label: "<"}, {value: ">=", label: ">="}, {value: "<=", label: "<="}
+                {value: "=", label: "="}, {value: "!=", label: "!="}, {value: "<>", label: "<>"}, // Přidáno <>
+                {value: ">", label: ">"}, {value: "<", label: "<"},
+                {value: ">=", label: ">="}, {value: "<=", label: "<="} // Přidáno >= a <=
             ];
         }
 
@@ -179,9 +182,9 @@ export const GenericsTableColumnsSelect: FC = () => {
         }
 
         const showValueInput = currentUiOperatorValue && !["IS NULL", "IS NOT NULL", "IS TRUE", "IS FALSE"].includes(currentUiOperatorValue);
-        const inputType = (isNumericType(colSchema.Type) && currentUiOperatorValue !== "IN") ? "number" :
+        const inputType = (isNumericType(colSchema.Type) && currentUiOperatorValue !== "IN" && currentUiOperatorValue !== "NOT IN") ? "number" :
             isDateType(colSchema.Type) ? (colSchema.Type.toLowerCase() === "date" ? "date" : "datetime-local") : "text";
-        const placeholderText = currentUiOperatorValue === "IN" ? "Values separated by line" : "Value";
+        const placeholderText = (currentUiOperatorValue === "IN" || currentUiOperatorValue === "NOT IN") ? "Values separated by line" : "Value";
 
         return (
             <div key={`${fieldName}-${filterIndex}`} className="row g-2 align-items-center mt-2">

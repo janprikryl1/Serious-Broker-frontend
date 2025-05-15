@@ -54,15 +54,15 @@ export const generateSQLQuery = (currentQuery: Partial<GenericTableQuery> | unde
                     const fieldSql = `\`${cond.field}\``;
                     if (cond.operator === "IS NULL" || cond.operator === "IS NOT NULL") {
                         return `${fieldSql} ${cond.operator}`;
-                    } else if (cond.operator === "IN") {
+                    } else if (cond.operator === "IN" || cond.operator === "NOT IN") {
                         if (cond.value === undefined || cond.value === null || String(cond.value).trim() === '') return null;
                         const valuesArray = String(cond.value).split(',').map(v => v.trim()).filter(v => v !== '');
                         if (valuesArray.length === 0) return null;
                         const escapedValues = valuesArray.map(v => escapeSqlValue(v, isNumericCol));
-                        return `${fieldSql} IN (${escapedValues.join(", ")})`;
+                        return `${fieldSql} ${cond.operator} (${escapedValues.join(", ")})`;
                     } else {
-                        if (cond.value === undefined && !['=', '!=', 'LIKE', 'NOT LIKE'].includes(cond.operator)) return null;
-                        const valueStr = escapeSqlValue(cond.value, isNumericCol && ['=', '!=', '>', '<', '>=', '<='].includes(cond.operator));
+                        if (cond.value === undefined && !['=', '!=', '<>', 'LIKE', 'NOT LIKE'].includes(cond.operator)) return null;
+                        const valueStr = escapeSqlValue(cond.value, isNumericCol && ['=', '!=', '<>', '>', '<', '>=', '<='].includes(cond.operator));
                         return `${fieldSql} ${cond.operator} ${valueStr}`;
                     }
                 })

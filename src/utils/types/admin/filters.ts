@@ -1,9 +1,9 @@
 export type FilterOperator =
-    | "=" | "!=" | ">" | "<" | ">=" | "<="
+    | "=" | "!=" | ">" | "<" | ">=" | "<=" | "<>"
     | "LIKE" | "NOT LIKE"
     | "IS NULL" | "IS NOT NULL"
     | "IS TRUE" | "IS FALSE"
-    | "IN";
+    | "IN" | "NOT IN";
 
 export type FilterCondition = {
     field: string;

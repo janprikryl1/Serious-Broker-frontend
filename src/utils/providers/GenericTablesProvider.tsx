@@ -53,7 +53,7 @@ export const GenericTablesProvider = ({ children }: Props) => {
         try {
             const response = await getQueryById(id);
             if (response.status === 200) {
-                const queryData = parseSQLToTableQuery(response.data.query);
+                const queryData = parseSQLToTableQuery(response.data.query);console.log(queryData);
                 if (queryData === null) {
                     setGeneratedQuery(response.data.query);
                     setStep(GenericTablesSteps.SUMMARY);
@@ -77,12 +77,7 @@ export const GenericTablesProvider = ({ children }: Props) => {
         if (!query) return;
 
         try {
-            const dataToSave = {
-                ...query,
-                table,
-                query: generateSQLQuery(query, table),
-            };
-
+            const dataToSave = {...query, table, query: generatedQuery};
             await saveQuery(dataToSave, id);
             CustomSwal.fire({
                 title: t("Query successfully saved"),

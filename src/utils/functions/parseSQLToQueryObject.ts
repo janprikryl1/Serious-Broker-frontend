@@ -1,280 +1,210 @@
 import {FilterOperator, FilterCondition, GenericTableQuery} from "../types/admin/filters";
 
-export const parseSQLToTableQuery = (sqlQuery: string): { tableName: string; query: GenericTableQuery; } | null => {
-    try {
-        // Clean up the query
-        const cleanQuery = sqlQuery.trim().replace(/;$/, '');
+const splitTopLevel = (expr: string, op: "AND" | "OR"): string[] => {
+    const parts: string[] = [];
+    let depth = 0;
+    let tokenStart = 0;
+    const len = expr.length;
+    const opLower = op.toLowerCase();
 
-        // Initialize the result object
+    for (let i = 0; i < len; i++) {
+        const ch = expr[i];
+        if (ch === "(") depth++;
+        else if (ch === ")") depth--;
+
+        if (
+            depth === 0 &&
+            i + op.length + 1 < len &&
+            /\s/.test(expr[i]) &&
+            expr.substr(i + 1, op.length).toLowerCase() === opLower &&
+            /\s/.test(expr[i + op.length + 1])
+        ) {
+            parts.push(expr.substring(tokenStart, i).trim());
+            i += op.length;
+            tokenStart = i + 1;
+        }
+    }
+    const tail = expr.substring(tokenStart).trim();
+    if (tail) parts.push(tail);
+    return parts;
+};
+export const parseSQLToTableQuery = (sqlQuery: string): { tableName: string; query: GenericTableQuery } | null => {
+    try {
+        const cleanQuery = sqlQuery.trim().replace(/;$/, "");
         const result: GenericTableQuery = {};
 
-        // Basic validation that this is a SELECT query
-        if (!cleanQuery.toUpperCase().startsWith('SELECT ')) {
-            throw new Error('Query must be a SELECT statement');
-        }
+        if (!/^SELECT\s/i.test(cleanQuery))
+            throw new Error("Query must be a SELECT statement");
 
-        // Extract table name
+        /* --- FROM ------------------------------------------------------------------ */
         const fromMatch = cleanQuery.match(/FROM\s+`([^`]+)`/i);
-        if (!fromMatch) {
-            throw new Error('Cannot find table name in FROM clause');
-        }
+        if (!fromMatch) throw new Error("Cannot find table name in FROM clause");
         const tableName = fromMatch[1];
 
-        // Parse columns
+        /* --- SELECT columns --------------------------------------------------------- */
         const selectMatch = cleanQuery.match(/SELECT\s+(.+?)\s+FROM/i);
         if (selectMatch) {
-            const columnsStr = selectMatch[1].trim();
-            if (columnsStr !== '*') {
-                const columns = columnsStr.split(',')
-                    .map(col => col.trim())
-                    .map(col => {
-                        // Extract field name from backticks
-                        const match = col.match(/`([^`]+)`/);
-                        return match ? match[1] : col;
-                    });
-                result.columns = columns;
+            const colsStr = selectMatch[1].trim();
+            if (colsStr !== "*") {
+                result.columns = colsStr
+                    .split(",")
+                    .map((c) => c.trim())
+                    .map((c) => (c.startsWith("`") ? c.slice(1, -1) : c));
             }
         }
 
-        // Parse WHERE clause
-        const whereRegex = /WHERE\s+(.+?)(?:\s+ORDER BY|\s+LIMIT|$)/is;
-        const whereMatch = cleanQuery.match(whereRegex);
-
+        /* --- WHERE ------------------------------------------------------------------ */
+        const whereMatch = cleanQuery.match(
+            /WHERE\s+(.+?)(?:\s+ORDER\s+BY|\s+LIMIT|$)/is
+        );
         if (whereMatch) {
-            let whereClause = whereMatch[1].trim();
+            const whereClause = whereMatch[1].trim();
 
-            // Detect global operator by counting outside parentheses
-            let orCount = 0;
-            let andCount = 0;
-            let depth = 0;
-            let pos = 0;
-
-            while (pos < whereClause.length) {
-                const substring = whereClause.substring(pos);
-                if (whereClause[pos] === '(') {
-                    depth++;
-                } else if (whereClause[pos] === ')') {
-                    depth--;
-                } else if (depth === 0) {
-                    // Check for OR outside parentheses
-                    const orMatch = /^\s+OR\s+/.exec(substring);
-                    if (orMatch) {
-                        orCount++;
-                        pos += orMatch[0].length - 1;
-                    }
-
-                    // Check for AND outside parentheses
-                    const andMatch = /^\s+AND\s+/.exec(substring);
-                    if (andMatch) {
-                        andCount++;
-                        pos += andMatch[0].length - 1;
-                    }
+            // 1) detekce globálního operátoru (na top-level)
+            let depth = 0, orCnt = 0, andCnt = 0;
+            for (let i = 0; i < whereClause.length; i++) {
+                const rest = whereClause.substring(i);
+                if (whereClause[i] === "(") depth++;
+                else if (whereClause[i] === ")") depth--;
+                else if (depth === 0) {
+                    const or = /^\s+OR\s+/i.exec(rest);
+                    const and = /^\s+AND\s+/i.exec(rest);
+                    if (or) { orCnt++; i += or[0].length - 1; }
+                    else if (and) { andCnt++; i += and[0].length - 1; }
                 }
-                pos++;
             }
+            const globalOp: "AND" | "OR" = orCnt > 0 ? "OR" : "AND";
+            result.globalConditionOperator = globalOp;
 
-            const globalOperator = orCount > 0 ? 'OR' : 'AND';
-            result.globalConditionOperator = globalOperator as "AND" | "OR";
-
+            // 2) rozdělení na hlavní bloky
+            const groups = splitTopLevel(whereClause, globalOp);
             const conditions: FilterCondition[] = [];
 
-            // Split by the global operator to get main condition groups
-            const mainSplitRegex = globalOperator === 'OR'
-                ? /\s+OR\s+(?![^(]*\))/g  // Split by OR not inside parentheses
-                : /\s+AND\s+(?![^(]*\))/g; // Split by AND not inside parentheses
-
-            const mainGroups = whereClause.split(mainSplitRegex);
-
-            // Process each main group
-            mainGroups.forEach(group => {
-                group = group.trim();
-
-                // If group is surrounded by parentheses, remove them and process the inside
-                if (group.startsWith('(') && group.endsWith(')')) {
-                    const innerContent = group.substring(1, group.length - 1).trim();
-
-                    // Split by AND for inner conditions
-                    const innerConditions = innerContent.split(/\s+AND\s+/g);
-                    innerConditions.forEach(innerCondition => {
-                        const condition = parseCondition(innerCondition.trim());
-                        if (condition) conditions.push(condition);
+            groups.forEach((g) => {
+                const group = g.trim();
+                if (group.startsWith("(") && group.endsWith(")")) {
+                    splitTopLevel(group.slice(1, -1).trim(), "AND").forEach((c) => {
+                        const cond = parseCondition(c.trim());
+                        if (cond) conditions.push(cond);
                     });
                 } else {
-                    // Direct condition without parentheses
-                    const condition = parseCondition(group);
-                    if (condition) conditions.push(condition);
+                    const cond = parseCondition(group);
+                    if (cond) conditions.push(cond);
                 }
             });
 
-            if (conditions.length > 0) {
-                result.conditions = conditions;
-            }
+            if (conditions.length) result.conditions = conditions;
         }
 
-        // Parse ORDER BY clause
-        const orderByMatch = cleanQuery.match(/ORDER BY\s+`([^`]+)`\s+(ASC|DESC)(?:\s+LIMIT|$)/i);
-        if (orderByMatch) {
+        /* --- ORDER BY ---------------------------------------------------------------- */
+        const ob = cleanQuery.match(
+            /ORDER BY\s+`([^`]+)`\s+(ASC|DESC)(?:\s|$)/i
+        );
+        if (ob) {
             result.orderBy = {
-                field: orderByMatch[1],
-                direction: orderByMatch[2].toUpperCase() as 'ASC' | 'DESC'
+                field: ob[1],
+                direction: ob[2].toUpperCase() as "ASC" | "DESC"
             };
         }
 
-        // Parse LIMIT and OFFSET
-        const limitMatch = cleanQuery.match(/LIMIT\s+(\d+)(?:\s+OFFSET\s+(\d+))?/i);
-        if (limitMatch) {
-            result.limit = parseInt(limitMatch[1]);
-            if (limitMatch[2]) {
-                result.offset = parseInt(limitMatch[2]);
-            }
+        /* --- LIMIT / OFFSET ---------------------------------------------------------- */
+        const lm = cleanQuery.match(/LIMIT\s+(\d+)(?:\s+OFFSET\s+(\d+))?/i);
+        if (lm) {
+            result.limit = parseInt(lm[1], 10);
+            if (lm[2]) result.offset = parseInt(lm[2], 10);
         }
 
         return { tableName, query: result };
-    } catch (error) {
-        console.error('Error parsing SQL query:', error);
+    } catch (err) {
+        console.error("Error parsing SQL:", err);
         return null;
     }
 };
 
-/**
- * Parse a single condition string into a FilterCondition object
- * @param conditionStr The condition string to parse
- * @returns A FilterCondition object or null if parsing fails
- */
-const parseCondition = (conditionStr: string): FilterCondition | null => {
-    try {
-        conditionStr = conditionStr.trim();
+const parseCondition = (str: string): FilterCondition | null => {
+    str = str.trim();
 
-        // Handle IS NULL and IS NOT NULL
-        const nullMatch = conditionStr.match(/`([^`]+)`\s+(IS NULL|IS NOT NULL)/i);
-        if (nullMatch) {
-            return {
-                field: nullMatch[1],
-                operator: nullMatch[2].toUpperCase() as FilterOperator
-            };
-        }
-
-        // Handle IS TRUE and IS FALSE
-        const boolMatch = conditionStr.match(/`([^`]+)`\s+(IS TRUE|IS FALSE)/i);
-        if (boolMatch) {
-            return {
-                field: boolMatch[1],
-                operator: boolMatch[2].toUpperCase() as FilterOperator
-            };
-        }
-
-        // Handle IN operator with proper value extraction
-        const inRegex = /`([^`]+)`\s+IN\s+\(([^)]+)\)/i;
-        const inMatch = conditionStr.match(inRegex);
-        if (inMatch) {
-            const field = inMatch[1];
-            const valueStr = inMatch[2].trim();
-
-            // Parse values inside the IN clause
-            // We need to properly handle quoted values with commas
-            const values: (string | number | boolean | null)[] = [];
-            let currentValue = '';
-            let inQuote = false;
-            let quoteChar = '';
-
-            for (let i = 0; i < valueStr.length; i++) {
-                const char = valueStr[i];
-
-                if ((char === "'" || char === '"') && (i === 0 || valueStr[i-1] !== '\\')) {
-                    if (!inQuote) {
-                        inQuote = true;
-                        quoteChar = char;
-                    } else if (char === quoteChar) {
-                        inQuote = false;
-                    } else {
-                        currentValue += char;
-                    }
-                } else if (char === ',' && !inQuote) {
-                    // End of value
-                    values.push(parseValue(currentValue.trim()));
-                    currentValue = '';
-                } else {
-                    currentValue += char;
-                }
-            }
-
-            // Add the last value
-            if (currentValue.trim()) {
-                values.push(parseValue(currentValue.trim()));
-            }
-
-            // Convert values to string representation for storage
-            const processedValues = values
-                .map(v => {
-                    if (v === null) return 'NULL';
-                    if (typeof v === 'string') return `'${v}'`;
-                    return String(v);
-                })
-                .join(',');
-
-            return {
-                field,
-                operator: 'IN',
-                value: processedValues
-            };
-        }
-
-        // Handle all other operators, ensuring we don't capture trailing parentheses
-        const operatorPattern = /`([^`]+)`\s+(=|!=|>|<|>=|<=|LIKE|NOT LIKE)\s+(.+)/i;
-        const opMatch = conditionStr.match(operatorPattern);
-
-        if (opMatch) {
-            const field = opMatch[1];
-            const operator = opMatch[2].toUpperCase() as FilterOperator;
-            let valueStr = opMatch[3].trim();
-
-            return {
-                field,
-                operator,
-                value: parseValue(valueStr)
-            };
-        }
-
-        return null;
-    } catch (error) {
-        console.error('Error parsing condition:', conditionStr, error);
-        return null;
+    /* IS NULL / NOT NULL */
+    const nullMatch = str.match(/^`([^`]+)`\s+(IS NULL|IS NOT NULL)$/i);
+    if (nullMatch) {
+        return { field: nullMatch[1], operator: nullMatch[2].toUpperCase() as FilterOperator };
     }
+
+    /* IS TRUE / IS FALSE */
+    const boolMatch = str.match(/^`([^`]+)`\s+(IS TRUE|IS FALSE)$/i);
+    if (boolMatch) {
+        return { field: boolMatch[1], operator: boolMatch[2].toUpperCase() as FilterOperator };
+    }
+
+    /* IN / NOT IN */
+    const inOrNot = str.match(/^`([^`]+)`\s+(NOT\s+)?IN\s*\(([^)]+)\)/i);
+    if (inOrNot) {
+        const field = inOrNot[1];
+        const operator: FilterOperator = inOrNot[2] ? "NOT IN" : "IN";
+        const list = inOrNot[3];
+
+        // tokenizace obsahu závorky (ignoruje čárky v uvozovkách)
+        const values: (string | number | boolean | null)[] = [];
+        let token = "", inQuote = false, quoteChar = "";
+        for (let i = 0; i < list.length; i++) {
+            const ch = list[i];
+            if ((ch === "'" || ch === '"') && (i === 0 || list[i - 1] !== "\\")) {
+                if (!inQuote) { inQuote = true; quoteChar = ch; }
+                else if (ch === quoteChar) { inQuote = false; }
+                else { token += ch; }
+            } else if (ch === "," && !inQuote) {
+                if (token.trim()) values.push(parseValue(token.trim()));
+                token = "";
+            } else token += ch;
+        }
+        if (token.trim()) values.push(parseValue(token.trim()));
+
+        const processed = values
+            .map(v =>
+                v === null ? "NULL" :
+                    typeof v === "boolean" ? (v ? "1" : "0") :
+                        String(v)
+            )
+            .join(",");
+
+        return { field, operator, value: processed };
+    }
+
+    /* binární operátory (=, !=, >=, LIKE, NOT LIKE …) */
+    const opMatch = str.match(
+        /^`([^`]+)`\s+(<>|!=|>=|<=|=|>|<|LIKE\b|NOT\s+LIKE\b)\s+(.+)/i
+    );
+    if (opMatch) {
+        let op = opMatch[2].toUpperCase();
+        if (op === "<>") op = "!=";
+        if (/NOT\s+LIKE/i.test(op)) op = "NOT LIKE";
+        return {
+            field: opMatch[1],
+            operator: op as FilterOperator,
+            value: parseValue(opMatch[3].trim())
+        };
+    }
+
+    console.warn("Neznámý formát podmínky:", str);
+    return null;
 };
 
-/**
- * Parse a single condition string into a FilterCondition object
- * @param conditionStr The condition string to parse
- * @returns A FilterCondition object or null if parsing fails
- */
-const parseValue = (valueStr: string): string | number | boolean | null => {
-    valueStr = valueStr.trim();
+const parseValue = (
+    v: string
+): string | number | boolean | null => {
+    v = v.trim();
+    if (v.toUpperCase() === "NULL") return null;
+    if (/^-?\d+(\.\d+)?$/.test(v)) return parseFloat(v);
+    if (v === "0") return false;
+    if (v === "1") return true;
+    if (/^TRUE$/i.test(v)) return true;
+    if (/^FALSE$/i.test(v)) return false;
 
-    // Remove trailing parentheses if present
-    if (valueStr.endsWith(')')) {
-        valueStr = valueStr.replace(/\)+$/, '');
+    // odstraň uvozovky a ošetři escapované apostrofy
+    if ((v.startsWith("'") && v.endsWith("'")) || (v.startsWith('"') && v.endsWith('"'))) {
+        const unq = v.slice(1, -1);
+        if (v.startsWith("'")) return unq.replace(/''/g, "'");
+        return unq.replace(/""/g, '"');
     }
-
-    // Handle NULL
-    if (valueStr === 'NULL') {
-        return null;
-    }
-
-    // Handle numbers
-    if (/^-?\d+(\.\d+)?$/.test(valueStr)) {
-        return parseFloat(valueStr);
-    }
-
-    // Handle boolean (0 and 1)
-    if (valueStr === '0') return false;
-    if (valueStr === '1') return true;
-
-    // Handle quoted strings
-    if ((valueStr.startsWith("'") && valueStr.endsWith("'")) ||
-        (valueStr.startsWith('"') && valueStr.endsWith('"'))) {
-        // Remove quotes and unescape single quotes
-        return valueStr.substring(1, valueStr.length - 1).replace(/''/g, "'");
-    }
-
-    return valueStr;
+    return v;
 };
