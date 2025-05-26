@@ -21,3 +21,11 @@ export const getBinanceIndexAssetRecomBestPreviousDetail = async (assetLabel: st
     });
     return await res;
 }
+
+export const getBinanceIndexAssetRecomBestPreviousGraphData = async (assetLabel: string) => {
+    return await axios.get(`${backendUrl}graphs/binance_index_asset_recom_best_graph_data.php`, {
+        params: {
+            asset_label: assetLabel
+        }
+    })
+}

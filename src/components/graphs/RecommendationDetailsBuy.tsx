@@ -12,9 +12,9 @@ export const RecommendationDetailsBuy:FC<Props> = ({detailsData}) => {
     const {t} = useTranslation();
     
     return (
-        <>
+        <div className="col-sm">
             {isValid(detailsData.buy_week_0_week_day) && isValid(detailsData.buy_week_0_hour) &&
-                <p>{t("Last week's recommendations: ")}{t(getDayName(detailsData.buy_week_0_week_day))} {convertUTCToLocalTime(detailsData.buy_week_0_hour)}</p>}
+                <p><strong>{t("Last week's recommendations: ")}{t(getDayName(detailsData.buy_week_0_week_day))} {convertUTCToLocalTime(detailsData.buy_week_0_hour)}</strong></p>}
             {isValid(detailsData.buy_week_1_week_day) && isValid(detailsData.buy_week_1_hour) &&
                 <p>{t("Previous week's recommendations: ")}{t(getDayName(detailsData.buy_week_1_week_day))} {convertUTCToLocalTime(detailsData.buy_week_1_hour)}</p>}
             {isValid(detailsData.buy_week_2_week_day) && isValid(detailsData.buy_week_2_hour) &&
@@ -41,6 +41,6 @@ export const RecommendationDetailsBuy:FC<Props> = ({detailsData}) => {
                 <p>{t("Recommendations for previous year: ")} {getYear(detailsData.buy_year_1_week_day)} {convertUTCToLocalTime(detailsData.buy_year_1_hour)}</p>}
             {isValid(detailsData.buy_year_2_week_day) && isValid(detailsData.buy_year_2_hour) &&
                 <p>{t("Recommendations for the year before previous: ")} {getYear(detailsData.buy_year_2_week_day)} {convertUTCToLocalTime(detailsData.buy_year_2_hour)}</p>}
-        </>
+        </div>
     );
 }
