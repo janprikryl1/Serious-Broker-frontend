@@ -16,6 +16,7 @@ import {useUserContext} from "../../utils/providers/providerUser.tsx";
 import {adminURLS, routes} from "../../utils/constants";
 import {UserRole} from "../../utils/types/user/userTypes.ts";
 import {CgDatabase} from "react-icons/cg";
+import {TbForms} from "react-icons/tb";
 
 export const AdminSidebar: FC = () => {
     const { t } = useTranslation();
@@ -117,6 +118,9 @@ export const AdminSidebar: FC = () => {
                     </MenuItem>
                     <MenuItem icon={<CgDatabase />} component={<NavLink to={adminURLS.genericTableData} />} className="sidebar-item">
                         {t("Generic data")}
+                    </MenuItem>
+                    <MenuItem icon={<TbForms />} component={<NavLink to={adminURLS.forms} />} className="sidebar-item">
+                        {t("Forms")}
                     </MenuItem>
                     <MenuItem icon={<CiLogout />} onClick={logout} className="sidebar-item">
                         {t("Logout")}

@@ -877,5 +877,15 @@
     "Error while deleting select": "Chyba při mazání záznamu",
     "Generic table results": "Výsledky generického dotazu",
     "Query successfully saved": "Dotaz byl uložen",
-    "Query was successfully saved.": "Dotaz byl úspěšně uložen."
+    "Query was successfully saved.": "Dotaz byl úspěšně uložen.",
+    "Forms": "Formuláře",
+    "New question": "Nová otázka",
+    "Cancel": "Zrušit",
+    "Add option": "Přidat možnost",
+    "Required": "Povinné",
+    "Question text": "Text otázky",
+    "Question type": "Typ otázky",
+    "Options": "Možnosti",
+    "Yes": "Ano",
+    "No": "Ne"
 }

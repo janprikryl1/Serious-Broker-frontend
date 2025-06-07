@@ -66,6 +66,7 @@ const PersonalStrategyGuide = lazy(() => import ("./pages/guide/PersonalStrategy
 const AdminGenericTableData = lazy(() => import ("./pages/admin/AdminGenericTableData.tsx").then(module => ({ default: module.AdminGenericTableData })));
 const AdminGenericTableDataEdit = lazy(() => import ("./pages/admin/AdminGenericTableDataEdit.tsx").then(module => ({ default: module.AdminGenericTableDataEdit })));
 const AdminGenericTableResults = lazy(() => import ("./pages/admin/AdminGenericTableResults.tsx").then(module => ({ default: module.AdminGenericTableResults })));
+const AdminFormsOverview = lazy(() => import ("./pages/admin/AdminFormsOverview.tsx").then(module => ({ default: module.AdminFormsOverview })));
 
 export const Router:FC = () => {
     return (
@@ -138,6 +139,7 @@ export const Router:FC = () => {
                 <Route path={routes.admin.newGenericTableData} element={<PageLoader><AdminGenericTableDataEdit /></PageLoader>} />
                 <Route path={routes.admin.editGenericTableData} element={<PageLoader><AdminGenericTableDataEdit /></PageLoader>} />
                 <Route path={routes.admin.genericsTableData} element={<PageLoader><AdminGenericTableResults /></PageLoader>} />
+                <Route path={routes.admin.forms} element={<PageLoader><AdminFormsOverview /></PageLoader>} />
             </Route>
             <Route path={guideURLS.index} element={<PageLoader><Guide /></PageLoader>}>
                 <Route path={routes.guides.guidedInvestControl} element={<PageLoader><GuidedInvestControlGuide /></PageLoader>} />

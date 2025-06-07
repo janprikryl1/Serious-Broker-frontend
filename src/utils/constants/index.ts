@@ -97,6 +97,7 @@ export const routes = {
         newGenericTableData: "generic_table_data/edit",
         editGenericTableData: "generic_table_data/edit/:id",
         genericsTableData: "generic_table_results/:id",
+        forms: "forms",
     },
     guides: {
         index: "",
@@ -140,6 +141,7 @@ export const adminURLS = {
     genericTableData: "/admin/generic_table_data",
     newGenericTableData: "/admin/generic_table_data/edit",
     genericsTableData: "/admin/generic_table_results",
+    forms: "/admin/forms",
 }
 
 export const guideURLS = {
