@@ -36,7 +36,7 @@ export const AdminSidebar: FC = () => {
     };
     
     useEffect(() => {
-        if (user === undefined || !(user.role === UserRole.Admin || user.role === UserRole.Manager)) {
+        if (user === undefined || !(user?.role === UserRole.Admin || user?.role === UserRole.Manager)) {
             navigate(routes.home);
         }
     }, [user]);

@@ -10,6 +10,8 @@ import {UnverifiedHeaderInfo} from "./components/navbar/UnverifiedHeaderInfo.tsx
 import {Header} from "./components/navbar/Header.tsx";
 import {Footer} from "./components/navbar/Footer.tsx";
 import {Router} from "./Router.tsx";
+import {ToastContainer} from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 // Disable automatic CSS addition for Font Awesome
 config.autoAddCss = false;
@@ -31,6 +33,7 @@ function App() {
                     </AchievementsProvider>
                 </ProviderUser>
             </ThemeProvider>
+            <ToastContainer position="bottom-right" />
         </BrowserRouter>
     );
 }

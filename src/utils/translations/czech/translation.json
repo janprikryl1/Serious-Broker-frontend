@@ -887,5 +887,8 @@
     "Question type": "Typ otázky",
     "Options": "Možnosti",
     "Yes": "Ano",
-    "No": "Ne"
+    "No": "Ne",
+    "Order saved successfully": "Pořadí bylo úspěšně uloženo",
+    "Saved successfully": "Uloženo",
+    "Responses": "Odpovědi"
 }

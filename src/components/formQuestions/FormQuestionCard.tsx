@@ -4,13 +4,17 @@ import {Question, QuestionType} from "../../utils/types/admin/Question";
 import {Button, ButtonColor} from "../reusable/Button.tsx";
 import {useTranslation} from "react-i18next";
 import {FaRegTrashCan} from "react-icons/fa6";
+import {toast} from "react-toastify";
+import {saveQuestion} from "../../utils/api/formsService.ts";
 
 type Props = {
     question: Question;
     onSave?: (updated: Question) => void;
+    deleteQuestion?: (id: number) => void;
+    updateId: (oldId: number, newId: number) => void;
 };
 
-export const FormQuestionCard: FC<Props> = ({question, onSave}) => {
+export const FormQuestionCard: FC<Props> = ({question, onSave, deleteQuestion, updateId}) => {
     const {t} = useTranslation();
     const [isEditing, setIsEditing] = useState(false);
 
@@ -31,7 +35,7 @@ export const FormQuestionCard: FC<Props> = ({question, onSave}) => {
 
     const watchType = watch("type");
 
-    const onSubmit = (data: Question) => {
+    const onSubmit = async (data: Question) => {
         const cleaned = {
             ...data,
             options:
@@ -41,8 +45,13 @@ export const FormQuestionCard: FC<Props> = ({question, onSave}) => {
         };
 
         console.log("Ukládám otázku:", cleaned);
-        onSave?.(cleaned);
-        setIsEditing(false);
+        const response = await saveQuestion(cleaned);
+        if (response?.status === 200) {
+            onSave?.(cleaned);
+            setIsEditing(false);
+            toast.success(t("Saved successfully"));
+            updateId(question.id, response.data.id);
+        }
     };
 
     return (
@@ -108,6 +117,9 @@ export const FormQuestionCard: FC<Props> = ({question, onSave}) => {
                             reset(question);
                             setIsEditing(false);
                         }}>{t("Cancel")}</Button>
+                        <Button type="button" color={ButtonColor.red} onClick={() => {
+                            deleteQuestion?.(question.id);
+                        }}><FaRegTrashCan /></Button>
                     </div>
                 </form>
             )}

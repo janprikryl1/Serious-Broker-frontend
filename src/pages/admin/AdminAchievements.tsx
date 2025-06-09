@@ -4,8 +4,6 @@ import {DataGrid} from "@mui/x-data-grid";
 import {useTranslation} from "react-i18next";
 import {Button, ButtonColor} from "../../components/reusable/Button.tsx";
 import {UserAchievementDetails} from "../../components/admin/achievments/UserAchievementDetails.tsx";
-import { ToastContainer } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
 import {useAdminAchievements} from "../../utils/hooks/admin/useAdminAchievements.ts";
 
 export const AdminAchievements:FC = () => {
@@ -78,7 +76,6 @@ export const AdminAchievements:FC = () => {
                     </div>
                 </div>
             </div>
-            <ToastContainer position="bottom-right" />
         </div>
     );
 };

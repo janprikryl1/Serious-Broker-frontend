@@ -24,7 +24,7 @@ export const useAdminUserManagement = () => {
     const [filteredUsers, setFilteredUsers] = useState<UserType[]>(users);
 
     useEffect(() => {
-        if (!user || user.role !== UserRole.Admin) {
+        if (!user || user?.role !== UserRole.Admin) {
             navigate(routes.home);
         }
     }, [user]);

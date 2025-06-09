@@ -1,36 +1,26 @@
-import { FC, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import {
-    DndContext,
-    closestCenter,
-    MouseSensor,
-    TouchSensor,
-    useSensor,
-    useSensors,
-    DragEndEvent,
-} from "@dnd-kit/core";
-import {
-    SortableContext,
-    useSortable,
-    verticalListSortingStrategy,
-    arrayMove,
-} from "@dnd-kit/sortable";
-import { CSS } from "@dnd-kit/utilities";
+import {FC, useEffect, useState} from "react";
+import {closestCenter, DndContext, DragEndEvent, MouseSensor, TouchSensor, useSensor, useSensors,} from "@dnd-kit/core";
+import {arrayMove, SortableContext, useSortable, verticalListSortingStrategy,} from "@dnd-kit/sortable";
+import {CSS} from "@dnd-kit/utilities";
 import {RiDragMove2Fill} from "react-icons/ri";
-import { adminURLS } from "../../utils/constants";
-import { Button } from "../../components/reusable/Button.tsx";
-import { ArticlesSkeleton } from "../../components/articles/ArticlesSkeleton.tsx";
-import { useTranslation } from "react-i18next";
-import { Question } from "../../utils/types/admin/Question.ts";
-import { getAllQuestions } from "../../utils/api/formsService.ts";
-import { FormQuestionCard } from "../../components/formQuestions/FormQuestionCard.tsx";
+import {Button, ButtonColor} from "../../components/reusable/Button.tsx";
+import {ArticlesSkeleton} from "../../components/articles/ArticlesSkeleton.tsx";
+import {useTranslation} from "react-i18next";
+import {Question, QuestionType} from "../../utils/types/admin/Question.ts";
+import {deleteQuestion, getAllQuestions, saveOrder} from "../../utils/api/formsService.ts";
+import {FormQuestionCard} from "../../components/formQuestions/FormQuestionCard.tsx";
+import {toast} from "react-toastify";
+import {Link} from "react-router-dom";
+import {adminURLS} from "../../utils/constants";
 
 type SortableCardProps = {
     question: Question;
     onSave?: (updated: Question) => void;
+    onDelete?: (id: number) => void;
+    updateId: (oldId: number, newId: number) => void;
 };
 
-const SortableCard: FC<SortableCardProps> = ({ question, onSave }) => {
+const SortableCard: FC<SortableCardProps> = ({ question, onSave, onDelete, updateId }) => {
     const { attributes, listeners, setNodeRef, transform, transition } = useSortable({
         id: question.id,
     });
@@ -50,7 +40,7 @@ const SortableCard: FC<SortableCardProps> = ({ question, onSave }) => {
                 <RiDragMove2Fill />
             </div>
             <div className="col-sm-8">
-                <FormQuestionCard question={question} onSave={onSave} />
+                <FormQuestionCard question={question} onSave={onSave} deleteQuestion={onDelete} updateId={updateId} />
             </div>
         </div>
     );
@@ -84,7 +74,7 @@ export const AdminFormsOverview: FC = () => {
         getData();
     }, []);
 
-    const handleDragEnd = (event: DragEndEvent) => {
+    const handleDragEnd = async (event: DragEndEvent) => {
         const { active, over } = event;
         if (active.id !== over?.id) {
             const oldIndex = questions.findIndex((q) => q.id === active.id);
@@ -94,9 +84,21 @@ export const AdminFormsOverview: FC = () => {
                 order: i + 1,
             }));
             setQuestions(newArray);
-            // TODO: API volání pro uložení nového pořadí
+            await saveOrder(newArray.map((q) => ({ id: q.id, order: q.order })));
+            toast.success(t("Order saved successfully"));
         }
     };
+    
+    const handleAddNewQuestion = () => {
+        const newQuestion: Question = {
+            id: Date.now(),
+            order: questions.length + 1,
+            type: QuestionType.text,
+            required: false,
+            question_text: t("New question"),
+        };
+        setQuestions(prev => [...prev, newQuestion]);
+    }
 
     return (
         <div className="padding-bottom admin-container">
@@ -108,10 +110,8 @@ export const AdminFormsOverview: FC = () => {
                         data-aos-duration="900"
                     >
                         <h3 className="admin-section-title">{t("Forms")}</h3>
-
-                        <Link to={adminURLS.newGenericTableData}>
-                            <Button>{t("New question")}</Button>
-                        </Link>
+                        <Button onClick={handleAddNewQuestion}>{t("New question")}</Button>
+                        <Link to={adminURLS.formResponses} style={{marginLeft:20}}><Button color={ButtonColor.gray}>{t("Responses")}</Button></Link>
 
                         <div className="padding-top padding-bottom">
                             <div className="blog__wrapper">
@@ -138,6 +138,21 @@ export const AdminFormsOverview: FC = () => {
                                                                     q.id === updated.id ? updated : q
                                                                 )
                                                             );
+                                                        }}
+                                                        onDelete={(id) => {
+                                                            deleteQuestion(id);
+                                                            setQuestions((prev) => prev.filter((q) => q.id !== id));
+                                                        }}
+                                                        updateId={(oldId: number, newId: number) => {
+                                                            setQuestions((prev) => prev.map((q) => {
+                                                                if (q.id === oldId) {
+                                                                    return {
+                                                                        ...q,
+                                                                        id: newId
+                                                                    };
+                                                                }
+                                                                return q;
+                                                            }));
                                                         }}
                                                     />
                                                 ))}
