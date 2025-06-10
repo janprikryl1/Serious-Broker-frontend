@@ -890,5 +890,11 @@
     "No": "Ne",
     "Order saved successfully": "Pořadí bylo úspěšně uloženo",
     "Saved successfully": "Uloženo",
-    "Responses": "Odpovědi"
+    "Responses": "Odpovědi",
+    "Reset answers": "Resetovat odpovědi",
+    "Reset old answers": "Resetovat staré odpovědi",
+    "Questionnaire": "Dotazník",
+    "Select an option": "Vyberte možnost",
+    "Questionnaire submitted successfully!": "Dotazník byl úspěšně odeslán!",
+    "There was an error submitting your answers.": "Při odesílání odpovědí došlo k chybě."
 }

@@ -1,7 +1,8 @@
 import { FC, useEffect, useState } from "react";
 import { QuestionResponseUserType } from "../../utils/types/admin/QuestionResponseUserType.ts";
-import { getUserQuestions } from "../../utils/api/formsService.ts";
+import {getUserQuestions, resetUserResponses} from "../../utils/api/formsService.ts";
 import {useTranslation} from "react-i18next";
+import {Button} from "../reusable/Button.tsx";
 
 type Props = {
     userId: string;
@@ -25,6 +26,11 @@ export const AdminFormResponsesTable: FC<Props> = ({ userId }) => {
             }
         })();
     }, [userId]);
+    
+    const handleResetUserResponses = async () => {
+        if (!userId) return;
+        await resetUserResponses(userId);
+    };
 
     return (
         <div className="mt-4">
@@ -40,6 +46,7 @@ export const AdminFormResponsesTable: FC<Props> = ({ userId }) => {
                     </p>
                 </div>
             )) : t("Loading...")}
+            {responses && <Button onClick={handleResetUserResponses}>{t("Reset answers")}</Button>}
         </div>
     );
 };

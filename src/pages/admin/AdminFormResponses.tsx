@@ -1,8 +1,9 @@
 import {ChangeEvent, FC, useEffect, useState} from "react";
 import { UserLiteType } from "../../utils/types/user/UserLiteType.ts";
-import { getUserLites } from "../../utils/api/formsService.ts";
+import {getUserLites, resetOldResponses} from "../../utils/api/formsService.ts";
 import { useTranslation } from "react-i18next";
 import {AdminFormResponsesTable} from "../../components/formQuestions/AdminFormResponsesTable.tsx";
+import {Button} from "../../components/reusable/Button.tsx";
 
 export const AdminFormResponses: FC = () => {
     const { t } = useTranslation();
@@ -25,6 +26,12 @@ export const AdminFormResponses: FC = () => {
     const handleChange = (event: ChangeEvent<HTMLSelectElement>) => {
         setSelectedUserId(event.target.value);
     };
+    
+    const handleResetAnswers = async () => {
+        if (!selectedUserId) return;
+        await resetOldResponses();
+        setSelectedUserId("");
+    };
 
     return (
         <div className="padding-bottom admin-container">
@@ -36,6 +43,8 @@ export const AdminFormResponses: FC = () => {
                         data-aos-duration="900"
                     >
                         <h3 className="admin-section-title">{t("Responses")}</h3>
+                        <Button onClick={handleResetAnswers}>{t("Reset old answers")}</Button>
+                        <br /><br />
                         <label htmlFor="userSelect" className="form-label">Vyberte uživatele</label>
                         <select
                             id="userSelect"

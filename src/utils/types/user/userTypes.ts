@@ -31,6 +31,7 @@ export type UserType = {
     receive_messages: boolean;
     verified: boolean;
     language: string;
+    has_filled_form: boolean;
 }
 
 export type MembershipTypes = {

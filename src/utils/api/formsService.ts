@@ -36,6 +36,28 @@ export const deleteQuestion = async (id: number) => {
     });
 }
 
+export const resetUserResponses = async (userId: string) => {
+    const token = localStorage.getItem("token");
+    if (!token) return;
+    return axios.post(`${backendUrl}/form_questions/reset_user_answers.php`, {
+        user_id: userId
+    }, {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        }
+    });
+}
+
+export const resetOldResponses = async () => {
+    const token = localStorage.getItem("token");
+    if (!token) return;
+    return axios.post(`${backendUrl}/form_questions/reset_one_year_answers.php`, {}, {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        }
+    });
+}
+
 export const saveOrder = async (newOrder:  { id: number; order: number; }[]) => {
     const token = localStorage.getItem("token");
     if (!token) return;
@@ -58,18 +80,19 @@ export const getUserLites = async () => {
 }
 
 export const getUserQuestions = async (userId: string) => {
-    const token = localStorage.getItem("token");
-    if (!token) return;
     return axios.get<QuestionResponseUserType[]>(`${backendUrl}/form_questions/get_user_responses.php`, {
         params: {
             user_id: userId
-        },
-        headers: {
-            Authorization: `Bearer ${token}`,
         }
     });
 }
 
-export const isFormFilled = async () => {
-    
+export const saveUserResponses = async (responses: any) => {
+    const token = localStorage.getItem("token");
+    if (!token) return;
+    return axios.post(`${backendUrl}/form_questions/submit_user_response.php`, responses, {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        }
+    });
 }

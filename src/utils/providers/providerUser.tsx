@@ -4,6 +4,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import {PROTECTED_ROUTES, routes} from "../constants";
 import {Preloader} from "../../Preloader.tsx";
 import {isAuthenticated} from "../api/authenticateService.ts";
+import {UserFormFillModal} from "../../components/formQuestions/UserFormFillModal.tsx";
 
 type Props = {
     children: ReactNode 
@@ -58,7 +59,14 @@ export const ProviderUser: FC<Props> = ({ children }) => {
 
     return (
         <UserContext.Provider value={{ user, logout, setUser }}>
-            {loading ? <Preloader /> : children}
+            {loading ? 
+                <Preloader /> 
+                : (
+                    <>
+                        {children}
+                        {user?.has_filled_form !== true && <UserFormFillModal />}
+                    </>
+                )}
         </UserContext.Provider>
     );
 };
