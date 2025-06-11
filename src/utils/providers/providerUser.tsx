@@ -64,7 +64,7 @@ export const ProviderUser: FC<Props> = ({ children }) => {
                 : (
                     <>
                         {children}
-                        {user?.has_filled_form !== true && <UserFormFillModal />}
+                        {(user && user.has_filled_form !== true) && <UserFormFillModal />}
                     </>
                 )}
         </UserContext.Provider>

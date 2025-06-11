@@ -149,7 +149,7 @@ export const UserFormFillModal: FC = () => {
                             </label>
                             {renderQuestionInput(currentQuestion)}
                             {errors[currentQuestion.id] && (
-                                <p className="text-danger small mt-1">{t("form.validation.required")}</p>
+                                <p className="text-danger small mt-1">{t("Required")}</p>
                             )}
                         </div>
                     </form>
