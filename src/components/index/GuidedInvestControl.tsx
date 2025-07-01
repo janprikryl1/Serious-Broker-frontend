@@ -4,17 +4,17 @@ import { useTranslation } from "react-i18next";
 import { useMediaQuery } from "@mui/material";
 import { Link } from "react-router-dom";
 import { guideURLS } from "../../utils/constants";
-import guidedInvestControlPhoneIcon from "../../utils/icons/index/guidedInvestControllPhoneIcon.png";
+import guidedInvestControlPhoneIcon from "../../utils/icons/index/two hands with bitcoin gradient.png";
 
 export const GuidedInvestControl: FC = () => {
     const { t } = useTranslation();
     const isMobile = useMediaQuery('(max-width:900px)');
 
     return (
-        <div className="py-2 position-relative" style={{ backgroundColor: "#3c3936" }}>
-            <div className="container pt-5 pb-5">
+        <div style={{ backgroundColor: "#3c3936" }}>
+            <div className="container">
                 <div className="row align-items-center">
-                    <div className="col-12 col-md-6 text-center text-md-start">
+                    <div className="col-md-6 text-center text-md-start">
                         <h1 className="index-title index-section-title">
                             {t("Guided Invest Control")}
                         </h1>
@@ -34,18 +34,13 @@ export const GuidedInvestControl: FC = () => {
                     </div>
 
                     {!isMobile && (
-                        <div className="col-12 col-md-6 text-center text-md-end mt-4 mt-md-0">
-                            <div className="position-relative d-inline-block" style={{ overflow: 'hidden' }}>
+                        <div className="col-12 col-md-6 text-center text-md-end mt-md-0">
+                            <div className="position-relative d-inline-block">
                                 <img
                                     src={guidedInvestControlPhoneIcon}
                                     alt="Graph no bg"
                                     className="img-fluid index-section-image"
-                                />
-                                <div
-                                    className="index-section-image-blurred-color-graphh"
-                                    style={{
-                                        background: "radial-gradient(ellipse at center, white 0%, transparent 30%)"
-                                    }}
+                                    style={{ scale: '1.2' }}
                                 />
                             </div>
                         </div>

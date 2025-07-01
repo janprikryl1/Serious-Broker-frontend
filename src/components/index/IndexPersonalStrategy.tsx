@@ -12,6 +12,7 @@ export const IndexPersonalStrategy:FC = () => {
         <div style={{backgroundColor: "#221f1c"}} className="py-5">
             <div className="container">
                 <div className="row justify-content-center align-items-center gx-0">
+                    <h2 className="index-section-head-title">{t("Know Our Investment Plans")}</h2>
                     <div className="col-sm-5 text-center text-sm-end mb-4 mb-sm-0">
                         <div className="position-relative d-inline-block" style={{ overflow: 'hidden' }}>
                             <img src={GraphNoBg} alt="Graph" className="img-fluid index-section-image" />

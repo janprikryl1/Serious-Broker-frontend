@@ -1,0 +1,186 @@
+.greed-fear-container {
+  position: relative;
+  width: 100%;
+  height: 680px;
+  background-color: #201d1b; /* Tmavší pozadí (Fear) */
+  color: #f0ebe5;
+  overflow: hidden;
+}
+
+/* === VRSTVA 1: POZADÍ === */
+.gf-background-split {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #3d3730; /* Světlejší pozadí (Greed) */
+  clip-path: polygon(0 0, 60% 0, 40% 100%, 0 100%);
+  z-index: 1;
+}
+
+/* === VRSTVA 2: VIZUÁLNÍ OBSAH (ikony, tlačítka, GREED/FEAR) === */
+.gf-visual-content {
+  position: absolute;
+  top: 2%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Ikony jsou nyní pod tlačítky */
+.gf-bull-icon,
+.gf-bear-icon {
+  position: absolute;
+  top: 55%;
+  transform: translateY(-35%);
+  width: 550px;
+  height: auto;
+  opacity: 0.5;
+  z-index: 2;
+}
+.gf-bull-icon { left: 0; }
+.gf-bear-icon { right: 0; }
+.gf-bull-icon img, .gf-bear-icon img { width: 100%; height: auto; }
+
+/* Overlay s tlačítky */
+.gf-options-overlay {
+  position: absolute;
+  top: 60%;
+  transform: translateY(-50%);
+  left: 0;
+  width: 100%;
+  height: 70%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 12%;
+  z-index: 3;
+}
+.gf-options-column {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 30%;
+  max-width: 300px;
+}
+.gf-option-button {
+  background-color: rgba(25, 23, 21, 0.35);
+  border: none;
+  color: #f0ebe5;
+  padding: 10px 15px;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 0.2s, border-color 0.2s, color 0.2s;
+  font-size: 1.3rem;
+  width: 100%;
+  height: 60px;
+  backdrop-filter: blur(1px) saturate(180%);
+}
+.gf-option-button-left {
+  box-shadow:
+          inset 0 -3em 3em rgba(100, 94, 86, 0.4),
+          0 0 0 0 transparent,
+          0.3em 1em 3em rgba(0, 0, 0, 0.2);
+}
+.gf-option-button-right {
+  background-color: rgba(53, 49, 45, 0.45);
+
+}
+.gf-option-button:hover {
+  background-color: #645e56;
+}
+.gf-option-number {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: #877968;
+  margin-right: 15px;
+  flex-shrink: 0;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.gf-option-button.gf-option-button-active {
+  background-color: #c5a36a; /* Výraznější barva pozadí */
+  color: #211f1d; /* Tmavší text pro lepší kontrast */
+  font-weight: 500;
+}
+.gf-option-button.gf-option-button-active .gf-option-number {
+  background-color: #f0ebe5; /* Světlé pozadí pro číslo */
+  color: #211f1d; /* Tmavý text čísla */
+}
+.gf-option-button.gf-option-button-active:hover {
+  background-color: #c5a36a;
+}
+.gf-option-button.gf-option-button-active:hover {
+  background-color: #c5a36a;
+}
+
+/* Centrální text GREED/FEAR */
+.gf-text-block {
+  position: relative;
+  text-align: center;
+  width: 400px;
+  z-index: 4;
+}
+.gf-title {
+  font-size: 3.5rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: -0.5rem;
+}
+.gf-subtitle-wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+.gf-subtitle {
+  font-family: 'Playfair', sans-serif;
+  font-size: 1.3rem;
+  margin: 0;
+  width: 35%;
+  line-height: 1.2;
+}
+
+.gf-result-container {
+  position: absolute;
+  bottom: 5%; // Umístění na spodní část vizuální oblasti
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 3; // Stejná úroveň jako tlačítka
+}
+
+.gf-result-text {
+  background: rgba(10, 10, 10, 0.3); // Tmavší, průhledné pozadí
+  color: #e0d9d1;
+  padding: 0.6rem 1.8rem;
+  border-radius: 50px; // Plně zakulacené rohy
+  font-size: 1.1rem;
+  font-weight: 500;
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  margin: 0;
+  transition: all 0.3s ease;
+}
+
+/* === VRSTVA 3: HLAVNÍ NADPIS (NEJVÝŠE) === */
+.gf-header-content {
+  position: relative;
+  padding-top: 80px;
+  padding-bottom: 40px;
+  z-index: 5;
+}

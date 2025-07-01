@@ -1,4 +1,4 @@
-import {createContext, useContext, useState, useEffect, ReactNode, FC} from 'react';
+import {createContext, useContext, useState, useEffect, ReactNode, FC, Dispatch, SetStateAction} from 'react';
 import { UserType } from "../types/user/userTypes.ts";
 import { useNavigate, useLocation } from "react-router-dom";
 import {PROTECTED_ROUTES, routes} from "../constants";
@@ -14,6 +14,7 @@ type UserContextType = {
     user: UserType | undefined;
     setUser: (user: UserType | undefined) => void;
     logout: () => void;
+    setFilledForm: Dispatch<SetStateAction<boolean>>;
 }
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
@@ -23,6 +24,7 @@ export const ProviderUser: FC<Props> = ({ children }) => {
     const location = useLocation();
     const [user, setUser] = useState<UserType>();
     const [loading, setLoading] = useState(true);
+    const [filledForm, setFilledForm] = useState(false);
 
     useEffect(() => {
         const loadIsAuthenticated = async () => {
@@ -30,6 +32,7 @@ export const ProviderUser: FC<Props> = ({ children }) => {
                 const result = await isAuthenticated();
                 if (result) {
                     setUser(result.data.user);
+                    setFilledForm(result.data.user.has_filled_form !== true);
                 }
             } catch (error) {
                 console.error(error);
@@ -58,13 +61,13 @@ export const ProviderUser: FC<Props> = ({ children }) => {
     };
 
     return (
-        <UserContext.Provider value={{ user, logout, setUser }}>
+        <UserContext.Provider value={{ user, logout, setUser, setFilledForm }}>
             {loading ? 
                 <Preloader /> 
                 : (
                     <>
                         {children}
-                        {(user && user.has_filled_form !== true) && <UserFormFillModal />}
+                        {filledForm && <UserFormFillModal />}
                     </>
                 )}
         </UserContext.Provider>
