@@ -897,8 +897,7 @@
     "Select an option": "Vyberte možnost",
     "Questionnaire submitted successfully!": "Dotazník byl úspěšně odeslán!",
     "There was an error submitting your answers.": "Při odesílání odpovědí došlo k chybě.",
-
-    "None, I haven't invested yet": "Žádné, zatím jsem nebyl investován",
+    "None, I haven't invested yet": "Žádné, zatím jsem neinvestoval",
     "Less than 1 year": "Méně než 1 rok",
     "1-3 years": "1-3 roky",
     "3-5 years": "3-5 roky",
@@ -911,14 +910,30 @@
     "How do we optimize your portfolio?": "Jak optimalizujeme vaše portfolio?",
     "You are more of a GREED investor": "Jste více GREED investor",
     "You are more of a FEAR investor": "Jste více FEAR investor",
-    "You are a BALANCED investor": "Jste více BALANCED investor",
+    "Greed or fear?": "Greed nebo fear?",
     "Optimism and rising prices": "Optimista, rostoucí ceny",
-    "Pessimism and falling prices": "Pessimista, klesající ceny",
+    "Pessimism and falling prices": "Pesimista, klesající ceny",
     "Don't buy, don't sell": "Nekupuj, neprodávej",
     "Buy less": "Kup méně",
     "Buy normal": "Kup normálně",
     "Buy more of the same coin": "Kup více stejné mince",
     "Buy something new": "Kup něco nového",
     "Buy more": "Kup více",
-    "Sell part or all": "Prodej část nebo vše"
+    "Sell part or all": "Prodej část nebo vše",
+    
+    
+    "Asset profitability calculator": "Kalkulačka zisku z assetu",
+    "Choose asset:": "Vyberte asset:",
+    "single coin": "Jedna mince",
+    "set of coins": "Sada mincí",
+    "Choose period:": "Vyberte období:",
+    "Calculate": "Vypočítat",
+    "Asset profitability in the selected period": "Zisková hodnota assetu v vybraném období",
+    "Most profitable assets": "Nejlepší assety",
+    "Portfolio name": "Název portfolia",
+    "Start typing...": "Začněte vyhledávat...",
+    "Asset profitability in last 7 days": "Zisková hodnota assetu za posledních 7 dní",
+    "Asset profitability in the selected period (last day)": "Zisková hodnota assetu v vybraném období (za poslední den)",
+    "Hour": "Hodina",
+    "Please select a coin and enter a valid amount.": "Vyberte minci a zadejte platnou částku."
 }

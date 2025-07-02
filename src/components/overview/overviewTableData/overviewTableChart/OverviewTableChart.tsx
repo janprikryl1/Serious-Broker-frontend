@@ -6,8 +6,8 @@ import {useOverviewTableChartStyles} from "../../../../utils/hooks/useOverviewTa
 type Props = {
     name: string;
     data: number[];
-    width?: number;
-    height?: number;
+    width?: number | string;
+    height?: number | string;
 };
 
 export const OverviewTableChart: FC<Props> = ({ name, data, width = 100, height = 30 }) => {

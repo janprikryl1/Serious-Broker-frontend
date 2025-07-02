@@ -12,7 +12,7 @@ export const GuidedInvestControl: FC = () => {
 
     return (
         <div style={{ backgroundColor: "#3c3936" }}>
-            <div className="container">
+            <div className="container pt-5 pb-5">
                 <div className="row align-items-center">
                     <div className="col-md-6 text-center text-md-start">
                         <h1 className="index-title index-section-title">

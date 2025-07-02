@@ -6,6 +6,7 @@ import greedIconUrl from "../../utils/icons/index/greed.svg";
 import fearIconUrl from "../../utils/icons/index/fear.svg";
 import {PhaseButton} from "./PhaseButton.tsx";
 import "../../styles/sass/components/GreedFearStrategies.module.css.scss";
+import {useMediaQuery} from "@mui/material";
 
 const greedOptions = [
     { text: "Don't buy, don't sell" },
@@ -24,15 +25,16 @@ const fearOptions = [
 ];
 
 const initialSelections = greedOptions.reduce((acc, _, index) => {
-    acc[index] = 'greed';
+    acc[index] = null;
     return acc;
-}, {} as { [key: number]: 'greed' | 'fear' });
+}, {} as { [key: number]: 'greed' | 'fear' | null });
 
 
 export const GreedFearStrategies = () => {
     const { t } = useTranslation();
     const [open, setOpen] = useState(false);
     const [selections, setSelections] = useState(initialSelections);
+    const isMobile = useMediaQuery('(max-width:768px)');
 
     const handleSelect = (rowIndex: number, side: 'greed' | 'fear') => {
         setSelections(prevSelections => ({
@@ -52,7 +54,7 @@ export const GreedFearStrategies = () => {
         if (fearCount > greedCount) {
             return 'You are more of a FEAR investor';
         }
-        return 'You are a BALANCED investor';
+        return 'Greed or fear?';
 
     }, [selections]);
 
@@ -70,6 +72,7 @@ export const GreedFearStrategies = () => {
                         <img src={fearIconUrl} alt="Fear Icon" />
                     </div>
 
+                    {!isMobile && (
                     <div className="gf-options-overlay">
                         <div className="gf-options-column">
                             {greedOptions.map((option, index) => (
@@ -95,7 +98,7 @@ export const GreedFearStrategies = () => {
                                 />
                             ))}
                         </div>
-                    </div>
+                    </div>)}
 
                     <div className="gf-result-container">
                         <p className="gf-result-text">{t(resultText)}</p>
@@ -103,7 +106,7 @@ export const GreedFearStrategies = () => {
 
                     <div className="gf-text-block">
                         <h3 className="gf-title">
-                            <span style={{marginLeft: '-1rem'}}>{t('GREED')}</span>
+                            <span style={{marginLeft: '-0.01rem'}}>{t('GREED')}</span>
                             <span style={{marginRight: '0.5rem'}}>{t('FEAR')}</span>
                         </h3>
                         <div className="gf-subtitle-wrapper">
@@ -113,7 +116,7 @@ export const GreedFearStrategies = () => {
                     </div>
                 </div>
 
-                <div className="gf-header-content container">
+                {!isMobile && <div className="gf-header-content container">
                     <h2 className="index-section-head-title">{t("Don't let emotions drive your decisions", "Don't Let Emotions Drive Your Decisions")}</h2>
                     <p style={{ fontSize: 20, fontWeight: 400, marginBottom: 2 }}>
                         {t("In order for us to constantly optimize your portfolio, you can", "In order for us to constantly optimize your portfolio, you can")}
@@ -123,7 +126,7 @@ export const GreedFearStrategies = () => {
                         <FaRegCircleQuestion size={15} style={{ marginBottom: "2px", display: 'inline-block', marginRight: '5px' }}/>
                         {t("How do we optimize your portfolio?", "How do we optimize your portfolio?")}
                     </span>
-                </div>
+                </div>}
             </div>
 
             <DragCloseDrawer open={open} setOpen={setOpen}>

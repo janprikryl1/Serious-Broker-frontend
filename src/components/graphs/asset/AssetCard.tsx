@@ -17,7 +17,7 @@ type Props = {
     details: string;
     data: number[];
     inWatchList: boolean;
-    setAssets: Dispatch<SetStateAction<AssetType[] | MostProfitableAssetDetailType[]>>;
+    setAssets?: Dispatch<SetStateAction<AssetType[] | MostProfitableAssetDetailType[]>>;
     dailyChange?: number;
 };
 
