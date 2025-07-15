@@ -5,9 +5,10 @@ import {routes} from "../../utils/constants";
 
 type Props = {
     param?: string;
+    showTitle?: boolean;
 };
 
-export const SidebarSearch: FC<Props> = ({ param = "" }) => {
+export const SidebarSearch: FC<Props> = ({ param = "", showTitle = true }) => {
     const { t } = useTranslation();
     const [searchText, setSearchText] = useState(param);
     const navigate = useNavigate();
@@ -21,7 +22,7 @@ export const SidebarSearch: FC<Props> = ({ param = "" }) => {
 
     return (
         <div className="sidebar__search">
-            <h6 className="mb-10">{t("Search Here")}</h6>
+            {showTitle && <h6 className="mb-10">{t("Search Here")}</h6>}
             <div className="sidebar__search-body">
                 <form onSubmit={handleSearch}>
                     <div className="input">

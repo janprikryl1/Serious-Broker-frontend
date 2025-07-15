@@ -68,6 +68,9 @@ const AdminGenericTableDataEdit = lazy(() => import ("./pages/admin/AdminGeneric
 const AdminGenericTableResults = lazy(() => import ("./pages/admin/AdminGenericTableResults.tsx").then(module => ({ default: module.AdminGenericTableResults })));
 const AdminFormsOverview = lazy(() => import ("./pages/admin/AdminFormsOverview.tsx").then(module => ({ default: module.AdminFormsOverview })));
 const AdminFormResponses = lazy(() => import ("./pages/admin/AdminFormResponses.tsx").then(module => ({ default: module.AdminFormResponses })));
+const CooperationInfo = lazy(() => import ("./pages/CooperationInfo.tsx").then(module => ({ default: module.CooperationInfo })));
+const GdprInfo = lazy(() => import ("./pages/GDPRInfo.tsx").then(module => ({ default: module.GdprInfo })));
+const CookiesInfo = lazy(() => import ("./pages/CookiesInfo.tsx").then(module => ({ default: module.CookiesInfo })));
 
 export const Router:FC = () => {
     return (
@@ -147,6 +150,9 @@ export const Router:FC = () => {
                 <Route path={routes.guides.guidedInvestControl} element={<PageLoader><GuidedInvestControlGuide /></PageLoader>} />
                 <Route path={routes.guides.personalStrategy} element={<PageLoader><PersonalStrategyGuide /></PageLoader>} />
             </Route>
+            <Route path={routes.cooperationInfo} element={<PageLoader><CooperationInfo /></PageLoader>} />
+            <Route path={routes.gdprInfo} element={<PageLoader><GdprInfo /></PageLoader>} />
+            <Route path={routes.cookiesInfo} element={<PageLoader><CookiesInfo /></PageLoader>} />
             <Route path="*" element={<PageLoader><ErrorPage /></PageLoader>} />
         </Routes>
     );

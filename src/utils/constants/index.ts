@@ -18,7 +18,7 @@ export const youtubeURL = "http://www.youtube.com/@SeriousBroker";
 export const twitterURL = "https://x.com/SeriousBroker";
 
 export const phoneNumber = "+420 735 838 972";
-export const contactEmail = "brokerserious@gmail.com";
+export const contactEmail = "info@serious.broker";
 
 export const freecurrencyapi = new Freecurrencyapi('fca_live_tMDn3hFf3kZtFQuBrCmsqlLwAEmgSJUtXoNJEASX');
 
@@ -107,7 +107,9 @@ export const routes = {
     },
     demos: "/demos",
     demo: "/demo/:id",
-    
+    cooperationInfo: "/cooperation_info",
+    gdprInfo: "/gdpr_info",
+    cookiesInfo: "/cookies_info",
 }
 
 export const editorURLS = {

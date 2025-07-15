@@ -17,7 +17,7 @@ export const toCzechDate = (dateRaw: string): string => {
 
 export const getDayName = (dayNumber: number) => {
     const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-    return dayNumber ? daysOfWeek[dayNumber] : 'Unknown day';
+    return dayNumber ? daysOfWeek[dayNumber-1] : 'Unknown day';
 }
 
 export const convertUTCToLocalTime = (utcHour: number) => {

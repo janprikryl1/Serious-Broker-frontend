@@ -1,18 +1,8 @@
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { LeftFloatingContactDetailsItem } from "./LeftFloatingContactDetailsItem.tsx";
-import { SocialLinkIcon } from "./SocialLinkIcon.tsx";
-import shibaInu from "../../utils/icons/cta/shiba_inu.webp";
 import {addFeedback} from "../../utils/api/feedbackService.ts";
-import {
-  contactEmail,
-  facebookURL,
-  instagramURL,
-  linkedinURL,
-  phoneNumber,
-  twitterURL,
-  youtubeURL
-} from "../../utils/constants";
+import {contactEmail, phoneNumber} from "../../utils/constants";
 import {CustomSwal} from "../../utils/functions/customSwal.ts";
 
 export const ContactCard: FC = () => {
@@ -49,38 +39,34 @@ export const ContactCard: FC = () => {
       <div className="contact padding-top padding-bottom">
         <div className="container">
           <div className="contact__wrapper">
-            <div className="row g-5">
-              <div className="col-md-5">
-                <div className="contact__info" data-aos="fade-right" data-aos-duration="1000">
-                  <div className="contact__social">
-                    <h3>{t("Welcome")}, <span>{t("Send us message")}</span>.</h3>
-                    <ul className="social">
-                      <SocialLinkIcon href={facebookURL} icon="fab fa-facebook-f" />
-                      <SocialLinkIcon href={instagramURL} icon="fab fa-instagram" />
-                      <SocialLinkIcon href={linkedinURL} icon="fa-brands fa-linkedin-in" />
-                      <SocialLinkIcon href={youtubeURL} icon="fab fa-youtube" />
-                      <SocialLinkIcon href={twitterURL} icon="fab fa-x-twitter" />
-                    </ul>
-                  </div>
-                  <div className="contact__details">
-                    <LeftFloatingContactDetailsItem href={`tel:${phoneNumber}`} title={phoneNumber} />
-                    <LeftFloatingContactDetailsItem href={`mailto:${contactEmail}`} title={contactEmail} />
-                    <LeftFloatingContactDetailsItem title="VŠB - Technická univerzita Ostrava" />
-                  </div>
-                </div>
+            <div className="row">
+              <div className="col-md-7" style={{textAlign: "left"}}>
+                <h3>Serious Investment s.r.o.</h3>
+                <p>Stanislavského 355</p>
+                <p>721 00 Ostrava-Svinov</p>
+                <p>Czech Republic</p>
+                <br/>
+                <p>IČ: 29456568</p>
+                <p>DIČ: CZ29456568</p>
+                <p>Datová schránka: gw2mvge</p>
+                <br/>
+                <p>Zapsána v obchodním rejstříku vedeném Krajským soudem v Ostravě oddíl C, vložka 54906</p>
+                <br/>
               </div>
-              <div className="col-md-7">
+              <div className="col-md-5">
                 <div className="contact__form">
                   <form onSubmit={handleSendMessage} data-aos="fade-left" data-aos-duration="1000">
                     <div className="row g-4">
                       <div className="input-group mb-3">
-                        <input className="form-control" type="text" name="name" placeholder={t("Full Name")} required />
+                        <input className="form-control" type="text" name="name" placeholder={t("Full Name")} required/>
                       </div>
                       <div className="input-group mb-3">
-                        <input className="form-control" type="email" name="email" placeholder={t("Email here")} required />
+                        <input className="form-control" type="email" name="email" placeholder={t("Email here")}
+                               required/>
                       </div>
                       <div className="input-group">
-                        <textarea cols={30} rows={5} className="form-control" name="message" placeholder={t("Enter Your Message")} required></textarea>
+                        <textarea cols={30} rows={5} className="form-control" name="message"
+                                  placeholder={t("Enter Your Message")} required></textarea>
                       </div>
                     </div>
                     <button type="submit" className="trk-btn trk-btn--border trk-btn--primary mt-4 d-block">
@@ -90,15 +76,11 @@ export const ContactCard: FC = () => {
                 </div>
               </div>
             </div>
+            <div className="contact__details">
+              <LeftFloatingContactDetailsItem href={`tel:${phoneNumber}`} title={phoneNumber}/>
+              <LeftFloatingContactDetailsItem href={`mailto:${contactEmail}`} title={contactEmail}/>
+            </div>
           </div>
-        </div>
-        <div className="contact__shape">
-        <span className="contact__shape-item contact__shape-item--1">
-          <img src={shibaInu} alt="shape-icon" />
-        </span>
-          <span className="contact__shape-item contact__shape-item--2">
-          <span></span>
-        </span>
         </div>
       </div>
   );

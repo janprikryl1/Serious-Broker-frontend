@@ -1,8 +1,5 @@
 .footer {
     @extend %of-hidden, %p-rel;
-    &--style2 {
-        background-color: $bg-color-12;
-    }
 
     &__wrapper {
         @extend %p-rel;
@@ -44,8 +41,8 @@
 
     &__end {
         @extend %py-25;
-        border-top: 1px solid rgb(172, 159, 141);
-        color: $text-color-2;
+        border-top: 1px solid #4c4b4a;
+        color: #aba7a0;
         font-weight: 500;
         font-size: 20px;
 
@@ -59,11 +56,7 @@
 
             a {
                 @extend %text-semibold;
-                color: $brand-color;
-
-                &.style2 {
-                    color: $bg-color-10;
-                }
+                color: #aba7a0;
             }
 
             @include breakpoint(sm) {
@@ -102,4 +95,16 @@
         max-width: 80%;
         margin-left: 10%;
     }
+}
+
+.footer__end-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+.footer__links {
+    display: flex;
+    gap: 2rem;
 }

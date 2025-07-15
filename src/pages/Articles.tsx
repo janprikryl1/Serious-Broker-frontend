@@ -9,6 +9,7 @@ import { ArticleCard } from "../components/articles/ArticleCard.tsx";
 import { ArticlesSkeleton } from "../components/articles/ArticlesSkeleton.tsx";
 import { CustomSwal } from "../utils/functions/customSwal.ts";
 import {useInfiniteScroll} from "../utils/hooks/useInfiniteScroll.ts";
+import {SidebarSearch} from "../components/article/SidebarSearch.tsx";
 
 export const Articles: FC = () => {
     const { t } = useTranslation();
@@ -52,6 +53,12 @@ export const Articles: FC = () => {
             <div className="mt-4 padding-bottom">
                 <div className="container">
                     <div className="blog__wrapper">
+                        <div className="row mb-4">
+                            <div className="col-6" />
+                            <div className="col-6">
+                                <SidebarSearch showTitle={false} />
+                            </div>
+                        </div>
                         <div className="row g-4">
                             <DictionaryLinkCard />
                             <CryptoCurrenciesLinkCard />

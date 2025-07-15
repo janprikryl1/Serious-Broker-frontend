@@ -1,5 +1,5 @@
 import {FC} from "react";
-import Logo from "./utils/icons/logo/SB2.svg";
+import Logo from "./utils/icons/logo/SBWhite.svg";
 
 export const Preloader:FC = () => {
     return (

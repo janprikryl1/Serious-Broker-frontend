@@ -439,3 +439,25 @@
     align-items: center;
   }
 }
+
+.cta-dark {
+  p {
+    font-size: 20px;
+    margin-top: 40px;
+    margin-bottom: 0;
+  }
+
+  p:first-child {
+    margin-top: 0;
+  }
+
+  p + span {
+    display: block;
+    margin-top: 20px;
+  }
+
+  span + span {
+    display: block;
+    margin-top: 4px;
+  }
+}
