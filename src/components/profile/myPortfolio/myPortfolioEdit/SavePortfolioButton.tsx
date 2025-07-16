@@ -8,6 +8,6 @@ export const SavePortfolioButton:FC = () => {
     const {saveChanges} = useMyPortfolioContext();
     
     return (
-        <Button style={{fontSize:20, color:"black"}} onClick={saveChanges}>{t("Save")}</Button>
+        <Button className="text-dark" style={{fontSize:20}} onClick={saveChanges}>{t("Save")}</Button>
     )
 }

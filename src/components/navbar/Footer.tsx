@@ -55,7 +55,8 @@ export const Footer:FC = () => {
                     <nav className="footer__links">
                         <Link to={routes.gdprInfo}>GDPR</Link>
                         <Link to={routes.cookiesInfo}>Cookies</Link>
-                        <Link to={routes.contact}>Kontakt</Link>
+                        <Link to={routes.about}>{t("About us")}</Link>
+                        <Link to={routes.contact}>{t("Contact")}</Link>
                     </nav>
                 </div>
             </div>

@@ -2,17 +2,20 @@ import {FC} from "react";
 import {useTranslation} from "react-i18next";
 import Form from 'react-bootstrap/Form';
 import { useUserContext } from "../../utils/providers/providerUser";
+import {useNavigate} from "react-router-dom";
+import {routes} from "../../utils/constants";
 
 
 export const ShortExpressiveText:FC = () => {
     const {t} = useTranslation();
-    const {user, setFilledForm} = useUserContext();
+    const {user} = useUserContext();
+    const navigate = useNavigate();
     
     const handleSelect = () => {
-        if (user?.has_filled_form === true) return;
-        setFilledForm(true);
+        navigate(routes.register);
     }
     
+    if (user?.has_filled_form === true) return null;
     return (
         <div className="index-short-expressive-text">
             <div className="container">

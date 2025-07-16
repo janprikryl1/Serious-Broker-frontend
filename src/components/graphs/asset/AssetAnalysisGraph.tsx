@@ -55,7 +55,7 @@ export const AssetAnalysisGraph: FC<Props> = ({isInWatchList, handleToggleWatchL
     };
 
     return (
-        <div className="service-details__content mb-5" style={{border: "0.5px solid #3e3a32", borderRadius: "16px", padding: "20px", backgroundColor: "#d4c6a9", height:"90%", color:"black"}}>
+        <div className="service-details__content text-dark mb-5" style={{border: "0.5px solid #3e3a32", borderRadius: "16px", padding: "20px", backgroundColor: "#d4c6a9", height:"90%"}}>
             <div className="row">
                 <div className="col-sm-4">
                     {graphData ? `${currencyPrice} ${currency}` : <Skeleton width={100} height={35}/>}

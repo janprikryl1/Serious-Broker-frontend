@@ -15,7 +15,7 @@ export const MyPortfolioAssets:FC = () => {
     
     return (
         <>
-            <Button style={{fontSize:15, color:"black"}} className="mb-3" onClick={handleAddAsset}>{t("Add new coin")}</Button>
+            <Button style={{fontSize:15}} className="mb-3 text-dark" onClick={handleAddAsset}>{t("Add new coin")}</Button>
             <h3>{t("Coins")}</h3>
             {asset.map((asset, index) => (
                 <MyPortfolioAsset key={index} asset={asset} index={index} />

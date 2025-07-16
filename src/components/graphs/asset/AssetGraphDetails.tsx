@@ -21,11 +21,10 @@ export const AssetGraphDetails: FC<Props> = ({ asset, selectedPeriod, currency, 
     const {profitType, setProfitType, renderProfitDetails} = useRenderProfitDetails(selectedPeriod, asset);
 
     return (
-        <div className="service-details__content mb-5" style={{
+        <div className="service-details__content mb-5 text-light" style={{
             border: "0.5px solid #3e3a32",
             borderRadius: "16px",
             padding: "20px",
-            color: "white",
             height: "90%"
         }}>
             <p style={{fontSize: "25px", fontWeight: "bold", marginBottom: "5px"}}>{t("Statistics")}</p>

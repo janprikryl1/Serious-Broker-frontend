@@ -40,7 +40,7 @@ export const TrendingSwiper = () => {
                 <div className="trending-swiper-wrapper">
                     {canGoPrev && (
                         <button className="swiper-button" onClick={() => swiperRef.current?.slidePrev()} aria-label="Previous">
-                            <GrLinkPrevious style={{color:"black", paddingLeft: "5px"}} />
+                            <GrLinkPrevious style={{color:"#0A0704", paddingLeft: "5px"}} />
                         </button>
                     )}
                     <div className="trending-swiper">
@@ -65,7 +65,7 @@ export const TrendingSwiper = () => {
                     </div>
                     {canGoNext && (
                         <button className="swiper-button" onClick={() => swiperRef.current?.slideNext()} aria-label="Next">
-                            <GrLinkNext style={{color:"black", paddingLeft: "5px"}} />
+                            <GrLinkNext style={{color:"#0A0704", paddingLeft: "5px"}} />
                         </button>
                     )}
                 </div>

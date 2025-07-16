@@ -3,10 +3,10 @@
    viewBox="0 0 365.17996 429.33661"
    version="1.1"
    id="svg334"
-   sodipodi:docname="Crypto portfolio-amico – kópia.svg"
+   sodipodi:docname="4_start_investing.svg"
    width="365.17996"
    height="429.33661"
-   inkscape:version="1.4 (86a8ad7, 2024-10-11)"
+   inkscape:version="1.4.2 (ebf0e94, 2025-05-08)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -21,15 +21,15 @@
      inkscape:pageopacity="0.0"
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
-     inkscape:zoom="5.6568543"
-     inkscape:cx="110.48543"
-     inkscape:cy="276.56714"
+     inkscape:zoom="1.4142136"
+     inkscape:cx="300.87393"
+     inkscape:cy="44.194173"
      inkscape:window-width="2560"
      inkscape:window-height="1511"
      inkscape:window-x="-9"
      inkscape:window-y="-9"
      inkscape:window-maximized="1"
-     inkscape:current-layer="freepik--chart--inject-13" />
+     inkscape:current-layer="g311" />
   <defs
      id="defs1">
     <linearGradient
@@ -235,7 +235,7 @@
          style="display:inline">
         <path
            d="m 409.14,22.62 c 0.13645,-1.265788 -0.4415,-2.502598 -1.5,-3.21 v 0 l -3.86,-2.21 v 0 c -1.1422,-0.564157 -2.50361,-0.444599 -3.53,0.31 L 295.93,77.73 c -2.91031,1.893767 -4.74193,5.062888 -4.93,8.53 V 160 c -0.13286,1.25024 0.42695,2.47337 1.46,3.19 v 0 l 3.95,2.25 v 0 c 1.1385,0.53039 2.47528,0.40015 3.49,-0.34 l 104.31,-60.22 c 2.9065,-1.896 4.73419,-5.064745 4.92,-8.53 z"
-           style="opacity:0.4;fill:#fff8ef;fill-opacity:1"
+           style="display:inline;opacity:1;fill:#efe8df;fill-opacity:1"
            id="path257"
            sodipodi:nodetypes="csccsccccsccscccc" />
         <path
@@ -355,7 +355,7 @@
          style="display:inline">
         <path
            d="m 409.14,122.2 a 3.42,3.42 0 0 0 -1.5,-3.21 v 0 l -3.86,-2.21 v 0 a 3.41,3.41 0 0 0 -3.53,0.3 l -104.32,60.23 a 10.88,10.88 0 0 0 -4.92,8.53 v 73.73 a 3.44,3.44 0 0 0 1.46,3.19 v 0 l 3.95,2.25 v 0 a 3.45,3.45 0 0 0 3.49,-0.34 l 104.31,-60.22 a 10.88,10.88 0 0 0 4.92,-8.53 z"
-           style="opacity:0.4;fill:#fff8ef;fill-opacity:1"
+           style="display:inline;opacity:1;fill:#efe8df;fill-opacity:1"
            id="path283" />
         <path
            d="m 409.14,122.2 v 73.73 a 10.88,10.88 0 0 1 -4.92,8.53 L 299.9,264.68 c -2.41,1.4 -4.43,0.54 -4.84,-1.87 a 4.17,4.17 0 0 0 0.87,-0.4 l 104.32,-60.22 a 10.87,10.87 0 0 0 4.92,-8.52 v -73.73 a 4.34,4.34 0 0 0 -0.09,-1 c 2.31,-0.85 4.06,0.46 4.06,3.26 z"
@@ -475,7 +475,7 @@
          style="display:inline">
         <path
            d="m 409.14,221.78 a 3.41,3.41 0 0 0 -1.5,-3.21 v 0 l -3.86,-2.21 v 0 a 3.41,3.41 0 0 0 -3.53,0.3 l -104.32,60.23 a 10.88,10.88 0 0 0 -4.92,8.53 v 73.72 a 3.44,3.44 0 0 0 1.46,3.2 v 0 l 3.95,2.25 v 0 a 3.47,3.47 0 0 0 3.49,-0.34 L 404.22,304 a 10.88,10.88 0 0 0 4.92,-8.53 z"
-           style="display:inline;opacity:0.4;fill:#fff8ef;fill-opacity:1"
+           style="display:inline;opacity:1;fill:#efe8df;fill-opacity:1"
            id="path309" />
         <path
            d="m 409.14,221.78 v 73.73 a 10.88,10.88 0 0 1 -4.92,8.53 L 299.9,364.26 c -2.41,1.4 -4.43,0.54 -4.84,-1.87 a 4.17,4.17 0 0 0 0.87,-0.4 l 104.32,-60.22 a 10.89,10.89 0 0 0 4.92,-8.52 v -73.74 a 4.3,4.3 0 0 0 -0.09,-1 c 2.31,-0.84 4.06,0.49 4.06,3.27 z"

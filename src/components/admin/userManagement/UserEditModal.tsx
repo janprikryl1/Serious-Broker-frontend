@@ -52,7 +52,7 @@ export const UserEditModal: FC<Props> = ({ open, handleClose, selectedUser, hand
         <Modal open={open} onClose={handleClose}>
             <ModalDialog layout="fullscreen" style={{ backgroundColor: "#101214" }}>
                 <ModalClose onClick={handleClose} />
-                <DialogTitle style={{ color: "white" }}>{t("Edit user")}</DialogTitle>
+                <DialogTitle className="text-light">{t("Edit user")}</DialogTitle>
                 <List sx={[{mx: "calc(-1 * var(--ModalDialog-padding))", px: "var(--ModalDialog-padding)"}, { overflow: 'auto' }]}
                 >
                     {selectedUser ? (

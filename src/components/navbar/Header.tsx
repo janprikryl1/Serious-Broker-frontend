@@ -43,7 +43,7 @@ export const Header: FC = () => {
                                 <ChangeLanguageIcon/>
                             </div>
                             {!user && !isMobile && (
-                                <div className="border-start px-3" style={{ color: "white", fontWeight: "bold" }}>
+                                <div className="border-start px-3 text-light" style={{ fontWeight: "bold" }}>
                                     <SignUpIcon/>
                                 </div>
                             )}

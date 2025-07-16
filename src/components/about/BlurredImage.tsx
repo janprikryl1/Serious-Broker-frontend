@@ -17,21 +17,21 @@ export const BlurredImage:FC<Props> = ({ imageSrc, altText }) => {
                 <div className="floating-content__item">
                     <h4>
                         <span className="purecounter">
-                          <CountUp end={10} duration={10} />
+                          <CountUp end={10} duration={10}/>
                         </span>{"+ "}{t("Years")}
+                        <p style={{marginTop: 10}}>{t("Experience")}</p>
                     </h4>
-                    <p>{t("Experience")}</p>
                 </div>
             </div>
             <div className="floating-content__bottom-right">
                 <div className="floating-content__item">
                     <h4>
                         <span className="purecounter">
-                          <CountUp end={30} duration={5} />
+                          <CountUp end={30} duration={5}/>
                         </span>
                         K+
+                        <p style={{marginTop: 10}}>{t("Currencies")}</p>
                     </h4>
-                    <p>{t("Currencies")}</p>
                 </div>
             </div>
         </div>

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 export enum ButtonColor {
     yellow = "#ae9647",
-    white = "#fff",
+    white = "#FFFDFA",
     green = "#00b300",
     red = "#952b34",
     blue = "#275fda",
@@ -28,7 +28,7 @@ export const Button: FC<ButtonProps> = ({children, onClick, className = "", type
             <Link
                 to={to}
                 className={`trk-btn--border trk-btn--primary link-underline-none ${className}`}
-                style={{ color: "black", backgroundColor: color, borderRadius: "3px", borderColor: "transparent", fontWeight: "bold", ...style }}
+                style={{ color: "#0A0704", backgroundColor: color, borderRadius: "3px", borderColor: "transparent", fontWeight: "bold", ...style }}
             >
                 {children}
             </Link>
@@ -40,7 +40,7 @@ export const Button: FC<ButtonProps> = ({children, onClick, className = "", type
             type={type as "button" | "submit" | "reset"}
             className={`btn trk-btn--border trk-btn--primary ${className}`}
             onClick={onClick}
-            style={{ backgroundColor: color, border: "none", color: color === ButtonColor.red || color === ButtonColor.transparent ? "white" : "black", borderRadius: 3, ...style}}
+            style={{ backgroundColor: color, border: "none", color: color === ButtonColor.red || color === ButtonColor.transparent ? "#FFFDFA" : "#0A0704", borderRadius: 3, ...style}}
             disabled={disabled}
         >
             {children}

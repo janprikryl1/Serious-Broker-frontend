@@ -108,7 +108,7 @@ export const ControlImageModal:FC<Props> = ({controlImage, isControlImageModalOp
             <DialogTitle className="new-achievement-dialog-title">
                 {t("Set coordinates of animation")}
             </DialogTitle>
-            <DialogContent className="text-white">
+            <DialogContent className="text-light">
                 <p className="text-center mb-3">{t("Click on the images to set the start and end points (percentages)")}.</p>
                 <div className="row">
                     <div className="col-md-6 text-center mb-4 d-flex flex-column align-items-center">

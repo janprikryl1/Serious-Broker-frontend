@@ -68,10 +68,10 @@ export const EarningIn: FC<Props> = ({ series, startDate, endDate }) => {
                                 sx={{
                                     color: "#ffca2d",
                                     "& .MuiPickersDay-root": { color: "#ffca2d" },
-                                    "& .MuiDayCalendar-weekDayLabel": { color: "white" },
+                                    "& .MuiDayCalendar-weekDayLabel": { color: "#FFFDFA" },
                                     "& .Mui-selected": { backgroundColor: "#ffca2d", color: "#000" },
-                                    "& .MuiPickersCalendarHeader-label": { color: "white" },
-                                    "& .MuiPickersArrowSwitcher-root": { color: "white" },
+                                    "& .MuiPickersCalendarHeader-label": { color: "#FFFDFA" },
+                                    "& .MuiPickersArrowSwitcher-root": { color: "#FFFDFA" },
                                 }}                          
                             />
                         </div>
@@ -89,10 +89,10 @@ export const EarningIn: FC<Props> = ({ series, startDate, endDate }) => {
                                 sx={{
                                     color: "#ffca2d",
                                     "& .MuiPickersDay-root": { color: "#ffca2d" },
-                                    "& .MuiDayCalendar-weekDayLabel": { color: "white" },
+                                    "& .MuiDayCalendar-weekDayLabel": { color: "#FFFDFA" },
                                     "& .Mui-selected": { backgroundColor: "#ffca2d", color: "#000" },
-                                    "& .MuiPickersCalendarHeader-label": { color: "white" },
-                                    "& .MuiPickersArrowSwitcher-root": { color: "white" },
+                                    "& .MuiPickersCalendarHeader-label": { color: "#FFFDFA" },
+                                    "& .MuiPickersArrowSwitcher-root": { color: "#FFFDFA" },
                                 }} 
                             />
                         </div>

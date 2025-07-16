@@ -10,7 +10,7 @@ export const ArticleBanner:FC<Props> = ({banner, title}) => {
     return (
         <>
             {banner ? (
-                <div className="card bg-dark text-white">
+                <div className="card bg-dark text-light">
                     <img src={`${imageURL}/${banner}`} className="card-img" alt={title}/>
                     <div className="card-img-overlay">
                         <h1 className="card-title">{title}</h1>

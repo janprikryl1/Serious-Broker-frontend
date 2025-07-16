@@ -138,15 +138,13 @@
         }
       }
     }
-
-
   }
 
   &__subscribe {
     flex: 1;
 
     h2 {
-      color: black;
+      color: #0A0704;
       margin-bottom: 20px;
       font-size: 24px;
 
@@ -398,7 +396,7 @@
     @extend %p-rel;
   }
   p {
-    color: black;
+    color: #0A0704;
     font-size: 30px;
     font-weight: bold;
   }

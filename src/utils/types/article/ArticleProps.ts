@@ -12,4 +12,5 @@ export type ArticleProps = {
     premiumOnly: boolean;
     banner: string;
     in_watchlist: boolean;
+    is_read: boolean;
 }

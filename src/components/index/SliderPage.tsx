@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC } from "react";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, Autoplay, EffectFade } from 'swiper/modules';
 import 'swiper/css';
@@ -12,14 +12,11 @@ import {useMediaQuery} from "@mui/material";
 import {IndexMobileSliderPage} from "./indexMobileSlider/IndexMobileSliderPage.tsx";
 import {IndexMobileSliderBitcoin} from "./indexMobileSlider/IndexMobileSliderBitcoin.tsx";
 import {IndexMobileSliderFiveMinutes} from "./indexMobileSlider/IndexMobileSliderFiveMinutes.tsx";
-import {IndexMobileSliderYourMoney} from "./indexMobileSlider/IndexMobileSliderYourMoney.tsx";
-import {SliderPageYourMoney} from "./indexSliderPages/SliderPageYourMoney.tsx";
 import {AssetCalculatorComponent} from "./AssetCalculatorComponent.tsx";
 
 
 export const SliderPage: FC = () => {
     const isMobile = useMediaQuery('(max-width:768px)');
-    const [activeIndex, setActiveIndex] = useState(0);
 
     return (
         <div style={{ position: 'relative' }}>
@@ -36,25 +33,22 @@ export const SliderPage: FC = () => {
                 effect="fade"
                 fadeEffect={{ crossFade: true }}
                 className="main-slider-container"
-                onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
             >
                 {isMobile ? (
                     <>
                         <SwiperSlide><IndexMobileSliderPage /></SwiperSlide>
                         <SwiperSlide><IndexMobileSliderBitcoin /></SwiperSlide>
                         <SwiperSlide><IndexMobileSliderFiveMinutes /></SwiperSlide>
-                        <SwiperSlide><IndexMobileSliderYourMoney /></SwiperSlide>
                     </>
                 ) : (
                     <>
                         <SwiperSlide><SliderPageSeriousBroker /></SwiperSlide>
                         <SwiperSlide><SliderPageBitcoin /></SwiperSlide>
                         <SwiperSlide><SliderPage5Minutes /></SwiperSlide>
-                        <SwiperSlide><SliderPageYourMoney /></SwiperSlide>
                     </>
                 )}
             </Swiper>
-            {!isMobile && activeIndex === 0 && <AssetCalculatorComponent />}
+            {!isMobile && <AssetCalculatorComponent />}
         </div>
     );
 };

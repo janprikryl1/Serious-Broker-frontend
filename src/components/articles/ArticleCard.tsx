@@ -56,9 +56,9 @@ export const ArticleCard:FC<Props> = ({data, link = "article", setData}) => {
                         <button style={{background:"none", border:"none"}} disabled={!user}>{!data.in_watchlist ? <FaRegBookmark style={{marginLeft: 10, marginBottom: 5}} onClick={handleAddToWatchList}/> : <FaBookmark style={{marginLeft: 10, marginBottom: 5}} onClick={handleRemoveFromWatchList} />}</button>
                     </div>
                     <h5 className="10 style2">
-                        <Link to={`/${link}/${data.id}`} className="link-underline-none">{data.title}</Link>
+                        <Link to={`/${link}/${data.id}`} className="link-underline-none" style={{fontWeight: data.is_read ? "normal" : "bold"}}>{data.title}</Link>
                     </h5>
-                    <p className="mb-15" style={{height: 100}}>{data.description}</p>
+                    <p className="mb-15" style={{height: 100, fontWeight: data.is_read ? "normal" : "bold"}}>{data.description}</p>
                     <div className="blog__writer">
                         <div className="blog__writer-designation">
                             <p>{data.user_firstname} {data.user_surname} <span>{toCzechDateFormat(data.changed)}</span></p>

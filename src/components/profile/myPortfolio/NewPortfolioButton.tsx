@@ -9,7 +9,7 @@ export const NewPortfolioButton:FC = () => {
     
     return (
         <Link to={routes.profile.newMyPortfolio} className="text-decoration-none">
-            <Button className="w-80 mt-1 mb-5" type="button" color={ButtonColor.yellow} style={{color: "black"}}>{t("Create new portfolio")}</Button>
+            <Button className="w-80 mt-1 mb-5 text-dark" type="button" color={ButtonColor.yellow}>{t("Create new portfolio")}</Button>
         </Link>
     );
 };

@@ -9,7 +9,7 @@ export const UserAchievementsTimeLine: FC = () => {
 
     return (
         <div className="cta__subscribe">
-            <h2 style={{color:"white", fontSize: "40px"}}>{t("Achievements")}</h2>
+            <h2 className="text-light" style={{ fontSize: "40px"}}>{t("Achievements")}</h2>
             <p>{t("List of your achievements")}</p>
             <TimeLineComponent achievements={achievements}/>
         </div>

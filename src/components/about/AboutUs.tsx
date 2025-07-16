@@ -4,7 +4,6 @@ import {useMediaQuery} from "@mui/material";
 import {BlurredImage} from "./BlurredImage.tsx";
 import dotSphere from "../../utils/icons/about/dot_sphere.svg";
 import {TeamMemberCard} from "./TeamMemberCard.tsx";
-import radoslavFasugaImg from "../../utils/icons/about/radoslav_fasuga.webp";
 
 export const AboutUs: FC = () => {
   const {t} = useTranslation();
@@ -36,7 +35,7 @@ export const AboutUs: FC = () => {
           <h2 className="index-title mb-4">{t("Our team")}</h2>
           <div className="about-team-member">
             <TeamMemberCard name="Ing. Radoslav Fasuga, Ph.D." position="Coordinator"
-                            description="10+ years of experience" image={radoslavFasugaImg}/>
+                            description="10+ years of experience" />
             <TeamMemberCard name="Jan Přikryl" position="Developer"/>
             <TeamMemberCard name="Adela Fedorová" position="Designer"/>
           </div>

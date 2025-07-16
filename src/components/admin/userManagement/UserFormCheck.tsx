@@ -13,7 +13,7 @@ export const UserFormCheck: FC<UserFormInputProps> = ({ label, value, readOnly =
     const { t } = useTranslation();
     return (
         <div className="row">
-            <div className="col-md-3 text-white">
+            <div className="col-md-3 text-light">
                 <h3>{t(label)}</h3>
             </div>
             <div className="col-md-2">

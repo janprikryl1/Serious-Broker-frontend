@@ -52,7 +52,7 @@ export const Assets: FC = () => {
             <div className="blog padding-top padding-bottom">
                 <div className="container">
                     <div className="blog__wrapper">
-                        <p className="text-white">
+                        <p className="text-light">
                             {t("Crypto indices provide a way to measure a performance of a selection of cryptocurrencies")}
                         </p>
                         <p>{t("Order by")}</p>

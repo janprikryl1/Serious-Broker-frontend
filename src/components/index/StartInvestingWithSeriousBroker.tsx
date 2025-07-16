@@ -11,15 +11,15 @@ export const StartInvestingWithSeriousBroker: FC = () => {
     return (
         <div style={{ backgroundColor: "#ae9749", minHeight: 600 }}>
             <div className="container pt-5 pb-5">
-                <h2 className="mb-5 text-black index-section-head-title">{t("Start Investing with Serious Broker")}</h2>
+                <h2 className="mb-5 text-dark index-section-head-title">{t("Start Investing with Serious Broker")}</h2>
                 <div className="row text-center gx-0">
                     <div className="col-sm">
                         <div className="step-wrapper">
                             <img src={ImageCreateAccount} alt="Create account"
                                  className="img-start-investing-with-serious-broker img-fluid"/>
                             <div className="step-content">
-                                <p className="index-step-number">1</p>
-                                <p className="text-black step-description">{t("Create a Serious Broker account")}</p>
+                                <div className="index-step-number"><p style={{marginTop:13}}>1</p></div>
+                                <p className="text-dark step-description">{t("Create a Serious Broker account")}</p>
                             </div>
                         </div>
                     </div>
@@ -27,8 +27,8 @@ export const StartInvestingWithSeriousBroker: FC = () => {
                         <div className="step-wrapper">
                             <img src={ImageSelectPlan} alt="Select plan" className="img-start-investing-with-serious-broker img-fluid" />
                             <div className="step-content">
-                                <p className="index-step-number">2</p>
-                                <p className="text-black step-description">{t("Choose your investment plan")}</p>
+                                <div className="index-step-number"><p style={{marginTop:13}}>2</p></div>
+                                <p className="text-dark step-description">{t("Choose your investment plan")}</p>
                             </div>
                         </div>
                     </div>
@@ -36,8 +36,8 @@ export const StartInvestingWithSeriousBroker: FC = () => {
                         <div className="step-wrapper">
                             <img src={ImageCreateBinanceAccount} alt="Create Binance account" className="img-start-investing-with-serious-broker img-fluid" />
                             <div className="step-content">
-                                <p className="index-step-number">3</p>
-                                <p className="text-black step-description">{t("Create a Binance account")}</p>
+                                <div className="index-step-number"><p style={{marginTop:10}}>3</p></div>
+                                <p className="text-dark step-description">{t("Create a Binance account")}</p>
                             </div>
                         </div>
                     </div>
@@ -45,8 +45,8 @@ export const StartInvestingWithSeriousBroker: FC = () => {
                         <div className="step-wrapper">
                             <img src={ImageStartInvesting} alt="Start investing" className="img-start-investing-with-serious-broker img-fluid" />
                             <div className="step-content">
-                                <p className="index-step-number">4</p>
-                                <p className="text-black step-description">{t("Start investing")}</p>
+                                <div className="index-step-number"><p style={{marginTop:10}}>4</p></div>
+                                <p className="text-dark step-description">{t("Start investing")}</p>
                             </div>
                         </div>
                     </div>

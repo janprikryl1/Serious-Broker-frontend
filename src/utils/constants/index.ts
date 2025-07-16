@@ -110,6 +110,7 @@ export const routes = {
     cooperationInfo: "/cooperation_info",
     gdprInfo: "/gdpr_info",
     cookiesInfo: "/cookies_info",
+    aboutLogin: "/about_login",
 }
 
 export const editorURLS = {
@@ -155,16 +156,18 @@ export const guideURLS = {
 }
 
 export const registeredUserNavbarURLs: NavbarURLs = {
-    articles: { title: "Articles", link: routes.articles },
-    overview: { title: "Overview", link: routes.overview },
-    assets: {title: "Assets", link: routes.assets},
-    graphs: {title: "Recommendation", link: routes.recommendation},
+    myPortfolio: { title: "Portfolio", link:  routes.profile.myPortfolio},
+    groups: { title: "Groups", link: routes.assets },
+    assets: {title: "Pairs", link: routes.recommendation},
+    education: {title: "Education", link: routes.articles},
     myWatchList: { title: "My watch list", link: routes.profile.myWatchList },
-    aboutUs: { title: "About us", link: routes.about },
+    overview: { title: "Overview", link: routes.overview },
+    //aboutUs: { title: "About us", link: routes.about },
 };
 
 export const notRegisteredUserNavbarURLs: Record<string, NavLink> = {
-    learn: { title: "Learn", link: routes.articles },
+    aboutLogin: { title: "Portfolio", link:  routes.aboutLogin},
+    education: {title: "Education", link: routes.articles},
     overview: { title: "Overview", link: routes.overview },
-    aboutUs: { title: "About us", link: routes.about },
+    //aboutUs: { title: "About us", link: routes.about },
 };

@@ -14,7 +14,7 @@ export const SignInIcon: FC = () => {
     return (
         user ? (
             <Dropdown className="trk-btn--border trk-btn--primary link-underline-none">
-                <Dropdown.Toggle variant="warning" style={{color: "black", borderRadius: "3px", fontWeight: "bold", backgroundColor: "#ae9647", borderColor: "#ae9647"}}>
+                <Dropdown.Toggle variant="warning" style={{color: "#0A0704", borderRadius: "3px", fontWeight: "bold", backgroundColor: "#ae9647", borderColor: "#ae9647"}}>
                     {user.firstname} {user.surname}
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
