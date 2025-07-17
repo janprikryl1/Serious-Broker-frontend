@@ -435,7 +435,7 @@
     "Subscribe to newsletter": "Odebírat newsletter",
     "I don't want any messages": "Nechci žádné zprávy",
     "Verified": "Ověřený",
-    "Serious Broker is a student project that is being developed as part of a bachelor thesis. It focuses on assisting in investing and spreading awareness about cryptocurrencies.": "Serious Broker je studentský projekt, který vzniká v rámci bakalářské práce. Zaměřuje se na pomoc při investování a rozšiřuje povědomí o kryptoměnách.",
+    "Serious Broker is a project that is being developed with cooperation of students of VŠB-FEI. It focuses on assisting in investing and spreading awareness about cryptocurrencies.": "Serious Broker je projekt, který je vyvíjen ve spolupráci se studenty VŠB-FEI. Zaměřuje se na pomoc při investování a rozšiřuje povědomí o kryptoměnách.",
     "Want to know more? Join us on social media or contact us via email for example.": "Chcete vědět víc? Přidejte si nás na sociálních sítích nebo nás kontaktujte například přes email.",
     "Help": "Nápověda",
     "Achievement help": "Nápověda k dosaženým úspěchům",
@@ -980,8 +980,12 @@
     "The project is implemented in cooperation with the Department of Computer Science.": "Projekt je realizován v rámci spolupráci s katedrou informatiky.",
     "Cooperation": "Spolupráce",
     "Our partners": "Naši partneři",
-    "Groups": "Skupiny",
+    "Groups": "Sety",
     "Pairs": "Páry",
     "Education": "Vzdělávání",
-    "Why to login?": "Proč se přihlásit?"
+    "Why to login?": "Proč se přihlásit?",
+    "WARNING OF RISKS": "VAROVÁNÍ PŘED RIZIKY",
+    "As with any asset, the value of digital assets can fluctuate significantly and there is a substantial risk of economic loss when buying, selling, holding or investing in digital assets. You should therefore consider whether trading or holding digital assets is appropriate for you in light of your financial situation.": "Stejně jako u každého aktiva může hodnota digitálních aktiv výrazně kolísat a při nákupu, prodeji, držení nebo investování do digitálních aktiv existuje podstatné riziko ekonomické ztráty. Měli byste proto zvážit, zda je pro vás obchodování nebo držení digitálních aktiv vhodné s ohledem na vaši finanční situaci.",
+    "We are not your broker, intermediary, agent or advisor and we have no fiduciary relationship or obligation to you in connection with any transactions or other activities you undertake while using our Services. We do not provide investment or advisory advice of any kind, and no communication or information we provide to you is intended or should be construed as advice of any kind.": "Nejsme vaším makléřem, zprostředkovatelem, zástupcem ani poradcem a nemáme vůči vám žádný svěřenecký vztah ani závazky v souvislosti s jakýmikoli transakcemi nebo jinými činnostmi, které provádíte při používání našich služeb. Neposkytujeme investiční ani poradenské poradenství jakéhokoli druhu a žádná komunikace ani informace, které vám poskytujeme, nejsou zamýšleny nebo by měly být vykládány jako rady jakéhokoli druhu.",
+    "It is your responsibility to determine whether any investment, investment strategy or related transaction is appropriate for you based on your personal investment objectives, financial situation and risk tolerance, and you are responsible for any related loss or liability. We do not recommend that you buy, acquire, sell or hold any digital asset. You should consult your financial advisor before deciding to buy, sell or hold any digital asset. We are not responsible for any decisions you make about buying, earning, selling or holding digital assets based on information provided by us, including any losses you incur as a result of those decisions.": "Je vaší odpovědností určit, zda je pro vás jakákoli investice, investiční strategie nebo související transakce vhodná podle vašich osobních investičních cílů, finanční situace a tolerance rizika, a jste zodpovědní za jakoukoli související ztrátu nebo odpovědnost. Nedoporučujeme, abyste jakékoli digitální aktivum kupovali, získávali, prodávali nebo drželi. Než se rozhodnete koupit, prodat nebo držet jakékoli digitální aktivum, měli byste se poradit se svým finančním poradcem. Neneseme odpovědnost za rozhodnutí, která učiníte o nákupu, výdělku, prodeji nebo držení digitálních aktiv na základě námi poskytnutých informací, včetně jakýchkoli ztrát, které vám v důsledku těchto rozhodnutí vzniknou."
 }

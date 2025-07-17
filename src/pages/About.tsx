@@ -2,6 +2,7 @@ import {FC} from 'react'
 import {TitleHeader} from "../components/about/TitleHeader.tsx";
 import {AboutUs} from "../components/about/AboutUs.tsx";
 import {ContactUs} from "../components/about/ContactUs.tsx";
+import {WarningOfRisks} from "../components/navbar/WarningOfRisks.tsx";
 
 export const About:FC = () => {
     return (
@@ -11,6 +12,9 @@ export const About:FC = () => {
                 <AboutUs />
             </div>
             <ContactUs />
+            <div className="container cta-dark">
+                <WarningOfRisks />
+            </div>
         </>
     )
 }

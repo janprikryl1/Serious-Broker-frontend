@@ -4,6 +4,7 @@ import { LeftFloatingContactDetailsItem } from "./LeftFloatingContactDetailsItem
 import {addFeedback} from "../../utils/api/feedbackService.ts";
 import {contactEmail, phoneNumber} from "../../utils/constants";
 import {CustomSwal} from "../../utils/functions/customSwal.ts";
+import {WarningOfRisks} from "../navbar/WarningOfRisks.tsx";
 
 export const ContactCard: FC = () => {
   const { t } = useTranslation();
@@ -40,7 +41,7 @@ export const ContactCard: FC = () => {
         <div className="container">
           <div className="contact__wrapper">
             <div className="row">
-              <div className="col-md-7" style={{textAlign: "left"}}>
+              <div className="col-md-7">
                 <h3>Serious Investment s.r.o.</h3>
                 <p>Stanislavského 355</p>
                 <p>721 00 Ostrava-Svinov</p>
@@ -81,6 +82,8 @@ export const ContactCard: FC = () => {
               <LeftFloatingContactDetailsItem href={`mailto:${contactEmail}`} title={contactEmail}/>
             </div>
           </div>
+          <br />
+          <WarningOfRisks />
         </div>
       </div>
   );
