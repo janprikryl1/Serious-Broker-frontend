@@ -54,7 +54,8 @@ export const WelcomePremium:FC = () => {
                         display: 'flex',
                         flexDirection: 'column',
                         gap: '1rem',
-                        marginTop: '1rem'
+                        marginTop: '1rem',
+                        alignItems: 'center',
                     }}>
                         <ContactButton
                             href={routes.register}

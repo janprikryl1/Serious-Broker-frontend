@@ -69,13 +69,13 @@ export const ContactButton = ({ href, text, icon, primary = false }: {href: stri
 
 export const Welcome:FC = () => {
     const navigate = useNavigate();
-    
+
     useEffect(() => {
         setTimeout(() => {
             navigate(routes.home);
         }, 7000);
     }, []);
-    
+
     return (
         <div style={{
             display: 'flex',
@@ -97,11 +97,12 @@ export const Welcome:FC = () => {
 
                 <SplitText text="Serious Broker" />
                 <SplitText text="Zaměřujeme se na pomoc při investování a rozšiřujeme povědomí o kryptoměnách." type="p" />
-                
+
                 <div style={{
                     width: '100%',
                     display: 'flex',
                     flexDirection: 'column',
+                    alignItems: 'center',
                     gap: '1rem',
                     marginTop: '1rem'
                 }}>
@@ -111,13 +112,13 @@ export const Welcome:FC = () => {
                         icon={<FiMail size={20} />}
                         primary
                     />
-                    
+
                     <ContactButton
                         href={routes.home}
                         text="Pokračovat"
                     />
                 </div>
-                
+
                 <SplitText text="Váš důvěryhodný partner pro krypto svět" type="p" />
             </div>
         </div>
