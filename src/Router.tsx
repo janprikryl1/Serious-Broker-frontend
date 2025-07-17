@@ -72,6 +72,8 @@ const CooperationInfo = lazy(() => import ("./pages/CooperationInfo.tsx").then(m
 const GdprInfo = lazy(() => import ("./pages/GDPRInfo.tsx").then(module => ({ default: module.GdprInfo })));
 const CookiesInfo = lazy(() => import ("./pages/CookiesInfo.tsx").then(module => ({ default: module.CookiesInfo })));
 const WhyLogin = lazy(() => import ("./pages/WhyLogin.tsx").then(module => ({ default: module.WhyLogin })));
+const Welcome = lazy(() => import ("./pages/welcome/Welcome.tsx").then(module => ({ default: module.Welcome })));
+const WelcomePremium = lazy(() => import ("./pages/welcome/WelcomePremium.tsx").then(module => ({ default: module.WelcomePremium })));
 
 export const Router:FC = () => {
     return (
@@ -155,6 +157,8 @@ export const Router:FC = () => {
             <Route path={routes.gdprInfo} element={<PageLoader><GdprInfo /></PageLoader>} />
             <Route path={routes.cookiesInfo} element={<PageLoader><CookiesInfo /></PageLoader>} />
             <Route path={routes.aboutLogin} element={<PageLoader><WhyLogin /></PageLoader>} />
+            <Route path="welcome" element={<PageLoader><Welcome /></PageLoader>} />
+            <Route path="welcome/premium" element={<PageLoader><WelcomePremium /></PageLoader>} />
             <Route path="*" element={<PageLoader><ErrorPage /></PageLoader>} />
         </Routes>
     );
