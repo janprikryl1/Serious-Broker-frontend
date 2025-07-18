@@ -1,23 +1,12 @@
-import {FC, useEffect} from "react";
+import {FC} from "react";
 import { FiAward } from 'react-icons/fi';
 import Logo from "../../utils/icons/logo/SB_only.svg";
 import {SplitText} from "../../components/reusable/SplitText.tsx";
 import {routes} from "../../utils/constants";
 import {LuCrown} from "react-icons/lu";
 import {ContactButton} from "./Welcome.tsx";
-import {useNavigate} from "react-router-dom";
-
-
 
 export const WelcomePremium:FC = () => {
-    const navigate = useNavigate();
-
-    useEffect(() => {
-        setTimeout(() => {
-            navigate(routes.home);
-        }, 7000);
-    }, []);
-    
     return (
         <div style={{
             minHeight: "93vh",

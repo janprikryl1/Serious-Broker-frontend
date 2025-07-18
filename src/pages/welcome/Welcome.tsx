@@ -1,9 +1,9 @@
-import {FC, useEffect} from "react";
+import {FC} from "react";
 import { FiMail } from 'react-icons/fi';
 import Logo from "../../utils/icons/logo/SB_only.svg";
 import {SplitText} from "../../components/reusable/SplitText.tsx";
 import {routes} from "../../utils/constants";
-import {Link, useNavigate} from "react-router-dom";
+import {Link} from "react-router-dom";
 
 export const ContactButton = ({ href, text, icon, primary = false }: {href: string, text: string, icon?: JSX.Element, primary?: boolean}) => {
     const primaryStyle = {
@@ -68,14 +68,6 @@ export const ContactButton = ({ href, text, icon, primary = false }: {href: stri
 
 
 export const Welcome:FC = () => {
-    const navigate = useNavigate();
-
-    useEffect(() => {
-        setTimeout(() => {
-            navigate(routes.home);
-        }, 7000);
-    }, []);
-
     return (
         <div style={{
             display: 'flex',
