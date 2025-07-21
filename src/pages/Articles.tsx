@@ -10,9 +10,11 @@ import { ArticlesSkeleton } from "../components/articles/ArticlesSkeleton.tsx";
 import { CustomSwal } from "../utils/functions/customSwal.ts";
 import { useInfiniteScroll } from "../utils/hooks/useInfiniteScroll.ts";
 import { SidebarSearch } from "../components/article/SidebarSearch.tsx";
+import {useUserContext} from "../utils/providers/providerUser.tsx";
 
 export const Articles: FC = () => {
     const { t } = useTranslation();
+    const {user} = useUserContext();
     const [articles, setArticles] = useState<ArticleProps[]>([]);
     const [totalPages, setTotalPages] = useState<number>(1);
     const [loading, setLoading] = useState<boolean>(false);
@@ -116,24 +118,28 @@ export const Articles: FC = () => {
                                     ))}
                                 </select>
                             </div>
-                            <div className="col-md-2">
-                                <label className="form-label">{t("Unread")}</label>
-                                <select className="form-select" value={unreadFilter}
-                                        onChange={e => setUnreadFilter(e.target.value as "all" | "yes" | "no")}>
-                                    <option value="all">{t("All")}</option>
-                                    <option value="yes">{t("Yes")}</option>
-                                    <option value="no">{t("No")}</option>
-                                </select>
-                            </div>
-                            <div className="col-md-2">
-                                <label className="form-label">{t("In watchlist")}</label>
-                                <select className="form-select" value={watchlistFilter}
-                                        onChange={e => setWatchlistFilter(e.target.value as "all" | "yes" | "no")}>
-                                    <option value="all">{t("All")}</option>
-                                    <option value="yes">{t("Yes")}</option>
-                                    <option value="no">{t("No")}</option>
-                                </select>
-                            </div>
+                            {user ? (
+                                <>
+                                    <div className="col-md-2">
+                                        <label className="form-label">{t("Unread")}</label>
+                                        <select className="form-select" value={unreadFilter}
+                                                onChange={e => setUnreadFilter(e.target.value as "all" | "yes" | "no")}>
+                                            <option value="all">{t("All")}</option>
+                                            <option value="yes">{t("Yes")}</option>
+                                            <option value="no">{t("No")}</option>
+                                        </select>
+                                    </div>
+                                    <div className="col-md-2">
+                                        <label className="form-label">{t("In watchlist")}</label>
+                                        <select className="form-select" value={watchlistFilter}
+                                                onChange={e => setWatchlistFilter(e.target.value as "all" | "yes" | "no")}>
+                                            <option value="all">{t("All")}</option>
+                                            <option value="yes">{t("Yes")}</option>
+                                            <option value="no">{t("No")}</option>
+                                        </select>
+                                    </div>
+                                </>
+                                ) : <div className="col-md-4" />}
                             <div className="col-md-4 align-items-end justify-content-end">
                                 <SidebarSearch showTitle={false}/>
                             </div>
