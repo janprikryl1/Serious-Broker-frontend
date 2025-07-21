@@ -48,35 +48,42 @@ export const Assets: FC = () => {
 
     return (
         <>
-            <TitleHeader title="Assets" />
+            <TitleHeader title="Sets" />
             <div className="blog padding-top padding-bottom">
                 <div className="container">
                     <div className="blog__wrapper">
+                        <h2>Proč sety?</h2>
                         <p className="text-light">
                             {t("Crypto indices provide a way to measure a performance of a selection of cryptocurrencies")}
                         </p>
-                        <p>{t("Order by")}</p>
-                        <div className="col-sm season-button-group chart-type mb-3" style={{ minWidth: 370 }}>
-                            {Object.values(AssetOrder).map((orderTypeItem) => (
-                                <SeasonButton
-                                    key={orderTypeItem}
-                                    seasonValue={orderTypeItem}
-                                    isActive={orderTypeItem === orderType}
-                                    onSelect={() => handleOrderTypeChange(orderTypeItem)}
-                                />
-                            ))}
-                        </div>
+                        <h2>Informace o assetech</h2>
+                        <p className="text-light">
+                            ...
+                        </p>
+                            <p>{t("Order by")}</p>
+                            <div className="col-sm season-button-group chart-type mb-3" style={{minWidth: 370}}>
+                                {Object.values(AssetOrder).map((orderTypeItem) => (
+                                    <SeasonButton
+                                        key={orderTypeItem}
+                                        seasonValue={orderTypeItem}
+                                        isActive={orderTypeItem === orderType}
+                                        onSelect={() => handleOrderTypeChange(orderTypeItem)}
+                                    />
+                                ))}
+                            </div>
 
-                        <div className="row g-8">
-                            {assets.map((asset) => (
-                                // @ts-ignore
-                                <AssetCard index={asset.id} label={asset.name} details={asset.label} key={asset.id} data={asset.profit_list} inWatchList={asset.in_watchlist} setAssets={setAssets} dailyChange={asset.daily_change} />
-                            ))}
-                        </div>
+                            <div className="row g-8">
+                                {assets.map((asset) => (
+                                    // @ts-ignore
+                                    <AssetCard index={asset.id} label={asset.name} details={asset.label} key={asset.id}
+                                               data={asset.profit_list} inWatchList={asset.in_watchlist}
+                                               setAssets={setAssets} dailyChange={asset.daily_change}/>
+                                ))}
+                            </div>
 
-                        <div ref={loaderRef} style={{marginTop: '20px'}}>
-                            {loading && <AssetSkeleton />}
-                        </div>
+                            <div ref={loaderRef} style={{marginTop: '20px'}}>
+                                {loading && <AssetSkeleton/>}
+                            </div>
                     </div>
                 </div>
             </div>

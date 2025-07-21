@@ -9,6 +9,7 @@ import {EarningIn} from "../../components/graphs/earningIn/EarningIn.tsx";
 import {AssetGraphCurrencyDetailSkeleton} from "../../components/graphs/asset/AssetGraphCurrencyDetailSkeleton.tsx";
 import {toCzechDateFormat} from "../../utils/functions/dateFunctions.ts";
 import {useAssetGraphCurrencyDetailDate} from "../../utils/hooks/useAssetGraphCurrencyDetailDate.ts";
+import {AssetGraphWhereToFindCurrency} from "../../components/graphs/earningIn/AssetGraphWhereToFindCurrency.tsx";
 
 export const AssetGraphCurrencyDetail: FC = () => {
     const { t } = useTranslation();
@@ -69,6 +70,7 @@ export const AssetGraphCurrencyDetail: FC = () => {
                                     {series !== undefined && 
                                         <EarningIn series={series} startDate={startDate} endDate={endDate}/>
                                     }
+                                    <AssetGraphWhereToFindCurrency />
                                 </div>
                             </div>
                         </div>

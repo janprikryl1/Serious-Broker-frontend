@@ -99,3 +99,17 @@ export const getAssetGraphPriceDetails = async (name: string) => {
 export const getThreeLastAssetsGraphData = async () => {
     return await axios.get<RecommendedProfileAssetType[]>(backendUrl + "graphs/binance_index_assets/get_three_assets.php");
 }
+
+export const getWhereCoinInAsset = async (asset_id: string) => {
+    const token = localStorage.getItem("token");
+    if(!token) return;
+    
+    return await axios.get<{label: string, name: string}[]>(backendUrl + "graphs/binance_index_assets/get_where_coin_in_asset.php", {
+        params: {
+            asset_id
+        },
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    });
+}
