@@ -1,6 +1,6 @@
 import {FC, useEffect, useState} from "react";
-import {AssetType} from "../../utils/types/asset/AssetType.ts";
-import {getAllAssets} from "../../utils/api/binanceIndexAssets.ts";
+import {AssetProfitList} from "../../utils/types/asset/AssetType.ts";
+import {getAllAssetsProfitList} from "../../utils/api/binanceIndexAssets.ts";
 import {AssetOrder} from "../../utils/enums/AssetOrderEnum.ts";
 import {AssetCard} from "../graphs/asset/AssetCard.tsx";
 import {AssetSkeleton} from "../graphs/asset/AssetSkeleton.tsx";
@@ -8,12 +8,12 @@ import {useTranslation} from "react-i18next";
 
 export const AssetCalculatorSetOfCoins:FC = () => {
     const {t} = useTranslation();
-    const [assets, setAssets] = useState<AssetType[]>();
+    const [assets, setAssets] = useState<AssetProfitList[]>();
     
     useEffect(() => {
         (async () => {
             try {
-                const response = await getAllAssets(1, 2, AssetOrder.MonthlyProfit);
+                const response = await getAllAssetsProfitList(1, 2,  AssetOrder.MonthlyProfit);
                 if (response) {
                     setAssets(response.data.data);
                 }

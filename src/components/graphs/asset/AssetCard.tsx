@@ -4,8 +4,6 @@ import {LineChart} from "@mui/x-charts";
 import {useTranslation} from "react-i18next";
 import {FaBookmark, FaRegBookmark} from "react-icons/fa";
 import "../../../styles/sass/components/asset-graph-styles.scss";
-import {AssetType} from "../../../utils/types/asset/AssetType.ts";
-import {MostProfitableAssetDetailType} from "../../../utils/types/graphs/MostProfitableAssetDetailType.ts";
 import {addToWatchList, removeFromWatchList} from "../../../utils/api/watchListService.ts";
 import {WatchListEnum} from "../../../utils/enums/WatchListEnum.ts";
 import {routes} from "../../../utils/constants";
@@ -17,7 +15,7 @@ type Props = {
     details: string;
     data: number[];
     inWatchList: boolean;
-    setAssets?: Dispatch<SetStateAction<AssetType[] | MostProfitableAssetDetailType[]>>;
+    setAssets?: Dispatch<SetStateAction<any[]>>; //AssetType[] | MostProfitableAssetDetailType
     dailyChange?: number;
 };
 

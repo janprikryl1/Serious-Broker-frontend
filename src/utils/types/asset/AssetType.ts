@@ -4,7 +4,20 @@ export type AssetType = {
     name: string;
     status: string;
     created: string;
-    profit_list: number[];
+    coins: {coin: string; amount: number}[];
+    to_date: string;
     in_watchlist: boolean;
     daily_change: number;
 }
+
+export type AssetProfitList = {
+    id: number;
+    label: string;
+    name: string;
+    status: string;
+    created: string;
+    profit_list: number[];
+    to_date: string;
+    in_watchlist: boolean;
+    daily_change: number;
+};
