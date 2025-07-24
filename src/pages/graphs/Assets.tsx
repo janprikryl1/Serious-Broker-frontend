@@ -13,6 +13,8 @@ import {AssetRow} from "../../components/graphs/asset/AssetRow.tsx";
 import {selectStyles} from "../../styles/selectStyles.ts";
 import {AssetRowSkeleton} from "../../components/graphs/asset/AssetRowSkeleton.tsx";
 import {AssetOrder} from "../../utils/enums/AssetOrder.ts";
+import {useMediaQuery} from "@mui/material";
+import {AssetRowMobile} from "../../components/graphs/asset/AssetRowMobile.tsx";
 
 const animatedComponents = makeAnimated();
 
@@ -28,6 +30,7 @@ export const Assets: FC = () => {
     const [includeCurrencies, setIncludedCurrencies] = useState<string[]>([]);
     const [searchQuery, setSearchQuery] = useState<string>("");
     const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('asc');
+    const isMobile = useMediaQuery('(max-width: 768px)');
 
     // Ref to prevent effect from running on initial mount
     const isInitialMount = useRef(true);
@@ -117,7 +120,7 @@ export const Assets: FC = () => {
     const currencyOptions = avaibleCoins?.map((coin) => ({
         value: coin.id.toString(),
         label: coin.name,
-    }));console.log(currencyOptions, includeCurrencies);
+    }));
 
     return (
         <>
@@ -190,40 +193,79 @@ export const Assets: FC = () => {
                         </div>
 
                         <div className="asset-table">
-                            {/* Hlavička tabulky */}
-                            <div className="table-row fw-bold d-flex align-items-stretch">
-                                {/* Hlavička 1. sloupce */}
-                                <div
-                                    className="col-2 fw-bold d-flex align-items-center"
-                                    style={{
-                                        padding: '0.75rem',
-                                        borderTop: '2px solid #d2c6a8',
-                                        borderLeft: '2px solid #d2c6a8',
-                                        borderRight: '2px solid #d2c6a8',
-                                    }}
-                                    onClick={() => handleSort(AssetOrder.Name)}
-                                >
-                                    Název {orderType === AssetOrder.Name && (sortDirection === 'asc' ? '▲' : '▼')}
-                                </div>
-                                {/* Ostatní hlavičky s vlastními šířkami */}
-                                <div className="text-truncate d-flex align-items-center" style={{ flex: '0 0 19%', maxWidth: '19%', paddingLeft: '1rem' }} onClick={() => handleSort(AssetOrder.Label)}>Label {orderType === AssetOrder.Label && (sortDirection === 'asc' ? '▲' : '▼')}</div>
-                                <div className="pe-3 d-flex align-items-center" style={{ flex: '0 0 12.5%' }} onClick={() => handleSort(AssetOrder.CreatedDate)}>Vytvořeno {orderType === AssetOrder.CreatedDate && (sortDirection === 'asc' ? '▲' : '▼')}</div>
-                                <div className="pe-3 d-flex align-items-center" style={{ flex: '0 0 22%', maxWidth: '29%' }}>Zastoupené mince</div>
-                                <div className="col-1 pe-3 d-flex align-items-center">Změna</div>
-                                <div className="pe-3 d-flex align-items-center" style={{ flex: '0 0 12%' }}>K datu</div>
-                                <div className="col-1 text-center d-flex align-items-center justify-content-center">Watchlist</div>
-                            </div>
-
-                            {/* Vykreslení řádků */}
-                            {assets.map((asset, index) => (
-                                <AssetRow
-                                    setAssets={setAssets}
-                                    asset={asset}
-                                    key={asset.id}
-                                    index={asset.id}
-                                    isLast={index === assets.length - 1}
-                                />
-                            ))}
+                            {isMobile ? (
+                                <>
+                                    <div className="table-row fw-bold d-flex align-items-stretch">
+                                        <div
+                                            className="col-4 fw-bold d-flex align-items-center"
+                                            style={{
+                                                padding: '0.75rem',
+                                                borderTop: '2px solid #d2c6a8',
+                                                borderLeft: '2px solid #d2c6a8',
+                                                borderRight: '2px solid #d2c6a8',
+                                            }}
+                                            onClick={() => handleSort(AssetOrder.Name)}
+                                        >
+                                            Název {orderType === AssetOrder.Name && (sortDirection === 'asc' ? '▲' : '▼')}
+                                        </div>
+                                        <div className="col-3 text-truncate d-flex align-items-center"
+                                             style={{paddingLeft: '1rem'}}
+                                             onClick={() => handleSort(AssetOrder.Label)}>Label {orderType === AssetOrder.Label && (sortDirection === 'asc' ? '▲' : '▼')}</div>
+                                        <div className="col-5 pe-3 d-flex align-items-center"
+                                             style={{paddingLeft: '1rem'}}>Zastoupené mince
+                                        </div>
+                                    </div>
+                                    {assets.map((asset, index) => (
+                                        <AssetRowMobile
+                                            asset={asset}
+                                            key={asset.id}
+                                            isLast={index === assets.length - 1}
+                                        />
+                                    ))}
+                                </>
+                                ) : (
+                                    <>
+                                    <div className="table-row fw-bold d-flex align-items-stretch">
+                                        <div
+                                            className="col-2 fw-bold d-flex align-items-center"
+                                            style={{
+                                                padding: '0.75rem',
+                                                borderTop: '2px solid #d2c6a8',
+                                                borderLeft: '2px solid #d2c6a8',
+                                                borderRight: '2px solid #d2c6a8',
+                                            }}
+                                            onClick={() => handleSort(AssetOrder.Name)}
+                                        >
+                                            Název {orderType === AssetOrder.Name && (sortDirection === 'asc' ? '▲' : '▼')}
+                                        </div>
+                                        {/* Ostatní hlavičky s vlastními šířkami */}
+                                        <div className="text-truncate d-flex align-items-center"
+                                             style={{flex: '0 0 19%', maxWidth: '19%', paddingLeft: '1rem'}}
+                                             onClick={() => handleSort(AssetOrder.Label)}>Label {orderType === AssetOrder.Label && (sortDirection === 'asc' ? '▲' : '▼')}</div>
+                                        <div className="pe-3 d-flex align-items-center" style={{flex: '0 0 12.5%'}}
+                                             onClick={() => handleSort(AssetOrder.CreatedDate)}>Vytvořeno {orderType === AssetOrder.CreatedDate && (sortDirection === 'asc' ? '▲' : '▼')}</div>
+                                        <div className="pe-3 d-flex align-items-center"
+                                             style={{flex: '0 0 22%', maxWidth: '29%'}}>Zastoupené mince
+                                        </div>
+                                        <div className="col-1 pe-3 d-flex align-items-center">Změna</div>
+                                        <div className="pe-3 d-flex align-items-center" style={{flex: '0 0 12%'}}>K
+                                            datu
+                                        </div>
+                                        <div
+                                            className="col-1 text-center d-flex align-items-center justify-content-center">Watchlist
+                                        </div>
+                                    </div>
+                                        {assets.map((asset, index) => (
+                                            <AssetRow
+                                                setAssets={setAssets}
+                                                asset={asset}
+                                                key={asset.id}
+                                                index={asset.id}
+                                                isLast={index === assets.length - 1}
+                                            />
+                                        ))}
+                                    </>
+                            )}
                         </div>
 
                         <div ref={loaderRef} style={{marginTop: '20px'}}>

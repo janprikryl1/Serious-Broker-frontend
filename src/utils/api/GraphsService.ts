@@ -4,11 +4,14 @@ import {backendUrl} from "../../env.ts";
 import {BinanceIndexAssetRecomBestPreviousDetails} from "../types/graphs/BinanceIndexAssetRecomBestPreviousDetails.ts";
 import {RecommendationDetailSeasonEnum} from "../enums/RecommendationDetailSeasonEnum.ts";
 
-export const getBinanceIndexAssetRecomBestPrevious = async (orderBy: string, page: number) => {
+export const getBinanceIndexAssetRecomBestPrevious = async (orderBy: string, page: number, sortDirection: "asc" | "desc", filters: { includeCurrencies: string[]; searchQuery: string }) => {
     const res  = axios.get<{totalPages: number; data: BinanceIndexAssetRecomBestPreviousType[]}>(backendUrl + "graphs/binance_index_asset_recom_best_previous.php", {
         params: {
             order_by: orderBy,
-            page: page
+            page: page,
+            sortDirection: sortDirection,
+            includeCurrencies: filters.includeCurrencies.join(","),
+            searchQuery: filters.searchQuery
         }
     });
     return await res;
