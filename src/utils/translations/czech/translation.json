@@ -1001,5 +1001,13 @@
     "Currency count": "Počet měn",
     "Included currencies": "Zahrnuté měny",
     "Select coins": "Vyberte mince",
-    "No coins": "Žádné mince"
+    "No coins": "Žádné mince",
+    "No data for this user": "Pro tento uživatel nejsou k dispozici žádná data",
+    "Your result": "Vaše výsledky",
+    "Evaluation": "Vyhodnocení",
+    "Total score": "Celková skóre",
+    "points": "bodů",
+    "Points": "Bodů",
+    "Options with points": "Možnosti s body",
+    "Evaulation settings": "Nastavení vyhodnocení"
 }

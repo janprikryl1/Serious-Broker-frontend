@@ -1,21 +1,22 @@
-import {FC, useState} from "react";
-import {useFieldArray, useForm} from "react-hook-form";
-import {Question, QuestionType} from "../../utils/types/admin/Question";
-import {Button, ButtonColor} from "../reusable/Button.tsx";
-import {useTranslation} from "react-i18next";
-import {FaRegTrashCan} from "react-icons/fa6";
-import {toast} from "react-toastify";
-import {saveQuestion} from "../../utils/api/formsService.ts";
+import { FC, useState } from "react";
+import { useFieldArray, useForm } from "react-hook-form";
+import { Question, QuestionType } from "../../utils/types/admin/Question";
+import { Button, ButtonColor } from "../reusable/Button.tsx";
+import { useTranslation } from "react-i18next";
+import { FaRegTrashCan } from "react-icons/fa6";
+import { toast } from "react-toastify";
+import { saveQuestion } from "../../utils/api/formsService.ts";
 
 type Props = {
     question: Question;
     onSave?: (updated: Question) => void;
     deleteQuestion?: (id: number) => void;
     updateId: (oldId: number, newId: number) => void;
+    category: string;
 };
 
-export const FormQuestionCard: FC<Props> = ({question, onSave, deleteQuestion, updateId}) => {
-    const {t} = useTranslation();
+export const FormQuestionCard: FC<Props> = ({ question, onSave, deleteQuestion, updateId, category }) => {
+    const { t } = useTranslation();
     const [isEditing, setIsEditing] = useState(false);
 
     const {
@@ -28,7 +29,7 @@ export const FormQuestionCard: FC<Props> = ({question, onSave, deleteQuestion, u
         defaultValues: question,
     });
 
-    const {fields, append, remove} = useFieldArray({
+    const { fields, append, remove } = useFieldArray({
         control,
         name: "options" as never,
     });
@@ -36,15 +37,15 @@ export const FormQuestionCard: FC<Props> = ({question, onSave, deleteQuestion, u
     const watchType = watch("type");
 
     const onSubmit = async (data: Question) => {
-        const cleaned = {
+        const cleaned: Question = {
             ...data,
-            options:
-                data.type === QuestionType.select
-                    ? data.options?.filter(opt => opt.trim() !== "")
-                    : undefined,
+            // @ts-ignore
+            category,
+            options: data.type === QuestionType.select
+                ? data.options?.filter(opt => opt.text.trim() !== "") ?? []
+                : null,
         };
 
-        console.log("Ukládám otázku:", cleaned);
         const response = await saveQuestion(cleaned);
         if (response?.status === 200) {
             onSave?.(cleaned);
@@ -62,10 +63,12 @@ export const FormQuestionCard: FC<Props> = ({question, onSave, deleteQuestion, u
                     <div className="text-muted small">
                         {t("Type")}: {question.type}, {t("Required")}: {question.required ? t("Yes") : t("No")}, {t("Order")}: {question.order}
                     </div>
-                    {question.type === QuestionType.select && question.options && question.options?.length > 0 && (
+                    {question.type === QuestionType.select && question.options && question.options.length > 0 && (
                         <ul className="ps-3 mt-2">
                             {question.options.map((opt, i) => (
-                                <li key={i}>{opt}</li>
+                                <li key={i}>
+                                    {opt.text} — {opt.points} {t("points")}
+                                </li>
                             ))}
                         </ul>
                     )}
@@ -77,7 +80,7 @@ export const FormQuestionCard: FC<Props> = ({question, onSave, deleteQuestion, u
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className="mb-2">
                         <label className="form-label">{t("Question text")}</label>
-                        <input {...register("question_text", {required: true})} className="form-control"/>
+                        <input {...register("question_text", { required: true })} className="form-control" />
                     </div>
 
                     <div className="mb-2">
@@ -90,22 +93,36 @@ export const FormQuestionCard: FC<Props> = ({question, onSave, deleteQuestion, u
                     </div>
 
                     <div className="form-check mb-2">
-                        <input type="checkbox" {...register("required")} className="form-check-input" id={`required-${question.id}`}/>
+                        <input type="checkbox" {...register("required")} className="form-check-input" id={`required-${question.id}`} />
                         <label className="form-check-label" htmlFor={`required-${question.id}`}>{t("Required")}</label>
                     </div>
 
                     {watchType === QuestionType.select && (
                         <div className="mb-3">
-                            <label className="form-label">{t("Options")}</label>
+                            <label className="form-label">{t("Options with points")}</label>
                             {fields.map((field, index) => (
-                                <div key={field.id} className="input-group mb-1">
-                                    <input {...register(`options.${index}` as const)} className="form-control"/>
+                                <div key={field.id} className="input-group mb-2">
+                                    <input
+                                        {...register(`options.${index}.text` as const)}
+                                        className="form-control"
+                                        placeholder={t("Option text")}
+                                    />
+                                    <input
+                                        type="number"
+                                        {...register(`options.${index}.points` as const)}
+                                        className="form-control"
+                                        placeholder={t("Points")}
+                                    />
                                     <button type="button" className="btn btn-outline-danger" onClick={() => remove(index)}>
                                         <FaRegTrashCan />
                                     </button>
                                 </div>
                             ))}
-                            <Button type="button" className="btn btn-sm btn-outline-secondary mt-1" onClick={() => append("")}>
+                            <Button
+                                type="button"
+                                className="btn btn-sm btn-outline-secondary mt-1"
+                                onClick={() => append({ text: "", points: 0 })}
+                            >
                                 {t("Add option")}
                             </Button>
                         </div>

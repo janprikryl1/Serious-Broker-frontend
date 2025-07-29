@@ -74,6 +74,7 @@ const CookiesInfo = lazy(() => import ("./pages/CookiesInfo.tsx").then(module =>
 const WhyLogin = lazy(() => import ("./pages/WhyLogin.tsx").then(module => ({ default: module.WhyLogin })));
 const Welcome = lazy(() => import ("./pages/welcome/Welcome.tsx").then(module => ({ default: module.Welcome })));
 const WelcomePremium = lazy(() => import ("./pages/welcome/WelcomePremium.tsx").then(module => ({ default: module.WelcomePremium })));
+const FormEvaulationSettings = lazy(() => import ("./pages/admin/FormEvaulationSettings.tsx").then(module => ({ default: module.FormEvaulationSettings })));
 
 export const Router:FC = () => {
     return (
@@ -148,6 +149,7 @@ export const Router:FC = () => {
                 <Route path={routes.admin.genericsTableData} element={<PageLoader><AdminGenericTableResults /></PageLoader>} />
                 <Route path={routes.admin.forms} element={<PageLoader><AdminFormsOverview /></PageLoader>} />
                 <Route path={routes.admin.formResponses} element={<PageLoader><AdminFormResponses /></PageLoader>} />
+                <Route path={routes.admin.formEvaulationSettings} element={<PageLoader><FormEvaulationSettings /></PageLoader>} />
             </Route>
             <Route path={guideURLS.index} element={<PageLoader><Guide /></PageLoader>}>
                 <Route path={routes.guides.guidedInvestControl} element={<PageLoader><GuidedInvestControlGuide /></PageLoader>} />

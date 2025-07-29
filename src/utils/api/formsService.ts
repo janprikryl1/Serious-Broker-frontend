@@ -1,13 +1,13 @@
-import {Question} from "../types/admin/Question.ts";
+import {CategorizedQuestions, Question} from "../types/admin/Question.ts";
 import axios from "axios";
 import {backendUrl} from "../../env.ts";
 import {UserLiteType} from "../types/user/UserLiteType.ts";
-import {QuestionResponseUserType} from "../types/admin/QuestionResponseUserType.ts";
+import {QuestionEvaluationType} from "../types/admin/QuestionResponseUserType.ts";
 
 export const getAllQuestions = async () => {
     const token = localStorage.getItem("token");
     if (!token) return;
-    return axios.get<Question[]>(`${backendUrl}/form_questions/get_questions.php`, {
+    return axios.get<CategorizedQuestions>(`${backendUrl}/form_questions/get_questions.php`, {
         headers: {
             Authorization: `Bearer ${token}`,
         }
@@ -58,16 +58,16 @@ export const resetOldResponses = async () => {
     });
 }
 
-export const saveOrder = async (newOrder:  { id: number; order: number; }[]) => {
+export const saveOrder = async (newOrder: { id: number; order: number; category: string }[]) => {
     const token = localStorage.getItem("token");
     if (!token) return;
-    
+
     return axios.post(`${backendUrl}/form_questions/save_order.php`, newOrder, {
         headers: {
             Authorization: `Bearer ${token}`,
         }
     });
-}
+};
 
 export const getUserLites = async () => {
     const token = localStorage.getItem("token");
@@ -80,7 +80,7 @@ export const getUserLites = async () => {
 }
 
 export const getUserQuestions = async (userId: string) => {
-    return axios.get<QuestionResponseUserType[]>(`${backendUrl}/form_questions/get_user_responses.php`, {
+    return axios.get<QuestionEvaluationType>(`${backendUrl}/form_questions/get_user_responses.php`, {
         params: {
             user_id: userId
         }
@@ -96,3 +96,33 @@ export const saveUserResponses = async (responses: any) => {
         }
     });
 }
+
+export const getFormSettings = async () => {
+    const token = localStorage.getItem("token");
+    if (!token) return;
+    return axios.get(`${backendUrl}/form_questions/get_evaluation_categories.php`, {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        }
+    });
+}
+
+export const saveFormSettings = async (settings: any) => {
+    const token = localStorage.getItem("token");
+    if (!token) return;
+    return axios.post(`${backendUrl}/form_questions/save_evaluation_category.php`, settings, {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        }
+    });
+}
+
+export const deleteFormSetting = async (id: number) => {
+    const token = localStorage.getItem("token");
+    if (!token) return;
+    return axios.post(`${backendUrl}/form_questions/delete_evaluation_category.php`, { id }, {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        }
+    });
+};

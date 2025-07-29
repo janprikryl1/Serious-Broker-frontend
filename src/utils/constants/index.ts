@@ -99,6 +99,7 @@ export const routes = {
         genericsTableData: "generic_table_results/:id",
         forms: "forms",
         formResponses: "form_responses",
+        formEvaulationSettings: "form_evaulation_settings",
     },
     guides: {
         index: "",
@@ -147,6 +148,7 @@ export const adminURLS = {
     genericsTableData: "/admin/generic_table_results",
     forms: "/admin/forms",
     formResponses: "/admin/form_responses",
+    formEvaulationSettings: "/admin/form_evaulation_settings",
 }
 
 export const guideURLS = {
