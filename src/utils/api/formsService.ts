@@ -1,4 +1,4 @@
-import {CategorizedQuestions, Question} from "../types/admin/Question.ts";
+import {CategorizedQuestions} from "../types/admin/Question.ts";
 import axios from "axios";
 import {backendUrl} from "../../env.ts";
 import {UserLiteType} from "../types/user/UserLiteType.ts";
@@ -14,15 +14,15 @@ export const getAllQuestions = async () => {
     });
 }
 
-export const saveQuestion = async (question: Question) => {
+export const saveQuestion = async (formData: FormData) => {
     const token = localStorage.getItem("token");
     if (!token) return;
-    return axios.post(`${backendUrl}/form_questions/save_question.php`, question, {
+    return axios.post(`${backendUrl}/form_questions/save_question.php`, formData, {
         headers: {
             Authorization: `Bearer ${token}`,
-        }
+        },
     });
-}
+};
 
 export const deleteQuestion = async (id: number) => {
     const token = localStorage.getItem("token");

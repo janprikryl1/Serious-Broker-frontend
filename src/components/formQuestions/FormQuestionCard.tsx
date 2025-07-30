@@ -6,6 +6,7 @@ import { useTranslation } from "react-i18next";
 import { FaRegTrashCan } from "react-icons/fa6";
 import { toast } from "react-toastify";
 import { saveQuestion } from "../../utils/api/formsService.ts";
+import {formImagesURL} from "../../utils/constants";
 
 type Props = {
     question: Question;
@@ -18,6 +19,7 @@ type Props = {
 export const FormQuestionCard: FC<Props> = ({ question, onSave, deleteQuestion, updateId, category }) => {
     const { t } = useTranslation();
     const [isEditing, setIsEditing] = useState(false);
+    const [imageFile, setImageFile] = useState<File | null>(null);
 
     const {
         register,
@@ -46,14 +48,28 @@ export const FormQuestionCard: FC<Props> = ({ question, onSave, deleteQuestion, 
                 : null,
         };
 
-        const response = await saveQuestion(cleaned);
+        const formData = new FormData();
+        formData.append("question_text", cleaned.question_text);
+        formData.append("type", cleaned.type);
+        formData.append("required", cleaned.required ? "1" : "0");
+        formData.append("order", cleaned.order.toString());
+        formData.append("category", category);
+        if (cleaned.description) formData.append("description", cleaned.description);
+        if (cleaned.options) formData.append("options", JSON.stringify(cleaned.options));
+        if (question.id && question.id < 999999999) formData.append("id", question.id.toString());
+        if (imageFile) formData.append("image", imageFile);
+
+        const response = await saveQuestion(formData);
+
         if (response?.status === 200) {
-            onSave?.(cleaned);
+            const updated = { ...cleaned, image_url: response.data.image_url ?? question.image_url };
+            onSave?.(updated);
+            updateId(question.id, response.data.id ?? question.id);
             setIsEditing(false);
             toast.success(t("Saved successfully"));
-            updateId(question.id, response.data.id);
         }
     };
+
 
     return (
         <div className="">
@@ -80,7 +96,7 @@ export const FormQuestionCard: FC<Props> = ({ question, onSave, deleteQuestion, 
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className="mb-2">
                         <label className="form-label">{t("Question text")}</label>
-                        <input {...register("question_text", { required: true })} className="form-control" />
+                        <input {...register("question_text", {required: true})} className="form-control"/>
                     </div>
 
                     <div className="mb-2">
@@ -93,7 +109,8 @@ export const FormQuestionCard: FC<Props> = ({ question, onSave, deleteQuestion, 
                     </div>
 
                     <div className="form-check mb-2">
-                        <input type="checkbox" {...register("required")} className="form-check-input" id={`required-${question.id}`} />
+                        <input type="checkbox" {...register("required")} className="form-check-input"
+                               id={`required-${question.id}`}/>
                         <label className="form-check-label" htmlFor={`required-${question.id}`}>{t("Required")}</label>
                     </div>
 
@@ -113,18 +130,39 @@ export const FormQuestionCard: FC<Props> = ({ question, onSave, deleteQuestion, 
                                         className="form-control"
                                         placeholder={t("Points")}
                                     />
-                                    <button type="button" className="btn btn-outline-danger" onClick={() => remove(index)}>
-                                        <FaRegTrashCan />
+                                    <button type="button" className="btn btn-outline-danger"
+                                            onClick={() => remove(index)}>
+                                        <FaRegTrashCan/>
                                     </button>
                                 </div>
                             ))}
                             <Button
                                 type="button"
                                 className="btn btn-sm btn-outline-secondary mt-1"
-                                onClick={() => append({ text: "", points: 0 })}
+                                onClick={() => append({text: "", points: 0})}
                             >
                                 {t("Add option")}
                             </Button>
+                        </div>
+                    )}
+                    <div className="mb-2">
+                        <label className="form-label">{t("Image (optional)")}</label>
+                        <input
+                            type="file"
+                            accept="image/*"
+                            className="form-control"
+                            onChange={(e) => {
+                                if (e.target.files && e.target.files.length > 0) {
+                                    setImageFile(e.target.files[0]);
+                                } else {
+                                    setImageFile(null);
+                                }
+                            }}
+                        />
+                    </div>
+                    {question.image_url && (
+                        <div className="mt-2">
+                            <img src={formImagesURL+question.image_url} alt="Question" className="img-fluid" style={{ maxHeight: 150 }} />
                         </div>
                     )}
 
@@ -136,7 +174,7 @@ export const FormQuestionCard: FC<Props> = ({ question, onSave, deleteQuestion, 
                         }}>{t("Cancel")}</Button>
                         <Button type="button" color={ButtonColor.red} onClick={() => {
                             deleteQuestion?.(question.id);
-                        }}><FaRegTrashCan /></Button>
+                        }}><FaRegTrashCan/></Button>
                     </div>
                 </form>
             )}

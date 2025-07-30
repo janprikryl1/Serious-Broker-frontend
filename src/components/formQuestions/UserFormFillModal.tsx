@@ -17,6 +17,7 @@ import {
 import { useForm, SubmitHandler } from "react-hook-form";
 import { toast } from "react-toastify";
 import Skeleton from "react-loading-skeleton";
+import {formImagesURL} from "../../utils/constants";
 
 type FormInputs = {
     [key: string]: string | number | boolean;
@@ -179,7 +180,7 @@ export const UserFormFillModal: FC = () => {
     const isLastQuestion = currentQuestionIndex === questions.length - 1;
 
     return (
-        <Modal show={true} onHide={handleClose} backdrop="static" keyboard={false} centered>
+        <Modal show={true} onHide={handleClose} backdrop="static" keyboard={false} centered size="lg">
             <Modal.Header closeButton>
                 <Modal.Title>{t("Questionnaire")}</Modal.Title>
             </Modal.Header>
@@ -191,13 +192,23 @@ export const UserFormFillModal: FC = () => {
                                 <p className="mb-3 fw-bold" style={{ fontSize: 20 }}>
                                     {currentQuestion.category}
                                 </p>
-                                
-                                    <form onSubmit={handleSubmit(onSubmit)} key={currentQuestion.id} id="user-questionnaire-form">
+
+                                <form onSubmit={handleSubmit(onSubmit)} key={currentQuestion.id} id="user-questionnaire-form">
                                     <div className="mb-3">
                                         <label htmlFor={String(currentQuestion.id)} className="form-label fw-bold">
                                             {currentQuestionIndex + 1}. {currentQuestion.question_text}
                                             {currentQuestion.required && <span className="text-danger">*</span>}
                                         </label>
+                                        {currentQuestion.image_url && (
+                                            <div className="mb-3 text-center">
+                                                <img
+                                                    src={formImagesURL+currentQuestion.image_url}
+                                                    alt="question"
+                                                    className="img-fluid rounded shadow-sm"
+                                                    style={{ maxHeight: 200, objectFit: "contain" }}
+                                                />
+                                            </div>
+                                        )}
                                         {renderQuestionInput(currentQuestion)}
                                         {errors[currentQuestion.id] && (
                                             <p className="text-danger small mt-1">{t("Required")}</p>

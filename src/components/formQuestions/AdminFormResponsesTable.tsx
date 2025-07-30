@@ -41,6 +41,11 @@ export const AdminFormResponsesTable: FC<Props> = ({ userId }) => {
     const handleResetUserResponses = async () => {
         if (!userId) return;
         await resetUserResponses(userId);
+        CustomSwal.fire({
+            title: t("Success"),
+            text: t("Answers for user reset"),
+            icon: "success",
+        });
     };
 
     if (!response) return <p>{t("Loading...")}</p>;
