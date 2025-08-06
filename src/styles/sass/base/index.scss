@@ -710,3 +710,33 @@
 .text-dark {
   color: #0A0704 !important;
 }
+
+.sticky-header-active + .asset-table-body {
+  padding-top: 60px;
+}
+
+.sticky-header-active {
+  position: fixed;
+  top: 0;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.sticky-header-active {
+  position: fixed;
+  top: 0;
+  z-index: 1020;
+  background-color: #211e1b;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
+}
+
+.sticky-header-active.is-sticky {
+  visibility: visible;
+  opacity: 1;
+}

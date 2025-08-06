@@ -12,7 +12,7 @@ import { AvailableCoinType } from "../../utils/types/myPortfolio/availableCoinTy
 import Select from "react-select";
 import makeAnimated from "react-select/animated";
 import { selectStyles } from "../../styles/selectStyles.ts";
-import {useMediaQuery} from "@mui/material";
+import { useMediaQuery } from "@mui/material";
 
 
 const avaibleCoins: AvailableCoinType[] = [
@@ -51,7 +51,10 @@ export const Recommendation: FC = () => {
     const [searchQuery, setSearchQuery] = useState<string>("");
     const isMobile = useMediaQuery('(max-width: 768px)');
     const isInitialMount = useRef(true);
-
+    const [isHeaderSticky, setIsHeaderSticky] = useState(false);
+    const originalHeaderRef = useRef<HTMLDivElement | null>(null);
+    const stickyHeaderRef = useRef<HTMLDivElement | null>(null);
+    
     const fetchData = useCallback(async (reset: boolean = false) => {
         if (isFetchingRef.current || (currentPage > totalPages && !reset)) return;
         isFetchingRef.current = true;
@@ -61,10 +64,7 @@ export const Recommendation: FC = () => {
                 orderType,
                 reset ? 1 : currentPage,
                 sortDirection,
-                {
-                    includeCurrencies,
-                    searchQuery
-                }
+                { includeCurrencies, searchQuery }
             );
             setData((prev) => (reset ? res.data.data : [...prev, ...res.data.data]));
             setTotalPages(res.data.totalPages);
@@ -76,8 +76,7 @@ export const Recommendation: FC = () => {
     }, [orderType, currentPage, totalPages, sortDirection, includeCurrencies, searchQuery]);
 
     useEffect(() => {
-        setData([]);
-        setTotalPages(1);
+        setData([]); setTotalPages(1);
     }, [orderType, sortDirection, includeCurrencies, searchQuery]);
 
     useEffect(() => {
@@ -85,25 +84,50 @@ export const Recommendation: FC = () => {
     }, [orderType, sortDirection]);
 
     useEffect(() => {
-        if (isInitialMount.current) {
-            isInitialMount.current = false;
-            return;
-        }
-        const handler = setTimeout(() => {
-            resetPage();
-            fetchData(true);
-        }, 500);
+        if (isInitialMount.current) { isInitialMount.current = false; return; }
+        const handler = setTimeout(() => { resetPage(); fetchData(true); }, 500);
         return () => clearTimeout(handler);
-    }, [includeCurrencies, searchQuery]);
+    }, [includeCurrencies, searchQuery, resetPage, fetchData]);
 
     useEffect(() => {
-        if (currentPage > 1) {
-            fetchData();
+        if (currentPage > 1) { fetchData(); }
+    }, [currentPage, fetchData]);
+
+    useEffect(() => {
+        const headerElement = originalHeaderRef.current;
+        if (!headerElement) return;
+
+        const intersectionObserver = new IntersectionObserver(
+            ([entry]) => {
+                const shouldBeSticky = !entry.isIntersecting && entry.boundingClientRect.y < 0;
+                setIsHeaderSticky(shouldBeSticky);
+            },
+            { rootMargin: "0px 0px -100% 0px", threshold: 0.0 }
+        );
+        intersectionObserver.observe(headerElement);
+
+        const stickyHeaderElement = stickyHeaderRef.current;
+        if (!stickyHeaderElement) {
+            return () => intersectionObserver.unobserve(headerElement);
         }
-    }, [currentPage]);
+
+        const resizeObserver = new ResizeObserver((entries) => {
+            for (let entry of entries) {
+                const { width, left } = entry.contentRect;
+                stickyHeaderElement.style.width = `${width}px`;
+                stickyHeaderElement.style.left = `${left}px`;
+            }
+        });
+        resizeObserver.observe(headerElement);
+
+        return () => {
+            intersectionObserver.unobserve(headerElement);
+            resizeObserver.unobserve(headerElement);
+        };
+    }, [data, loading]);
 
     const handleSort = (column: RecommendationGraphEnum) => {
-        if (column === orderType) {console.log(sortDirection, column);
+        if (column === orderType) {
             setSortDirection(prev => prev === 'asc' ? 'desc' : 'asc');
         } else {
             setOrderType(column);
@@ -117,6 +141,26 @@ export const Recommendation: FC = () => {
         label: coin.name,
     }));
 
+    const tableHeaderContent = (
+        <div className="table-row fw-bold d-flex align-items-stretch">
+            <div className="col-2 fw-bold d-flex align-items-center" style={{ padding: '0.75rem', borderLeft: '2px solid #d2c6a8', borderRight: '2px solid #d2c6a8', borderTop: '2px solid #d2c6a8', cursor: 'pointer' }} onClick={() => handleSort(RecommendationGraphEnum.ALL_SUG)}>
+                Název {orderType === RecommendationGraphEnum.ALL_SUG && (sortDirection === 'asc' ? '▲' : '▼')}
+            </div>
+            <div className="text-truncate d-flex align-items-center" style={{ flex: '0 0 15%', maxWidth: '15%', paddingLeft: '1rem', cursor: 'pointer' }} onClick={() => handleSort(RecommendationGraphEnum.LABEL_SUG)}>
+                Label {orderType === RecommendationGraphEnum.LABEL_SUG && (sortDirection === 'asc' ? '▲' : '▼')}
+            </div>
+            <div className="pe-3 d-flex align-items-center" style={{ flex: '0 0 20%', maxWidth: '20%' }}>Zastoupené mince</div>
+            {!isMobile && <>
+                <div className="pe-3 d-flex align-items-center" style={{ flex: '0 0 12.5%', cursor: 'pointer' }} onClick={() => handleSort(RecommendationGraphEnum.CMC_RANK)}>
+                    Coinmarket {orderType === RecommendationGraphEnum.CMC_RANK && (sortDirection === 'asc' ? '▲' : '▼')}
+                </div>
+                <div className="d-flex align-items-center" style={{ flex: '0 0 12%' }}>Pořadí týden</div>
+                <div className="d-flex align-items-center" style={{ flex: '0 0 12%' }}>Profit týden</div>
+                <div className="text-center d-flex align-items-center justify-content-center" style={{ flex: '0 0 11%' }}>Týden dopor.</div>
+            </>}
+        </div>
+    );
+
     return (
         <>
             <TitleHeader title="Recommendation" />
@@ -125,21 +169,7 @@ export const Recommendation: FC = () => {
                     <div className="row mb-3 sidebar__search" style={{ marginLeft: "0.1rem", marginRight: "0.1rem" }}>
                         <div className="col-md-3">
                             <label className="form-label">{t("Included currencies")}</label>
-                            {avaibleCoins && (
-                                <Select
-                                    closeMenuOnSelect={false}
-                                    components={animatedComponents}
-                                    isMulti
-                                    options={currencyOptions}
-                                    placeholder={t("Select coins")}
-                                    noOptionsMessage={() => t("No coins")}
-                                    value={currencyOptions?.filter((opt) => includeCurrencies.includes(opt.label))}
-                                    onChange={(selectedOptions) =>
-                                        setIncludedCurrencies(selectedOptions.map((opt) => opt.label))
-                                    }
-                                    styles={selectStyles}
-                                />
-                            )}
+                            {avaibleCoins && <Select closeMenuOnSelect={false} components={animatedComponents} isMulti options={currencyOptions} placeholder={t("Select coins")} noOptionsMessage={() => t("No coins")} value={currencyOptions?.filter((opt) => includeCurrencies.includes(opt.label))} onChange={(selectedOptions) => setIncludedCurrencies(selectedOptions.map((opt) => opt.label))} styles={selectStyles} />}
                         </div>
                         <div className="col-md-3" />
                         <div className="col-sm-6 align-items-end justify-content-end mb-3">
@@ -147,66 +177,29 @@ export const Recommendation: FC = () => {
                             <div className="sidebar__search-body">
                                 <form onSubmit={(e) => e.preventDefault()}>
                                     <div className="input">
-                                        <input
-                                            type="text"
-                                            className="form-control"
-                                            style={{ borderRadius: 4 }}
-                                            placeholder={t("Search")}
-                                            value={searchQuery}
-                                            onChange={(e) => setSearchQuery(e.target.value)}
-                                        />
-                                        <button type="submit" className="search-btn">
-                                            <i className="fa-solid fa-magnifying-glass"></i>
-                                        </button>
+                                        <input type="text" className="form-control" style={{ borderRadius: 4 }} placeholder={t("Search")} value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
+                                        <button type="submit" className="search-btn"><i className="fa-solid fa-magnifying-glass"></i></button>
                                     </div>
                                 </form>
                             </div>
                         </div>
                     </div>
 
-                    {(loading && currentPage === 1) || data.length === 0 ? (
+                    {(loading && currentPage === 1) ? (
                         <AssetRowSkeleton />
-                    ) : (
+                    ) : data.length > 0 ? (
                         <>
                             <div className="asset-table">
-                                <div className="table-row fw-bold d-flex align-items-stretch">
-                                    <div
-                                        className="col-2 fw-bold d-flex align-items-center"
-                                        style={{
-                                            padding: '0.75rem',
-                                            borderLeft: '2px solid #d2c6a8',
-                                            borderRight: '2px solid #d2c6a8',
-                                            borderTop: '2px solid #d2c6a8',
-                                        }}
-                                        onClick={() => handleSort(RecommendationGraphEnum.ALL_SUG)}
-                                    >
-                                        Název {orderType === RecommendationGraphEnum.ALL_SUG && (sortDirection === 'asc' ? '▲' : '▼')}
-                                    </div>
-                                    <div className="text-truncate d-flex align-items-center"
-                                         style={{ flex: '0 0 15%', maxWidth: '15%', paddingLeft: '1rem' }}
-                                         onClick={() => handleSort(RecommendationGraphEnum.LABEL_SUG)}>
-                                        Label {orderType === RecommendationGraphEnum.LABEL_SUG && (sortDirection === 'asc' ? '▲' : '▼')}
-                                    </div>
-                                    <div className="pe-3 d-flex align-items-center" style={{ flex: '0 0 20%', maxWidth: '20%' }}>
-                                        Zastoupené mince
-                                    </div>
-                                    {!isMobile && <>
-                                    <div className="pe-3 d-flex align-items-center" style={{ flex: '0 0 12.5%' }}
-                                         onClick={() => handleSort(RecommendationGraphEnum.CMC_RANK)}>
-                                        Coinmarket {orderType === RecommendationGraphEnum.CMC_RANK && (sortDirection === 'asc' ? '▲' : '▼')}
-                                    </div>
-                                    <div className="d-flex align-items-center" style={{ flex: '0 0 12%' }}>Pořadí týden</div>
-                                    <div className="d-flex align-items-center" style={{ flex: '0 0 12%' }}>Profit týden</div>
-                                    <div className="text-center d-flex align-items-center justify-content-center" style={{ flex: '0 0 11%' }}>Týden dopor.</div>
-                                    </>}
+                                <div ref={originalHeaderRef}>
+                                    {tableHeaderContent}
+                                </div>
+
+                                <div ref={stickyHeaderRef} className={`sticky-header-active ${isHeaderSticky ? 'is-sticky' : ''}`}>
+                                    {tableHeaderContent}
                                 </div>
 
                                 {data.map((item, index) => (
-                                    <RecomendationRow
-                                        data={item}
-                                        key={uuidv4()}
-                                        isLast={index === data.length - 1}
-                                    />
+                                    <RecomendationRow data={item} key={uuidv4()} isLast={index === data.length - 1} />
                                 ))}
                             </div>
 
@@ -214,6 +207,8 @@ export const Recommendation: FC = () => {
                                 {loading && <AssetRowSkeleton />}
                             </div>
                         </>
+                    ) : (
+                        <div className="text-center p-5">{t("No data found")}</div>
                     )}
                 </div>
             </div>
