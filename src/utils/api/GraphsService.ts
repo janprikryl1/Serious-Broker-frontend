@@ -34,3 +34,12 @@ export const getBinanceIndexAssetRecomBestPreviousGraphData = async (assetLabel:
         }
     })
 }
+
+export const getBinanceIndexAssetPriceGraphData = async (assetLabel: string, selectedPeriod: RecommendationDetailSeasonEnum) => {
+    return await axios.get(`${backendUrl}graphs/binance_index_asset_recom_best_graph_price_data.php`, {
+        params: {
+            asset_label: assetLabel,
+            selected_period: selectedPeriod
+        }
+    })
+}

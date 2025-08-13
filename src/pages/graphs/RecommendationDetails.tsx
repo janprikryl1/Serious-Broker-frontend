@@ -14,6 +14,7 @@ import {RecommendationDetailsYearDetails} from "../../components/graphs/Recommen
 import {RecommendationDetailsBuy} from "../../components/graphs/RecommendationDetailsBuy.tsx";
 import {RecommendationDetailsSell} from "../../components/graphs/RecommendationDetailsSell.tsx";
 import {RecommendationProfitGraph} from "../../components/graphs/RecommendationProfitGraph.tsx";
+import {RecommendedDetailsPriceGraph} from "../../components/graphs/RecommendedDetailsPriceGraph.tsx";
 
 export const RecommendationDetails:FC = () => {
     const {t} = useTranslation();
@@ -88,6 +89,7 @@ export const RecommendationDetails:FC = () => {
                                     {selectedDropdown === "buy" && <RecommendationDetailsBuy detailsData={detailsData} />}
                                     {selectedDropdown === "sell" && <RecommendationDetailsSell detailsData={detailsData} />}
                                     </div>
+                                    {asset_label && <RecommendedDetailsPriceGraph asset_label={asset_label} selectedPeriod={selectedPeriod} />}
                                 </div>
                             </div>
                         </div>
