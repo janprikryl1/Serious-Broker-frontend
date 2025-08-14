@@ -22,7 +22,8 @@ export const RecommendationDetails:FC = () => {
     const [detailsData, setDetailsData] = useState<BinanceIndexAssetRecomBestPreviousDetails | undefined>();
     const [selectedPeriod, setSelectedPeriod] = useState<RecommendationDetailSeasonEnum>(RecommendationDetailSeasonEnum.Week);
     const [selectedDropdown, setSelectedDropdown] = useState<string>("buy");
-    
+    const [selectedTimeZone, setSelectedTimeZone] = useState<string>("UTC");
+
     useEffect(() => {
         if (!asset_label) return;
         const getData = async () => {
@@ -66,7 +67,7 @@ export const RecommendationDetails:FC = () => {
                                             ) : null}
                                         </div>
                                         <div className="col-sm">
-                                            {asset_label && <RecommendationProfitGraph asset_label={asset_label} selectedPeriod={selectedPeriod} />}
+                                            {asset_label && <RecommendationProfitGraph asset_label={asset_label} selectedPeriod={selectedPeriod} selectedTimeZone={selectedTimeZone} />}
                                         </div>
                                         <div className="mb-5">
                                             <i className="mb-2">{t("Ranking description")}</i>
@@ -86,10 +87,10 @@ export const RecommendationDetails:FC = () => {
                                         </select>
                                     </div>
                                     <div className="row">
-                                    {selectedDropdown === "buy" && <RecommendationDetailsBuy detailsData={detailsData} />}
-                                    {selectedDropdown === "sell" && <RecommendationDetailsSell detailsData={detailsData} />}
+                                    {selectedDropdown === "buy" && <RecommendationDetailsBuy detailsData={detailsData} selectedTimeZone={selectedTimeZone} />}
+                                    {selectedDropdown === "sell" && <RecommendationDetailsSell detailsData={detailsData} selectedTimeZone={selectedTimeZone} />}
                                     </div>
-                                    {asset_label && <RecommendedDetailsPriceGraph asset_label={asset_label} selectedPeriod={selectedPeriod} />}
+                                    {asset_label && <RecommendedDetailsPriceGraph asset_label={asset_label} selectedPeriod={selectedPeriod} selectedTimeZone={selectedTimeZone} setSelectedTimezone={setSelectedTimeZone}/>}
                                 </div>
                             </div>
                         </div>

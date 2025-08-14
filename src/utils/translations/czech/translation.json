@@ -1013,5 +1013,14 @@
     "Show my portfolios": "Zobrazit moje portfolia",
     "Image (optional)": "Obrázek (volitelné)",
     "Answers for user reset": "Odpovědi pro uživatele resetovány",
-  "Show trash holds": "Zobrazit prahy"
+  "Show trash holds": "Zobrazit prahy",
+  "Buy": "Koupit",
+  "Sell": "Prodat",
+  "Price chart": "Graf vývoje ceny",
+  "Lower threshold (buy)": "Spodní práh (nakoupit)",
+  "Upper threshold (sell)": "Horní práh (prodat)",
+  "Number of highlighted points": "Počet vyznačených bodů",
+  "Sell Threshold": "Práh prodeje",
+  "Buy Threshold": "Práh nákupu",
+  "Timezone": "Časová zóna"
 }
