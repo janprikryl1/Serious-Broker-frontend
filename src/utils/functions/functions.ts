@@ -14,3 +14,7 @@ export const formatCurrency = (number: number | string) => {
     const price = Number(number);
     return price.toFixed(2);
 }
+
+export const truncateText = (text: string, maxLength: number) => {
+    return text.length > maxLength ? text.substring(0, maxLength) + "..." : text;
+};

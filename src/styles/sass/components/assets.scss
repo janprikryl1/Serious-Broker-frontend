@@ -1,0 +1,233 @@
+.info-box {
+  margin-bottom: 40px;
+  padding: 20px;
+  background-color: #ad9747;
+  border-radius: 4px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.info-box-heading {
+  color: #090703;
+  font-weight: 800;
+}
+
+.info-box-text {
+  color: #3a3733;
+  font-weight: 500;
+}
+
+.search-row-spacing {
+  margin-left: 0.1rem;
+  margin-right: 0.1rem;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4);
+  background-color: #3c362f;
+}
+
+.custom-form-select {
+  height: 55px;
+  border: none;
+  background-color: #f8f9fa;
+  color: black;
+  font-weight: 600;
+  border-radius: 2px;
+}
+
+.search-input {
+  height: 56px;
+  margin-top:2px;
+  border: none;
+  background-color: #f8f9fa;
+  color: black;
+  font-weight: 600;
+  border-radius: 2px;
+}
+
+.no-data-found {
+  padding: 5rem;
+}
+
+.load-more-container {
+  margin-top: 20px;
+}
+
+.sidebar__search-container {
+  position: relative;
+}
+
+.search-input {
+  padding-right: 40px;
+}
+
+.search-icon-wrapper {
+  position: absolute;
+  top: 50%;
+  right: 5px;
+  transform: translateY(-50%);
+  background-color: #FFD700;
+  padding: 8px;
+  margin-right: 5px;
+  border-radius: 50%;
+  display: flex;
+  cursor: pointer;
+  color: black;
+}
+
+.search-icon-wrapper svg {
+  color: white;
+}
+
+
+
+.table-header-row {
+  display: flex;
+  align-items: stretch;
+  border-top: 1px solid #d2c6a8;
+}
+
+
+.table-header-cell {
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.table-row {
+  display: flex;
+  align-items: stretch;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #3e3831;
+  }
+}
+
+.table-cell {
+  padding: 0.75rem 1rem;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.last-row {
+  border-bottom: 1px solid #d2c6a8;
+}
+
+@media (min-width: 769px) {
+  .table-cell-name, .table-header-cell-name {
+    flex: 0 0 20%;
+  }
+  .table-cell-label, .table-header-cell-label {
+    flex: 0 0 13%;
+  }
+  .table-cell-created, .table-header-cell-created {
+    flex: 0 0 12%;
+  }
+  .table-cell-coins, .table-header-cell-coins {
+    flex: 0 0 25%;
+  }
+  .table-cell-change, .table-header-cell-change {
+    flex: 0 0 10%;
+  }
+  .table-cell-to-date, .table-header-cell-to-date {
+    flex: 0 0 11%;
+  }
+  .table-cell-watchlist, .table-header-cell-watchlist {
+    flex: 0 0 9%;
+  }
+}
+
+@media (max-width: 768px) {
+  .table-cell-name-mobile, .table-header-cell-name-mobile {
+    flex: 0 0 35%;
+  }
+  .table-cell-label-mobile, .table-header-cell-label-mobile {
+    flex: 0 0 30%;
+  }
+  .table-cell-coins-mobile, .table-header-cell-coins-mobile {
+    flex: 0 0 35%;
+  }
+}
+
+.table-cell {
+  padding: 0.75rem 1rem;
+  display: flex;
+  align-items: center;
+}
+
+.table-header-cell {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+
+
+
+
+.reco-table-header, .reco-table-row {
+  display: flex;
+  align-items: stretch;
+}
+
+.reco-table-cell {
+  padding: 0.75rem 1rem;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  &:last-child {
+    
+  }
+}
+
+@media (min-width: 769px) {
+  .col-title, .recom-table-header-cell {
+    flex: 0 0 16%;
+  }
+
+  .col-label, .recom-table-header-cell-secondary.col-label {
+    flex: 0 0 15%;
+  }
+
+  .col-coins, .recom-table-header-cell-secondary.col-coins {
+    flex: 0 0 25%;
+  }
+
+  .col-cmc-rank, .recom-table-header-cell-secondary.col-cmc-rank {
+    flex: 0 0 10%;
+  }
+
+  .col-week-rank, .recom-table-header-cell-secondary.col-week-rank {
+    flex: 0 0 10%;
+  }
+
+  .col-week-profit, .recom-table-header-cell-secondary.col-week-profit {
+    flex: 0 0 10%;
+  }
+}
+
+@media (max-width: 768px) {
+  .reco-table-header, .reco-table-row {
+    .col-2 {
+      flex: 0 0 30%;
+    }
+    .col-label {
+      flex: 0 0 30%;
+    }
+    .col-coins {
+      flex: 0 0 40%;
+    }
+    .col-cmc-rank, .col-week-rank, .col-week-profit, .col-week-recom {
+      display: none;
+    }
+  }
+}

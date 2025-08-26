@@ -1,12 +1,12 @@
 export const selectStyles = {
     control: (base: any) => ({
         ...base,
-        backgroundColor: '#22201d',
+        backgroundColor: '#f8f9fa',
         border: 'none',
         boxShadow: 'none',
         minHeight: '55px',
-        borderRadius: '8px',
-        color: '#fff',
+        borderRadius: '2px',
+        color: 'black',
         fontSize: '0.95rem',
         paddingLeft: '2px',
     }),

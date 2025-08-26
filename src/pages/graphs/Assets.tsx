@@ -19,6 +19,9 @@ import { useUserContext } from "../../utils/providers/providerUser.tsx";
 import { MyPortfolio } from "../profile/MyPortfolio.tsx";
 import { Col, Row } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
+import {Button, ButtonColor} from "../../components/reusable/Button.tsx";
+import "../../styles/sass/components/assets.scss";
+import {FaSearch} from "react-icons/fa";
 
 const animatedComponents = makeAnimated();
 
@@ -41,49 +44,19 @@ export const Assets: FC = () => {
     const [isHeaderSticky, setIsHeaderSticky] = useState(false);
     const originalHeaderRef = useRef<HTMLDivElement | null>(null);
     const stickyHeaderRef = useRef<HTMLDivElement | null>(null);
+    const [avaibleCoins, setAvaibleCoins] = useState<AvailableCoinType[]>();
+    const [isScrollEnabled, setIsScrollEnabled] = useState(false);
+    const [firstLoad, setFirstLoad] = useState(true);
 
-    useEffect(() => {
-        if (showMyPortfolio === 'mine') return;
-        const headerElement = originalHeaderRef.current;
-        if (!headerElement) return;
-
-        const intersectionObserver = new IntersectionObserver(
-            ([entry]) => {
-                setIsHeaderSticky(!entry.isIntersecting && entry.boundingClientRect.y < 0);
-            },
-            { rootMargin: "0px 0px -100% 0px", threshold: 0.0 }
-        );
-        intersectionObserver.observe(headerElement);
-
-        const stickyHeaderElement = stickyHeaderRef.current;
-        if (!stickyHeaderElement) {
-            return () => intersectionObserver.unobserve(headerElement);
-        }
-
-        const resizeObserver = new ResizeObserver((entries) => {
-            for (let entry of entries) {
-                const { width } = entry.contentRect;
-                stickyHeaderElement.style.width = `${width}px`;
-            }
-        });
-        resizeObserver.observe(headerElement);
-
-        return () => {
-            intersectionObserver.unobserve(headerElement);
-            resizeObserver.unobserve(headerElement);
-        };
-    }, [assets, loading, showMyPortfolio]);
-
-    const handleSearch = (value: string) => { setSearchQuery(value); };
-
-    const getAssets = useCallback(async (reset: boolean = false) => {
-        if (isFetchingRef.current || (currentPage > totalPages && !reset) || showMyPortfolio === "mine") return;
+    const getAssets = useCallback(async (pageToFetch: number, isReset: boolean = false) => {
+        if (isFetchingRef.current || showMyPortfolio === "mine") return;
+        if (!isReset && pageToFetch > totalPages) return;
 
         isFetchingRef.current = true;
         setLoading(true);
         try {
             const response = await getAllAssets(
-                reset ? 1 : currentPage,
+                pageToFetch,
                 pageLimit,
                 {
                     currencyCount,
@@ -93,7 +66,7 @@ export const Assets: FC = () => {
                 }
             );
             if (response) {
-                setAssets((prev) => (reset ? response.data.data : [...prev, ...response.data.data]));
+                setAssets((prev) => (isReset ? response.data.data : [...prev, ...response.data.data]));
                 setTotalPages(response.data.totalPages);
             }
         } catch (error) {
@@ -102,47 +75,8 @@ export const Assets: FC = () => {
             setLoading(false);
             isFetchingRef.current = false;
         }
-    }, [currentPage, orderType, totalPages, currencyCount, includeCurrencies, searchQuery, sortDirection, showMyPortfolio]);
+    }, [orderType, sortDirection, currencyCount, includeCurrencies, searchQuery, totalPages, showMyPortfolio]);
 
-    useEffect(() => {
-        setAssets([]);
-        setTotalPages(1);
-    }, [orderType, currencyCount, includeCurrencies, searchQuery, sortDirection]);
-
-    useEffect(() => {
-        if (showMyPortfolio === 'all') {
-            getAssets(true);
-        }
-    }, [orderType, sortDirection, showMyPortfolio]);
-
-    useEffect(() => {
-        if (isInitialMount.current) {
-            isInitialMount.current = false;
-            return;
-        }
-        const handler = setTimeout(() => {
-            resetPage();
-            getAssets(true);
-        }, 500);
-        return () => clearTimeout(handler);
-    }, [currencyCount, includeCurrencies, searchQuery]);
-
-    useEffect(() => {
-        if (currentPage > 1) {
-            getAssets();
-        }
-    }, [currentPage, getAssets]);
-
-    const handleSort = (column: AssetOrder) => {
-        if (column === orderType) {
-            setSortDirection(prev => prev === 'asc' ? 'desc' : 'asc');
-        } else {
-            setOrderType(column);
-            setSortDirection('desc');
-        }
-    };
-
-    const [avaibleCoins, setAvaibleCoins] = useState<AvailableCoinType[]>();
     useEffect(() => {
         (async () => {
             try {
@@ -153,25 +87,109 @@ export const Assets: FC = () => {
             }
         })();
     }, []);
+
+    useEffect(() => {
+        if (firstLoad && showMyPortfolio === 'all') {
+            getAssets(1, true);
+            setFirstLoad(false);
+        }
+    }, [firstLoad, showMyPortfolio, getAssets]);
+
+    useEffect(() => {
+        if (showMyPortfolio === 'all') {
+            resetPage();
+        }
+    }, [orderType, sortDirection, showMyPortfolio, resetPage]);
+
+    useEffect(() => {
+        if (isInitialMount.current) {
+            isInitialMount.current = false;
+            return;
+        }
+        if (showMyPortfolio === 'mine') return;
+        const handler = setTimeout(() => {
+            resetPage();
+            getAssets(1, true);
+        }, 500);
+        return () => clearTimeout(handler);
+    }, [currencyCount, includeCurrencies, searchQuery, getAssets, resetPage, showMyPortfolio]);
+
+    useEffect(() => {
+        if (currentPage > 1 && showMyPortfolio === 'all' && isScrollEnabled) {
+            getAssets(currentPage, false);
+        }
+    }, [currentPage, getAssets, showMyPortfolio, isScrollEnabled]);
+
+    useEffect(() => {
+        if (showMyPortfolio === 'mine') return;
+        const headerElement = originalHeaderRef.current;
+        if (!headerElement) return;
+
+        let ticking = false;
+
+        const handleScroll = () => {
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    const rect = headerElement.getBoundingClientRect();
+                    setIsHeaderSticky(rect.top <= 0);
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        };
+
+        const resizeObserver = new ResizeObserver((entries) => {
+            for (let entry of entries) {
+                const { width } = entry.contentRect;
+                if (stickyHeaderRef.current) {
+                    stickyHeaderRef.current.style.width = `${width}px`;
+                }
+            }
+        });
+
+        window.addEventListener('scroll', handleScroll);
+        resizeObserver.observe(headerElement);
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+            resizeObserver.unobserve(headerElement);
+        };
+    }, [assets, loading, showMyPortfolio]);
+
+    const handleSort = (column: AssetOrder) => {
+        if (column === orderType) {
+            setSortDirection(prev => prev === 'asc' ? 'desc' : 'asc');
+        } else {
+            setOrderType(column);
+            setSortDirection('desc');
+        }
+    };
+
     const currencyOptions = avaibleCoins?.map((coin) => ({ value: coin.id.toString(), label: coin.name }));
+    const hasMore = currentPage < totalPages;
+
+    const handleLoadMoreClick = () => {
+        setIsScrollEnabled(true);
+        getAssets(1, true);
+    };
 
     const tableHeaderContent = (
-        <div className="table-row fw-bold d-flex align-items-stretch">
+        <div className="table-header-row fw-bold d-flex align-items-stretch">
             {isMobile ? (
                 <>
-                    <div className="col-4 fw-bold d-flex align-items-center" style={{ padding: '0.75rem', borderTop: '2px solid #d2c6a8', borderLeft: '2px solid #d2c6a8', borderRight: '2px solid #d2c6a8', cursor: 'pointer' }} onClick={() => handleSort(AssetOrder.Name)}>Název {orderType === AssetOrder.Name && (sortDirection === 'asc' ? '▲' : '▼')}</div>
-                    <div className="col-3 text-truncate d-flex align-items-center" style={{ paddingLeft: '1rem', cursor: 'pointer' }} onClick={() => handleSort(AssetOrder.Label)}>Label {orderType === AssetOrder.Label && (sortDirection === 'asc' ? '▲' : '▼')}</div>
-                    <div className="col-5 pe-3 d-flex align-items-center" style={{ paddingLeft: '1rem' }}>Zastoupené mince</div>
+                    <div className="table-header-cell table-header-cell-name-mobile" onClick={() => handleSort(AssetOrder.Name)}>{t("Title")} {orderType === AssetOrder.Name && (sortDirection === 'asc' ? '▲' : '▼')}</div>
+                    <div className="table-header-cell table-header-cell-label-mobile text-truncate" onClick={() => handleSort(AssetOrder.Label)}>Label {orderType === AssetOrder.Label && (sortDirection === 'asc' ? '▲' : '▼')}</div>
+                    <div className="table-header-cell table-header-cell-coins-mobile pe-3">{t("Coins represented")}</div>
                 </>
             ) : (
                 <>
-                    <div className="col-2 fw-bold d-flex align-items-center" style={{ padding: '0.75rem', borderTop: '2px solid #d2c6a8', borderLeft: '2px solid #d2c6a8', borderRight: '2px solid #d2c6a8', cursor: 'pointer' }} onClick={() => handleSort(AssetOrder.Name)}>Název {orderType === AssetOrder.Name && (sortDirection === 'asc' ? '▲' : '▼')}</div>
-                    <div className="text-truncate d-flex align-items-center" style={{ flex: '0 0 19%', maxWidth: '19%', paddingLeft: '1rem', cursor: 'pointer' }} onClick={() => handleSort(AssetOrder.Label)}>Label {orderType === AssetOrder.Label && (sortDirection === 'asc' ? '▲' : '▼')}</div>
-                    <div className="pe-3 d-flex align-items-center" style={{ flex: '0 0 12.5%', cursor: 'pointer' }} onClick={() => handleSort(AssetOrder.CreatedDate)}>Vytvořeno {orderType === AssetOrder.CreatedDate && (sortDirection === 'asc' ? '▲' : '▼')}</div>
-                    <div className="pe-3 d-flex align-items-center" style={{ flex: '0 0 22%', maxWidth: '29%' }}>Zastoupené mince</div>
-                    <div className="col-1 pe-3 d-flex align-items-center">Změna</div>
-                    <div className="pe-3 d-flex align-items-center" style={{ flex: '0 0 12%' }}>K datu</div>
-                    <div className="col-1 text-center d-flex align-items-center justify-content-center">Watchlist</div>
+                    <div className="table-header-cell table-header-cell-name" onClick={() => handleSort(AssetOrder.Name)}>{t("Title")} {orderType === AssetOrder.Name && (sortDirection === 'asc' ? '▲' : '▼')}</div>
+                    <div className="table-header-cell table-header-cell-label" onClick={() => handleSort(AssetOrder.Label)}>Label {orderType === AssetOrder.Label && (sortDirection === 'asc' ? '▲' : '▼')}</div>
+                    <div className="table-header-cell table-header-cell-created pe-4" onClick={() => handleSort(AssetOrder.CreatedDate)}>{t("Created")} {orderType === AssetOrder.CreatedDate && (sortDirection === 'asc' ? '▲' : '▼')}</div>
+                    <div className="table-header-cell table-header-cell-coins pe-3">{t("Coins represented")}</div>
+                    <div className="table-header-cell table-header-cell-change pe-3">{t("Change ")}</div>
+                    <div className="table-header-cell table-header-cell-to-date pe-3">{t("To date")}</div>
+                    <div className="table-header-cell table-header-cell-watchlist text-center d-flex align-items-center justify-content-center">Watchlist</div>
                 </>
             )}
         </div>
@@ -183,14 +201,19 @@ export const Assets: FC = () => {
             <div className="blog padding-top padding-bottom">
                 <div className="container">
                     <div className="blog__wrapper">
-                        <h2>Proč sety?</h2>
-                        <p className="text-light">{t("Crypto indices provide a way to measure a performance of a selection of cryptocurrencies")}</p>
-                        <h2>Informace o assetech</h2>
-                        <p className="text-light">...</p>
+                        <div className="info-box">
+                            <h3 className="info-box-heading">{t("What Is Index")}</h3>
+                            <p className="info-box-text">{t("Index is a set of cryptocurrencies grouped together to measure performance of the set as a whole, rather than focusing single coin.")}</p>
+                            <h3 className="info-box-heading">{t("Advantages of Indices")}</h3>
+                            <p className="info-box-text">{t("Trading indices can be more beneficial because they are diversified, therefore they may be less vulnerable to sudden market fluctuations. Another advantage is that investors don’t need worry about managing multiple assets at once.")}</p>
+                            <h3 className="info-box-heading">{t("Index Composition and Weighting")}</h3>
+                            <p className="info-box-text">{t("The number of coins contained in an index varies significantly. Some indices track only a few coins, while others may follow hundreds or even thousands of them. The coins within an index also carry different weights, which determine their impact on overall performance. The higher the weight of a coin, the greater its influence on the index.")}</p>
+                        </div>
+                        <h3>{t("List of indexes")}</h3>
                         {user && (
                             <Row className="justify-content-center align-items-center mb-3">
                                 <Col xs="auto">
-                                    <Form.Check type="switch" id="category-switch" label={t("Show my portfolios")} onChange={() => setShowMyPortfolio(showMyPortfolio === "mine" ? "all" : "mine")} checked={showMyPortfolio === "mine"} />
+                                    <Form.Check type="switch" id="category-switch" label={t("Show my")} onChange={() => setShowMyPortfolio(showMyPortfolio === "mine" ? "all" : "mine")} checked={showMyPortfolio === "mine"} />
                                 </Col>
                             </Row>
                         )}
@@ -198,10 +221,11 @@ export const Assets: FC = () => {
                             <MyPortfolio />
                         ) : (
                             <>
-                                <div className="row mb-3 sidebar__search" style={{ marginLeft: "0.1rem", marginRight: "0.1rem" }}>
+                                <div className="row mb-5 sidebar__search search-row-spacing">
+                                    <p style={{fontSize:25, fontWeight:500, color:"white"}}>{t("Filters")}</p>
                                     <div className="col-md-3">
                                         <label className="form-label">{t("Currency count")}</label>
-                                        <select className="form-select" style={{ height: 55, border: "none" }} value={currencyCount} onChange={e => setCurrencyCount(e.target.value)}>
+                                        <select className="form-select custom-form-select" value={currencyCount} onChange={e => setCurrencyCount(e.target.value)}>
                                             <option value="all">{t("All")}</option>
                                             <option value="1">1</option>
                                             <option value="2">2</option>
@@ -228,45 +252,56 @@ export const Assets: FC = () => {
                                         )}
                                     </div>
                                     <div className="col-sm-6 align-items-end justify-content-end mb-3">
-                                        <h6 className="mb-10">{t("Search Here")}</h6>
-                                        <div className="sidebar__search-body">
-                                            <form onSubmit={(e) => e.preventDefault()}>
-                                                <div className="input">
-                                                    <input
-                                                        type="text"
-                                                        className="form-control"
-                                                        style={{ borderRadius: 4 }}
-                                                        placeholder={t("Search")}
-                                                        value={searchQuery}
-                                                        onChange={(e) => handleSearch(e.target.value)}
-                                                    />
-                                                    <button type="submit" className="search-btn">
-                                                        <i className="fa-solid fa-magnifying-glass"></i>
-                                                    </button>
-                                                </div>
-                                            </form>
+                                        <h6 className="mb-10">{t("Search by name")}</h6>
+                                        <div className="sidebar__search-container">
+                                            <input
+                                                type="text"
+                                                className="search-input"
+                                                placeholder={t("Hledat")}
+                                                value={searchQuery}
+                                                onChange={(e) => setSearchQuery(e.target.value)}
+                                            />
+                                            <div className="search-icon-wrapper">
+                                                <FaSearch />
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-
-                                <div ref={stickyHeaderRef} className={`sticky-header-active ${isHeaderSticky ? 'is-sticky' : ''}`}>{tableHeaderContent}</div>
-
-                                <div className="asset-table">
-                                    <div ref={originalHeaderRef} style={{ visibility: isHeaderSticky ? 'hidden' : 'visible' }}>{tableHeaderContent}</div>
-                                    <div className="asset-table-body">
-                                        {(loading && currentPage === 1) ? (
-                                            <AssetRowSkeleton />
-                                        ) : isMobile ? (
-                                            assets.map((asset, index) => <AssetRowMobile asset={asset} key={asset.id} isLast={index === assets.length - 1} />)
-                                        ) : (
-                                            assets.map((asset, index) => <AssetRow setAssets={setAssets} asset={asset} key={asset.id} index={asset.id} isLast={index === assets.length - 1} />)
-                                        )}
-                                    </div>
-                                </div>
+                                {assets.length > 0 ? (
+                                    <>
+                                        <div ref={stickyHeaderRef} className={`sticky-header-active ${isHeaderSticky ? 'is-sticky' : ''}`}>
+                                            {tableHeaderContent}
+                                        </div>
+                                        <div className="asset-table">
+                                            <div ref={originalHeaderRef}>
+                                                {tableHeaderContent}
+                                            </div>
+                                            <div className="asset-table-body">
+                                                {isMobile ? (
+                                                    assets.map((asset, index) => <AssetRowMobile asset={asset} key={asset.id} isLast={index === assets.length - 1} />)
+                                                ) : (
+                                                    assets.map((asset, index) => <AssetRow setAssets={setAssets} asset={asset} key={asset.id} index={asset.id} isLast={index === assets.length - 1} />)
+                                                )}
+                                            </div>
+                                        </div>
+                                    </>
+                                ) : (
+                                    <div className="text-center p-5 no-data-found">{t("No data found")}</div>
+                                )}
                             </>
                         )}
-                        <div ref={loaderRef} style={{ marginTop: '20px' }}>
-                            {loading && showMyPortfolio === "all" && <AssetRowSkeleton />}
+                        <div className="load-more-container">
+                            {hasMore && showMyPortfolio === 'all' && (
+                                isScrollEnabled ? (
+                                    <div ref={loaderRef}>
+                                        {loading && <AssetRowSkeleton />}
+                                    </div>
+                                ) : (
+                                    <div className="d-flex justify-content-center">
+                                        <Button color={ButtonColor.transparent} style={{color: "#ae9647"}} onClick={handleLoadMoreClick}>Načíst další</Button>
+                                    </div>
+                                )
+                            )}
                         </div>
                     </div>
                 </div>
