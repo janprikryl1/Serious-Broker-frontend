@@ -8,6 +8,7 @@ export enum ButtonColor {
     red = "#952b34",
     blue = "#275fda",
     gray = "#5c636a",
+    brown = "#4c4135",
     transparent = "transparent"
 }
 

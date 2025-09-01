@@ -788,7 +788,7 @@
     "Professional investment management, investing on behalf of clients using their financial resources": "Profesionální správa investic, investování jménem klientů s využitím jejich finančních zdrojů",
     "Start Investing with Serious Broker": "Začněte investovat se Serious Broker",
     "Create a Serious Broker account": "Založte si profil na Serious Broker",
-    "Choose your investment plan": "Vyberte si investiční plán",
+    "Choose your investment plan": "Nastavte si preference investování",
     "Create a Binance account": "Založte si účet na Binance",
     "Start investing": "Začněte investovat",
     "Why to Invest in Cryptocurrencies": "Proč investovat do kryptoměn",
@@ -921,7 +921,7 @@
     "Sell part or all": "Prodej část nebo vše",
     
     
-    "Asset profitability calculator": "Kalkulačka zisku z assetu",
+    "Crypto calculator": "Krypto kalkulačka",
     "Choose asset:": "Vyberte asset:",
     "single coin": "Jedna mince",
     "set of coins": "Sada mincí",
@@ -1037,5 +1037,13 @@
   "List of indexes": "List setů",
   "List of pairs": "List párů",
   "Filters": "Filtry",
-  "Search by name": "Hledejte podle názvu"
+  "Search by name": "Hledejte podle názvu",
+  "Stress-free with a clear head": " Bez stresu s čistou hlavou",
+  "By investing through Serious.Broker, you can save a lot of time and nerves – from constantly monitoring market developments to worrying about whether to sell an investment or what to do if its value drops.": "Investováním prostřednictvím Serious.Broker si můžete ušetřit spoustu času i nervů – od neustálého sledování vývoje trhu až po obavy, zda investici prodat, nebo co dělat při poklesu její hodnoty",
+  "Instead of stress, you can shop with a clear head and benefit from the favorable turn in the cryptocurrency market.": "Namísto stresu tak můžete s čistou hlavou nakupovat a těžit z příznivého obratu na trhu s kryptoměnami.",
+  "Personal story": " Osobní příběh",
+  "Send us your API key": "Předejte nám API klíč",
+  
+  "Investment questionnaire": "Investiční dotazník",
+  "Fill out a short investment questionnaire so we can prepare better recommendations for you.": "Vyplňte krátký investiční dotazník, abychom pro vás mohli připravit lepší doporučení."
 }

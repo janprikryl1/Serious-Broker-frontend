@@ -1,0 +1,153 @@
+
+.asset-calculator {
+  background-color: #2e2821;
+  padding: 1.5rem;
+  color: #fef8ef;
+  font-family: 'Georgia', serif;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  
+  .index-section-head-title {
+    font-size: 2rem;
+    font-weight: normal;
+    font-family: 'Palatino', serif;
+    margin-bottom: 0.5rem;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+    font-weight: 300;
+    color: #fef8ef;
+    margin-bottom: 1.5rem;
+  }
+  
+  .calculator-main-layout {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: nowrap;
+    justify-content: center;
+
+    .calculator-form-container {
+      background-color: #3b352e;
+      padding: 1.5rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .calculator-info-panel {
+      width: 300px;
+      background-color: #3b352e;
+      padding: 1.5rem;
+      color: #fef8ef;
+      flex-shrink: 0;
+    }
+  }
+  
+  .calculator-label {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: normal;
+    color: #fff;
+    margin-bottom: 0.25rem;
+  }
+
+  .calculator-section {
+    margin-bottom: 0.75rem;
+  }
+  
+  select, input[type="text"], input[type="number"] {
+    width: 100%;
+    padding: 12px 15px;
+    border: none;
+    background-color: #fef4e4;
+    border-radius: 0;
+    color: #000;
+    font-size: 0.9rem;
+    appearance: none;
+    &::placeholder {
+      color: #9c958a;
+    }
+  }
+
+  .amount-group {
+    display: flex;
+    gap: 0;
+    .calculator-currency {
+      width: 70px;
+      flex-shrink: 0;
+    }
+  }
+
+  .calculator-period {
+    width: 100px;
+    flex-shrink: 0;
+  }
+  
+  .calculate-btn {
+    display: block;
+    width: 100%;
+    font-size: 1rem;
+    padding: 12px;
+    background-color: #c9b369;
+    color: #2e2821;
+    font-weight: bold;
+    border: none;
+    margin-top: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    &:disabled {
+      background-color: #a39572;
+      cursor: not-allowed;
+    }
+  }
+  
+  .result-box {
+    background-color: #fff;
+    color: #000;
+    padding: 1rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    margin-top: 1.5rem;
+    border-radius: 0;
+
+    .result-value {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #000;
+    }
+
+    .result-label {
+      color: #666;
+      font-size: 0.8rem;
+      text-transform: capitalize;
+    }
+  }
+}
+
+.info-panel {
+  h3 {
+    font-size: 1.2rem;
+    font-weight: normal;
+    color: #fff;
+    margin-bottom: 1rem;
+  }
+
+  .step {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 0.75rem;
+  }
+
+  .step-number {
+    width: 20px;
+    height: 20px;
+    font-size: 0.8rem;
+    margin-right: 0.75rem;
+  }
+
+  .step-text {
+    font-size: 0.9rem;
+    line-height: 1.4;
+  }
+}

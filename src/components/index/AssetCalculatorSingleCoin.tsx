@@ -1,12 +1,13 @@
-import {FC, useEffect, useState} from "react";
-import {Button} from "../reusable/Button.tsx";
-import {useTranslation} from "react-i18next";
-import {AssetCalculatorMostProfitableAssets} from "./AssetCalculatorMostProfitableAssets.tsx";
-import {getAllAssetCoins, getAssetCoinDetails} from "../../utils/api/assetCalculatorService.ts";
-import {CustomSwal} from "../../utils/functions/customSwal.ts";
-import {OverviewTableChart} from "../overview/overviewTableData/overviewTableChart/OverviewTableChart.tsx";
+import { FC, useEffect, useState } from "react";
+import { Button } from "../reusable/Button.tsx";
+import { useTranslation } from "react-i18next";
+import { AssetCalculatorMostProfitableAssets } from "./AssetCalculatorMostProfitableAssets.tsx";
+import { getAllAssetCoins, getAssetCoinDetails } from "../../utils/api/assetCalculatorService.ts";
+import { CustomSwal } from "../../utils/functions/customSwal.ts";
+import { OverviewTableChart } from "../overview/overviewTableData/overviewTableChart/OverviewTableChart.tsx";
+import "../../styles/sass/components/index-calculator.scss";
 
-interface ICalculationResult {
+type ICalculationResult = {
     final_profit: number;
     chart_data: { datetime: string; profit: number }[];
 }
@@ -16,7 +17,7 @@ const formatCurrency = (value: number) => {
 }
 
 export const AssetCalculatorSingleCoin: FC = () => {
-    const {t} = useTranslation();
+    const { t } = useTranslation();
     const [assetCoins, setAssetCoins] = useState<{ asset_label: string }[]>([]);
     const [selectedCoin, setSelectedCoin] = useState<string>("");
     const [selectedPeriod, setSelectedPeriod] = useState<string>("Day");
@@ -71,79 +72,66 @@ export const AssetCalculatorSingleCoin: FC = () => {
         } finally {
             setIsLoading(false);
         }
-    }
+    };
 
     return (
-        <>
+        <div className="calculator-form-container">
+            <label className="calculator-label">{t("Choose asset name:")}</label>
             <div className="select-wrapper">
                 <select value={selectedCoin} onChange={(e) => setSelectedCoin(e.target.value)}>
-                    <option value="" disabled>{t("Select a coin...")}</option>
+                    <option value="" disabled>{t("Start typing or select...")}</option>
                     {assetCoins.map((coin) => (
                         <option key={coin.asset_label} value={coin.asset_label}>{coin.asset_label}</option>
                     ))}
                 </select>
             </div>
 
-            <hr className="calculator-divider"/>
-
-            <div className="calculator-section">
-                <label className="calculator-label">{t("Amount")}</label>
-                <div className="amount-group">
-                    <input
-                        type="number"
-                        placeholder="E.g. 500"
-                        value={amount}
-                        onChange={(e) => setAmount(e.target.value)}
-                    />
-                    <div className="select-wrapper calculator-select-box">
-                        <select value={selectedCurrency} onChange={(e) => setSelectedCurrency(e.target.value)}>
-                            <option>EUR</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-
-            <hr className="calculator-divider"/>
-
-            <div className="calculator-section-inline">
-                <label className="calculator-label">{t("Choose period:")}</label>
-                <div className="select-wrapper calculator-select-box">
-                    <select value={selectedPeriod} onChange={(e) => setSelectedPeriod(e.target.value)}>
-                        <option value="Day">{t("Day")}</option>
-                        <option value="Hour">{t("Hour")}</option>
+            <label className="calculator-label mt-4">{t("Amount")}</label>
+            <div className="amount-group">
+                <input
+                    type="number"
+                    placeholder={t("e.g. 500")}
+                    value={amount}
+                    onChange={(e) => setAmount(e.target.value)}
+                />
+                <div className="select-wrapper calculator-currency">
+                    <select value={selectedCurrency} onChange={(e) => setSelectedCurrency(e.target.value)}>
+                        <option>EUR</option>
                     </select>
                 </div>
             </div>
 
-            <hr className="calculator-divider"/>
+            <label className="calculator-label mt-4">{t("Choose investment holding period")}</label>
+            <div className="select-wrapper calculator-period">
+                <select value={selectedPeriod} onChange={(e) => setSelectedPeriod(e.target.value)}>
+                    <option value="Day">{t("Day")}</option>
+                    <option value="Hour">{t("Hour")}</option>
+                </select>
+            </div>
 
-            <Button className="calculate-btn" style={{borderRadius: 0}} onClick={handleCalculate} disabled={isLoading}>
+            <Button className="calculate-btn" onClick={handleCalculate} disabled={isLoading}>
                 {isLoading ? t("Calculating...") : t("Calculate")}
             </Button>
 
             {calculationResult && (
-                <>
-                    <div className="result-box">
-                        <div className="result-chart-wrapper">
-                            <OverviewTableChart
-                                name={selectedCoin}
-                                data={calculationResult.chart_data.map((x) => x.profit)}
-                                width="100%"
-                                height="100%"
-                            />
-                        </div>
-                        <div className="result-text-content">
-                            <span className="result-value" style={{color: calculationResult.final_profit >= 0 ? 'green' : 'red'}}>
-                                {formatCurrency(calculationResult.final_profit)}
-                            </span>
-                            <small className="result-label">{t("Profit")}</small>
-                        </div>
+                <div className="result-box">
+                    <div className="result-chart-wrapper">
+                        <OverviewTableChart
+                            name={selectedCoin}
+                            data={calculationResult.chart_data.map((x) => x.profit)}
+                            width="100%"
+                            height="100%"
+                        />
                     </div>
-
-                    <p className="result-caption">{selectedPeriod === "Day" ? t("Asset profitability in last 7 days") : t("Asset profitability in the selected period (last day)")}</p>
-                </>
+                    <div className="result-text-content">
+            <span className="result-value" style={{ color: calculationResult.final_profit >= 0 ? 'green' : 'red' }}>
+              {formatCurrency(calculationResult.final_profit)}
+            </span>
+                        <small className="result-label">{t("Profit")}</small>
+                    </div>
+                </div>
             )}
             <AssetCalculatorMostProfitableAssets/>
-        </>
-    )
-}
+        </div>
+    );
+};

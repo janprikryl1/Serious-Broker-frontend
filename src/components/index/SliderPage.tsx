@@ -12,7 +12,6 @@ import {useMediaQuery} from "@mui/material";
 import {IndexMobileSliderPage} from "./indexMobileSlider/IndexMobileSliderPage.tsx";
 import {IndexMobileSliderBitcoin} from "./indexMobileSlider/IndexMobileSliderBitcoin.tsx";
 import {IndexMobileSliderFiveMinutes} from "./indexMobileSlider/IndexMobileSliderFiveMinutes.tsx";
-import {AssetCalculatorComponent} from "./AssetCalculatorComponent.tsx";
 
 
 export const SliderPage: FC = () => {
@@ -48,7 +47,6 @@ export const SliderPage: FC = () => {
                     </>
                 )}
             </Swiper>
-            {!isMobile && <AssetCalculatorComponent />}
         </div>
     );
 };

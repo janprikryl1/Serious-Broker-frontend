@@ -1,24 +1,23 @@
 import {FC} from "react";
 import {SliderPage} from "../components/index/SliderPage.tsx";
 import {ShortExpressiveText} from "../components/index/ShortExpressiveText.tsx";
-import {IndexPersonalStrategy} from "../components/index/IndexPersonalStrategy.tsx";
-import {GuidedInvestControl} from "../components/index/GuidedInvestControl.tsx";
-import {IndexInvestorGuide} from "../components/index/IndexInvestorGuide.tsx";
-import {StartInvestingWithSeriousBroker} from "../components/index/StartInvestingWithSeriousBroker.tsx";
-import {WhyToInvestInCryptocurrencies} from "../components/index/WhyToInvestInCryptocurrencies.tsx";
-import {GreedFearStrategies} from "../components/index/GreedFearStrategies.tsx";
+import {StartInvestingWithSeriousBroker} from "../components/index/StartInvestingWithSeriousBroker.tsx";;
+import {AssetCalculatorComponent} from "../components/index/AssetCalculatorComponent.tsx";
+import {NoStressClearHeadInfo} from "../components/index/NoStressClearHeadInfo.tsx";
 
 export const Index: FC = () => {
     return (
         <>
             <SliderPage />
+            <StartInvestingWithSeriousBroker />
+            <AssetCalculatorComponent />
             <ShortExpressiveText />
-            <GreedFearStrategies />
+            <NoStressClearHeadInfo />
+            {/*<GreedFearStrategies />
             <IndexPersonalStrategy />
             <GuidedInvestControl />
             <IndexInvestorGuide />
-            <StartInvestingWithSeriousBroker />
-            <WhyToInvestInCryptocurrencies />
+            <WhyToInvestInCryptocurrencies />*/}
             {/*<BitcoinProfitCalculator />*/}
         </>
     );

@@ -12,14 +12,17 @@
         }
 
         &--style1 {
-            padding-block: 40px;
+            padding-top: 20px;
+            padding-bottom: 20px;
 
             @include breakpoint(sm) {
-                padding-block: 40px;
+              padding-top: 20px;
+              padding-bottom: 20px;
             }
 
             @include breakpoint(lg) {
-                padding-block: 60px;
+              padding-top: 30px;
+              padding-bottom: 30px;
             }
         }
 
