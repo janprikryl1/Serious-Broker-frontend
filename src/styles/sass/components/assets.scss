@@ -1,3 +1,5 @@
+/* assets.scss */
+
 .info-box {
   margin-bottom: 40px;
   padding: 20px;
@@ -76,14 +78,16 @@
   color: white;
 }
 
-
+.asset-table {
+  border: 1px solid #66625e;
+  border-radius: 8px;
+  overflow: hidden;
+}
 
 .table-header-row {
   display: flex;
   align-items: stretch;
-  border-top: 1px solid #d2c6a8;
 }
-
 
 .table-header-cell {
   padding: 0.75rem 1rem;
@@ -93,6 +97,11 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.table-header-cell:first-child {
+  border-right: 1px solid #66625e;
+  background-color: #292521;
 }
 
 .table-row {
@@ -114,8 +123,9 @@
   text-overflow: ellipsis;
 }
 
-.last-row {
-  border-bottom: 1px solid #d2c6a8;
+.table-cell:first-child {
+  border-right: 1px solid #66625e;
+  background-color: #292521;
 }
 
 @media (min-width: 769px) {
@@ -166,14 +176,20 @@
   text-overflow: ellipsis;
 }
 
-
-
-
-
-
-.reco-table-header, .reco-table-row {
+.reco-table-header {
   display: flex;
   align-items: stretch;
+  border-bottom: 1px solid #66625e;
+}
+
+.reco-table-row {
+  display: flex;
+  align-items: stretch;
+  border-top: 1px solid #66625e;
+}
+
+.reco-table-row:first-of-type {
+  border-top: none;
 }
 
 .reco-table-cell {
@@ -183,33 +199,58 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
 
-  &:last-child {
-    
-  }
+.recom-table-header-cell {
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  background-color: #292521;
+}
+
+.recom-table-header-cell-secondary {
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.recom-table-header-cell-secondary:last-child {
+  border-right: none;
+}
+
+.reco-table-cell:first-child {
+  border-right: 1px solid #66625e;
+  background-color: #292521;
+}
+
+.reco-table-cell:last-child {
+  border-right: none;
 }
 
 @media (min-width: 769px) {
   .col-title, .recom-table-header-cell {
     flex: 0 0 16%;
   }
-
   .col-label, .recom-table-header-cell-secondary.col-label {
     flex: 0 0 15%;
   }
-
   .col-coins, .recom-table-header-cell-secondary.col-coins {
     flex: 0 0 25%;
   }
-
   .col-cmc-rank, .recom-table-header-cell-secondary.col-cmc-rank {
     flex: 0 0 10%;
   }
-
   .col-week-rank, .recom-table-header-cell-secondary.col-week-rank {
     flex: 0 0 10%;
   }
-
   .col-week-profit, .recom-table-header-cell-secondary.col-week-profit {
     flex: 0 0 10%;
   }
