@@ -8,10 +8,12 @@ import {useTranslation} from "react-i18next";
 import {Button, ButtonColor} from "../reusable/Button.tsx";
 import {guideURLS} from "../../utils/constants";
 import {Link} from "react-router-dom";
+import {useMediaQuery} from "@mui/material";
 
 export const StartInvestingWithSeriousBroker: FC = () => {
     const { t } = useTranslation();
-    
+    const isMobile = useMediaQuery('(max-width: 768px)');
+
     return (
         <div style={{ backgroundColor: "#ae9749", minHeight: 700 }}>
             <div className="container pt-5 pb-5">
@@ -65,7 +67,7 @@ export const StartInvestingWithSeriousBroker: FC = () => {
                     </div>
                 </div>
             </div>
-            <div style={{ display: "flex", justifyContent: "center", marginTop:40 }}>
+            <div style={{ display: "flex", justifyContent: "center", paddingTop: isMobile ? -40 : 40, paddingBottom:40 }}>
                 <Link to={guideURLS.index}>
                     <Button color={ButtonColor.brown} style={{color:"white", fontSize:18}}>{t("Learn More")}</Button>
                 </Link>

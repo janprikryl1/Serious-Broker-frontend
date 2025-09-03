@@ -1,12 +1,11 @@
 import {FC, useEffect, useState} from "react";
 import {IoIosArrowBack, IoIosArrowForward} from "react-icons/io";
-import {DragCloseDrawer} from "../reusable/DragCloseDrawer.tsx";
 import {useTranslation} from "react-i18next";
 import {bestAssetDetails} from "../../utils/api/assetCalculatorService.ts";
 import Skeleton from "react-loading-skeleton";
 import {OverviewTableChart} from "../overview/overviewTableData/overviewTableChart/OverviewTableChart.tsx";
 
-interface IBestAssetData {
+type IBestAssetData = {
     asset_label: string;
     final_profit: number;
     chart_data: number[];
@@ -18,7 +17,6 @@ const formatCurrency = (value: number) => {
 
 export const AssetCalculatorMostProfitableAssets: FC = () => {
     const {t} = useTranslation();
-    const [open, setOpen] = useState(false);
     const [index, setIndex] = useState(0);
     const [chartData, setChartData] = useState<IBestAssetData | null>(null);
     const [isLoading, setIsLoading] = useState(true);
@@ -56,8 +54,8 @@ export const AssetCalculatorMostProfitableAssets: FC = () => {
         
         return (
             <div className="most-profitable-section">
-                <h5 className="most-profitable-title" onClick={() => setOpen(true)}>
-                    {t("Most profitable assets")} <span className="info-icon">i</span>
+                <h5 className="most-profitable-title">
+                    {t("Most profitable assets")}
                 </h5>
                 <div className="result-box most-profitable-box">
                     <div className="result-chart-wrapper">
@@ -81,10 +79,6 @@ export const AssetCalculatorMostProfitableAssets: FC = () => {
                         <IoIosArrowForward/>
                     </button>
                 </div>
-                <DragCloseDrawer open={open} setOpen={setOpen}>
-                    <h2>{t("Most profitable assets")}</h2>
-                    ....
-                </DragCloseDrawer>
             </div>
         );
     }

@@ -15,7 +15,7 @@ export const CooperationInfo:FC = () => {
             <div className="container cta-dark">
                 <h1>{t("Our partners")}</h1>
                 <p>{t("Serious Broker is a project that is being developed with cooperation of students of VŠB-FEI. It focuses on assisting in investing and spreading awareness about cryptocurrencies.")}</p>
-                <p>{t("The project is implemented in cooperation with the Department of Computer Science.")}</p>
+                <p>{t("Serious Broker was implemented in cooperation with the Department of Computer Science.")}</p>
                 <br />
                 <a href="https://www.vsb.cz/cs/" className="mb-25"><img src={vsbLogo} width={80} alt="VSB" className="me-2"/> VŠB-TUO</a>
                 <br />

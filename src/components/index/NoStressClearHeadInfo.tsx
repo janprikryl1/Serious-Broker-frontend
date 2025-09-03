@@ -11,8 +11,8 @@ export const NoStressClearHeadInfo:FC = () => {
         <div style={{ backgroundColor: "#ae9749" }}>
             <div className="container pt-5 pb-5">
                 <h2 className="mb-5 text-dark index-section-head-title">{t("Stress-free with a clear head")}</h2>
-                <p className="text-dark text-bolder">{t("By investing through Serious.Broker, you can save a lot of time and nerves – from constantly monitoring market developments to worrying about whether to sell an investment or what to do if its value drops.")}</p>
-                <p className="text-dark text-bolder">{t("Instead of stress, you can shop with a clear head and benefit from the favorable turn in the cryptocurrency market.")}</p>
+                <p className="text-dark text-bolder index-description">{t("By investing through Serious.Broker, you can save a lot of time and nerves – from constantly monitoring market developments to worrying about whether to sell an investment or what to do if its value drops.")}</p>
+                <p className="text-dark text-bolder index-description">{t("Instead of stress, you can shop with a clear head and benefit from the favorable turn in the cryptocurrency market.")}</p>
                 <div style={{ display: "flex", justifyContent: "center" }}>
                     <Link to={guideURLS.personalStrategy}>
                         <Button color={ButtonColor.brown} style={{ color:"white" }}>

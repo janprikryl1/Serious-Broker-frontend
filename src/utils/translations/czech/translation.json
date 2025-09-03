@@ -976,7 +976,7 @@
     "Show notification if you accept a cookie.": "Zobrazit upozornění, pokud přijmete soubor cookie.",
     "Please note that if you block our cookies in your browser settings, you may not be able to access certain features on our website, such as the shopping cart, order management or customization, and your overall experience on our website may also be affected. If you choose to delete all cookies in your browser, the preferences associated with your browser will be removed when you close your browser.Please note that unless you have adjusted your browser settings to reject cookies, our system will send cookies as soon as you visit one of our websites.": "Upozorňujeme, že pokud v nastavení prohlížeče zablokujete naše soubory cookie, může se stát, že nebudete mít přístup k některým funkcím na našich webových stránkách, jako je například nákupní košík, správa objednávky či přizpůsobení, a může být rovněž ovlivněn celkový dojem z návštěvy našeho webu. Pokud v prohlížeči zvolíte odstranění všech souborů cookie, budou předvolby související s vaším prohlížečem při jeho zavření odstraněny.Upozorňujeme, že pokud jste neupravili nastavení prohlížeče tak, aby byly soubory cookie odmítány, náš systém odešle soubory cookie ihned, jakmile navštívíte některou z našich webových stránek.",
     "Learn more about cookies": "Další informace o souborech cookie",
-    "The project is implemented in cooperation with the Department of Computer Science.": "Projekt je realizován v rámci spolupráci s katedrou informatiky.",
+    "Serious Broker was implemented in cooperation with the Department of Computer Science.": "Serious Broker vznikl jako studentský projekt na Katedře Informatiky.",
     "Cooperation": "Spolupráce",
     "Our partners": "Naši partneři",
     "Groups": "Sety",
@@ -1043,7 +1043,19 @@
   "Instead of stress, you can shop with a clear head and benefit from the favorable turn in the cryptocurrency market.": "Namísto stresu tak můžete s čistou hlavou nakupovat a těžit z příznivého obratu na trhu s kryptoměnami.",
   "Personal story": " Osobní příběh",
   "Send us your API key": "Předejte nám API klíč",
+  "Choose asset name:": "Vyberte název kryptoměny",
+  "Invested amount": "Investovaná částka",
+  "Choose investment holding period": "Vyberte délku držení investice",
   
   "Investment questionnaire": "Investiční dotazník",
-  "Fill out a short investment questionnaire so we can prepare better recommendations for you.": "Vyplňte krátký investiční dotazník, abychom pro vás mohli připravit lepší doporučení."
+  "Fill out a short investment questionnaire so we can prepare better recommendations for you.": "Vyplňte krátký investiční dotazník, abychom pro vás mohli připravit lepší doporučení.",
+  "Calculate How Much You Could Have Earned If You Started Investing In Crypto Earlier With Serious.Broker": "Spočítejte si, kolik jste mohli na kryptu vydělat, kdybyste se Serious.Broker začali investovat již dříve",
+
+  "Enter or choose a cryptocurrency, e.g. Bitcoin.": "Zadejte nebo vyberte kryptoměnu, např. Bitcoin.",
+  "Enter the amount you would buy the cryptocurrency for.": " Zadejte částku, za kterou byste kryptoměnu nakoupili.",
+  "Choose the currency in which the result should be displayed.": "Vyberte měnu, ve které se má výsledek zobrazit.",
+  "Select the period for which you would hold the investment.": "Zvolte dobu, po kterou byste investici drželi.",
+  "Click the 'Calculate' button.": "Klikněte na tlačítko “Vypočítat”.",
+  "The result represents the profitability of the selected cryptocurrency for the given period backward from today.": " Výsledek představuje ziskovost zvolené kryptoměny za zadané období zpětně od dnešního dne.",
+  "Past returns are no guarantee of future results.": "Minulé výnosy nejsou zárukou budoucích výsledků."
 }

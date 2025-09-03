@@ -1,11 +1,9 @@
 import { FC, useEffect, useState } from "react";
 import { Button } from "../reusable/Button.tsx";
 import { useTranslation } from "react-i18next";
-import { AssetCalculatorMostProfitableAssets } from "./AssetCalculatorMostProfitableAssets.tsx";
 import { getAllAssetCoins, getAssetCoinDetails } from "../../utils/api/assetCalculatorService.ts";
 import { CustomSwal } from "../../utils/functions/customSwal.ts";
 import { OverviewTableChart } from "../overview/overviewTableData/overviewTableChart/OverviewTableChart.tsx";
-import "../../styles/sass/components/index-calculator.scss";
 
 type ICalculationResult = {
     final_profit: number;
@@ -22,7 +20,7 @@ export const AssetCalculatorSingleCoin: FC = () => {
     const [selectedCoin, setSelectedCoin] = useState<string>("");
     const [selectedPeriod, setSelectedPeriod] = useState<string>("Day");
     const [selectedCurrency, setSelectedCurrency] = useState<string>("EUR");
-    const [amount, setAmount] = useState<number | string>("");
+    const [amount, setAmount] = useState<number | string>(1);
     const [calculationResult, setCalculationResult] = useState<ICalculationResult | null>(null);
     const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -41,6 +39,12 @@ export const AssetCalculatorSingleCoin: FC = () => {
             }
         })();
     }, []);
+
+    useEffect(() => {
+        if (selectedCoin) {
+            handleCalculate();
+        }
+    }, [assetCoins]);
 
     const handleCalculate = async () => {
         if (!selectedCoin || !amount || Number(amount) <= 0) {
@@ -76,42 +80,58 @@ export const AssetCalculatorSingleCoin: FC = () => {
 
     return (
         <div className="calculator-form-container">
-            <label className="calculator-label">{t("Choose asset name:")}</label>
-            <div className="select-wrapper">
-                <select value={selectedCoin} onChange={(e) => setSelectedCoin(e.target.value)}>
-                    <option value="" disabled>{t("Start typing or select...")}</option>
-                    {assetCoins.map((coin) => (
-                        <option key={coin.asset_label} value={coin.asset_label}>{coin.asset_label}</option>
-                    ))}
-                </select>
-            </div>
-
-            <label className="calculator-label mt-4">{t("Amount")}</label>
-            <div className="amount-group">
-                <input
-                    type="number"
-                    placeholder={t("e.g. 500")}
-                    value={amount}
-                    onChange={(e) => setAmount(e.target.value)}
-                />
-                <div className="select-wrapper calculator-currency">
-                    <select value={selectedCurrency} onChange={(e) => setSelectedCurrency(e.target.value)}>
-                        <option>EUR</option>
+            {/* 1) Výběr coinu */}
+            <div className="form-step">
+                <label className="calculator-label">{t("Choose asset name:")}</label>
+                <div className="select-wrapper" style={{marginBottom:2}}>
+                    <select value={selectedCoin} onChange={(e) => setSelectedCoin(e.target.value)}>
+                        <option value="" disabled>{t("Start typing or select...")}</option>
+                        {assetCoins.map((coin) => (
+                            <option key={coin.asset_label} value={coin.asset_label}>{coin.asset_label}</option>
+                        ))}
                     </select>
                 </div>
             </div>
 
-            <label className="calculator-label mt-4">{t("Choose investment holding period")}</label>
-            <div className="select-wrapper calculator-period">
-                <select value={selectedPeriod} onChange={(e) => setSelectedPeriod(e.target.value)}>
-                    <option value="Day">{t("Day")}</option>
-                    <option value="Hour">{t("Hour")}</option>
-                </select>
+            {/* 2) Částka + měna */}
+            <div className="form-step">
+                <label className="calculator-label mt-2">{t("Invested amount")}</label>
+                <div className="amount-group" style={{marginBottom:20}}>
+                    <input
+                        type="number"
+                        placeholder={t("e.g. 500")}
+                        value={amount}
+                        className="calculator-input"
+                        onChange={(e) => setAmount(e.target.value)}
+                    />
+                    <div className="select-wrapper calculator-currency">
+                        <select value={selectedCurrency} onChange={(e) => setSelectedCurrency(e.target.value)}>
+                            <option>EUR</option>
+                        </select>
+                    </div>
+                </div>
             </div>
 
-            <Button className="calculate-btn" onClick={handleCalculate} disabled={isLoading}>
-                {isLoading ? t("Calculating...") : t("Calculate")}
-            </Button>
+            {/* 3) Období držení */}
+            <div className="form-step">
+                <div style={{ display: "flex" }}>
+                    <label className="calculator-label" style={{ width: "60%", marginRight: 60, height:50 }}>
+                        {t("Choose investment holding period")}
+                    </label>
+                    <div className="select-wrapper calculator-period" style={{ width: "25%", marginTop: 5 }}>
+                        <select value={selectedPeriod} onChange={(e) => setSelectedPeriod(e.target.value)}>
+                            <option value="Day">{t("Day")}</option>
+                            <option value="Hour">{t("Hour")}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div className="form-step">
+                <Button className="calculate-btn" style={{marginTop:0, marginBottom:5}} onClick={handleCalculate} disabled={isLoading}>
+                    {isLoading ? t("Calculating...") : t("Calculate")}
+                </Button>
+            </div>
 
             {calculationResult && (
                 <div className="result-box">
@@ -131,7 +151,6 @@ export const AssetCalculatorSingleCoin: FC = () => {
                     </div>
                 </div>
             )}
-            <AssetCalculatorMostProfitableAssets/>
         </div>
     );
 };
