@@ -6,6 +6,7 @@ import {Newsletter} from "../components/overview/Newsletter.tsx";
 import {SignUpBanner} from "../components/overview/SignUpBanner.tsx";
 import {LookingForMoreInDepthStatistics} from "../components/overview/LookingForMoreInDepthStatistics.tsx";
 import {OverviewTableData} from "../components/overview/overviewTableData/OverviewTableData.tsx";
+import {BitcoinProfitCalculator} from "../components/index/BitcoinProfitCalculator.tsx";
 import "../styles/sass/components/overview.scss";
 
 export const Overview:FC = () => {
@@ -22,6 +23,7 @@ export const Overview:FC = () => {
             {!user && (
                 <>
                     <LookingForMoreInDepthStatistics />
+                    <BitcoinProfitCalculator />
                     <SignUpBanner />
                 </>
             )}

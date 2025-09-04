@@ -1,10 +1,11 @@
-import React, {createContext, useContext, useState, useEffect, ReactNode, Dispatch, SetStateAction} from 'react';
+import React, {createContext, useContext, useState, useEffect, ReactNode, Dispatch, SetStateAction, lazy} from 'react';
 import {useUserContext} from "./providerUser.tsx";
 import {useTranslation} from "react-i18next";
 import {getAchievements, markReadAchievment} from "../api/achievementService.ts";
 import {CustomSwal} from "../functions/customSwal.ts";
 import {AchievementType} from "../types/user/AchievementType.ts";
-import {AchievementAnimation} from "../../components/achievment/AchievementAnimation.tsx";
+const AchievementAnimation = lazy(() => import("../../components/achievment/AchievementAnimation.tsx").then((m) => ({ default: m.AchievementAnimation })));
+import {PageLoader} from "../../components/reusable/PageLoader.tsx";
 
 type AchievementsContextType = {
     achievements: AchievementType[];
@@ -85,7 +86,7 @@ export const AchievementsProvider: React.FC<{ children: ReactNode }> = ({ childr
     return (
         <AchievementContext.Provider value={{ achievements, setAchievements, unreadAchievements, markAchievementAsRead }}>
             {children}
-            {showAnimation && <AchievementAnimation onClose={handleMarkLastAchievementAsRead}/>}
+            {showAnimation && <PageLoader><AchievementAnimation onClose={handleMarkLastAchievementAsRead}/></PageLoader>}
         </AchievementContext.Provider>
     );
 };

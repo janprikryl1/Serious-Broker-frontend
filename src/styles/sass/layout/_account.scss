@@ -13,15 +13,13 @@
       @extend %p-20;
       max-inline-size: 800px;
       margin-inline: auto;
-      background-color: $bg-color;
-      border-radius: 4px;
 
       @include breakpoint(sm) {
         padding: 50px;
       }
 
       @include breakpoint(lg) {
-        padding: 100px;
+        padding-left: 80px;
       }
     }
   }

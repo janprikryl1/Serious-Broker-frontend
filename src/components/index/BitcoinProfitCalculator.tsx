@@ -23,7 +23,7 @@ export const BitcoinProfitCalculator: FC = () => {
     } = useBitcoinProfitCalculator();
     
     return (
-        <div className="py-5 bitcoin-profit-calculator-container">
+        <div className="py-3">
             <div className="container">
                 <h2 className="index-section-head-title mb-1">{t("Bitcoin Profit Calculator")}</h2>
                 <p style={{ maxWidth: '800px' }}>

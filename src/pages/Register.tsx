@@ -25,37 +25,31 @@ export const Register: FC = () => {
     } = useRegister();
 
     return (
-        <section className="account padding-bottom mt-3">
-            <div className="container">
-                <div className="account__wrapper" data-aos="fade-up" data-aos-duration="800">
-                    <div className="row g-4">
-                        <div className="col-12">
-                            <div className="account__content account__content--style1">
-                                <div className="account__header">
-                                    <h2>{t("Create an account")}</h2>
-                                    <p>{t("Create an account to get started. We just need a few details from you to get started.")}</p>
-                                </div>
-                                <form onSubmit={handleSubmit(onSubmit)}>
-                                    {currentStep === 1 ?
-                                        <RegisterStepOne formRegister={formRegister} errors={errors} watch={watch}/>
-                                        : currentStep === 2 ?
-                                        <RegisterStepTwo formRegister={formRegister} errors={errors} watch={watch} setValue={setValue}/>
-                                        : currentStep === 3 ?
-                                        <RegisterStepThree formRegister={formRegister}/>
-                                        : <RegisterStepFour watch={watch} setValue={setValue} formRegister={formRegister}/>
-                                    }
-                                    <RegisterStepsPagiation currentStep={currentStep} trigger={trigger} setCurrentStep={setCurrentStep} sending={sending}/>
-                                </form>
-                                <div className="account__switch">
-                                    <p>
-                                    {t("Already have account? ")}
-                                        <Link to={routes.signIn} className="link-underline-none">
-                                            {t("Login")}
-                                        </Link>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
+        <section className="padding-bottom">
+            <div className="account__wrapper" data-aos="fade-up" data-aos-duration="800">
+                <div className="account__content account__content--style1">
+                    <div className="account__header">
+                        <h2>{t("Create an account")}</h2>
+                        <p>{t("Create an account to get started. We just need a few details from you to get started.")}</p>
+                    </div>
+                    <form onSubmit={handleSubmit(onSubmit)}>
+                        {currentStep === 1 ?
+                            <RegisterStepOne formRegister={formRegister} errors={errors} watch={watch}/>
+                            : currentStep === 2 ?
+                            <RegisterStepTwo formRegister={formRegister} errors={errors} watch={watch} setValue={setValue}/>
+                            : currentStep === 3 ?
+                            <RegisterStepThree formRegister={formRegister}/>
+                            : <RegisterStepFour watch={watch} setValue={setValue} formRegister={formRegister}/>
+                        }
+                        <RegisterStepsPagiation currentStep={currentStep} trigger={trigger} setCurrentStep={setCurrentStep} sending={sending}/>
+                    </form>
+                    <div className="account__switch">
+                        <p>
+                            {t("Already have account? ")}
+                            <Link to={routes.signIn} className="link-underline-none">
+                                {t("Login")}
+                            </Link>
+                        </p>
                     </div>
                 </div>
             </div>

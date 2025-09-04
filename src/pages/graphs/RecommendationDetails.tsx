@@ -43,7 +43,7 @@ export const RecommendationDetails:FC = () => {
             {detailsData ? (
                 <>
                     <TitleHeader title={`${detailsData.asset_label} - ${detailsData.name}`} />
-                    <div className="container graph-container">
+                    <div className="container graph-container mt-4">
                         <div className="service-details__wrapper">
                             <div className="service-details__item">
                                 <div className="service-details__item-inner mb-5">

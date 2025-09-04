@@ -30,7 +30,7 @@ export const AssetGraph: FC = () => {
         asset ? (
             <>
                 <TitleHeader title={asset?.name} text={asset?.label}/>
-                <div className="container padding-bottom asset-font">
+                <div className="container padding-bottom asset-font mt-4">
                     <div className="service-details__wrapper">
                         <div className="service-details__item">
                             <div className="service-details__item-inner">

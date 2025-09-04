@@ -3,8 +3,7 @@
   width: 100%;
   z-index: 99;
   font-weight: bold;
-  margin-top: -30px;
-  margin-bottom: -30px;
+  margin-top: -20px;
 
   &--style1 {
     @extend %p-rel;
@@ -472,6 +471,7 @@
   background-repeat: no-repeat;
   background-position: top 10px center;
   background-color: rgb(49, 46, 40);
+  border-radius: 4px;
 
   @include breakpoint(lg) { padding-block: 100px; }
 
@@ -479,7 +479,7 @@
     content: "";
     position: absolute;
     inset: 0;
-    background: rgba(0, 0, 0, 0.6);
+    background: rgba(0, 0, 0, 0.15);
   }
 
   &__content {
