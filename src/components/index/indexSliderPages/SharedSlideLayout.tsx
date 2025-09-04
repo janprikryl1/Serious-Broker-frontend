@@ -1,13 +1,13 @@
 import { FC, ReactNode } from "react";
 
-interface SharedSlideLayoutProps {
+type Props = {
     imageUrl: string;
     children: ReactNode;
     backgroundSize?: string;
     backgroundPosition?: string;
 }
 
-export const SharedSlideLayout: FC<SharedSlideLayoutProps> = ({imageUrl, children, backgroundSize, backgroundPosition}) => {
+export const SharedSlideLayout: FC<Props> = ({imageUrl, children, backgroundSize, backgroundPosition}) => {
     const style = {
         backgroundImage: `url(${imageUrl})`,
         ...(backgroundSize && { backgroundSize }),

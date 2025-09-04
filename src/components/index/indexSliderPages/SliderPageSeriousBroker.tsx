@@ -1,26 +1,25 @@
 import { FC } from "react";
 import { SharedSlideLayout } from "./SharedSlideLayout";
-import Logo from "../../../utils/icons/logo/SB2.svg";
-import BrokerBg from "../../../utils/icons/index/crypto-hand2_light.webp";
+import Logo from "../../../utils/icons/index/vectorized_with_yellow_coins.svg";
 import { useTranslation } from "react-i18next";
+import {Button} from "../../reusable/Button.tsx";
+import {Link} from "react-router-dom";
+import {routes} from "../../../utils/constants";
 
 export const SliderPageSeriousBroker: FC = () => {
     const { t } = useTranslation();
 
     return (
-        <div className="serious-broker-correct-layout">
-            <SharedSlideLayout imageUrl={BrokerBg} backgroundSize={"65% 120%"} backgroundPosition={"0% 12vh"}>
-                <div>
-                    <img
-                        src={Logo}
-                        alt="Serious Broker logo"
-                        className="logo-dark"
-                        loading="lazy"
-                    />
-                    <h3 className="slide-title" style={{fontSize: 50, lineHeight: 0.2}}>{t("Your Money,")}</h3>
-                    <h3 className="slide-title" style={{fontSize: 50, marginBottom:"13vh"}}>{t("Your Rules")}</h3>
-                </div>
-            </SharedSlideLayout>
-        </div>
+        <SharedSlideLayout imageUrl={Logo} backgroundSize={"45% 140%"} backgroundPosition={"100% 40%"}>
+            <div>
+                <h3 className="slide-title-your-money-your-rules">{t("Your Money,") + t("Your Rules")}</h3>
+                <p className="slide-description-your-money-your-rules">{t("Savings in crypto.")}</p>
+                <p className="slide-description-your-money-your-rules">
+                    <Link to={routes.about}>
+                        <Button style={{fontWeight:700, fontSize:"1.2rem"}}>{t("Proč s námi spořit do krypta")}</Button>
+                    </Link>
+                </p>
+            </div>
+        </SharedSlideLayout>
     );
 };

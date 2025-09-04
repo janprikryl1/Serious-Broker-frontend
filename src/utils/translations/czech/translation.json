@@ -770,8 +770,8 @@
     "Show error details": "Zobrazit detaily chyby",
     "Hide details": "Skrýt detaily",
     "Together We Help Your Investments Grow": "Společně pomáháme vašim investicím růst",
-    "Do you know Bitcoin?": "Znáte Bitcoin?",
-    "It Can Earn Money for You": "Může vám pomoct vydělat",
+    "We have automation in our pocket": "Automatizaci máme v kapse",
+    "Set up an investment plan that suits you and get buy and sell recommendations for carefree investing.": "Nastavte si investiční plán podle sebe a získávejte doporučení k nákupu a prodeji pro bezstarostné investování.",
     "5 minutes": "5 minut",
     "To Make You Understand Crypto": "Stačí k pochopení kryptoměn",
     "Learn Now": "Chci se naučit",
@@ -1057,5 +1057,7 @@
   "Select the period for which you would hold the investment.": "Zvolte dobu, po kterou byste investici drželi.",
   "Click the 'Calculate' button.": "Klikněte na tlačítko “Vypočítat”.",
   "The result represents the profitability of the selected cryptocurrency for the given period backward from today.": " Výsledek představuje ziskovost zvolené kryptoměny za zadané období zpětně od dnešního dne.",
-  "Past returns are no guarantee of future results.": "Minulé výnosy nejsou zárukou budoucích výsledků."
+  "Past returns are no guarantee of future results.": "Minulé výnosy nejsou zárukou budoucích výsledků.",
+  "Savings in crypto.": "Spoření do krypta.",
+  "Why save in crypto with us?": "Proč s námi spořit do krypta"
 }

@@ -6,7 +6,6 @@
 .shared-slide-layout {
   position: relative;
   height: 50vh;
-  background-color: #120c06;
   background-size: 70%;
   background-repeat: no-repeat;
   background-position: calc(100% - 60vh) calc(100% + 30vh);
@@ -19,7 +18,6 @@
     position: absolute;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.2);
     z-index: 1;
   }
 
@@ -512,7 +510,7 @@
   position: fixed;
   top: 0;
   z-index: 1020;
-  background-color: #211e1b;
+  background-color: #1e1702;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   left: 0;
   right: 0;
@@ -526,4 +524,36 @@
 .sticky-header-active.is-sticky {
   visibility: visible;
   opacity: 1;
+}
+
+.slide-title-automatization {
+  font-size: 3rem;
+  line-height: 1.2;
+  margin-left: -35vw;
+  letter-spacing: 0.5px;
+}
+
+.slide-tagline-automatization {
+  font-size: 1.3rem;
+  max-width: 600px;
+  line-height: 1.5;
+  margin-top: 1rem;
+  margin-left: -35vw;
+  letter-spacing: 0.5px;
+  color: #aaa79f;
+}
+
+.slide-title-your-money-your-rules {
+  letter-spacing: 0.5px;
+  font-size: 3.5rem;
+  margin-left: -35vw;
+  max-width: 800px;
+}
+
+.slide-description-your-money-your-rules {
+  letter-spacing: 0.5px;
+  font-size: 1.3rem;
+  margin-left: -35vw;
+  max-width: 800px;
+  color: #aaa79f;
 }

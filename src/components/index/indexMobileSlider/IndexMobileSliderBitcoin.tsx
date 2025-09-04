@@ -11,8 +11,8 @@ export const IndexMobileSliderBitcoin: FC = () => {
     return (
         <div className="container d-flex flex-column align-items-center justify-content-center text-center" style={{ minHeight: '100vh' }}>
             <img src={BitcoinBg} alt="Bitcoin" loading="lazy" style={{ width: "200px" }} />
-            <h1 className="mt-4">{t("Do you know Bitcoin?")}</h1>
-            <p>{t("It Can Earn Money for You")}</p>
+            <h1 className="mt-4">{t("We have automation in our pocket")}</h1>
+            <p>{t("Set up an investment plan that suits you and get buy and sell recommendations for carefree investing.")}</p>
             <div className="mt-5">
                 <Button>
                     <Link to={routes.cryptocurrencyDetailURL + 1} className="text-decoration-none text-dark">

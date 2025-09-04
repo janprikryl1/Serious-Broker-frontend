@@ -6,12 +6,12 @@ import { GoogleTranslation } from "../../GoogleTranslation";
 import {SiGoogletranslate} from "react-icons/si";
 
 export const ChangeLanguageIcon:FC = () => {
-    const { t} = useTranslation();
+    const { t, i18n } = useTranslation();
     const [showGoogleTranslation, setShowGoogleTranslation] = useState(false);
     
     return (
         <div style={{marginRight: "1vw"}}>
-            <NavDropdown title={t("Language")}>
+            <NavDropdown title={i18n.language === "cs" ? "CZ" : "EN"}>
                 <LanguageFlagComponent languageId="cs" languageName="Čeština" setShowGoogleTranslation={setShowGoogleTranslation}/>
                 <LanguageFlagComponent languageId="en" languageName="English" setShowGoogleTranslation={setShowGoogleTranslation}/>
                 <Dropdown.Divider />

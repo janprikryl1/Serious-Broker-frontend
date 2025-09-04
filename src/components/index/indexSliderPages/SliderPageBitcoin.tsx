@@ -8,20 +8,22 @@ import {useTranslation} from "react-i18next";
 
 export const SliderPageBitcoin:FC = () => {
     const { t } = useTranslation();
-    
+
     return (
-        <SharedSlideLayout 
+        <SharedSlideLayout
             imageUrl={BitcoinBg}
             backgroundSize={"40%"}
-            backgroundPosition={"5% 0%"}
+            backgroundPosition={"100% 10%"}
         >
             <div className="container">
-                <h1 className="slide-title" style={{marginLeft:"-25vw"}}>{t("Do you know Bitcoin?")}</h1>
-                <p className="slide-tagline" style={{marginLeft:"15vw"}}>
-                    {t("It Can Earn Money for You")}
+                <h1 className="slide-title-automatization">{t("We have automation in our pocket")}</h1>
+                <p className="slide-tagline-automatization">
+                    {t("Set up an investment plan that suits you and get buy and sell recommendations for carefree investing.")}
                 </p>
-                <p className="slide-tagline">
-                    <Button><Link to={routes.cryptocurrencyDetailURL + 1}>{t("Learn Now")}</Link></Button>
+                <p className="slide-tagline-automatization">
+                    <Link to={routes.cryptocurrencyDetailURL + 1}>
+                        <Button style={{fontWeight:700}}>{t("Learn Now")}</Button>
+                    </Link>
                 </p>
             </div>
         </SharedSlideLayout>
