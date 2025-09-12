@@ -42,7 +42,7 @@ export const AssetCalculatorSingleCoin: FC = () => {
 
     useEffect(() => {
         if (selectedCoin) {
-            handleCalculate();
+            /////handleCalculate();
         }
     }, [assetCoins]);
 

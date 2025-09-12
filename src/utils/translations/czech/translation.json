@@ -1059,5 +1059,13 @@
   "The result represents the profitability of the selected cryptocurrency for the given period backward from today.": " Výsledek představuje ziskovost zvolené kryptoměny za zadané období zpětně od dnešního dne.",
   "Past returns are no guarantee of future results.": "Minulé výnosy nejsou zárukou budoucích výsledků.",
   "Savings in crypto.": "Spoření do krypta.",
-  "Why save in crypto with us?": "Proč s námi spořit do krypta"
+  "Why save in crypto with us?": "Proč s námi spořit do krypta",
+  "Something went wrong during calculation!": "Něco se nepovedlo během výpočtu",
+  "Custom portfolios": "Vlastní portfolia",
+  "For Registered": "Pro přihlášené",
+  "Build your own portfolio with a given representation of coins in any ratio and monitor its development.": "Sestavte si vlastní portfolio s daným zastoupením mincí v libovolném poměru a sledujte jeho vývoj.",
+  "Detail of pairs": "Detail párů",
+  "Track when it was most profitable to sell or buy based on historical data.": "Sledujte na základě historických dat kdy bylo nejvýhodnější prodat nebo nakoupit.",
+  "Save assets, coins or articles for later.": "Uložte si assety, mince nebo články na později.",
+  "Comment articles.": "Komentujte čánky"
 }
