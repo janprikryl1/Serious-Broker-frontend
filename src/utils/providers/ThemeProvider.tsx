@@ -1,4 +1,4 @@
-import {createContext, useContext, useState, useEffect, ReactNode, useCallback, FC} from 'react';
+import {createContext, useContext, useState, ReactNode, useCallback, FC} from 'react';
 import {SkeletonTheme} from "react-loading-skeleton";
 
 type ThemeContextType = {
@@ -17,13 +17,13 @@ export const ThemeProvider: FC<{ children: ReactNode }> = ({ children }) => {
         setTheme(themeMode);
     }, []);
     
-    useEffect(() => {
+    /*useEffect(() => {
         if ("theme" in localStorage) {
             updateThemeColor(localStorage.getItem('theme') as 'light' | 'dark');
         } else {
             updateThemeColor("dark");
         }
-    }, []);
+    }, []);*/
 
     const toggleTheme = () => {
         const theme = localStorage.getItem('theme');
