@@ -1,8 +1,7 @@
 import { FC, useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { NavbarDesktopMenu } from "./NavbarDesktopMenu.tsx";
-import Logo from "../../utils/icons/logo/sb.svg";
-import SeriousBrokerHandWriting from "../../utils/icons/logo/seious-broker-handwriting.svg";
+import SeriousBrokerHandWriting from "../../utils/icons/logo/S_B-logo-final.svg";
 import { MobileMenu } from "./MobileMenu.tsx";
 import { useMediaQuery } from "@mui/material";
 import { useUserContext } from "../../utils/providers/providerUser.tsx";
@@ -28,7 +27,6 @@ export const Header: FC = () => {
                         <div className="d-flex align-items-center">
                             <div className="logo">
                                 <Link to={routes.home} aria-label="Serious Broker - home">
-                                    <img className="logo-mark" src={Logo} alt="SB logo"/>
                                     <img
                                         className="wordmark"
                                         src={SeriousBrokerHandWriting}

@@ -47,14 +47,19 @@
   background: #1e1702;
   padding-block: 6px;
   min-height: 56px;
+  margin-top:5%;
 
   @include breakpoint(sm) {
     position: relative;
   }
 
+  @include breakpoint(lg) {
+    margin-top:0;
+  }
+
   .logo {
     flex: 0 0 auto;
-
+    
     a {
       @extend %d-flex, %align-i-center;
       gap: 8px;
@@ -64,15 +69,8 @@
         display: block;
       }
 
-      .logo-mark {
-        width: 34px;
-        @include breakpoint(lg) { width: 36px; }
-        @include breakpoint(xl) { width: 38px; }
-      }
-
       .wordmark {
         width: 120px;
-        margin-top: 10px;
         @include breakpoint(lg) { width: 140px; }
         @include breakpoint(xl) { width: 160px; }
       }

@@ -8,7 +8,8 @@ export const CookiesInfo:FC = () => {
     return (
         <>
             <TitleHeader title="Cookies"/>
-            <div className="container cta-dark">
+            <div className="container">
+                <div className="cta-dark">
                 <h1>{t("Information about Cookies")}</h1>
                 <p>1. {t("What are the cookies?")}</p>
                 <span>{t("Cookies are small text files that are stored on your computer or device when you visit our website.")}</span>
@@ -52,6 +53,7 @@ export const CookiesInfo:FC = () => {
                 <a href="www.international-chamber.co.uk/our-expertise/digitaleconomy">www.international-chamber.co.uk/our-expertise/digitaleconomy</a>
                 <br/>
                 <a href="http://www.cnil.fr/vos-libertes/vos-traces/les-cookies/">http://www.cnil.fr/vos-libertes/vos-traces/les-cookies/</a>
+            </div>
             </div>
         </>
     )
