@@ -14,7 +14,7 @@ type Props = {
     isLast: boolean;
 };
 
-export const AssetRow: FC<Props> = ({ asset, setAssets, index, isLast }) => {
+export const AssetRow: FC<Props> = ({ asset, setAssets, index, isLast }) => {console.error(asset)
     const handleAddToWatchlist = async () => {
         try {
             const response = await addToWatchList(index, WatchListEnum.Asset);

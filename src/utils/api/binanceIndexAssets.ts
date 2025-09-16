@@ -9,6 +9,8 @@ import {AssetGraphPriceDetailsType} from "../types/graphs/AssetGraphPriceDetails
 import {RecommendedProfileAssetType} from "../types/asset/RecommendedProfileAssetType.ts";
 
 export const getAllAssets = async (page: number, limit: number, filters: { currencyCount: string; includeCurrencies: string[]; searchQuery: string; order: {direction: "asc" | "desc", orderType: AssetOrder} }) => {
+    const token = localStorage.getItem("token");
+
     return await axios.get<{totalPages: number; data: AssetType[]}>(backendUrl + "graphs/binance_index_assets/get_all_assets.php", {
         params: {
             page: page,
@@ -18,6 +20,9 @@ export const getAllAssets = async (page: number, limit: number, filters: { curre
             search: filters.searchQuery,
             direction: filters.order.direction,
             order: filters.order.orderType
+        },
+        headers: {
+            Authorization: `Bearer ${token}`
         }
     });
 };
@@ -39,9 +44,14 @@ export const getAllAssetsProfitList  = async (page: number, limit: number, order
 };
 
 export const getAssetByIndexLabel = async (index_label: string) => {
+    const token = localStorage.getItem("token");
+    
     return await axios.get( backendUrl + "graphs/binance_index_assets/get_asset_by_id.php", {
         params: {
             name: index_label
+        },
+        headers:{
+            Authorization: `Bearer ${token}`
         }
     });
 };
@@ -70,10 +80,15 @@ export const getAssetGraphData = async (currencies: QuotedCurrency[], period: Qu
 }
 
 export const getAssetGraphDataPreparedAssets = async (asset_label: string, selectedPeriod: QuotedCurrenciesPeriod) => {
+    const token = localStorage.getItem("token");
+
     return await axios.get(backendUrl + "graphs/binance_index_assets/asset_graph_data_prepared_asset.php", {
         params: {
             name: asset_label,
             period: selectedPeriod
+        },
+        headers:{
+            Authorization: `Bearer ${token}`
         }
     });
 }

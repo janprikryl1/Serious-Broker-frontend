@@ -10,6 +10,7 @@ import {useTranslation} from "react-i18next";
 import {freecurrencyapi} from "../../../utils/constants";
 import {Currencies} from "../../../utils/enums/CurrenciesEnum.ts";
 import {AssetAnalysisGraphData} from "../../../utils/types/graphs/AssetAnalysisGraphData.ts";
+import {MissingCurrencyType} from "../../../utils/types/graphs/MissingCurrencyType.ts";
 
 type Props = {
     isInWatchList?: boolean;
@@ -23,9 +24,10 @@ type Props = {
     setCurrencyPrice: Dispatch<SetStateAction<string | undefined>>;
     currencyValue: number;
     setCurrencyValue: Dispatch<SetStateAction<number>>;
+    missingCurrencies?: MissingCurrencyType[];
 };
 
-export const AssetAnalysisGraph: FC<Props> = ({isInWatchList, handleToggleWatchList, selectedPeriod, setSelectedPeriod, graphData, currencyValue, setCurrencyValue, setCurrency, setCurrencyPrice, currencyPrice, currency}) => {
+export const AssetAnalysisGraph: FC<Props> = ({isInWatchList, handleToggleWatchList, selectedPeriod, setSelectedPeriod, graphData, currencyValue, setCurrencyValue, setCurrency, setCurrencyPrice, currencyPrice, currency, missingCurrencies}) => {
     const {t} = useTranslation();
 
     const handleSwitchCurrency = async (e: ChangeEvent<HTMLSelectElement>) => {
@@ -115,7 +117,16 @@ export const AssetAnalysisGraph: FC<Props> = ({isInWatchList, handleToggleWatchL
                             margin={{ left: 50, right: 0, top: 20, bottom: 30 }}
                         />
                     ) : (
-                        <div className="no-data">{t("No data")}</div>
+                        <div className="no-data">
+                            {missingCurrencies ? (
+                                <div style={{marginTop:20}}>
+                                    <p>{t("These coins are no longer traded")}:</p>
+                                    <small>
+                                        {missingCurrencies.map(m => m.asset_label).join(', ')}
+                                    </small>
+                                </div>
+                            ) : <p>{t("No data")}</p>}
+                        </div>
                     )}
                 </div>
             ) : (

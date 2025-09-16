@@ -23,7 +23,9 @@ export const AssetGraph: FC = () => {
         setCurrencyPrice,
         currencyPrice,
         currency,
-        graphData
+        graphData,
+        missingCurrencies,
+        isInWatchList
     } = useAssetGraph();
 
     return (
@@ -40,7 +42,7 @@ export const AssetGraph: FC = () => {
                                         <div className="row">
                                             <div className="col-sm-8">
                                                 <AssetAnalysisGraph
-                                                    isInWatchList={asset.in_watchlist}
+                                                    isInWatchList={isInWatchList}
                                                     handleToggleWatchList={handleToggleWatchList}
                                                     selectedPeriod={selectedPeriod}
                                                     setSelectedPeriod={setSelectedPeriod}
@@ -51,6 +53,7 @@ export const AssetGraph: FC = () => {
                                                     currencyPrice={currencyPrice}
                                                     currency={currency}
                                                     graphData={graphData}
+                                                    missingCurrencies={missingCurrencies}
                                                 />
                                             </div>
                                             <div className="col-sm-4">

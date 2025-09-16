@@ -8,6 +8,7 @@ import {getAssetByIndexLabel, getAssetGraphDataPreparedAssets} from "../api/bina
 import {addToWatchList, removeFromWatchList} from "../api/watchListService.ts";
 import {WatchListEnum} from "../enums/WatchListEnum.ts";
 import {formatCurrency} from "../functions/functions.ts";
+import {MissingCurrencyType} from "../types/graphs/MissingCurrencyType.ts";
 
 export const useAssetGraph = () => {
     const { name } = useParams();
@@ -17,6 +18,8 @@ export const useAssetGraph = () => {
     const [currencyPrice, setCurrencyPrice] = useState<string>();
     const [currencyValue, setCurrencyValue] = useState<number>(1);
     const [graphData, setGraphData] = useState<AssetAnalysisGraphData>();
+    const [missingCurrencies, setMissingCurrencies] = useState<MissingCurrencyType[]>();
+    const [isInWatchList, setIsInWatchList] = useState<boolean>(false);
 
     useEffect(() => {
         if (name === undefined) return;
@@ -57,6 +60,12 @@ export const useAssetGraph = () => {
                 setGraphData(response.data);
                 setCurrencyPrice(formatCurrency(response.data.price));
                 setCurrency(Currencies.EUR);
+                if ("missing_assets" in response.data) {
+                    setMissingCurrencies(response.data.missing_assets as MissingCurrencyType[]);
+                }
+                if ("in_watchlist" in response.data) {
+                    setIsInWatchList(response.data.in_watchlist);
+                }
             } catch (e) {
                 console.error(e);
             }
@@ -75,6 +84,8 @@ export const useAssetGraph = () => {
         setCurrencyPrice,
         currencyPrice,
         currency,
-        graphData
+        graphData,
+        missingCurrencies,
+        isInWatchList
     }
 }
