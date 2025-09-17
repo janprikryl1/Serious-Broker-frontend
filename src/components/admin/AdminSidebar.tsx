@@ -58,15 +58,15 @@ export const AdminSidebar: FC = () => {
                         if (level === 0) {
                             return {
                                 color: disabled ? "#eee" : "#0A0704",
-                                backgroundColor: active ? "#ab9641" : undefined,
+                                backgroundColor: active ? "#B1974E" : undefined,
                                 "&:hover": {
-                                    backgroundColor: "#ab9641 !important",
+                                    backgroundColor: "#B1974E !important",
                                     color: "#0A0704 !important",
                                     borderRadius: "8px !important",
                                     fontWeight: "bold !important"
                                 },
                                 [`&.active`]: {
-                                    backgroundColor: '#ab9641',
+                                    backgroundColor: '#B1974E',
                                     color: '#0A0704',
                                 },
                             };

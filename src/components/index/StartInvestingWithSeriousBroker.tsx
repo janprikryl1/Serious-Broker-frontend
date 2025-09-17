@@ -15,7 +15,7 @@ export const StartInvestingWithSeriousBroker: FC = () => {
     const isMobile = useMediaQuery('(max-width: 768px)');
 
     return (
-        <div style={{ backgroundColor: "#ae9749", minHeight: 700 }}>
+        <div style={{ backgroundColor: "#B1974E", minHeight: 700 }}>
             <div className="container pt-5 pb-5">
                 <h2 className="mb-5 text-dark index-section-head-title">{t("Start Investing with Serious Broker")}</h2>
                 <div className="row text-center gx-0">

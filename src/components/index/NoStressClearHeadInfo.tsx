@@ -8,7 +8,7 @@ export const NoStressClearHeadInfo:FC = () => {
     const {t} = useTranslation();
 
     return (
-        <div style={{ backgroundColor: "#ae9749" }}>
+        <div style={{ backgroundColor: "#B1974E" }}>
             <div className="container pt-5 pb-5">
                 <h2 className="mb-5 text-dark index-section-head-title">{t("Stress-free with a clear head")}</h2>
                 <p className="text-dark text-bolder index-description">{t("By investing through Serious.Broker, you can save a lot of time and nerves – from constantly monitoring market developments to worrying about whether to sell an investment or what to do if its value drops.")}</p>

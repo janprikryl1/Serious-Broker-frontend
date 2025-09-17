@@ -2,7 +2,7 @@ import { FC, ReactNode, CSSProperties } from "react";
 import { Link } from "react-router-dom";
 
 export enum ButtonColor {
-    yellow = "#ae9647",
+    yellow = "#B1974E",
     white = "#FFFDFA",
     green = "#00b300",
     red = "#952b34",
