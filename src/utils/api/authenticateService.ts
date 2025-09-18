@@ -3,6 +3,7 @@ import {backendUrl} from "../../env.ts";
 import {UserType} from "../types/user/userTypes.ts";
 import {loginType} from "../types/user/loginType.ts";
 import {registerUserType, registerUserTypeResponse} from "../types/user/registerUserType.ts";
+import {ZeruhResponse} from "../types/user/verifyEmailType.ts";
 
 export const isAuthenticated = async () => {
     const token = localStorage.getItem("token");
@@ -32,7 +33,7 @@ export const register = async (formData: registerUserType) => {
 }
 
 export const verifyEmail = async (email: string) => {
-    return await axios.get(backendUrl+"email/verify_email.php", {
+    return await axios.get<ZeruhResponse>(backendUrl+"email/verify_email.php", {
         params: {
             email
         }

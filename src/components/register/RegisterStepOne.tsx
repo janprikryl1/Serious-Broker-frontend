@@ -2,9 +2,9 @@ import {FC, useEffect, useState} from "react";
 import {LoginRegisterInput} from "../signIn/LoginRegisterInput.tsx";
 import PasswordStrengthBar from "react-password-strength-bar";
 import {FieldErrors, UseFormRegister, UseFormWatch} from "react-hook-form";
-import {verifyEmail} from "../../utils/api/authenticateService.ts";
 import {useTranslation} from "react-i18next";
 import {RegisterUserSchemaType} from "../../utils/formSchemas/registerUserSchema.ts";
+import {verifyEmail} from "../../utils/api/authenticateService.ts";
 
 type Props = {
     formRegister: UseFormRegister<RegisterUserSchemaType>;
@@ -30,9 +30,10 @@ export const RegisterStepOne:FC<Props> = ({formRegister, errors, watch}) => {
         if (emailCheckTimeout) clearTimeout(emailCheckTimeout);
         const timeout = setTimeout(async () => {
             try {
-                const response = await verifyEmail(email);
-                setEmailValid(response.data.data.mx_found);
-                setSuggestedDomain(response.data.data.domain_suggestion || null);
+                const res = await verifyEmail(email);
+                if (!res.data) return;
+                setEmailValid(res.data.result.validation_details.mx_found);
+                setSuggestedDomain(res.data.result.domain_details.did_you_mean);
             } catch (error) {
                 console.error("Email verification failed", error);
             }
@@ -67,5 +68,5 @@ export const RegisterStepOne:FC<Props> = ({formRegister, errors, watch}) => {
             <PasswordStrengthBar password={password || ""} minLength={8} scoreWords={['velmi slabé', 'slabé', 'silné', 'velmi silné']} shortScoreWord={'velmi slabé'} />
             <LoginRegisterInput register={formRegister} name="passwordAgain" placeholder="Password again" type="password" required error={errors.passwordAgain} />
         </>
-    )
-}
+    );
+};
