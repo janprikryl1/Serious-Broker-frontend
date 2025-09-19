@@ -221,7 +221,7 @@ export const Assets: FC = () => {
                             <MyPortfolio />
                         ) : (
                             <>
-                                <div className="row mb-5 sidebar__search search-row-spacing">
+                                <div className="row mb-5 sidebar__search search-row-spacing" style={{ backgroundColor: "rgba(64, 51, 38, 0.8)" }}>
                                     <p style={{fontSize:25, fontWeight:500, color:"white"}}>{t("Filters")}</p>
                                     <div className="col-md-3">
                                         <label className="form-label">{t("Currency count")}</label>

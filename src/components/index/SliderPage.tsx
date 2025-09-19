@@ -7,11 +7,9 @@ import 'swiper/css/autoplay';
 import 'swiper/css/effect-fade';
 import {SliderPageSeriousBroker} from "./indexSliderPages/SliderPageSeriousBroker.tsx";
 import {SliderPageBitcoin} from "./indexSliderPages/SliderPageBitcoin.tsx";
-import {SliderPage5Minutes} from "./SliderPage5Minutes.tsx";
 import {useMediaQuery} from "@mui/material";
 import {IndexMobileSliderPage} from "./indexMobileSlider/IndexMobileSliderPage.tsx";
 import {IndexMobileSliderBitcoin} from "./indexMobileSlider/IndexMobileSliderBitcoin.tsx";
-import {IndexMobileSliderFiveMinutes} from "./indexMobileSlider/IndexMobileSliderFiveMinutes.tsx";
 
 
 export const SliderPage: FC = () => {
@@ -37,13 +35,13 @@ export const SliderPage: FC = () => {
                     <>
                         <SwiperSlide><IndexMobileSliderPage /></SwiperSlide>
                         <SwiperSlide><IndexMobileSliderBitcoin /></SwiperSlide>
-                        <SwiperSlide><IndexMobileSliderFiveMinutes /></SwiperSlide>
+                        {/*<SwiperSlide><IndexMobileSliderFiveMinutes /></SwiperSlide>*/}
                     </>
                 ) : (
                     <>
                         <SwiperSlide><SliderPageSeriousBroker /></SwiperSlide>
                         <SwiperSlide><SliderPageBitcoin /></SwiperSlide>
-                        <SwiperSlide><SliderPage5Minutes /></SwiperSlide>
+                        {/*<SwiperSlide><SliderPage5Minutes /></SwiperSlide>*/}
                     </>
                 )}
             </Swiper>

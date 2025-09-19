@@ -5,7 +5,7 @@ import {GraphPortfolioAsset} from "./GraphPortfolioAsset.tsx";
 import {ProfileOverviewAsset} from "../../../pages/profile/ProfileOverviewAsset.tsx";
 
 export const MyLastPortfolioGraphs:FC = () => {
-    const [graphData, setGraphData] = useState<MyThreeAssetsDataType[]>([]);
+    const [graphData, setGraphData] = useState<MyThreeAssetsDataType[]>();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -22,7 +22,7 @@ export const MyLastPortfolioGraphs:FC = () => {
     
     return (
         <div className="row">
-            {graphData.length === 0 ? <ProfileOverviewAsset /> : 
+            {graphData === undefined ? <ProfileOverviewAsset /> : 
             graphData.map((asset: MyThreeAssetsDataType) => (
                 <GraphPortfolioAsset title={asset.name} data={asset.monthlyChartData.data} key={asset.id} />
             ))}

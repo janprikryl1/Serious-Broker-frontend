@@ -98,7 +98,7 @@ export const Articles: FC = () => {
                     <div className="blog__wrapper">
 
                         {/* Filter section */}
-                        <div className="row mb-3 sidebar__search" style={{marginLeft: "0.1rem", marginRight: "0.1rem"}}>
+                        <div className="row mb-3 sidebar__search" style={{marginLeft: "0.1rem", marginRight: "0.1rem", backgroundColor: "rgba(64, 51, 38, 0.8)"}}>
                             <div className="col-md-2">
                                 <label className="form-label">{t("Type")}</label>
                                 <select className="form-select" value={articleType}
@@ -141,7 +141,7 @@ export const Articles: FC = () => {
                                 </>
                                 ) : <div className="col-md-4" />}
                             <div className="col-md-4 align-items-end justify-content-end">
-                                <SidebarSearch showTitle={false}/>
+                                <SidebarSearch showTitle={false} style={{backgroundColor:"transparent", boxShadow:"none"}}/>
                             </div>
 
                             <div className="col-md-2 d-flex align-items-center gap-2">

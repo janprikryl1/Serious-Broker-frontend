@@ -101,7 +101,7 @@
 
 .table-header-cell:first-child {
   border-right: 1px solid #66625e;
-  background-color: #292521;
+  background-color: rgba(64, 51, 38, 0.4);
 }
 
 .table-row {
@@ -125,7 +125,7 @@
 
 .table-cell:first-child {
   border-right: 1px solid #66625e;
-  background-color: #292521;
+  background-color: rgba(64, 51, 38, 0.4);
 }
 
 @media (min-width: 769px) {
@@ -209,7 +209,7 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  background-color: #292521;
+  background-color: rgba(64, 51, 38, 0.4);
 }
 
 .recom-table-header-cell-secondary {
@@ -228,7 +228,7 @@
 
 .reco-table-cell:first-child {
   border-right: 1px solid #66625e;
-  background-color: #292521;
+  background-color: rgba(64, 51, 38, 0.4);
 }
 
 .reco-table-cell:last-child {

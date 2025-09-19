@@ -179,7 +179,7 @@ export const Recommendation: FC = () => {
             <div className="blog mt-4 padding-bottom">
                 <div className="container">
                     <h3>{t("List of pairs")}</h3>
-                    <div className="row mb-3 sidebar__search table-row-spacing" style={{maxWidth:"100%", marginLeft:0}}>
+                    <div className="row mb-3 sidebar__search table-row-spacing" style={{maxWidth:"100%", marginLeft:0, backgroundColor: "rgba(64, 51, 38, 0.8)"}}>
                         <div className="col-md-3">
                             <label className="form-label">{t("Included currencies")}</label>
                             {avaibleCoins && <Select closeMenuOnSelect={false} components={animatedComponents} isMulti options={currencyOptions} placeholder={t("Select coins")} noOptionsMessage={() => t("No coins")} value={currencyOptions?.filter((opt) => includeCurrencies.includes(opt.label))} onChange={(selectedOptions) => setIncludedCurrencies(selectedOptions.map((opt) => opt.label))} styles={selectStyles} />}

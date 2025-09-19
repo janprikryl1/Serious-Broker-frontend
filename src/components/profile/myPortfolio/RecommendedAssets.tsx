@@ -5,7 +5,7 @@ import {getThreeLastAssetsGraphData} from "../../../utils/api/binanceIndexAssets
 import {ProfileOverviewAsset} from "../../../pages/profile/ProfileOverviewAsset.tsx";
 
 export const RecommendedAssets: FC = () => {
-    const [assetsData, setAssetsData] = useState<RecommendedProfileAssetType[]>([]);
+    const [assetsData, setAssetsData] = useState<RecommendedProfileAssetType[]>();
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
 
@@ -43,7 +43,8 @@ export const RecommendedAssets: FC = () => {
                     <div className="col-12 alert alert-warning text-center">
                         Could not load recommended index funds: {error}
                     </div>
-                ) : assetsData.length === 0 ? (
+                ) : assetsData === undefined ? <></>
+                  : assetsData.length === 0 ? (
                     <div className="col-12 text-center text-muted">
                         No recommended index funds found.
                     </div>

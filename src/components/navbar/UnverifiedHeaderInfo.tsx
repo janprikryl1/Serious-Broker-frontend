@@ -40,12 +40,12 @@ export const UnverifiedHeaderInfo:FC = () => {
 
     if (user?.verified == false && !isVerifyAccountPage) {
         return (
-            <header className="header-section unverified-header-container">
-                <div className="header-bottom">
+            <header className="header-section" style={{backgroundColor:"black"}}>
+                <div className="header-bottom" style={{marginTop:20, paddingTop:5, paddingBottom:10}}>
                     <div className="container">
-                        <div className="header-wrapper d-flex">
+                        <div className="header-wrapper d-flex" style={{backgroundColor:"black"}}>
                             <div className="menu-area d-flex">
-                                <CiWarning size={40} />
+                                <CiWarning size={30} style={{marginBottom:20}} />
                             </div>
                             <div className="menu-area d-flex">
                                 <h3>{t("Your email is not verified yet.")}</h3>

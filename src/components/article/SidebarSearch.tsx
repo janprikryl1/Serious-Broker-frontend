@@ -1,4 +1,4 @@
-import {FC, FormEvent, useState} from "react";
+import {CSSProperties, FC, FormEvent, useState} from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import {routes} from "../../utils/constants";
@@ -6,9 +6,10 @@ import {routes} from "../../utils/constants";
 type Props = {
     param?: string;
     showTitle?: boolean;
+    style?: CSSProperties;
 };
 
-export const SidebarSearch: FC<Props> = ({ param = "", showTitle = true }) => {
+export const SidebarSearch: FC<Props> = ({ param = "", showTitle = true, style }) => {
     const { t } = useTranslation();
     const [searchText, setSearchText] = useState(param);
     const navigate = useNavigate();
@@ -21,7 +22,7 @@ export const SidebarSearch: FC<Props> = ({ param = "", showTitle = true }) => {
     };
 
     return (
-        <div className="sidebar__search">
+        <div className="sidebar__search" style={style}>
             {showTitle && <h6 className="mb-10">{t("Search Here")}</h6>}
             <div className="sidebar__search-body">
                 <form onSubmit={handleSearch}>
