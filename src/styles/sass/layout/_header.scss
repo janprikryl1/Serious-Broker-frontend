@@ -44,7 +44,7 @@
   @extend %d-flex,
   %justify-between,
   %align-i-center;
-  background: #1e1702;
+  background: $thm-brown-dark-color;
   padding-block: 6px;
   min-height: 56px;
   margin-top:5%;
@@ -465,19 +465,22 @@
 
 .page-header {
   @extend %p-rel, %of-hidden;
-  padding-block: 70px;
+  //padding-block: 70px;
   background-repeat: no-repeat;
   background-position: top 10px center;
   background-color: rgb(49, 46, 40);
   border-radius: 4px;
+  justify-content: center;
+  height: 100%;
+  boxShadow: 0 0 25px rgba(0, 0, 0, 0.1);
 
-  @include breakpoint(lg) { padding-block: 100px; }
+  @include breakpoint(lg) { padding-block: 40px; }
 
   &::before {
     content: "";
     position: absolute;
     inset: 0;
-    background: rgba(27, 20, 0, 0.6);
+    background: rgba(17, 13, 9, 0.74);
   }
 
   &__content {
@@ -487,8 +490,8 @@
 
     h2 {
       color: $bg-white;
-      margin-top: -5%;
-      @include breakpoint(lg) { margin-bottom: 15px; }
+      margin-top: 20px;
+      //@include breakpoint(lg) { margin-bottom: 15px; }
     }
   }
 }

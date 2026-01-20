@@ -38,10 +38,14 @@ textarea {
 
 
 .form-control {
-    background-color: $wh-color;
+    //background-color: $wh-color;
     border-color: $form-border;
     padding: 13px 20px;
     border-radius: 8px;
+    background-color: $thm-brown-dark-color;
+    justify-items: center;
+    //width: 70px;
+    //height: 30px;
     color: $title-color;
 
     @include breakpoint(lg) {
@@ -51,23 +55,89 @@ textarea {
     &:focus {
         box-shadow: none;
         border-color: $brand-color;
-        background-color: $wh-color;
+        background-color: #FFFFFF20;
         color: $title-color;
     }
+
+    &:disabled {
+      background-color: #FFFFFF20;
+      color: $thm-gray-dark-color;
+    }
+}
+
+.form-select {
+  background-color: $thm-brown-dark-color;
+  border-color: $form-border;
+  border-radius: 8px;
+  color: $title-color;
+
+  &:focus {
+    box-shadow: none;
+    border-color: $brand-color;
+    background-color: #70665C;
+    color: $title-color;
+  }
+}
+
+.form-control-custom[type=number]::-webkit-inner-spin-button,
+.form-control-custom[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.form-control-custom[type=number] {
+  -moz-appearance: textfield;
 }
 
 .form-check-input {
     background-color: $wh-color;
 }
 
+.custom-checkbox {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+
+  input[type="checkbox"] {
+    opacity: 0;
+    position: absolute;
+    width: 0;
+    height: 0;
+  }
+
+  span.checkbox-box {
+    width: 20px;
+    height: 20px;
+    border: 2px solid $brand-color;
+    border-radius: 4px;
+    display: inline-block;
+    margin-right: 8px;
+    transition: all 0.2s ease;
+  }
+
+  input[type="checkbox"]:checked + span.checkbox-box {
+    background-color: $brand-color;
+  }
+}
+
+
 .form-label {
-    @extend %mb-5,
-    %text-semibold;
+    display: flex;
+    align-items: center;
+    margin: 0;
+    line-height: 1;
+
     @include font-size(18px);
     & {
-        font-family: $text-font;
+        font-family: 'PT Sans', sans-serif;
+        font-weight: 400;
         color: $title-color;
     }
+}
+
+.form-label.disabled {
+    color: #6C6860;
 }
 
 .input-group {

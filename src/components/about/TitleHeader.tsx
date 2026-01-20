@@ -4,23 +4,27 @@ import HeaderImage from "../../utils/icons/cta/sticks_graph.webp";
 
 type Props = {
   title: string;
+  title2?: string;
   text?: string;
 };
 
-export const TitleHeader: FC<Props> = ({ title, text = "" }) => {
+export const TitleHeader: FC<Props> = ({ title, title2 = "", text = "" }) => {
   const {t} = useTranslation();
 
   return (
-      <div className="container">
-          <section className="page-header bg--cover" style={{backgroundImage: `url(${HeaderImage})`}}>
-            <div
-                className="page-header__content"
-                data-aos="fade-right"
-                data-aos-duration="1000"
-            >
-              <h2>{t(title)}</h2>
-              <small>{t(text)}</small>
-            </div>
+      <div className="container" >
+          <section className="page-header shadow bg--cover" style={{backgroundImage: `url(${HeaderImage})`}}>
+              <div
+                  className="page-header__content"
+                  data-aos="fade-right"
+                  data-aos-duration="1000"
+              >
+                  <div style={{display: "flex", gap: "20px", alignItems: "baseline"}}>
+                      <h2>{t(title)}</h2>
+                      {title2 && <h2 className={"secondary-title"}>{title2}</h2>}
+                  </div>
+                  {text && <small>{t(text)}</small>}
+              </div>
           </section>
       </div>
   );

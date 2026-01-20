@@ -2,18 +2,23 @@ import {Dispatch, FC, SetStateAction, useEffect, useMemo, useRef, useState} from
 import { Form } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import {
-    ResponsiveChartContainer,
     LinePlot,
     ScatterPlot,
     ChartsReferenceLine,
     ChartsXAxis,
     ChartsYAxis,
-    ChartsTooltip,
+    ChartsTooltip, ChartContainer,
 } from "@mui/x-charts";
 import { getBinanceIndexAssetPriceGraphData } from "../../utils/api/GraphsService.ts";
 import { CustomSwal } from "../../utils/functions/customSwal.ts";
 import { RecommendationDetailSeasonEnum } from "../../utils/enums/RecommendationDetailSeasonEnum.ts";
 import {createDateFormatters, parseBackendUtc, timeZoneOptions} from "../../utils/functions/dateFunctions.ts";
+
+/*
+* Big recommendation graph
+* URL: https://serious.broker/graphs/recommendation/detail/BTC
+* Shown on the bottom of the page
+**/
 
 type Props = {
     asset_label: string;
@@ -207,7 +212,7 @@ export const RecommendedDetailsPriceGraph: FC<Props> = ({asset_label, selectedPe
             >
                 <div style={{ width: "100%", overflowX: "auto", height: `${chartHeight}px`, position: "relative" }}>
                     {graphData && graphData.length > 0 ? (
-                        <ResponsiveChartContainer
+                        <ChartContainer
                             height={chartHeight}
                             series={[
                                 {
@@ -311,7 +316,7 @@ export const RecommendedDetailsPriceGraph: FC<Props> = ({asset_label, selectedPe
                             ))}
                             <ChartsXAxis />
                             <ChartsYAxis />
-                        </ResponsiveChartContainer>
+                        </ChartContainer>
                     ) : (
                         <div
                             style={{

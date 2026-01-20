@@ -5,6 +5,12 @@ import { useTranslation } from "react-i18next";
 import { RecommendationDetailSeasonEnum } from "../../utils/enums/RecommendationDetailSeasonEnum.ts";
 import {createDateFormatters, parseBackendUtc} from "../../utils/functions/dateFunctions.ts";
 
+/*
+* Recommendation graph
+* URL: https://serious.broker/graphs/recommendation/detail/BTC
+* Shown on the top of the page
+* */
+
 type Props = {
     asset_label: string;
     selectedPeriod: RecommendationDetailSeasonEnum;
