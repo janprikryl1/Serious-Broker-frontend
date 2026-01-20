@@ -122,7 +122,7 @@ export const BtfdDcaComparison: FC<Props> = ({asset_label}) => {
     // Compute DCA
     useEffect(() => {
 
-        if (graphData) {
+        if (graphData && filteredData) {
             const points = filteredData.map((p) => p)
 
             let totalInvested = 0;
@@ -156,7 +156,7 @@ export const BtfdDcaComparison: FC<Props> = ({asset_label}) => {
 
     // Compute BTFD
     useEffect(() => {
-        if (graphData) {
+        if (graphData && filteredData) {
 
             const points = filteredData.map((p) => p)
 
@@ -236,7 +236,7 @@ export const BtfdDcaComparison: FC<Props> = ({asset_label}) => {
                             className="form-select"
                             style={{ height: 34, maxWidth: 100 }}
                             value={selectedNumOfYears}
-                            onChange={(e) => setSelectedNumOfYears(e.target.value)}
+                            onChange={(e) => setSelectedNumOfYears(Number(e.target.value))}
                         >
                             {[1, 2, 3, 4, 5].map((n) => (
                                 <option key={n} value={n}>
@@ -285,7 +285,7 @@ export const BtfdDcaComparison: FC<Props> = ({asset_label}) => {
                             max={MAX}
                             step={0.1}
                             valueLabelDisplay="on"
-                            color="#B1974E"
+                            color={"#B1974E" as any}
                             sx={{
                                 width: 300,
                                 color: "#B1974E",
@@ -356,7 +356,7 @@ export const BtfdDcaComparison: FC<Props> = ({asset_label}) => {
                                     yAxisId: "price",
                                     type: "line",
                                     label: t("Price"),
-                                    data: filteredData.map((p) => p.closeEur),
+                                    data: filteredData?.map((p) => p.closeEur),
                                     color: "#4C4033",
                                     /*valueFormatter: (value: number | null) =>
                                         value !== null ? `${value.toFixed(2)} €` : "",*/
@@ -389,7 +389,7 @@ export const BtfdDcaComparison: FC<Props> = ({asset_label}) => {
                             xAxis={[
                                 {
                                     scaleType: "band",
-                                    data: filteredData.map((p) => `${p.datetime}`),
+                                    data: filteredData?.map((p) => `${p.datetime}`),
                                     height: 45,
                                     groups: [
                                         {

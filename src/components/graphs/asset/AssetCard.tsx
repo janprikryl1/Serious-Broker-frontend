@@ -63,7 +63,7 @@ export const AssetCard: FC<Props> = ({ index, label, details, data, inWatchList,
                             ]}
                             width={350}
                             height={150}
-                            tooltip={{ trigger: "none" }}
+                            axisHighlight={{ x: 'none', y: 'none' }}
                             sx={{
                                 backgroundColor: "#d4c6a9",
                                 "& .MuiChartsAxis-root": {

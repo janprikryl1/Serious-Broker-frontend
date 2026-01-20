@@ -5,7 +5,7 @@ type SeasonButtonProps = {
     seasonValue: string;
     isActive: boolean;
     onSelect: () => void;
-    disabled: boolean;
+    disabled?: boolean;
 };
 
 export const SeasonButton: FC<SeasonButtonProps> = ({ seasonValue, isActive, onSelect, disabled = false }) => {

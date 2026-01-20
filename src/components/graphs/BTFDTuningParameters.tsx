@@ -157,7 +157,7 @@ export const BTFDTuningParameters:FC = () => {
         }
 
         const baseSettings = settings[0];
-        const differingParameterIndexes = [];
+        const differingParameterIndexes: number[] = [];
 
         for (let i = 1; i < settings.length; i++) {
             const currentSettings = settings[i];
@@ -198,7 +198,7 @@ export const BTFDTuningParameters:FC = () => {
 
                             <div className="container mt-4">
 
-                                {results.map((asset, assetIndex) => (
+                                {results?.map((asset, assetIndex) => (
                                     <div key={assetIndex} className="mb-5">
 
                                         <h3 className="mt-4 mb-3">{asset.assetName}</h3>
@@ -232,7 +232,7 @@ export const BTFDTuningParameters:FC = () => {
                                                     // Priorita (else if) zabezpečí, že sa zvýrazní len jedna bunka,
                                                     // presne ako v tvojej pôvodnej funkcii.
 
-                                                    let highlightType = null; // null, 'multiplier', 'period', alebo 'maxDrop'
+                                                    let highlightType: string | null = null; // null, 'multiplier', 'period', alebo 'maxDrop'
 
                                                     if (settingIndex > 0) { // Prvý riadok (index 0) nezvýrazňujeme
                                                         if (currentSetting.multiplier !== baseSetting.multiplier) {

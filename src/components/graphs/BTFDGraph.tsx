@@ -72,7 +72,7 @@ export const BTFDGraph: FC<Props> = ({ graphData, datetimes }) => {
     //console.log("datetimes: ", datetimes);
 
     function decimate(data: number[], step: number) {
-        const out = [];
+        const out: number[] = [];
         for (let i = 0; i < data.length; i += step) out.push(data[i]);
         return out;
     }

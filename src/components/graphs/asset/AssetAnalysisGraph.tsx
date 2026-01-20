@@ -104,7 +104,7 @@ export const AssetAnalysisGraph: FC<Props> = ({isInWatchList, handleToggleWatchL
                                 valueFormatter: (value) => value,
                             }]}
 
-                            tooltip={{ trigger: "axis" }}
+                            axisHighlight={{ x: 'line' }}
                             sx={{
                                 backgroundColor: "transparent",
                                 "& .MuiChartsAxis-root": {

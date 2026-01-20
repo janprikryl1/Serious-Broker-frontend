@@ -25,7 +25,7 @@ export const AssetGraphPieChart: FC<Props> = ({ assets }) => {
                 slotProps={{
                     legend: {
                         hidden: true,
-                    }
+                    } as any
                 }}
                 width={360}
                 height={240}
