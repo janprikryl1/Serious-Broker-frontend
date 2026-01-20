@@ -46,7 +46,7 @@ export const getBinanceIndexAssetPriceGraphData = async (assetLabel: string, sel
 
 /* Used in RecommendedDetailsPriceGraph_new */
 export const getBinanceIndexAssetAverageGraphData = async (assetLabel: string, numberOfWeeks: number) => {
-    return await axios.get(`http://localhost/bakalarka_backend-main/bakalarka_backend-main/graphs/binance_index_assets/get_average_asset_buy_hourly.php`, {
+    return await axios.get(`${backendUrl}graphs/binance_index_assets/get_average_asset_buy_hourly.php`, {
         params: {
             asset_label: assetLabel,
             number_of_weeks: numberOfWeeks
@@ -56,7 +56,7 @@ export const getBinanceIndexAssetAverageGraphData = async (assetLabel: string, n
 
 /* Used in BtfdDcaComparison */
 export const getAssetSpotKlines = async (assetLabel: string, numberOfYears: number, endDate?: string) => {
-    return await axios.get(`http://localhost/bakalarka_backend-main/bakalarka_backend-main/graphs/asset_klines.php`, {
+    return await axios.get(`${backendUrl}graphs/asset_klines.php`, {
         params: {
             asset_label: assetLabel,
             num_of_years: numberOfYears,
