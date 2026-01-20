@@ -1,14 +1,24 @@
-$thm-brand-color: #b1964d;
-$thm-brand-color-dark: #b1964d;
+$thm-primary-color: #B1974E;
+$thm-brand-color-dark: #B1974E;
 
-$thm-secondary-color: #b1964d;
-$thm-secondary-color-dark:#b1964d;
+$thm-brown-dark-color: #251F19;
+$thm-brown-dark-color-dark:#251F19;
 
-$thm-tertiary-color:#FFFDFA;
-$thm-tertiary-color-dark: #986d28;
+$thm-brown-light-color:#4C4033;
+$thm-brown-light-color-dark: #4C4033;
 
-$thm-tertiary-color2:#FFFDFA;
-$thm-tertiary-color2-dark: #fdc872;
+$thm-cream-color:#FFF4E5;
+$thm-cream-dark: #FFF4E5;
+
+$thm-gray-dark-color: #ABA7A0;
+$thm-gray-light-color: #C3C0BB;
+
+$thm-white-color: #FFF8EF;
+$thm-my-black-color: #0A0704;
+$thm-black-color: #0A0704;
+$thm-sandy-color: #ADA08D;
+
+//
 
 $thm-tertiary-color3:#FFFDFA;
 $thm-tertiary-color3-dark: #986d28;
@@ -95,7 +105,6 @@ $thm-form-focus-dark: #366CD5;
 $thm-wh-color:#FFFDFA;
 $thm-wh-color-dark: rgba(64, 51, 38, 0.8);
 
-$thm-black-color:#0A0704;
 $thm-black-color-dark:#FFFDFA;
 
 
@@ -112,14 +121,19 @@ $thm-success-dark: #12B76A;
 $thm-danger-light: #FF0000;
 $thm-danger-dark: #FF0000;
 
-
-
 //===================== Theme varibale for  ** Light ** ===================== //
 :root {
-    --brand-color:#{$thm-brand-color};
-    --secondary-color:#{$thm-secondary-color};
-    --tertiary-color:#{$thm-tertiary-color};
-    --tertiary-color2:#{$thm-tertiary-color2};
+    --brand-color:#{$thm-primary-color};
+    --brown-dark-color:#{$thm-brown-dark-color};
+    --brown-light-color:#{$thm-brown-light-color};
+    --cream-color:#{$thm-cream-color};
+    --gray-dark-color:#{$thm-gray-dark-color};
+    --gray-light-color:#{$thm-gray-light-color};
+    --white-color:#{$thm-white-color};
+    --black-color:#{$thm-my-black-color};
+    --sandy-color:#{$thm-sandy-color};
+
+
     --tertiary-color3:#{$thm-tertiary-color3};
     --tertiary-color4:#{$thm-tertiary-color4};
     --body-color:#{$thm-body-color-light};
@@ -203,7 +217,6 @@ $thm-danger-dark: #FF0000;
 
     // others colors
     --wh-color:#{$thm-wh-color};
-    --black-color:#{$thm-black-color};
 
     --floating-content-border-color: rgba(0, 0, 0, 0.02);
     --floating-content-bg-color: rgba(255, 255, 255, 0.90);
@@ -290,9 +303,9 @@ $thm-danger-dark: #FF0000;
 
     & {
         --brand-color: #{$thm-brand-color-dark};
-        --secondary-color: #{$thm-secondary-color-dark};
-        --tertiary-color: #{$thm-tertiary-color-dark};
-        --tertiary-color2: #{$thm-tertiary-color2-dark};
+        --brown-dark-color: #{$thm-brown-dark-color-dark};
+        --brown-light-color: #{$thm-brown-light-color-dark};
+        --cream-color: #{$thm-cream-dark};
         --tertiary-color3: #{$thm-tertiary-color3-dark};
         --tertiary-color4: #{$thm-tertiary-color4-dark};
         --body-color: #{$thm-body-color-dark};
@@ -371,7 +384,6 @@ $thm-danger-dark: #FF0000;
 
         // others colors
         --wh-color: #{$thm-wh-color-dark};
-        --black-color: #{$thm-black-color-dark};
 
         --floating-content-border-color: rgba(0, 0, 0, 0.02);
         --floating-content-bg-color: rgba(63, 81, 75, 0.80);
@@ -426,9 +438,9 @@ $thm-danger-dark: #FF0000;
 }
 
 $brand-color: var(--brand-color);
-$secondary-color: var(--secondary-color);
-$tertiary-color: var(--tertiary-color);
-$tertiary-color2: var(--tertiary-color2);
+$secondary-color: var(--brown-dark-color);
+$tertiary-color: var(--brown-light-color);
+$tertiary-color2: var(--cream-color);
 $tertiary-color3: var(--tertiary-color3);
 $tertiary-color4: var(--tertiary-color4);
 

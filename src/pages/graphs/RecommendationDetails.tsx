@@ -16,6 +16,11 @@ import {RecommendationDetailsSell} from "../../components/graphs/RecommendationD
 import {RecommendationProfitGraph} from "../../components/graphs/RecommendationProfitGraph.tsx";
 import {RecommendedDetailsPriceGraph} from "../../components/graphs/RecommendedDetailsPriceGraph.tsx";
 
+/*
+*  URL: https://serious.broker/graphs/recommendation/detail/BTC
+*  login -> pairs -> search asset or select from the table
+* */
+
 export const RecommendationDetails:FC = () => {
     const {t} = useTranslation();
     const {asset_label} = useParams<{ asset_label: string }>();
@@ -54,6 +59,9 @@ export const RecommendationDetails:FC = () => {
 
                                     <RecommendedSeasonSelect selectedPeriod={selectedPeriod} setSelectedPeriod={setSelectedPeriod} />
 
+                                    {/* Based on selected period react component is chosen
+                                        only for displaying stats and information next to graph */}
+
                                     <div className="row">
                                         <div className="col-sm-5">
                                             {selectedPeriod === RecommendationDetailSeasonEnum.Week ? (
@@ -66,6 +74,9 @@ export const RecommendationDetails:FC = () => {
                                                 <RecommendationDetailsYearDetails detailsData={detailsData}/>
                                             ) : null}
                                         </div>
+
+                                        {/* Firsth graph component */}
+
                                         <div className="col-sm">
                                             {asset_label && <RecommendationProfitGraph asset_label={asset_label} selectedPeriod={selectedPeriod} selectedTimeZone={selectedTimeZone} />}
                                         </div>
@@ -86,10 +97,16 @@ export const RecommendationDetails:FC = () => {
                                             <option value="sell">{t("When to sell")}</option>
                                         </select>
                                     </div>
+
+                                    {/* Recommendation stats and data */}
+
                                     <div className="row">
                                     {selectedDropdown === "buy" && <RecommendationDetailsBuy detailsData={detailsData} selectedTimeZone={selectedTimeZone} />}
                                     {selectedDropdown === "sell" && <RecommendationDetailsSell detailsData={detailsData} selectedTimeZone={selectedTimeZone} />}
                                     </div>
+
+                                    {/* Recommendation graph */}
+
                                     {asset_label && <RecommendedDetailsPriceGraph asset_label={asset_label} selectedPeriod={selectedPeriod} selectedTimeZone={selectedTimeZone} setSelectedTimezone={setSelectedTimeZone}/>}
                                 </div>
                             </div>

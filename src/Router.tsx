@@ -3,6 +3,7 @@ import {Route, Routes} from "react-router-dom";
 import {adminURLS, editorURLS, guideURLS, routes} from "./utils/constants";
 import {PageLoader} from "./components/reusable/PageLoader.tsx";
 import {EditorOverview} from "./pages/editor/EditorOverview.tsx";
+import {BTFDTuningParameters} from "./components/graphs/BTFDTuningParameters.tsx";
 const Index = lazy(() => import("./pages/Index.tsx").then(module => ({ default: module.Index })));
 const About = lazy(() => import("./pages/About.tsx").then(module => ({ default: module.About })));
 const Contact = lazy(() => import("./pages/Contact.tsx").then(module => ({ default: module.Contact })));
@@ -16,7 +17,7 @@ const Recommendation = lazy(() => import("./pages/graphs/Recommendation.tsx").th
 const Glossary = lazy(() => import("./pages/Glossary.tsx").then(module => ({ default: module.Glossary })));
 const CryptoCurrenciesList = lazy(() => import("./pages/CryptoCurrenciesList.tsx").then(module => ({ default: module.CryptoCurrenciesList })));
 const CryptoCurrencyDetail = lazy(() => import("./pages/CryptoCurrencyDetail.tsx").then(module => ({ default: module.CryptoCurrencyDetail })));
-const RecommendationDetails = lazy(() => import("./pages/graphs/RecommendationDetails.tsx").then(module => ({ default: module.RecommendationDetails })));
+const RecommendationDetails_new = lazy(() => import("./pages/graphs/RecommendationDetails_new.tsx").then(module => ({ default: module.RecommendationDetails_new })));
 const VerifyAccount = lazy(() => import("./pages/VerifyAccount.tsx").then(module => ({ default: module.VerifyAccount })));
 const ForgottenPassword = lazy(() => import("./pages/ForgottenPassword.tsx").then(module => ({ default: module.ForgottenPassword })));
 const RecoverPassword = lazy(() => import("./pages/RecoverPassword.tsx").then(module => ({ default: module.RecoverPassword })));
@@ -93,7 +94,7 @@ export const Router:FC = () => {
             <Route path={routes.dictionary} element={<PageLoader><Glossary /></PageLoader>} />
             <Route path={routes.cryptocurrenciesList} element={<PageLoader><CryptoCurrenciesList /></PageLoader>} />
             <Route path={routes.cryptocurrencyDetail} element={<PageLoader><CryptoCurrencyDetail /></PageLoader>} />
-            <Route path={routes.graphsRecommendationDetail} element={<PageLoader><RecommendationDetails /></PageLoader>} />
+            <Route path={routes.graphsRecommendationDetail} element={<PageLoader><RecommendationDetails_new /></PageLoader>} />                                                   {/**/}
             <Route path={routes.signIn} element={<PageLoader><SignIn /></PageLoader>} />
             <Route path={routes.register} element={<PageLoader><Register /></PageLoader>} />
             <Route path={routes.verifyAccount} element={<PageLoader><VerifyAccount /></PageLoader>} />
@@ -162,6 +163,8 @@ export const Router:FC = () => {
             <Route path="welcome" element={<PageLoader><Welcome /></PageLoader>} />
             <Route path="welcome/premium" element={<PageLoader><WelcomePremium /></PageLoader>} />
             <Route path="*" element={<PageLoader><ErrorPage /></PageLoader>} />
+            <Route path="BTFDTuning" element={<PageLoader><BTFDTuningParameters/></PageLoader>} />
+
         </Routes>
     );
 }

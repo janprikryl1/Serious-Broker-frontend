@@ -87,7 +87,7 @@
 
 .font-footer {
   font-size: 16px;
-  color: #aba7a0;
+  color: $thm-gray-light-color;
 }
 
 @media (max-width: 767px) {
@@ -110,7 +110,7 @@
 }
 
 .active-yellow {
-  color: #B1974E !important;
+  color: $brand-color !important;
 }
 
 .img-start-investing-with-serious-broker {
@@ -163,7 +163,7 @@
 }
 
 .index-short-expressive-text {
-  background-color: #4b4135;
+  background-color: $brand-color;
   color: #fff;
   padding: 40px;
   font-weight: 700;

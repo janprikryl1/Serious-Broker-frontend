@@ -3,6 +3,11 @@ import {toPercentTwoDecimal} from "../../utils/functions/functions.ts";
 import { useTranslation } from "react-i18next";
 import {BinanceIndexAssetRecomBestPreviousDetails} from "../../utils/types/graphs/BinanceIndexAssetRecomBestPreviousDetails.ts";
 
+/*
+* Info and stats to weekly analytics
+* URL: https://serious.broker/graphs/recommendation/detail/BTC
+* */
+
 type Props = {
     detailsData: BinanceIndexAssetRecomBestPreviousDetails;
 }

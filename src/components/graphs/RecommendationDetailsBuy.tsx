@@ -4,6 +4,11 @@ import { useTranslation } from "react-i18next";
 import { BinanceIndexAssetRecomBestPreviousDetails } from "../../utils/types/graphs/BinanceIndexAssetRecomBestPreviousDetails.ts";
 import { isValid } from "./RecommendationDetailsSell.tsx";
 
+/*
+* Info and details of recommendation
+* URL: https://serious.broker/graphs/recommendation/detail/BTC
+* */
+
 type Props = {
     detailsData: BinanceIndexAssetRecomBestPreviousDetails;
     selectedTimeZone: string;
