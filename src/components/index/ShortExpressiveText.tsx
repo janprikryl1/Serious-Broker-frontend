@@ -22,7 +22,7 @@ export const ShortExpressiveText:FC = () => {
                 <h2 className="index-section-head-title">{t("Investiční dotazník")}</h2>
                 <p className="mb-4 text-light index-description">{t("Fill out a short investment questionnaire so we can prepare better recommendations for you.")}</p>
 
-                <div className="index-short-expressive-text">
+                <div className="index-short-expressive-text" >
                     <p style={{marginBottom: "20px"}}>
                         <span style={{color:"#ad9747"}}>1</span> 2 3 4 5
                     </p>

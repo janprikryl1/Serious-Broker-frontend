@@ -10,7 +10,7 @@ export const SliderPageSeriousBroker: FC = () => {
     const { t } = useTranslation();
 
     return (
-        <SharedSlideLayout imageUrl={Logo} backgroundSize={"35% 140%"} backgroundPosition={"90% 40%"}>
+        <SharedSlideLayout imageUrl={Logo} backgroundSize={"contain"} backgroundPosition={"90% bottom"}>
             <div>
                 <h3 className="slide-title-your-money-your-rules">{t("Your Money,") + t("Your Rules")}</h3>
                 <p className="slide-description-your-money-your-rules">{t("Savings in crypto.")}</p>

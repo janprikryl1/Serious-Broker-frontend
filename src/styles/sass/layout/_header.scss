@@ -44,7 +44,7 @@
   @extend %d-flex,
   %justify-between,
   %align-i-center;
-  background: $thm-brown-dark-color;
+  background: $primary-color;
   padding-block: 6px;
   min-height: 56px;
   margin-top:5%;
@@ -71,8 +71,8 @@
 
       .wordmark {
         width: 120px;
-        @include breakpoint(lg) { width: 140px; }
-        @include breakpoint(xl) { width: 160px; }
+        @include breakpoint(lg) { width: 300px; }
+        @include breakpoint(xl) { width: 300px; }
       }
     }
 

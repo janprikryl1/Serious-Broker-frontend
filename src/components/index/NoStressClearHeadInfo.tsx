@@ -4,7 +4,7 @@ import {Button, ButtonColor} from "../reusable/Button.tsx";
 import {Link} from "react-router-dom";
 import {guideURLS} from "../../utils/constants";
 
-export const NoStressClearHeadInfo:FC = () => {
+export const NoStressClearHeadInfo: FC = () => {
     const {t} = useTranslation();
 
     return (
@@ -15,9 +15,9 @@ export const NoStressClearHeadInfo:FC = () => {
                 <p className="text-dark text-bolder index-description">{t("Instead of stress, you can shop with a clear head and benefit from the favorable turn in the cryptocurrency market.")}</p>
                 <div style={{ display: "flex", justifyContent: "center" }}>
                     <Link to={guideURLS.personalStrategy}>
-                        <Button color={ButtonColor.brown} style={{ color:"white" }}>
+                        {/*<Button color={ButtonColor.brown} style={{ color:"white" }}>
                             {t("Personal story")}
-                        </Button>
+                        </Button>*/}
                     </Link>
                 </div>
             </div>

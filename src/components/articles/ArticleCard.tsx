@@ -53,15 +53,20 @@ export const ArticleCard:FC<Props> = ({data, link = "article", setData}) => {
                                 Premium
                             </span>
                         }
-                        <button style={{background:"none", border:"none"}} disabled={!user}>{!data.in_watchlist ? <FaRegBookmark style={{marginLeft: 10, marginBottom: 5}} onClick={handleAddToWatchList}/> : <FaBookmark style={{marginLeft: 10, marginBottom: 5}} onClick={handleRemoveFromWatchList} />}</button>
+                        <button style={{background: "none", border: "none", color: "#FFFFFF"}} disabled={!user}>{!data.in_watchlist ? <FaRegBookmark style={{marginLeft: 10, marginBottom: 5}} onClick={handleAddToWatchList}/> : <FaBookmark style={{marginLeft: 10, marginBottom: 5}} onClick={handleRemoveFromWatchList} />}</button>
                     </div>
                     <h5 className="10 style2">
-                        <Link to={`/${link}/${data.id}`} className="link-underline-none" style={{fontWeight: data.is_read ? "normal" : "bold"}}>{data.title}</Link>
+                        <Link to={`/${link}/${data.id}`} className="link-underline-none" style={{fontWeight: data.is_read ? "normal" : "bold", color: "var(--white-color)"}}>{data.title}</Link>
                     </h5>
-                    <p className="mb-15" style={{height: 100, fontWeight: data.is_read ? "normal" : "bold"}}>{data.description}</p>
+                    <p className="mb-15" style={{height: 100, fontWeight: "normal"}}>{data.description}</p>
                     <div className="blog__writer">
-                        <div className="blog__writer-designation">
-                            <p>{data.user_firstname} {data.user_surname} <span>{toCzechDateFormat(data.changed)}</span></p>
+                        <div className="blog__writer-designation d-flex align-items-center">
+                            <div style={{marginRight: "20px"}}>
+                                <p>{data.user_firstname} {data.user_surname}</p>
+                            </div>
+                            <div>
+                                <p><span>{toCzechDateFormat(data.changed)}</span></p>
+                            </div>
                         </div>
                     </div>
                 </div>
