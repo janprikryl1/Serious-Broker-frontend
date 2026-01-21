@@ -1,22 +1,21 @@
-$thm-primary-color: #B1974E;
-$thm-brand-color-dark: #B1974E;
-
-$thm-brown-dark-color: #251F19;
+$primary-color: #251F19;
 $thm-brown-dark-color-dark:#251F19;
 
-$thm-brown-light-color:#4C4033;
+$secondary-color: #B1974E;
+$thm-brand-color-dark: #B1974E;
+
+$tertiary-color:#4C4033;
 $thm-brown-light-color-dark: #4C4033;
 
-$thm-cream-color:#FFF4E5;
+$cream-color:#FFF4E5;
 $thm-cream-dark: #FFF4E5;
 
-$thm-gray-dark-color: #ABA7A0;
-$thm-gray-light-color: #C3C0BB;
+$white-color: #FDFAF5;
+$black-color: #0A0704;
 
-$thm-white-color: #FFF8EF;
-$thm-my-black-color: #0A0704;
-$thm-black-color: #0A0704;
-$thm-sandy-color: #ADA08D;
+$gray-1-color: #ABA7A0;
+$gray-2-color: #C3C0BB;
+$sandy-color: #ADA08D;
 
 //
 
@@ -123,15 +122,15 @@ $thm-danger-dark: #FF0000;
 
 //===================== Theme varibale for  ** Light ** ===================== //
 :root {
-    --brand-color:#{$thm-primary-color};
-    --brown-dark-color:#{$thm-brown-dark-color};
-    --brown-light-color:#{$thm-brown-light-color};
-    --cream-color:#{$thm-cream-color};
-    --gray-dark-color:#{$thm-gray-dark-color};
-    --gray-light-color:#{$thm-gray-light-color};
-    --white-color:#{$thm-white-color};
-    --black-color:#{$thm-my-black-color};
-    --sandy-color:#{$thm-sandy-color};
+    --brand-color:#{$secondary-color};
+    --brown-dark-color:#{$primary-color};
+    --brown-light-color:#{$tertiary-color};
+    --cream-color:#{$cream-color};
+    --gray-dark-color:#{$gray-1-color};
+    --gray-light-color:#{$gray-2-color};
+    --white-color:#{$white-color};
+    --black-color:#{$black-color};
+    --sandy-color:#{$sandy-color};
 
 
     --tertiary-color3:#{$thm-tertiary-color3};
@@ -438,8 +437,8 @@ $thm-danger-dark: #FF0000;
 }
 
 $brand-color: var(--brand-color);
-$secondary-color: var(--brown-dark-color);
-$tertiary-color: var(--brown-light-color);
+//$secondary-color: var(--brown-dark-color);
+//$tertiary-color: var(--brown-light-color);
 $tertiary-color2: var(--cream-color);
 $tertiary-color3: var(--tertiary-color3);
 $tertiary-color4: var(--tertiary-color4);

@@ -42,7 +42,7 @@ textarea {
     border-color: $form-border;
     padding: 13px 20px;
     border-radius: 8px;
-    background-color: $thm-brown-dark-color;
+    background-color: $primary-color;
     justify-items: center;
     //width: 70px;
     //height: 30px;
@@ -61,12 +61,12 @@ textarea {
 
     &:disabled {
       background-color: #FFFFFF20;
-      color: $thm-gray-dark-color;
+      color: $gray-1-color;
     }
 }
 
 .form-select {
-  background-color: $thm-brown-dark-color;
+  background-color: $primary-color;
   border-color: $form-border;
   border-radius: 8px;
   color: $title-color;

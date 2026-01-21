@@ -167,7 +167,7 @@ export const Articles: FC = () => {
                             <DictionaryLinkCard/>
                             <CryptoCurrenciesLinkCard/>
                             {filteredArticles.map((item) => (
-                                <div key={item.id} className="col-sm-6 col-lg-4">
+                                <div key={item.id} className="col-sm-6 col-lg-6">
                                     <ArticleCard data={item} setData={setArticles}/>
                                 </div>
                             ))}
