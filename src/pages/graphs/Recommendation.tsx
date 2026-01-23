@@ -1,22 +1,20 @@
-import {FC, useCallback, useEffect, useRef, useState} from "react";
-import {
-    BinanceIndexAssetRecomBestPreviousType
-} from "../../utils/types/graphs/BinanceIndexAssetRecomBestPreviousType.ts";
-import {useTranslation} from "react-i18next";
-import {v4 as uuidv4} from "uuid";
-import {getBinanceIndexAssetRecomBestPrevious} from "../../utils/api/GraphsService.ts";
-import {TitleHeader} from "../../components/about/TitleHeader.tsx";
-import {useInfiniteScroll} from "../../utils/hooks/useInfiniteScroll.ts";
-import {RecomendationRow} from "../../components/graphs/RecomendationRow.tsx";
-import {AssetRowSkeleton} from "../../components/graphs/asset/AssetRowSkeleton.tsx";
-import {RecommendationGraphEnum} from "../../utils/enums/RecommendationGraphEnum.tsx";
-import {AvailableCoinType} from "../../utils/types/myPortfolio/availableCoinType.ts";
+import { FC, useCallback, useEffect, useRef, useState } from "react";
+import { BinanceIndexAssetRecomBestPreviousType } from "../../utils/types/graphs/BinanceIndexAssetRecomBestPreviousType.ts";
+import { useTranslation } from "react-i18next";
+import { getBinanceIndexAssetRecomBestPrevious } from "../../utils/api/GraphsService.ts";
+import { TitleHeader } from "../../components/about/TitleHeader.tsx";
+import { useInfiniteScroll } from "../../utils/hooks/useInfiniteScroll.ts";
+import { RecomendationRow } from "../../components/graphs/RecomendationRow.tsx";
+import { AssetRowSkeleton } from "../../components/graphs/asset/AssetRowSkeleton.tsx";
+import { RecommendationGraphEnum } from "../../utils/enums/RecommendationGraphEnum.tsx";
+import { AvailableCoinType } from "../../utils/types/myPortfolio/availableCoinType.ts";
 import Select from "react-select";
 import makeAnimated from "react-select/animated";
-import {selectStyles} from "../../styles/selectStyles.ts";
-import {useMediaQuery} from "@mui/material";
+import { selectStyles } from "../../styles/selectStyles.ts";
+import { useMediaQuery } from "@mui/material";
 import "../../styles/sass/components/assets.scss";
-import {FaSearch} from "react-icons/fa";
+import { FaSearch } from "react-icons/fa";
+import { useSearchParams } from "react-router-dom";
 
 const avaibleCoins: AvailableCoinType[] = [
     {id: 1, name: "BTC"},
@@ -43,24 +41,77 @@ const animatedComponents = makeAnimated();
 
 export const Recommendation: FC = () => {
     const { t } = useTranslation();
+    const [searchParams, setSearchParams] = useSearchParams();
+    const initialOrderType = (searchParams.get("orderBy") as RecommendationGraphEnum) || RecommendationGraphEnum.ALL_SUG;
+    const initialSortDirection = (searchParams.get("direction") as 'asc' | 'desc') || 'asc';
+    const initialSearchQuery = searchParams.get("searchQuery") || "";
+    const initialIncludeCurrencies = searchParams.get("includeCurrencies")
+        ? searchParams.get("includeCurrencies")!.split("|")
+        : [];
+
     const [data, setData] = useState<BinanceIndexAssetRecomBestPreviousType[]>([]);
     const [totalPages, setTotalPages] = useState<number>(1);
     const [loading, setLoading] = useState<boolean>(false);
     const isFetchingRef = useRef<boolean>(false);
     const { currentPage, loaderRef, resetPage } = useInfiniteScroll({ totalPages, loading });
-    const [orderType, setOrderType] = useState<RecommendationGraphEnum>(RecommendationGraphEnum.ALL_SUG);
-    const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('asc');
-    const [includeCurrencies, setIncludedCurrencies] = useState<string[]>([]);
-    const [searchQuery, setSearchQuery] = useState<string>("");
+    const [orderType, setOrderType] = useState<RecommendationGraphEnum>(initialOrderType);
+    const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>(initialSortDirection);
+    const [includeCurrencies, setIncludedCurrencies] = useState<string[]>(initialIncludeCurrencies);
+    const [searchQuery, setSearchQuery] = useState<string>(initialSearchQuery);
+
     const isMobile = useMediaQuery('(max-width: 768px)');
     const isInitialMount = useRef(true);
     const [isHeaderSticky, setIsHeaderSticky] = useState(false);
     const originalHeaderRef = useRef<HTMLDivElement | null>(null);
     const stickyHeaderRef = useRef<HTMLDivElement | null>(null);
 
+    const handleSort = (column: RecommendationGraphEnum) => {
+        let newDirection: 'asc' | 'desc' = 'asc';
+        if (column === orderType) {
+            newDirection = sortDirection === 'asc' ? 'desc' : 'asc';
+        } else {
+            newDirection = 'desc';
+        }
+
+        setOrderType(column);
+        setSortDirection(newDirection);
+
+        setSearchParams(prev => {
+            prev.set("orderBy", column);
+            prev.set("direction", newDirection);
+            return prev;
+        });
+    };
+
+    const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value = e.target.value;
+        setSearchQuery(value);
+        setSearchParams(prev => {
+            if (value) prev.set("searchQuery", value);
+            else prev.delete("searchQuery");
+            return prev;
+        });
+    };
+
+    const handleIncludeCurrenciesChange = (selectedOptions: any) => {
+        const selectedLabels = selectedOptions.map((opt: any) => opt.label);
+        setIncludedCurrencies(selectedLabels);
+        setSearchParams(prev => {
+            if (selectedLabels.length > 0) {
+                prev.set("includeCurrencies", selectedLabels.join("|"));
+            } else {
+                prev.delete("includeCurrencies");
+            }
+            return prev;
+        });
+    };
+
+    // --- FETCH DATA ---
+
     const fetchData = useCallback(async (pageToFetch: number, isReset: boolean = false) => {
         if (isFetchingRef.current) return;
         if (!isReset && pageToFetch > totalPages) return;
+
         isFetchingRef.current = true;
         setLoading(true);
         try {
@@ -70,8 +121,11 @@ export const Recommendation: FC = () => {
                 sortDirection,
                 { includeCurrencies, searchQuery }
             );
-            setData((prev) => (isReset ? res.data.data : [...prev, ...res.data.data]));
-            setTotalPages(res.data.totalPages);
+
+            if (res && res.data) {
+                setData((prev) => (isReset ? res.data.data : [...prev, ...res.data.data]));
+                setTotalPages(res.data.totalPages);
+            }
         } catch (e) {
             console.error("Error fetching recommendations:", e);
         } finally {
@@ -139,15 +193,6 @@ export const Recommendation: FC = () => {
         };
     }, [data, loading]);
 
-    const handleSort = (column: RecommendationGraphEnum) => {
-        if (column === orderType) {
-            setSortDirection(prev => prev === 'asc' ? 'desc' : 'asc');
-        } else {
-            setOrderType(column);
-            setSortDirection('desc');
-        }
-    };
-
     const currencyOptions = avaibleCoins?.map((coin) => ({
         value: coin.id.toString(),
         label: coin.name,
@@ -186,7 +231,19 @@ export const Recommendation: FC = () => {
                     <div className="row mb-3 sidebar__search table-row-spacing" style={{maxWidth:"100%", marginLeft:0, backgroundColor: "rgba(64, 51, 38, 0.8)"}}>
                         <div className="col-md-3">
                             <h6 className="form-label mb-1">{t("Included currencies")}</h6>
-                            {avaibleCoins && <Select closeMenuOnSelect={false} components={animatedComponents} isMulti options={currencyOptions} placeholder={t("Select coins")} noOptionsMessage={() => t("No coins")} value={currencyOptions?.filter((opt) => includeCurrencies.includes(opt.label))} onChange={(selectedOptions) => setIncludedCurrencies(selectedOptions.map((opt) => opt.label))} styles={selectStyles} />}
+                            {avaibleCoins && (
+                                <Select
+                                    closeMenuOnSelect={false}
+                                    components={animatedComponents}
+                                    isMulti
+                                    options={currencyOptions}
+                                    placeholder={t("Select coins")}
+                                    noOptionsMessage={() => t("No coins")}
+                                    value={currencyOptions?.filter((opt) => includeCurrencies.includes(opt.label))}
+                                    onChange={handleIncludeCurrenciesChange}
+                                    styles={selectStyles}
+                                />
+                            )}
                         </div>
                         <div className="col-md-3" />
                         <div className="col-sm-6 align-items-end justify-content-end mb-3">
@@ -197,7 +254,7 @@ export const Recommendation: FC = () => {
                                     className="search-input"
                                     placeholder={t("Hledat")}
                                     value={searchQuery}
-                                    onChange={(e) => setSearchQuery(e.target.value)}
+                                    onChange={handleSearchChange}
                                 />
                                 <div className="search-icon-wrapper">
                                     <FaSearch />
@@ -220,7 +277,11 @@ export const Recommendation: FC = () => {
                                 </div>
 
                                 {data.map((item, index) => (
-                                    <RecomendationRow data={item} key={uuidv4()} isLast={index === data.length - 1} />
+                                    <RecomendationRow
+                                        data={item}
+                                        key={item.id || index}
+                                        isLast={index === data.length - 1}
+                                    />
                                 ))}
                             </div>
 

@@ -22,22 +22,24 @@ import Form from "react-bootstrap/Form";
 import {Button, ButtonColor} from "../../components/reusable/Button.tsx";
 import "../../styles/sass/components/assets.scss";
 import {FaSearch} from "react-icons/fa";
+import { useSearchParams } from "react-router-dom";
 
 const animatedComponents = makeAnimated();
 
 export const Assets: FC = () => {
     const { t } = useTranslation();
     const { user } = useUserContext();
+    const [searchParams, setSearchParams] = useSearchParams();
     const [assets, setAssets] = useState<AssetType[]>([]);
     const [totalPages, setTotalPages] = useState<number>(1);
     const [loading, setLoading] = useState<boolean>(false);
-    const [orderType, setOrderType] = useState<AssetOrder>(AssetOrder.Name);
     const isFetchingRef = useRef<boolean>(false);
     const { currentPage, loaderRef, resetPage } = useInfiniteScroll({ totalPages, loading });
-    const [currencyCount, setCurrencyCount] = useState<string>("all");
-    const [includeCurrencies, setIncludedCurrencies] = useState<string[]>([]);
-    const [searchQuery, setSearchQuery] = useState<string>("");
-    const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('asc');
+    const [currencyCount, setCurrencyCount] = useState<string>(searchParams.get("currencyCount") ?? "all");
+    const [includeCurrencies, setIncludedCurrencies] = useState<string[]>(searchParams.get("includeCurrencies")
+        ? searchParams.get("includeCurrencies")!.split("|")
+        : []);
+    const [searchQuery, setSearchQuery] = useState<string>(searchParams.get("searchQuery") ?? "");
     const [showMyPortfolio, setShowMyPortfolio] = useState<"mine" | "all">("all");
     const isMobile = useMediaQuery('(max-width: 768px)');
     const isInitialMount = useRef(true);
@@ -47,6 +49,8 @@ export const Assets: FC = () => {
     const [avaibleCoins, setAvaibleCoins] = useState<AvailableCoinType[]>();
     const [isScrollEnabled, setIsScrollEnabled] = useState(false);
     const [firstLoad, setFirstLoad] = useState(true);
+    const [orderType, setOrderType] = useState<AssetOrder>((searchParams.get("orderBy") as AssetOrder) || AssetOrder.Name);
+    const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>((searchParams.get("direction") as 'asc' | 'desc') || 'asc');
 
     const getAssets = useCallback(async (pageToFetch: number, isReset: boolean = false) => {
         if (isFetchingRef.current || showMyPortfolio === "mine") return;
@@ -157,12 +161,21 @@ export const Assets: FC = () => {
     }, [assets, loading, showMyPortfolio]);
 
     const handleSort = (column: AssetOrder) => {
+        let newDirection: 'asc' | 'desc' = 'asc';
+        let newOrderType = column;
+
         if (column === orderType) {
-            setSortDirection(prev => prev === 'asc' ? 'desc' : 'asc');
+            newDirection = sortDirection === 'asc' ? 'desc' : 'asc';
         } else {
-            setOrderType(column);
-            setSortDirection('desc');
+            newDirection = 'desc';
         }
+        setOrderType(newOrderType);
+        setSortDirection(newDirection);
+        setSearchParams(prev => {
+            prev.set("orderBy", column);
+            prev.set("direction", newDirection);
+            return prev;
+        });
     };
 
     useEffect(() => {
@@ -177,6 +190,39 @@ export const Assets: FC = () => {
     const handleLoadMoreClick = () => {
         setIsScrollEnabled(true);
         getAssets(1, true);
+    };
+
+    const handleCurrencyCountChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        const value = e.target.value;
+        setCurrencyCount(value);
+        setSearchParams(prev => {
+            if (value === "all") prev.delete("currencyCount"); // Volitelné: neukládat "all" do URL pro čistotu
+            else prev.set("currencyCount", value);
+            return prev;
+        });
+    };
+
+    const handleIncludeCurrenciesChange = (selectedOptions: any) => {
+        const selectedLabels = selectedOptions.map((opt: any) => opt.label);
+        setIncludedCurrencies(selectedLabels);
+        setSearchParams(prev => {
+            if (selectedLabels.length > 0) {
+                prev.set("includeCurrencies", selectedLabels.join("|"));
+            } else {
+                prev.delete("includeCurrencies");
+            }
+            return prev;
+        });
+    };
+
+    const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value = e.target.value;
+        setSearchQuery(value);
+        setSearchParams(prev => {
+            if (value) prev.set("searchQuery", value);
+            else prev.delete("searchQuery");
+            return prev;
+        });
     };
 
     const tableHeaderContent = (
@@ -231,7 +277,7 @@ export const Assets: FC = () => {
                                     <p style={{fontSize:25, fontWeight:500, color:"white"}}>{t("Filters")}</p>
                                     <div className="col-md-3">
                                         <h6 className="form-label mb-1">{t("Currency count")}</h6>
-                                        <select className="form-select custom-form-select" value={currencyCount} onChange={e => setCurrencyCount(e.target.value)}>
+                                        <select className="form-select custom-form-select" value={currencyCount} onChange={handleCurrencyCountChange}>
                                             <option value="all">{t("All")}</option>
                                             <option value="1">1</option>
                                             <option value="2">2</option>
@@ -252,7 +298,7 @@ export const Assets: FC = () => {
                                                 placeholder={t("Select coins")}
                                                 noOptionsMessage={() => t("No coins")}
                                                 value={currencyOptions?.filter((opt) => includeCurrencies.includes(opt.label))}
-                                                onChange={(selectedOptions) => setIncludedCurrencies(selectedOptions.map((opt) => opt.label))}
+                                                onChange={handleIncludeCurrenciesChange}
                                                 styles={selectStyles}
                                             />
                                         )}
@@ -265,7 +311,7 @@ export const Assets: FC = () => {
                                                 className="search-input"
                                                 placeholder={t("Hledat")}
                                                 value={searchQuery}
-                                                onChange={(e) => setSearchQuery(e.target.value)}
+                                                onChange={handleSearchChange}
                                             />
                                             <div className="search-icon-wrapper">
                                                 <FaSearch />
