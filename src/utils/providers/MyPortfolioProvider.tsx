@@ -21,6 +21,10 @@ type MyPortfolioProps = {
     availableCoins: AvailableCoinType[];
     saveChanges: () => Promise<void>;
     isLoading: boolean;
+    investedAmount: number;
+    startInvest: string;
+    setInvestedAmount: Dispatch<SetStateAction<number>>;
+    setStartInvest: Dispatch<SetStateAction<string>>;
 };
 
 const MyPortfolioContext = createContext<MyPortfolioProps | undefined>(undefined);
@@ -35,6 +39,8 @@ export const MyPortfolioProvider = ({ children }: Props) => {
 
     const [name, setName] = useState<string>("");
     const [description, setDescription] = useState<string>("");
+    const [investedAmount, setInvestedAmount] = useState<number>(0);
+    const [startInvest, setStartInvest] = useState<string>("");
     const [asset, setAsset] = useState<Assets[]>([]);
 
     useEffect(() => {
@@ -64,6 +70,8 @@ export const MyPortfolioProvider = ({ children }: Props) => {
                 setName(portfolio.name);
                 setDescription(portfolio.description || "");
                 setAsset(portfolio.asset);
+                setInvestedAmount(portfolio.invested_amount);
+                setStartInvest(portfolio.start_invest);
             } catch (error) {
                 console.error(error);
             } finally {
@@ -100,7 +108,9 @@ export const MyPortfolioProvider = ({ children }: Props) => {
                 id: id ? parseInt(id) : undefined,
                 name: name.trim(),
                 description: description.trim(),
-                asset
+                asset,
+                invested_amount: investedAmount,
+                start_invest: startInvest
             };
 
             const response = await saveMyPortfolio(portfolioData);
@@ -134,7 +144,11 @@ export const MyPortfolioProvider = ({ children }: Props) => {
         asset,
         setAsset,
         saveChanges,
-        isLoading
+        isLoading,
+        investedAmount,
+        startInvest,
+        setInvestedAmount,
+        setStartInvest
     };
 
     return (

@@ -4,7 +4,7 @@ import {useMyPortfolioContext} from "../../../../utils/providers/MyPortfolioProv
 
 export const MyPortfolioDetails:FC = () => {
     const {t} = useTranslation();
-    const {name, setName, description, setDescription} = useMyPortfolioContext();
+    const {name, setName, description, setDescription, investedAmount, startInvest, setInvestedAmount, setStartInvest} = useMyPortfolioContext();
     
     return (
         <>
@@ -30,6 +30,31 @@ export const MyPortfolioDetails:FC = () => {
                     className="form-control"
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
+                />
+            </div>
+            <div className="mb-3">
+                <label htmlFor="portfolioDescription" className="form-label">
+                    {t("Invested amount")}
+                </label>
+                <input
+                    type="number"
+                    min={0}
+                    id="portfolioInvestedAmount"
+                    className="form-control"
+                    value={investedAmount}
+                    onChange={(e) => setInvestedAmount(Number(e.target.value))}
+                />
+            </div>
+            <div className="mb-3">
+                <label htmlFor="portfolioDescription" className="form-label">
+                    {t("Date of starting investing")}
+                </label>
+                <input
+                    type="date"
+                    id="portfolioStartInvest"
+                    className="form-control"
+                    value={startInvest}
+                    onChange={(e) => setStartInvest(e.target.value)}
                 />
             </div>
         </>

@@ -1,18 +1,20 @@
-import { FC, useEffect, useState, useRef, useCallback } from "react";
-import { BinanceIndexAssetRecomBestPreviousType } from "../../utils/types/graphs/BinanceIndexAssetRecomBestPreviousType.ts";
-import { useTranslation } from "react-i18next";
-import { v4 as uuidv4 } from "uuid";
-import { getBinanceIndexAssetRecomBestPrevious } from "../../utils/api/GraphsService.ts";
-import { TitleHeader } from "../../components/about/TitleHeader.tsx";
-import { useInfiniteScroll } from "../../utils/hooks/useInfiniteScroll.ts";
-import { RecomendationRow } from "../../components/graphs/RecomendationRow.tsx";
-import { AssetRowSkeleton } from "../../components/graphs/asset/AssetRowSkeleton.tsx";
-import { RecommendationGraphEnum } from "../../utils/enums/RecommendationGraphEnum.tsx";
-import { AvailableCoinType } from "../../utils/types/myPortfolio/availableCoinType.ts";
+import {FC, useCallback, useEffect, useRef, useState} from "react";
+import {
+    BinanceIndexAssetRecomBestPreviousType
+} from "../../utils/types/graphs/BinanceIndexAssetRecomBestPreviousType.ts";
+import {useTranslation} from "react-i18next";
+import {v4 as uuidv4} from "uuid";
+import {getBinanceIndexAssetRecomBestPrevious} from "../../utils/api/GraphsService.ts";
+import {TitleHeader} from "../../components/about/TitleHeader.tsx";
+import {useInfiniteScroll} from "../../utils/hooks/useInfiniteScroll.ts";
+import {RecomendationRow} from "../../components/graphs/RecomendationRow.tsx";
+import {AssetRowSkeleton} from "../../components/graphs/asset/AssetRowSkeleton.tsx";
+import {RecommendationGraphEnum} from "../../utils/enums/RecommendationGraphEnum.tsx";
+import {AvailableCoinType} from "../../utils/types/myPortfolio/availableCoinType.ts";
 import Select from "react-select";
 import makeAnimated from "react-select/animated";
-import { selectStyles } from "../../styles/selectStyles.ts";
-import { useMediaQuery } from "@mui/material";
+import {selectStyles} from "../../styles/selectStyles.ts";
+import {useMediaQuery} from "@mui/material";
 import "../../styles/sass/components/assets.scss";
 import {FaSearch} from "react-icons/fa";
 
@@ -167,7 +169,9 @@ export const Recommendation: FC = () => {
                     Coinmarket {orderType === RecommendationGraphEnum.CMC_RANK && (sortDirection === 'asc' ? '▲' : '▼')}
                 </div>
                 <div className="d-flex align-items-center recom-table-header-cell-secondary col-week-rank">{t("Weekly ranking")}</div>
-                <div className="d-flex align-items-center recom-table-header-cell-secondary col-week-profit">{t("Profit week")}</div>
+                <div className="d-flex align-items-center recom-table-header-cell-secondary col-week-profit" onClick={() => handleSort(RecommendationGraphEnum.WEEK_ALL_PROFIT)}>
+                    {t("Profit week")} {orderType === RecommendationGraphEnum.WEEK_ALL_PROFIT && (sortDirection === 'asc' ? '▲' : '▼')}
+                </div>
                 <div className="text-center d-flex align-items-center justify-content-center recom-table-header-cell-secondary">{t("Week recom.")}</div>
             </>}
         </div>

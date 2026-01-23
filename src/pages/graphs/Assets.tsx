@@ -165,6 +165,12 @@ export const Assets: FC = () => {
         }
     };
 
+    useEffect(() => {
+        setAssets([]);
+        getAssets(1, true);
+        setFirstLoad(false);
+    }, [orderType, sortDirection]);
+
     const currencyOptions = avaibleCoins?.map((coin) => ({ value: coin.id.toString(), label: coin.name }));
     const hasMore = currentPage < totalPages;
 
@@ -187,7 +193,7 @@ export const Assets: FC = () => {
                     <div className="table-header-cell table-header-cell-label" onClick={() => handleSort(AssetOrder.Label)}>Label {orderType === AssetOrder.Label && (sortDirection === 'asc' ? '▲' : '▼')}</div>
                     <div className="table-header-cell table-header-cell-created pe-4" onClick={() => handleSort(AssetOrder.CreatedDate)}>{t("Created")} {orderType === AssetOrder.CreatedDate && (sortDirection === 'asc' ? '▲' : '▼')}</div>
                     <div className="table-header-cell table-header-cell-coins pe-3">{t("Coins represented")}</div>
-                    <div className="table-header-cell table-header-cell-change pe-3">{t("Change ")}</div>
+                    <div className="table-header-cell table-header-cell-change pe-3" onClick={() => handleSort(AssetOrder.Change)}>{t("Change ")} {orderType === AssetOrder.Change && (sortDirection === 'asc' ? '▲' : '▼')}</div>
                     <div className="table-header-cell table-header-cell-to-date pe-3">{t("To date")}</div>
                     <div className="table-header-cell table-header-cell-watchlist text-center d-flex align-items-center justify-content-center">Watchlist</div>
                 </>
