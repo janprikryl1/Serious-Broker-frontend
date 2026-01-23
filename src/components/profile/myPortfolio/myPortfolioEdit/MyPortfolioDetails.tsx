@@ -34,7 +34,7 @@ export const MyPortfolioDetails:FC = () => {
             </div>
             <div className="mb-3">
                 <label htmlFor="portfolioDescription" className="form-label">
-                    {t("Invested amount")}
+                    {t("Invested amount")} (€)
                 </label>
                 <input
                     type="number"

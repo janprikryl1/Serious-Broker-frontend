@@ -230,7 +230,7 @@ export const Assets: FC = () => {
                                 <div className="row mb-5 sidebar__search search-row-spacing" style={{ backgroundColor: "rgba(64, 51, 38, 0.8)" }}>
                                     <p style={{fontSize:25, fontWeight:500, color:"white"}}>{t("Filters")}</p>
                                     <div className="col-md-3">
-                                        <label className="form-label">{t("Currency count")}</label>
+                                        <h6 className="form-label mb-1">{t("Currency count")}</h6>
                                         <select className="form-select custom-form-select" value={currencyCount} onChange={e => setCurrencyCount(e.target.value)}>
                                             <option value="all">{t("All")}</option>
                                             <option value="1">1</option>
@@ -242,7 +242,7 @@ export const Assets: FC = () => {
                                         </select>
                                     </div>
                                     <div className="col-md-3">
-                                        <label className="form-label">{t("Included currencies")}</label>
+                                        <h6 className="form-label mb-1">{t("Included currencies")}</h6>
                                         {avaibleCoins && (
                                             <Select
                                                 closeMenuOnSelect={false}
@@ -257,8 +257,8 @@ export const Assets: FC = () => {
                                             />
                                         )}
                                     </div>
-                                    <div className="col-sm-6 align-items-end justify-content-end mb-3">
-                                        <h6 className="mb-10">{t("Search by name")}</h6>
+                                    <div className="col-sm-6 align-items-end justify-content-end">
+                                        <h6 className="form-label">{t("Search by name")}</h6>
                                         <div className="sidebar__search-container">
                                             <input
                                                 type="text"

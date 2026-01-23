@@ -185,12 +185,12 @@ export const Recommendation: FC = () => {
                     <h3>{t("List of pairs")}</h3>
                     <div className="row mb-3 sidebar__search table-row-spacing" style={{maxWidth:"100%", marginLeft:0, backgroundColor: "rgba(64, 51, 38, 0.8)"}}>
                         <div className="col-md-3">
-                            <label className="form-label">{t("Included currencies")}</label>
+                            <h6 className="form-label mb-1">{t("Included currencies")}</h6>
                             {avaibleCoins && <Select closeMenuOnSelect={false} components={animatedComponents} isMulti options={currencyOptions} placeholder={t("Select coins")} noOptionsMessage={() => t("No coins")} value={currencyOptions?.filter((opt) => includeCurrencies.includes(opt.label))} onChange={(selectedOptions) => setIncludedCurrencies(selectedOptions.map((opt) => opt.label))} styles={selectStyles} />}
                         </div>
                         <div className="col-md-3" />
                         <div className="col-sm-6 align-items-end justify-content-end mb-3">
-                            <h6 className="mb-10">{t("Search by name")}</h6>
+                            <h6 className="form-label mb-1">{t("Search by name")}</h6>
                             <div className="sidebar__search-container">
                                 <input
                                     type="text"

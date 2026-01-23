@@ -9,9 +9,11 @@ import {AssetGraphPieChart} from "../../components/graphs/asset/AssetGraphPieCha
 import {AssetDetailSkeleton} from "../../components/graphs/asset/AssetDetailSkeleton.tsx";
 import {Highlight} from "../../components/editor/highlights/Highlight.tsx";
 import {useAssetGraph} from "../../utils/hooks/useAssetGraph.ts";
+import {useMediaQuery} from "@mui/material";
 
 export const AssetGraph: FC = () => {
     const { t } = useTranslation();
+    const isMobile = useMediaQuery('(max-width: 768px)');
     const {
         asset,
         handleToggleWatchList,
@@ -92,9 +94,11 @@ export const AssetGraph: FC = () => {
                                                         ))}
                                                     </div>
                                                 </div>
-                                                <div className="col-sm-4">
-                                                    <AssetGraphPieChart assets={asset.assets} />  
-                                                </div>
+                                                {!isMobile &&
+                                                    <div className="col-sm-4">
+                                                        <AssetGraphPieChart assets={asset.assets} />  
+                                                    </div>
+                                                }
                                             </div>
                                         )}
                                     </div>

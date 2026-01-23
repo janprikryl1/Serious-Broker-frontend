@@ -17,10 +17,12 @@ import {AssetAnalysisGraphData} from "../../utils/types/graphs/AssetAnalysisGrap
 import {QuotedCurrency} from "../../utils/types/graphs/QuotedCurrency.ts";
 import {getAssetGraphData} from "../../utils/api/binanceIndexAssets.ts";
 import {formatCurrency} from "../../utils/functions/functions.ts";
+import {useMediaQuery} from "@mui/material";
 
 export const MyPortfolioDetails:FC = () => {
     const { t } = useTranslation();
     const {id} = useParams();
+    const isMobile = useMediaQuery('(max-width: 768px)');
     const [portfolio, setPortfolio] = useState<MyPortfolioType>();
     const [selectedPeriod, setSelectedPeriod] = useState(QuotedCurrenciesPeriod.month);
     const [currency, setCurrency] = useState<Currencies>(Currencies.EUR);
@@ -76,7 +78,9 @@ export const MyPortfolioDetails:FC = () => {
                                 <>
                                     <h2 className="mb-4">{t("Title of portfolio")}: {portfolio.label} <MyPortfolioEditButton /></h2>
                                     <h3>{portfolio.description}</h3>
-                                    <p>{t("Created")}: {toCzechDate(portfolio.created)}</p>
+                                    <p>Výše investice: {portfolio.invested_amount} €</p>
+                                    <p>Datum vložení peněz do kryptoměn: {toCzechDate(portfolio.start_invest)}</p>
+                                    <p>{t("Portfolio created")}: {toCzechDate(portfolio.created)}</p>
                                     <div className="row">
                                         <div className="col-sm-8">
                                             <AssetAnalysisGraph
@@ -103,9 +107,11 @@ export const MyPortfolioDetails:FC = () => {
                                                 ))}
                                             </div>
                                         </div>
-                                        <div className="col-sm-4">
-                                            <AssetGraphPieChart assets={portfolio.asset as Assets[]}/>
-                                        </div>
+                                        {!isMobile &&
+                                            <div className="col-sm-4">
+                                                <AssetGraphPieChart assets={portfolio.asset as Assets[]}/>
+                                            </div>
+                                        }
                                     </div>
                                 </>
                             ) : (

@@ -11,6 +11,8 @@ export type MyPortfolioType = {
     description: string;
     last_update: string;
     created: string;
+    invested_amount: number;
+    start_invest: string | Date;
     asset: CustomPortfolioAssetType[];
     week_all_profit: number;
     week_0_profit: number;
