@@ -62,7 +62,7 @@ export const BtfdDcaComparison: FC<Props> = ({asset_label}) => {
     const [ATHs, setATHs] = useState<number[]>([])
 
     const getMonth = (data: String) => {
-        return Month[parseInt(data.split("-")[1])];
+        return t(Month[parseInt(data.split("-")[1])]);
     }
 
     const getYear = (data: String) => {
@@ -183,7 +183,7 @@ export const BtfdDcaComparison: FC<Props> = ({asset_label}) => {
                 console.log(multiplier);
 
                 let actualInvestment = multiplier * baseInvestment;
-
+                
                 totalInvested += actualInvestment;
                 totalAssetUnitsOwned += actualInvestment / p.closeEur;
 
@@ -211,14 +211,13 @@ export const BtfdDcaComparison: FC<Props> = ({asset_label}) => {
         <>
             <h3>{t("Investment Strategies Comparison")}</h3>
 
-            <p>Compare the most popular investing strategy - Dollar Cost Averaging with its slightly improved dynamic version.</p>
+            <p>{t("Compare the most popular investing strategy - Dollar Cost Averaging with its slightly improved dynamic version.")}</p>
 
             <h5 style={{color: "#B1974E"}}>DCA - Dollar Cost Averaging</h5>
-            <p>This simple buf effective strategy is most efficient in long-termi investing and is based on periodically investing the same fixed amount of money, regardless of asset price.</p>
+            <p>{t("This simple buf effective strategy is most efficient in long-termi investing and is based on periodically investing the same fixed amount of money, regardless of asset price.")}</p>
 
             <h5 style={{color: "#B1974E"}}>BTFD - Buy the F*****g Dip</h5>
-            <p>It is a dynamic strategy, which means that the amount of investment changes based on the asset price. It has two metrics - base investment amount and multiplier. Before an investment is made, a multiplier
-            is computed based od current price decline compared to asset's ATH. The multiplier then multiplies the base investment amount. To put it simply - the lower the price is, the more you invest.</p>
+            <p>{t("It is a dynamic strategy, which means that the amount of investment changes based on the asset price. It has two metrics - base investment amount and multiplier. Before an investment is made, a multiplier is computed based od current price decline compared to asset's ATH. The multiplier then multiplies the base investment amount. To put it simply - the lower the price is, the more you invest.")}</p>
 
             <div style={{paddingLeft: "15px", marginTop: "70px"}}>
                 <div>
@@ -228,7 +227,7 @@ export const BtfdDcaComparison: FC<Props> = ({asset_label}) => {
                                 {t("Regular daily investment for a period of")}
                             </Form.Label>
                             <Typography style={{color: ""}}>
-                                The period over which you invest every day
+                                {t("The period over which you invest every day")}
                             </Typography>
                         </div>
 
@@ -240,7 +239,7 @@ export const BtfdDcaComparison: FC<Props> = ({asset_label}) => {
                         >
                             {[1, 2, 3, 4, 5].map((n) => (
                                 <option key={n} value={n}>
-                                    {n} {n === 1 ? "year" : "years"}
+                                    {n} {n === 1 ? t("year") : t("years")}
                                 </option>
                             ))}
                         </Form.Select>
@@ -252,7 +251,7 @@ export const BtfdDcaComparison: FC<Props> = ({asset_label}) => {
                                 {t("Base investment amount:")}
                             </Form.Label>
                             <Typography style={{ color: "" }}>
-                                The minimal amount of investment
+                                {t("The minimal amount of investment")}
                             </Typography>
                         </div>
 
@@ -272,7 +271,7 @@ export const BtfdDcaComparison: FC<Props> = ({asset_label}) => {
                                 {t("Maximal multiplier:")}
                             </Form.Label>
                             <Typography style={{ color: "" }}>
-                                Maximum investment multiplier
+                                {t("Maximum investment multiplier")}
                             </Typography>
                         </div>
 
@@ -314,8 +313,8 @@ export const BtfdDcaComparison: FC<Props> = ({asset_label}) => {
                         <div className="col" style={{fontWeight: "bold", fontSize: "1.8rem"}}>{BTFDReturn.toFixed(2)} %</div>
                     </div>
                     <div className="row justify-content-center text-center align-items-center" >
-                        <div className="col" style={{fontSize: "1.1rem", color: "#C3C0BB"}}>DCA return</div>
-                        <div className="col" style={{fontSize: "1.1rem", color: "#C3C0BB"}}>BTFD return</div>
+                        <div className="col" style={{fontSize: "1.1rem", color: "#C3C0BB"}}>DCA {t("return")}</div>
+                        <div className="col" style={{fontSize: "1.1rem", color: "#C3C0BB"}}>BTFD {t("return")}</div>
                     </div>
                 </CardContainer>
             </div>
@@ -369,7 +368,7 @@ export const BtfdDcaComparison: FC<Props> = ({asset_label}) => {
                                     id: "DCASeries",
                                     yAxisId: "return",
                                     type: "line",
-                                    label: t("DCA Return"),
+                                    label: `DCA ${t("return")}`,
                                     data: DCAReturnValues,
                                     color: "#76B4FF",
                                     valueFormatter: (value: number | null) =>
@@ -379,7 +378,7 @@ export const BtfdDcaComparison: FC<Props> = ({asset_label}) => {
                                     id: "BTFDSeries",
                                     yAxisId: "return",
                                     type: "line",
-                                    label: t("BTFD Return"),
+                                    label: `BTFD ${t("return")}`,
                                     data: BTFDReturnValues,
                                     color: "#FFB676",
                                     valueFormatter: (value: number | null) =>

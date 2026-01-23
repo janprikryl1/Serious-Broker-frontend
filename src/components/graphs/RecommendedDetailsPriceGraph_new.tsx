@@ -76,7 +76,7 @@ export const RecommendedDetailsPriceGraph1: FC<Props> = ({asset_label, selectedT
     const [filteredData, setFilteredData] = useState<ProcessedDataPoint[] | undefined>();
 
     const getDay = (data: String) => {
-        return Day[parseInt(data.split(" - ")[0], 10)];
+        return t(Day[parseInt(data.split(" - ")[0], 10)]);
     }
 
     const getHour = (data: String) => {

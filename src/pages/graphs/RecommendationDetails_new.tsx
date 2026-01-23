@@ -127,12 +127,12 @@ export const RecommendationDetails_new:FC = () => {
 
                                     <CardContainer color="#ffffff20" >
                                         <div className="row justify-content-center text-center align-items-center" style={{paddingTop: "1.5em"}}>
-                                            <div className="col" style={{fontWeight: "bold", fontSize: "2.8rem"}}>{detailsData.buy_week_0_week_day != null ? Day[detailsData.buy_week_0_week_day] : detailsData.buy_week_0_week_day} {detailsData.buy_week_0_hour}:00</div>
-                                            <div className="col" style={{fontWeight: "bold", fontSize: "2.8rem"}}>{detailsData.sell_week_0_week_day != null ? Day[detailsData.sell_week_0_week_day] : detailsData.sell_week_0_week_day} {detailsData.sell_week_0_hour}:00</div>
+                                            <div className="col" style={{fontWeight: "bold", fontSize: "2.8rem"}}>{detailsData.buy_week_0_week_day != null ? t(Day[detailsData.buy_week_0_week_day]) : detailsData.buy_week_0_week_day} {detailsData.buy_week_0_hour}:00</div>
+                                            <div className="col" style={{fontWeight: "bold", fontSize: "2.8rem"}}>{detailsData.sell_week_0_week_day != null ? t(Day[detailsData.sell_week_0_week_day]) : detailsData.sell_week_0_week_day} {detailsData.sell_week_0_hour}:00</div>
                                         </div>
                                         <div className="row justify-content-center text-center align-items-center" style={{paddingBottom: "1.5em"}}>
-                                            <div className="col" style={{fontSize: "1.4rem", color: "#C3C0BB"}}>Best time to buy</div>
-                                            <div className="col" style={{fontSize: "1.4rem", color: "#C3C0BB"}}>Best time to sell</div>
+                                            <div className="col" style={{fontSize: "1.4rem", color: "#C3C0BB"}}>{t("Best time to buy")}</div>
+                                            <div className="col" style={{fontSize: "1.4rem", color: "#C3C0BB"}}>{t("Best time to sell")}</div>
                                         </div>
                                     </CardContainer>
 
