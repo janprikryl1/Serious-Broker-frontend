@@ -78,8 +78,8 @@ export const MyPortfolioDetails:FC = () => {
                                 <>
                                     <h2 className="mb-4">{t("Title of portfolio")}: {portfolio.label} <MyPortfolioEditButton /></h2>
                                     <h3>{portfolio.description}</h3>
-                                    <p>Výše investice: {portfolio.invested_amount} €</p>
-                                    <p>Datum vložení peněz do kryptoměn: {toCzechDate(portfolio.start_invest)}</p>
+                                    <p>{t("Amount of investment:")} {portfolio.invested_amount} € ({t("Value as of today's date")} ({toCzechDate(new Date())}): {portfolio.current_value} €)</p>
+                                    <p>{t("Date of investing money in cryptocurrencies:")} {toCzechDate(portfolio.start_invest)}</p>
                                     <p>{t("Portfolio created")}: {toCzechDate(portfolio.created)}</p>
                                     <div className="row">
                                         <div className="col-sm-8">

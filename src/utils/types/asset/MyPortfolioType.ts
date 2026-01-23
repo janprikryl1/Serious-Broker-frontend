@@ -13,6 +13,8 @@ export type MyPortfolioType = {
     created: string;
     invested_amount: number;
     start_invest: string | Date;
+    current_value: number;
+    value_change_pct: number;
     asset: CustomPortfolioAssetType[];
     week_all_profit: number;
     week_0_profit: number;

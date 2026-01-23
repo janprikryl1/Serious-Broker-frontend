@@ -105,9 +105,7 @@ export const Recommendation: FC = () => {
             return prev;
         });
     };
-
-    // --- FETCH DATA ---
-
+    
     const fetchData = useCallback(async (pageToFetch: number, isReset: boolean = false) => {
         if (isFetchingRef.current) return;
         if (!isReset && pageToFetch > totalPages) return;
@@ -279,7 +277,7 @@ export const Recommendation: FC = () => {
                                 {data.map((item, index) => (
                                     <RecomendationRow
                                         data={item}
-                                        key={item.id || index}
+                                        key={index}
                                         isLast={index === data.length - 1}
                                     />
                                 ))}
