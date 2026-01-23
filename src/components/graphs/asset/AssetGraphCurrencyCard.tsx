@@ -14,7 +14,7 @@ type Props = {
 
 export const AssetGraphCurrencyCard: FC<Props> = ({ singleAsset }) => {
     const { t } = useTranslation();
-    const [coinGraphData, setCoinGraphData] = useState<number[]>();
+    const [coinGraphData, setCoinGraphData] = useState<number[] | "">();
 
     useEffect(() => {
         const fetchGraphPreviewData = async () => {
@@ -41,7 +41,7 @@ export const AssetGraphCurrencyCard: FC<Props> = ({ singleAsset }) => {
                     <p>{singleAsset.name}</p>
                 </div>
                 <div className="col-sm d-flex flex-column align-items-center asset-graph-currency-card-graph">
-                    {coinGraphData ? 
+                    {coinGraphData === "" ? <p>{t("Not traded anymore")}</p> : coinGraphData ? 
                         <OverviewTableChart
                             name={singleAsset.asset_label}
                             data={coinGraphData}
