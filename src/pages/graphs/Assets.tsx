@@ -23,8 +23,17 @@ import {Button, ButtonColor} from "../../components/reusable/Button.tsx";
 import "../../styles/sass/components/assets.scss";
 import {FaSearch} from "react-icons/fa";
 import { useSearchParams } from "react-router-dom";
+import { Dropdown } from "react-bootstrap";
+import { CustomHeaderToggle } from "../../components/reusable/CustomHeaderToggle.tsx";
 
 const animatedComponents = makeAnimated();
+
+const timeRangeOptions = [
+    { label: '7d', value: '7d' },
+    { label: '30d', value: '30d' },
+    { label: '3m', value: '3m' },
+    { label: '1y', value: '1y' },
+];
 
 export const Assets: FC = () => {
     const { t } = useTranslation();
@@ -51,7 +60,9 @@ export const Assets: FC = () => {
     const [firstLoad, setFirstLoad] = useState(true);
     const [orderType, setOrderType] = useState<AssetOrder>((searchParams.get("orderBy") as AssetOrder) || AssetOrder.Name);
     const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>((searchParams.get("direction") as 'asc' | 'desc') || 'asc');
+    const [timeRange, setTimeRange] = useState<string>(searchParams.get("timeRange") || "24h");
 
+    
     const getAssets = useCallback(async (pageToFetch: number, isReset: boolean = false) => {
         if (isFetchingRef.current || showMyPortfolio === "mine") return;
         if (!isReset && pageToFetch > totalPages) return;
@@ -66,7 +77,7 @@ export const Assets: FC = () => {
                     currencyCount,
                     includeCurrencies,
                     searchQuery,
-                    order: { direction: sortDirection, orderType: orderType }
+                    order: { direction: sortDirection, orderType: orderType, timeRange: timeRange }
                 }
             );
             if (response) {
@@ -182,7 +193,7 @@ export const Assets: FC = () => {
         setAssets([]);
         getAssets(1, true);
         setFirstLoad(false);
-    }, [orderType, sortDirection]);
+    }, [orderType, sortDirection, timeRange]);
 
     const currencyOptions = avaibleCoins?.map((coin) => ({ value: coin.id.toString(), label: coin.name }));
     const hasMore = currentPage < totalPages;
@@ -196,7 +207,7 @@ export const Assets: FC = () => {
         const value = e.target.value;
         setCurrencyCount(value);
         setSearchParams(prev => {
-            if (value === "all") prev.delete("currencyCount"); // Volitelné: neukládat "all" do URL pro čistotu
+            if (value === "all") prev.delete("currencyCount");
             else prev.set("currencyCount", value);
             return prev;
         });
@@ -225,6 +236,18 @@ export const Assets: FC = () => {
         });
     };
 
+    const handleTimeRangeChange = (newRange: string) => {
+        setTimeRange(newRange);
+        setOrderType(AssetOrder.Change);
+        setSortDirection((prevState) => prevState === 'desc' ? 'asc' : "desc");
+        setSearchParams(prev => {
+            prev.set("timeRange", newRange);
+            prev.set("orderBy", AssetOrder.Change);
+            prev.set("direction", sortDirection === 'asc' ? 'desc' : 'asc');
+            return prev;
+        });
+    };
+
     const tableHeaderContent = (
         <div className="table-header-row fw-bold d-flex align-items-stretch">
             {isMobile ? (
@@ -239,7 +262,28 @@ export const Assets: FC = () => {
                     <div className="table-header-cell table-header-cell-label" onClick={() => handleSort(AssetOrder.Label)}>Label {orderType === AssetOrder.Label && (sortDirection === 'asc' ? '▲' : '▼')}</div>
                     <div className="table-header-cell table-header-cell-created pe-4" onClick={() => handleSort(AssetOrder.CreatedDate)}>{t("Created")} {orderType === AssetOrder.CreatedDate && (sortDirection === 'asc' ? '▲' : '▼')}</div>
                     <div className="table-header-cell table-header-cell-coins pe-3">{t("Coins represented")}</div>
-                    <div className="table-header-cell table-header-cell-change pe-3" onClick={() => handleSort(AssetOrder.Change)}>{t("Change ")} {orderType === AssetOrder.Change && (sortDirection === 'asc' ? '▲' : '▼')}</div>
+                    <div className="table-header-cell table-header-cell-change">
+                        <Dropdown onSelect={(k) => k && handleTimeRangeChange(k)}>
+                            <Dropdown.Toggle as={CustomHeaderToggle} id="dropdown-custom-components">
+                                <span style={{maxWidth:130, overflow:"hidden"}}>
+                                    {orderType !== AssetOrder.Change ? t("Change") : t("Ch")} ({timeRange})
+                                    {orderType === AssetOrder.Change && (sortDirection === 'asc' ? ' ▲' : ' ▼')}
+                                </span>
+                            </Dropdown.Toggle>
+
+                            <Dropdown.Menu style={{ minWidth: '80px' }}>
+                                {timeRangeOptions.map((opt) => (
+                                    <Dropdown.Item
+                                        key={opt.value}
+                                        eventKey={opt.value}
+                                        active={timeRange === opt.value}
+                                    >
+                                        {opt.label}
+                                    </Dropdown.Item>
+                                ))}
+                            </Dropdown.Menu>
+                        </Dropdown>
+                    </div>
                     <div className="table-header-cell table-header-cell-to-date pe-3">{t("To date")}</div>
                     <div className="table-header-cell table-header-cell-watchlist text-center d-flex align-items-center justify-content-center">Watchlist</div>
                 </>

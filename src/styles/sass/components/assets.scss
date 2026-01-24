@@ -87,6 +87,18 @@
 .table-header-row {
   display: flex;
   align-items: stretch;
+  position: relative; // nebo sticky, pokud používáte sticky
+  z-index: 100; // Musí být vyšší než řádky tabulky
+  overflow: visible !important; // Povolí dropdownu "přetéct" ven z hlavičky
+}
+
+.table-header-cell-change {
+  overflow: visible !important; // Konkrétní buňka nesmí ořezávat obsah
+}
+
+.asset-table-body {
+  position: relative;
+  z-index: 1;
 }
 
 .table-header-cell {

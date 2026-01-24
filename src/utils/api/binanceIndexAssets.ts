@@ -8,7 +8,7 @@ import {QuotedCurrenciesPeriod} from "../options/QuotedCurrenciesPeriod.ts";
 import {AssetGraphPriceDetailsType} from "../types/graphs/AssetGraphPriceDetailsType.ts";
 import {RecommendedProfileAssetType} from "../types/asset/RecommendedProfileAssetType.ts";
 
-export const getAllAssets = async (page: number, limit: number, filters: { currencyCount: string; includeCurrencies: string[]; searchQuery: string; order: {direction: "asc" | "desc", orderType: AssetOrder} }) => {
+export const getAllAssets = async (page: number, limit: number, filters: { currencyCount: string; includeCurrencies: string[]; searchQuery: string; order: {direction: "asc" | "desc", orderType: AssetOrder, timeRange: string} }) => {
     const token = localStorage.getItem("token");
 
     return await axios.get<{totalPages: number; data: AssetType[]}>(backendUrl + "graphs/binance_index_assets/get_all_assets.php", {
@@ -19,7 +19,8 @@ export const getAllAssets = async (page: number, limit: number, filters: { curre
             includeCurrencies: filters.includeCurrencies.join(","),
             search: filters.searchQuery,
             direction: filters.order.direction,
-            order: filters.order.orderType
+            order: filters.order.orderType,
+            timeRange: filters.order.timeRange
         },
         headers: {
             Authorization: `Bearer ${token}`

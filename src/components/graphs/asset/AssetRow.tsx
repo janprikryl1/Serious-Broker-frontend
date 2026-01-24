@@ -5,7 +5,7 @@ import { addToWatchList, removeFromWatchList } from "../../../utils/api/watchLis
 import { WatchListEnum } from "../../../utils/enums/WatchListEnum.ts";
 import { Link } from "react-router-dom";
 import { routes } from "../../../utils/constants";
-import {truncateText} from "../../../utils/functions/functions.ts";
+import {toPercentTwoDecimal, truncateText} from "../../../utils/functions/functions.ts";
 
 type Props = {
     asset: AssetType;
@@ -14,7 +14,7 @@ type Props = {
     isLast: boolean;
 };
 
-export const AssetRow: FC<Props> = ({ asset, setAssets, index, isLast }) => {console.error(asset)
+export const AssetRow: FC<Props> = ({ asset, setAssets, index, isLast }) => {
     const handleAddToWatchlist = async () => {
         try {
             const response = await addToWatchList(index, WatchListEnum.Asset);
@@ -67,7 +67,7 @@ export const AssetRow: FC<Props> = ({ asset, setAssets, index, isLast }) => {con
                     {truncateText(asset.coins, 20)}
                 </div>
                 <div className="table-cell table-cell-change d-flex align-items-center">
-                    {asset.daily_change.toFixed(2)} %
+                    {toPercentTwoDecimal(1 - asset.daily_change)} %
                 </div>
                 <div className="table-cell table-cell-to-date d-flex align-items-center">
                     {toCzechDate(asset.to_date)}
