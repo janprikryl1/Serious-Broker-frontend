@@ -2,7 +2,12 @@ import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import {DataGrid, GridRenderCellParams} from "@mui/x-data-grid";
 import {logURL} from "../../utils/constants";
-import {cryptoCurrencyUpdate, deleteCryptocurrency, getAllCryptocurrencies} from "../../utils/api/adminCryptocurrencyService.ts";
+import {
+    cryptoCurrencyUpdate,
+    deleteCryptocurrency,
+    getAllCryptocurrencies,
+    stylizedImageUpdate
+} from "../../utils/api/adminCryptocurrencyService.ts";
 import {CryptoCurrencyTableInput} from "../../components/admin/cryptoCurrencyManagement/CryptoCurrencyTableInput.tsx";
 import {CryptoCurrencyFileUpload} from "../../components/admin/cryptoCurrencyManagement/CryptoCurrencyFileUpload.tsx";
 import {CryptoCurrencyIconLink} from "../../components/admin/cryptoCurrencyManagement/CryptoCurrencyIconLink.tsx";
@@ -17,6 +22,7 @@ export const AdminCoinSettings: FC = () => {
     const [cryptocurrencies, setCryptocurrencies] = useState<CryptoCurrencyType[]>([]);
     const [editModeRows, setEditModeRows] = useState<{ [key: number]: boolean }>({});
     const [selectedFiles, setSelectedFiles] = useState<{ [key: number]: File | null }>({});
+    const [selectedStylizedFiles, setSelectedStylizedFiles] = useState<{ [key: number]: File | null }>({});
     const [filteredCoins, setFilteredCoins] = useState<CryptoCurrencyType[]>();
 
     
@@ -40,6 +46,26 @@ export const AdminCoinSettings: FC = () => {
         }));
     };
 
+    const handleStylizedFileChange = (id: number, file: File | null) => {
+        setSelectedStylizedFiles((prev) => ({ ...prev, [id]: file }));
+    };
+
+    const handleSubmitStylized = async (id: number) => {
+        const cryptocurrency = cryptocurrencies.find((crypto) => crypto.id === id);
+        const file = selectedStylizedFiles[id];
+
+        if (cryptocurrency && file) {
+            try {
+                const result = await stylizedImageUpdate(id, cryptocurrency.name, cryptocurrency.symbol, file);
+                if (result?.data.status === "success") {
+                    CustomSwal.fire({ icon: "success", title: t("Updated"), text: t("Stylized image updated") });
+                }
+            } catch (e) {
+                console.error(e);
+            }
+        }
+    };
+    
     const handleTextChange = (id: number, value: string, field: 'name' | 'symbol' | 'about') => {
         setCryptocurrencies((prevCryptocurrencies) => prevCryptocurrencies.map((cryptocurrency) => {
             if (cryptocurrency.id === id) {
@@ -59,7 +85,7 @@ export const AdminCoinSettings: FC = () => {
                 id: cryptocurrency.id,
                 name: cryptocurrency.name,
                 symbol: cryptocurrency.symbol,
-                photo: selectedFiles[id],
+                photo: selectedFiles[id]
             };
             try {
                 const result = await cryptoCurrencyUpdate(updateObject);
@@ -144,6 +170,20 @@ export const AdminCoinSettings: FC = () => {
             renderCell: (params: GridRenderCellParams<{id: number}>) => editModeRows[params.row.id] ? (
                     <CryptoCurrencyFileUpload handleFileChange={handleFileChange} handleSubmit={handleSubmit} rowId={params.row.id} handleDelete={handleDelete} />
                 ) : <CryptoCurrencyIconLink link={params.value} />
+        },
+        {
+            field: 'stylized_image',
+            headerName: t("Stylized Image"),
+            flex: 2,
+            headerClassName: 'background-gray',
+            renderCell: (params: GridRenderCellParams) => editModeRows[params.row.id] ? (
+                <CryptoCurrencyFileUpload
+                    handleFileChange={handleStylizedFileChange}
+                    handleSubmit={handleSubmitStylized}
+                    rowId={params.row.id}
+                    handleDelete={handleDelete}
+                />
+            ) : <CryptoCurrencyIconLink link={params.value} />
         },
     ];
 

@@ -20,7 +20,8 @@ export const defaultNewCurrency = {
     telegram: "",
     cmc_rank: 0,
     date: "",
-    photo: null
+    photo: null,
+    stylized_image_file: null
 }
 
 export const defaultNewDemo: DemoType = {
