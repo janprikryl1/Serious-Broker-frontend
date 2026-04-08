@@ -44,15 +44,15 @@ export const RegisterStepOne:FC<Props> = ({formRegister, errors, watch}) => {
     
     return (
         <>
-            <LoginRegisterInput register={formRegister} name="nickname" placeholder="Nickname" required error={errors.nickname} />
-            <LoginRegisterInput register={formRegister} name="firstname" placeholder="Name" required error={errors.firstname} />
-            <LoginRegisterInput register={formRegister} name="midlename" placeholder="Middle name" error={errors.midlename} />
-            <LoginRegisterInput register={formRegister} name="surname" placeholder="Surname" required error={errors.surname} />
+            <LoginRegisterInput register={formRegister} name="nickname" placeholder={t("Nickname")} required error={errors.nickname} />
+            <LoginRegisterInput register={formRegister} name="firstname" placeholder={t("Name")} required error={errors.firstname} />
+            <LoginRegisterInput register={formRegister} name="midlename" placeholder={t("Middle name")} error={errors.midlename} />
+            <LoginRegisterInput register={formRegister} name="surname" placeholder={t("Surname")} required error={errors.surname} />
             <div className="position-relative">
                 <LoginRegisterInput
                     register={formRegister}
                     name="email"
-                    placeholder="Email"
+                    placeholder={t("Email")}
                     type="email"
                     required
                     className={emailValid === false ? "is-invalid" : ""}
@@ -64,9 +64,9 @@ export const RegisterStepOne:FC<Props> = ({formRegister, errors, watch}) => {
                     </div>
                 )}
             </div>
-            <LoginRegisterInput register={formRegister} name="password" placeholder="Password" type="password" required error={errors.password} />
-            <PasswordStrengthBar password={password || ""} minLength={8} scoreWords={['velmi slabé', 'slabé', 'silné', 'velmi silné']} shortScoreWord={'velmi slabé'} />
-            <LoginRegisterInput register={formRegister} name="passwordAgain" placeholder="Password again" type="password" required error={errors.passwordAgain} />
+            <LoginRegisterInput register={formRegister} name="password" placeholder={t("Password")} type="password" required error={errors.password} />
+            <PasswordStrengthBar password={password || ""} minLength={8} scoreWords={[t('very weak'), t('weak'), t('strong'), t('very strong')]} shortScoreWord={t('very weak')} />
+            <LoginRegisterInput register={formRegister} name="passwordAgain" placeholder={t("Password again")} type="password" required error={errors.passwordAgain} />
         </>
     );
 };

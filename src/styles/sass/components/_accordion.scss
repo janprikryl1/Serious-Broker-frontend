@@ -119,3 +119,38 @@
         }
     }
 }
+
+.accordion-toggle-wrapper {
+  svg {
+    transition: transform 0.3s ease;
+  }
+
+  &.is-closed {
+    svg {
+      transform: rotate(0deg);
+    }
+  }
+
+  &.is-open {
+    svg {
+      transform: rotate(-90deg);
+      color: var(--secondary-color)
+    }
+  }
+}
+
+.table-row-active {
+  .accordion-toggle-wrapper {
+    &.is-open {
+      svg {
+        transform: rotate(-90deg);
+        color: var(--black-color) !important;
+      }
+    }
+  }
+}
+
+.accordion-content {
+  margin: 20px;
+
+}

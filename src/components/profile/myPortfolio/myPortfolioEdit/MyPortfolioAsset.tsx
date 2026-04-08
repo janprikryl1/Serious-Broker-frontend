@@ -64,7 +64,7 @@ export const MyPortfolioAsset: FC<Props> = ({ asset, index }) => {
                 <Slider
                     value={asset.allocation * 100}
                     onChange={handleSliderChange}
-                    aria-label="Allocation"
+                    aria-label={t("Allocation")}
                     valueLabelDisplay="auto"
                     min={0}
                     max={100}

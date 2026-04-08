@@ -18,11 +18,13 @@ export type CryptoCurrencyDetailType = CryptoCurrencyType & {
     cmc_rank: number;
     date: string;
     photo: string;
+    stylized_image: string;
     categories: string;
 }
 
 export type CryptoCurrencyAdminType = CryptoCurrencyType & {
     photo: File | null;
+    stylized_image: string;
 };
 
 export type CryptoCurrencyNewType = CryptoCurrencyType & {

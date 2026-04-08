@@ -11,7 +11,7 @@ export const CooperationInfo:FC = () => {
     
     return (
         <>
-            <TitleHeader title="Cooperation"/>
+            <TitleHeader title={t("Cooperation")}/>
             <div className="container">
                 <div className="cta-dark">
                     <h1>{t("Our partners")}</h1>

@@ -10,7 +10,7 @@ export const AssetCalculatorComponent: FC = () => {
     const isMobile = useMediaQuery('(max-width: 768px)');
 
     return (
-        <div className="asset-calculator">
+        <div className="asset-calculator mt-5">
             <div className="container">
                 <h2>{t("Crypto calculator")}</h2>
                 <p className="subtitle">{t("Calculate How Much You Could Have Earned If You Started Investing In Crypto Earlier With Serious.Broker")}</p>

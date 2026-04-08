@@ -16,7 +16,7 @@ export const NotFoundErrorPage:FC = () => {
             <div data-aos="fade-up" data-aos-duration="800">
               <div className="error__content text-center">
                 <h2>
-                  <span>ooops!</span> {t("page not found")}
+                  <span>Oops!</span> {t("page not found")}
                 </h2>
                 <Link
                   to={routes.home}

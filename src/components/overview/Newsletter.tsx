@@ -28,7 +28,7 @@ export const Newsletter: FC = () => {
                     <input
                         className="register-input"
                         type="email"
-                        placeholder="E-mail"
+                        placeholder={t("E-mail")}
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                     />

@@ -1,22 +1,26 @@
 .asset-graph-currency-card {
-  background-color: #d4c6a9;
+  background-color: var(--cream-color);
   border-radius: 16px;
   margin: 1%;
-  padding: 1%;
+  padding: 15px;
   width: 342px;
-  color: #0A0704;
+  color: var(--black-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  min-height: 80px;
 }
 
 .asset-graph-currency-card-img {
   width: 40px;
   max-width: 50px;
+  flex-shrink: 0;
 }
 
 .asset-graph-currency-card-coin-name {
   font-size: 15px;
   text-align: center;
   line-height: 1.4;
-  margin-top: 5px;
   max-width: 90px;
 }
 
@@ -29,13 +33,12 @@
   font-size: 15px;
   text-align: center;
   line-height: 1.4;
-  margin-top: 5px; 
 }
 
 .asset-graph-currency-card-price-container {
   font-size: 15px;
   text-align: center;
-  line-height: 0.5;
+  line-height: 1;
 }
 
 .asset-graph-currency-card-price-container-text {
@@ -46,10 +49,9 @@
 @media (max-width: 768px) {
   .asset-graph-currency-card {
     font-size: 15px;
-    margin: 2%;
-    padding: 3%;
+    margin: 2% 0;
+    padding: 15px;
     max-width: 90%;
-    margin-left: 10px;
-    height: 250px;
+    min-height: 100px;
   }
 }

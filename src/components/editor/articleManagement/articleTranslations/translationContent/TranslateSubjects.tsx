@@ -26,8 +26,8 @@ export const TranslateSubjects:FC = () => {
                         <Button onClick={() => handleTranslateSubjectTitle(subject.id)}>{t("Translate")}</Button>
                     </InputGroup>
                     <InputGroup className="mb-3">
-                        <InputGroup.Text>Text</InputGroup.Text>
-                        <Form.Control as="textarea" placeholder="..." value={subject.text} onChange={(e) => handleSetSubjectText(e.target.value, subject.id)}/>
+                        <InputGroup.Text>{t("Text")}</InputGroup.Text>
+                        <Form.Control as="textarea" placeholder={t("Detailed description...")} value={subject.text} onChange={(e) => handleSetSubjectText(e.target.value, subject.id)}/>
                         <Button onClick={() => handleTranslateSubjectText(subject.id)}>{t("Translate")}</Button>
                     </InputGroup>
                 </div>

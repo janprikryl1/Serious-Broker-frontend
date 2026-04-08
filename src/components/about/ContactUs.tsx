@@ -48,7 +48,7 @@ export const ContactUs: FC = () => {
                 <p>{t("If you want to learn more about our work or have any questions, feel free to send us a message.")}</p>
 
                     <form onSubmit={handleSendMessage}>
-                        <input type="email" name="email" className="contact-input" placeholder="E-mail"/>
+                        <input type="email" name="email" className="contact-input" placeholder={t("E-mail")}/>
                         <textarea cols={30} rows={5} name="message" className="contact-input"
                                   placeholder={t("Leave a message...")} required/>
         

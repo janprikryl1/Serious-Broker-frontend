@@ -4,8 +4,8 @@ import {AvailableCoinType} from "../types/myPortfolio/availableCoinType.ts";
 import {MyPortfolioType} from "../types/myPortfolio/MyPortfolioType.ts";
 import {MyPortfolioType as MyPortfolioTypeGraph} from "../types/asset/MyPortfolioType.ts";
 
-export const getAvaliableCoins = async () => {
-    return await axios.get<AvailableCoinType[]>(`${backendUrl}/my_portfolio/avaibable_coins.php`);
+export const getAvailableCoins = async () => {
+    return await axios.get<AvailableCoinType[]>(`${backendUrl}/my_portfolio/available_coins.php`);
 }
 
 export const getMyPortfolios = async () => {

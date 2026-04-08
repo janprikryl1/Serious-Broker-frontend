@@ -32,7 +32,7 @@ export const AdminAchievements:FC = () => {
                             data-aos="fade-up"
                             data-aos-duration="900"
                         >
-                            <h1 className="admin-section-title">{t("Achievments management")}</h1>
+                            <h1 className="admin-section-title">{t("Achievements management")}</h1>
                             <p>{t("Click on user to load and edit achievements")}</p>
                             <Button className="mb-3" onClick={handleAddLongPeriodOfTimeAchievements}>{t("Give achievements for long period of time")}</Button>
                             <InputGroup className="mb-3">

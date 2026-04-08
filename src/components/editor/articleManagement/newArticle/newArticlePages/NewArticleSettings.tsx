@@ -114,7 +114,7 @@ export const NewArticleSettings:FC = () => {
             {publicationType === 4 && (
                 <InputGroup className="mb-3">
                     <InputGroup.Text>{t("Days")}</InputGroup.Text>
-                    <Form.Control type="number" placeholder="Nabídnout daný počet dnů od registrace" value={publicateFromDays ?? 0} onChange={(e) => setPublicateFromDays(parseInt(e.target.value))}/>
+                    <Form.Control type="number" placeholder={t("Offer the number of days since registration")} value={publicateFromDays ?? 0} onChange={(e) => setPublicateFromDays(parseInt(e.target.value))}/>
                 </InputGroup>
             )}
 

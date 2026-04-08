@@ -1,6 +1,7 @@
 import {FC, useMemo} from "react";
 import {useTranslation} from "react-i18next";
 import {useMyPortfolioContext} from "../../../../utils/providers/MyPortfolioProvider.tsx";
+import {TitleHeader} from "../../../about/TitleHeader.tsx";
 
 export const MyPortfolioDetails:FC = () => {
     const {t} = useTranslation();

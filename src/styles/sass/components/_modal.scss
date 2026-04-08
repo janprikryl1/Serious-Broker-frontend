@@ -1,0 +1,56 @@
+.custom-modal {
+  border-radius: 5px;
+  border: none;
+  background-color: var(--tertiary-color);
+  padding: 30px 35px;
+  box-shadow: 0px 0px 1px rgba(10, 7, 4, 0.01),
+  0px 0px 4px rgba(10, 7, 4, 0.03),
+  0px 0px 10px rgba(10, 7, 4, 0.04),
+  0px 0px 18px rgba(10, 7, 4, 0.05),
+  0px 0px 28px rgba(10, 7, 4, 0.07),
+  0px 0px 40px rgba(10, 7, 4, 0.08);
+}
+
+
+.custom-modal-header {
+  border: none;
+  padding: 20px 10px;
+}
+
+.custom-modal-footer {
+  border: none;
+}
+
+.lottie-custom-color-secondary {
+  path {
+    stroke: var(--secondary-color) !important;
+    fill: var(--secondary-color) !important;
+  }
+
+  path[fill="none"] {
+    fill: none !important;
+    stroke: var(--secondary-color) !important;
+  }
+
+  path[stroke="none"], path:not([stroke]) {
+    stroke: none !important;
+    fill: var(--secondary-color) !important;
+  }
+}
+
+.lottie-custom-color-red {
+  path {
+    stroke: var(--red-on-primary-color) !important;
+    fill: var(--red-on-primary-color) !important;
+  }
+
+  path[fill="none"] {
+    fill: none !important;
+    stroke: var(--red-on-primary-color) !important;
+  }
+
+  path[stroke="none"], path:not([stroke]) {
+    stroke: none !important;
+    fill: var(--red-on-primary-color) !important;
+  }
+}

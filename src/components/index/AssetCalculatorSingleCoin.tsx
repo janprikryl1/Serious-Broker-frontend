@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import { getAllAssetCoins, getAssetCoinDetails } from "../../utils/api/assetCalculatorService.ts";
 import { CustomSwal } from "../../utils/functions/customSwal.ts";
 import { OverviewTableChart } from "../overview/overviewTableData/overviewTableChart/OverviewTableChart.tsx";
+import {routes} from "../../utils/constants";
 
 type ICalculationResult = {
     final_profit: number;
@@ -128,9 +129,10 @@ export const AssetCalculatorSingleCoin: FC = () => {
             </div>
 
             <div className="form-step">
-                <Button className="calculate-btn" style={{marginTop:0, marginBottom:5}} onClick={handleCalculate} disabled={isLoading}>
+                <Button className="calculate-btn" onClick={handleCalculate} disabled={isLoading}>
                     {isLoading ? t("Calculating...") : t("Calculate")}
                 </Button>
+
             </div>
 
             {calculationResult && (

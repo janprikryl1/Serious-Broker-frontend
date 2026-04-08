@@ -24,10 +24,10 @@ export const Subjects:FC = () => {
                         />
                     </InputGroup>
                     <InputGroup className="mb-3">
-                        <InputGroup.Text>Text</InputGroup.Text>
+                        <InputGroup.Text>{t("Text")}</InputGroup.Text>
                         <Form.Control 
                             as="textarea" 
-                            placeholder="..."
+                            placeholder={t("Detailed description...")}
                             value={subject.text} 
                             onChange={(e) => handleSetSubjectText(e.target.value, subject.id)}
                         />

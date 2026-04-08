@@ -15,9 +15,7 @@ export const SliderPageSeriousBroker: FC = () => {
                 <h3 className="slide-title-your-money-your-rules">{t("Your Money,") + t("Your Rules")}</h3>
                 <p className="slide-description-your-money-your-rules">{t("Savings in crypto.")}</p>
                 <p className="slide-description-your-money-your-rules">
-                    <Link to={routes.about}>
-                        <Button style={{fontWeight:700, fontSize:"1.2rem"}}>{t("Proč s námi spořit do krypta")}</Button>
-                    </Link>
+                    <Button className="mb-5 mt-4" type="link" to={routes.about}>{t("Why to save crypto with Serious.Broker")}</Button>
                 </p>
             </div>
         </SharedSlideLayout>

@@ -40,7 +40,7 @@ export const AssetGraph: FC = () => {
                             <div className="service-details__item-inner">
                                 <div className="service-details__item">
                                     <div className="service-details__content" data-aos="fade-up" data-aos-duration="900">
-                                        <h2 className="asset-title">{t("Analytics")}</h2>
+                                        {/*<h2 className="asset-title">{t("Analytics")}</h2>*/}
                                         <div className="row">
                                             <div className="col-sm-8">
                                                 <AssetAnalysisGraph
@@ -77,12 +77,9 @@ export const AssetGraph: FC = () => {
                                                     </>
                                                 }
                                             </div>
-                                            <div className="col-sm-4">
-                                                <Highlight/>
-                                            </div>
                                         </div>
                                         <h2 className="asset-title">{t("Index composition")}</h2>
-                                        {asset.assets !== null && (
+                                        {asset.assets && asset.assets.length > 0 && (
                                             <div className="row">
                                                 <div className="col-sm-8">
                                                     <div className="row">

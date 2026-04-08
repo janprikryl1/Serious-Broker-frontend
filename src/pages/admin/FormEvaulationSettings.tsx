@@ -2,14 +2,15 @@ import { FC, useEffect, useState } from "react";
 import {deleteFormSetting, getFormSettings, saveFormSettings} from "../../utils/api/formsService";
 import { Button, ButtonColor } from "../../components/reusable/Button";
 import { FaSave, FaPlus } from "react-icons/fa";
-import { toast } from "react-toastify";
 import { EvaluationCategory } from "../../utils/types/admin/EvaluationCategory.ts";
 import { FaRegTrashCan } from "react-icons/fa6";
+import {ToastColor, useToast} from "../../utils/providers/ToastProvider.tsx";
 
 
 export const FormEvaulationSettings: FC = () => {
     const [categories, setCategories] = useState<EvaluationCategory[]>([]);
     const [isSaving, setIsSaving] = useState(false);
+    const { showToast } = useToast();
 
     useEffect(() => {
         (async () => {
@@ -20,7 +21,7 @@ export const FormEvaulationSettings: FC = () => {
                 }
             } catch (error) {
                 console.error("Error fetching evaluation settings:", error);
-                toast.error("Nepodařilo se načíst data.");
+                showToast("Nepodařilo se načíst data.", ToastColor.red);
             }
         })();
     }, []);
@@ -59,13 +60,13 @@ export const FormEvaulationSettings: FC = () => {
             setIsSaving(true);
             const response = await saveFormSettings(categories);
             if (response?.status === 200) {
-                toast.success("Uloženo.");
+                showToast("Uloženo.", ToastColor.green);
             } else {
-                toast.error("Chyba při ukládání.");
+                showToast("Chyba při ukládání.", ToastColor.red);
             }
         } catch (err) {
             console.error("Save error", err);
-            toast.error("Chyba při ukládání.");
+            showToast("Chyba při ukládání.", ToastColor.red);
         } finally {
             setIsSaving(false);
         }

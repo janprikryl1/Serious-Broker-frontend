@@ -2,11 +2,18 @@ import { FC } from "react";
 import { AssetType } from "../../../utils/types/asset/AssetType";
 import { Link } from "react-router-dom";
 import { routes } from "../../../utils/constants";
-import {truncateText} from "../../../utils/functions/functions.ts";
 
 type Props = {
     asset: AssetType;
     isLast: boolean;
+};
+
+const formatCoins = (coins: string, maxItems: number = 3): string => {
+    const coinArray = coins.split(',').map(c => c.trim());
+    if (coinArray.length <= maxItems) {
+        return coins;
+    }
+    return coinArray.slice(0, maxItems).join(', ') + ', ...';
 };
 
 export const AssetRowMobile: FC<Props> = ({ asset, isLast }) => {
@@ -17,16 +24,15 @@ export const AssetRowMobile: FC<Props> = ({ asset, isLast }) => {
                     className="table-cell table-cell-name-mobile fw-bold d-flex align-items-center"
                     title={asset.name}
                 >
-                    {truncateText(asset.name, 12)}
-                </div>
-                <div className="table-cell table-cell-label-mobile text-truncate d-flex align-items-center" title={asset.label}>
-                    {truncateText(asset.label, 10)}
+                    <span style={{ minWidth: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                        {asset.name}
+                    </span>
                 </div>
                 <div
                     className="table-cell table-cell-coins-mobile d-flex align-items-center"
                     title={asset.coins}
                 >
-                    {truncateText(asset.coins, 10)}
+                    {formatCoins(asset.coins, 3)}
                 </div>
             </div>
         </Link>

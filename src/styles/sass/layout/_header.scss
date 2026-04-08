@@ -2,7 +2,7 @@
   @extend %p-rel;
   width: 100%;
   z-index: 99;
-  font-weight: bold;
+  //font-weight: bold;
   margin-top: -20px;
 
   &--style1 {
@@ -55,6 +55,10 @@
 
   @include breakpoint(lg) {
     margin-top:0;
+  }
+
+  .container {
+    max-width: 1800px;
   }
 
   .logo {

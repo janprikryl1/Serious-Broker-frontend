@@ -8,6 +8,7 @@ import {QuotedCurrenciesPeriod} from "../options/QuotedCurrenciesPeriod.ts";
 import {AssetGraphPriceDetailsType} from "../types/graphs/AssetGraphPriceDetailsType.ts";
 import {RecommendedProfileAssetType} from "../types/asset/RecommendedProfileAssetType.ts";
 
+// Table binance_index_asset
 export const getAllAssets = async (page: number, limit: number, filters: { currencyCount: string; includeCurrencies: string[]; searchQuery: string; order: {direction: "asc" | "desc", orderType: AssetOrder, timeRange: string} }) => {
     const token = localStorage.getItem("token");
 
@@ -47,7 +48,7 @@ export const getAllAssetsProfitList  = async (page: number, limit: number, order
 export const getAssetByIndexLabel = async (index_label: string) => {
     const token = localStorage.getItem("token");
     
-    return await axios.get( backendUrl + "graphs/binance_index_assets/get_asset_by_id.php", {
+    return await axios.get(backendUrl + "/graphs/binance_index_assets/get_asset_by_id.php", {
         params: {
             name: index_label
         },
@@ -118,4 +119,8 @@ export const getWhereCoinInAsset = async (asset_id: string) => {
             asset_id
         }
     });
+}
+
+export const getTradingCoins = async () => {
+    return await axios.get<string[]>(backendUrl + "graphs/binance_index_assets/get_trading_coins.php");
 }

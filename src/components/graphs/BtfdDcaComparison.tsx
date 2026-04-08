@@ -1,17 +1,14 @@
 import {FC, useEffect, useMemo, useRef, useState} from "react";
-import {getAssetSpotKlines, getBinanceIndexAssetAverageGraphData} from "../../utils/api/GraphsService.ts";
+import {getAssetSpotKlines} from "../../utils/api/GraphsService.ts";
+import {getBinanceAssetATH} from "../../utils/api/ATHService.ts";
 import {CustomSwal} from "../../utils/functions/customSwal.ts";
 import {useTranslation} from "react-i18next";
-import {RecommendedSeasonSelect} from "./RecommendedSeasonSelect.tsx";
 import {Form} from "react-bootstrap";
-import {BarPlot, ChartContainer, ChartsTooltip, ChartsXAxis, ChartsYAxis, LinePlot} from "@mui/x-charts";
-import {graphColors} from "../../utils/constants/qraphConstants.ts";
-import {timeZoneOptions} from "../../utils/functions/dateFunctions.ts";
+import {ChartContainer, ChartsTooltip, ChartsXAxis, ChartsYAxis, LinePlot} from "@mui/x-charts";
 import Typography from "@mui/material/Typography";
 import Slider from "@mui/material/Slider";
 import {CardContainer} from "../reusable/CardContainer.tsx";
-import {Day} from "../../pages/graphs/RecommendationDetails_new.tsx";
-import {BtfdDcaReturnsComparison} from "./BtfdDcaReturnsComparison.tsx";
+import {ATHType} from "../../utils/types/ATH/ATHType.ts";
 
 type Props = {
     asset_label: string;
@@ -54,12 +51,12 @@ export const BtfdDcaComparison: FC<Props> = ({asset_label}) => {
     const [DCATotalInvested, setDCATotalInvested] = useState(0);
     const [BTFDReturn, setBTFDReturn] = useState(0);
     const [BTFDTotalInvested, setBTFDTotalInvested] = useState(0);
-    const [ATH, setATH] = useState(102708.00);
     const [DCAReturnValues, setDCAReturnValues] = useState<number[]>([]);
     const [BTFDReturnValues, setBTFDReturnValues] = useState<number[]>([]);
     const [DCAReturnPoints, setDCAReturnPoints] = useState<ReturnDataPoint[] | undefined>();
     const [BTFDReturnPoints, setBTFDReturnPoints] = useState<ReturnDataPoint[] | undefined>();
     const [ATHs, setATHs] = useState<number[]>([])
+    const [assetATH, setAssetATH] = useState<ATHType | null>(null);
 
     const getMonth = (data: String) => {
         return t(Month[parseInt(data.split("-")[1])]);
@@ -86,15 +83,26 @@ export const BtfdDcaComparison: FC<Props> = ({asset_label}) => {
         if (!asset_label) return;
         const getData = async () => {
             setGraphData(undefined);
+            setFilteredData(undefined);
+            setAssetATH(null);
             try {
-                const response = await getAssetSpotKlines(
-                    asset_label,
-                    selectedNumOfYears,
-                );
-                if (response?.data) {
-                    console.log(response.data);
+                const [klinesResponse, athResponse] = await Promise.all([
+                    getAssetSpotKlines(asset_label, selectedNumOfYears),
+                    getBinanceAssetATH(asset_label),
+                ]);
 
-                    const processedData: ProcessedDataPoint[] = response.data.map((p: any) => ({
+                if (athResponse?.data) {
+                    const parsedPriceEur = Number(athResponse.data.price_eur);
+                    const parsedPriceUsd = Number(athResponse.data.price_usd);
+                    setAssetATH({
+                        ...athResponse.data,
+                        price_eur: Number.isFinite(parsedPriceEur) ? parsedPriceEur : 0,
+                        price_usd: Number.isFinite(parsedPriceUsd) ? parsedPriceUsd : 0,
+                    });
+                }
+
+                if (klinesResponse?.data) {
+                    const processedData: ProcessedDataPoint[] = klinesResponse.data.map((p: any) => ({
                         datetime: p.datetime,
                         closeEur: parseFloat(p.close_eur),
                     }));
@@ -104,20 +112,20 @@ export const BtfdDcaComparison: FC<Props> = ({asset_label}) => {
 
                 } else {
                     setGraphData([]);
+                    setFilteredData([]);
                 }
             } catch (e) {
-                console.log("NO DATA");
                 CustomSwal.fire({
                     title: t("Error"),
                     text: t("Something went wrong"),
                     icon: "error",
                 });
-                console.log(e);
                 setGraphData([]);
+                setFilteredData([]);
             }
         };
         getData();
-    }, [asset_label, selectedNumOfYears, baseInvestment, maxMultiplier, t]);
+    }, [asset_label, selectedNumOfYears, t]);
 
     // Compute DCA
     useEffect(() => {
@@ -160,7 +168,10 @@ export const BtfdDcaComparison: FC<Props> = ({asset_label}) => {
 
             const points = filteredData.map((p) => p)
 
-            let currentATH = ATH;
+            const initialATH = Number(assetATH?.price_eur);
+            let currentATH = Number.isFinite(initialATH) && initialATH > 0
+                ? initialATH
+                : (points[0]?.closeEur ?? 0);
 
             let totalInvested = 0;
             let totalAssetUnitsOwned = 0;
@@ -178,9 +189,10 @@ export const BtfdDcaComparison: FC<Props> = ({asset_label}) => {
 
                 aths.push(currentATH);
 
-                let priceDecrease = Math.min((currentATH - p.closeEur) / currentATH, 0.75);
+                let priceDecrease = currentATH > 0
+                    ? Math.min((currentATH - p.closeEur) / currentATH, maxDecrease)
+                    : 0;
                 const multiplier = 1 + ((maxMultiplier - 1) / maxDecrease * priceDecrease);
-                console.log(multiplier);
 
                 let actualInvestment = multiplier * baseInvestment;
                 
@@ -205,7 +217,13 @@ export const BtfdDcaComparison: FC<Props> = ({asset_label}) => {
             setBTFDReturnPoints(BTFDPoints);
 
         }
-    }, [baseInvestment, periodInvestment, maxDecrease, maxMultiplier, filteredData, graphData]);
+    }, [baseInvestment, periodInvestment, maxDecrease, maxMultiplier, filteredData, graphData, assetATH]);
+
+    const priceSeries = graphData?.map((p) => p.closeEur) ?? [];
+    const athSeries = ATHs ?? [];
+    const combinedPriceValues = [...priceSeries, ...athSeries].filter((v) => Number.isFinite(v));
+    const priceMin = combinedPriceValues.length > 0 ? Math.min(...combinedPriceValues) * 0.9 : 0;
+    const priceMax = combinedPriceValues.length > 0 ? Math.max(...combinedPriceValues) * 1.1 : 1;
 
     return (
         <>
@@ -232,8 +250,8 @@ export const BtfdDcaComparison: FC<Props> = ({asset_label}) => {
                         </div>
 
                         <Form.Select
-                            className="form-select"
-                            style={{ height: 34, maxWidth: 100 }}
+                            className="select-box-outline"
+                            style={{ maxWidth: 120 }}
                             value={selectedNumOfYears}
                             onChange={(e) => setSelectedNumOfYears(Number(e.target.value))}
                         >
@@ -256,12 +274,14 @@ export const BtfdDcaComparison: FC<Props> = ({asset_label}) => {
                         </div>
 
                         <Form.Control
-                            className="form-control-custom"
-                            type="number"
-                            style={{ width: "70px", height: "30px" }}
-                            value={baseInvestment}
-                            onChange={(e) => setBaseInvestment(parseInt(e.target.value))}
-                            onBlur={(e) => setBaseInvestment(parseInt(e.target.value))}
+                          className="outline-input"
+                          type="number"
+                          style={{
+                              width: `${baseInvestment.toString().length + 5}ch`,
+                              minWidth: "50px"
+                          }}
+                          value={baseInvestment}
+                          onChange={(e) => setBaseInvestment(parseInt(e.target.value) || 0)}
                         />
                     </div>
 
@@ -307,7 +327,7 @@ export const BtfdDcaComparison: FC<Props> = ({asset_label}) => {
             </div>
 
             <div className="justify-content-center text-center align-items-center" style={{display: "flex"}}>
-                <CardContainer color="#ffffff20" style={{width: "50%", height: "100px"}}>
+                <CardContainer color="#ffffff20" style={{width: "50%"}}>
                     <div className="row justify-content-center text-center align-items-center">
                         <div className="col" style={{fontWeight: "bold", fontSize: "1.8rem"}}>{DCAReturn.toFixed(2)} %</div>
                         <div className="col" style={{fontWeight: "bold", fontSize: "1.8rem"}}>{BTFDReturn.toFixed(2)} %</div>
@@ -343,11 +363,9 @@ export const BtfdDcaComparison: FC<Props> = ({asset_label}) => {
                                     label: t("ATH"),
                                     data: ATHs,
                                     color: "#FF7676",
-                                    /*valueFormatter: (value: number | null) =>
-                                        value !== null ? `${Number(value).toFixed(2)} €` : "",*/
                                     valueFormatter: (value: number | null) =>
                                         value !== null
-                                            ? `${value.toLocaleString('fr-FR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} %`
+                                            ? `${value.toLocaleString('fr-FR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} €`
                                             : ""
                                 },
                                 {
@@ -357,11 +375,9 @@ export const BtfdDcaComparison: FC<Props> = ({asset_label}) => {
                                     label: t("Price"),
                                     data: filteredData?.map((p) => p.closeEur),
                                     color: "#4C4033",
-                                    /*valueFormatter: (value: number | null) =>
-                                        value !== null ? `${value.toFixed(2)} €` : "",*/
                                     valueFormatter: (value: number | null) =>
                                         value !== null
-                                            ? `${value.toLocaleString('fr-FR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} %`
+                                            ? `${value.toLocaleString('fr-FR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} €`
                                             : ""
                                 },
                                 {
@@ -423,8 +439,8 @@ export const BtfdDcaComparison: FC<Props> = ({asset_label}) => {
                             yAxis={[
                                 {
                                     id: "price",
-                                    min: Math.min(...graphData.map((p) => p.closeEur)) * 0.9,
-                                    max: Math.max(...graphData.map((p) => p.closeEur)) * 1.1,
+                                    min: priceMin,
+                                    max: priceMax,
                                     tickNumber: 5,
                                     position: 'left',
                                     width: 80,
@@ -492,7 +508,7 @@ export const BtfdDcaComparison: FC<Props> = ({asset_label}) => {
                             <ChartsXAxis />
                             <ChartsYAxis axisId="price" />
                             <ChartsYAxis axisId="return" />
-                            <ChartsYAxis axisId="ATH" />
+                            {/*<ChartsYAxis axisId="ATH" />*/}
                         </ChartContainer>
                     ) : (
                         <div

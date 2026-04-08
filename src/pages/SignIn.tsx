@@ -37,7 +37,7 @@ export const SignIn: FC = () => {
                             <Button
                                 type="submit"
                                 className="trk-btn trk-btn--large trk-btn--secondary2"
-                                color={ButtonColor.yellow}
+                                color={ButtonColor.gold}
                                 disabled={isSubmitting}
                             >
                                 {t("Submit")}

@@ -30,12 +30,19 @@ export const AssetGraphPriceDetails:FC<Props> = ({currency, currencyValue}) => {
         getDetails();
     }, []);
 
+    const formatNumber = (value: number): string => {
+        return Math.round(value).toLocaleString('cs-CZ', {
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 0,
+        });
+    };
+
     const renderRow = (label: string, value: number | null) => {
         if (value !== 0 && value !== null) {
             return (
                 <div style={{display: "flex", justifyContent: "space-between", marginBottom: "4px"}}>
                     <span>{label}</span>
-                    <span style={{fontWeight: "bold"}}>{toPercentTwoDecimal(value * currencyValue)} {currency}</span>
+                    <span style={{fontWeight: "bold"}}>{formatNumber(value * currencyValue)} {currency}</span>
                 </div>
             );
         }
@@ -44,9 +51,9 @@ export const AssetGraphPriceDetails:FC<Props> = ({currency, currencyValue}) => {
     
     return (
         <>
-            <p style={{fontSize: "25px", fontWeight: "bold", marginBottom: "5px", marginTop: "20px"}}>{t("Details")}</p>
+            <div className={"mt-4 mb-2"} style={{fontSize: "25px"}}>{t("Details")}</div>
             {assetGraphPriceDetails === undefined ? <p>{t("Loading...")}</p> : (
-                <div style={{fontSize: "12px"}}>
+                <div style={{fontSize: "18px"}}>
                     <div
                         style={{
                             display: "flex",
@@ -54,9 +61,9 @@ export const AssetGraphPriceDetails:FC<Props> = ({currency, currencyValue}) => {
                             marginBottom: "4px",
                         }}
                     >
-                        <span>{t("Market capitalisation: ")}</span>
+                        <span className={"gray-2-color-text"}>{t("Market capitalisation: ")}</span>
                         <span
-                            style={{fontWeight: "bold"}}>{toPercentTwoDecimal(assetGraphPriceDetails.marketcap)} $</span>
+                            style={{fontWeight: "bold"}}>{formatNumber(assetGraphPriceDetails.marketcap)} $</span>
                     </div>
                     {renderRow(t("Last price: "), assetGraphPriceDetails.current_price)}
                     {renderRow(t("Daily high: "), assetGraphPriceDetails.daily_high)}

@@ -71,7 +71,7 @@ export const AdminUserManagement: FC = () => {
                                     value={searchTerm2}
                                     onChange={(e) => setSearchTerm2(e.target.value)}
                                 />
-                                <Button color={ButtonColor.yellow} onClick={handleSearch}>{t("Search")}</Button>
+                                <Button color={ButtonColor.gold} onClick={handleSearch}>{t("Search")}</Button>
                                 <Button color={ButtonColor.red} onClick={handleClearFilters}>{t("Clear filters")}</Button>
                             </InputGroup>
                             <DataGrid

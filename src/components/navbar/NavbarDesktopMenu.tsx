@@ -29,7 +29,7 @@ export const NavbarDesktopMenu: FC = () => {
                                     <NavDropdown
                                         title={t(item.title)}
                                         id={`nav-dropdown-${key}`}
-                                        className={isDropdownActive ? "active-yellow" : ""}
+                                        className={`custom-nav-dropdown ${isDropdownActive ? "active-yellow" : ""}`}
                                     >
                                         {Object.keys(item.subLinks).map((subKey) => (
                                             <NavDropdown.Item

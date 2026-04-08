@@ -1,9 +1,21 @@
 import {FC, lazy} from "react";
-import {Route, Routes} from "react-router-dom";
+import {Outlet, Route, Routes} from "react-router-dom";
 import {adminURLS, editorURLS, guideURLS, routes} from "./utils/constants";
 import {PageLoader} from "./components/reusable/PageLoader.tsx";
 import {EditorOverview} from "./pages/editor/EditorOverview.tsx";
 import {BTFDTuningParameters} from "./components/graphs/BTFDTuningParameters.tsx";
+import {NewInvestmentPlan} from "./pages/profile/investment-plan/NewInvestmentPlan.tsx";
+import {NewPortfolio} from "./pages/profile/investment-plan/NewPortfolio.tsx";
+import {ChooseExistingPortfolio} from "./pages/profile/investment-plan/ChooseExistingPortfolio.tsx";
+import {RecurringInvestment} from "./pages/profile/investment-plan/RecurringInvestment.tsx";
+import {InvestedAmount} from "./pages/profile/investment-plan/InvestedAmount.tsx";
+import {TrafficLightsComponent} from "./components/trafficLight/TrafficLightsComponent.tsx";
+import {TrafficLights} from "./pages/profile/investment-plan/TrafficLights.tsx";
+import {InvestmentPlanProvider} from "./utils/providers/InvestmentPlanProvider.tsx";
+import {NewInvestmentPlanIntro} from "./pages/profile/investment-plan/NewInvestmentPlanIntro.tsx";
+import {MyInvestmentPlans} from "./pages/profile/MyInvestmentPlans.tsx";
+import {NewInvestmentPlanName} from "./pages/profile/investment-plan/NewInvestmentPlanName.tsx";
+import {MyTrafficLights} from "./pages/profile/MyTrafficLight.tsx";
 const Index = lazy(() => import("./pages/Index.tsx").then(module => ({ default: module.Index })));
 const About = lazy(() => import("./pages/About.tsx").then(module => ({ default: module.About })));
 const Contact = lazy(() => import("./pages/Contact.tsx").then(module => ({ default: module.Contact })));
@@ -72,7 +84,7 @@ const AdminFormResponses = lazy(() => import ("./pages/admin/AdminFormResponses.
 const CooperationInfo = lazy(() => import ("./pages/CooperationInfo.tsx").then(module => ({ default: module.CooperationInfo })));
 const GdprInfo = lazy(() => import ("./pages/GDPRInfo.tsx").then(module => ({ default: module.GdprInfo })));
 const CookiesInfo = lazy(() => import ("./pages/CookiesInfo.tsx").then(module => ({ default: module.CookiesInfo })));
-const WhyLogin = lazy(() => import ("./pages/WhyLogin.tsx").then(module => ({ default: module.WhyLogin })));
+// const WhyLogin = lazy(() => import ("./pages/WhyLogin.tsx").then(module => ({ default: module.WhyLogin })));
 const Welcome = lazy(() => import ("./pages/welcome/Welcome.tsx").then(module => ({ default: module.Welcome })));
 const WelcomePremium = lazy(() => import ("./pages/welcome/WelcomePremium.tsx").then(module => ({ default: module.WelcomePremium })));
 const FormEvaulationSettings = lazy(() => import ("./pages/admin/FormEvaulationSettings.tsx").then(module => ({ default: module.FormEvaulationSettings })));
@@ -111,7 +123,19 @@ export const Router:FC = () => {
                 <Route path={routes.profile.editMyPortfolio} element={<PageLoader><EditMyPortfolio/></PageLoader>} />
                 <Route path={routes.profile.myPortfolioDetails} element={<PageLoader><MyPortfolioDetails/></PageLoader>} />
                 <Route path={routes.profile.newMyPortfolio} element={<PageLoader><EditMyPortfolio/></PageLoader>} />
+                <Route path={routes.profile.newInvestmentPlanIntro} element={<PageLoader><NewInvestmentPlanIntro/></PageLoader>} />
+                <Route element={<InvestmentPlanProvider><Outlet /></InvestmentPlanProvider>}>
+                    <Route path={routes.profile.newInvestmentPlanName} element={<PageLoader><NewInvestmentPlanName/></PageLoader>} />
+                    <Route path={routes.profile.newInvestmentPlan} element={<PageLoader><NewInvestmentPlan/></PageLoader>} />
+                    <Route path={routes.profile.newInvestmentPlanNewPortfolio} element={<PageLoader><NewPortfolio/></PageLoader>} />
+                    <Route path={routes.profile.newInvestmentPlanExistingPortfolio} element={<PageLoader><ChooseExistingPortfolio/></PageLoader>} />
+                    <Route path={routes.profile.newInvestmentPlanRecurringInvestment} element={<PageLoader><RecurringInvestment/></PageLoader>} />
+                    <Route path={routes.profile.newInvestmentPlanInvestedAmount} element={<PageLoader><InvestedAmount/></PageLoader>} />
+                    <Route path={routes.profile.newInvestmentPlanTrafficLights} element={<PageLoader><TrafficLights/></PageLoader>} />
+                </Route>
                 <Route path={routes.profile.sessions} element={<PageLoader><ProfileSessions/></PageLoader>} />
+                <Route path={routes.profile.myInvestmentPlans} element={<PageLoader><MyInvestmentPlans/></PageLoader>} />
+                <Route path={routes.profile.myTrafficLights} element={<PageLoader><MyTrafficLights/></PageLoader>} />
                 <Route path={routes.profile.myWatchList} element={<PageLoader><MyWatchList/></PageLoader>} />
             </Route>
             <Route path={editorURLS.index} element={<EditorOverview />}>
@@ -159,11 +183,11 @@ export const Router:FC = () => {
             <Route path={routes.cooperationInfo} element={<PageLoader><CooperationInfo /></PageLoader>} />
             <Route path={routes.gdprInfo} element={<PageLoader><GdprInfo /></PageLoader>} />
             <Route path={routes.cookiesInfo} element={<PageLoader><CookiesInfo /></PageLoader>} />
-            <Route path={routes.aboutLogin} element={<PageLoader><WhyLogin /></PageLoader>} />
+            {/*<Route path={routes.aboutLogin} element={<PageLoader><WhyLogin /></PageLoader>} />*/}
             <Route path="welcome" element={<PageLoader><Welcome /></PageLoader>} />
             <Route path="welcome/premium" element={<PageLoader><WelcomePremium /></PageLoader>} />
             <Route path="*" element={<PageLoader><ErrorPage /></PageLoader>} />
-            <Route path="BTFDTuning" element={<PageLoader><BTFDTuningParameters/></PageLoader>} />
+            <Route path={routes.BTFD} element={<PageLoader><BTFDTuningParameters/></PageLoader>} />
 
         </Routes>
     );

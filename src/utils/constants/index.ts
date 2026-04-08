@@ -46,6 +46,7 @@ export const routes = {
     cryptocurrencyDetail: "/cryptocurrency_detail/:id",
     graphsRecommendationDetailURL: "/graphs/recommendation/detail/",
     graphsRecommendationDetail: "/graphs/recommendation/detail/:asset_label",
+    BTFD: "/graphs/BTFD",
     signIn: "/sign_in",
     register: "/register",
     profile: {
@@ -59,6 +60,16 @@ export const routes = {
         newMyPortfolio: "/profile/edit_my_portfolio",
         myPortfolioDetails: "/profile/my_portfolio_details/:id",
         myWatchList: "/profile/my_watch_list",
+        newInvestmentPlanIntro: "/profile/new_investment_plan_intro",
+        newInvestmentPlanName: "/profile/new_investment_plan_name",
+        newInvestmentPlan: "/profile/new_investment_plan",
+        newInvestmentPlanNewPortfolio: "/profile/new_investment_plan/new_portfolio",
+        newInvestmentPlanExistingPortfolio: "/profile/new_investment_plan/existing_portfolio",
+        newInvestmentPlanRecurringInvestment: "/profile/new_investment_plan/recurring_investment",
+        newInvestmentPlanInvestedAmount: "/profile/new_investment_plan/invested_amount",
+        newInvestmentPlanTrafficLights: "/profile/new_investment_plan/traffic_lights",
+        myInvestmentPlans: "/profile/my_investment_plans",
+        myTrafficLights: "/profile/my_traffic_lights",
     },
     verifyAccount: "/verify_account/:user_id/:token",
     forgottenPassword: "/forgotten_password",
@@ -159,19 +170,35 @@ export const guideURLS = {
 }
 
 export const registeredUserNavbarURLs: NavbarURLs = {
-    myPortfolio: { title: "Portfolio", link:  routes.profile.myPortfolio},
-    groups: { title: "Groups", link: routes.assets },
-    assets: {title: "Pairs", link: routes.recommendation},
+    analysesStrategies: {
+        title: "Analyses & Strategies",
+        subLinks: {
+            indices: { title: "Indices", link: routes.assets },
+            cryptocurrencies: { title: "Cryptocurrencies", link: routes.cryptocurrenciesList },
+            recommendation: { title: "Buy & Sell Timing", link: routes.recommendation },
+            BTFD: { title: "Strategies", link: routes.BTFD },
+        }
+    },
+    investmentProfile: {
+        title: "Investment Profile",
+        subLinks: {
+            // dashboard: { title: "Dashboard", link: routes.profile.myPortfolio },
+            portfolios: { title: "My Portfolios", link: routes.profile.myPortfolio },
+            investmentPlans: { title: "My Investment Plans", link: routes.profile.myInvestmentPlans },
+            marketTrafficLights: { title: "My Market Traffic Lights", link: routes.profile.myTrafficLights },
+            watchlist: { title: "Watchlist", link: routes.profile.myWatchList },
+        }
+    },
     education: {title: "Education", link: routes.articles},
-    myWatchList: { title: "My watch list", link: routes.profile.myWatchList },
-    overview: { title: "Overview", link: routes.overview },
+    // overview: { title: "Overview", link: routes.overview },
     //aboutUs: { title: "About us", link: routes.about },
 };
 
 export const notRegisteredUserNavbarURLs: Record<string, NavLink> = {
-    aboutLogin: { title: "Portfolio", link:  routes.aboutLogin},
-    groups: { title: "Groups", link: routes.assets },
+    aboutLogin: { title: "Analyses & Strategies", link:  routes.register},
+    indices: { title: "Indices", link: routes.assets },
+    cryptocurrencies: { title: "Cryptocurrencies", link: routes.cryptocurrenciesList },
     education: {title: "Education", link: routes.articles},
-    overview: { title: "Overview", link: routes.overview },
+    // overview: { title: "Overview", link: routes.overview },
     //aboutUs: { title: "About us", link: routes.about },
 };

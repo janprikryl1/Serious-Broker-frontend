@@ -5,26 +5,12 @@ import {CryptoCategories} from "../components/articles/cryptoCurrenciesList/Cryp
 import {CryptoCurrencies} from "../components/articles/cryptoCurrenciesList/CryptoCurrencies.tsx";
 
 export const CryptoCurrenciesList:FC = () => {
-    const [showCategory, setShowCategory] = useState(false);
-    
+
     return (
         <>
-            <TitleHeader title="Crypto currencies list"/>
+            <TitleHeader title="Cryptocurrencies List"/>
             <div className="container padding-bottom">
-                <div className="graph-container">
-                    <div className="service-details__wrapper">
-                        <div className="service-details__item">
-                            <div className="service-details__item-inner">
-                                <CryptoCurrencyViewSwitch showCategory={showCategory} setShowCategory={setShowCategory}/>
-                                {showCategory ? (
-                                    <CryptoCategories />
-                                ) : (
-                                    <CryptoCurrencies />
-                                )}
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <CryptoCurrencies />
             </div>
         </>
     );
