@@ -57,6 +57,12 @@ export const SignInIcon: FC = () => {
                             Admin panel
                         </Dropdown.Item>
                     )}
+                    {user.role === UserRole.Admin && (
+                        <Dropdown.Item as={"a"} href={adminURLS.internalTool} className={"d-flex gap-2 align-items-center" }>
+                            <RiAdminLine />
+                            {t("Internal toll")}
+                        </Dropdown.Item>
+                    )}
                     <Dropdown.Divider />
                     <Dropdown.Item onClick={logout} >
                         <div className={"d-flex gap-2 align-items-center"} style={{color: "var(--red-on-tertiary-color)", fontWeight: "bold"}}>

@@ -161,6 +161,7 @@ export const adminURLS = {
     forms: "/admin/forms",
     formResponses: "/admin/form_responses",
     formEvaulationSettings: "/admin/form_evaulation_settings",
+    internalTool: "http://serious.broker/internal"
 }
 
 export const guideURLS = {
