@@ -32,6 +32,23 @@ export const cryptoCurrencyUpdate = async (post: CryptoCurrencyAdminType) => {
     });
 };
 
+export const stylizedImageUpdate = async (id: number, name: string, symbol: string, file: File) => {
+    const token = localStorage.getItem("token");
+    if (!token) return;
+
+    const formData = new FormData();
+    formData.append('id', id.toString());
+    formData.append('name', name);
+    formData.append('symbol', symbol);
+    formData.append('stylized_image', file);
+
+    return await axios.post(backendUrl + "cryptocurrency_list/upload_stylized_image.php", formData, {
+        headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'multipart/form-data'
+        }
+    });
+};
 
 export const cryptoCurrencyAdd = async (post: CryptoCurrencyNewType) => {
     const token = localStorage.getItem("token");
@@ -54,6 +71,9 @@ export const cryptoCurrencyAdd = async (post: CryptoCurrencyNewType) => {
     formData.append('date', post.date);
     if (post.photo) {
         formData.append('photo', post.photo);
+    }
+    if (post.stylized_image_file) {
+        formData.append('stylized_image', post.stylized_image_file);
     }
 
     return await axios.post(backendUrl + "cryptocurrency_list/new_cryptocurrency.php", formData, {
