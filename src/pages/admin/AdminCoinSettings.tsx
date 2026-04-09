@@ -15,7 +15,7 @@ import {AddCryptoCurrency} from "../../components/admin/cryptoCurrencyManagement
 import {Button} from "../../components/reusable/Button.tsx";
 import {AdminTableFilter} from "../../components/reusable/AdminTableFilter.tsx";
 import {CustomSwal} from "../../utils/functions/customSwal.ts";
-import {CryptoCurrencyType} from "../../utils/types/asset/CryptoCurrencyType.ts";
+import {CryptoCurrencyAdminType, CryptoCurrencyType} from "../../utils/types/asset/CryptoCurrencyType.ts";
 
 export const AdminCoinSettings: FC = () => {
     const { t } = useTranslation();
@@ -88,7 +88,7 @@ export const AdminCoinSettings: FC = () => {
                 photo: selectedFiles[id]
             };
             try {
-                const result = await cryptoCurrencyUpdate(updateObject);
+                const result = await cryptoCurrencyUpdate(updateObject as CryptoCurrencyAdminType);
                 if (!result) throw ("Not sent");
                 if (result.data.status === "success") {
                     CustomSwal.fire({

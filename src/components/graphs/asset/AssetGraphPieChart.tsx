@@ -83,18 +83,6 @@ export const AssetGraphPieChart: FC<Props> = ({ assets, assetName }) => {
                 width={400}
                 height={240}
                 colors={[
-                    '#C5A059', // Sýta ušľachtilá zlatá
-                    '#5D8AA8', // Air Force modrá
-                    '#A95C5C', // Tlmená terakota (červená)
-                    '#D4AF37', // Klasická metalická zlatá
-                    '#466D85', // Hlboká oceánska modrá
-                    '#8B4444', // Elegantná vínová
-                    '#E5C383', // Svetlá šampanská zlatá
-                    '#7395AE', // Šedomodrá s vyšším jasom
-                    '#C06C84', // Tlmená malinovo-červená
-                    '#9E7E38'  // Bronzovo-zlatá
-                ]}
-                colors={[
                     '#C5A059', // 1. Ušľachtilá stredná zlatá
                     '#8B6D1B', // 2. Tmavý antický bronz
                     '#F1DBA1', // 3. Jemné bledé šampanské
