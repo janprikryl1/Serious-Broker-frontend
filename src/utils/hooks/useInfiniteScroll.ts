@@ -1,13 +1,14 @@
-import { useEffect, useRef, useState, useCallback } from 'react';
+import {useEffect, useRef, useState, useCallback, RefObject} from 'react';
 
 type UseInfiniteScrollOptions = {
     totalPages: number;
     loading: boolean;
     threshold?: number;
     rootMargin?: string;
+    root?: HTMLDivElement | null;
 }
 
-export const useInfiniteScroll = ({totalPages, loading, threshold = 1.0, rootMargin = '100px'}: UseInfiniteScrollOptions) => {
+export const useInfiniteScroll = ({totalPages, loading, threshold = 1.0, rootMargin = '100px', root}: UseInfiniteScrollOptions) => {
     const [currentPage, setCurrentPage] = useState<number>(1);
     const observerRef = useRef<IntersectionObserver | null>(null);
     const loaderRef = useRef<HTMLDivElement | null>(null);
@@ -25,13 +26,16 @@ export const useInfiniteScroll = ({totalPages, loading, threshold = 1.0, rootMar
                     setCurrentPage((prev) => prev + 1);
                 }
             },
-            { root: null, rootMargin, threshold }
+            {
+                root: root,
+                rootMargin,
+                threshold }
         );
 
         observerRef.current.observe(loaderRef.current);
 
         return () => observerRef.current?.disconnect();
-    }, [loading, totalPages, currentPage, rootMargin, threshold]);
+    }, [loading, totalPages, currentPage, rootMargin, threshold, root]);
 
     return {
         currentPage,

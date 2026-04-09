@@ -5,7 +5,7 @@ import {BinanceIndexAssetRecomBestPreviousDetails} from "../types/graphs/Binance
 import {RecommendationDetailSeasonEnum} from "../enums/RecommendationDetailSeasonEnum.ts";
 
 export const getBinanceIndexAssetRecomBestPrevious = async (orderBy: string, page: number, sortDirection: "asc" | "desc", filters: { includeCurrencies: string[]; searchQuery: string }) => {
-    const res  = axios.get<{totalPages: number; data: BinanceIndexAssetRecomBestPreviousType[]}>(backendUrl + "graphs/binance_index_asset_recom_best_previous.php", {
+    const res  = axios.get<{totalPages: number; data: BinanceIndexAssetRecomBestPreviousType[]}>(`${backendUrl}/graphs/binance_index_asset_recom_best_previous.php`, {
         params: {
             order_by: orderBy,
             page: page,
@@ -55,12 +55,13 @@ export const getBinanceIndexAssetAverageGraphData = async (assetLabel: string, n
 }
 
 /* Used in BtfdDcaComparison */
-export const getAssetSpotKlines = async (assetLabel: string, numberOfYears: number, endDate?: string) => {
+export const getAssetSpotKlines = async (assetLabel: string, numberOfYears?: number, startDate?: string, endDate?: string) => {
     return await axios.get(`${backendUrl}graphs/asset_klines.php`, {
         params: {
             asset_label: assetLabel,
             num_of_years: numberOfYears,
-            endDate: endDate
+            start_date: startDate,
+            end_date: endDate
         }
     })
 }

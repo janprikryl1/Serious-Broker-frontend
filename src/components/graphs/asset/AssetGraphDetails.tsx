@@ -7,6 +7,7 @@ import {QuotedCurrenciesPeriod} from "../../../utils/options/QuotedCurrenciesPer
 import {AssetGraphPriceDetails} from "./AssetGraphPriceDetails.tsx";
 import {Currencies} from "../../../utils/enums/CurrenciesEnum.ts";
 import {useRenderProfitDetails} from "../../../utils/hooks/useRenderProfitDetails.tsx";
+import {OutlineContainer} from "../../reusable/OutlineContainer.tsx";
 
 type Props = {
     asset: AssetDetailType | MyPortfolioType;
@@ -21,31 +22,36 @@ export const AssetGraphDetails: FC<Props> = ({ asset, selectedPeriod, currency, 
     const {profitType, setProfitType, renderProfitDetails} = useRenderProfitDetails(selectedPeriod, asset);
 
     return (
-        <div className="service-details__content mb-5 text-light" style={{
-            border: "0.5px solid #3e3a32",
-            borderRadius: "16px",
-            padding: "20px",
-            height: "90%"
-        }}>
-            <p style={{fontSize: "25px", fontWeight: "bold", marginBottom: "5px"}}>{t("Statistics")}</p>
-            <p style={{fontSize: "15px", marginBottom: "5px"}}>{t("Last update: ")} {toCzechDate(asset.last_update)}</p>
+      <OutlineContainer style={{margin: 0, padding: "20px"}}>
+        <div className={"mb-2"} style={{fontSize: "25px"}}>{t("Statistics")}</div>
+
+        {/*<div className="service-details__content mb-5 text-light" style={{*/}
+        {/*    border: "0.5px solid #3e3a32",*/}
+        {/*    borderRadius: "16px",*/}
+        {/*    padding: "20px",*/}
+        {/*    height: "90%"*/}
+        {/*}}>*/}
+        {/*    <h5>{t("Statistics")}</h5>*/}
+        {/*    <p style={{fontSize: "15px", marginBottom: "5px"}}>{t("Last update: ")} {toCzechDate(asset.last_update)}</p>*/}
 
             <div className="d-flex gap-3">
                 <select
                     id="profitType"
-                    className="form-select"
+                    className="form-select select-box-outline"
                     value={profitType}
                     onChange={(e) => setProfitType(e.target.value)}
+                    style={{width: "180px"}}
                 >
                     <option value="Profit">{t("Profit")}</option>
                     <option value="Sell Profit">{t("Sell profit")}</option>
                 </select>
             </div>
 
-            <div className="mt-4" style={{fontSize: "12px"}}>
+            <div className="mt-4" style={{fontSize: "18px"}}>
                 {renderProfitDetails()}
             </div>
             {showPriceDetails && <AssetGraphPriceDetails currency={currency} currencyValue={currencyValue} />}
-        </div>
+        {/*</div>*/}
+      </OutlineContainer>
     );
 };

@@ -5,9 +5,18 @@ type Props = {
     children: ReactNode;
     backgroundSize?: string;
     backgroundPosition?: string;
+    className?: string;
+    contentClassName?: string;
 }
 
-export const SharedSlideLayout: FC<Props> = ({imageUrl, children, backgroundSize, backgroundPosition}) => {
+export const SharedSlideLayout: FC<Props> = ({
+    imageUrl,
+    children,
+    backgroundSize,
+    backgroundPosition,
+    className,
+    contentClassName,
+}) => {
     const style = {
         backgroundImage: `url(${imageUrl})`,
         ...(backgroundSize && { backgroundSize }),
@@ -15,9 +24,9 @@ export const SharedSlideLayout: FC<Props> = ({imageUrl, children, backgroundSize
     };
 
     return (
-        <div className="shared-slide-layout" style={style}>
+        <div className={`shared-slide-layout ${className ?? ""}`.trim()} style={style}>
             <div className="overlay" />
-            <div className="content">
+            <div className={`content ${contentClassName ?? ""}`.trim()}>
                 {children}
             </div>
         </div>

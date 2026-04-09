@@ -54,7 +54,7 @@ export const ProfileSessionsList: FC = () => {
             }}>
                 <TableHead>
                     <TableRow>
-                        {!isMobile && <TableCell>ID</TableCell>}
+                        {!isMobile && <TableCell>{t("ID")}</TableCell>}
                         <TableCell>{t("Created")}</TableCell>
                         <TableCell>{t("IP Address")}</TableCell>
                         <TableCell>{t("Action")}</TableCell>

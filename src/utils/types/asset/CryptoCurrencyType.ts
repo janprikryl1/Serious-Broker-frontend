@@ -24,6 +24,7 @@ export type CryptoCurrencyDetailType = CryptoCurrencyType & {
 
 export type CryptoCurrencyAdminType = CryptoCurrencyType & {
     photo: File | null;
+    stylized_image: string;
 };
 
 export type CryptoCurrencyNewType = CryptoCurrencyType & {

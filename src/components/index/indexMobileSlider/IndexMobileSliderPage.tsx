@@ -1,5 +1,5 @@
 import { FC } from "react";
-import Logo from "../../../utils/icons/logo/SB2.svg";
+import Logo from "../../../utils/icons/logo/SB-handwritten-white.svg";
 import { useTranslation } from "react-i18next";
 
 export const IndexMobileSliderPage: FC = () => {
@@ -11,7 +11,6 @@ export const IndexMobileSliderPage: FC = () => {
                 <img
                     src={Logo}
                     alt="Serious Broker logo"
-                    className="logo-dark"
                     loading="lazy"
                     style={{ width: "90%" }}
                 />

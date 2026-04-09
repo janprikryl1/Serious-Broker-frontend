@@ -4,8 +4,8 @@ import { Question, QuestionType } from "../../utils/types/admin/Question";
 import { Button, ButtonColor } from "../reusable/Button.tsx";
 import { useTranslation } from "react-i18next";
 import { FaRegTrashCan } from "react-icons/fa6";
-import { toast } from "react-toastify";
 import { saveQuestion } from "../../utils/api/formsService.ts";
+import {ToastColor, useToast} from "../../utils/providers/ToastProvider.tsx";
 import {formImagesURL} from "../../utils/constants";
 
 type Props = {
@@ -18,6 +18,7 @@ type Props = {
 
 export const FormQuestionCard: FC<Props> = ({ question, onSave, deleteQuestion, updateId, category }) => {
     const { t } = useTranslation();
+    const { showToast } = useToast();
     const [isEditing, setIsEditing] = useState(false);
     const [imageFile, setImageFile] = useState<File | null>(null);
 
@@ -66,7 +67,7 @@ export const FormQuestionCard: FC<Props> = ({ question, onSave, deleteQuestion, 
             onSave?.(updated);
             updateId(question.id, response.data.id ?? question.id);
             setIsEditing(false);
-            toast.success(t("Saved successfully"));
+            showToast(t("Saved successfully"), ToastColor.green);
         }
     };
 

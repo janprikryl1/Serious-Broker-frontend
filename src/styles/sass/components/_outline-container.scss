@@ -1,0 +1,6 @@
+.outline-container-hover {
+  &:hover {
+    outline: 0.5px solid var(--secondary-color) !important;
+    box-shadow:  0 0 15px 5px color-mix(in srgb, var(--secondary-color), transparent 90%) !important;
+  }
+}

@@ -1,6 +1,9 @@
 import Swal from 'sweetalert2';
+import withReactContent from "sweetalert2-react-content";
 
 export const CustomSwal = Swal.mixin({
-  background: '#1e1702',
-  color: '#FFFDFA'
+  background: 'var(--tertiary-color)',
+  color: 'var(--white-color)'
 });
+
+export const MySwal = withReactContent(CustomSwal);

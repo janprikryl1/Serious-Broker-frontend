@@ -17,8 +17,8 @@ export const ShortExpressiveText:FC = () => {
 
     if (user?.has_filled_form === true) return null;
     return (
-        <div style={{backgroundColor: "#191300", paddingBottom:50}}>
-            <div className="container">
+        <div style={{ paddingBottom:50}}>
+            <div className="container mt-5">
                 <h2 className="index-section-head-title">{t("Investiční dotazník")}</h2>
                 <p className="mb-4 text-light index-description">{t("Fill out a short investment questionnaire so we can prepare better recommendations for you.")}</p>
 
@@ -35,7 +35,7 @@ export const ShortExpressiveText:FC = () => {
                         <option>{t("5-10 years")}</option>
                         <option>{t("10+ years")}</option>
                     </Form.Select>
-                    <Button onClick={handleSelect}>Vyplnit dotazník</Button>
+                    <Button className="mt-3" onClick={handleSelect}>{t("Fill out the survey")}</Button>
                 </div>
             </div>
         </div>

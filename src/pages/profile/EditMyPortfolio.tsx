@@ -7,7 +7,7 @@ import {MyPortfolioPreviewButton} from "../../components/profile/myPortfolio/myP
 
 export const EditMyPortfolio:FC = () => {
     return (
-        <div className="service-details__item-inner">
+        <div className="service-details__item-inner container">
             <MyPortfolioProvider>
                 <MyPortfolioDetails />
                 <MyPortfolioAssets />

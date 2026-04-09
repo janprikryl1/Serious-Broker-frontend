@@ -1,13 +1,14 @@
 import {useEffect, useState} from "react";
 import {GridCellParams} from "@mui/x-data-grid";
-import {toast} from "react-toastify";
 import {useTranslation} from "react-i18next";
 import {UserType} from "../../types/user/userTypes.ts";
 import {getAllUsers} from "../../api/adminService.ts";
 import {giveAchievmentsForLongPeriod} from "../../api/achievementService.ts";
+import {ToastColor, useToast} from "../../providers/ToastProvider.tsx";
 
 export const useAdminAchievements = () => {
     const {t} = useTranslation();
+    const { showToast } = useToast();
     const [users, setUsers] = useState<UserType[]>([]);
     const [selectedUser, setSelectedUser] = useState<UserType>();
     const [searchTerm, setSearchTerm] = useState('');
@@ -56,11 +57,11 @@ export const useAdminAchievements = () => {
         try {
             const response = await giveAchievmentsForLongPeriod();
             if (response.status === 200) {
-                toast.success(t("Activity checked"));
+                showToast(t("Activity checked"), ToastColor.green);
             }
         } catch (error) {
             console.error(error);
-            toast.error(t("Error"));
+            showToast(t("Error"), ToastColor.red);
         }
     };
     

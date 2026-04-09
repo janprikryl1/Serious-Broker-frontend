@@ -16,7 +16,7 @@ export const StartInvestingWithSeriousBroker: FC = () => {
 
     return (
         <div style={{ backgroundColor: "#B1974E", minHeight: 700 }}>
-            <div className="container pt-5 pb-5">
+            <div className="container-xxl pt-5 pb-5">
                 <h2 className="mb-5 text-dark index-section-head-title">{t("Start Investing with Serious Broker")}</h2>
                 <div className="row text-center gx-0">
                     <div className="col-sm">
@@ -69,7 +69,7 @@ export const StartInvestingWithSeriousBroker: FC = () => {
             </div>
             <div style={{ display: "flex", justifyContent: "center", paddingTop: isMobile ? -40 : 40, paddingBottom:40 }}>
                 <Link to={guideURLS.index}>
-                    <Button color={ButtonColor.brown} style={{color:"white", fontSize:18}}>{t("Learn More")}</Button>
+                    <Button color={ButtonColor.lightBrown} style={{color:"white", fontSize:18}}>{t("Learn More")}</Button>
                 </Link>
             </div>
         </div>

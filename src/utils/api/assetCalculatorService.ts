@@ -2,7 +2,7 @@ import axios from "axios";
 import {backendUrl} from "../../env.ts";
 
 export const getAllAssetCoins = async () => {
-    return await axios.get(`${backendUrl}index/all_coins.php`);
+    return await axios.get(`${backendUrl}graphs/all_coins.php`);
 }
 
 export const getAssetCoinDetails = async (coin: string, period: string, amount: number) => {

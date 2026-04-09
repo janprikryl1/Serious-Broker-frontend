@@ -5,19 +5,14 @@ import {useTranslation} from "react-i18next";
 import {getBinanceIndexAssetRecomBestPreviousDetail} from "../../utils/api/GraphsService.ts";
 import {TitleHeader} from "../../components/about/TitleHeader.tsx";
 import {RecommendationDetailsSkeleton} from "../../components/graphs/RecommendationDetailsSkeleton.tsx";
-import {RecommendedSeasonSelect} from "../../components/graphs/RecommendedSeasonSelect.tsx";
 import {RecommendationDetailSeasonEnum} from "../../utils/enums/RecommendationDetailSeasonEnum.ts";
-import {RecommendationDetailWeekDetails} from "../../components/graphs/RecommendationDetailWeekDetails.tsx";
-import {RecommendationDetailsMonthDetails} from "../../components/graphs/RecommendationDetailsMonthDetails.tsx";
-import {RecommendationDetailsQuarterDetails} from "../../components/graphs/RecommendationDetailsQuarterDetails.tsx";
-import {RecommendationDetailsYearDetails} from "../../components/graphs/RecommendationDetailsYearDetails.tsx";
-import {RecommendationDetailsBuy} from "../../components/graphs/RecommendationDetailsBuy.tsx";
-import {RecommendationDetailsSell} from "../../components/graphs/RecommendationDetailsSell.tsx";
-import {RecommendationProfitGraph} from "../../components/graphs/RecommendationProfitGraph.tsx";
-import {RecommendedDetailsPriceGraph} from "../../components/graphs/RecommendedDetailsPriceGraph.tsx";
 import {RecommendedDetailsPriceGraph1} from "../../components/graphs/RecommendedDetailsPriceGraph_new.tsx";
 import {CardContainer} from "../../components/reusable/CardContainer.tsx";
 import {BtfdDcaComparison} from "../../components/graphs/BtfdDcaComparison.tsx";
+import {OutlineContainer} from "../../components/reusable/OutlineContainer.tsx";
+import {getCryptocurrencyById} from "../../utils/api/CryptocurrencyService.ts";
+import {coinURL} from "../../utils/constants";
+import {CryptoCurrencyDetailType} from "../../utils/types/asset/CryptoCurrencyType.ts";
 
 /*
 *  URL: https://serious.broker/graphs/recommendation/detail/BTC
@@ -39,6 +34,7 @@ export const RecommendationDetails_new:FC = () => {
     const {t} = useTranslation();
     const {asset_label} = useParams<{ asset_label: string }>();
     const [detailsData, setDetailsData] = useState<BinanceIndexAssetRecomBestPreviousDetails | undefined>();
+    const [cryptoDetails, setCryptoDetails] = useState<CryptoCurrencyDetailType | undefined>();
     const [selectedPeriod, setSelectedPeriod] = useState<RecommendationDetailSeasonEnum>(RecommendationDetailSeasonEnum.Week);
     const [selectedDropdown, setSelectedDropdown] = useState<string>("buy");
     const [selectedTimeZone, setSelectedTimeZone] = useState<string>("UTC");
@@ -49,6 +45,8 @@ export const RecommendationDetails_new:FC = () => {
             try {
                 const res = await getBinanceIndexAssetRecomBestPreviousDetail(asset_label);
                 setDetailsData(res.data);
+                const cryptoRes = await getCryptocurrencyById(asset_label);
+                setCryptoDetails(cryptoRes.data);
             } catch (e) {
                 console.error("Failed to fetch recommendation details:", e);
                 setDetailsData(undefined);
@@ -57,75 +55,22 @@ export const RecommendationDetails_new:FC = () => {
         getData();
     }, [asset_label]);
 
-    // @ts-ignore
     return (
         <>
             {detailsData ? (
                 <>
-                    <TitleHeader title={`${detailsData.name}`} title2={`${detailsData.asset_label}`} />
+                    <TitleHeader
+                        title={`${detailsData.name}`}
+                        title2={`${detailsData.asset_label}`}
+                        img={cryptoDetails?.stylized_image ? `${coinURL}/${cryptoDetails.stylized_image}` : ""}
+                    />
                     <div className="container graph-container mt-4">
                         <div className="service-details__wrapper">
                             <div className="service-details__item">
                                 <div className="service-details__item-inner mb-5">
-                                    {/*
-                                    <h5 className="index-title" style={{overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap"}}>{t("Quote currencies: ")}{detailsData.quote_currencies}</h5>
-                                    {detailsData.all_pos !== null && <p>{t("Best of all index: ")}{detailsData.all_pos}</p>}
-                                    {detailsData.all_sug !== null && <p>{t("All suggestions: ")}{detailsData.all_sug}</p>}
-                                    {detailsData.cmc_rank !== null && <p>{t("cmc_rank")}: {detailsData.cmc_rank}</p>}
-
-                                    <RecommendedSeasonSelect selectedPeriod={selectedPeriod} setSelectedPeriod={setSelectedPeriod} />
-
-                                    {/* Based on selected period react component is chosen
-                                        only for displaying stats and information next to graph }
-
-                                    <div className="row">
-                                        <div className="col-sm-5">
-                                            {selectedPeriod === RecommendationDetailSeasonEnum.Week ? (
-                                                <RecommendationDetailWeekDetails detailsData={detailsData}/>
-                                            ) : selectedPeriod === RecommendationDetailSeasonEnum.Month ? (
-                                                <RecommendationDetailsMonthDetails detailsData={detailsData}/>
-                                            ) : selectedPeriod === RecommendationDetailSeasonEnum.Quarter ? (
-                                                <RecommendationDetailsQuarterDetails detailsData={detailsData}/>
-                                            ) : selectedPeriod === RecommendationDetailSeasonEnum.Year ? (
-                                                <RecommendationDetailsYearDetails detailsData={detailsData}/>
-                                            ) : null}
-                                        </div>
-
-                                        {/* Firsth graph component }
-
-                                        <div className="col-sm">
-                                            {asset_label && <RecommendationProfitGraph asset_label={asset_label} selectedPeriod={selectedPeriod} selectedTimeZone={selectedTimeZone} />}
-                                        </div>
-                                        <div className="mb-5">
-                                            <i className="mb-2">{t("Ranking description")}</i>
-                                            <i>{t("Invest description")}</i>
-                                        </div>
-                                    </div>
-
-                                    <div className="d-flex align-items-center mt-4 mb-2" style={{maxWidth: "250px"}}>
-                                        <label className="form-label me-2">{t("Recommendation for")}</label>
-                                        <select
-                                            className="form-select mb-2"
-                                            value={selectedDropdown}
-                                            onChange={(e) => setSelectedDropdown(e.target.value)}
-                                        >
-                                            <option value="buy">{t("When to buy")}</option>
-                                            <option value="sell">{t("When to sell")}</option>
-                                        </select>
-                                    </div>
-
-                                    {/* Recommendation stats and data }
-
-                                    <div className="row">
-                                    {selectedDropdown === "buy" && <RecommendationDetailsBuy detailsData={detailsData} selectedTimeZone={selectedTimeZone} />}
-                                    {selectedDropdown === "sell" && <RecommendationDetailsSell detailsData={detailsData} selectedTimeZone={selectedTimeZone} />}
-                                    </div>*/}
-
-
-
                                     <h1 className="index-title" style={{overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap"}}>{t("Latest Weekly Recommendations")}</h1>
 
-                                    <CardContainer color="#ffffff20" >
+                                    <OutlineContainer bgColor={"var(--quaternary-color-transparent-50)"}>
                                         <div className="row justify-content-center text-center align-items-center" style={{paddingTop: "1.5em"}}>
                                             <div className="col" style={{fontWeight: "bold", fontSize: "2.8rem"}}>{detailsData.buy_week_0_week_day != null ? t(Day[detailsData.buy_week_0_week_day]) : detailsData.buy_week_0_week_day} {detailsData.buy_week_0_hour}:00</div>
                                             <div className="col" style={{fontWeight: "bold", fontSize: "2.8rem"}}>{detailsData.sell_week_0_week_day != null ? t(Day[detailsData.sell_week_0_week_day]) : detailsData.sell_week_0_week_day} {detailsData.sell_week_0_hour}:00</div>
@@ -134,12 +79,9 @@ export const RecommendationDetails_new:FC = () => {
                                             <div className="col" style={{fontSize: "1.4rem", color: "#C3C0BB"}}>{t("Best time to buy")}</div>
                                             <div className="col" style={{fontSize: "1.4rem", color: "#C3C0BB"}}>{t("Best time to sell")}</div>
                                         </div>
-                                    </CardContainer>
-
-
+                                    </OutlineContainer>
 
                                     {/* Recommendation graph */}
-
                                     {asset_label && <RecommendedDetailsPriceGraph1 asset_label={asset_label} selectedTimeZone={selectedTimeZone} setSelectedTimezone={setSelectedTimeZone}/>}
                                     {asset_label && <BtfdDcaComparison asset_label={asset_label}/>}
                                 </div>

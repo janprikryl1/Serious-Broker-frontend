@@ -40,7 +40,7 @@ export const BitcoinProfitCalculator: FC = () => {
                                         type="number"
                                         value={amount}
                                         onChange={handleAmountChange}
-                                        placeholder="1"
+                                        placeholder={t("Amount")}
                                         required
                                         min="0.01"
                                         step={0.1}

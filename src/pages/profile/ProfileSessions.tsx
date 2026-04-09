@@ -4,7 +4,7 @@ import {ProfileSessionsList} from "../../components/profile/sessions/ProfileSess
 export const ProfileSessions: FC = () => {
     return (
         <div className="service-details__item padding-bottom">
-            <div className="service-details__item-inner">
+            <div className="container service-details__item-inner">
                 <div
                     className="service-details__content"
                     data-aos="fade-up"

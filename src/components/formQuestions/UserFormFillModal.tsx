@@ -15,7 +15,7 @@ import {
     QuestionOption
 } from "../../utils/types/admin/Question.ts";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { toast } from "react-toastify";
+import {ToastColor, useToast} from "../../utils/providers/ToastProvider.tsx";
 import Skeleton from "react-loading-skeleton";
 import {formImagesURL} from "../../utils/constants";
 
@@ -28,6 +28,7 @@ type QuestionWithCategory = Question & { category: string };
 export const UserFormFillModal: FC = () => {
     const { t } = useTranslation();
     const { user, setUser, setFilledForm } = useUserContext();
+    const { showToast } = useToast();
     const [questions, setQuestions] = useState<QuestionWithCategory[]>([]);
     const [isLoading, setIsLoading] = useState(true);
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -80,7 +81,7 @@ export const UserFormFillModal: FC = () => {
                 }
             } catch (error) {
                 console.error("Error fetching questions:", error);
-                toast.error(t("Error loading questions"));
+                showToast(t("Error loading questions"), ToastColor.red);
             } finally {
                 setIsLoading(false);
             }
@@ -109,12 +110,12 @@ export const UserFormFillModal: FC = () => {
             const res = await saveUserResponses(payload);
 
             if (res?.data) {
-                toast.success(t("Questionnaire submitted successfully!"));
+                showToast(t("Questionnaire submitted successfully!"), ToastColor.green);
                 setEvaluationResult(res.data);
             }
         } catch (error) {
             console.error("Error submitting responses:", error);
-            toast.error(t("There was an error submitting your answers."));
+            showToast(t("There was an error submitting your answers."), ToastColor.red);
         }
     };
 

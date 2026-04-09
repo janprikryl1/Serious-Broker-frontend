@@ -2,13 +2,15 @@ import { FC, ReactNode, CSSProperties } from "react";
 import { Link } from "react-router-dom";
 
 export enum ButtonColor {
-    yellow = "#B1974E",
-    white = "#FFFDFA",
-    green = "#00b300",
-    red = "#952b34",
-    blue = "#275fda",
-    gray = "#5c636a",
-    brown = "#4c4135",
+    gold = "var(--secondary-color)",
+    white = "var(--white-color)",
+    cream = "var(--cream-color)",
+    sandy = "var(--sandy-color)",
+    green = "var(--green-on-primary-color)",
+    red = "var(--red-on-tertiary-color)",
+    gray = "#var(--gray-2-color)",
+    lightBrown = "var(--tertiary-color)",
+    darkBrown = "var(--primary-color)",
     transparent = "transparent"
 }
 
@@ -21,15 +23,28 @@ type ButtonProps = {
     style?: CSSProperties;
     color?: ButtonColor;
     disabled?: boolean;
+    shadow?: boolean;
 };
 
-export const Button: FC<ButtonProps> = ({children, onClick, className = "", type = "button", to, style, color = ButtonColor.yellow, disabled = false}) => {
+export const Button: FC<ButtonProps> = ({children, onClick, className = "primary", type = "button", to, style, color = ButtonColor.gold, disabled = false, shadow = true}) => {
     if (type === "link" && to) {
         return (
             <Link
                 to={to}
-                className={`trk-btn--border trk-btn--primary link-underline-none ${className}`}
-                style={{ color: "#0A0704", backgroundColor: color, borderRadius: "3px", borderColor: "transparent", fontWeight: "bold", ...style }}
+                className={`btn trk-btn trk-btn--border trk-btn--${className}`}
+                style={{
+                    color: color === ButtonColor.red
+                      || color === ButtonColor.green
+                      || color === ButtonColor.lightBrown
+                      || color === ButtonColor.transparent
+                      || color === ButtonColor.darkBrown
+                      ? "var(--white-color)" : "var(--black-color)",
+                    backgroundColor: color,
+                    boxShadow: shadow ? `0 0 15px 5px color-mix(in srgb, ${color}, transparent 90%)` : "none",
+                    letterSpacing: 1,
+                    fontWeight: 400,
+                    ...style
+                }}
             >
                 {children}
             </Link>
@@ -39,9 +54,20 @@ export const Button: FC<ButtonProps> = ({children, onClick, className = "", type
     return (
         <button
             type={type as "button" | "submit" | "reset"}
-            className={`btn trk-btn--border trk-btn--primary ${className}`}
+            className={`btn trk-btn trk-btn--border trk-btn--${className}`}
             onClick={onClick}
-            style={{ backgroundColor: color, border: "none", color: color === ButtonColor.red || color === ButtonColor.transparent ? "#FFFDFA" : "#0A0704", borderRadius: 3, ...style}}
+            style={{
+                backgroundColor: color,
+                border: "none",
+                color: color === ButtonColor.red
+                    || color === ButtonColor.green
+                    || color === ButtonColor.lightBrown
+                    || color === ButtonColor.transparent
+                    || color === ButtonColor.darkBrown
+                    ? "var(--white-color)" : "var(--black-color)",
+                boxShadow: shadow ? `0 0 15px 5px color-mix(in srgb, ${color}, transparent 90%)` : "none",
+                letterSpacing: 1,
+                ...style}}
             disabled={disabled}
         >
             {children}

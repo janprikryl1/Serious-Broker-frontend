@@ -10,6 +10,8 @@ import {SliderPageBitcoin} from "./indexSliderPages/SliderPageBitcoin.tsx";
 import {useMediaQuery} from "@mui/material";
 import {IndexMobileSliderPage} from "./indexMobileSlider/IndexMobileSliderPage.tsx";
 import {IndexMobileSliderBitcoin} from "./indexMobileSlider/IndexMobileSliderBitcoin.tsx";
+import {SliderPageCryptoStreet} from "./indexSliderPages/SliderPageCryptoStreet.tsx";
+import {SliderPageCryptoCity} from "./indexSliderPages/SliderPageCryptoCity.tsx";
 
 
 export const SliderPage: FC = () => {
@@ -24,7 +26,7 @@ export const SliderPage: FC = () => {
                 pagination={{ clickable: true }}
                 loop={true}
                 autoplay={{
-                    delay: 5000,
+                    delay: 10000,
                     disableOnInteraction: false,
                 }}
                 effect="fade"
@@ -39,8 +41,10 @@ export const SliderPage: FC = () => {
                     </>
                 ) : (
                     <>
-                        <SwiperSlide><SliderPageSeriousBroker /></SwiperSlide>
-                        <SwiperSlide><SliderPageBitcoin /></SwiperSlide>
+                        <SwiperSlide><SliderPageCryptoStreet /></SwiperSlide>
+                        <SwiperSlide><SliderPageCryptoCity /></SwiperSlide>
+                        {/*<SwiperSlide><SliderPageSeriousBroker /></SwiperSlide>*/}
+                        {/*<SwiperSlide><SliderPageBitcoin /></SwiperSlide>*/}
                         {/*<SwiperSlide><SliderPage5Minutes /></SwiperSlide>*/}
                     </>
                 )}

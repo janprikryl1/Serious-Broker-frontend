@@ -39,7 +39,7 @@ export const Pagination: FC<PaginationProps> = ({ currentPage, totalPages, onPag
                 {pagesToShow.map(p => (
                     <li key={p}>
                         <Button
-                            color={p === currentPage ? ButtonColor.green : ButtonColor.yellow}
+                            color={p === currentPage ? ButtonColor.green : ButtonColor.gold}
                             onClick={() => onPageChange(p)}
                         >
                             {p}

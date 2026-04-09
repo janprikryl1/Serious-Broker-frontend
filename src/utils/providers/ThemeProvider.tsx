@@ -36,7 +36,7 @@ export const ThemeProvider: FC<{ children: ReactNode }> = ({ children }) => {
 
     return (
         <ThemeContext.Provider value={{ theme, toggleTheme }}>
-            <SkeletonTheme baseColor={theme === "dark" ? "#303030" : "#A0A0A0"} highlightColor={theme === "dark" ? "#444" : "#F0F0F0"}>
+            <SkeletonTheme baseColor={"var(--tertiary-color)"} highlightColor={"var(--secondary-color)"}>
                 {children}
             </SkeletonTheme>
         </ThemeContext.Provider>

@@ -10,7 +10,7 @@ export const Profile: FC = () => {
         return (
             <div style={{display: 'flex'}}>
                 <ProfileSidebar/>
-                <main style={{flex: 1}} className="container">
+                <main style={{flex: 1}}>
                     <Outlet/>
                 </main>
             </div>

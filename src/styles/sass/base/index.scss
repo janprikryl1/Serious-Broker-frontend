@@ -5,7 +5,7 @@
 
 .shared-slide-layout {
   position: relative;
-  height: 50vh;
+  height: 93vh;
   background-size: 70%;
   background-repeat: no-repeat;
   background-position: calc(100% - 60vh) calc(100% + 30vh);
@@ -19,6 +19,7 @@
     width: 100%;
     height: 100%;
     z-index: 1;
+    background-color: rgba(35, 30, 16, 0.6);
   }
 
   .content {
@@ -55,12 +56,46 @@
   }
 }
 
+.shared-slide-layout.shared-slide-layout--crypto-street {
+  .content {
+    margin-left: 0;
+    max-width: none;
+    width: 100%;
+  }
+
+  .slide-title-automatization,
+  .slide-tagline-automatization {
+    margin-left: 0;
+  }
+
+  .slide-title-automatization,
+  .slide-title-your-money-your-rules {
+    font-size: 5rem;
+    letter-spacing: 3px;
+  }
+
+  .slide-title-your-money-your-rules,
+  .slide-description-your-money-your-rules {
+    margin-left: 0;
+  }
+
+  .slide-description-your-money-your-rules {
+    font-size: 3rem;
+    color: var(--gray-3-color)
+  }
+
+  .slide-tagline-automatization, {
+    font-size: 2.5rem;
+    color: var(--gray-3-color)
+  }
+}
+
 .main-slider-container .swiper-pagination-bullet {
-  width: 40px !important;
+  width: 50px !important;
   height: 4px !important;
   border-radius: 10px !important;
   opacity: 1 !important;
-  margin: 0 5px !important;
+  margin: 0 10px 15px !important;
   display: inline-block !important;
   transition: background-color 0.3s ease;
 }
@@ -87,7 +122,7 @@
 
 .font-footer {
   font-size: 16px;
-  color: $gray-2-color;
+  color: $gray-3-color;
 }
 
 @media (max-width: 767px) {
@@ -110,7 +145,7 @@
 }
 
 .active-yellow {
-  color: $brand-color !important;
+  color: $secondary-color !important;
 }
 
 .img-start-investing-with-serious-broker {
@@ -510,7 +545,7 @@
   position: fixed;
   top: 0;
   z-index: 1020;
-  background-color: #1e1702;
+  background-color: var(--tertiary-color);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   left: 0;
   right: 0;
@@ -552,8 +587,21 @@
 
 .slide-description-your-money-your-rules {
   letter-spacing: 0.5px;
-  font-size: 1.3rem;
+  font-size: 1.6rem;
   margin-left: -35vw;
   max-width: 800px;
   color: #aaa79f;
+}
+
+@media (min-width: 1400px) {
+  .container,
+  .container-fluid,
+  .container-xxl,
+  .container-xl,
+  .container-lg,
+  .container-md,
+  .container-sm {
+    max-width: 1500px !important;
+    width: 80% !important;
+  }
 }

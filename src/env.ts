@@ -1,1 +1,2 @@
+// export const backendUrl = "http://localhost/bakalarka_backend/";//"https://localhost/bakalarka_backend";
 export const backendUrl = "https://api.serious.broker/";//"https://localhost/bakalarska_prace_backend";

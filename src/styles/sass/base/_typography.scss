@@ -30,10 +30,9 @@ h6 {
   }
 }
 
-h1, h2, h3 {
+h1, h2, h3, h4, h5, h6 {
   font-family: "PT Serif Caption", sans-serif !important;
 }
-
 
 h1{
   line-height: 1.067;
@@ -114,6 +113,12 @@ ol {
   text-decoration: none;
 }
 
+.link-underline {
+  text-decoration: underline;
+  text-decoration-color: var(--secondary-color) !important;
+  color: var(--secondary-color);
+}
+
 .background-gray {
   background-color: #5c636a;
 }
@@ -176,12 +181,12 @@ button {
           color 0.3s ease;
 
   &:disabled {
-    color: $gray-1-color
+    color: $gray-2-color
   }
 }
 
 .season-button.active {
-  background-color: var(--brand-color);
+  background-color: var(--secondary-color);
   color: var(--black-color);
   font-family: "PT Sans", sans-serif;
   font-weight: 500;
@@ -240,8 +245,6 @@ button {
     font-size: 15px;
   }
 
-
-
   .coin-logo {
     width: 20px;
     height: 20px;
@@ -285,4 +288,58 @@ button {
 .preloader-container {
   width: 50vw;
   height: 50vh;
+}
+
+.accent-number {
+  font-family: "PT Serif Caption";
+  color: var(--secondary-color);
+  font-size: 20px;
+}
+
+.gray-1-color-text {
+  color: var(--gray-1-color);
+}
+
+.gray-2-color-text {
+  color: var(--gray-2-color);
+}
+
+.gray-3-color-text {
+  color: var(--gray-3-color);
+}
+
+.gray-4-color-text {
+  color: var(--gray-4-color);
+}
+
+.gray-5-color-text {
+  color: var(--gray-5-color);
+}
+
+.gold-color-text {
+  color: var(--secondary-color);
+}
+
+.white-color-text {
+  color: var(--white-color);
+}
+
+.black-color-text {
+  color: var(--black-color);
+}
+
+.red-on-primary-color-text {
+  color: var(--red-on-primary-color);
+}
+
+.red-on-tertiary-color-text {
+  color: var(--red-on-tertiary-color);
+}
+
+.green-on-primary-color-text {
+  color: var(--green-on-primary-color);
+}
+
+.green-on-tertiary-color-text {
+  color: var(--green-on-tertiary-color);
 }

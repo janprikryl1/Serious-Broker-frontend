@@ -1,5 +1,6 @@
 import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
+import {Button} from "../components/reusable/Button.tsx";
 
 type Props = {
     error: Error;
@@ -18,7 +19,7 @@ export const ErrorFallback: FC<Props> = ({ error }) => {
                             <div data-aos="fade-up" data-aos-duration="800">
                                 <div className="error__content text-center">
                                     <h2>
-                                        <span>ooops!</span> {t("There was an error")}
+                                        <span>{t("Oops")}!</span> {t("There was an error")}
                                     </h2>
                                     <p>{t("We are working on resolving this issue. Please try again later.")}</p>
 

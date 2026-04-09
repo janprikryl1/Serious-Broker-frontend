@@ -1,10 +1,16 @@
-import { FC } from "react";
+import React, { FC } from "react";
 import Skeleton from "react-loading-skeleton";
 
-export const GraphDataSkeleton: FC = () => {
+type Props = {
+    baseColor?: string;
+    highlightColor?: string;
+    style?: React.CSSProperties;
+}
+
+export const GraphDataSkeleton: FC<Props> = ({baseColor, highlightColor, style}) => {
     return (
-        <div style={{ flexDirection: "column", alignItems: "center", justifyContent: "center", height: 400 }}>
-            <Skeleton width={"100%"} height={400} />
+        <div style={style}>
+            <Skeleton width={"100%"} height={"100%"} baseColor={baseColor} highlightColor={highlightColor}/>
         </div>
     );
 };

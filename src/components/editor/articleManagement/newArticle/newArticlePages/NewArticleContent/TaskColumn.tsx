@@ -34,7 +34,7 @@ export const TaskColumn:FC = () => {
                     <InputGroup className="mb-3">
                         <InputGroup.Text>{t("Text")}</InputGroup.Text>
                         <Form.Control
-                            placeholder="..."
+                            placeholder={t("Enter task text...")}
                             value={task.task}
                             onChange={(e) => handleSetContentTask(e, currentContent, taskIndex)}
                         />

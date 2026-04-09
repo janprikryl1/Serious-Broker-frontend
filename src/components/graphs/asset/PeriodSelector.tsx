@@ -18,7 +18,7 @@ export const PeriodSelector: FC<Props> = ({ selectedPeriod, setSelectedPeriod })
                 {t("Candles per")}
             </Typography>
             <Form.Select
-                aria-label="Candles per"
+                aria-label={t("Candles per")}
                 value={selectedPeriod}
                 onChange={(e) => setSelectedPeriod(e.target.value as keyof typeof ChartAssetPeriodEnum)}
                 style={{ width: "150px", minWidth: "120px" }}

@@ -1,0 +1,204 @@
+.traffic-light-circle-big {
+  aspect-ratio: 1/1;
+  width: 3.5rem;
+  height: auto;
+  border-radius: 50%;
+  //margin-left: 20px;
+}
+
+.traffic-light-trigger-wrapper {
+  border-radius: 10px;
+  background-color: var(--primary-color);
+  padding: 10px 20px 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .items {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100px;
+    gap: clamp(1rem,5vw, 2rem);
+  }
+
+  .divider {
+    width: 1px;
+    align-self: stretch;
+    transform: scaleY(0.8);
+    background-color: var(--gray-1-color);
+  }
+
+  .traffic-light-trigger-element {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .label {
+      font-size: 16px;
+      color: var(--secondary-color);
+    }
+
+    .select-box-bottom-border {
+      background-color: transparent;
+      padding: 0 0 5px 0;
+      border-radius: 0;
+      font-size: 18px;
+
+      &:hover {
+        background-color: transparent;
+      }
+    }
+
+    .form-control.borderless {
+      font-size: 18px !important;
+      padding: 0 0 6px 0;
+      width: 100% !important;
+      border-bottom: solid 1px var(--secondary-color);
+      justify-items: center !important;
+    }
+
+    .select-box-bottom-border {
+      width: 130px !important;
+
+      option {
+        background-color: var(--primary-color);
+      }
+    }
+  }
+
+  .traffic-light-trigger-element.disabled {
+    opacity: 0.3;
+  }
+}
+
+.traffic-light-compact {
+  color: var(--black-color);
+  font-size: 1.3rem;
+  width: 100%;
+  cursor: pointer;
+  transition: opacity 0.3s ease, background-color 0.3s ease;
+  position: relative;
+
+  &:hover {
+    background-color: var(--tertiary-color);
+    color: var(--white-color);
+
+    .traffic-light-triggers-preview {
+      opacity: 1;
+      transform: translateY(-50%) translateX(0);
+    }
+  }
+
+  .content {
+    position: relative;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 0 auto;
+    padding: 3px 0 3px 0;
+    display: flex;
+    width: 89.5%;
+    border-bottom: 1px solid color-mix(in srgb, var(--gray-4-color), transparent 60%);
+  }
+
+  .traffic-light-triggers-preview {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%) translateX(10px);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    pointer-events: none;
+  }
+
+  &.selected-traffic-light {
+    background-color: var(--tertiary-color) !important;
+    color: var(--white-color) !important;
+    cursor: default; // Zmeníme kurzor, keďže už je vybraný
+
+    &:hover {
+      // Zrušíme akékoľvek zmeny pri hoveri
+      background-color: var(--tertiary-color);
+      opacity: 1;
+    }
+
+    // Zabezpečíme, aby preview krúžky boli viditeľné aj bez hoveru (ak chceš)
+    .traffic-light-triggers-preview {
+      opacity: 1; // Trochu ich stlmíme, aby fajka vynikla
+      transform: translateY(-50%); // Posunieme ich doľava od fajky
+    }
+  }
+
+  .selection-checkmark {
+    margin-left: 10px;
+    color: var(--secondary-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: fadeInScale 0.2s ease-out;
+  }
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: translateY(-50%) scale(0.5);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(-50%) scale(1);
+  }
+}
+
+.traffic-light-circle-small {
+  display: inline-block;
+  aspect-ratio: 1/1;
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  //margin-left: 20px;
+}
+
+.static-text {
+  text-align: center;
+  border-bottom: 1px solid var(--secondary-color);
+}
+
+.static-name {
+  font-size: 26px;
+  color: var(--secondary-color);
+  border-bottom: 1px solid var(--secondary-color);
+  width: fit-content;
+}
+
+@media (max-width: 992px) {
+  .traffic-light-trigger-wrapper {
+    padding: 20px;
+
+    .items {
+      flex-direction: column; /* Usporiada položky pod seba */
+      gap: 15px;
+    }
+
+    .traffic-light-trigger-element {
+      width: 100%;
+      flex: auto; /* Zruší flex 1 1 0, aby sa obsah nedeformoval vertikálne */
+    }
+
+    .divider {
+      width: 100%; /* Čiara bude teraz horizontálna */
+      height: 1px;
+      margin: 10px 0;
+    }
+  }
+}
+
+@media (min-width: 1870px) {
+  .custom-col {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+}

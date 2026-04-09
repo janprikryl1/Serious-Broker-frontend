@@ -2,7 +2,28 @@ import {ApexOptions} from "apexcharts";
 import {useMemo} from "react";
 import {randomColor} from "../functions/getColorFunctions.ts";
 
-export const useOverviewTableChartStyles = () => {
+export const useOverviewTableChartStyles = (data?: number[]) => {
+
+    // Determine profit or loss
+    const getTrendColor = (dataArray?: number[]): string => {
+        if (!dataArray || dataArray.length < 2) {
+            return randomColor();
+        }
+        
+        const firstValue = dataArray[0];
+        const lastValue = dataArray[dataArray.length - 1];
+        
+        if (lastValue > firstValue) {
+            return "var(--green-on-primary-color)";
+        }
+        else if (lastValue < firstValue) {
+            return "var(--red-on-primary-color)";
+        }
+        else {
+            return "var(--secondary-color)";
+        }
+    };
+    
     const options: ApexOptions = useMemo(() => ({
         chart: {
             type: "line",
@@ -22,7 +43,7 @@ export const useOverviewTableChartStyles = () => {
         stroke: {
             curve: "smooth",
             width: 1,
-            colors: [randomColor()],
+            colors: [getTrendColor(data)],
         },
         grid: {
             row: {
@@ -40,18 +61,9 @@ export const useOverviewTableChartStyles = () => {
             },
         },
         tooltip: {
-            theme: "dark",
-            x: {
-                show: false,
-            },
-            y: {
-                formatter: (val) => val.toFixed(2),
-            },
-            marker: {
-                show: true,
-            },
+            enabled: false,
         },
-    }), []);
+    }), [data]);
     
     return {
         options

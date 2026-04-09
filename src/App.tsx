@@ -10,8 +10,7 @@ import {UnverifiedHeaderInfo} from "./components/navbar/UnverifiedHeaderInfo.tsx
 import {Header} from "./components/navbar/Header.tsx";
 import {Footer} from "./components/navbar/Footer.tsx";
 import {Router} from "./Router.tsx";
-import {ToastContainer} from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastProvider } from "./utils/providers/ToastProvider.tsx";
 
 // Disable automatic CSS addition for Font Awesome
 config.autoAddCss = false;
@@ -22,19 +21,22 @@ function App() {
     }, []);
 
     return (
-        <BrowserRouter>
-            <ThemeProvider>
-                <ProviderUser>
-                    <AchievementsProvider>
-                        <UnverifiedHeaderInfo />
-                        <Header />
-                        <Router />
-                        <Footer />
-                    </AchievementsProvider>
-                </ProviderUser>
-            </ThemeProvider>
-            <ToastContainer position="bottom-right" />
-        </BrowserRouter>
+        <>
+            <BrowserRouter>
+                <ToastProvider>
+                    <ThemeProvider>
+                        <ProviderUser>
+                            <AchievementsProvider>
+                                <UnverifiedHeaderInfo />
+                                <Header />
+                                <Router />
+                                <Footer />
+                            </AchievementsProvider>
+                        </ProviderUser>
+                    </ThemeProvider>
+                </ToastProvider>
+            </BrowserRouter>
+        </>
     );
 }
 

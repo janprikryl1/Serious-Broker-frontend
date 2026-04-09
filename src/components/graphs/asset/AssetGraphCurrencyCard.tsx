@@ -29,28 +29,51 @@ export const AssetGraphCurrencyCard: FC<Props> = ({ singleAsset }) => {
     }, []);
 
     return (
-        <div className="col-sm-3 asset-graph-currency-card">
-            <div className="row d-flex align-items-center">
-                <div className="col-sm-2 d-flex flex-column align-items-center" style={{marginLeft: "5px"}}>
-                    <img src={`${coinURL}${singleAsset.photo}`} alt={singleAsset.asset_label} className="asset-graph-currency-card-img" />
+        <div className="asset-graph-currency-card">
+            <div className="d-flex align-items-center justify-content-around h-100 w-100">
+
+                {/* Picture */}
+                <div className="d-flex flex-column align-items-center justify-content-center  crypto-logo">
+                    {singleAsset.photo ?
+                      <img src={`${coinURL}${singleAsset.photo}`} alt={singleAsset.asset_label}/>:
+                      <div style={{
+                        width: '100%',
+                        height: '100%',
+                        backgroundColor: 'var(--secondary-color)',
+                        borderRadius: '50%'
+                    }} />}
+
                 </div>
-                <div className="col-sm d-flex flex-column align-items-center asset-graph-currency-card-coin-name">
-                    <Link to={`${routes.assetGraphDetail}/${singleAsset.id}`} className="link-underline-none asset-graph-currency-card-coin-name-link">
+
+                {/* Name */}
+                <div className="d-flex flex-column align-items-center justify-content-center asset-graph-currency-card-coin-name" style={{fontSize: "1.2rem"}}>
+                    {/*<Link to={`${routes.assetGraphDetail}/${singleAsset.id}`} className="link-underline-none asset-graph-currency-card-coin-name-link">*/}
                         {singleAsset.asset_label}
-                    </Link>
-                    <p>{singleAsset.name}</p>
+                    {/*</Link>*/}
+                    <p className="mb-1">{singleAsset.name}</p>
                 </div>
-                <div className="col-sm d-flex flex-column align-items-center asset-graph-currency-card-graph">
-                    {coinGraphData === "" ? <p>{t("Not traded anymore")}</p> : coinGraphData ? 
+
+                {/* Graph */}
+                <div className="d-flex flex-column align-items-center justify-content-center asset-graph-currency-card-graph">
+                    {coinGraphData === "" ?
+                      <div className={"color-container--red"}>
+                          <div className={"red-on-primary-color-text"} style={{fontSize: "0.8rem"}}>
+                              {t("Not traded")} <br/> {t("anymore")}
+                          </div>
+                      </div> :
+                      coinGraphData ?
                         <OverviewTableChart
                             name={singleAsset.asset_label}
                             data={coinGraphData}
                             width={70}
-                        /> : <Skeleton width={70} height={50}/>}
+                        /> :
+                        <Skeleton width={70} height={50}/>}
                 </div>
-                <div className="col-sm d-flex flex-column align-items-center asset-graph-currency-card-price-container">
-                    <p className="asset-graph-currency-card-price-container-text">{singleAsset.allocation * 100}%</p>
-                    <p>{t("Contribution")}</p>
+
+                {/* Contribution */}
+                <div className="d-flex flex-column align-items-center justify-content-center asset-graph-currency-card-price-container">
+                    <p className="asset-graph-currency-card-price-container-text mb-1">{(singleAsset.allocation * 100).toFixed(2)}%</p>
+                    <p className="mb-1">{t("Contribution")}</p>
                     {singleAsset.status === false && <i>{t("Not counted")}</i>}
                 </div>
             </div>

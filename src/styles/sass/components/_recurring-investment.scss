@@ -1,0 +1,75 @@
+.day-select-row {
+  display: flex;
+  width: 70%;
+  border: 1px solid var(--secondary-color);
+  border-radius: 2px;
+  overflow: hidden;
+  background-color: transparent;
+}
+
+.day-select-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  max-width: 400px;
+  border: 1px solid var(--secondary-color);
+  border-right: none;
+  border-bottom: none;
+}
+
+.day-select-grid-item {
+  display: flex;            /* Spraví z bunky flex kontajner */
+  justify-content: center;  /* Zarovná text na stred vodorovne */
+  align-items: center;
+  flex: 1;
+  padding: 0;
+  color: white;
+  font-size: 18px;
+  border-right: 1px solid var(--secondary-color);
+  border-bottom: 1px solid var(--secondary-color);
+  cursor: pointer;
+  transition: background-color 0.2s;
+  aspect-ratio: 1/1;
+  width: 100%;
+  height: auto;
+
+  &.selected {
+    background-color: var(--secondary-color);
+    color: black;
+
+    &:hover {
+      background-color: var(--secondary-color);
+    }
+  }
+
+  &:hover {
+    background-color: var(--secondary-color-opaque);
+  }
+}
+
+.day-select-row-item {
+  flex: 1;
+  padding: 12px 0 12px 0;
+  text-align: center;
+  color: white;
+  font-size: 18px;
+  border-right: 1px solid var(--secondary-color);
+  cursor: pointer;
+  transition: background-color 0.2s;
+
+  &.selected {
+    background-color: var(--secondary-color);
+    color: black;
+
+    &:hover {
+      background-color: var(--secondary-color);
+    }
+  }
+
+  &:last-child {
+    border-right: none;
+  }
+
+  &:hover {
+    background-color: var(--secondary-color-opaque);
+  }
+}

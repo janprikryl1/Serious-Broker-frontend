@@ -39,7 +39,7 @@ export const ProfileMembership: FC = () => {
 
     return (
         <div className="padding-bottom service-details__item">
-            <div className="service-details__item-inner">
+            <div className="container service-details__item-inner">
                 <div
                     className="service-details__content"
                     data-aos="fade-up"

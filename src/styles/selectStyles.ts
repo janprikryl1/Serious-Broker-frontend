@@ -1,70 +1,82 @@
 export const selectStyles = {
-    control: (base: any) => ({
+    control: (base: any, state: any) => ({
         ...base,
-        backgroundColor: '#f8f9fa',
-        border: 'none',
-        boxShadow: 'none',
-        minHeight: '55px',
+        backgroundColor: 'transparent',
+        border: '1px solid var(--secondary-color)',
         borderRadius: '2px',
-        color: 'black',
-        fontSize: '0.95rem',
-        paddingLeft: '2px',
+        padding: '7px 0 7px 8px',
+        fontFamily: '"PT Sans", sans-serif',
+        fontSize: '16px',
+        color: 'var(--white-color)',
+        cursor: 'pointer',
+        transition: 'all 0.3s ease',
+        minHeight: 'auto',
+        lineHeight: '1.5',
+        boxShadow: state.isFocused 
+            ? '0 0 15px 5px color-mix(in srgb, var(--secondary-color), transparent 90%)' 
+            : 'none',
+        '&:hover': {
+            borderColor: 'var(--secondary-color)',
+            boxShadow: 'var(--golden-glow-shadow)',
+        },
     }),
     valueContainer: (base: any) => ({
         ...base,
-        padding: '0 6px',
+        padding: '0',
+    }),
+    input: (base: any) => ({
+        ...base,
+        color: 'var(--white-color)',
+        fontFamily: '"PT Sans", sans-serif',
+        margin: '0px',
+        padding: '0px',
+    }),
+    placeholder: (base: any) => ({
+        ...base,
+        color: 'var(--gray-1-color)',
     }),
     menu: (base: any) => ({
         ...base,
-        backgroundColor: '#22201d',
-        borderRadius: '8px',
-        color: '#fff',
-        zIndex: 5,
+        backgroundColor: 'var(--tertiary-color)',
+        borderRadius: '2px',
+        color: 'var(--black-color)',
+        zIndex: 9999,
     }),
-    option: (base: any, state:any) => ({
+    option: (base: any, state: any) => ({
         ...base,
-        backgroundColor: state.isFocused ? '#333029' : '#22201d',
-        color: '#fff',
+        backgroundColor: state.isFocused ? 'var(--secondary-color)' : 'var(--tertiary-color)',
+        color: state.isFocused ? 'var(--black-color)' : 'var(--white-color)',
+        padding: '10px',
+        fontSize: '16px',
         cursor: 'pointer',
     }),
-    multiValue: (base:any) => ({
+    multiValue: (base: any) => ({
         ...base,
-        backgroundColor: '#2f2c28',
-        borderRadius: '4px',
+        backgroundColor: 'var(--tertiary-color-light)',
+        borderRadius: '5px',
     }),
     multiValueLabel: (base: any) => ({
         ...base,
-        color: '#fff',
         fontWeight: 500,
+        padding: '0px',
+        color: 'var(--white-color)',
     }),
     multiValueRemove: (base: any) => ({
         ...base,
-        color: '#aaa',
+        color: 'var(--gray-4-color)',
+        borderRadius: '5px',
         ':hover': {
-            backgroundColor: '#444038',
-            color: '#fff',
+            color: 'var(--white-color)',
         },
     }),
-    dropdownIndicator: (base: any) => ({
+    indicatorSeparator: () => ({
+        display: 'none',
+    }),
+    clearIndicator: (base: any) => ({
         ...base,
-        color: '#aaa',
+        color: 'var(--secondary-color)',
         ':hover': {
-            color: '#fff',
+            color: 'var(--secondary-color)',
         },
-    }),
-    clearIndicator: (base:any) => ({
-        ...base,
-        color: '#aaa',
-        ':hover': {
-            color: '#fff',
-        },
-    }),
-    input: (base:any) => ({
-        ...base,
-        color: '#fff',
-    }),
-    placeholder: (base:any) => ({
-        ...base,
-        color: '#aaa',
     }),
 };

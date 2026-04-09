@@ -10,8 +10,9 @@ import {WatchListEnum} from "../enums/WatchListEnum.ts";
 import {formatCurrency} from "../functions/functions.ts";
 import {MissingCurrencyType} from "../types/graphs/MissingCurrencyType.ts";
 
-export const useAssetGraph = () => {
+export const useAssetGraph = (propName?: string) => {
     const { name } = useParams();
+    const assetName = propName || name;
     const [asset, setAsset] = useState<AssetDetailType | null>(null);
     const [selectedPeriod, setSelectedPeriod] = useState(QuotedCurrenciesPeriod.month);
     const [currency, setCurrency] = useState<Currencies>(Currencies.EUR);
@@ -22,14 +23,14 @@ export const useAssetGraph = () => {
     const [isInWatchList, setIsInWatchList] = useState<boolean>(false);
 
     useEffect(() => {
-        if (name === undefined) return;
+        if (!assetName) return;
         const getGraphData = async () => {
-            const response = await getAssetByIndexLabel(name);
+            const response = await getAssetByIndexLabel(assetName);
             if (!response) return;
             setAsset(response.data);
         };
         getGraphData();
-    }, [name]);
+    }, [assetName]);
 
     const handleToggleWatchList = async () => {
         if (!asset) return;
@@ -51,11 +52,11 @@ export const useAssetGraph = () => {
     };
 
     useEffect(() => {
-        if (!asset || !name) return;
+        if (!asset || !assetName) return;
         const getGraphData = async () => {
             try {
                 setGraphData(undefined);
-                const response = await getAssetGraphDataPreparedAssets(name, selectedPeriod);
+                const response = await getAssetGraphDataPreparedAssets(assetName, selectedPeriod);
                 if (!response) return;
                 setGraphData(response.data);
                 setCurrencyPrice(formatCurrency(response.data.price));

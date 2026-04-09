@@ -4,8 +4,8 @@ import { useParams, useNavigate } from "react-router-dom";
 import { AvailableCoinType } from "../types/myPortfolio/availableCoinType.ts";
 import {MyPortfolioType} from "../types/myPortfolio/MyPortfolioType.ts";
 import {Assets} from "../types/asset/AssetDetailType.ts";
-import {getAvaliableCoins, getMyPortfolioDetails, saveMyPortfolio} from "../api/myPortfolioService.ts";
-import {CustomSwal} from "../functions/customSwal.ts";
+import {getAvailableCoins, getMyPortfolioDetails, saveMyPortfolio} from "../api/myPortfolioService.ts";
+import {ToastColor, useToast} from "./ToastProvider.tsx";
 
 type Props = {
     children: ReactNode;
@@ -19,7 +19,7 @@ type MyPortfolioProps = {
     asset: Assets[];
     setAsset: Dispatch<SetStateAction<Assets[]>>;
     availableCoins: AvailableCoinType[];
-    saveChanges: () => Promise<void>;
+    saveChanges: () => Promise<any>;
     isLoading: boolean;
     investedAmount: number;
     startInvest: string;
@@ -32,22 +32,23 @@ const MyPortfolioContext = createContext<MyPortfolioProps | undefined>(undefined
 export const MyPortfolioProvider = ({ children }: Props) => {
     const { id } = useParams<{ id: string }>();
     const { t } = useTranslation();
+
     const navigate = useNavigate();
-
     const [isLoading, setIsLoading] = useState(false);
-    const [availableCoins, setAvailableCoins] = useState<AvailableCoinType[]>([]);
 
+    const [availableCoins, setAvailableCoins] = useState<AvailableCoinType[]>([]);
     const [name, setName] = useState<string>("");
     const [description, setDescription] = useState<string>("");
     const [investedAmount, setInvestedAmount] = useState<number>(0);
     const [startInvest, setStartInvest] = useState<string>("");
     const [asset, setAsset] = useState<Assets[]>([]);
+    const { showToast } = useToast();
 
     useEffect(() => {
         const fetchCoins = async () => {
             try {
                 setIsLoading(true);
-                const response = await getAvaliableCoins();
+                const response = await getAvailableCoins();
                 setAvailableCoins(response.data);
             } catch (error) {
                 console.error(error);
@@ -84,22 +85,16 @@ export const MyPortfolioProvider = ({ children }: Props) => {
 
     const saveChanges = async () => {
         if (!name.trim()) {
-            CustomSwal.fire({
-                title: t('Error, portfolio name is required'),
-                text: t('Please enter portfolio name'),
-                icon: 'error',
-            });
-            return;
+            showToast(t('Error, portfolio name is required'), ToastColor.red);
+            return null;
         }
 
         if (!asset.length) {
-            CustomSwal.fire({
-                title: t('Error, portfolio asset is required'),
-                text: t('Please add at least one asset to portfolio'),
-                icon: 'error',
-            });
-            return;
+            showToast(t('Error, portfolio asset is required'), ToastColor.red);
+            return null;
         }
+
+        showToast(t('Saving portfolio...'), ToastColor.gold);
 
         try {
             setIsLoading(true);
@@ -114,22 +109,14 @@ export const MyPortfolioProvider = ({ children }: Props) => {
             };
 
             const response = await saveMyPortfolio(portfolioData);
-            CustomSwal.fire({
-                title: t('Portfolio saved'),
-                text: t('Portfolio saved successfully'),
-                icon: 'success',
-            });
 
-            if (!id && response.data.data.id) {
-                navigate("/profile/edit_my_portfolio/"+response.data.data.id);
-            }
+            showToast(t('Portfolio saved successfully'), ToastColor.green);
+
+            return response;
         } catch (error) {
             console.error('Error saving portfolio:', error);
-            CustomSwal.fire({
-                title: t('Error while saving portfolio'),
-                text: t('Error while saving portfolio, please try again'),
-                icon: 'error',
-            });
+            showToast(t('Error while saving portfolio, please try again'), ToastColor.red, 5000);
+            return null;
         } finally {
             setIsLoading(false);
         }

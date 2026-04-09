@@ -11,7 +11,7 @@ type Props = {
 };
 
 export const OverviewTableChart: FC<Props> = ({ name, data, width = 100, height = 30 }) => {
-    const {options} = useOverviewTableChartStyles();
+    const {options} = useOverviewTableChartStyles(data);
 
     return (
         <Suspense fallback={<Skeleton height={30} width={100} style={{ maxWidth: "100%" }} />}>

@@ -1,25 +1,88 @@
-$primary-color: #251F19;
-$thm-brown-dark-color-dark:#251F19;
+// Theme colors
+
+$primary-color: #231F1B;
+$thm-brown-dark-color-dark: #231F1B;
 
 $secondary-color: #B1974E;
-$thm-brand-color-dark: #B1974E;
+$secondary-color-transparent-50: color-mix(in srgb, var(--secondary-color) 50%, transparent);
 
-$tertiary-color:#4C4033;
-$thm-brown-light-color-dark: #4C4033;
+$tertiary-color: #494036;
+$tertiary-color-light: #625950;
+$thm-brown-light-color-dark: #494036;
 
-$cream-color:#FFF4E5;
-$thm-cream-dark: #FFF4E5;
+$quaternary-color: #3E362E;
+$quaternary-color-transparent-50: color-mix(in srgb, var(--quaternary-color) 50%, transparent);
+
+// Basic colors
+
+$cream-color: #FEF2E6;
+$thm-cream-dark: #FEF2E6;
 
 $white-color: #FDFAF5;
 $black-color: #0A0704;
 
-$gray-1-color: #ABA7A0;
-$gray-2-color: #C3C0BB;
-$sandy-color: #ADA08D;
+$gray-1-color: #76746F;
+$gray-2-color: #A8A6A3;
+$gray-3-color: #C1BFBD;
+$gray-4-color: #44403B;
+$gray-5-color: #808080;
+$sandy-color: #AD9D8D;
+
+// Reds and greens
+
+//$green-on-primary-color: #4C9832;
+$green-on-tertiary-color: #6ea25a;
+//$red-on-primary-color: #983232;
+$red-on-tertiary-color: #A53636;
+
+// test
+$green-on-primary-color: #2eb26d;
+$red-on-primary-color: #c32d2e;
+
+
+$green-toast-color: #528D49;
+$red-toast-color: #8D4949;
+$neutral-toast-color: $secondary-color;
+
+// Traffic lights - dark colors
+
+$traffic-light-danger1-dark-color: #8E3E3E;
+$traffic-light-danger2-dark-color: #8E533E;
+$traffic-light-danger3-dark-color: #8E6B3E;
+$traffic-light-danger4-dark-color: #8E7D3E;
+$traffic-light-neutral-dark-color: #666666;
+$traffic-light-safe1-dark-color: #8B8E3E;
+$traffic-light-safe2-dark-color: #768E3E;
+$traffic-light-safe3-dark-color: #598E3E;
+$traffic-light-safe4-dark-color: #3E8E55;
+
+
+// Traffic lights - light colors
+
+/*$traffic-light-danger1-light-color: #8E3E3E;
+$traffic-light-danger2-light-color: #A86148;
+$traffic-light-danger3-light-color: #A87E48;
+$traffic-light-danger4-light-color: #A88E48;
+$traffic-light-neutral-light-color: #787878;
+$traffic-light-safe1-light-color: #A8A048;
+$traffic-light-safe2-light-color: #9BA848;
+$traffic-light-safe3-light-color: #79A848;
+$traffic-light-safe4-light-color: #48A84B;*/
+
+$traffic-light-danger1-light-color: #C45C5C;
+$traffic-light-danger2-light-color: #C67256;
+$traffic-light-danger3-light-color: #C78951;
+$traffic-light-danger4-light-color: #C8964F;
+$traffic-light-neutral-light-color: #7A7A7A;
+$traffic-light-safe1-light-color: #C9A54D;
+$traffic-light-safe2-light-color: #A9A85B;
+$traffic-light-safe3-light-color: #84AA6C;
+$traffic-light-safe4-light-color: #5CAB7D;
 
 //
+$thm-brand-color-dark: $secondary-color;
 
-$thm-tertiary-color3:#FFFDFA;
+$thm-tertiary-color3: #FFFDFA;
 $thm-tertiary-color3-dark: #986d28;
 
 $thm-tertiary-color4:#6084E0;
@@ -120,23 +183,76 @@ $thm-success-dark: #12B76A;
 $thm-danger-light: #FF0000;
 $thm-danger-dark: #FF0000;
 
-//===================== Theme varibale for  ** Light ** ===================== //
+//===================== Theme variables for  ** Light ** ===================== //
 :root {
-    --brand-color:#{$secondary-color};
-    --brown-dark-color:#{$primary-color};
-    --brown-light-color:#{$tertiary-color};
-    --cream-color:#{$cream-color};
-    --gray-dark-color:#{$gray-1-color};
-    --gray-light-color:#{$gray-2-color};
-    --white-color:#{$white-color};
-    --black-color:#{$black-color};
-    --sandy-color:#{$sandy-color};
+    /* Theme colors */
+    --secondary-color: #{$secondary-color};
+    --secondary-color-transparent-50: #{$secondary-color-transparent-50};
+    --primary-color: #{$primary-color};
+    --tertiary-color: #{$tertiary-color};
+    --tertiary-color-light: #{$tertiary-color-light};
+    --quaternary-color: #{$quaternary-color};
+    --quaternary-color-transparent-50: #{$quaternary-color-transparent-50};
 
+    /* Basic colors */
+    --cream-color: #{$cream-color};
+    --gray-1-color: #{$gray-1-color};
+    --gray-2-color: #{$gray-2-color};
+    --gray-3-color: #{$gray-3-color};
+    --gray-4-color: #{$gray-4-color};
+    --gray-5-color: #{$gray-5-color};
+    --white-color: #{$white-color};
+    --black-color: #{$black-color};
+    --sandy-color: #{$sandy-color};
+
+    /* Reds and greens */
+    --green-on-primary-color: #{$green-on-primary-color};
+    --green-on-tertiary-color: #{$green-on-tertiary-color};
+    --red-on-primary-color: #{$red-on-primary-color};
+    --red-on-tertiary-color: #{$red-on-tertiary-color};
+
+    --green-toast-color: #{$green-toast-color};
+    --red-toast-color: #{$red-toast-color};
+    --neutral-toast-color: #{$neutral-toast-color};
+
+    /* Traffic lights - dark colors */
+    --traffic-light-danger1-dark-color: #{$traffic-light-danger1-dark-color};
+    --traffic-light-danger2-dark-color: #{$traffic-light-danger2-dark-color};
+    --traffic-light-danger3-dark-color: #{$traffic-light-danger3-dark-color};
+    --traffic-light-danger4-dark-color: #{$traffic-light-danger4-dark-color};
+    --traffic-light-neutral-dark-color: #{$traffic-light-neutral-dark-color};
+    --traffic-light-safe1-dark-color: #{$traffic-light-safe1-dark-color};
+    --traffic-light-safe2-dark-color: #{$traffic-light-safe2-dark-color};
+    --traffic-light-safe3-dark-color: #{$traffic-light-safe3-dark-color};
+    --traffic-light-safe4-dark-color: #{$traffic-light-safe4-dark-color};
+
+    /* Traffic lights - light colors */
+    --traffic-light-danger1-light-color: #{$traffic-light-danger1-light-color};
+    --traffic-light-danger2-light-color: #{$traffic-light-danger2-light-color};
+    --traffic-light-danger3-light-color: #{$traffic-light-danger3-light-color};
+    --traffic-light-danger4-light-color: #{$traffic-light-danger4-light-color};
+    --traffic-light-neutral-light-color: #{$traffic-light-neutral-light-color};
+    --traffic-light-safe1-light-color: #{$traffic-light-safe1-light-color};
+    --traffic-light-safe2-light-color: #{$traffic-light-safe2-light-color};
+    --traffic-light-safe3-light-color: #{$traffic-light-safe3-light-color};
+    --traffic-light-safe4-light-color: #{$traffic-light-safe4-light-color};
+
+    /* Shadows */
+    --golden-glow-shadow: 0 0 15px 5px color-mix(in srgb, var(--secondary-color), transparent 90%);
+    --gray-1-glow-shadow: 0 0 15px 5px color-mix(in srgb, var(--gray-1-color), transparent 90%);
+    --gray-2-glow-shadow: 0 0 15px 5px color-mix(in srgb, var(--gray-2-color), transparent 90%);
+    --dark-basic-shadow:  0px 0px 1px rgba(10, 7, 4, 0.01),
+        0px 0px 4px rgba(10, 7, 4, 0.03),
+        0px 0px 10px rgba(10, 7, 4, 0.04),
+        0px 0px 18px rgba(10, 7, 4, 0.05),
+        0px 0px 28px rgba(10, 7, 4, 0.07),
+        0px 0px 40px rgba(10, 7, 4, 0.08);
+
+    //
 
     --tertiary-color3:#{$thm-tertiary-color3};
     --tertiary-color4:#{$thm-tertiary-color4};
     --body-color:#{$thm-body-color-light};
-
 
     --header-bg-color: #986d28;
     --header-bg-color2: #efb85f;
@@ -154,15 +270,10 @@ $thm-danger-dark: #FF0000;
 
     --feature-bg-color: #393735;
 
-
-
     --social-border-color:#{$thm-social-border-color-light};
     --social-border-color-2:#{$thm-social-border-color-2-light};
     --social-border-color-3:#{$thm-social-border-color-2-light};
     --form-border:#{$thm-form-border-light};
-
-    // --test-color: blue;
-    // --test-color-trans: rgba(0, 0, 255, 0.205);
 
     // text colors
     --title-color:#{$thm-title-color};
@@ -301,9 +412,9 @@ $thm-danger-dark: #FF0000;
 
 
     & {
-        --brand-color: #{$thm-brand-color-dark};
-        --brown-dark-color: #{$thm-brown-dark-color-dark};
-        --brown-light-color: #{$thm-brown-light-color-dark};
+        --secondary-color: #{$thm-brand-color-dark};
+        --primary-color: #{$thm-brown-dark-color-dark};
+        --tertiary-color: #{$thm-brown-light-color-dark};
         --cream-color: #{$thm-cream-dark};
         --tertiary-color3: #{$thm-tertiary-color3-dark};
         --tertiary-color4: #{$thm-tertiary-color4-dark};
@@ -436,7 +547,7 @@ $thm-danger-dark: #FF0000;
     }
 }
 
-$brand-color: var(--brand-color);
+$brand-color: var(--secondary-color);
 //$secondary-color: var(--brown-dark-color);
 //$tertiary-color: var(--brown-light-color);
 $tertiary-color2: var(--cream-color);

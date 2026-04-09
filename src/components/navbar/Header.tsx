@@ -1,7 +1,7 @@
 import { FC, useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { NavbarDesktopMenu } from "./NavbarDesktopMenu.tsx";
-import SeriousBrokerHandWriting from "../../utils/icons/logo/S_B-logo-final.svg";
+import SeriousBrokerHandWriting from "../../utils/icons/logo/SB-handwritten-white.svg";
 import { MobileMenu } from "./MobileMenu.tsx";
 import { useMediaQuery } from "@mui/material";
 import { useUserContext } from "../../utils/providers/providerUser.tsx";
@@ -22,7 +22,7 @@ export const Header: FC = () => {
     return (
         <header className="header-section header-section--style1">
             <div className="header-wrapper">
-                <div className="container">
+                <div className="container mt-4">
                     <div className="d-flex align-items-center justify-content-between">
                         <div className="d-flex align-items-center">
                             <div className="logo">
@@ -34,7 +34,7 @@ export const Header: FC = () => {
                                     />
                                 </Link>
                             </div>
-                            {!isMobile && <div className="vr"></div>}
+                            {/*{!isMobile && <div className="vr"></div>}*/}
 
                             <div className="menu-area">
                                 <NavbarDesktopMenu/>
@@ -42,12 +42,9 @@ export const Header: FC = () => {
                         </div>
 
                         <div className="d-flex align-items-center flex-nowrap">
-                            <div className="mx-2 mobile-hide">
-                                <ChangeLanguageIcon />
-                            </div>
 
                             {!user && !isMobile && (
-                                <div className="border-start px-3 text-light fw-bold">
+                                <div className="px-3 text-light fw-bold">
                                     <SignUpIcon />
                                 </div>
                             )}
@@ -55,6 +52,11 @@ export const Header: FC = () => {
                             <div className="mx-2">
                                 <SignInIcon />
                             </div>
+
+                            <div className="mx-2 mobile-hide">
+                                <ChangeLanguageIcon />
+                            </div>
+
 
                             <div className="header-bar" onClick={toggleMobileMenu} aria-label="Toggle menu">
                                 <span></span><span></span><span></span>

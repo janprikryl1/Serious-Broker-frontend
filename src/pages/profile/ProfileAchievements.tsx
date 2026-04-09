@@ -3,7 +3,7 @@ import {UserAchievementsTimeLine} from "../../components/profile/userAchievments
 
 export const ProfileAchievements:FC = () => {
     return (
-        <div className="padding-bottom">
+        <div className="container padding-bottom">
             <div className="service-details__item" style={{maxWidth:"500px"}}>
                 <div className="service-details__item-inner">
                     <div
