@@ -50,7 +50,7 @@ export const InvestedAmount = () => {
                                         return;
                                     }
                                     const num = parseInt(val, 10);
-                                    if (!isNaN(num) && num >= 0 && num <= 23) {
+                                    if (!isNaN(num) && num >= 0) {
                                         setSelectedAmount(num);
                                     }
                                 }}

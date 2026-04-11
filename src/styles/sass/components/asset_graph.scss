@@ -1,7 +1,15 @@
+.asset-graph-currency-card-link {
+  width: auto;
+  flex: 0 0 auto;
+  color: inherit;
+  display: block;
+  margin: 8px;
+}
+
 .asset-graph-currency-card {
   background-color: var(--cream-color);
   border-radius: 16px;
-  margin: 1%;
+  margin: 0;
   padding: 15px;
   width: 342px;
   color: var(--black-color);
@@ -47,9 +55,13 @@
 }
 
 @media (max-width: 768px) {
+  .asset-graph-currency-card-link {
+    margin: 8px 0;
+  }
+
   .asset-graph-currency-card {
     font-size: 15px;
-    margin: 2% 0;
+    margin: 0;
     padding: 15px;
     max-width: 90%;
     min-height: 100px;

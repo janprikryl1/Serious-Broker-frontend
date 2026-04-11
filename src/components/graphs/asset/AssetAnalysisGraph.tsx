@@ -109,7 +109,7 @@ export const AssetAnalysisGraph: FC<Props> = ({
 
   const profit = calculateProfit();
 
-  // Memoizovať výpočty grafických dát - prepočítavať len keď sa zmenia relevantné dáta
+  // Memorize graph data
   const chartConfig = useMemo(() => {
     if (!graphData?.data || Object.keys(graphData.data).length === 0) return null;
 
@@ -117,19 +117,22 @@ export const AssetAnalysisGraph: FC<Props> = ({
     const minVal = Math.min(...values);
     const maxVal = Math.max(...values);
     const padding = (maxVal - minVal) * 0.15;
-    
-    // Stabilné ID pre gradient
+
     const gradientId = `asset-analysis-gradient-${selectedPeriod}-${currency}`;
     
     const xAxisData = Object.keys(graphData.data).map((dateStr) => new Date(dateStr));
 
     const maxLabelLength = Math.max(
-      ...values.map(v => {
-        const len = Math.round((v ?? 0) * currencyValue);
-        return len.toLocaleString().length + 1 + currency.length;
+      ...values.map((v) => {
+        const convertedValue = (v ?? 0) * currencyValue;
+        const formatted = new Intl.NumberFormat(undefined, {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2
+        }).format(convertedValue);
+        return formatted.length + 1 + currency.length;
       })
     );
-    const dynamicWidth = Math.max(50, maxLabelLength * 9);
+    const dynamicWidth = Math.max(50, (maxLabelLength) * 9);
 
     return { values, minVal, maxVal, padding, gradientId, xAxisData, dynamicWidth };
   }, [graphData, currencyValue, currency, selectedPeriod]);
@@ -139,26 +142,27 @@ export const AssetAnalysisGraph: FC<Props> = ({
     return [
       {
         id: 'asset',
-        type: 'line' as const, // <-- TU JE ZMENA
+        type: 'line' as const,
         data: chartConfig.values,
         color: trendColor,
         area: true,
         baseline: chartConfig.minVal - chartConfig.padding,
         showMark: false,
-        curve: 'catmullRom' as const, // <-- Pridaj to radšej aj sem, pre ten istý dôvod
+        curve: 'catmullRom' as const,
         valueFormatter: (value: number | null) =>
           value == null ? '' : `${formatCurrency((value ?? 0) * currencyValue)} ${currency}`
       }
     ];
   }, [chartConfig, trendColor, currencyValue, currency]);
 
-  // Memoizácia X-osi
+  // Memorize X axis
   const chartXAxis = useMemo(() => {
     if (!chartConfig) return [];
     return [
       {
         scaleType: 'time' as const,
         data: chartConfig.xAxisData,
+        tickNumber: 8,
         valueFormatter: (date: Date, context: { location?: string }) => {
           const isTooltip = context?.location === 'tooltip';
           const noYearPeriods = [
@@ -182,7 +186,7 @@ export const AssetAnalysisGraph: FC<Props> = ({
     ];
   }, [chartConfig, selectedPeriod]);
 
-  // Memoizácia Y-osi
+  // Memorize Y axis
   const chartYAxis = useMemo(() => {
     if (!chartConfig) return [];
     return [
@@ -190,8 +194,11 @@ export const AssetAnalysisGraph: FC<Props> = ({
         min: chartConfig.minVal - chartConfig.padding,
         max: chartConfig.maxVal + chartConfig.padding,
         valueFormatter: (value: number | null) => {
-          const vypocet = Math.round((value ?? 0) * currencyValue);
-          const sformatovaneCislo = new Intl.NumberFormat(undefined, { maximumFractionDigits: 0 }).format(vypocet);
+          const convertedValue = (value ?? 0) * currencyValue;
+          const sformatovaneCislo = new Intl.NumberFormat(undefined, {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+          }).format(convertedValue);
           return `${sformatovaneCislo} ${currency}`;
         },
         width: chartConfig.dynamicWidth,
@@ -217,7 +224,7 @@ export const AssetAnalysisGraph: FC<Props> = ({
   return (
     <div className="text-dark mb-5 asset-analysis-graph-wrapper">
       <div className="row mb-4">
-        <div className="col-sm-4 me-auto"
+        <div className="col-auto me-auto"
              style={{display: 'flex', alignItems: 'center', gap: '8px'}}>
           {graphData ? (
             <>
@@ -227,7 +234,7 @@ export const AssetAnalysisGraph: FC<Props> = ({
               {profit && (
                 <div className={`d-flex align-items-center gap-3 color-container--${profit.isProfit ? "green" : "red"}`}>
                 <span style={{fontSize: "23px", fontFamily: "PT Sans Caption", color: trendColor}}>
-                  {profit.isProfit ? "+" : ""}{formatCurrency(profit.profitValue)} {currency}
+                  {profit.isProfit ? "+" : "-"}{formatCurrency(profit.profitValue)} {currency}
                 </span>
                 </div>
               )}

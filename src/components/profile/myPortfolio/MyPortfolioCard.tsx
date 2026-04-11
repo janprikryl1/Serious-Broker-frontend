@@ -2,7 +2,6 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { getMyPortfolioDetailsGraph } from '../../../utils/api/myPortfolioService.ts';
-import { CardContainer } from '../../reusable/CardContainer.tsx';
 import { AreaPlot, ChartContainer, ChartsTooltip, LinePlot } from '@mui/x-charts';
 import { GraphDataSkeleton } from '../../graphs/asset/GraphDataSkeleton.tsx';
 import { getAssetGraphData } from '../../../utils/api/binanceIndexAssets.ts';
@@ -12,8 +11,7 @@ import { FiEdit3 } from 'react-icons/fi';
 import { LuTrash } from 'react-icons/lu';
 import { SlOptions } from 'react-icons/sl';
 import { LuTrendingDown, LuTrendingUp } from 'react-icons/lu';
-import { CustomTooltip } from '../../reusable/CustomTooltip.tsx';
-import {OutlineContainer} from "../../reusable/OutlineContainer.tsx";
+import { OutlineContainer } from '../../reusable/OutlineContainer.tsx';
 
 export const MyPortfolioCard = ({ data, onDelete, isRemoving = false }) => {
   const { t } = useTranslation();
@@ -21,7 +19,6 @@ export const MyPortfolioCard = ({ data, onDelete, isRemoving = false }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [profitEur, setProfitEur] = useState(Number.NaN);
   const [profitPct, setProfitPct] = useState(Number.NaN);
-  const [investedAmount, setInvestedAmount] = useState(0);
   const [chartValues, setChartValues] = useState([0]);
   const [hasChartData, setHasChartData] = useState(false);
   const [isActionsMenuOpen, setIsActionsMenuOpen] = useState(false);
@@ -38,13 +35,6 @@ export const MyPortfolioCard = ({ data, onDelete, isRemoving = false }) => {
       try {
         const detailsResponse = await getMyPortfolioDetailsGraph(data.id);
         const details = detailsResponse.data;
-        const investAmount = Number(details.invested_amount);
-        const currentValue = Number(details.current_value);
-        const calculatedProfit = currentValue - investAmount;
-
-        setInvestedAmount(investAmount);
-        setProfitEur(calculatedProfit);
-        setProfitPct(investAmount > 0 ? (calculatedProfit / investAmount) * 100 : Number.NaN);
 
         const currencies = details.asset
           .filter((assetDetail) => assetDetail.status)
@@ -58,6 +48,8 @@ export const MyPortfolioCard = ({ data, onDelete, isRemoving = false }) => {
 
         if (currencies.length === 0) {
           setHasChartData(false);
+          setProfitEur(Number.NaN);
+          setProfitPct(Number.NaN);
           return;
         }
 
@@ -68,9 +60,18 @@ export const MyPortfolioCard = ({ data, onDelete, isRemoving = false }) => {
 
         if (values.length === 0) {
           setHasChartData(false);
+          setProfitEur(Number.NaN);
+          setProfitPct(Number.NaN);
           return;
         }
 
+        const firstValue = values[0];
+        const lastValue = values[values.length - 1];
+        const calculatedProfitEur = lastValue - firstValue;
+        const calculatedProfitPct = firstValue > 0 ? (calculatedProfitEur / firstValue) * 100 : Number.NaN;
+
+        setProfitEur(calculatedProfitEur);
+        setProfitPct(calculatedProfitPct);
         setChartValues(values);
         setHasChartData(true);
       } catch {
@@ -222,7 +223,6 @@ export const MyPortfolioCard = ({ data, onDelete, isRemoving = false }) => {
       </div>
 
       <div className="mt-4" style={{ minHeight: '60px' }}>
-
         {Number.isFinite(profitEur) ? (
           <div className="flex flex-column">
             <div style={{ fontSize: '1.1rem' }}>
@@ -238,11 +238,11 @@ export const MyPortfolioCard = ({ data, onDelete, isRemoving = false }) => {
 
               {Number.isFinite(profitPct) && (
                 <span className="gray-5-color-text" style={{ marginLeft: '5px' }}>
-                  { '(' + (profitEur >= 0 ? '+' : '') + profitPct.toFixed(2) + ' %)'}
+                  {' (' + (profitEur >= 0 ? '+' : '') + profitPct.toFixed(2) + ' %)'}
                 </span>
               )}
             </div>
-            <div className="small gray-2-color-text">{t(`${investedAmount.toFixed(2)} EUR invested`)}</div>
+            <div className="small gray-2-color-text">{t('Monthly return')}</div>
           </div>
         ) : (
           ''

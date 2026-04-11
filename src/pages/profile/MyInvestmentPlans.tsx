@@ -1,4 +1,4 @@
-import React, {FC, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState} from "react";
+import React, {FC, useCallback, useEffect, useMemo, useRef, useState} from "react";
 import {useTranslation} from "react-i18next";
 import {deleteInvestmentPlan, getInvestmentPlansDetails} from "../../utils/api/investmentPlanService.ts";
 import {InvestmentPlanType, InvestmentPlanTypeDetails} from "../../utils/types/investmentPlan/InvestmentPlanType.ts";
@@ -7,17 +7,18 @@ import {Button} from "../../components/reusable/Button.tsx";
 import {CustomTooltip} from "../../components/reusable/CustomTooltip.tsx";
 import {routes} from "../../utils/constants";
 import {TitleHeader} from "../../components/about/TitleHeader.tsx";
-import {ChartContainer, ChartsGrid, ChartsTooltip, ChartsXAxis, ChartsYAxis, LinePlot} from "@mui/x-charts";
+import {ChartContainer, ChartsTooltip, ChartsXAxis, ChartsYAxis, LinePlot} from "@mui/x-charts";
 import {getAssetSpotKlines} from "../../utils/api/GraphsService.ts";
 import {GraphDataSkeleton} from "../../components/graphs/asset/GraphDataSkeleton.tsx";
 import {GoPlus} from "react-icons/go";
-import {IoWalletOutline} from "react-icons/io5";
+import {IoOpenOutline, IoWalletOutline} from "react-icons/io5";
 import {FiDollarSign} from "react-icons/fi";
 import {LuClock, LuTrendingUp, LuTrendingDown, LuTrash} from "react-icons/lu";
 import {IoIosArrowDown, IoIosArrowUp} from "react-icons/io";
 import {TbMoneybag} from "react-icons/tb";
 import {MdNumbers} from "react-icons/md";
 import {SlOptions} from "react-icons/sl";
+import {Link} from "react-router-dom";
 
 type KlinePoint = {
   datetime: string;
@@ -36,6 +37,7 @@ type ProfitPoint = {
 type SimulationState = {
   loading: boolean;
   points: ProfitPoint[];
+  investmentCount?: number;
   error?: string;
 };
 
@@ -44,16 +46,10 @@ type WeightedAsset = {
   allocation: number;
 };
 
-type PortfolioAssetLike = {
-  asset_label?: unknown;
-  assetLabel?: unknown;
-  label?: unknown;
-  symbol?: unknown;
-  name?: unknown;
-  allocation?: unknown;
-  weight?: unknown;
-  percentage?: unknown;
-  share?: unknown;
+type AssetSeries = {
+  label: string;
+  prices: Map<string, number>;
+  allocation: number;
 };
 
 class SimulationDataError extends Error {
@@ -94,6 +90,8 @@ const toValidNumber = (value: unknown, fallback = 0) => {
   return Number.isFinite(parsed) ? parsed : fallback;
 };
 
+const ALLOCATION_TOLERANCE = 0.0001;
+
 const formatNumber = (value: number): string => {
   return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
 };
@@ -106,62 +104,6 @@ const normalizeAssetLabel = (value: unknown) => {
   return raw;
 };
 
-const toArray = (value: unknown): any[] => (Array.isArray(value) ? value : []);
-
-const parseCoinsField = (value: unknown): PortfolioAssetLike[] => {
-  if (Array.isArray(value)) return value as PortfolioAssetLike[];
-  if (typeof value !== "string" || !value.trim()) return [];
-
-  try {
-    const parsed = JSON.parse(value);
-    if (Array.isArray(parsed)) return parsed as PortfolioAssetLike[];
-    if (parsed && typeof parsed === "object") {
-      return Object.values(parsed as Record<string, unknown>) as PortfolioAssetLike[];
-    }
-  } catch {
-    return [];
-  }
-
-  return [];
-};
-
-const extractPortfolioAssets = (payload: any): PortfolioAssetLike[] => {
-  const directCandidates = [
-    payload?.asset,
-    payload?.assets,
-    payload?.target_coins,
-    payload?.data?.asset,
-    payload?.data?.assets,
-    payload?.data?.target_coins,
-    payload?.portfolio?.asset,
-    payload?.portfolio?.assets,
-  ];
-
-  for (const candidate of directCandidates) {
-    const arr = toArray(candidate);
-    if (arr.length > 0) return arr;
-  }
-
-  const parsedCandidates = [
-    parseCoinsField(payload?.COINS),
-    parseCoinsField(payload?.coins),
-    parseCoinsField(payload?.data?.COINS),
-    parseCoinsField(payload?.data?.coins),
-  ];
-
-  for (const candidate of parsedCandidates) {
-    if (candidate.length > 0) return candidate;
-  }
-
-  return [];
-};
-
-const mapPortfolioAssetToWeighted = (asset: PortfolioAssetLike): WeightedAsset => ({
-  assetLabel: normalizeAssetLabel(
-    asset.asset_label ?? asset.assetLabel ?? asset.label ?? asset.symbol ?? asset.name
-  ),
-  allocation: toValidNumber(asset.allocation ?? asset.weight ?? asset.percentage ?? asset.share),
-});
 
 const normalizeAssetKlines = (rows: any[]): KlinePoint[] => {
   return rows
@@ -203,9 +145,9 @@ const shouldInvestOnPoint = (point: KlinePoint, plan: InvestmentPlanType) => {
   return false;
 };
 
-const simulateDca = (points: KlinePoint[], plan: InvestmentPlanType): ProfitPoint[] => {
+/*const simulateDca = (points: KlinePoint[], plan: InvestmentPlanType): ProfitPoint[] => {
   const amount = toValidNumber(plan.investment_amount);
-  if (amount <= 0) return [];
+  if (amount <= 0) return {points: [], investmentCount: 0};
 
   const start = plan.start_date ? new Date(plan.start_date) : null;
   const hasValidStart = !!start && Number.isFinite(start.getTime());
@@ -235,18 +177,124 @@ const simulateDca = (points: KlinePoint[], plan: InvestmentPlanType): ProfitPoin
   }
 
   return profitSeries;
+};*/
+
+const simulatePortfolioDca = (
+  timeline: string[],
+  series: { label: string; prices: Map<string, number>; allocation: number }[],
+  plan: InvestmentPlanType
+): { points: ProfitPoint[]; investmentCount: number } => {
+
+  const amount = toValidNumber(plan.investment_amount);
+  if (amount <= 0) return {points: [], investmentCount: 0};
+
+  const units: Record<string, number> = {};
+  series.forEach(s => units[s.label] = 0);
+
+  // Parse start_date if provided
+  const start = plan.start_date ? new Date(plan.start_date) : null;
+  const hasValidStart = !!start && Number.isFinite(start.getTime());
+
+  // Cache parsed datetime to avoid repeated Date parsing
+  const timelineParsed = timeline.map(dt => {
+    const d = parseDatetime(dt);
+    return {
+      datetime: dt,
+      date: d,
+      dayOfWeek: d.getDay() === 0 ? 7 : d.getDay(),
+      hour: d.getHours()
+    };
+  }).filter(p => Number.isFinite(p.date.getTime()));
+
+  let totalInvested = 0;
+  let investmentCount = 0;
+  const result: ProfitPoint[] = [];
+
+  for (const point of timelineParsed) {
+    // Skip timeline points before start_date
+    if (hasValidStart && point.date < start) continue;
+
+    const {datetime, dayOfWeek, hour} = point;
+
+    const fakePoint: KlinePoint = {
+      datetime,
+      closeEur: 0,
+      dayOfWeek,
+      hour
+    };
+
+    // investícia
+    if (shouldInvestOnPoint(fakePoint, plan)) {
+      // 1. Vytvoríš si premennú pre aktuálne kolo nákupu
+      let investedThisRound = 0;
+
+      for (const asset of series) {
+        const price = asset.prices.get(datetime);
+
+        // Ak cena chýba (alebo je 0), preskočíme tento coin a do investedThisRound sa nič nepridá
+        if (!price || price <= 0) continue;
+
+        // Výpočet sumy pre tento konkrétny coin
+        const investPart = amount * asset.allocation;
+
+        // Samotný nákup kusov
+        units[asset.label] += investPart / price;
+
+        // 2. Pripočítaš k reálnej útrate LEN to, čo si práve zaplatil
+        investedThisRound += investPart;
+      }
+
+      // 3. Do celkovej investície pripočítaš len to, čo sa reálne minulo
+      if (investedThisRound > 0) {
+        investmentCount++;
+      }
+      totalInvested += investedThisRound;
+    }
+
+    // výpočet hodnoty portfólia
+    let portfolioValue = 0;
+
+    for (const asset of series) {
+      const price = asset.prices.get(datetime);
+      if (!price) continue;
+
+      portfolioValue += units[asset.label] * price;
+    }
+
+    if (totalInvested > 0) {
+      result.push({
+        datetime,
+        invested: totalInvested,
+        value: portfolioValue,
+        returnPct: ((portfolioValue - totalInvested) / totalInvested) * 100
+      });
+    }
+  }
+
+  return {points: result, investmentCount};
 };
 
 const MiniProfitChart: FC<{ points: ProfitPoint[] }> = ({points}) => {
   const {t} = useTranslation();
-  const xValues = points.map((p) => p.datetime);
-  const invested = points.map((p) => p.invested);
-  const values = points.map((p) => p.value);
-  const returns = points.map((p) => p.returnPct);
 
   const chartMargins = useMemo(() => ({left: 0, right: 0, top: 0, bottom: 0}), []);
-  const minPrice = invested.length > 0 ? Math.min(...invested, ...values) * 0.9 : 0;
-  const maxPrice = invested.length > 0 ? Math.max(...invested, ...values) * 1.1 : 1;
+  const chartData = useMemo(() => ({
+    xValues: points.map((p) => p.datetime),
+    invested: points.map((p) => p.invested),
+    values: points.map((p) => p.value),
+    returns: points.map((p) => p.returnPct)
+  }), [points]);
+
+  const {xValues, invested, values, returns} = chartData;
+
+  const minPrice = useMemo(() => 
+    invested.length > 0 ? Math.min(...invested, ...values) * 0.9 : 0,
+    [invested, values]
+  );
+  const maxPrice = useMemo(() => 
+    invested.length > 0 ? Math.max(...invested, ...values) * 1.1 : 1,
+    [invested, values]
+  );
 
   if (points.length === 0) {
     return <div className="gray-2-color-text">{t("No simulation data for selected schedule.")}</div>;
@@ -304,6 +352,10 @@ const MiniProfitChart: FC<{ points: ProfitPoint[] }> = ({points}) => {
                 }
                 return String(value).slice(0, 10);
               },
+              tickInterval: (value, index) => {
+                const step = Math.ceil(xValues.length / 12);
+                return index % step === 0;
+              },
               tickLabelStyle: {
                 fontSize: 10,
                 fontFamily: "PT Sans, sans-serif",
@@ -318,6 +370,7 @@ const MiniProfitChart: FC<{ points: ProfitPoint[] }> = ({points}) => {
               max: maxPrice,
               position: "left",
               tickNumber: 5,
+              width: 60,
               valueFormatter: (value: number | null) => (value !== null ? `${value.toFixed(0)} EUR` : ""),
               tickLabelStyle: {
                 fontSize: 10,
@@ -329,6 +382,7 @@ const MiniProfitChart: FC<{ points: ProfitPoint[] }> = ({points}) => {
               id: "return",
               position: "right",
               tickNumber: 5,
+              width: 60,
               valueFormatter: (value: number | null) => (value !== null ? `${value.toFixed(2)} %` : ""),
               tickLabelStyle: {
                 fontSize: 10,
@@ -345,7 +399,7 @@ const MiniProfitChart: FC<{ points: ProfitPoint[] }> = ({points}) => {
             "& .MuiLineElement-series-returnPct": {strokeWidth: 1.5},
           }}
         >
-          <ChartsGrid vertical/>
+          {/*<ChartsGrid vertical/>*/}
           <ChartsTooltip trigger="axis"/>
           <LinePlot/>
           <ChartsXAxis/>
@@ -357,28 +411,6 @@ const MiniProfitChart: FC<{ points: ProfitPoint[] }> = ({points}) => {
   );
 };
 
-const normalizeInvestmentPlansPayload = (payload: unknown): InvestmentPlanTypeDetails[] => {
-  if (Array.isArray(payload)) return payload as InvestmentPlanTypeDetails[];
-
-  if (payload && typeof payload === "object") {
-    const record = payload as Record<string, unknown>;
-    const nestedCandidates = [record.data, record.plans, record.items];
-
-    for (const candidate of nestedCandidates) {
-      if (Array.isArray(candidate)) {
-        return candidate as InvestmentPlanTypeDetails[];
-      }
-    }
-
-    const objectValues = Object.values(record);
-    if (objectValues.length > 0 && objectValues.every((value) => value && typeof value === "object" && !Array.isArray(value))) {
-      return objectValues as InvestmentPlanTypeDetails[];
-    }
-  }
-
-  return [];
-};
-
 export const MyInvestmentPlans: FC = () => {
   const {t} = useTranslation();
   const [investmentPlans, setInvestmentPlans] = useState<InvestmentPlanTypeDetails[]>([]);
@@ -388,13 +420,12 @@ export const MyInvestmentPlans: FC = () => {
   const [openActionsMenuPlanKey, setOpenActionsMenuPlanKey] = useState<number | null>(null);
   const [removingPlanIds, setRemovingPlanIds] = useState<number[]>([]);
   const itemRefs = useRef<Map<number, HTMLDivElement>>(new Map());
-  const previousRectsRef = useRef<Map<number, DOMRect>>(new Map());
 
   const fetchInvestmentPlans = useCallback(async () => {
     try {
       setIsLoading(true);
       const response = await getInvestmentPlansDetails();
-      setInvestmentPlans(normalizeInvestmentPlansPayload(response.data));
+      setInvestmentPlans(response.data);
     } catch {
       setInvestmentPlans([]);
     } finally {
@@ -430,14 +461,16 @@ export const MyInvestmentPlans: FC = () => {
     }
   }, [fetchInvestmentPlans]);
 
-  const buildWeightedSeries = useCallback(async (assets: WeightedAsset[], startDate: string | null) => {
+  /*const buildWeightedSeries = useCallback(async (assets: WeightedAsset[], startDate: string | null) => {
     const validAssets = assets.filter((a) => !!a.assetLabel && a.allocation > 0);
-    if (validAssets.length === 0) return [];
+    if (validAssets.length === 0) throw new Error("No allocation provided");
 
     const totalAllocation = validAssets.reduce((sum, asset) => sum + asset.allocation, 0);
-    if (totalAllocation <= 0) return [];
+    if (Math.abs(totalAllocation - 1) > ALLOCATION_TOLERANCE) {
+      throw new Error("Invalid allocation sum");
+    }
 
-    const normalizedWeights = new Map(validAssets.map((asset) => [asset.assetLabel, asset.allocation / totalAllocation]));
+    const allocationByLabel = new Map(validAssets.map((asset) => [asset.assetLabel, asset.allocation]));
     const start = startDate ?? undefined;
 
     const klinesByAsset = await Promise.all(
@@ -480,7 +513,7 @@ export const MyInvestmentPlans: FC = () => {
           hasMissingValue = true;
           break;
         }
-        const weight = normalizedWeights.get(assetKlines.label) ?? 0;
+        const weight = allocationByLabel.get(assetKlines.label) ?? 0;
         weightedClose += (price as number) * weight;
       }
 
@@ -495,42 +528,98 @@ export const MyInvestmentPlans: FC = () => {
     }
 
     return portfolioSeries;
-  }, []);
+  }, []);*/
 
-  const buildPlanSeries = useCallback(async (plan: InvestmentPlanTypeDetails) => {
-    const weightedAssets = getWeightedAssetsFromPlan(plan);
+  const buildAssetSeries = async (
+    assets: WeightedAsset[],
+    startDate: string | null
+  ): Promise<{ timeline: string[]; series: AssetSeries[] }> => {
 
-    if (weightedAssets.length === 0) return [];
+    const validAssets = assets.filter(a => a.assetLabel && a.allocation > 0);
+    if (validAssets.length === 0) {
+      throw new Error("No allocation provided");
+    }
 
-    return await buildWeightedSeries(weightedAssets, plan.start_date);
-  }, [buildWeightedSeries]);
+    const totalAllocation = validAssets.reduce((sum, asset) => sum + asset.allocation, 0);
+    if (Math.abs(totalAllocation - 1) > ALLOCATION_TOLERANCE) {
+      throw new Error("Invalid allocation sum");
+    }
+
+    const klinesByAsset = await Promise.all(
+      validAssets.map(async (asset) => {
+        try {
+          const res = await getAssetSpotKlines(asset.assetLabel, undefined, startDate ?? undefined);
+          const points = normalizeAssetKlines(res.data ?? []);
+
+          if (points.length === 0) {
+            return {label: asset.assetLabel, failed: true, allocation: asset.allocation, prices: new Map(), timeline: []};
+          }
+
+          return {
+            label: asset.assetLabel,
+            failed: false,
+            allocation: asset.allocation,
+            prices: new Map(points.map(p => [p.datetime, p.closeEur])),
+            timeline: points.map(p => p.datetime)
+          };
+        } catch {
+          return {label: asset.assetLabel, failed: true, allocation: asset.allocation, prices: new Map(), timeline: []};
+        }
+      })
+    );
+
+    const failedCoins = klinesByAsset.filter(k => k.failed).map(k => k.label);
+    if (failedCoins.length > 0) {
+      throw new SimulationDataError(failedCoins);
+    }
+
+    const successfulKlines = klinesByAsset.filter(k => !k.failed);
+    if (successfulKlines.length === 0) {
+      throw new Error("No klines data available");
+    }
+
+    const timeline = successfulKlines[0]?.timeline ?? [];
+
+    return {
+      timeline,
+      series: successfulKlines.map(r => ({
+        label: r.label,
+        prices: r.prices,
+        allocation: r.allocation
+      }))
+    };
+  };
 
   const loadSimulation = useCallback(async (plan: InvestmentPlanTypeDetails, planKey: number) => {
     setSimulations((prev) => ({
       ...prev,
-      [planKey]: {loading: true, points: []},
+      [planKey]: {loading: true, points: [], investmentCount: 0},
     }));
 
     try {
-      const series = await buildPlanSeries(plan);
-      const points = simulateDca(series, plan);
+      const weightedAssets = getWeightedAssetsFromPlan(plan);
+      // const series = await buildWeightedSeries(weightedAssets, plan.start_date);
+      // const points = simulateDca(series, plan);
+
+      const { timeline, series } = await buildAssetSeries(weightedAssets, plan.start_date);
+      const {points, investmentCount} = simulatePortfolioDca(timeline, series, plan);
 
       setSimulations((prev) => ({
         ...prev,
-        [planKey]: {loading: false, points},
+        [planKey]: {loading: false, points, investmentCount},
       }));
     } catch (error) {
       const failedCoins = error instanceof SimulationDataError ? error.failedCoins : [];
       const errorMessage = failedCoins.length > 0
-        ? `Unalble to load simulation data. No longer traded coins: ${failedCoins.join(", ")}`
+        ? `Unable to load simulation data. No longer traded coins: ${failedCoins.join(", ")}`
         : t("Unable to load simulation data");
 
       setSimulations((prev) => ({
         ...prev,
-        [planKey]: {loading: false, points: [], error: errorMessage},
+        [planKey]: {loading: false, points: [], investmentCount: 0, error: errorMessage},
       }));
     }
-  }, [buildPlanSeries, t]);
+  }, [buildAssetSeries, t]);
 
   useEffect(() => {
     investmentPlans.forEach((plan, index) => {
@@ -549,25 +638,15 @@ export const MyInvestmentPlans: FC = () => {
   };
 
   const getWeightedAssetsFromPlan = (plan: InvestmentPlanTypeDetails): WeightedAsset[] => {
-    const fromPayload = extractPortfolioAssets(plan)
-      .map(mapPortfolioAssetToWeighted)
-      .filter((asset) => !!asset.assetLabel && asset.allocation > 0);
-
-    if (fromPayload.length > 0) {
-      return fromPayload;
-    }
-
     const targetCoins = Array.isArray(plan.target_coins) ? plan.target_coins : [];
     if (targetCoins.length === 0) return [];
 
-    // Fallback to equal weighting when backend does not provide allocation for target coins.
-    const equalAllocation = 1 / targetCoins.length;
     return targetCoins
       .map((coin) => ({
         assetLabel: normalizeAssetLabel(coin.asset_label),
-        allocation: equalAllocation,
+        allocation: toValidNumber(coin.allocation),
       }))
-      .filter((asset) => !!asset.assetLabel && asset.allocation > 0);
+      .filter((asset) => !!asset.assetLabel);
   };
 
   const getTotalProfit = (points: ProfitPoint[]) => {
@@ -617,6 +696,10 @@ export const MyInvestmentPlans: FC = () => {
                   : "";
                 const displayStartDate = plan.start_date || simulatedStartDate || "-";
                 const sourceName = plan.target_name || String(plan.user_portfolio_id ?? plan.binance_asset_id ?? "-");
+                const assetName = plan.portfolio_name || plan.index_name || sourceName || "-";
+                const assetDetailPath = plan.target_type === "index"
+                  ? (assetName !== "-" ? `/asset_graph/${encodeURIComponent(assetName)}` : null)
+                  : (plan.user_portfolio_id ? `/profile/my_portfolio_details/${plan.user_portfolio_id}` : null);
                 const totalProfit = getTotalProfit(simulation?.points ?? []);
                 const trend = totalProfit ? {
                   isPositive: totalProfit.amount >= 0,
@@ -629,7 +712,12 @@ export const MyInvestmentPlans: FC = () => {
                 const planDetails = [
                   {
                     label: t("Asset name"),
-                    value: plan.portfolio_name || plan.index_name || sourceName || "-",
+                    value: assetDetailPath ? (
+                      <Link to={assetDetailPath} className="text-decoration-underline gap-1">
+                        {assetName}
+                        <IoOpenOutline size={14} aria-hidden="true" style={{marginLeft: "5px"}}/>
+                      </Link>
+                    ) : assetName,
                     Icon: IoWalletOutline,
                   },
                   {
@@ -644,7 +732,7 @@ export const MyInvestmentPlans: FC = () => {
                   },
                   {
                     label: t("Total investments"),
-                    value: simulation?.points.length ?? 0,
+                    value: simulation?.investmentCount ?? 0,
                     Icon: MdNumbers,
                   },
                   {
@@ -771,7 +859,7 @@ export const MyInvestmentPlans: FC = () => {
                                 position: 'relative',
                                 top: 'auto',
                                 right: 'auto'
-                              }} // Prebíjame pôvodné absolute poziciovanie
+                              }}
                               onClick={(e) => e.stopPropagation()}
                               onBlur={(e) => {
                                 if (!e.currentTarget.contains(e.relatedTarget)) {
@@ -892,6 +980,21 @@ export const MyInvestmentPlans: FC = () => {
                                 </div>
 
                               </div>
+
+                              {/* Chart Section */}
+                              <div style={{display: 'grid', gridTemplateColumns: '1fr', gap: '20px', marginTop: '40px'}}>
+                                {simulation?.loading && (
+                                  <GraphDataSkeleton
+                                    baseColor={"var(--cream-color)"}
+                                    highlightColor={"var(--secondary-color)"}
+                                    style={{width: "100%", height: "220px"}}
+                                  />
+                                )}
+                                {simulation?.error && <div className="gray-2-color-text">{simulation.error}</div>}
+                                {!simulation?.loading && !simulation?.error && (
+                                  <MiniProfitChart points={simulation?.points ?? []}/>
+                                )}
+                              </div>
                             </div>
                           </>
                         )}
@@ -924,20 +1027,6 @@ export const MyInvestmentPlans: FC = () => {
                         </button>
                       </div>
 
-                      {/* Chart */}
-                      <div style={{display: 'grid', gridTemplateColumns: '1fr', gap: '20px'}}>
-                        {simulation?.loading && (
-                          <GraphDataSkeleton
-                            baseColor={"var(--cream-color)"}
-                            highlightColor={"var(--secondary-color)"}
-                            style={{width: "100%", height: "220px"}}
-                          />
-                        )}
-                        {simulation?.error && <div className="gray-2-color-text">{simulation.error}</div>}
-                        {!simulation?.loading && !simulation?.error && (
-                          <MiniProfitChart points={simulation?.points ?? []}/>
-                        )}
-                      </div>
                     </CardContainer>
                   </div>
                 );

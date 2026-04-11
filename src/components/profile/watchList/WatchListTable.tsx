@@ -37,7 +37,6 @@ export const WatchListTable: FC<Props> = ({watchList, setWatchList}) => {
     loadData();
   }, []);
 
-  // Načítaj dáta pre mince vo watchliste
   useEffect(() => {
     const loadCoinDetails = async () => {
       const coinsToLoad = watchList.filter((item) => item.type === "coin");

@@ -9,7 +9,8 @@ import {AssetGraphPieChart} from "../../components/graphs/asset/AssetGraphPieCha
 import {AssetDetailSkeleton} from "../../components/graphs/asset/AssetDetailSkeleton.tsx";
 import {Highlight} from "../../components/editor/highlights/Highlight.tsx";
 import {useAssetGraph} from "../../utils/hooks/useAssetGraph.ts";
-import {useMediaQuery} from "@mui/material";
+import {Link, useMediaQuery} from "@mui/material";
+import {routes} from "../../utils/constants";
 
 export const AssetGraph: FC = () => {
     const { t } = useTranslation();
@@ -93,7 +94,7 @@ export const AssetGraph: FC = () => {
                                                 </div>
                                                 {!isMobile &&
                                                     <div className="col-sm-4">
-                                                        <AssetGraphPieChart assets={asset.assets} />  
+                                                        <AssetGraphPieChart assets={asset.assets} />
                                                     </div>
                                                 }
                                             </div>

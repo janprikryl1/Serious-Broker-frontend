@@ -78,7 +78,6 @@ export const renderTable = (
     const isCoinsTable = items.length > 0 && items.every(item => item.type === WatchListEnum.Coin);
 
     if (isCoinsTable) {
-        // Definícia stĺpcov pre tabuľku
         type TableColumn = {
             label: string;
             key: string;
@@ -145,7 +144,7 @@ export const renderTable = (
                                 <tr key={item.id}>
                                     <td className="text-start" style={{padding: '15px', flex: 1, minWidth: '120px'}}>
                                         <Link 
-                                            to={`${routes.assetGraphDetail}/${item.item_id}`}
+                                            to={`${routes.graphsRecommendationDetailURL}${item.title}`}
                                             className="d-flex align-items-center gap-3 text-decoration-none"
                                             style={{color: 'inherit'}}
                                         >

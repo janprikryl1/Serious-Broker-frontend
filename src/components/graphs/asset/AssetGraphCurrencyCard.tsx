@@ -29,6 +29,11 @@ export const AssetGraphCurrencyCard: FC<Props> = ({ singleAsset }) => {
     }, []);
 
     return (
+
+        <Link
+          to={`${routes.graphsRecommendationDetailURL}${encodeURIComponent(singleAsset.asset_label)}`}
+          className="link-underline-none asset-graph-currency-card-link"
+        >
         <div className="asset-graph-currency-card">
             <div className="d-flex align-items-center justify-content-around h-100 w-100">
 
@@ -78,5 +83,6 @@ export const AssetGraphCurrencyCard: FC<Props> = ({ singleAsset }) => {
                 </div>
             </div>
         </div>
+        </Link>
     );
 };

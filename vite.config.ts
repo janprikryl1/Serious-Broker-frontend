@@ -43,5 +43,15 @@ export default defineConfig({
         return !excludedPaths.some(path => fileName.includes(path));
       }
     })
-  ]
+  ],
+    server: {
+        proxy: {
+            // Všetky požiadavky začínajúce na /bakalarka_backend presmeruj na localhost (Apache/PHP)
+            '/bakalarka_backend': {
+                target: 'http://localhost',
+                changeOrigin: true,
+                secure: false,
+            }
+        }
+    }
 });

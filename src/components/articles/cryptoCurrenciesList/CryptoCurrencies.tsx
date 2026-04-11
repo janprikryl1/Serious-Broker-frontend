@@ -7,10 +7,12 @@ import "../../../styles/sass/components/crypto_currencies.scss";
 import {OutlineContainer} from "../../reusable/OutlineContainer.tsx";
 import {SearchBar} from "../../reusable/SearchBar.tsx";
 import {coinURL} from "../../../utils/constants";
+import { useNavigate } from "react-router-dom";
 
 const PAGE_SIZE = 52; // Nastavené na násobok 4 pre peknú mriežku
 
 export const CryptoCurrencies: FC = () => {
+  const navigate = useNavigate();
   const [cryptocurrencies, setCryptocurrencies] = useState<(CryptoCurrencyType & { stylized_image?: string })[]>([]);
   const [searchValue, setSearchValue] = useState("");
   const [totalPages, setTotalPages] = useState<number>(1);
@@ -46,7 +48,7 @@ export const CryptoCurrencies: FC = () => {
 
 
   return (
-    <div className="">
+    <div>
       <div className="d-flex justify-content-center mb-5 mt-5">
         <SearchBar value={searchValue} onChange={(e) => setSearchValue(e.target.value)}/>
       </div>
@@ -76,7 +78,7 @@ export const CryptoCurrencies: FC = () => {
                 overflow: "hidden"
               }}
               bgColor={"var(--quaternary-color-transparent-50)"}
-              // onClick={() => navigate(`/cryptocurrency_detail/${crypto.id}`)}
+              onClick={() => navigate(`/graphs/recommendation/detail/${crypto.symbol}`)}
               enableHover={true}
             >
               <img
@@ -116,8 +118,8 @@ export const CryptoCurrencies: FC = () => {
                   textAlign: "center"
                 }}
               >
-        {crypto.symbol}
-    </span>
+                  {crypto.symbol}
+              </span>
             </OutlineContainer>
           ))
         ) : (
