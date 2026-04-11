@@ -18,8 +18,8 @@ export type CryptoCurrencyDetailType = CryptoCurrencyType & {
     cmc_rank: number;
     date: string;
     photo: string;
-    stylized_image: string;
     categories: string;
+    stylized_image: string | null;
 }
 
 export type CryptoCurrencyAdminType = CryptoCurrencyType & {
@@ -41,4 +41,5 @@ export type CryptoCurrencyNewType = CryptoCurrencyType & {
     cmc_rank: number;
     date: string;
     photo: File | null;
+    stylized_image_file: File | null;
 }

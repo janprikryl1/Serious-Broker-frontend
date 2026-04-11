@@ -53,7 +53,7 @@ export const CryptoCurrencyDetail: FC = () => {
                                         <h3 className="index-title">{cryptocurrency.name} ({cryptocurrency.symbol})</h3>
                                         {!imageError && (
                                             <img
-                                                src={`${coinURL}/${cryptocurrency.photo}`}
+                                                src={`${coinURL}/${cryptocurrency?.stylized_image ? cryptocurrency.stylized_image : cryptocurrency.photo}`}
                                                 alt={cryptocurrency.name}
                                                 width={300}
                                                 onError={() => setImageError(true)}
