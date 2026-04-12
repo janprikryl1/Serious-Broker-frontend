@@ -37,7 +37,7 @@ export const IncreaseDecreaseCategory:FC<Props> = ({category, setCategory, setTa
                 {t("Previous")}
             </Button>{' '}
             <Button
-                color={ButtonColor.blue}
+                color={ButtonColor.gold}
                 onClick={handleIncreaseCategory}
                 disabled={category === content.length - 1}
                 style={{fontSize: "20px"}}

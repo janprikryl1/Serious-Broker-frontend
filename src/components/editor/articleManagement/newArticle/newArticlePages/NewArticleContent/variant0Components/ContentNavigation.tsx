@@ -19,7 +19,7 @@ export const ContentNavigation: FC = () => {
                 {t("Previous")}
             </Button>{` ${currentContent + 1}/${content.length} `}
             <Button
-                color={ButtonColor.blue}
+                color={ButtonColor.gold}
                 onClick={handleIncreaseCategory}
                 disabled={currentContent === content.length - 1 && content.length === 0}
             >
