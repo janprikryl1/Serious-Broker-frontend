@@ -18,6 +18,7 @@ export type InvestmentPlanType = {
 export type InvestmentPlanTargetCoin = {
     id: number;
     asset_label: string;
+    allocation: number;
 };
 
 export type InvestmentPlanTypeDetails = {

@@ -25,15 +25,15 @@ export const SignInIcon: FC = () => {
                 </Dropdown.Toggle>
                 <Dropdown.Menu className="glass-effect">
                     <Dropdown.Item as={Link} to={routes.profile.profileURL} className={"d-flex gap-2 align-items-center"} >
-                       <RiUserLine />
-                       {t("Profile")}
+                        <RiUserLine />
+                        {t("Profile")}
                     </Dropdown.Item>
-                  <Dropdown.Item as={Link} to={routes.profile.edit} className={"d-flex gap-2 align-items-center"} >
-                    <FiEdit3 />
-                    {t("Edit profile")}
-                  </Dropdown.Item>
+                    <Dropdown.Item as={Link} to={routes.profile.edit} className={"d-flex gap-2 align-items-center"} >
+                        <FiEdit3 />
+                        {t("Edit profile")}
+                    </Dropdown.Item>
                     <Dropdown.Item as={Link} to={routes.profile.membership} className={"d-flex gap-2 align-items-center"} >
-                      <RiIdCardLine />
+                        <RiIdCardLine />
                         {t("Membership")}
                     </Dropdown.Item>
                     <Dropdown.Item as={Link} to={routes.profile.achievements} className={"d-flex gap-2 align-items-center"} >
@@ -57,17 +57,11 @@ export const SignInIcon: FC = () => {
                             Admin panel
                         </Dropdown.Item>
                     )}
-                    {user.role === UserRole.Admin && (
-                        <Dropdown.Item as={"a"} href={adminURLS.internalTool} className={"d-flex gap-2 align-items-center" }>
-                            <RiAdminLine />
-                            {t("Internal toll")}
-                        </Dropdown.Item>
-                    )}
                     <Dropdown.Divider />
                     <Dropdown.Item onClick={logout} >
                         <div className={"d-flex gap-2 align-items-center"} style={{color: "var(--red-on-tertiary-color)", fontWeight: "bold"}}>
-                          <RiLogoutBoxRLine />
-                          {t("Logout")}
+                            <RiLogoutBoxRLine />
+                            {t("Logout")}
                         </div>
                     </Dropdown.Item>
                 </Dropdown.Menu>
