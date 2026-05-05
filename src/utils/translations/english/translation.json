@@ -295,5 +295,47 @@
     "Allocation must be 100% in total.": "Allocation must be 100% in total.",
     "Create": "Create",
     "Select Assets": "Select Assets",
-    "Add": "Add"
+    "Add": "Add",
+    "Seriousness • Safety • Trust" : "Seriousness • Safety • Trust",
+    "Seriousness, Safety, Trust" : "Seriousness, Safety, Trust",
+    "infoBoxRecom": {
+        "rankingTitle": "How to interpret the asset performance ranking?",
+        "rankingInitialText": "This chart illustrates the historical success of purchasing a selected asset at specific days and hours. To utilize the data effectively, it is important to understand how our algorithm processes time intervals.",
+        "rankDefinitionTitle": "1. What does the Rank value represent?",
+        "rankDefinitionText": "For each hour in the week (168 unique records in total), we calculate the potential profit compared to the previous hour. Based on this result, we determine the order (Rank):",
+        "rank1": "Rank 1:",
+        "rank1Desc": "statistically the most profitable time for purchase.",
+        "rank168": "Rank 168:",
+        "rank168Desc": "time with the lowest historical yield.",
+        "intervalsTitle": "2. Difference in interval display",
+        "intervalsText": "The appearance of the chart changes according to the length of the monitored period, which is caused by the data processing method:",
+        "shortPeriodTitle": "Short period (1 week)",
+        "shortPeriodDesc": "We work with 168 unique time slots. Since we compare each hour with others within a single week, each receives its own unique place in the ranking. In this case, the chart is more dynamic and captures specific market anomalies of that week.",
+        "longPeriodTitle": "Long period (2 or more weeks)",
+        "longPeriodDesc": "Statistical averaging of the same days and hours from multiple weeks occurs. This leads to a 'smoothing' of the chart line, making it more stable and less prone to short-term fluctuations. With averages, it can happen that two different hours achieve an identical Rank, indicating their nearly identical long-term potential.",
+        "whyImportant": "Why is this important?",
+        "whyImportantDesc": "Monitoring longer intervals will help you identify long-term trends – times that are consistently favorable for purchase regardless of random fluctuations in a specific week."
+    },
+    "btfdInfo": {
+        "title": "BTFD – Buy The F*****g Dip",
+        "initialText": "BTFD is an enhanced, intelligent evolution of the classic DCA strategy. While standard DCA buys blindly regardless of market conditions, BTFD leverages volatility to your advantage.",
+        "dynamicVsPassiveTitle": "Dynamic vs. Passive Investing",
+        "dynamicVsPassiveText": "It is a dynamic strategy, meaning your investment amount directly responds to current asset prices. Unlike traditional methods, it doesn't treat every market day the same way.",
+        "mechanicsTitle": "How it works: Mechanics",
+        "mechanicsText": "The system operates based on two core metrics that determine the final strength of each purchase.",
+        "baseAmountTitle": "Base Amount",
+        "baseAmountDesc": "The standard investment size you are willing to commit under normal conditions.",
+        "multiplierTitle": "The Multiplier",
+        "multiplierDesc": "A coefficient calculated based on the percentage drop from the All-Time High (ATH). The deeper the dip, the higher the multiplier.",
+        "whyBetterTitle": "Why is it more effective than DCA?",
+        "whyBetterDesc": "It allows you to accumulate more assets precisely when they are 'on sale', effectively lowering your average purchase price and maximizing potential returns.",
+        "tuningDescription": "The following section provides a detailed overview of how the selected BTFD strategy parameters influence the purchasing process for specific cryptocurrencies. These simulations demonstrate the impact of the multiplier and time periods on overall purchasing efficiency compared to market trends."
+    },
+    "activeTrafficLights": "Buy {{buy}}, Sell {{sell}}",
+    "defineTrafficLight": "Define {{type}} Traffic Light",
+    "trafficLight": {
+        "triggerDescription": "Within a traffic light you can define a trigger, which will ensure that a buy action will occur when certain requirements are fulfilled."
+    },
+    "BuyTL": "Buy",
+    "SellTL": "Sell"
 }

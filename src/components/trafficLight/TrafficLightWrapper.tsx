@@ -54,14 +54,16 @@ export const TrafficLightWrapper: FC<TrafficLightProps> = (props) => {
       <div className={"gray-2-color-text"}>{t("Name")}</div>
 
       {/* Reference Section */}
-      <div className={"d-flex align-items-center mt-4 gap-5"}>
-        <span className={"white-color-text"} style={{ fontSize: "20px" }}>{t("Watch over")}</span>
+      <div className={"d-flex flex-column flex-sm-row align-items-sm-center mt-4 mb-5 gap-2 gap-sm-5"}>
+        <span className={"white-color-text"} style={{ fontSize: "20px", whiteSpace: "nowrap" }}>
+          {t("Watch over")}
+        </span>
         {isEditable ? (
           <Form.Select
             value={props.reference}
             onChange={(e) => props.onReferenceChange?.(e.target.value as TrafficLightReference)}
             className="select-box-outline"
-            style={{ width: "230px" }}
+            style={{ width: "100%", maxWidth: "230px" }} // Na mobile zaberie plnú šírku (max 230px)
           >
             {Object.values(TrafficLightReference).map((v) => (
               <option key={v} value={v}>{t(v)}</option>
@@ -74,10 +76,10 @@ export const TrafficLightWrapper: FC<TrafficLightProps> = (props) => {
 
       {/* Base Price Info (Details only) */}
       {props.variant === 'details' && props.basePrice && (
-        <div className={"d-flex align-items-center mt-2 gap-5"}>
-                    <span className={"white-color-text"} style={{ fontSize: "20px" }}>
-                        {t("Base investment amount for this investment plan")}
-                    </span>
+        <div className={"d-flex flex-column flex-sm-row align-items-sm-center mt-2 gap-2 gap-sm-5"}>
+          <span className={"white-color-text"} style={{ fontSize: "20px" }}>
+            {t("Base investment amount for this investment plan")}
+          </span>
           <div className={"static-text"}>{props.basePrice} {props.currency}</div>
         </div>
       )}

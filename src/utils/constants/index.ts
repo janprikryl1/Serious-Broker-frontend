@@ -70,6 +70,7 @@ export const routes = {
         newInvestmentPlanTrafficLights: "/profile/new_investment_plan/traffic_lights",
         myInvestmentPlans: "/profile/my_investment_plans",
         myTrafficLights: "/profile/my_traffic_lights",
+        dashboard: "/profile/dashboard",
     },
     verifyAccount: "/verify_account/:user_id/:token",
     forgottenPassword: "/forgotten_password",
@@ -161,7 +162,6 @@ export const adminURLS = {
     forms: "/admin/forms",
     formResponses: "/admin/form_responses",
     formEvaulationSettings: "/admin/form_evaulation_settings",
-    internalTool: "http://serious.broker/internal"
 }
 
 export const guideURLS = {
@@ -175,15 +175,15 @@ export const registeredUserNavbarURLs: NavbarURLs = {
         title: "Analyses & Strategies",
         subLinks: {
             indices: { title: "Indices", link: routes.assets },
-            cryptocurrencies: { title: "Cryptocurrencies", link: routes.cryptocurrenciesList },
-            recommendation: { title: "Buy & Sell Timing", link: routes.recommendation },
+            // cryptocurrencies: { title: "Cryptocurrencies", link: routes.cryptocurrenciesList },
+            cryptocurrencies: { title: "Cryptocurrencies", link: routes.recommendation },
             BTFD: { title: "Strategies", link: routes.BTFD },
         }
     },
     investmentProfile: {
         title: "Investment Profile",
         subLinks: {
-            // dashboard: { title: "Dashboard", link: routes.profile.myPortfolio },
+            dashboard: { title: "Dashboard", link: routes.profile.dashboard },
             portfolios: { title: "My Portfolios", link: routes.profile.myPortfolio },
             investmentPlans: { title: "My Investment Plans", link: routes.profile.myInvestmentPlans },
             marketTrafficLights: { title: "My Market Traffic Lights", link: routes.profile.myTrafficLights },
@@ -191,8 +191,6 @@ export const registeredUserNavbarURLs: NavbarURLs = {
         }
     },
     education: {title: "Education", link: routes.articles},
-    // overview: { title: "Overview", link: routes.overview },
-    //aboutUs: { title: "About us", link: routes.about },
 };
 
 export const notRegisteredUserNavbarURLs: Record<string, NavLink> = {
@@ -200,6 +198,4 @@ export const notRegisteredUserNavbarURLs: Record<string, NavLink> = {
     indices: { title: "Indices", link: routes.assets },
     cryptocurrencies: { title: "Cryptocurrencies", link: routes.cryptocurrenciesList },
     education: {title: "Education", link: routes.articles},
-    // overview: { title: "Overview", link: routes.overview },
-    //aboutUs: { title: "About us", link: routes.about },
 };

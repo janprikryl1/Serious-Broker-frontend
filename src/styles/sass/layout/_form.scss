@@ -1,57 +1,10 @@
-/*input,
-textarea {
-    @extend %w-100;
-    @include add-prefix(transition, $transition);
-    & {
-        border-radius: 8px;
-        color: $text-color;
-        padding: 1rem 2rem;
-        z-index: 1;
-    }
-
-    &.style1 {
-        border-radius: 0;
-        border: none;
-        background-color: $brand-color;
-        color: $wh-color;
-
-        &::placeholder {
-            font-weight: 400;
-            color: $wh-color;
-            color: $text-color;
-        }
-
-    }
-
-    &::placeholder {
-        font-weight: 400;
-        color: rgba($text-color-light, $alpha: .3);
-
-    }
-
-    &:focus-within {
-        outline: none;
-        border-color: transparent;
-        box-shadow: none;
-    }
-}*/
-
-
 .form-control {
-    //background-color: $wh-color;
     border-color: $form-border;
     padding: 10px 15px;
     border-radius: 8px;
     background-color: $primary-color;
-    //justify-items: center;
-    //width: 70px;
-    //height: 30px;
     color: $title-color;
     caret-color: var(--white-color);
-
-  @include breakpoint(lg) {
-      //padding: 16px 20px;
-    }
 
   &:focus {
       box-shadow: none;
@@ -70,7 +23,6 @@ textarea {
       background-color: transparent;
       border: none;
       border-bottom: 1px solid var(--gray-3-color);
-      justify-items: start;
       padding-left: 0;
 
       &:focus {
@@ -133,6 +85,8 @@ textarea {
     display: inline-block;
     margin-right: 8px;
     transition: all 0.2s ease;
+    aspect-ratio: 1/1;
+
   }
 
   input[type="checkbox"]:checked + span.checkbox-box {
@@ -213,7 +167,6 @@ textarea {
 
   // Options
   option {
-    //background-color: var(--primary-color);
     color: var(--white-color);
     padding: 10px;
     font-size: 16px;
@@ -256,71 +209,4 @@ textarea {
   &:hover {
     box-shadow: var(--golden-glow-shadow);
   }
-}
-
-
-
-
-
-/* --- Spoločný Glassmorphism základ --- */
-.Toastify__toast {
-  background: color-mix(in srgb, var(--secondary-color), transparent 55%) !important;
-
-  backdrop-filter: blur(12px) saturate(160%) !important;
-  -webkit-backdrop-filter: blur(12px) saturate(160%) !important;
-
-  border-radius: 4px !important;
-  color: var(--white-color) !important;
-
-  box-shadow: 0 8px 32px color-mix(in srgb, var(--black-color), transparent 85%) !important;
-}
-
-/* --- 1. HLAVNÝ / INFO (Tvoja Zlatá - Secondary) --- */
-.Toastify__toast--info {
-  background: color-mix(in srgb, var(--secondary-color), transparent 55%) !important;
-}
-.Toastify__toast--info .Toastify__toast-icon svg {
-  fill: var(--black-color) !important;
-}
-.Toastify__progress-bar--info {
-  background-image: none !important;
-  background-color: var(--secondary-color) !important;
-}
-
-/* --- 2. SUCCESS (Zelená) --- */
-.Toastify__toast--success {
-  background: color-mix(in srgb, var(--green-on-primary-color), transparent 55%) !important;
-
-}
-.Toastify__toast--success .Toastify__toast-icon svg {
-  fill: #4caf50 !important;
-}
-.Toastify__progress-bar--success {
-  background: #4caf50 !important;
-}
-
-/* --- 3. ERROR (Červená) --- */
-.Toastify__toast--error {
-  background: color-mix(in srgb, var(--red-on-primary-color), transparent 55%) !important;
-}
-.Toastify__toast--error .Toastify__toast-icon svg {
-  fill: #ff4b4b !important;
-}
-.Toastify__progress-bar--error {
-  background: #ff4b4b !important;
-}
-
-/* --- Vizuálne doladenie vnútra --- */
-.Toastify__toast-body {
-  font-family: inherit !important;
-  font-weight: 500;
-}
-
-.Toastify__close-button {
-  color: var(--white-color) !important;
-  opacity: 0.5;
-}
-
-.Toastify__close-button:hover {
-  opacity: 1;
 }

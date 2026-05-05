@@ -1,4 +1,4 @@
-import {FC, useEffect, useState} from "react";
+import React, {FC, useEffect, useState} from "react";
 import {useTranslation} from "react-i18next";
 import {Collapse} from "react-bootstrap";
 import {deleteTrafficLight, getTrafficLights} from "../../utils/api/trafficLightsService.ts";
@@ -16,15 +16,7 @@ import {EditDeleteButtons} from "../../components/reusable/EditDeleteButtons.tsx
 import {GoPlus} from "react-icons/go";
 import {useTrafficLightForm} from "../../utils/hooks/useTrafficLightForm.ts";
 import {TrafficLightFormModal} from "../../components/trafficLight/TrafficLightFormModal.tsx";
-
-
-const ToggleIcon: FC<{ isOpen: boolean }> = ({ isOpen }) => {
-  return (
-    <div style={{ transition: "transform 0.3s ease", transform: isOpen ? "rotate(180deg)" : "rotate(0deg)" }}>
-      <IoIosArrowDown size={24} color="var(--secondary-color)"/>
-    </div>
-  );
-};
+import {AccordionToggleIcon} from "../../components/reusable/AccordionToggleIcon.tsx";
 
 const MyTrafficLightsContent: FC = () => {
   const [loading, setLoading] = useState(true);
@@ -173,15 +165,15 @@ const MyTrafficLightsContent: FC = () => {
                 <div key={idx} style={{ backgroundColor: trigger.color }} className="traffic-light-circle-small"></div>
               ))}
             </div>
-            <ToggleIcon isOpen={open} />
+            <AccordionToggleIcon isOpen={open} size={24} />
           </div>
         </div>
 
         <Collapse in={open}>
-          <div>
+          <div style={{ padding: "20px 25px" }}>
             <TrafficLightTriggers triggers={tl.triggers} variant="basic" type={tl.type} />
             <div
-              className="mt-4 pt-3 d-flex justify-content-between align-items-center"
+              className="mt-4 pt-3 d-flex flex-column flex-md-row align-items-start align-items-md-center justify-content-between gap-3"
               style={{ borderTop: "1px solid var(--gray-4-color)" }}
             >
               <div>
@@ -189,12 +181,14 @@ const MyTrafficLightsContent: FC = () => {
                 <span className="gold-color-text"><strong>{usageCount}</strong></span>
                 <span className="gray-3-color-text">{t(" investment plans")}</span>
               </div>
-              <EditDeleteButtons
-                onDelete={() => handleDelete(tl)}
-                onEdit={() => handleOpenEdit(tl)}
-                deleteLabel={t("Delete")}
-                editLabel={t("Edit Settings")}
-              />
+              <div className="d-flex align-self-stretch align-self-md-auto justify-content-start justify-content-md-end">
+                <EditDeleteButtons
+                  onDelete={() => handleDelete(tl)}
+                  onEdit={() => handleOpenEdit(tl)}
+                  deleteLabel={t("Delete")}
+                  editLabel={t("Edit Settings")}
+                />
+              </div>
             </div>
           </div>
         </Collapse>
@@ -249,7 +243,7 @@ const MyTrafficLightsContent: FC = () => {
       <TrafficLightFormModal
         show={showCreateModal}
         onHide={() => setShowCreateModal(false)}
-        title={t(`Define ${type === "buy" ? "Buy" : "Sell"} Traffic Light`)}
+        title={t('defineTrafficLight', { type: t(type === "buy" ? "BuyTL" : "SellTL") })}
         variant="create"
         triggers={formTriggers}
         type={type}

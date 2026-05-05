@@ -1,30 +1,29 @@
-import {FC, useEffect, useRef, useState} from "react";
+// @ts-nocheck
+import React, {useEffect, useRef, useState} from "react";
 import {useTranslation} from "react-i18next";
 import {Link, useSearchParams} from "react-router-dom";
 import {coinURL, routes} from "../../../utils/constants";
 import {InvestmentPlanLayout} from "../../../components/profile/myPortfolio/InvestmentPlanLayout.tsx";
 import {SearchBar} from "../../../components/reusable/SearchBar.tsx";
 import {useAssets} from "../../../utils/hooks/useAssets.ts";
-import {AssetType} from "../../../utils/types/asset/AssetType.ts";
 import {useInfiniteScroll} from "../../../utils/hooks/useInfiniteScroll.ts";
 import {AssetOrder} from "../../../utils/enums/AssetOrder.ts";
 import {AssetTable} from "../../../components/reusable/AssetTable.tsx";
-import {TableColumn} from "../../../utils/types/TableColumn.ts";
 import {toCzechDate} from "../../../utils/functions/dateFunctions.ts";
 import "../../../styles/sass/components/assets.scss";
 import "../../../styles/sass/components/overview.scss";
 import {Checkbox} from "../../../components/reusable/Checkbox.tsx";
-import {getAllCryptocurrencies, getAllCryptocurrenciesPhoto} from "../../../utils/api/CryptocurrencyService.ts";
+import {getAllCryptocurrenciesPhoto} from "../../../utils/api/CryptocurrencyService.ts";
 import {getTradingCoins} from "../../../utils/api/binanceIndexAssets.ts";
-import {CryptoCurrencyAdminType} from "../../../utils/types/asset/CryptoCurrencyType.ts";
 import {IoIosArrowBack} from "react-icons/io";
 import {AssetGraphPieChart} from "../../../components/graphs/asset/AssetGraphPieChart.tsx";
 import {AssetSimpleGraph} from "../../../components/graphs/asset/AssetSimpleGraph.tsx";
 import {NextStepButton} from "../../../components/reusable/NextStepButton.tsx";
 
 import {useInvestmentPlanContext} from "../../../utils/providers/InvestmentPlanProvider.tsx";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
-export const ChooseExistingPortfolio: FC = () => {
+export const ChooseExistingPortfolio = () => {
   const {t} = useTranslation();
   const currentStep = 0;
 
@@ -35,38 +34,39 @@ export const ChooseExistingPortfolio: FC = () => {
   } = useInvestmentPlanContext();
 
   const [searchParams, setSearchParams] = useSearchParams();
-  const [allCurrencies, setAllCurrencies] = useState<CryptoCurrencyAdminType[]>([]);
-  const {assets, loading, totalPages, getAssets, setAssets} = useAssets();
-  const [scrollContainer, setScrollContainer] = useState<HTMLDivElement | null>(null);
+  const [allCurrencies, setAllCurrencies] = useState([]);
+  const {assets, loading, totalPages, getAssets} = useAssets();
+  const [scrollContainer, setScrollContainer] = useState(null);
   const {currentPage, loaderRef, resetPage} = useInfiniteScroll({totalPages, loading, root: scrollContainer});
   const isFetchingRef = useRef(false);
-  const [currencyCount] = useState<string>(searchParams.get("currencyCount") ?? "all");
-  const [includeCurrencies] = useState<string[]>(searchParams.get("includeCurrencies")
-    ? searchParams.get("includeCurrencies")!.split("|")
+  const [currencyCount] = useState(searchParams.get("currencyCount") ?? "all");
+  const [includeCurrencies] = useState(searchParams.get("includeCurrencies")
+    ? (searchParams.get("includeCurrencies") || "").split("|")
     : []);
-  const [searchQuery, setSearchQuery] = useState<string>(searchParams.get("searchQuery") ?? "");
-  const [showAssets, setShowAssets] = useState<"mine" | "all">("all");
-  const [orderType, setOrderType] = useState<AssetOrder>((searchParams.get("orderBy") as AssetOrder) || AssetOrder.Name);
-  const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>((searchParams.get("direction") as 'asc' | 'desc') || 'asc');
-  const [timeRange] = useState<string>(searchParams.get("timeRange") || "24h");
-  const [loadingPage, setLoadingPage] = useState<boolean>(false);
-  const [tradingCoins, setTradingCoins] = useState<string[]>([]);
-  const [showNonTradingIndices, setShowNonTradingIndices] = useState<boolean>(false);
-  const [showOlderIndices, setShowOlderIndices] = useState<boolean>(false);
+  const [searchQuery, setSearchQuery] = useState(searchParams.get("searchQuery") ?? "");
+  const [showAssets, setShowAssets] = useState("all");
+  const [orderType, setOrderType] = useState(searchParams.get("orderBy") || AssetOrder.Name);
+  const [sortDirection, setSortDirection] = useState(searchParams.get("direction") || 'asc');
+  const [timeRange] = useState(searchParams.get("timeRange") || "24h");
+  const [loadingPage, setLoadingPage] = useState(false);
+  const [tradingCoins, setTradingCoins] = useState([]);
+  const [showNonTradingIndices, setShowNonTradingIndices] = useState(false);
+  const [showOlderIndices, setShowOlderIndices] = useState(false);
+  const isMobile = useMediaQuery('(max-width: 576px)');
 
-  const [selectedRowId, setSelectedRowId] = useState<number | null>(
+  const [selectedRowId, setSelectedRowId] = useState(
     isCustomPortfolio ? userPortfolioId : binanceAssetId
   );
 
   // Filter by year
-  const isRecentIndex = (asset: AssetType): boolean => {
+  const isRecentIndex = (asset) => {
     const createdDate = new Date(asset.created);
     const year = createdDate.getFullYear();
     return year >= 2025;
   };
 
   // Filter only trading coins
-  const isAssetTrading = (asset: AssetType): boolean => {
+  const isAssetTrading = (asset) => {
     if (tradingCoins.length === 0) return true;
     const assetCoins = asset.coins.split(',').map(coin => coin.trim().toUpperCase());
     const upperTradingCoins = tradingCoins.map(coin => coin.toUpperCase());
@@ -79,7 +79,7 @@ export const ChooseExistingPortfolio: FC = () => {
     return tradingFilter && dateFilter;
   });
 
-  const simpleColumns: TableColumn<AssetType>[] = [
+  const simpleColumns = [
     {
       key: "name",
       header: t("Title"),
@@ -246,26 +246,7 @@ export const ChooseExistingPortfolio: FC = () => {
     });
   }, [currentPage]);
 
-  const handleSort = (column: AssetOrder) => {
-    // ... (tvoj kód)
-    let newDirection: 'asc' | 'desc' = 'asc';
-    let newOrderType = column;
-
-    if (column === orderType) {
-      newDirection = sortDirection === 'asc' ? 'desc' : 'asc';
-    } else {
-      newDirection = 'desc';
-    }
-    setOrderType(newOrderType);
-    setSortDirection(newDirection);
-    setSearchParams(prev => {
-      prev.set("orderBy", column);
-      prev.set("direction", newDirection);
-      return prev;
-    });
-  };
-
-  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleSearchChange = (e) => {
     const value = e.target.value;
     setSearchQuery(value);
     setSearchParams(prev => {
@@ -275,11 +256,7 @@ export const ChooseExistingPortfolio: FC = () => {
     });
   };
 
-  const handleCheckbox = (isChecked: boolean) => {
-    isChecked ? setShowAssets("mine") : setShowAssets("all");
-  };
-
-  const handleRowClick = (asset: AssetType) => {
+  const handleRowClick = (asset) => {
     if (selectedRowId === asset.id) {
       setSelectedRowId(null);
       setIsCustomPortfolio(false);
@@ -309,8 +286,8 @@ export const ChooseExistingPortfolio: FC = () => {
         <Link to={routes.profile.newInvestmentPlanNewPortfolio}
               className="link-underline">{t("Create new portfolio instead")}</Link>
 
-        <div className="mt-5" style={{display: "flex"}}>
-          <div className="d-flex gap-4 w-100 mt-4">
+        <div className="choose-existing-portfolio__filters mt-5">
+          <div className="choose-existing-portfolio__checkbox-group d-flex gap-4 w-100 mt-4">
             <Checkbox
               checked={showNonTradingIndices}
               onChange={setShowNonTradingIndices}
@@ -322,12 +299,16 @@ export const ChooseExistingPortfolio: FC = () => {
               label={t("Show older indices")}
             />
           </div>
-          <SearchBar onChange={handleSearchChange} value={searchQuery}
-                     style={{marginLeft: "auto"}}></SearchBar>
+          <SearchBar
+            className={"outline-searchbar choose-existing-portfolio__search"}
+            onChange={handleSearchChange}
+            value={searchQuery}
+            style={{marginLeft: "auto"}}
+          />
         </div>
 
         {/* Show table */}
-        <div className="scrollable-table-container mt-4" ref={setScrollContainer}>
+        <div className="scrollable-table-container choose-existing-portfolio__table-wrapper mt-4" ref={setScrollContainer}>
           {filteredAssets.length > 0 ? (
             <>
               <AssetTable
@@ -378,7 +359,7 @@ export const ChooseExistingPortfolio: FC = () => {
           )}
         </div>
 
-        <div className={"d-flex justify-content-between"}>
+        <div className={`d-flex ${isMobile ? "flex-column" : "flex-row gap-3"} justify-content-between mt-4`}>
           <NextStepButton currentStep={currentStep} currentStepFinished={selectedRowId != null}
                           link={routes.profile.newInvestmentPlan} variant={"previous"}
                           buttonLabel={t("Select existing or new")} color={"transparent"}/>

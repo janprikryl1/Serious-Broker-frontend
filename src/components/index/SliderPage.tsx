@@ -8,8 +8,8 @@ import 'swiper/css/effect-fade';
 import {SliderPageSeriousBroker} from "./indexSliderPages/SliderPageSeriousBroker.tsx";
 import {SliderPageBitcoin} from "./indexSliderPages/SliderPageBitcoin.tsx";
 import {useMediaQuery} from "@mui/material";
-import {IndexMobileSliderPage} from "./indexMobileSlider/IndexMobileSliderPage.tsx";
-import {IndexMobileSliderBitcoin} from "./indexMobileSlider/IndexMobileSliderBitcoin.tsx";
+import {MobileSliderPageCryptoStreet} from "./indexMobileSlider/MobileSliderPageCryptoStreet.tsx";
+import {MobileSliderPageCryptoCity} from "./indexMobileSlider/MobileSliderPageCryptoCity.tsx";
 import {SliderPageCryptoStreet} from "./indexSliderPages/SliderPageCryptoStreet.tsx";
 import {SliderPageCryptoCity} from "./indexSliderPages/SliderPageCryptoCity.tsx";
 
@@ -32,11 +32,12 @@ export const SliderPage: FC = () => {
                 effect="fade"
                 fadeEffect={{ crossFade: true }}
                 className="main-slider-container"
+                style={{ height: "calc(100vh - 75px)" }}
             >
                 {isMobile ? (
                     <>
-                        <SwiperSlide><IndexMobileSliderPage /></SwiperSlide>
-                        <SwiperSlide><IndexMobileSliderBitcoin /></SwiperSlide>
+                        <SwiperSlide><MobileSliderPageCryptoStreet /></SwiperSlide>
+                        <SwiperSlide><MobileSliderPageCryptoCity /></SwiperSlide>
                         {/*<SwiperSlide><IndexMobileSliderFiveMinutes /></SwiperSlide>*/}
                     </>
                 ) : (

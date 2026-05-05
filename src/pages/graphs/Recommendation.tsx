@@ -297,7 +297,7 @@ export const Recommendation: FC = () => {
 
     return (
         <>
-            <TitleHeader title={t("Buy & Sell Timing")} />
+            <TitleHeader title={t("Cryptocurrencies")} />
             <div className="blog mt-4 padding-bottom">
                 <div className="container">
                     <OutlineContainer className={"mb-5"} bgColor={"var(--quaternary-color-transparent-50)"} style={{margin: "1px"}}>

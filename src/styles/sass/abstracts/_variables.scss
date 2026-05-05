@@ -5,6 +5,7 @@ $thm-brown-dark-color-dark: #231F1B;
 
 $secondary-color: #B1974E;
 $secondary-color-transparent-50: color-mix(in srgb, var(--secondary-color) 50%, transparent);
+$secondary-color-transparent-30: color-mix(in srgb, var(--secondary-color) 30%, transparent);
 
 $tertiary-color: #494036;
 $tertiary-color-light: #625950;
@@ -12,6 +13,7 @@ $thm-brown-light-color-dark: #494036;
 
 $quaternary-color: #3E362E;
 $quaternary-color-transparent-50: color-mix(in srgb, var(--quaternary-color) 50%, transparent);
+$quaternary-color-transparent-30: color-mix(in srgb, var(--quaternary-color) 30%, transparent);
 
 // Basic colors
 
@@ -28,46 +30,15 @@ $gray-4-color: #44403B;
 $gray-5-color: #808080;
 $sandy-color: #AD9D8D;
 
-// Reds and greens
-
-//$green-on-primary-color: #4C9832;
-$green-on-tertiary-color: #6ea25a;
-//$red-on-primary-color: #983232;
-$red-on-tertiary-color: #A53636;
-
-// test
+// Red and green
 $green-on-primary-color: #2eb26d;
 $red-on-primary-color: #c32d2e;
-
 
 $green-toast-color: #528D49;
 $red-toast-color: #8D4949;
 $neutral-toast-color: $secondary-color;
 
-// Traffic lights - dark colors
-
-$traffic-light-danger1-dark-color: #8E3E3E;
-$traffic-light-danger2-dark-color: #8E533E;
-$traffic-light-danger3-dark-color: #8E6B3E;
-$traffic-light-danger4-dark-color: #8E7D3E;
-$traffic-light-neutral-dark-color: #666666;
-$traffic-light-safe1-dark-color: #8B8E3E;
-$traffic-light-safe2-dark-color: #768E3E;
-$traffic-light-safe3-dark-color: #598E3E;
-$traffic-light-safe4-dark-color: #3E8E55;
-
-
-// Traffic lights - light colors
-
-/*$traffic-light-danger1-light-color: #8E3E3E;
-$traffic-light-danger2-light-color: #A86148;
-$traffic-light-danger3-light-color: #A87E48;
-$traffic-light-danger4-light-color: #A88E48;
-$traffic-light-neutral-light-color: #787878;
-$traffic-light-safe1-light-color: #A8A048;
-$traffic-light-safe2-light-color: #9BA848;
-$traffic-light-safe3-light-color: #79A848;
-$traffic-light-safe4-light-color: #48A84B;*/
+// Traffic lights
 
 $traffic-light-danger1-light-color: #C45C5C;
 $traffic-light-danger2-light-color: #C67256;
@@ -78,6 +49,15 @@ $traffic-light-safe1-light-color: #C9A54D;
 $traffic-light-safe2-light-color: #A9A85B;
 $traffic-light-safe3-light-color: #84AA6C;
 $traffic-light-safe4-light-color: #5CAB7D;
+
+// Charts
+
+$chart-red: #D15B5B;
+$chart-orange: #D48352;
+$chart-yellow: #D9B34D;
+$chart-green: #6DB388;
+$chart-blue: #5B89AD;
+$chart-purple: #9275A3;
 
 //
 $thm-brand-color-dark: $secondary-color;
@@ -207,26 +187,13 @@ $thm-danger-dark: #FF0000;
 
     /* Reds and greens */
     --green-on-primary-color: #{$green-on-primary-color};
-    --green-on-tertiary-color: #{$green-on-tertiary-color};
     --red-on-primary-color: #{$red-on-primary-color};
-    --red-on-tertiary-color: #{$red-on-tertiary-color};
 
     --green-toast-color: #{$green-toast-color};
     --red-toast-color: #{$red-toast-color};
     --neutral-toast-color: #{$neutral-toast-color};
 
-    /* Traffic lights - dark colors */
-    --traffic-light-danger1-dark-color: #{$traffic-light-danger1-dark-color};
-    --traffic-light-danger2-dark-color: #{$traffic-light-danger2-dark-color};
-    --traffic-light-danger3-dark-color: #{$traffic-light-danger3-dark-color};
-    --traffic-light-danger4-dark-color: #{$traffic-light-danger4-dark-color};
-    --traffic-light-neutral-dark-color: #{$traffic-light-neutral-dark-color};
-    --traffic-light-safe1-dark-color: #{$traffic-light-safe1-dark-color};
-    --traffic-light-safe2-dark-color: #{$traffic-light-safe2-dark-color};
-    --traffic-light-safe3-dark-color: #{$traffic-light-safe3-dark-color};
-    --traffic-light-safe4-dark-color: #{$traffic-light-safe4-dark-color};
-
-    /* Traffic lights - light colors */
+    /* Traffic lights */
     --traffic-light-danger1-light-color: #{$traffic-light-danger1-light-color};
     --traffic-light-danger2-light-color: #{$traffic-light-danger2-light-color};
     --traffic-light-danger3-light-color: #{$traffic-light-danger3-light-color};
@@ -247,6 +214,15 @@ $thm-danger-dark: #FF0000;
         0px 0px 18px rgba(10, 7, 4, 0.05),
         0px 0px 28px rgba(10, 7, 4, 0.07),
         0px 0px 40px rgba(10, 7, 4, 0.08);
+
+    /* Charts */
+
+    --chart-red: #{$chart-red};
+    --chart-orange: #{$chart-orange};
+    --chart-yellow: #{$chart-yellow};
+    --chart-green: #{$chart-green};
+    --chart-blue: #{$chart-blue};
+    --chart-purple: #{$chart-purple};
 
     //
 

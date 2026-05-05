@@ -17,7 +17,13 @@ export const ProfileOverview:FC = () => {
     
     return (
       <>
-      <TitleHeader title={t("Profile overview")} />
+        <TitleHeader
+          title={
+            user?.firstname || user?.surname
+              ? `${user.firstname} ${user.surname}`
+              : t("Profile Overview")
+          }
+        />
         <div className="container padding-bottom" style={{minHeight: "50vh"}}>
             <div className="row">
                 <AdminOverviewCard title={t("Achievments count")}

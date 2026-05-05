@@ -23,7 +23,7 @@ export const SearchBar: FC<SearchFieldProps> = ({
   return (
     <>
       <div
-        className={`${className} d-flex align-items-center position-relative`}
+        className={`d-flex align-items-center position-relative ${className}`}
         style={{ fontSize: "16px", ...(style || {}) }}
       >
         <div className="search-icon-wrapper">
