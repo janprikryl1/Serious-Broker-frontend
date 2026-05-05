@@ -266,7 +266,7 @@ export const AssetAnalysisGraph: FC<Props> = ({
         <div style={{width: "100%", overflowX: "auto"}}>
           {chartConfig ? (
             <ChartContainer
-              key={`chart-container-stable`} // FIX: Odstránili sme závislosť key od state!
+              key={`chart-container-stable`}
               series={chartSeries}
               xAxis={chartXAxis}
               yAxis={chartYAxis}

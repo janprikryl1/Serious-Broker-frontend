@@ -10,7 +10,7 @@ import {timeZoneOptions} from "../../utils/functions/dateFunctions.ts";
 import Typography from "@mui/material/Typography";
 import Slider from "@mui/material/Slider";
 import {CardContainer} from "../reusable/CardContainer.tsx";
-import {Day} from "../../pages/graphs/RecommendationDetails_new.tsx";
+import {Day} from "../../pages/graphs/RecommendationDetails.tsx";
 
 type Props = {
     asset_label: string;
@@ -59,107 +59,6 @@ export const BtfdDcaReturnsComparison: FC<Props> = ({
     return (
         <>
             <h3>{t("Investment Strategies Return Comparison")}</h3>
-
-            {/*<div style={{paddingLeft: "15px", marginTop: "70px"}}>
-                <div>
-                    <div className="mb-5" style={{ display: "flex", flexDirection: "row", gap: "1rem", alignItems: "center" }}>
-                        <div style={{ display: "flex", flexDirection: "column" }}>
-                            <Form.Label style={{ width: 370 }}>
-                                {t("Regular daily investment for a period of")}
-                            </Form.Label>
-                            <Typography style={{color: ""}}>
-                                The period over which you invest every day
-                            </Typography>
-                        </div>
-
-                        <Form.Select
-                            className="form-select"
-                            style={{ height: 34, maxWidth: 100 }}
-                            value={selectedNumOfYears}
-                            onChange={(e) => setSelectedNumOfYears(e.target.value)}
-                        >
-                            {[1, 2, 3, 4, 5].map((n) => (
-                                <option key={n} value={n}>
-                                    {n} {n === 1 ? "year" : "years"}
-                                </option>
-                            ))}
-                        </Form.Select>
-                    </div>
-
-                    <div className="mb-5" style={{ display: "flex", flexDirection: "row", gap: "1rem", alignItems: "center" }}>
-                        <div style={{ display: "flex", flexDirection: "column" }}>
-                            <Form.Label className="form-label" style={{ width: 370 }}>
-                                {t("Base investment amount:")}
-                            </Form.Label>
-                            <Typography style={{ color: "" }}>
-                                The minimal amount of investment
-                            </Typography>
-                        </div>
-
-                        <Form.Control
-                            className="form-control-custom"
-                            type="number"
-                            style={{ width: "70px", height: "30px" }}
-                            value={baseInvestment}
-                            onChange={(e) => setBaseInvestment(parseInt(e.target.value))}
-                            onBlur={(e) => setBaseInvestment(parseInt(e.target.value))}
-                        />
-                    </div>
-
-                    <div className="mb-5" style={{ display: "flex", flexDirection: "row", gap: "1rem", alignItems: "center" }}>
-                        <div style={{ display: "flex", flexDirection: "column" }}>
-                            <Form.Label className="form-label" style={{ width: 370 }}>
-                                {t("Maximal multiplier:")}
-                            </Form.Label>
-                            <Typography style={{ color: "" }}>
-                                Maximum investment multiplier
-                            </Typography>
-                        </div>
-
-                        <Slider
-                            className="form-control-slider"
-                            marks={marks}
-                            value={maxMultiplier}
-                            onChange={(event, value) => setMaxMultiplier(value as number)}
-                            min={MIN}
-                            max={MAX}
-                            step={0.1}
-                            valueLabelDisplay="on"
-                            color="#B1974E"
-                            sx={{
-                                width: 300,
-                                color: "#B1974E",
-                                "& .MuiSlider-mark": {
-                                    height: 0,
-                                    width: 0,
-                                },
-                                "& .MuiSlider-markLabel": {
-                                    color: "white",
-                                    fontFamily: "PT Sans Caption, sans-serif",
-                                },
-                                "& .MuiSlider-thumb": {
-                                    width: 15,
-                                    height: 15,
-                                },
-                            }}
-                        />
-                    </div>
-                </div>
-            </div>*/}
-
-            {/*<div className="justify-content-center text-center align-items-center" style={{display: "flex"}}>
-                <CardContainer color="#ffffff20" style={{width: "50%", height: "100px"}}>
-                    <div className="row justify-content-center text-center align-items-center">
-                        <div className="col" style={{fontWeight: "bold", fontSize: "1.8rem"}}>{DCAReturn.toFixed(2)} %</div>
-                        <div className="col" style={{fontWeight: "bold", fontSize: "1.8rem"}}>{BTFDReturn.toFixed(2)} %</div>
-                    </div>
-                    <div className="row justify-content-center text-center align-items-center" >
-                        <div className="col" style={{fontSize: "1.1rem", color: "#C3C0BB"}}>DCA return</div>
-                        <div className="col" style={{fontSize: "1.1rem", color: "#C3C0BB"}}>BTFD return</div>
-                    </div>
-                </CardContainer>
-            </div>*/}
-
             <div
                 ref={chartContainerRef}
                 className="col-sm service-details__content mb-5 mt-4"

@@ -11,6 +11,11 @@
   0px 0px 40px rgba(10, 7, 4, 0.08);
 }
 
+@media (max-width: 576px) {
+  .custom-modal {
+    padding: 15px 20px;
+  }
+}
 
 .custom-modal-header {
   border: none;

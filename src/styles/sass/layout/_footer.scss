@@ -96,7 +96,6 @@
 .footer-mob {
     @include breakpoint(max-lg) {
         max-width: 80%;
-        margin-left: 10%;
     }
 }
 

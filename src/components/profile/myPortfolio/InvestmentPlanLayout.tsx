@@ -22,7 +22,7 @@ export const InvestmentPlanLayout: FC<Props> = ({children, currentStep, title, c
     <>
       <TitleHeader title={t(title)}/>
       <div className={"container"}>
-        <OutlineContainer style={{margin: 0}}>
+        <OutlineContainer style={{margin: 0}} className={"choose-existing-portfolio__table-wrapper"}>
           <Stepper steps={INVESTMENT_PLAN_STEPS} currentStep={currentStep}></Stepper>
           {children}
         </OutlineContainer>

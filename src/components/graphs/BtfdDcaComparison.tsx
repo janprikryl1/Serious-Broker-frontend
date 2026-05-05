@@ -7,8 +7,10 @@ import {Form} from "react-bootstrap";
 import {ChartContainer, ChartsTooltip, ChartsXAxis, ChartsYAxis, LinePlot} from "@mui/x-charts";
 import Typography from "@mui/material/Typography";
 import Slider from "@mui/material/Slider";
+import useMediaQuery from "@mui/material/useMediaQuery";
 import {CardContainer} from "../reusable/CardContainer.tsx";
 import {ATHType} from "../../utils/types/ATH/ATHType.ts";
+import {OutlineContainer} from "../reusable/OutlineContainer.tsx";
 
 type Props = {
     asset_label: string;
@@ -36,6 +38,7 @@ const chartHeight = 600;
 export const BtfdDcaComparison: FC<Props> = ({asset_label}) => {
     const { t, i18n } = useTranslation();
     const chartContainerRef = useRef<HTMLDivElement>(null);
+    const isMobile = useMediaQuery('(max-width: 1000px)');
     const [graphData, setGraphData] = useState<ProcessedDataPoint[] | undefined>();
     const [filteredData, setFilteredData] = useState<ProcessedDataPoint[] | undefined>();
     const [selectedNumOfYears, setSelectedNumOfYears] = useState(1);
@@ -239,19 +242,16 @@ export const BtfdDcaComparison: FC<Props> = ({asset_label}) => {
 
             <div style={{paddingLeft: "15px", marginTop: "70px"}}>
                 <div>
-                    <div className="mb-5" style={{ display: "flex", flexDirection: "row", gap: "1rem", alignItems: "center" }}>
-                        <div style={{ display: "flex", flexDirection: "column" }}>
-                            <Form.Label style={{ width: 370 }}>
+                    <div className="mb-5" style={{ display: "flex", flexDirection: isMobile ? "column" : "row", gap: "1rem", alignItems: isMobile ? "flex-start" : "center" }}>
+                        <div style={{ display: "flex", flexDirection: "column", width: isMobile ? "100%" : "auto" }}>
+                            <Form.Label style={{ width: isMobile ? "100%" : 370 }}>
                                 {t("Regular daily investment for a period of")}
                             </Form.Label>
-                            <Typography style={{color: ""}}>
-                                {t("The period over which you invest every day")}
-                            </Typography>
                         </div>
 
                         <Form.Select
                             className="select-box-outline"
-                            style={{ maxWidth: 120 }}
+                            style={{ maxWidth: isMobile ? "100%" : 120, width: isMobile ? "100%" : "auto" }}
                             value={selectedNumOfYears}
                             onChange={(e) => setSelectedNumOfYears(Number(e.target.value))}
                         >
@@ -263,21 +263,18 @@ export const BtfdDcaComparison: FC<Props> = ({asset_label}) => {
                         </Form.Select>
                     </div>
 
-                    <div className="mb-5" style={{ display: "flex", flexDirection: "row", gap: "1rem", alignItems: "center" }}>
-                        <div style={{ display: "flex", flexDirection: "column" }}>
-                            <Form.Label className="form-label" style={{ width: 370 }}>
-                                {t("Base investment amount:")}
+                    <div className="mb-5" style={{ display: "flex", flexDirection: isMobile ? "column" : "row", gap: "1rem", alignItems: isMobile ? "flex-start" : "center" }}>
+                        <div style={{ display: "flex", flexDirection: "column", width: isMobile ? "100%" : "auto" }}>
+                            <Form.Label className="form-label" style={{ width: isMobile ? "100%" : 370 }}>
+                                {t("Base investment amount (EUR):")}
                             </Form.Label>
-                            <Typography style={{ color: "" }}>
-                                {t("The minimal amount of investment")}
-                            </Typography>
                         </div>
 
                         <Form.Control
                           className="outline-input"
                           type="number"
                           style={{
-                              width: `${baseInvestment.toString().length + 5}ch`,
+                              width: isMobile ? "100%" : `${baseInvestment.toString().length + 5}ch`,
                               minWidth: "50px"
                           }}
                           value={baseInvestment}
@@ -285,14 +282,11 @@ export const BtfdDcaComparison: FC<Props> = ({asset_label}) => {
                         />
                     </div>
 
-                    <div className="mb-5" style={{ display: "flex", flexDirection: "row", gap: "1rem", alignItems: "center" }}>
-                        <div style={{ display: "flex", flexDirection: "column" }}>
-                            <Form.Label className="form-label" style={{ width: 370 }}>
-                                {t("Maximal multiplier:")}
+                    <div className="mb-5" style={{ display: "flex", flexDirection: isMobile ? "column" : "row", gap: "1.8rem", alignItems: isMobile ? "flex-start" : "center" }}>
+                        <div style={{ display: "flex", flexDirection: "column", width: isMobile ? "100%" : "auto" }}>
+                            <Form.Label className="form-label" style={{ width: isMobile ? "100%" : 370 }}>
+                                {t("Maximal investment multiplier:")}
                             </Form.Label>
-                            <Typography style={{ color: "" }}>
-                                {t("Maximum investment multiplier")}
-                            </Typography>
                         </div>
 
                         <Slider
@@ -306,7 +300,7 @@ export const BtfdDcaComparison: FC<Props> = ({asset_label}) => {
                             valueLabelDisplay="on"
                             color={"#B1974E" as any}
                             sx={{
-                                width: 300,
+                                width: isMobile ? "100%" : 300,
                                 color: "#B1974E",
                                 "& .MuiSlider-mark": {
                                     height: 0,
@@ -327,7 +321,7 @@ export const BtfdDcaComparison: FC<Props> = ({asset_label}) => {
             </div>
 
             <div className="justify-content-center text-center align-items-center" style={{display: "flex"}}>
-                <CardContainer color="#ffffff20" style={{width: "50%"}}>
+                <OutlineContainer bgColor={"var(--quaternary-color-transparent-50)"} style={{width: "50%", minWidth: "320px"}}>
                     <div className="row justify-content-center text-center align-items-center">
                         <div className="col" style={{fontWeight: "bold", fontSize: "1.8rem"}}>{DCAReturn.toFixed(2)} %</div>
                         <div className="col" style={{fontWeight: "bold", fontSize: "1.8rem"}}>{BTFDReturn.toFixed(2)} %</div>
@@ -336,7 +330,7 @@ export const BtfdDcaComparison: FC<Props> = ({asset_label}) => {
                         <div className="col" style={{fontSize: "1.1rem", color: "#C3C0BB"}}>DCA {t("return")}</div>
                         <div className="col" style={{fontSize: "1.1rem", color: "#C3C0BB"}}>BTFD {t("return")}</div>
                     </div>
-                </CardContainer>
+                </OutlineContainer>
             </div>
 
             <div
@@ -347,10 +341,24 @@ export const BtfdDcaComparison: FC<Props> = ({asset_label}) => {
                     border: "0.5px solid #3e3a32",
                     borderRadius: "5px",
                     padding: "20px",
-                    backgroundColor: "#FFF4E5",
+                    backgroundColor: "var(--cream-color)",
                 }}
             >
-                <div style={{ width: "100%", height: `${chartHeight}px`, position: "relative" }}>
+                <div
+                    style={{
+                        width: "100%",
+                        overflowX: isMobile ? "auto" : "visible",
+                        overflowY: "visible",
+                        WebkitOverflowScrolling: "touch",
+                    }}
+                >
+                    <div
+                        style={{
+                            minWidth: isMobile ? "900px" : "100%",
+                            height: `${chartHeight}px`,
+                            position: "relative",
+                        }}
+                    >
                     {graphData && graphData.length > 0 ? (
                         <ChartContainer
                             height={chartHeight}
@@ -526,6 +534,7 @@ export const BtfdDcaComparison: FC<Props> = ({asset_label}) => {
                             </h4>
                         </div>
                     )}
+                    </div>
                 </div>
             </div>
             {/*{asset_label && <BtfdDcaReturnsComparison asset_label={asset_label} BTFDReturnPoints={BTFDReturnPoints} DCAReturnPoints={DCAReturnPoints}/>}*/}

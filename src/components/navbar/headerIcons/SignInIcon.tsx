@@ -12,16 +12,18 @@ import { FaHistory } from "react-icons/fa";
 import { TbUserEdit } from "react-icons/tb";
 import {LiaUserEditSolid} from "react-icons/lia";
 import {FiEdit3} from "react-icons/fi";
+import {useMediaQuery} from "@mui/material";
 
 export const SignInIcon: FC = () => {
     const { t } = useTranslation();
     const { user, logout } = useUserContext();
+    const isMobile = useMediaQuery("(max-width: 820px)");
 
     return (
         user ? (
             <Dropdown className="">
-                <Dropdown.Toggle className={"sign-in-dropdown p-3"} style={{ lineHeight: "1" }}>
-                    {user.firstname} {user.surname}
+                <Dropdown.Toggle className={`sign-in-dropdown d-flex align-items-center ${isMobile ? "p-1" : "p-3"}`} style={{ lineHeight: "1" }}>
+                  {isMobile ? <RiUserLine size={20} /> : `${user.firstname} ${user.surname}`}
                 </Dropdown.Toggle>
                 <Dropdown.Menu className="glass-effect">
                     <Dropdown.Item as={Link} to={routes.profile.profileURL} className={"d-flex gap-2 align-items-center"} >
@@ -59,7 +61,7 @@ export const SignInIcon: FC = () => {
                     )}
                     <Dropdown.Divider />
                     <Dropdown.Item onClick={logout} >
-                        <div className={"d-flex gap-2 align-items-center"} style={{color: "var(--red-on-tertiary-color)", fontWeight: "bold"}}>
+                        <div className={"d-flex gap-2 align-items-center"} style={{color: "var(--red-on-primary-color)", fontWeight: "bold"}}>
                           <RiLogoutBoxRLine />
                           {t("Logout")}
                         </div>

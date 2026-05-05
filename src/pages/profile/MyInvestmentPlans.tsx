@@ -19,6 +19,8 @@ import {TbMoneybag} from "react-icons/tb";
 import {MdNumbers} from "react-icons/md";
 import {SlOptions} from "react-icons/sl";
 import {Link} from "react-router-dom";
+import {ToastColor, useToast} from "../../utils/providers/ToastProvider.tsx";
+import {SpinnerLoader} from "../../components/reusable/SpinnerLoader.tsx";
 
 type KlinePoint = {
   datetime: string;
@@ -145,40 +147,6 @@ const shouldInvestOnPoint = (point: KlinePoint, plan: InvestmentPlanType) => {
   return false;
 };
 
-/*const simulateDca = (points: KlinePoint[], plan: InvestmentPlanType): ProfitPoint[] => {
-  const amount = toValidNumber(plan.investment_amount);
-  if (amount <= 0) return {points: [], investmentCount: 0};
-
-  const start = plan.start_date ? new Date(plan.start_date) : null;
-  const hasValidStart = !!start && Number.isFinite(start.getTime());
-
-  let totalInvested = 0;
-  let totalUnits = 0;
-  const profitSeries: ProfitPoint[] = [];
-
-  for (const point of points) {
-    const pointDate = parseDatetime(point.datetime);
-    if (!Number.isFinite(pointDate.getTime())) continue;
-    if (hasValidStart && pointDate < (start as Date)) continue;
-    if (!shouldInvestOnPoint(point, plan)) continue;
-
-    totalInvested += amount;
-    totalUnits += amount / point.closeEur;
-
-    const value = totalUnits * point.closeEur;
-    const returnPct = totalInvested > 0 ? ((value - totalInvested) / totalInvested) * 100 : 0;
-
-    profitSeries.push({
-      datetime: point.datetime,
-      invested: totalInvested,
-      value,
-      returnPct,
-    });
-  }
-
-  return profitSeries;
-};*/
-
 const simulatePortfolioDca = (
   timeline: string[],
   series: { label: string; prices: Map<string, number>; allocation: number }[],
@@ -223,35 +191,27 @@ const simulatePortfolioDca = (
       hour
     };
 
-    // investícia
     if (shouldInvestOnPoint(fakePoint, plan)) {
-      // 1. Vytvoríš si premennú pre aktuálne kolo nákupu
       let investedThisRound = 0;
 
       for (const asset of series) {
         const price = asset.prices.get(datetime);
 
-        // Ak cena chýba (alebo je 0), preskočíme tento coin a do investedThisRound sa nič nepridá
         if (!price || price <= 0) continue;
-
-        // Výpočet sumy pre tento konkrétny coin
+        // Amount of this coin
         const investPart = amount * asset.allocation;
-
-        // Samotný nákup kusov
+        // Buy the amount for the price
         units[asset.label] += investPart / price;
-
-        // 2. Pripočítaš k reálnej útrate LEN to, čo si práve zaplatil
+        // Add to sum
         investedThisRound += investPart;
       }
 
-      // 3. Do celkovej investície pripočítaš len to, čo sa reálne minulo
       if (investedThisRound > 0) {
         investmentCount++;
       }
       totalInvested += investedThisRound;
     }
 
-    // výpočet hodnoty portfólia
     let portfolioValue = 0;
 
     for (const asset of series) {
@@ -399,7 +359,6 @@ const MiniProfitChart: FC<{ points: ProfitPoint[] }> = ({points}) => {
             "& .MuiLineElement-series-returnPct": {strokeWidth: 1.5},
           }}
         >
-          {/*<ChartsGrid vertical/>*/}
           <ChartsTooltip trigger="axis"/>
           <LinePlot/>
           <ChartsXAxis/>
@@ -460,75 +419,6 @@ export const MyInvestmentPlans: FC = () => {
       setRemovingPlanIds((prev) => prev.filter((planId) => planId !== id));
     }
   }, [fetchInvestmentPlans]);
-
-  /*const buildWeightedSeries = useCallback(async (assets: WeightedAsset[], startDate: string | null) => {
-    const validAssets = assets.filter((a) => !!a.assetLabel && a.allocation > 0);
-    if (validAssets.length === 0) throw new Error("No allocation provided");
-
-    const totalAllocation = validAssets.reduce((sum, asset) => sum + asset.allocation, 0);
-    if (Math.abs(totalAllocation - 1) > ALLOCATION_TOLERANCE) {
-      throw new Error("Invalid allocation sum");
-    }
-
-    const allocationByLabel = new Map(validAssets.map((asset) => [asset.assetLabel, asset.allocation]));
-    const start = startDate ?? undefined;
-
-    const klinesByAsset = await Promise.all(
-      validAssets.map(async (asset) => {
-        try {
-          const response = await getAssetSpotKlines(asset.assetLabel, undefined, start);
-          const points = normalizeAssetKlines(Array.isArray(response.data) ? response.data : []);
-
-          if (points.length === 0) {
-            return {label: asset.assetLabel, failed: true as const};
-          }
-
-          const map = new Map(points.map((p) => [p.datetime, p.closeEur]));
-          return {label: asset.assetLabel, map, points, failed: false as const};
-        } catch {
-          return {label: asset.assetLabel, failed: true as const};
-        }
-      })
-    );
-
-    const failedCoins = klinesByAsset.filter((asset) => asset.failed).map((asset) => asset.label);
-    if (failedCoins.length > 0) {
-      throw new SimulationDataError(failedCoins);
-    }
-
-    const successfulKlines = klinesByAsset.filter((asset) => !asset.failed);
-
-    if (successfulKlines.length === 0 || successfulKlines[0].points.length === 0) return [];
-
-    const baseTimeline = successfulKlines[0].points;
-    const portfolioSeries: KlinePoint[] = [];
-
-    for (const basePoint of baseTimeline) {
-      let weightedClose = 0;
-      let hasMissingValue = false;
-
-      for (const assetKlines of successfulKlines) {
-        const price = assetKlines.map.get(basePoint.datetime);
-        if (!Number.isFinite(price)) {
-          hasMissingValue = true;
-          break;
-        }
-        const weight = allocationByLabel.get(assetKlines.label) ?? 0;
-        weightedClose += (price as number) * weight;
-      }
-
-      if (!hasMissingValue && weightedClose > 0) {
-        portfolioSeries.push({
-          datetime: basePoint.datetime,
-          closeEur: weightedClose,
-          dayOfWeek: basePoint.dayOfWeek,
-          hour: basePoint.hour,
-        });
-      }
-    }
-
-    return portfolioSeries;
-  }, []);*/
 
   const buildAssetSeries = async (
     assets: WeightedAsset[],
@@ -598,9 +488,6 @@ export const MyInvestmentPlans: FC = () => {
 
     try {
       const weightedAssets = getWeightedAssetsFromPlan(plan);
-      // const series = await buildWeightedSeries(weightedAssets, plan.start_date);
-      // const points = simulateDca(series, plan);
-
       const { timeline, series } = await buildAssetSeries(weightedAssets, plan.start_date);
       const {points, investmentCount} = simulatePortfolioDca(timeline, series, plan);
 
@@ -675,9 +562,7 @@ export const MyInvestmentPlans: FC = () => {
 
         <div>
           {isLoading ? (
-            <div className="text-center mt-5">
-              <p>{t("Loading...")}</p>
-            </div>
+            <SpinnerLoader />
           ) : investmentPlans.length === 0 ? (
             <div className="text-center mt-5">
               <h4>{t("You have no investment plans created yet.")}</h4>
@@ -775,7 +660,6 @@ export const MyInvestmentPlans: FC = () => {
                 ];
 
                 return (
-                  // Three dots menu
                   <div
                     key={planKey}
                     className={`col-12 my-portfolio-grid-item ${isRemoving ? "my-portfolio-grid-item--removing" : ""}`}
@@ -791,44 +675,65 @@ export const MyInvestmentPlans: FC = () => {
                       className={`my-portfolio-card my-investment-plan-card ${isRemoving ? "my-portfolio-card--removing" : ""}`}
                       color="var(--tertiary-color)"
                       animate={false}
-                      style={{padding: "25px", margin: "5px 0"}}
                     >
-                      <div className="mb-4">
-                        <div style={{
-                          display: 'flex',
-                          alignItems: 'flex-start',
-                          justifyContent: 'space-between',
-                          gap: '20px'
-                        }}>
+                      {/* Three dots menu */}
+                      <div
+                        className="my-portfolio-card__actions plan-card__actions"
+                        onClick={(e) => e.stopPropagation()}
+                        onBlur={(e) => {
+                          if (!e.currentTarget.contains(e.relatedTarget)) {
+                            setOpenActionsMenuPlanKey(null);
+                          }
+                        }}
+                      >
+                        <button
+                          type="button"
+                          className="my-portfolio-card__actions-trigger"
+                          aria-label={t('Options')}
+                          onClick={() => setOpenActionsMenuPlanKey((prev) => (prev === planKey ? null : planKey))}
+                          style={{background: 'transparent', border: 'none', padding: '5px'}}
+                        >
+                          <SlOptions color={'var(--gray-2-color)'} size={15}/>
+                        </button>
 
-                          <div className={"d-flex align-items-center gap-3 flex-grow-1"}>
+                        {openActionsMenuPlanKey === planKey && (
+                          <div className="my-portfolio-card__actions-menu" style={{right: 0, top: '100%'}}>
+                            <button
+                              type="button"
+                              className="my-portfolio-card__actions-item my-portfolio-card__actions-item--danger"
+                              disabled={!canDelete || isRemoving}
+                              onClick={() => {
+                                if (!planId || isRemoving) return;
+                                setOpenActionsMenuPlanKey(null);
+                                void handleDeleteInvestmentPlan(planId);
+                              }}
+                            >
+                              <LuTrash/>
+                              <span>{t('Delete')}</span>
+                            </button>
+                          </div>
+                        )}
+                      </div>
+
+                      <div className="mb-4">
+                        <div className="plan-card__header">
+                          <div className="plan-card__title-group">
                             <div className={"name"} style={{marginBottom: 0}}>{plan.name}</div>
-                              <div className={`color-container--gold gold-color-text`}
-                                   style={{padding: '4px 12px', fontSize: '0.85rem', whiteSpace: 'nowrap'}}>
+                              <div className={`color-container--gold gold-color-text plan-card__badge`}>
                                 {plan.is_custom_portfolio ? (t("Custom Portfolio")) : (t("Binance Portfolio"))}
                               </div>
-
                           </div>
 
-                          <div className="d-flex align-items-center gap-3">
-
                             {/* Change value */}
-                            <div style={{textAlign: 'right'}}>
-                              <div style={{
-                                fontSize: "1.35rem",
-                                display: 'flex',
-                                alignItems: 'center',
-                                justifyContent: 'flex-end',
-                                gap: '8px',
-                                flexDirection: 'row'
-                              }}>
+                            <div className="plan-card__profit">
+                              <div  className="plan-card__profit-row">
                                 {totalProfit && (
                                   <CustomTooltip
                                     title={`${t("Holdings value")}: ${totalProfit.value.toFixed(2)} ${plan.currency}`}
                                     placement={"top"}
                                   >
                                     <div style={{display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer'}}>
-                                      <strong style={{fontSize: '1.7rem'}}>
+                                      <strong className="plan-card__profit-value">
                                         {`${formatNumber(Math.round(totalProfit.value * 100) / 100)} ${plan.currency}`}
                                       </strong>
                                     </div>
@@ -839,8 +744,7 @@ export const MyInvestmentPlans: FC = () => {
                                     title={`${totalProfit ? (totalProfit?.amount >= 0 ? t('Profit') + ': ' : t('Loss') + ': ') : ""}${totalProfit?.amount.toFixed(2)} ${plan.currency}`}
                                     placement={"top"}
                                   >
-                                    <div className={`${trend.containerClass} d-flex align-items-center gap-3`}
-                                         style={{padding: '4px 12px'}}>
+                                    <div className={`${trend.containerClass} plan-card__trend d-flex align-items-center gap-3`}>
                                       <trend.Icon size={20} style={{color: trend.iconColor}}/>
                                       <span className={trend.textClass}>
                                         <strong>
@@ -852,61 +756,12 @@ export const MyInvestmentPlans: FC = () => {
                                 )}
                               </div>
                             </div>
-
-                            <div
-                              className="my-portfolio-card__actions"
-                              style={{
-                                position: 'relative',
-                                top: 'auto',
-                                right: 'auto'
-                              }}
-                              onClick={(e) => e.stopPropagation()}
-                              onBlur={(e) => {
-                                if (!e.currentTarget.contains(e.relatedTarget)) {
-                                  setOpenActionsMenuPlanKey(null);
-                                }
-                              }}
-                            >
-                              <button
-                                type="button"
-                                className="my-portfolio-card__actions-trigger"
-                                aria-label={t('Options')}
-                                onClick={() => setOpenActionsMenuPlanKey((prev) => (prev === planKey ? null : planKey))}
-                                style={{background: 'transparent', border: 'none', padding: '5px'}}
-                              >
-                                <SlOptions color={'var(--gray-2-color)'} size={15}/>
-                              </button>
-
-                              {openActionsMenuPlanKey === planKey && (
-                                <div className="my-portfolio-card__actions-menu" style={{right: 0, top: '100%'}}>
-                                  <button
-                                    type="button"
-                                    className="my-portfolio-card__actions-item my-portfolio-card__actions-item--danger"
-                                    disabled={!canDelete || isRemoving}
-                                    onClick={() => {
-                                      if (!planId || isRemoving) return;
-                                      setOpenActionsMenuPlanKey(null);
-                                      void handleDeleteInvestmentPlan(planId);
-                                    }}
-                                  >
-                                    <LuTrash/>
-                                    <span>{t('Delete')}</span>
-                                  </button>
-                                </div>
-                              )}
-                            </div>
-                          </div>
                         </div>
                       </div>
 
                       {/* Info Cards Row */}
-                      <div style={{
-                        display: 'grid',
-                        gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-                        gap: '20px',
-                      }} className={"mb-4"}>
+                      <div className={" plan-card__info-grid mb-4"}>
                         {planDetails.map((item, index) => (
-
 
                           <div key={index} className={"d-flex align-items-center gap-3"}>
                             <div className="color-container--gold icon-container">
@@ -930,7 +785,7 @@ export const MyInvestmentPlans: FC = () => {
                           <>
                             <hr/>
                             <div className={"mt-4 mb-4"}>
-                              <div style={{display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '40px'}}>
+                              <div className="plan-card__details-grid">
 
                                 {/* Schedule Details Section */}
                                 <div>
@@ -949,7 +804,7 @@ export const MyInvestmentPlans: FC = () => {
                                   </div>
                                 </div>
 
-                                {/* Traffic Lights Section - TERAZ IDENTICKÁ ŠTRUKTÚRA */}
+                                {/* Traffic Lights Section */}
                                 <div>
                                   <h5 className="mb-3">{t("Traffic Lights")}</h5>
                                   <div className={"d-flex flex-column gap-3"} style={{maxWidth: "300px"}}>
@@ -982,7 +837,7 @@ export const MyInvestmentPlans: FC = () => {
                               </div>
 
                               {/* Chart Section */}
-                              <div style={{display: 'grid', gridTemplateColumns: '1fr', gap: '20px', marginTop: '40px'}}>
+                              <div className="plan-card__chart">
                                 {simulation?.loading && (
                                   <GraphDataSkeleton
                                     baseColor={"var(--cream-color)"}
@@ -1001,18 +856,7 @@ export const MyInvestmentPlans: FC = () => {
 
                         <button
                           onClick={() => setExpandedPlanId(expandedPlanId === planKey ? null : planKey)}
-                          style={{
-                            width: '100%',
-                            padding: '12px 16px',
-                            border: '1px solid rgba(200, 180, 160, 0.3)',
-                            borderRadius: '8px',
-                            backgroundColor: 'transparent',
-                            color: 'var(--secondary-color)',
-                            fontSize: '1rem',
-                            cursor: 'pointer',
-                            marginBottom: '20px',
-                            transition: 'all 0.3s ease',
-                          }}
+                          className="plan-card__toggle-btn"
                           onMouseEnter={(e) => {
                             e.currentTarget.style.borderColor = 'var(--secondary-color)';
                             e.currentTarget.style.backgroundColor = 'rgba(177, 151, 78, 0.1)';

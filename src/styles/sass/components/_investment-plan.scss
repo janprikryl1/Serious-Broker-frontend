@@ -61,11 +61,142 @@
 }
 
 .my-investment-plan-card {
-  min-height: 100% !important;
+  position: relative;
+  padding-top: 35px;
 }
 
 .my-portfolio-card.my-investment-plan-card {
   cursor: default !important;
+}
+
+.investment-plan-choice {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4%;
+  width: 100%;
+  flex-wrap: nowrap;
+}
+
+.investment-plan-choice__link {
+  width: 35%;
+  min-width: 0;
+  text-decoration: none;
+}
+
+.investment-plan-choice__card {
+  text-align: center;
+  color: var(--black-color) !important;
+  padding-top: 15%;
+  border-radius: 5px;
+  min-height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.investment-plan-choice__separator {
+  color: var(--gray-2-color);
+  margin: 0;
+  white-space: nowrap;
+}
+
+.investment-plan-intro {
+  width: 100%;
+}
+
+.investment-plan-intro__grid {
+  align-items: stretch;
+}
+
+.investment-plan-intro__grid-item {
+  display: flex;
+}
+
+.investment-plan-intro__card {
+  width: 100%;
+  min-height: 200px;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+.investment-plan-intro__step-content {
+  height: 100%;
+}
+
+.investment-plan-intro__step-title {
+  font-size: clamp(1.05rem, 0.85rem + 0.6vw, 1.35rem);
+}
+
+.investment-plan-intro__step-description {
+  font-size: clamp(0.95rem, 0.8rem + 0.45vw, 1.1rem);
+  color: var(--gray-2-color);
+}
+
+.investment-plan-intro .step-number-bg {
+  font-size: clamp(130px, 15vw, 220px);
+  left: 78%;
+}
+
+.investment-plan-intro__actions {
+  width: 100%;
+}
+
+.investment-plan-name__title {
+  margin-bottom: 1.25rem;
+}
+
+.investment-plan-name__field-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.investment-plan-name__input-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 15px;
+  width: 100%;
+  margin-bottom: -15px;
+}
+
+.investment-plan-name__input {
+  flex: 1 1 auto;
+  min-width: 0;
+  font-size: 24px;
+}
+
+.investment-plan-name__textarea {
+  width: 100%;
+  min-height: 120px;
+  text-align: start;
+  resize: none;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.choose-existing-portfolio__filters {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.choose-existing-portfolio__checkbox-group {
+  flex: 1 1 auto;
+  align-items: center;
+}
+
+.choose-existing-portfolio__search {
+  margin-left: auto;
+  width: auto;
+  max-width: 420px;
+}
+
+.choose-existing-portfolio__table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .icon-container {
@@ -76,4 +207,266 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.plan-card__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.plan-card__title-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.plan-card__badge {
+  padding: 4px 12px;
+  font-size: 0.85rem;
+  white-space: nowrap;
+}
+
+/* Profit section */
+.plan-card__profit {
+  text-align: right;
+  max-width: calc(100% - 50px);
+  padding-right: 30px;
+}
+
+.plan-card__profit-row {
+  font-size: 1.35rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.plan-card__profit-value {
+  font-size: 1.7rem;
+}
+
+.plan-card__trend {
+  padding: 4px 12px;
+}
+
+/* Info grid */
+.plan-card__info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 20px;
+}
+
+/* Expand section */
+.plan-card__details-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+}
+
+/* Chart */
+.plan-card__chart {
+  margin-top: 40px;
+}
+
+/* Button */
+.plan-card__toggle-btn {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid rgba(200, 180, 160, 0.3);
+  border-radius: 8px;
+  background-color: transparent;
+  color: var(--secondary-color);
+  font-size: 1rem;
+  cursor: pointer;
+  margin-bottom: 20px;
+  transition: all 0.3s ease;
+}
+
+.plan-card__toggle-btn:hover {
+  border-color: var(--secondary-color);
+  background-color: rgba(177, 151, 78, 0.1);
+}
+
+/* RESPONSIVE FIX */
+@media (max-width: 768px) {
+  .choose-existing-portfolio__filters {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+  }
+
+  .choose-existing-portfolio__checkbox-group {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem !important;
+  }
+
+  .choose-existing-portfolio__search {
+    margin-left: 0 !important;
+    max-width: 100% !important;
+  }
+
+  .choose-existing-portfolio__table-wrapper {
+    width: 100% !important;
+    max-width: 100vw;
+    margin-left: 0;
+    margin-right: 0;
+    padding: 10px !important;
+  }
+
+  .investment-plan-choice {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .investment-plan-choice__link {
+    width: 100%;
+  }
+
+  .investment-plan-choice__card {
+    padding-top: 0;
+    min-height: 120px;
+  }
+
+  .investment-plan-choice__separator {
+    text-align: center;
+  }
+
+  .investment-plan-intro__title {
+    margin-top: 1.5rem !important;
+    font-size: 1.45rem;
+  }
+
+  .investment-plan-intro__grid {
+    margin-bottom: 1.5rem !important;
+  }
+
+  .investment-plan-intro__card {
+    min-height: 170px;
+    padding: 1rem !important;
+  }
+
+  .investment-plan-intro .step-number-bg {
+    font-size: 120px;
+    top: 38%;
+    left: 76%;
+    opacity: 0.12;
+  }
+
+  .investment-plan-intro__step-description {
+    font-size: 0.95rem;
+  }
+
+  .investment-plan-name__input-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    margin-bottom: 0;
+  }
+
+  .investment-plan-name__input,
+  .investment-plan-name__textarea {
+    width: 100%;
+  }
+
+  .investment-plan-name__edit-icon {
+    align-self: flex-end;
+  }
+
+  .investment-plan-name__actions {
+    justify-content: flex-start !important;
+  }
+
+  .plan-card__header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .plan-card__profit {
+    text-align: left;
+    max-width: 100%;
+    padding-right: 0;
+  }
+
+  .plan-card__profit-row {
+    justify-content: flex-start;
+  }
+
+  .plan-card__actions {
+    top: 12px;
+    right: 12px;
+  }
+}
+
+@media (max-width: 576px) {
+  .investment-plan-intro__card {
+    min-height: 150px;
+  }
+
+  .investment-plan-intro .step-number-bg {
+    font-size: 100px;
+  }
+
+  .investment-plan-name__edit-icon {
+    width: 28px;
+    height: 28px;
+  }
+}
+
+.plan-card__actions {
+  position: absolute !important;
+  top: 15px;
+  right: 15px;
+  z-index: 10;
+  margin: 0;
+}
+
+.day-select-wrapper {
+  width: 100%;
+  margin-top: 5px;
+}
+
+.day-select-flex {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  width: 100%;
+}
+
+.day-select-item {
+  flex: 1 1 calc(25% - 8px);
+  min-width: 60px;
+  padding: 10px 5px;
+  border: 1px solid var(--secondary-color);
+  border-radius: 4px;
+  color: white;
+  text-align: center;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.2s ease-in-out;
+
+  &.selected {
+    background-color: var(--secondary-color);
+    color: var(--tertiary-color);
+    font-weight: bold;
+  }
+
+  &:hover {
+    background-color: rgba(177, 151, 78, 0.2);
+  }
+}
+
+@media (min-width: 576px) {
+  .day-select-item {
+    flex: 0 1 auto;
+    padding: 10px 15px;
+  }
 }

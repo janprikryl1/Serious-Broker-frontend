@@ -3,7 +3,6 @@
   width: 3.5rem;
   height: auto;
   border-radius: 50%;
-  //margin-left: 20px;
 }
 
 .traffic-light-trigger-wrapper {
@@ -117,18 +116,16 @@
   &.selected-traffic-light {
     background-color: var(--tertiary-color) !important;
     color: var(--white-color) !important;
-    cursor: default; // Zmeníme kurzor, keďže už je vybraný
+    cursor: default;
 
     &:hover {
-      // Zrušíme akékoľvek zmeny pri hoveri
       background-color: var(--tertiary-color);
       opacity: 1;
     }
 
-    // Zabezpečíme, aby preview krúžky boli viditeľné aj bez hoveru (ak chceš)
     .traffic-light-triggers-preview {
-      opacity: 1; // Trochu ich stlmíme, aby fajka vynikla
-      transform: translateY(-50%); // Posunieme ich doľava od fajky
+      opacity: 1;
+      transform: translateY(-50%);
     }
   }
 
@@ -159,7 +156,6 @@
   width: 17px;
   height: 17px;
   border-radius: 50%;
-  //margin-left: 20px;
 }
 
 .static-text {
@@ -179,17 +175,23 @@
     padding: 20px;
 
     .items {
-      flex-direction: column; /* Usporiada položky pod seba */
+      flex-direction: column;
       gap: 15px;
     }
 
     .traffic-light-trigger-element {
-      width: 100%;
-      flex: auto; /* Zruší flex 1 1 0, aby sa obsah nedeformoval vertikálne */
+      width: auto;
+      flex: 0 1 auto;
+      align-items: flex-start;
+      min-width: 0;
+    }
+
+    .traffic-light-trigger-element.text-end {
+      align-items: flex-end;
     }
 
     .divider {
-      width: 100%; /* Čiara bude teraz horizontálna */
+      width: 100%;
       height: 1px;
       margin: 10px 0;
     }

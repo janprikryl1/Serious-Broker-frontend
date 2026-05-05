@@ -271,18 +271,15 @@
     &--red {
         @extend .color-container;
         background-color: color-mix(in srgb, var(--red-on-primary-color) 20%, transparent);
-        //border: 1px solid var(--red-on-primary-color)
     }
 
     &--green {
         @extend .color-container;
         background-color: color-mix(in srgb, var(--green-on-primary-color) 20%, transparent);
-        //border: 1px solid var(--green-on-primary-color)
     }
 
     &--gold {
         @extend .color-container;
         background-color: color-mix(in srgb, var(--secondary-color) 20%, transparent);
-        //border: 1px solid var(--secondary-color)
     }
 }

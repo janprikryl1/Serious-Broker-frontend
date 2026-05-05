@@ -6,13 +6,15 @@ import {useInfiniteScroll} from "../../../utils/hooks/useInfiniteScroll.ts";
 import "../../../styles/sass/components/crypto_currencies.scss";
 import {OutlineContainer} from "../../reusable/OutlineContainer.tsx";
 import {SearchBar} from "../../reusable/SearchBar.tsx";
-import {coinURL} from "../../../utils/constants";
+import {coinURL, routes} from "../../../utils/constants";
 import { useNavigate } from "react-router-dom";
+import {useUserContext} from "../../../utils/providers/providerUser.tsx";
 
-const PAGE_SIZE = 52; // Nastavené na násobok 4 pre peknú mriežku
+const PAGE_SIZE = 52;
 
 export const CryptoCurrencies: FC = () => {
   const navigate = useNavigate();
+  const {user} = useUserContext();
   const [cryptocurrencies, setCryptocurrencies] = useState<(CryptoCurrencyType & { stylized_image?: string })[]>([]);
   const [searchValue, setSearchValue] = useState("");
   const [totalPages, setTotalPages] = useState<number>(1);
@@ -78,7 +80,10 @@ export const CryptoCurrencies: FC = () => {
                 overflow: "hidden"
               }}
               bgColor={"var(--quaternary-color-transparent-50)"}
-              onClick={() => navigate(`/graphs/recommendation/detail/${crypto.symbol}`)}
+              onClick={() => navigate(user
+                ? `${routes.graphsRecommendationDetailURL}/${crypto.symbol}`
+                : routes.register
+              )}
               enableHover={true}
             >
               <img
