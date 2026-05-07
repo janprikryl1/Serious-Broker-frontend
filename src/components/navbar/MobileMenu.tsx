@@ -1,53 +1,111 @@
-import { FC } from "react";
-import { Link } from "react-router-dom";
-import { useTranslation } from "react-i18next";
-import { useUserContext } from "../../utils/providers/providerUser.tsx";
-import { notRegisteredUserNavbarURLs, registeredUserNavbarURLs } from "../../utils/constants";
+import {FC, useState} from "react";
+import {Link} from "react-router-dom";
+import {useTranslation} from "react-i18next";
+import {useUserContext} from "../../utils/providers/providerUser.tsx";
+import {notRegisteredUserNavbarURLs, registeredUserNavbarURLs} from "../../utils/constants";
+import {NavDropdown} from "react-bootstrap";
+import {AccordionToggleIcon} from "../reusable/AccordionToggleIcon.tsx";
+import {SignUpIcon} from "./headerIcons/SignUpIcon.tsx";
+import {SignInIcon} from "./headerIcons/SignInIcon.tsx";
+import {ChangeLanguageIcon} from "./headerIcons/languageSwitchIcon/ChangeLanguageIcon.tsx";
+import {useMediaQuery} from "@mui/material";
 
 type Props = {
-    toggleMobileMenu: () => void;
+  toggleMobileMenu: () => void;
+  isOpen: boolean;
 };
 
-export const MobileMenu: FC<Props> = ({ toggleMobileMenu }) => {
-    const { t } = useTranslation();
-    const { user } = useUserContext();
+export const MobileMenu: FC<Props> = ({ toggleMobileMenu, isOpen }) => {
+  const { t } = useTranslation();
+  const { user } = useUserContext();
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+  const isMobile = useMediaQuery("(max-width: 820px)");
+  const isTablet = useMediaQuery("(max-width: 1457px)");
 
-    const menuLinks = user ? registeredUserNavbarURLs : notRegisteredUserNavbarURLs;
+  const menuLinks = user ? registeredUserNavbarURLs : notRegisteredUserNavbarURLs;
+  const isActive = (path: string) => location.pathname.startsWith(path);
 
-    return (
-        <div className="mobile-menu">
-            <button className="close-button" onClick={toggleMobileMenu}>&times;</button>
-            <ul className="mobile-menu-list">
-                {Object.keys(menuLinks).map((key) => {
-                    const item = menuLinks[key];
+  const handleDropdownClick = (key: string) => {
+    setOpenDropdown(openDropdown === key ? null : key);
+  };
 
-                    if ("subLinks" in item) {
-                        return Object.entries(item.subLinks).map(([subKey, subItem]) => (
-                            <li key={`${key}-${subKey}`}>
-                                <Link
-                                    to={subItem.link}
-                                    onClick={toggleMobileMenu}
-                                    className="link-underline-none"
-                                >
-                                    {t(subItem.title)}
-                                </Link>
-                            </li>
-                        ));
-                    }
+  return (
+    <div className={`mobile-menu ${isOpen ? "is-open" : ""}`}>
+      <div className={`d-flex flex-column align-items-center justify-content-center mt-3 mb-3 pb-3 ${!isTablet || user ? "hidden" : "border-bottom"} `} style={{width: "90%"}}>
+        <div className={"w-75"}>
+          <div className={"d-flex align-items-center justify-content-center mb-3 w-100 "}>
+            {!user && isMobile && (
+              <div className="me-2 fw-bold" style={{color: "var(--white-color)"}}>
+                <SignUpIcon/>
+              </div>
+            )}
 
-                    return (
-                        <li key={key}>
-                            <Link
-                                to={item.link}
-                                onClick={toggleMobileMenu}
-                                className="link-underline-none"
-                            >
-                                {t(item.title)}
-                            </Link>
-                        </li>
-                    );
-                })}
-            </ul>
+            {!user && isTablet && (
+              <div className={`${isMobile? "ms-2" : ""}`}>
+                <SignInIcon />
+              </div>
+            )}
+          </div>
+
+          {isMobile && (
+            <div className={"d-flex justify-content-between w-100"}>
+              {t("Language")}
+              <div className="">
+                <ChangeLanguageIcon />
+              </div>
+            </div>
+          )}
         </div>
-    );
+      </div>
+
+      <ul className="mobile-menu-list">
+        {Object.keys(menuLinks).map((key) => {
+          const item = menuLinks[key];
+
+          if ("subLinks" in item) {
+            const isOpen = openDropdown === key;
+            const isDropdownActive = Object.values(item.subLinks).some((sub) => isActive(sub.link));
+
+            return (
+              <li className="mobile-dropdown-item" key={key}>
+                <div
+                  className={`dropdown-trigger ${isDropdownActive ? "active-yellow" : ""}`}
+                  onClick={() => handleDropdownClick(key)}
+                >
+                  {t(item.title)}
+                  <AccordionToggleIcon isOpen={isOpen} size={18} />
+                </div>
+
+                {/* Accordion vysúvanie */}
+                <div className={`mobile-submenu ${isOpen ? "visible" : ""}`}>
+                  {Object.keys(item.subLinks).map((subKey) => (
+                    <Link
+                      to={item.subLinks[subKey].link}
+                      key={subKey}
+                      onClick={toggleMobileMenu}
+                      className={`submenu-link ${isActive(item.subLinks[subKey].link) ? "active-yellow" : ""}`}
+                    >
+                      {t(item.subLinks[subKey].title)}
+                    </Link>
+                  ))}
+                </div>
+              </li>
+            );
+          }
+
+          return (
+            <li key={key}>
+              <Link
+                to={item.link}
+                onClick={toggleMobileMenu}
+                className={`link-underline-none ${isActive(item.link) ? "active-yellow" : ""}`}
+              >
+                {t(item.title)}
+              </Link>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
+  );
 };

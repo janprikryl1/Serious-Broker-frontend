@@ -5,7 +5,6 @@ import { useTranslation } from "react-i18next";
 import { TriggerType } from "../../utils/types/trafficLight/TriggerType.ts";
 import {LuTrash} from "react-icons/lu";
 
-// Enumy pre interné potreby komponentu
 enum Event { priceRise = "Price rise", priceDrop = "Price drop" }
 enum Action { less = "less", more = "more", normal = "normally", none = "Don't" }
 
@@ -24,84 +23,100 @@ export const TrafficLightTriggers: FC<TriggersProps> = ({
                                                         }) => {
   const { t } = useTranslation();
   const isEditable = variant === 'edit';
-  const computeNewInvestment = (trigger: TriggerType) => {
-    if (!basePrice || !trigger.actionByPercentage) return null;
-    const percentage = Number(trigger.actionByPercentage);
-    switch (trigger.action) {
-      case Action.less: return (((100 - percentage) / 100) * basePrice).toFixed(2);
-      case Action.more: return (((100 + percentage) / 100) * basePrice).toFixed(2);
-      case Action.normal: return basePrice;
-      default: return null;
-    }
-  };
 
   return (
-    <div className={"d-flex flex-column mt-5 mb-3 gap-4"}>
+    <div className="d-flex flex-column mb-3 gap-5">
       {triggers.map((trigger, index) => (
-        <div key={trigger.id || index} className={"d-flex align-items-center gap-4"}>
-          <div className={"traffic-light-circle-big"} style={{ backgroundColor: trigger.color }}></div>
+        <div key={trigger.id || index} className="d-flex flex-column gap-2">
 
-          <div className="d-flex gap-3 flex-grow-1 align-items-center">
-            {/* Prvý kontajner - Event */}
-            <div className={"traffic-light-trigger-wrapper flex-grow-1 p-3"}>
-              <div className={"d-flex flex-column w-100"}>
-                {/* Horný riadok: Text/Select vľavo, Číslo/Input vpravo */}
-                <div className="d-flex justify-content-between align-items-center w-100">
-                  <div className={"traffic-light-trigger-element m-0"}>
+          {/* HLAVIČKA RIADKA: Gulička a Delete tlačidlo */}
+          <div className="d-flex justify-content-between align-items-center px-1">
+            <div
+              className="flex-shrink-0"
+              style={{
+                backgroundColor: trigger.color || 'var(--gray-3-color)',
+                width: '32px',
+                height: '32px',
+                borderRadius: '50%',
+                border: trigger.color ? 'none' : '2px dashed var(--gray-text)',
+                boxShadow: trigger.color ? '0 0 10px ' + trigger.color : 'none'
+              }}
+            ></div>
+
+            {isEditable && (
+              <div
+                className="d-flex align-items-center justify-content-center"
+                style={{
+                  backgroundColor: "var(--red-on-primary-color)",
+                  borderRadius: "50%",
+                  width: "30px",
+                  height: "30px",
+                  cursor: "pointer",
+                }}
+                onClick={() => onTriggerDelete?.(index)}
+              >
+                <LuTrash size={16} color="white" />
+              </div>
+            )}
+          </div>
+
+          <div className="d-flex flex-column flex-md-row gap-3 align-items-stretch">
+
+            {/* Event Container */}
+            <div className="traffic-light-trigger-wrapper flex-grow-1 p-3">
+              <div className="d-flex flex-column w-100">
+                <div className="d-flex justify-content-between align-items-center w-100 gap-2">
+                  <div className="flex-grow-1">
                     {isEditable ? (
                       <Form.Select
                         value={trigger.event}
                         onChange={(e) => onTriggerChange?.(index, "event", e.target.value)}
-                        className="select-box-bottom-border"
-                        style={{ width: "230px" }}
+                        className="select-box-bottom-border w-100"
+                        style={{ maxWidth: "200px" }}
                       >
                         {Object.values(Event).map((v) => <option key={v} value={v}>{t(v)}</option>)}
                       </Form.Select>
                     ) : (
-                      <div>{t(trigger.event)}</div>
+                      <div className="fw-bold">{t(trigger.event)}</div>
                     )}
                   </div>
-
-                  <div className={"traffic-light-trigger-element m-0 text-end"}>
+                  <div className="text-end">
                     {isEditable ? (
-                      <div style={{width: "80px"}} className={"d-flex"}>
-                      <input
-                          type="text"
+                      <div className="d-flex align-items-center justify-content-end" style={{width: "70px"}}>
+                        <input
+                          type="number"
                           className="form-control borderless text-end p-0"
                           value={trigger.eventByPercentage}
                           onChange={(e) => onTriggerChange?.(index, "eventByPercentage", e.target.value)}
-                          style={{ color: "var(--gold-color)" }}
+                          style={{ color: "var(--gold-color)", width: "45px" }}
                         />
-                        %
+                        <span className="ms-1">%</span>
                       </div>
                     ) : (
-                      <div style={{ color: "var(--secondary-color)", fontWeight: "bold", fontSize: "1.7rem", lineHeight: 1.3 }}>
-                        {trigger.eventByPercentage} %
+                      <div style={{ color: "var(--secondary-color)", fontWeight: "bold", fontSize: "1.4rem" }}>
+                        {trigger.eventByPercentage}%
                       </div>
                     )}
                   </div>
                 </div>
-
-                {/* Spodný riadok: Label vľavo, "By percent" vpravo */}
                 <div className="d-flex justify-content-between w-100 mt-1">
-                  <div className={"label gray-2-color-text small"}>{t("Event")}</div>
-                  <div className={"label gray-2-color-text small"}>{t("Up to")}</div>
+                  <div className="gray-2-color-text small">{t("Event")}</div>
+                  <div className="gray-2-color-text small">{t("Up to")}</div>
                 </div>
               </div>
             </div>
 
-            {/* Druhý kontajner - Action */}
-            <div className={"traffic-light-trigger-wrapper flex-grow-1 p-3"}>
-              <div className={"d-flex flex-column w-100"}>
-                {/* Horný riadok */}
-                <div className="d-flex justify-content-between align-items-center w-100">
-                  <div className={"traffic-light-trigger-element m-0"}>
+            {/* Action Container */}
+            <div className="traffic-light-trigger-wrapper flex-grow-1 p-3">
+              <div className="d-flex flex-column w-100">
+                <div className="d-flex justify-content-between align-items-center w-100 gap-2">
+                  <div className="flex-grow-1">
                     {isEditable ? (
                       <Form.Select
                         value={trigger.action}
                         onChange={(e) => onTriggerChange?.(index, "action", e.target.value)}
-                        className="select-box-bottom-border"
-                        style={{ width: "230px" }}
+                        className="select-box-bottom-border w-100"
+                        style={{ maxWidth: "200px" }}
                       >
                         {Object.values(Action).map((v) => (
                           <option key={v} value={v}>
@@ -110,58 +125,36 @@ export const TrafficLightTriggers: FC<TriggersProps> = ({
                         ))}
                       </Form.Select>
                     ) : (
-                      <div>{t(trigger.action)}</div>
+                      <div className="fw-bold">{t(trigger.action)}</div>
                     )}
                   </div>
-
-                  <div className={"traffic-light-trigger-element m-0 text-end"}>
+                  <div className="text-end">
                     {isEditable ? (
-                      <div style={{width: "80px"}} className={"d-flex"}>
+                      <div className="d-flex align-items-center justify-content-end" style={{width: "70px"}}>
                         <input
-                          type="text"
+                          type="number"
                           className="form-control borderless text-end p-0"
                           disabled={trigger.action === Action.none}
                           value={trigger.actionByPercentage}
                           onChange={(e) => onTriggerChange?.(index, "actionByPercentage", e.target.value)}
-                          style={{ width: "60px", color: "var(--gold-color)" }}
+                          style={{ color: "var(--gold-color)", width: "45px" }}
                         />
-                        %
+                        <span className="ms-1">%</span>
                       </div>
                     ) : (
-                      <div style={{ color: "var(--secondary-color)", fontWeight: "bold", fontSize: "1.7rem", lineHeight: 1.3 }}>
-                        {trigger.actionByPercentage} %
+                      <div style={{ color: "var(--secondary-color)", fontWeight: "bold", fontSize: "1.4rem" }}>
+                        {trigger.actionByPercentage}%
                       </div>
                     )}
                   </div>
                 </div>
-
-                {/* Spodný riadok */}
                 <div className="d-flex justify-content-between w-100 mt-1">
-                  <div className={"label gray-2-color-text small"}>{t("Action")}</div>
-                  <div className={"label gray-2-color-text small"}>{t("By percent")}</div>
+                  <div className="gray-2-color-text small">{t("Action")}</div>
+                  <div className="gray-2-color-text small">{t("By percent")}</div>
                 </div>
               </div>
             </div>
 
-            {isEditable && (
-              <div
-                className="d-flex align-items-center justify-content-center"
-                style={{
-                  backgroundColor: "var(--red-on-tertiary-color)", // Tvoja nová červená
-                  borderRadius: "50%",
-                  width: "32px",
-                  height: "32px",
-                  cursor: "pointer",
-                  flexShrink: 0 // Zabezpečí, aby krúžok ostal okrúhly aj pri nedostatku miesta
-                }}
-                onClick={() => onTriggerDelete?.(index)}
-              >
-                <LuTrash
-                  size={18} // Trochu menšia veľkosť, aby mala v krúžku "vzduch"
-                  color="white"
-                />
-              </div>
-            )}
           </div>
         </div>
       ))}

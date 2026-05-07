@@ -12,28 +12,30 @@ import { FaHistory } from "react-icons/fa";
 import { TbUserEdit } from "react-icons/tb";
 import {LiaUserEditSolid} from "react-icons/lia";
 import {FiEdit3} from "react-icons/fi";
+import {useMediaQuery} from "@mui/material";
 
 export const SignInIcon: FC = () => {
     const { t } = useTranslation();
     const { user, logout } = useUserContext();
+    const isMobile = useMediaQuery("(max-width: 820px)");
 
     return (
         user ? (
             <Dropdown className="">
-                <Dropdown.Toggle className={"sign-in-dropdown p-3"} style={{ lineHeight: "1" }}>
-                    {user.firstname} {user.surname}
+                <Dropdown.Toggle className={`sign-in-dropdown d-flex align-items-center ${isMobile ? "p-1" : "p-3"}`} style={{ lineHeight: "1" }}>
+                  {isMobile ? <RiUserLine size={20} /> : `${user.firstname} ${user.surname}`}
                 </Dropdown.Toggle>
                 <Dropdown.Menu className="glass-effect">
                     <Dropdown.Item as={Link} to={routes.profile.profileURL} className={"d-flex gap-2 align-items-center"} >
-                        <RiUserLine />
-                        {t("Profile")}
+                       <RiUserLine />
+                       {t("Profile")}
                     </Dropdown.Item>
-                    <Dropdown.Item as={Link} to={routes.profile.edit} className={"d-flex gap-2 align-items-center"} >
-                        <FiEdit3 />
-                        {t("Edit profile")}
-                    </Dropdown.Item>
+                  <Dropdown.Item as={Link} to={routes.profile.edit} className={"d-flex gap-2 align-items-center"} >
+                    <FiEdit3 />
+                    {t("Edit profile")}
+                  </Dropdown.Item>
                     <Dropdown.Item as={Link} to={routes.profile.membership} className={"d-flex gap-2 align-items-center"} >
-                        <RiIdCardLine />
+                      <RiIdCardLine />
                         {t("Membership")}
                     </Dropdown.Item>
                     <Dropdown.Item as={Link} to={routes.profile.achievements} className={"d-flex gap-2 align-items-center"} >
@@ -57,17 +59,11 @@ export const SignInIcon: FC = () => {
                             Admin panel
                         </Dropdown.Item>
                     )}
-                    {user.role === UserRole.Admin && (
-                        <Dropdown.Item as="a" href={adminURLS.internalTool} className={"d-flex gap-2 align-items-center" }>
-                            <RiAdminLine />
-                            {t("Internal tool")}
-                        </Dropdown.Item>
-                    )}
                     <Dropdown.Divider />
                     <Dropdown.Item onClick={logout} >
-                        <div className={"d-flex gap-2 align-items-center"} style={{color: "var(--red-on-tertiary-color)", fontWeight: "bold"}}>
-                            <RiLogoutBoxRLine />
-                            {t("Logout")}
+                        <div className={"d-flex gap-2 align-items-center"} style={{color: "var(--red-on-primary-color)", fontWeight: "bold"}}>
+                          <RiLogoutBoxRLine />
+                          {t("Logout")}
                         </div>
                     </Dropdown.Item>
                 </Dropdown.Menu>

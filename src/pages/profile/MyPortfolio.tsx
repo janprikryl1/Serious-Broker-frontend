@@ -1,6 +1,8 @@
 import {useCallback, useEffect, useLayoutEffect, useRef, useState, useMemo} from "react";
 import {useTranslation} from "react-i18next";
 import {deleteMyPortfolio, getMyPortfolios, getMyPortfolioDetailsGraph} from "../../utils/api/myPortfolioService.ts";
+import {getAssetGraphData} from "../../utils/api/binanceIndexAssets.ts";
+import {QuotedCurrenciesPeriod} from "../../utils/options/QuotedCurrenciesPeriod.ts";
 import {MyPortfolioCard} from "../../components/profile/myPortfolio/MyPortfolioCard.tsx";
 import {Button} from "../../components/reusable/Button.tsx";
 import {routes} from "../../utils/constants";
@@ -8,39 +10,77 @@ import {TitleHeader} from "../../components/about/TitleHeader.tsx";
 import {MyPortfolioType} from "../../utils/types/myPortfolio/MyPortfolioType.ts";
 import {CardContainer} from "../../components/reusable/CardContainer.tsx";
 import {GoPlus} from "react-icons/go";
+import {PortfolioGraphData} from "../../utils/types/asset/MyPortfolioType.ts";
 
 export const MyPortfolio = () => {
   const {t} = useTranslation();
   const [myPortfolios, setMyPortfolios] = useState<MyPortfolioType[]>([]);
   const [removingPortfolioIds, setRemovingPortfolioIds] = useState<number[]>([]);
-  const [portfolioStats, setPortfolioStats] = useState<Map<number, {current_value: number; invested_amount: number; profit: number; profitPct: number}>>(new Map());
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+
+  const [portfolioGraphData, setPortfolioGraphData] = useState<Map<number, PortfolioGraphData>>(new Map());
+
   const itemRefs = useRef<Map<number, HTMLDivElement>>(new Map());
-  const previousRectsRef = useRef<Map<number, DOMRect>>(new Map())
+  const previousRectsRef = useRef<Map<number, DOMRect>>(new Map());
 
   const fetchMyPortfolios = useCallback(async () => {
     try {
+      setIsLoading(true);
       const response = await getMyPortfolios();
       const portfolios = Array.isArray(response.data) ? response.data : [];
       setMyPortfolios(portfolios);
 
-      // Fetch details for statistics
-      const stats = new Map();
+      const graphData = new Map();
+
       for (const portfolio of portfolios) {
         try {
           const detailsResponse = await getMyPortfolioDetailsGraph(portfolio.id!);
           const details = detailsResponse.data;
-          const investedAmount = Number(details.invested_amount);
-          const currentValue = Number(details.current_value);
-          const profit = currentValue - investedAmount;
-          const profitPct = investedAmount > 0 ? (profit / investedAmount) * 100 : 0;
-          stats.set(portfolio.id!, {current_value: currentValue, invested_amount: investedAmount, profit, profitPct});
+
+          const currencies = details.asset
+            .filter((assetDetail) => assetDetail.status)
+            .map((assetDetail) => ({
+              asset_label: assetDetail.asset_label,
+              allocation: assetDetail.allocation
+            }));
+
+          if (currencies.length > 0) {
+            try {
+              const graphResponse = await getAssetGraphData(currencies, QuotedCurrenciesPeriod.month);
+              const values = Object.values(graphResponse?.data?.data ?? {})
+                .map((value) => Number(value))
+                .filter((value) => Number.isFinite(value));
+
+              if (values.length > 0) {
+                const firstValue = values[0];
+                const lastValue = values[values.length - 1];
+
+                const calculatedProfitEur = lastValue - firstValue;
+
+                const calculatedProfitPct = firstValue !== 0
+                  ? (calculatedProfitEur / firstValue) * 100
+                  : 0;
+
+                graphData.set(portfolio.id!, {
+                  chartValues: values,
+                  profitEur: calculatedProfitEur,
+                  profitPct: calculatedProfitPct
+                });
+              }
+            } catch (error) {
+              console.error(`Failed to fetch graph data for portfolio ${portfolio.id}:`, error);
+            }
+          }
         } catch (error) {
           console.error(`Failed to fetch details for portfolio ${portfolio.id}:`, error);
         }
       }
-      setPortfolioStats(stats);
+
+      setPortfolioGraphData(graphData);
+      setIsLoading(false);
     } catch {
       setMyPortfolios([]);
+      setPortfolioGraphData(new Map());
     }
   }, []);
 
@@ -57,10 +97,10 @@ export const MyPortfolio = () => {
     try {
       await deleteMyPortfolio(id);
       setMyPortfolios((prev) => prev.filter((portfolio) => portfolio.id !== id));
-      setPortfolioStats((prev) => {
-        const newStats = new Map(prev);
-        newStats.delete(id);
-        return newStats;
+      setPortfolioGraphData((prev) => {
+        const newGraphData = new Map(prev);
+        newGraphData.delete(id);
+        return newGraphData;
       });
     } catch {
       await fetchMyPortfolios();
@@ -100,40 +140,6 @@ export const MyPortfolio = () => {
     previousRectsRef.current = nextRects;
   }, [myPortfolios]);
 
-  // Calculate statistics
-  const totalPortfolioValue = useMemo(() => {
-    let total = 0;
-    portfolioStats.forEach((stat) => {
-      total += stat.current_value;
-    });
-    return total;
-  }, [portfolioStats]);
-
-  const totalProfit = useMemo(() => {
-    let total = 0;
-    portfolioStats.forEach((stat) => {
-      total += stat.profit;
-    });
-    return total;
-  }, [portfolioStats]);
-
-  const totalProfitPct = useMemo(() => {
-    const totalInvested = Array.from(portfolioStats.values()).reduce((sum, stat) => sum + stat.invested_amount, 0);
-    return totalInvested > 0 ? (totalProfit / totalInvested) * 100 : 0;
-  }, [portfolioStats, totalProfit]);
-
-  const bestPerformer = useMemo(() => {
-    let best = { name: '', profitPct: -Infinity };
-    for (let i = 0; i < myPortfolios.length; i++) {
-      const portfolio = myPortfolios[i];
-      const stats = portfolioStats.get(portfolio.id!);
-      if (stats && stats.profitPct > best.profitPct) {
-        best = { name: portfolio.name, profitPct: stats.profitPct };
-      }
-    }
-    return best.name ? best : null;
-  }, [myPortfolios, portfolioStats]);
-
   return (
     <>
       <TitleHeader title={t("My Portfolios")}/>
@@ -163,7 +169,9 @@ export const MyPortfolio = () => {
                 <MyPortfolioCard
                   data={portfolio}
                   isRemoving={removingPortfolioIds.includes(portfolio.id!)}
+                  isLoading={isLoading}
                   onDelete={handleDeletePortfolio}
+                  graphData={portfolioGraphData.get(portfolio.id!)}
                 />
               </div>
             ))}

@@ -31,11 +31,9 @@ export const TrafficLightFormModal: FC<any> = ({
     >
       <Modal.Body>
         <div>
-          <h3>{title}</h3>
+          <h3>{t(title, { type: t(type) })}</h3>
           <div className={"mb-4"}>
-            {t(
-              "Within a traffic light you can define a trigger, which will ensure that buy action will occur when certain requirements are fulfilled."
-            )}
+            {t('trafficLight.triggerDescription')}
           </div>
 
           {/* Triggers */}

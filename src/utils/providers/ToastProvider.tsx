@@ -55,7 +55,7 @@ const ToastComponent = ({ toast, progress, isVisible }: { toast: Toast | null, p
         <div
             style={{
                 backgroundColor: toast.color,
-                color: 'white',
+                color: toast.color === ToastColor.gold ? 'black' : 'white',
                 padding: '10px 20px',
                 textAlign: 'center',
                 fontSize: '16px',

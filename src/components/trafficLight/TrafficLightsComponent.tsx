@@ -16,16 +16,13 @@ import {TrafficLightReference} from "../../utils/enums/TrafficLight.ts";
 import {useInvestmentPlanContext} from "../../utils/providers/InvestmentPlanProvider.tsx";
 import {FaCheck} from "react-icons/fa6";
 import {TrafficLightWrapper} from "./TrafficLightWrapper.tsx";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 enum Currency {
     CZK = "CZK",
     EUR = "EUR",
     USD = "USD"
 }
-
-/*enum TrafficLightReference {
-    ATH = "ATH - All Time High Price"
-}*/
 
 enum Event {
     priceRise = "Price rise",
@@ -65,12 +62,12 @@ export const TrafficLightsComponent = () => {
     const [selectedCurrency, setSelectedCurrency] = useState<Currency>(Currency.EUR);
     const [showCreateTrafficLightModal, setShowCreateTrafficLightModal] = useState(false);
     const [showReviewTrafficLightModal, setShowReviewTrafficLightModal] = useState(false);
-    // const [reference, setReference] = useState<TrafficLightReference>(TrafficLightReference.ATH);
     const [maxTriggersReached, setMaxTriggersReached] = useState(false);
     const [typeCamelCase, setTypeCamelCase ] = useState<string>("");
     const [userBuyTrafficLights, setUserBuyTrafficLights] = useState<TrafficLightType[]>([])
     const [userSellTrafficLights, setUserSellTrafficLights] = useState<TrafficLightType[]>([])
     const [trafficLightClicked, setTrafficLightClicked] = useState<TrafficLightType | null>(null);
+    const isMobile = useMediaQuery('(max-width: 576px)');
 
     const {
         name,
@@ -340,10 +337,10 @@ export const TrafficLightsComponent = () => {
                 {t("You can set triggers to dynamically adapt your base investment price to the current market trend. With this tool you can invest more or less money based on certain events. You can also keep your assets protected from unwanted losses due to market drop.")}
             </div>
 
-            <div className={"d-flex justify-content-between gap-4 w-100"}>
+            <div className={"row g-4"}>
 
                 {/* LEFT COLUMN - Buy Traffic Lights */}
-                <div className={"d-flex flex-column"} style={{ width: "50%" }}>
+                <div className={"col-lg-6 d-flex flex-column mb-4 mb-lg-0"}>
                     <div className={"white-color-text"}
                          style={{ fontSize: "1.4rem", fontFamily: "PT Sans Caption" }}>
                         {t("Select from Your")}{" "}
@@ -351,13 +348,13 @@ export const TrafficLightsComponent = () => {
                         {t("Traffic Lights")}
                     </div>
 
-                    <CardContainer color="var(--secondary-color)" style={{ marginBottom: "5px", marginLeft: 0, borderRadius: "10px", overflow: "hidden", width: "100%", paddingLeft: 0, paddingRight: 0 }}>
-                        <div className={"blur-bg-image-container"}>
+                    <CardContainer color="var(--secondary-color)" className="px-0 mx-0 w-100" style={{ flexGrow: 1, marginBottom: "5px", borderRadius: "10px", overflow: "hidden" }}>
+                        <div className={"blur-bg-image-container h-100"}>
                             <img src={BuyCryptoImg} className={"blur-bg-image"} alt={""} />
 
-                            <div className={"content"}>
+                            <div className={"content d-flex flex-column"}>
                                 {userBuyTrafficLights.length < 1 ? (
-                                  <div className="p-4 text-center">
+                                  <div className="p-4 text-center my-auto">
                                       <div className={"gray-4-color-text mb-4"}>{t("You have no buy traffic lights defined")}</div>
                                       <Button color={ButtonColor.lightBrown} shadow={true}
                                               style={{ marginBottom: 0, fontWeight: "normal" }}
@@ -393,7 +390,7 @@ export const TrafficLightsComponent = () => {
                 </div>
 
                 {/* RIGHT COLUMN - Sell Traffic Lights */}
-                <div className={"d-flex flex-column"} style={{ width: "50%" }}>
+                <div className={"col-lg-6 d-flex flex-column"}>
                     <div className={"white-color-text"}
                          style={{ fontSize: "1.4rem", fontFamily: "PT Sans Caption" }}>
                         {t("Select from Your")}{" "}
@@ -401,13 +398,13 @@ export const TrafficLightsComponent = () => {
                         {t("Traffic Lights")}
                     </div>
 
-                    <CardContainer color="var(--secondary-color)" style={{borderRadius: "10px", overflow: "hidden", width: "100%", paddingLeft: 0, paddingRight: 0 }}>
-                        <div className={"blur-bg-image-container"}>
+                    <CardContainer color="var(--secondary-color)" className="px-0 mx-0 w-100" style={{ flexGrow: 1, borderRadius: "10px", overflow: "hidden" }}>
+                        <div className={"blur-bg-image-container h-100"}>
                             <img src={SellCryptoImg} className={"blur-bg-image"} alt={""} />
 
-                            <div className={"content"}>
+                            <div className={"content d-flex flex-column"}>
                                 {userSellTrafficLights.length < 1 ? (
-                                  <div className="p-4 text-center">
+                                  <div className="p-4 text-center my-auto">
                                       <div className={"gray-4-color-text mb-4"}>{t("You have no sell traffic lights defined")}</div>
                                       <Button color={ButtonColor.lightBrown} shadow={true}
                                               style={{ marginBottom: 0, fontWeight: "normal" }}
@@ -444,7 +441,7 @@ export const TrafficLightsComponent = () => {
 
             </div>
 
-            <div className={"d-flex justify-content-between"}>
+            <div className={`d-flex ${isMobile ? "flex-column" : "flex-row gap-3"} justify-content-between mt-4`}>
                 <NextStepButton currentStep={currentStep} currentStepFinished={selectedAmount != null && selectedAmount > 0}  link={routes.profile.newInvestmentPlanInvestedAmount} variant={"previous"} color={"var(--sandy-color)"} />
                 <NextStepButton currentStep={currentStep}
                                 currentStepFinished={selectedAmount != null && selectedAmount > 0}
@@ -464,9 +461,9 @@ export const TrafficLightsComponent = () => {
             >
                 <Modal.Body>
                     <div>
-                        <h3>{t(`Define ${typeCamelCase} Traffic Light`)}</h3>
+                        <h3>{t('defineTrafficLight', { type: typeCamelCase })}</h3>
                         <div className={"mb-4"}>
-                            {t("Within a traffic light you can define a trigger, which will ensure that buy action will occur when certain requirements are fulfilled.")}
+                            {t('trafficLight.triggerDescription')}
                         </div>
 
                         {/* Triggers */}

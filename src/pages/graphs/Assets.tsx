@@ -30,6 +30,8 @@ import {getAllCryptocurrenciesPhoto} from "../../utils/api/CryptocurrencyService
 import {CryptoCurrencyAdminType} from "../../utils/types/asset/CryptoCurrencyType.ts";
 import {Checkbox} from "../../components/reusable/Checkbox.tsx";
 import {TitleHeader} from "../../components/about/TitleHeader.tsx";
+import {CollapsibleInfoBox} from "../../components/reusable/CollapsibleInfoBox.tsx";
+import {SpinnerLoader} from "../../components/reusable/SpinnerLoader.tsx";
 
 const animatedComponents = makeAnimated();
 
@@ -65,7 +67,7 @@ export const Assets: FC = () => {
   const [firstLoad, setFirstLoad] = useState(true);
   const [orderType, setOrderType] = useState<AssetOrder>((searchParams.get("orderBy") as AssetOrder) || AssetOrder.Name);
   const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>((searchParams.get("direction") as 'asc' | 'desc') || 'asc');
-  const [timeRange, setTimeRange] = useState<string>(searchParams.get("timeRange") || "24h");
+  const [timeRange, setTimeRange] = useState<string>(searchParams.get("timeRange") || "7d");
   const [allCurrencies, setAllCurrencies] = useState<CryptoCurrencyAdminType[]>([]);
   const [tradingCoins, setTradingCoins] = useState<string[]>([]);
   const [showNonTradingIndices, setShowNonTradingIndices] = useState<boolean>(false);
@@ -329,18 +331,24 @@ export const Assets: FC = () => {
       <div className="blog padding-bottom">
         <div className="container">
           <div className="blog__wrapper">
-            <div className="info-box mb-5">
-              <h5 className="info-box-heading">{t("What Is an Index")}</h5>
-              <p
-                className="info-box-text">{t("Index is a set of cryptocurrencies grouped together to measure performance of the set as a whole, rather than focusing on single coin.")}</p>
+            <CollapsibleInfoBox
+              title={t("What Is an Index")}
+              initialText={t("Index is a set of cryptocurrencies grouped together to measure performance of the set as a whole, rather than focusing on single coin.")}
+              className="mb-5"
+            >
+              {/* Všetko tu vnútri sa bude vysúvať/skrývať */}
               <h5 className="info-box-heading">{t("Advantages of Indices")}</h5>
-              <p
-                className="info-box-text">{t("Trading indices can be more beneficial because they are diversified, therefore they may be less vulnerable to sudden market fluctuations. Another advantage is that investors don’t need worry about managing multiple assets at once.")}</p>
+              <p className="info-box-text">
+                {t("Trading indices can be more beneficial because they are diversified, therefore they may be less vulnerable to sudden market fluctuations. Another advantage is that investors don’t need worry about managing multiple assets at once.")}
+              </p>
+
               <h5 className="info-box-heading">{t("Index Composition and Weighting")}</h5>
-              <p
-                className="info-box-text">{t("The number of coins contained in an index varies significantly. Some indices track only a few coins, while others may follow hundreds or even thousands of them. The coins within an index also carry different weights, which determine their impact on overall performance. The higher the weight of a coin, the greater its influence on the index.")}</p>
-            </div>
-            <h3>{t("List of indexes")}</h3>
+              <p className="info-box-text m-0">
+                {t("The number of coins contained in an index varies significantly. Some indices track only a few coins, while others may follow hundreds or even thousands of them. The coins within an index also carry different weights, which determine their impact on overall performance. The higher the weight of a coin, the greater its influence on the index.")}
+              </p>
+            </CollapsibleInfoBox>
+
+            <h3>{t("List of Indices")}</h3>
 
             <OutlineContainer className={"mb-5"} bgColor={"var(--quaternary-color-transparent-50)"} style={{margin: 0}}>
               <div className="d-flex gap-4 w-100 flex-wrap">
@@ -376,7 +384,7 @@ export const Assets: FC = () => {
                   <SearchBar value={searchQuery} onChange={handleSearchChange} />
                 </div>
               </div>
-              <div className="d-flex gap-4 w-100 mt-4">
+              <div className="container d-flex flex-column flex-md-row gap-5 w-100 mt-4 m-0 p-0">
                 <Checkbox
                   checked={showNonTradingIndices}
                   onChange={setShowNonTradingIndices}
@@ -409,7 +417,9 @@ export const Assets: FC = () => {
                 </div>
               </>
             ) : (
-              <div className="text-center p-5 no-data-found">{t("No data found")}</div>
+              loading ?
+                <SpinnerLoader /> :
+                <div className="text-center p-5 no-data-found">{t("No data found")}</div>
             )}
             <div className="load-more-container">
               {hasMore && showMyPortfolio === 'all' && (

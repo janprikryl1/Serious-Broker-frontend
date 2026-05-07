@@ -49,3 +49,9 @@ export type MyPortfolioType = {
     sell_year_1_profit: number;
     sell_year_2_profit: number;
 }
+
+export type PortfolioGraphData = {
+    chartValues: number[];
+    profitEur: number;
+    profitPct: number
+}

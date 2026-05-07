@@ -1,0 +1,14 @@
+.dashboard-container {
+  background: $quaternary-color-transparent-30 !important;
+  margin: 0 !important;
+  border-radius: 10px !important;
+  padding: 15px !important;
+}
+
+.card-header {
+  border-bottom: 1px solid $secondary-color-transparent-50;
+}
+
+.border-bottom {
+  border-bottom: 1px solid $quaternary-color !important;
+}

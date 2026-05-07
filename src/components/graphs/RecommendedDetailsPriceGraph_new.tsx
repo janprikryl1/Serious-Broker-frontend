@@ -1,40 +1,48 @@
 import {Dispatch, FC, SetStateAction, useEffect, useMemo, useRef, useState} from "react";
-import { Form } from "react-bootstrap";
-import { useTranslation } from "react-i18next";
-import {
-    ChartContainer,
-    LinePlot,
-    ChartsXAxis,
-    ChartsYAxis,
-    ChartsTooltip, BarPlot
-} from "@mui/x-charts";
-import {
-    getBinanceIndexAssetAverageGraphData,
-    getBinanceIndexAssetPriceGraphData
-} from "../../utils/api/GraphsService.ts";
-import { CustomSwal } from "../../utils/functions/customSwal.ts";
-import { RecommendationDetailSeasonEnum } from "../../utils/enums/RecommendationDetailSeasonEnum.ts";
-import {createDateFormatters, parseBackendUtc, timeZoneOptions} from "../../utils/functions/dateFunctions.ts";
+import {Form} from "react-bootstrap";
+import {useTranslation} from "react-i18next";
+import {BarPlot, ChartContainer, ChartsLegend, ChartsTooltip, ChartsXAxis, ChartsYAxis, LinePlot} from "@mui/x-charts";
+import {getBinanceIndexAssetAverageGraphData} from "../../utils/api/GraphsService.ts";
+import {CustomSwal} from "../../utils/functions/customSwal.ts";
+import {RecommendationDetailSeasonEnum} from "../../utils/enums/RecommendationDetailSeasonEnum.ts";
+import {createDateFormatters} from "../../utils/functions/dateFunctions.ts";
 import {RecommendedSeasonSelect} from "./RecommendedSeasonSelect.tsx";
-import '../../styles/css/MuiChartsTooltip.css';
+import {useMediaQuery} from "@mui/material";
+import {
+    BinanceIndexAssetRecomBestPreviousDetails
+} from "../../utils/types/graphs/BinanceIndexAssetRecomBestPreviousDetails.ts";
+import {OutlineContainer} from "../reusable/OutlineContainer.tsx";
 
 /*
 * Big recommendation graph
 * URL: https://serious.broker/graphs/recommendation/detail/BTC
 * Shown on the bottom of the page
-**/
+ */
+
+/*
+ * Preco graf vyzera tak ako vyzera
+ *
+ * Pri intervale pre 1 tyzden:
+ *      Mame pre kazdy den a kazdu hodinu prave jeden zaznam. Takze sa nepocita priemer ranku, ale berie sa hodnota priamo.
+ *      Preto sa nemoze stat, ze by hodnota ranku bola dvakrat taka ista. Pre kazdy tyzden je tam 168 hodnot potencialneho zisku oproti predchadzajucej hodine.
+ *      Z toho je stala nejaka hodnota najlepsia a nejaka najhorsia.
+ * Pri itervale 2 a viac tyzdnov
+ *      Pre urcity den a hodinu uz existuje viac zaznamov, ktore sa musia priemerovat. Prave preto sa moze stat, ze by vysiel v roznych dnoch rovnaky rank.
+ *      Cim vacsi casovy interval berieme, tym je linia v grafe znazornujuca rank vyhladenejsia.
+ */
 
 type Props = {
     asset_label: string;
     selectedTimeZone: string;
     setSelectedTimezone: Dispatch<SetStateAction<string>>;
+    recommendationsDetail: BinanceIndexAssetRecomBestPreviousDetails;
 };
 
 enum Week {
     "Week" = 1,
     "Month" = 4,
-    'Quarter' = 12,
-    "Year" = 48,
+    "Quarter" = 13,
+    "Year" = 52,
 }
 
 enum Day {
@@ -51,12 +59,15 @@ type ProcessedDataPoint = {dayAndHour: string, dayOfWeek: number, hour: number, 
 type ScatterPoint = { x: Date; y: number };
 
 const chartHeight = 600;
+const profitSeriesColor = "#4C4033";
+const rankSeriesColor = "#B1974E";
 
-export const RecommendedDetailsPriceGraph1: FC<Props> = ({asset_label, selectedTimeZone, setSelectedTimezone}) => {
+export const RecommendedDetailsPriceGraph1: FC<Props> = ({asset_label, selectedTimeZone, setSelectedTimezone, recommendationsDetail}) => {
     const { t, i18n } = useTranslation();
     const { date, dateTime } = createDateFormatters(i18n.language ?? "cs-CZ", selectedTimeZone);
     const [graphData, setGraphData] = useState<ProcessedDataPoint[] | undefined>();
     const chartContainerRef = useRef<HTMLDivElement>(null);
+    const isMobile = useMediaQuery('(max-width: 1000px');
     const chartMargins = useMemo(
         () => ({ left: 0, right: 0, top: 0, bottom: 0 }),
         []
@@ -75,6 +86,38 @@ export const RecommendedDetailsPriceGraph1: FC<Props> = ({asset_label, selectedT
     const [customEnabled, setCustomEnabled] = useState(false);
     const [filteredData, setFilteredData] = useState<ProcessedDataPoint[] | undefined>();
 
+    const buyDayMapping = {
+        [RecommendationDetailSeasonEnum.Week]: recommendationsDetail.buy_week_0_week_day,
+        [RecommendationDetailSeasonEnum.Month]: recommendationsDetail.buy_month_0_week_day,
+        [RecommendationDetailSeasonEnum.Quarter]: recommendationsDetail.buy_quarter_0_week_day,
+        [RecommendationDetailSeasonEnum.Year]: recommendationsDetail.buy_year_0_week_day,
+    };
+    const buyDay = buyDayMapping[selectedPeriod] ?? recommendationsDetail.buy_year_0_week_day;
+
+    const buyHourMapping = {
+        [RecommendationDetailSeasonEnum.Week]: recommendationsDetail.buy_week_0_hour,
+        [RecommendationDetailSeasonEnum.Month]: recommendationsDetail.buy_month_0_hour,
+        [RecommendationDetailSeasonEnum.Quarter]: recommendationsDetail.buy_quarter_0_hour,
+        [RecommendationDetailSeasonEnum.Year]: recommendationsDetail.buy_year_0_hour,
+    };
+    const buyHour = buyHourMapping[selectedPeriod] ?? recommendationsDetail.buy_year_0_hour;
+
+    const sellDayMapping = {
+        [RecommendationDetailSeasonEnum.Week]: recommendationsDetail.sell_week_0_week_day,
+        [RecommendationDetailSeasonEnum.Month]: recommendationsDetail.sell_month_0_week_day,
+        [RecommendationDetailSeasonEnum.Quarter]: recommendationsDetail.sell_quarter_0_week_day,
+        [RecommendationDetailSeasonEnum.Year]: recommendationsDetail.sell_year_0_week_day,
+    };
+    const sellDay = sellDayMapping[selectedPeriod] ?? recommendationsDetail.sell_year_0_week_day;
+
+    const sellHourMapping = {
+        [RecommendationDetailSeasonEnum.Week]: recommendationsDetail.sell_week_0_hour,
+        [RecommendationDetailSeasonEnum.Month]: recommendationsDetail.sell_month_0_hour,
+        [RecommendationDetailSeasonEnum.Quarter]: recommendationsDetail.sell_quarter_0_hour,
+        [RecommendationDetailSeasonEnum.Year]: recommendationsDetail.sell_year_0_hour,
+    };
+    const sellHour = sellHourMapping[selectedPeriod] ?? recommendationsDetail.sell_year_0_hour;
+
     const getDay = (data: String) => {
         return t(Day[parseInt(data.split(" - ")[0], 10)]);
     }
@@ -89,8 +132,6 @@ export const RecommendedDetailsPriceGraph1: FC<Props> = ({asset_label, selectedT
         }
     }
 
-
-
     useEffect(() => {
         if (!asset_label) return;
         const getData = async () => {
@@ -101,9 +142,6 @@ export const RecommendedDetailsPriceGraph1: FC<Props> = ({asset_label, selectedT
                     customEnabled ? numOfWeeks : Week[selectedPeriod]
                 );
                 if (response?.data) {
-                    console.log(response.data);
-
-
                     const processedData: ProcessedDataPoint[] = response.data.map((p: any) => ({
                         dayAndHour: p.dayOfWeek + " - " + p.hour,
                         dayOfWeek: parseInt(p.day_of_week),
@@ -141,66 +179,13 @@ export const RecommendedDetailsPriceGraph1: FC<Props> = ({asset_label, selectedT
         getData();
     }, [asset_label, selectedPeriod, numOfWeeks, t]);
 
-    /*const { thresholdLines, buyPoints, sellPoints } = useMemo(() => {
-        if (!graphData || graphData.length === 0) {
-            return {
-                thresholdLines: [] as { y: number; label: string; color: string }[],
-                buyPoints: [] as ScatterPoint[],
-                sellPoints: [] as ScatterPoint[],
-            };
-        }
 
-        const prices = graphData.map((p) => p.price);
-        const lowerCount = Math.max(1, lowerThresholdCount);
-        const upperCount = Math.max(1, upperThresholdCount);
-
-        if (lowerCount + upperCount >= prices.length) {
-            return { thresholdLines: [], buyPoints: [], sellPoints: [] };
-        }
-
-        if (highlightCount > lowerCount || highlightCount > upperCount) {
-            return { thresholdLines: [], buyPoints: [], sellPoints: [] };
-        }
-
-        const sortedPrices = [...prices].sort((a, b) => a - b);
-        const lowerPriceThreshold = sortedPrices[lowerCount - 1];
-        const upperPriceThreshold = sortedPrices[prices.length - upperCount];
-
-        const potentialBuyPoints = graphData.filter((p) => p.price <= lowerPriceThreshold);
-        const potentialSellPoints = graphData.filter((p) => p.price >= upperPriceThreshold);
-
-        const topBuyPoints = potentialBuyPoints
-            .sort((a, b) => a.price - b.price)
-            .slice(0, highlightCount);
-        const topSellPoints = potentialSellPoints
-            .sort((a, b) => b.price - a.price)
-            .slice(0, highlightCount);
-
-        return {
-            thresholdLines: showTrashHolds
-                ? [
-                    { y: lowerPriceThreshold, label: t("Buy Threshold"), color: "blue" },
-                    { y: upperPriceThreshold, label: t("Sell Threshold"), color: "purple" },
-                ]
-                : [],
-            buyPoints: topBuyPoints.map((p) => ({ x: p.date, y: p.price })),
-            sellPoints: topSellPoints.map((p) => ({ x: p.date, y: p.price })),
-        };
-    }, [
-        graphData,
-        lowerThresholdCount,
-        upperThresholdCount,
-        highlightCount,
-        showTrashHolds,
-        t,
-    ]);*/
 
     return (
         <>
             <h3>{t("Average Profit Graph")}</h3>
 
             <div style={{paddingLeft: "15px"}}>
-                <h5 style={{paddingBottom: "10px"}}>{t("Watched period")}</h5>
                 <RecommendedSeasonSelect selectedPeriod={selectedPeriod} setSelectedPeriod={setSelectedPeriod} disabled={customEnabled}/>
 
                 <div className="d-flex align-items-center">
@@ -220,70 +205,36 @@ export const RecommendedDetailsPriceGraph1: FC<Props> = ({asset_label, selectedT
                         onChange={(e) => setNumOfWeeks(parseInt(e.target.value))}
                         onBlur={() => {
                             let val = numOfWeeks || 30;
-                            //val = Math.max(1, Math.min(val, (graphData?.length ?? upperThresholdCount) - upperThresholdCount - 1));
                             setNumOfWeeks(val);
                         }}
                         disabled={!customEnabled}
                     />
                 </div>
             </div>
-            {/*{showTrashHolds && (
-                <div className="mt-3" style={{ display: "flex", flexDirection: "column", gap: "5px" }}>
-                    <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-                        <Form.Label style={{ width: 240 }}>{t("Lower threshold (buy)")}</Form.Label>
-                        <Form.Control
-                            style={{ height: 30, width: 100 }}
-                            type="number"
-                            value={lowerThresholdCount}
-                            onChange={(e) =>
-                                setLowerThresholdCount(Math.max(1, parseInt(e.target.value) || 1))
-                            }
-                            min="1"
-                            max={(graphData?.length ?? upperThresholdCount) - upperThresholdCount - 1}
-                        />
+
+            <OutlineContainer bgColor={"var(--quaternary-color-transparent-50)"}>
+                <div className="row justify-content-center text-center align-items-center gap-5 py-1 py-md-3">
+
+                    <div className="col-12 col-sm-5">
+                        <div className="responsive-time-font">
+                            {buyDay != null ? t(Day[buyDay]) : buyDay} {buyHour}:00
+                        </div>
+                        <div className="responsive-label-font mt-1">
+                            {t("Best time to buy")}
+                        </div>
                     </div>
-                    <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-                        <Form.Label style={{ width: 240 }}>{t("Upper threshold (sell)")}</Form.Label>
-                        <Form.Control
-                            type="number"
-                            style={{ height: 30, width: 100 }}
-                            value={upperThresholdCount}
-                            onChange={(e) =>
-                                setUpperThresholdCount(Math.max(1, parseInt(e.target.value) || 1))
-                            }
-                            min="1"
-                            max={(graphData?.length ?? lowerThresholdCount) - lowerThresholdCount - 1}
-                        />
+
+                    <div className="col-12 col-sm-5">
+                        <div className={"responsive-time-font"}>
+                            {sellDay != null ? t(Day[sellDay]) : sellDay} {sellHour}:00
+                        </div>
+                        <div className={"responsive-label-font"}>
+                            {t("Best time to sell")}
+                        </div>
                     </div>
-                    <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-                        <Form.Label style={{ width: 240 }}>{t("Number of highlighted points")}</Form.Label>
-                        <Form.Control
-                            type="number"
-                            style={{ height: 30, width: 100 }}
-                            value={highlightCount}
-                            onChange={(e) =>
-                                setHighlightCount(Math.max(1, parseInt(e.target.value) || 1))
-                            }
-                            min="1"
-                            max={lowerThresholdCount < upperThresholdCount ? lowerThresholdCount : upperThresholdCount}
-                        />
-                    </div>
-                    <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-                        <Form.Label style={{ width: 240 }}>{t("Timezone")}</Form.Label>
-                        <Form.Select
-                            style={{ height: 34, maxWidth: 100 }}
-                            value={selectedTimeZone}
-                            onChange={(e) => setSelectedTimezone(e.target.value)}
-                        >
-                            {timeZoneOptions.map((tz) => (
-                                <option key={tz} value={tz}>
-                                    {tz}
-                                </option>
-                            ))}
-                        </Form.Select>
-                    </div>
+
                 </div>
-            )}*/}
+            </OutlineContainer>
 
             <div
                 ref={chartContainerRef}
@@ -293,10 +244,24 @@ export const RecommendedDetailsPriceGraph1: FC<Props> = ({asset_label, selectedT
                     border: "0.5px solid #3e3a32",
                     borderRadius: "5px",
                     padding: "20px",
-                    backgroundColor: "#FFF4E5",
+                    backgroundColor: "var(--cream-color)",
                 }}
             >
-                <div style={{ width: "100%", height: `${chartHeight}px`, position: "relative" }}>
+                <div
+                    style={{
+                        width: "100%",
+                        overflowX: isMobile ? "auto" : "visible",
+                        overflowY: "visible",
+                        WebkitOverflowScrolling: "touch",
+                    }}
+                >
+                    <div
+                        style={{
+                            minWidth: isMobile ? "1100px" : "100%",
+                            height: `${chartHeight}px`,
+                            position: "relative",
+                        }}
+                    >
                     {graphData && graphData.length > 0 ? (
                         <ChartContainer
                             height={chartHeight}
@@ -305,20 +270,20 @@ export const RecommendedDetailsPriceGraph1: FC<Props> = ({asset_label, selectedT
                                 {
                                     id: "profitSeries",
                                     yAxisId: "profit",
-                                    type: "bar",
+                                    type: "line",
                                     label: t("Profit"),
                                     data: graphData.map((p) => p.avgProfit - offset),
-                                    color: "#B1974E",
+                                    color: profitSeriesColor,
                                     valueFormatter: (value: number | null) =>
                                         value !== null ? `${Number(value + offset).toFixed(3)} €` : "",
                                 },
                                 {
                                     id: "rankSeries",
                                     yAxisId: "rank",
-                                    type: "line",
+                                    type: "bar",
                                     label: t("Rank"),
                                     data: graphData.map((p) => p.avgWeekRanking),
-                                    color: "#4C4033",
+                                    color: rankSeriesColor,
                                     valueFormatter: (value: number | null) =>
                                         value !== null ? `${Number(value).toFixed()}` : "",
                                 },
@@ -348,7 +313,6 @@ export const RecommendedDetailsPriceGraph1: FC<Props> = ({asset_label, selectedT
                                             },
                                         },
                                     ],
-                                    //tickNumber: 168 / 2,
                                     tickPlacement: "middle",
                                     tickInterval: (value: any, index: number) => index % 3 === 0,
                                     tickLabelInterval: ( value) => {
@@ -408,7 +372,6 @@ export const RecommendedDetailsPriceGraph1: FC<Props> = ({asset_label, selectedT
                             ]}
                             sx={{
                                 backgroundColor: "transparent",
-                                //"& .MuiChartsAxis-line": { stroke: "#888",},
                                 '& .MuiChartsTooltip-root': {
                                     fontSize: 14,
                                     backgroundColor: '#4287f5',
@@ -418,7 +381,6 @@ export const RecommendedDetailsPriceGraph1: FC<Props> = ({asset_label, selectedT
                                     zIndex: 1000,
                                 },
                                 '& .MuiChartsTooltip-table': {
-                                    // optional – table contents inside
                                     fontWeight: 600,
                                 }
                             }}
@@ -426,19 +388,6 @@ export const RecommendedDetailsPriceGraph1: FC<Props> = ({asset_label, selectedT
                             <BarPlot/>
                             <LinePlot />
                             <ChartsTooltip trigger="axis" />
-
-                            {/*{showTrashHolds && <ScatterPlot />}*/}
-
-                            {/*{thresholdLines.map((line, index) => (
-                                <ChartsReferenceLine
-                                    key={index}
-                                    y={line.y}
-                                    label={`${line.label}: ${line.y.toFixed(2)} €`}
-                                    labelAlign="end"
-                                    lineStyle={{ stroke: line.color, strokeDasharray: "4 4" }}
-                                    labelStyle={{ fill: line.color, fontWeight: "bold", fontSize: "12px" }}
-                                />
-                            ))}*/}
                             <ChartsXAxis />
                             <ChartsYAxis axisId="profit" />
                             <ChartsYAxis axisId="rank" />
@@ -459,6 +408,7 @@ export const RecommendedDetailsPriceGraph1: FC<Props> = ({asset_label, selectedT
                             </h4>
                         </div>
                     )}
+                    </div>
                 </div>
             </div>
         </>

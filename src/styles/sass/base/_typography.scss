@@ -227,8 +227,8 @@ button {
 
 @media (max-width: 768px) {
   .container {
-    max-width: 100% !important;
-    width: 100% !important;
+    max-width: 90% !important;
+    width: 90% !important;
     padding-left: 0 !important;
     padding-right: 0 !important;    
   }
@@ -332,14 +332,6 @@ button {
   color: var(--red-on-primary-color);
 }
 
-.red-on-tertiary-color-text {
-  color: var(--red-on-tertiary-color);
-}
-
 .green-on-primary-color-text {
   color: var(--green-on-primary-color);
-}
-
-.green-on-tertiary-color-text {
-  color: var(--green-on-tertiary-color);
 }

@@ -1,8 +1,9 @@
-import {FC} from 'react'
+import {FC, useEffect} from 'react'
 import {TitleHeader} from "../components/about/TitleHeader.tsx";
 import {AboutUs} from "../components/about/AboutUs.tsx";
 import {ContactUs} from "../components/about/ContactUs.tsx";
 import {WarningOfRisks} from "../components/navbar/WarningOfRisks.tsx";
+import {ToastColor, useToast} from "../utils/providers/ToastProvider.tsx";
 
 export const About:FC = () => {
     return (

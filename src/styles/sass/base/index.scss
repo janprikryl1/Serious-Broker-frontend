@@ -10,9 +10,6 @@
   background-repeat: no-repeat;
   background-position: calc(100% - 60vh) calc(100% + 30vh);
   display: flex;
-  align-items: center;
-  color: #fff;
-  letter-spacing: 10px;
 
   .overlay {
     position: absolute;
@@ -455,19 +452,15 @@
 }
 
 .result-label {
-  /* Obecný styl pro menší text (Zisk, 1000SATS) */
   font-size: 1rem;
   color: #555;
   margin-bottom: 0.25rem;
 }
 
 .result-value {
-  /* Obecný styl pro velkou hodnotu */
   font-size: 2.2rem;
   font-weight: 700;
 }
-
-/* --- Nové a specifické styly pro šipky --- */
 
 .most-profitable-section {
   margin-top: 2rem;
@@ -478,11 +471,11 @@
 }
 
 .overlay-arrow {
-  position: absolute; /* KLÍČOVÉ: pozicují se relativně k .result-box */
+  position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  z-index: 3; /* Musí být nad grafem i textem */
-  background-color: rgba(255, 255, 255, 0.5); /* Lehké pozadí pro lepší viditelnost */
+  z-index: 3;
+  background-color: rgba(255, 255, 255, 0.5);
   border-radius: 50%;
   width: 36px;
   height: 36px;
@@ -544,7 +537,7 @@
 .sticky-header-active {
   position: fixed;
   top: 0;
-  z-index: 1020;
+  z-index: 100;
   background-color: var(--tertiary-color);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   left: 0;
@@ -566,6 +559,11 @@
   line-height: 1.2;
   margin-left: -35vw;
   letter-spacing: 0.5px;
+
+  &--mobile {
+    font-size: 2.6rem;
+    letter-spacing: 0;
+  }
 }
 
 .slide-tagline-automatization {
@@ -575,7 +573,11 @@
   margin-top: 1rem;
   margin-left: -35vw;
   letter-spacing: 0.5px;
-  color: #aaa79f;
+
+  &--mobile {
+    font-size: 1.2rem;
+    letter-spacing: 0;
+  }
 }
 
 .slide-title-your-money-your-rules {
@@ -583,6 +585,11 @@
   font-size: 3.5rem;
   margin-left: -35vw;
   max-width: 800px;
+
+  &--mobile {
+    font-size: 2.6rem;
+    letter-spacing: 0;
+  }
 }
 
 .slide-description-your-money-your-rules {
@@ -590,10 +597,15 @@
   font-size: 1.6rem;
   margin-left: -35vw;
   max-width: 800px;
-  color: #aaa79f;
+  color: var(--gray-2-color);
+
+  &--mobile {
+    font-size: 1.2rem;
+    letter-spacing: 0;
+  }
 }
 
-@media (min-width: 1400px) {
+@media (min-width: 769px) {
   .container,
   .container-fluid,
   .container-xxl,

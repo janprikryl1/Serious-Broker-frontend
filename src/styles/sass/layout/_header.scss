@@ -47,7 +47,6 @@
   background: $primary-color;
   padding-block: 6px;
   min-height: 56px;
-  margin-top:5%;
 
   @include breakpoint(sm) {
     position: relative;
@@ -74,9 +73,8 @@
       }
 
       .wordmark {
-        width: 120px;
+        width: 220px;
         @include breakpoint(lg) { width: 300px; }
-        @include breakpoint(xl) { width: 300px; }
       }
     }
 
@@ -106,7 +104,7 @@
 
     .dropdown-menu {
       position: absolute !important;
-      z-index: 9999;
+      z-index: 3000;
     }
   }
 
@@ -337,80 +335,6 @@
       transform: scaleY(1);
       box-shadow: 0 5px 10px -3px rgba(0, 0, 0, 0.1);
       background-color: $wh-color;
-    }
-  }
-}
-
-@media (min-width: 767px) {
-  .header-bar {
-    display: none;
-  }
-}
-
-.header-bar {
-  @extend %p-rel;
-  @extend %c-pointer;
-  width: 25px;
-  height: 20px;
-  @extend %ms-30;
-  padding: 6px;
-
-  @include breakpoint (md) {
-    width: 30px;
-    height: 24px;
-  }
-
-  span {
-    @extend %p-abs;
-    @extend %d-inline-block;
-    @extend %w-100;
-    @include add-prefix(transition, $transition);
-    & {
-      background-color: $black-color;
-      border-radius: 5px;
-      height: 2px;
-      left: 0;
-    }
-
-    &:first-child { top: 0; }
-    &:nth-child(2) {
-      top: 51%;
-      transform: translateY(-65%);
-    }
-    &:last-child { bottom: 0; }
-  }
-
-  &.active {
-    span {
-      &:first-child {
-        @include add-prefix(transform, rotate(45deg) translate(3px, 9px));
-        @include breakpoint(md) {
-          @include add-prefix(transform, rotate(45deg) translate(3px, 12px));
-        }
-      }
-      &:nth-child(2) { opacity: 0; }
-      &:last-child {
-        @include add-prefix(transform, rotate(-45deg) translate(3px, -10px));
-        @include breakpoint(md) {
-          @include add-prefix(transform, rotate(-45deg) translate(3px, -13px));
-        }
-      }
-    }
-  }
-
-  @include breakpoint(max-sm) {
-    width: 15px;
-    height: 16px;
-    margin-right: 20px;
-
-    span { height: 2px; width: 20px; }
-
-    &.active {
-      span {
-        &:first-child { @include add-prefix(transform, rotate(45deg) translate(4px, 6px)); }
-        &:nth-child(2) { opacity: 0; }
-        &:last-child { @include add-prefix(transform, rotate(-45deg) translate(4px, -6px)); }
-      }
     }
   }
 }

@@ -1,72 +1,81 @@
-import { FC, useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
-import { NavbarDesktopMenu } from "./NavbarDesktopMenu.tsx";
+import {FC, useEffect, useState} from "react";
+import {Link, useLocation} from "react-router-dom";
+import {NavbarDesktopMenu} from "./NavbarDesktopMenu.tsx";
 import SeriousBrokerHandWriting from "../../utils/icons/logo/SB-handwritten-white.svg";
-import { MobileMenu } from "./MobileMenu.tsx";
-import { useMediaQuery } from "@mui/material";
-import { useUserContext } from "../../utils/providers/providerUser.tsx";
-import { routes } from "../../utils/constants";
-import { ChangeLanguageIcon } from "./headerIcons/languageSwitchIcon/ChangeLanguageIcon.tsx";
-import { SignUpIcon } from "./headerIcons/SignUpIcon.tsx";
-import { SignInIcon } from "./headerIcons/SignInIcon.tsx";
+import {MobileMenu} from "./MobileMenu.tsx";
+import {useMediaQuery} from "@mui/material";
+import {useUserContext} from "../../utils/providers/providerUser.tsx";
+import {routes} from "../../utils/constants";
+import {ChangeLanguageIcon} from "./headerIcons/languageSwitchIcon/ChangeLanguageIcon.tsx";
+import {SignUpIcon} from "./headerIcons/SignUpIcon.tsx";
+import {SignInIcon} from "./headerIcons/SignInIcon.tsx";
+import {FiMenu} from "react-icons/fi";
 
 export const Header: FC = () => {
-    const { user } = useUserContext();
-    const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
-    const location = useLocation();
-    const isMobile = useMediaQuery("(max-width:768px)");
+  const {user} = useUserContext();
+  const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const location = useLocation();
+  const isMobile = useMediaQuery("(max-width: 820px)");
+  const isTablet = useMediaQuery("(max-width: 1457px)");
 
-    const toggleMobileMenu = () => setMobileMenuOpen((v) => !v);
-    useEffect(() => setMobileMenuOpen(false), [location.pathname]);
+  const toggleMobileMenu = () => setMobileMenuOpen((v) => !v);
+  const menuColor = isMobileMenuOpen ? "var(--secondary-color)" : "var(--white-color)"
+  useEffect(() => setMobileMenuOpen(false), [location.pathname]);
 
-    return (
-        <header className="header-section header-section--style1">
-            <div className="header-wrapper">
-                <div className="container mt-4">
-                    <div className="d-flex align-items-center justify-content-between">
-                        <div className="d-flex align-items-center">
-                            <div className="logo">
-                                <Link to={routes.home} aria-label="Serious Broker - home">
-                                    <img
-                                        className="wordmark"
-                                        src={SeriousBrokerHandWriting}
-                                        alt="Serious.Broker"
-                                    />
-                                </Link>
-                            </div>
-                            {/*{!isMobile && <div className="vr"></div>}*/}
+  return (
+    <header className="header-section header-section--style1">
+      <div className="header-wrapper">
+        <div className="container mt-4">
+          <div className="d-flex align-items-center justify-content-between">
+            <div className="d-flex align-items-center">
+              <div className="logo">
+                <Link to={routes.home} aria-label="Serious Broker - home">
+                  <img
+                    className="wordmark"
+                    src={SeriousBrokerHandWriting}
+                    alt="Serious.Broker"
+                  />
+                </Link>
+              </div>
 
-                            <div className="menu-area">
-                                <NavbarDesktopMenu/>
-                            </div>
-                        </div>
-
-                        <div className="d-flex align-items-center flex-nowrap">
-
-                            {!user && !isMobile && (
-                                <div className="px-3 text-light fw-bold">
-                                    <SignUpIcon />
-                                </div>
-                            )}
-
-                            <div className="mx-2">
-                                <SignInIcon />
-                            </div>
-
-                            <div className="mx-2 mobile-hide">
-                                <ChangeLanguageIcon />
-                            </div>
-
-
-                            <div className="header-bar" onClick={toggleMobileMenu} aria-label="Toggle menu">
-                                <span></span><span></span><span></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+              <div className="menu-area">
+                <NavbarDesktopMenu/>
+              </div>
             </div>
 
-            {isMobileMenuOpen && <MobileMenu toggleMobileMenu={toggleMobileMenu} />}
-        </header>
-    );
+            <div className="d-flex align-items-center flex-nowrap">
+
+              {!user && !isMobile && (
+                <div className="px-3 fw-bold" style={{color: "var(--white-color)"}}>
+                  <SignUpIcon/>
+                </div>
+              )}
+
+              {user || (!isMobile && !isTablet) ? (
+                  <div className="mx-2">
+                    <SignInIcon/>
+                  </div>
+              ) : null}
+
+              {!isMobile && (
+                  <div className="mx-2">
+                    <ChangeLanguageIcon/>
+                  </div>
+              )}
+
+
+              {isTablet || isMobile ?
+                <div onClick={toggleMobileMenu} aria-label="Toggle menu">
+                  <FiMenu size={38} style={{color: menuColor, marginLeft: "15px"}}/>
+                </div> :
+                null
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <MobileMenu toggleMobileMenu={toggleMobileMenu} isOpen={isMobileMenuOpen} />
+    </header>
+  );
 };

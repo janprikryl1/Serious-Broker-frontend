@@ -15,6 +15,7 @@
   border: 0.5px solid color-mix(in srgb, var(--white-color) 15%, transparent) !important;
   border-radius: 8px !important;
   padding: 8px 0;
+  z-index: 2100;
 }
 
 .dropdown-item {

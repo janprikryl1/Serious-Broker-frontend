@@ -41,7 +41,7 @@ export const useSignIn = () => {
                     text: t("Welcome back!")
                 }).then(() => {
                     setUser(resData.user);
-                    navigate(routes.profile.myPortfolio);
+                    navigate(routes.profile.dashboard);
                 });
             } else if (resData.status === "error") {
                 if (resData.message === "invalid") {
