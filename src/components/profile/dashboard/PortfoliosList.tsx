@@ -2,14 +2,17 @@ import React, { useEffect, useState } from 'react';
 import { OutlineContainer } from '../../reusable/OutlineContainer.tsx';
 import { getMyPortfolios } from '../../../utils/api/myPortfolioService.ts';
 import { useTranslation } from 'react-i18next';
-import {routes} from "../../../utils/constants";
-import {Link} from "react-router-dom";
+import {routes} from '../../../utils/constants';
+import {Link} from 'react-router-dom';
+import {MyPortfolioType} from "../../../utils/types/myPortfolio/MyPortfolioType.ts";
 
-export const PortfoliosList = () => {
+type Props = {
+  isLoading: boolean;
+  portfolios: MyPortfolioType[];
+}
+
+export const PortfoliosList = ({isLoading, portfolios}: Props) => {
   const { t } = useTranslation();
-
-  const [portfolios, setPortfolios] = useState(JSON.parse('[]'));
-  const [isLoading, setIsLoading] = useState(true);
 
   const parseAssets = (assetValue) => {
     if (Array.isArray(assetValue)) return assetValue;
@@ -26,35 +29,12 @@ export const PortfoliosList = () => {
     return [];
   };
 
-  useEffect(() => {
-    let mounted = true;
-
-    const loadPortfolios = async () => {
-      try {
-        setIsLoading(true);
-        const response = await getMyPortfolios();
-        if (!mounted) return;
-        setPortfolios(Array.isArray(response?.data) ? response.data : []);
-      } catch {
-        if (mounted) setPortfolios([]);
-      } finally {
-        if (mounted) setIsLoading(false);
-      }
-    };
-
-    loadPortfolios();
-
-    return () => {
-      mounted = false;
-    };
-  }, []);
-
   if (isLoading) {
-    return <div className="mt-4">Načítavam portfóliá...</div>;
+    return <div className="mt-4">{t('Loading portfolios...')}</div>;
   }
 
   if (!portfolios.length) {
-    return <div className="mt-4">Žiadne portfóliá sa nenašli.</div>;
+    return <div className="mt-4">{t('No portfolios found.')}</div>;
   }
 
   return (
@@ -73,13 +53,13 @@ export const PortfoliosList = () => {
           const hasMoreAssets = assets.length > 3;
 
           return (
-            <div className="d-flex gap-2 align-items-start" key={portfolio.id ?? portfolio.name}>
-              <div className="col-3 mb-0">
+            <div className="d-flex flex-wrap gap-2 align-items-center justify-content-between pb-2" key={portfolio.id ?? portfolio.name}>
+              <div className="mb-0">
                 <Link to={`/profile/my_portfolio_details/${portfolio.id}`} className="text-decoration-none">
                   {portfolio.name}
                 </Link>
               </div>
-              <div className='gray-2-color-text'>
+              <div className='gray-2-color-text text-start flex-grow-1'>
                 {assetsPreview.length > 0
                   ? `${assetsPreview.join(', ')}${hasMoreAssets ? ', ...' : ''}`
                   : <div className='gray-2-color-text'>{t('No assets')}</div>

@@ -6,11 +6,3 @@ export type DashboardType = {
   traffic_light_sell_sum?: number;
 };
 
-export type DashboardApiResponse = {
-  status: 'success' | 'error';
-  authenticated: boolean;
-  user_id?: number;
-  portfolio_sum?: number;
-  total_invested?: number;
-};
-

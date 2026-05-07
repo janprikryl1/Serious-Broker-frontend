@@ -93,12 +93,16 @@ export const InvestmentPlanList = () => {
             <div className="mb-0">
                 {plan.name || '-'}
             </div>
-            <div className="d-flex gap-3 mb-2 border-bottom">
+            <div className="row mb-2 border-bottom">
               {getPlanFields(plan).map((item, index) => (
-                <div key={index} className="d-flex align-items-center gap-3 col-4 mb-3">
+                <div key={index} className="d-flex align-items-center gap-3 col-12 col-sm-4 mb-3">
+
+                  {/* Icon */}
                   <div className="color-container--gold icon-container">
                     <item.Icon size={20} />
                   </div>
+
+                  {/* Label + Value */}
                   <div>
                     <div className="gray-2-color-text" style={{ fontSize: '0.9rem' }}>
                       {t(item.label)}

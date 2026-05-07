@@ -4,87 +4,61 @@ import PropTypes from 'prop-types';
 import { getMyPortfolioDetailsGraph } from '../../../utils/api/myPortfolioService.ts';
 import { AreaPlot, ChartContainer, ChartsTooltip, LinePlot } from '@mui/x-charts';
 import { GraphDataSkeleton } from '../../graphs/asset/GraphDataSkeleton.tsx';
-import { getAssetGraphData } from '../../../utils/api/binanceIndexAssets.ts';
-import { QuotedCurrenciesPeriod } from '../../../utils/options/QuotedCurrenciesPeriod.ts';
 import { useTranslation } from 'react-i18next';
 import { FiEdit3 } from 'react-icons/fi';
 import { LuTrash } from 'react-icons/lu';
 import { SlOptions } from 'react-icons/sl';
 import { LuTrendingDown, LuTrendingUp } from 'react-icons/lu';
 import { OutlineContainer } from '../../reusable/OutlineContainer.tsx';
+import {MyPortfolioType} from "../../../utils/types/myPortfolio/MyPortfolioType.ts";
+import {PortfolioGraphData} from "../../../utils/types/asset/MyPortfolioType.ts";
+import {Assets} from "../../../utils/types/asset/AssetDetailType.ts";
 
-export const MyPortfolioCard = ({ data, onDelete, isRemoving = false }) => {
+type Props = {
+  data: MyPortfolioType;
+  onDelete: () => void;
+  isRemoving: boolean;
+  isLoading: boolean;
+  graphData: PortfolioGraphData;
+}
+
+export const MyPortfolioCard = ({ data, onDelete, isRemoving = false, isLoading, graphData }) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const [isLoading, setIsLoading] = useState(false);
-  const [profitEur, setProfitEur] = useState(Number.NaN);
-  const [profitPct, setProfitPct] = useState(Number.NaN);
-  const [chartValues, setChartValues] = useState([0]);
-  const [hasChartData, setHasChartData] = useState(false);
-  const [isActionsMenuOpen, setIsActionsMenuOpen] = useState(false);
   const [assetsCount, setAssetsCount] = useState(0);
+  const [isActionsMenuOpen, setIsActionsMenuOpen] = useState(false);
+
+  // Use graph data from props
+  const profitEur = graphData?.profitEur ?? Number.NaN;
+  const profitPct = graphData?.profitPct ?? Number.NaN;
+  const chartValues = graphData?.chartValues ?? [0];
+  const hasChartData = !!graphData?.chartValues && graphData.chartValues.length > 0;
+
   const minVal = Math.min(...chartValues);
   const maxVal = Math.max(...chartValues);
   const padding = (maxVal - minVal) * 0.05;
 
   useEffect(() => {
-    if (!data.id) return;
+    let assetsArray: Assets[] = [];
 
-    const fetchPortfolioCardData = async () => {
-      setIsLoading(true);
-      try {
-        const detailsResponse = await getMyPortfolioDetailsGraph(data.id);
-        const details = detailsResponse.data;
-
-        const currencies = details.asset
-          .filter((assetDetail) => assetDetail.status)
-          .map((assetDetail) => ({
-            asset_label: assetDetail.asset_label,
-            allocation: assetDetail.allocation
-          }));
-
-        const activeAssetsCount = details.asset.filter((assetDetail) => assetDetail.status).length;
-        setAssetsCount(activeAssetsCount);
-
-        if (currencies.length === 0) {
-          setHasChartData(false);
-          setProfitEur(Number.NaN);
-          setProfitPct(Number.NaN);
-          return;
+    if (data.asset) {
+      if (Array.isArray(data.asset)) {
+        assetsArray = data.asset;
+      } else if (typeof data.asset === 'string') {
+        try {
+          const parsed = JSON.parse(data.asset);
+          assetsArray = Array.isArray(parsed) ? parsed : [];
+        } catch (e) {
+          console.error("Error parsing assets:", e);
+          assetsArray = [];
         }
-
-        const graphResponse = await getAssetGraphData(currencies, QuotedCurrenciesPeriod.month);
-        const values = Object.values(graphResponse?.data?.data ?? {})
-          .map((value) => Number(value))
-          .filter((value) => Number.isFinite(value));
-
-        if (values.length === 0) {
-          setHasChartData(false);
-          setProfitEur(Number.NaN);
-          setProfitPct(Number.NaN);
-          return;
-        }
-
-        const firstValue = values[0];
-        const lastValue = values[values.length - 1];
-        const calculatedProfitEur = lastValue - firstValue;
-        const calculatedProfitPct = firstValue > 0 ? (calculatedProfitEur / firstValue) * 100 : Number.NaN;
-
-        setProfitEur(calculatedProfitEur);
-        setProfitPct(calculatedProfitPct);
-        setChartValues(values);
-        setHasChartData(true);
-      } catch {
-        setProfitEur(Number.NaN);
-        setProfitPct(Number.NaN);
-        setHasChartData(false);
-      } finally {
-        setIsLoading(false);
       }
-    };
+    }
 
-    fetchPortfolioCardData();
-  }, [data.id]);
+    const activeAssetsCount = assetsArray.filter((assetDetail) => assetDetail.status).length;
+    setAssetsCount(activeAssetsCount);
+
+  }, [data.asset]);
 
   const profitClassName = useMemo(() => {
     if (!Number.isFinite(profitEur)) return 'gray-2-color-text';
@@ -259,5 +233,10 @@ MyPortfolioCard.propTypes = {
     description: PropTypes.string
   }).isRequired,
   onDelete: PropTypes.func.isRequired,
-  isRemoving: PropTypes.bool
+  isRemoving: PropTypes.bool,
+  graphData: PropTypes.shape({
+    chartValues: PropTypes.arrayOf(PropTypes.number),
+    profitEur: PropTypes.number,
+    profitPct: PropTypes.number
+  })
 };

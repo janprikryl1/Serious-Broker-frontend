@@ -337,5 +337,6 @@
         "triggerDescription": "Within a traffic light you can define a trigger, which will ensure that a buy action will occur when certain requirements are fulfilled."
     },
     "BuyTL": "Buy",
-    "SellTL": "Sell"
+    "SellTL": "Sell",
+    "estimatedTotalInvestment": "Total estimated contributions calculated from the start date of each plan. Please note: This is a simulation based on your settings and may slightly differ from actual executed trades."
 }

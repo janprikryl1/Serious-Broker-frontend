@@ -7,7 +7,6 @@ import {CustomSwal} from "../../utils/functions/customSwal.ts";
 import {RecommendationDetailSeasonEnum} from "../../utils/enums/RecommendationDetailSeasonEnum.ts";
 import {createDateFormatters} from "../../utils/functions/dateFunctions.ts";
 import {RecommendedSeasonSelect} from "./RecommendedSeasonSelect.tsx";
-import '../../styles/css/MuiChartsTooltip.css';
 import {useMediaQuery} from "@mui/material";
 import {
     BinanceIndexAssetRecomBestPreviousDetails

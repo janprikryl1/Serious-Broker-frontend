@@ -1,11 +1,13 @@
 import React, {useEffect, useState} from 'react';
-import {TitleHeader} from "../../components/about/TitleHeader.tsx";
-import {InfoRow} from "../../components/profile/dashboard/InfoRow";
-import {BestPortfolio} from "../../components/profile/dashboard/BestPortfolio.tsx";
-import { getDashboardDetails } from "../../utils/api/dashboardService.ts";
-import {PortfoliosList} from "../../components/profile/dashboard/PortfoliosList.tsx";
-import {InvestmentPlanList} from "../../components/profile/dashboard/InvestmentPlanList.tsx";
-import {TrafficLightsList} from "../../components/profile/dashboard/TrafficLightsList.tsx";
+import {TitleHeader} from '../../components/about/TitleHeader.tsx';
+import {InfoRow} from '../../components/profile/dashboard/InfoRow';
+import {BestPortfolio} from '../../components/profile/dashboard/BestPortfolio.tsx';
+import { getDashboardDetails } from '../../utils/api/dashboardService.ts';
+import {PortfoliosList} from '../../components/profile/dashboard/PortfoliosList.tsx';
+import {InvestmentPlanList} from '../../components/profile/dashboard/InvestmentPlanList.tsx';
+import {TrafficLightsList} from '../../components/profile/dashboard/TrafficLightsList.tsx';
+import {getMyPortfolios} from '../../utils/api/myPortfolioService.ts';
+import {MyPortfolioType} from "../../utils/types/myPortfolio/MyPortfolioType.ts";
 
 export const Dashboard = () => {
   const [portfolioSum, setPortfolioSum] = useState(0);
@@ -13,6 +15,8 @@ export const Dashboard = () => {
   const [totalInvested, setTotalInvested] = useState(0);
   const [buyTrafficLights, setBuyTrafficLights] = useState(0);
   const [sellTrafficLights, setSellTrafficLights] = useState(0);
+  const [portfolios, setPortfolios] = useState<MyPortfolioType[]>([]);
+  const [arePortfoliosLoading, setArePortfoliosLoading] = useState(true);
 
   useEffect(() => {
     let mounted = true;
@@ -36,6 +40,21 @@ export const Dashboard = () => {
       }
     })();
 
+    const loadPortfolios = async () => {
+      try {
+        setArePortfoliosLoading(true);
+        const response = await getMyPortfolios();
+        if (!mounted) return;
+        setPortfolios(Array.isArray(response?.data) ? response.data : []);
+      } catch {
+        if (mounted) setPortfolios([]);
+      } finally {
+        if (mounted) setArePortfoliosLoading(false);
+      }
+    };
+
+    loadPortfolios();
+
     return () => {
       mounted = false;
     };
@@ -48,11 +67,11 @@ export const Dashboard = () => {
         <div className="d-flex flex-column gap-4">
           <InfoRow portfolioSum={portfolioSum} totalInvested={totalInvested} investmentPlanSum={investmentPlanSum} buyTrafficLightSum={buyTrafficLights} sellTrafficLightSum={sellTrafficLights}/>
           <div className="row g-4">
-            <div className="col-lg-8 col-md-5">
-              <BestPortfolio />
+            <div className="col-12 col-xl-7">
+              <BestPortfolio isLoading={arePortfoliosLoading} myPortfolios={portfolios} />
             </div>
-            <div className="col-lg-4 col-md-7">
-              <PortfoliosList />
+            <div className="col-12 col-xl-5">
+              <PortfoliosList isLoading={arePortfoliosLoading} portfolios={portfolios} />
             </div>
           </div>
           <TrafficLightsList />

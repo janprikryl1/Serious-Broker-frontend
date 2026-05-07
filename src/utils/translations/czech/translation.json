@@ -1282,6 +1282,7 @@
     "Active Investment Plans": "Aktivní investiční plány",
     "Total Invested": "Celkem investováno",
     "Most profitable portfolio": "Nejziskovější portfolio",
+    "Top-performing portfolio of the past month": "Nejvýkonnější portfolio za poslední měsíc",
     "Investment Frequency": "Frekvence investování",
     "Investment Amount": "Výše investice",
     "Index Name": "Název indexu",
@@ -1302,5 +1303,7 @@
     "SellTL": "prodejní",
     "Saving traffic light...": "Ukládání tržního semaforu...",
     "Error while saving. Please try again.": "Nastala chyba při ukládání. Zkuste to znovu.",
-    "Traffic light saved successfully!": "Tržní semafor úspešně uložen!"
+    "Traffic light saved successfully!": "Tržní semafor úspešně uložen!",
+    "estimatedTotalInvestment": "Celkové odhadované vklady vypočítané od data zahájení každého plánu. Upozornění: Jedná se o simulaci založenou na vašem nastavení, která se může mírně lišit od skutečně provedených obchodů."
+
 }

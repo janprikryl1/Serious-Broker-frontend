@@ -13,12 +13,10 @@ import { MyPortfolioType } from "../../../utils/types/myPortfolio/MyPortfolioTyp
 import {CardContainer} from "../../reusable/CardContainer.tsx";
 import {OutlineContainer} from "../../reusable/OutlineContainer.tsx";
 
-type PortfolioStats = {
-  current_value: number;
-  invested_amount: number;
-  profit: number;
-  profitPct: number;
-};
+type Props = {
+  isLoading: boolean;
+  myPortfolios: MyPortfolioType[];
+}
 
 type BestPerformer = {
   id: number;
@@ -30,73 +28,68 @@ type PortfolioGraphDetails = {
   asset: Array<{ asset_label: string; allocation: number; status: boolean }>;
 };
 
-export const BestPortfolio = () => {
+type PortfolioStats = {
+  id: number;
+  profitPct: number;
+};
+
+export const BestPortfolio = ({isLoading, myPortfolios}: Props) => {
   const { t } = useTranslation();
-  const [myPortfolios, setMyPortfolios] = useState<MyPortfolioType[]>([]);
-  const [portfolioStats, setPortfolioStats] = useState<Map<number, PortfolioStats>>(new Map());
+  const [portfolioStats, setPortfolioStats] = useState<PortfolioStats[]>([]);
   const [bestPortfolioDetails, setBestPortfolioDetails] = useState<PortfolioGraphDetails | null>(null);
   const [selectedPeriod, setSelectedPeriod] = useState(QuotedCurrenciesPeriod.month);
   const [currency, setCurrency] = useState<Currencies>(Currencies.EUR);
   const [currencyPrice, setCurrencyPrice] = useState<string>();
   const [currencyValue, setCurrencyValue] = useState<number>(1);
   const [graphData, setGraphData] = useState<AssetAnalysisGraphData>();
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isBestLoading, setIsBestLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const fetchMyPortfolios = async () => {
       try {
-        setIsLoading(true);
-        const response = await getMyPortfolios();
-        const portfolios = Array.isArray(response.data) ? response.data : [];
-        setMyPortfolios(portfolios);
+        setIsBestLoading(true);
 
-        const stats = new Map<number, PortfolioStats>();
-        for (const portfolio of portfolios) {
+        const stats: PortfolioStats[] = []
+        for (const portfolio of myPortfolios) {
           if (!portfolio.id) continue;
 
           try {
             const detailsResponse = await getMyPortfolioDetailsGraph(portfolio.id);
             const details = detailsResponse.data;
-            const investedAmount = Number(details.invested_amount);
-            const currentValue = Number(details.current_value);
-            const profit = currentValue - investedAmount;
-            const profitPct = investedAmount > 0 ? (profit / investedAmount) * 100 : 0;
-            stats.set(portfolio.id, {
-              current_value: currentValue,
-              invested_amount: investedAmount,
-              profit,
-              profitPct,
-            });
+            const profitPct = details.month_0_profit;
+            stats.push({id: portfolio.id, profitPct: profitPct});
           } catch {
-            // Keep module resilient; one failed portfolio should not break whole widget.
           }
         }
 
         setPortfolioStats(stats);
       } catch {
-        setMyPortfolios([]);
-        setPortfolioStats(new Map());
+        setPortfolioStats([]);
       } finally {
-        setIsLoading(false);
+        setIsBestLoading(false);
       }
     };
 
     fetchMyPortfolios();
-  }, []);
+  }, [myPortfolios]);
 
-  // Same best performer selection logic as in MyPortfolio.tsx, extended with id for follow-up graph loading.
   const bestPerformer = useMemo<BestPerformer | null>(() => {
+
     let best: BestPerformer | null = null;
 
     for (let i = 0; i < myPortfolios.length; i++) {
       const portfolio = myPortfolios[i];
       if (!portfolio?.id) continue;
 
-      const stats = portfolioStats.get(portfolio.id);
+      const stats = portfolioStats.find(s => s.id === portfolio.id);
       if (!stats) continue;
 
       if (!best || stats.profitPct > best.profitPct) {
-        best = { id: portfolio.id, name: portfolio.name, profitPct: stats.profitPct };
+        best = {
+          id: portfolio.id,
+          name: portfolio.name,
+          profitPct: stats.profitPct
+        };
       }
     }
 
@@ -153,7 +146,7 @@ export const BestPortfolio = () => {
     fetchGraphData();
   }, [bestPortfolioDetails, selectedPeriod]);
 
-  if (isLoading) {
+  if (isLoading || isBestLoading) {
     return (
       <OutlineContainer className="dashboard-container mt-4">
         <p className="mb-0">{t("Loading best portfolio...")}</p>
@@ -174,7 +167,7 @@ export const BestPortfolio = () => {
     <div className="mt-1">
         <div className={'card-header mb-3'}>
           <p className="mb-3">
-            {t("Most profitable portfolio")}:{" "}
+            {t("Top-performing portfolio of the past month")}:{" "}
             <Link to={`/profile/my_portfolio_details/${bestPerformer.id}`} className="text-decoration-underline gold-color-text fs-4">
               {bestPerformer.name}
             </Link>
