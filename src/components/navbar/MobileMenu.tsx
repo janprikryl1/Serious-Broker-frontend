@@ -31,7 +31,7 @@ export const MobileMenu: FC<Props> = ({ toggleMobileMenu, isOpen }) => {
 
   return (
     <div className={`mobile-menu ${isOpen ? "is-open" : ""}`}>
-      <div className={`d-flex flex-column align-items-center justify-content-center mt-3 mb-3 pb-3 ${!isMobile || !isTablet ? "hidden" : "border-bottom"} `} style={{width: "90%"}}>
+      <div className={`d-flex flex-column align-items-center justify-content-center mt-3 mb-3 pb-3 ${!isTablet || user ? "hidden" : "border-bottom"} `} style={{width: "90%"}}>
         <div className={"w-75"}>
           <div className={"d-flex align-items-center justify-content-center mb-3 w-100 "}>
             {!user && isMobile && (
@@ -40,7 +40,7 @@ export const MobileMenu: FC<Props> = ({ toggleMobileMenu, isOpen }) => {
               </div>
             )}
 
-            {isTablet && !user && (
+            {!user && isTablet && (
               <div className={`${isMobile? "ms-2" : ""}`}>
                 <SignInIcon />
               </div>
