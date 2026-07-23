@@ -1,33 +1,39 @@
 // Theme colors
 
-$primary-color: #231F1B;
-$thm-brown-dark-color-dark: #231F1B;
+$primary-color: #2C2523;
+$thm-brown-dark-color-dark: #2C2523;
 
-$secondary-color: #B1974E;
+$secondary-color: #C5A657;
 $secondary-color-transparent-50: color-mix(in srgb, var(--secondary-color) 50%, transparent);
 $secondary-color-transparent-30: color-mix(in srgb, var(--secondary-color) 30%, transparent);
 
-$tertiary-color: #494036;
+$tertiary-color: #4A3E3B;
 $tertiary-color-light: #625950;
-$thm-brown-light-color-dark: #494036;
+$thm-brown-light-color-dark: #4A3E3B;
 
 $quaternary-color: #3E362E;
 $quaternary-color-transparent-50: color-mix(in srgb, var(--quaternary-color) 50%, transparent);
 $quaternary-color-transparent-30: color-mix(in srgb, var(--quaternary-color) 30%, transparent);
+
+$quinary-color: #F9F8F6;
+$quinary-color-transparent-50: color-mix(in srgb, var(--quinary-color) 50%, transparent);
+$quinary-color-transparent-30: color-mix(in srgb, var(--quinary-color) 30%, transparent);
 
 // Basic colors
 
 $cream-color: #FEF2E6;
 $thm-cream-dark: #FEF2E6;
 
-$white-color: #FDFAF5;
-$black-color: #0A0704;
+$white-color: #F9F8F6;
+$black-color: #2C2523;
+$true-black: #000000;
 
 $gray-1-color: #76746F;
 $gray-2-color: #A8A6A3;
 $gray-3-color: #C1BFBD;
 $gray-4-color: #44403B;
 $gray-5-color: #808080;
+$gray-6-color: #DCD6CF;
 $sandy-color: #AD9D8D;
 
 // Red and green
@@ -173,6 +179,8 @@ $thm-danger-dark: #FF0000;
     --tertiary-color-light: #{$tertiary-color-light};
     --quaternary-color: #{$quaternary-color};
     --quaternary-color-transparent-50: #{$quaternary-color-transparent-50};
+    --quinary-color: #{$quinary-color};
+    --quinary-color-transparent-50: #{$quinary-color-transparent-50};
 
     /* Basic colors */
     --cream-color: #{$cream-color};
@@ -181,9 +189,11 @@ $thm-danger-dark: #FF0000;
     --gray-3-color: #{$gray-3-color};
     --gray-4-color: #{$gray-4-color};
     --gray-5-color: #{$gray-5-color};
+    --gray-6-color: #{$gray-6-color};
     --white-color: #{$white-color};
     --black-color: #{$black-color};
     --sandy-color: #{$sandy-color};
+    --true-black: #{$true-black};
 
     /* Reds and greens */
     --green-on-primary-color: #{$green-on-primary-color};
@@ -650,10 +660,10 @@ $text-font: 'Raleway', sans-serif;
 $fs-base: 16px !default;
 $fs-small:14px;
 
-$fs-h1: 60px;
-$fs-h2: 48px;
-$fs-h3: 32px;
-$fs-h4: 28px;
+$fs-h1: 72px;
+$fs-h2: 58px;
+$fs-h3: 42px;
+$fs-h4: 32px;
 $fs-h5: 24px;
 $fs-h6: 20px;
 

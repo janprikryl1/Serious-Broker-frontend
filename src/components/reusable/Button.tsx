@@ -8,7 +8,8 @@ export enum ButtonColor {
     sandy = "var(--sandy-color)",
     green = "var(--green-on-primary-color)",
     red = "var(--red-on-tertiary-color)",
-    gray = "var(--gray-2-color)",
+    gray1 = "var(--gray-1-color)",
+    gray2 = "var(--gray-2-color)",
     lightBrown = "var(--tertiary-color)",
     darkBrown = "var(--primary-color)",
     transparent = "transparent"
@@ -16,7 +17,7 @@ export enum ButtonColor {
 
 type ButtonProps = {
     children: ReactNode;
-    onClick?: () => void;
+    onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
     className?: string;
     type?: "button" | "submit" | "reset" | "link";
     to?: string;
@@ -35,13 +36,13 @@ export const Button: FC<ButtonProps> = ({children, onClick, className = "primary
         return (
             <Link
                 to={to}
-                className={`btn trk-btn trk-btn--border trk-btn--${className}`}
+                className={`btn trk-btn trk-btn--border trk-btn--primary trk-btn--${className}`}
                 style={{
                     color: fontColorFinal,
                     backgroundColor: color,
                     boxShadow: shadow ? `0 0 15px 5px color-mix(in srgb, ${color}, transparent 90%)` : "none",
                     letterSpacing: 1,
-                    fontWeight: 400,
+                    fontWeight: 500,
                     ...style
                 }}
             >

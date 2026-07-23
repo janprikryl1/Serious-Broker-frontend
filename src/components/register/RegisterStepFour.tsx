@@ -24,7 +24,7 @@ export const RegisterStepFour:FC<Props> = ({ watch, setValue, formRegister}) => 
                 {...formRegister("language")}
             />
 
-            <Form className="padding-bottom">
+            <div className="padding-bottom">
                 <h3>{t("Newsletter")}</h3>
                 <Form.Check
                     checked={watch("newsletter_subscription") ?? true}
@@ -38,7 +38,7 @@ export const RegisterStepFour:FC<Props> = ({ watch, setValue, formRegister}) => 
                     label={t("Would you like to join a free educational program with information sent usually once a week?")}
                     onChange={(e) => setValue("education_emails", e.target.checked)}
                 />
-            </Form>
+            </div>
         </>
     );
 }

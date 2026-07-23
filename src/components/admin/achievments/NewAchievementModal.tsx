@@ -58,7 +58,7 @@ export const NewAchievementModal: FC<Props> = ({ selectedUser, setAchievements, 
                 />
             </DialogContent>
             <DialogActions>
-                <Button color={ButtonColor.gray} onClick={closeModal}>{t("Close")}</Button>
+                <Button color={ButtonColor.gray2} onClick={closeModal}>{t("Close")}</Button>
                 <Button onClick={handleAddAchievement}>{t("Add")}</Button>
             </DialogActions>
         </Dialog>

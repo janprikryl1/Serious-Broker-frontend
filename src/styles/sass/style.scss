@@ -46,7 +46,6 @@
 'components/about',
 'components/table',
 'components/card',
-'components/header',
 'components/menu',
 'components/stepper',
 'components/search-bar',
@@ -70,3 +69,17 @@
 
 // Custom components
 @import 'components/chart';
+
+// Tailwind
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+@layer base {
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0 1000px #121212 inset !important;
+    -webkit-text-fill-color: #ffffff !important;
+  }
+}

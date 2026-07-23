@@ -8,7 +8,7 @@ export const NewPage:FC = () => {
     const {t} = useTranslation();
 
     return (
-        <Button color={ButtonColor.gray} onClick={nextPage} className="me-2">
+        <Button color={ButtonColor.gray2} onClick={nextPage} className="me-2">
             {page === 0 ? t("Continue") : t("Back")}
         </Button>
     )

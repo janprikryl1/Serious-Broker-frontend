@@ -125,10 +125,10 @@
     "Week all": "Týdenní vše",
     "Week all profit": "Týdenní celkový výnos",
     "Order by": "Seřadit podle",
-    "Don’t have an account yet? ": "Nemáte profil? ",
+    "Don’t have an account yet? ": "Nemáte účet? ",
     "Fill in your details to log in": "Zadejte své údaje pro přihlášení",
-    "Already have account? ": "Již máte účet? ",
-    "Create an account to get started. We just need a few details from you to get started.": "Vytvořte účet a začněte. Potřebujeme jen několik údajů pro začátek.",
+    "Already have an account? ": "Již máte účet? ",
+    "We just need a few details to set up your profile": "Potřebujeme jen pár údajů k nastavení vašeho profilu",
     "No comments yet": "Zatím žádné komentáře",
     "Article count": "Počet článků",
     "User count": "Počet uživatelů",
@@ -268,7 +268,7 @@
     "Submit": "Potvrdit",
     "Not an account?": "Nemáte profil?",
     "Register here": "Registrovat zde",
-    "Create an account": "Vytvořit profil",
+    "Create an account": "Vytvořit účet",
     "Enter": "Potvrdit",
     "Register": "Registrace",
     "Have already an account?": "Už máte profil?",
@@ -279,8 +279,10 @@
     "Nickname": "Přezdívka",
     "Surname": "Přijmení",
     "Middle name": "Prostřední jméno",
-    "Title before": "Titul před",
-    "Title after": "Titul za",
+    "Title": "Titul před",
+    "Suffix": "Titul za",
+    "title-placeholder": "Např. Ing.",
+    "suffix-placeholder": "Např. Ph.D., MBA",
     "Firm": "Firma",
     "Firm name": "Název firmy",
     "Firm id": "ID firmy",
@@ -786,7 +788,7 @@
     "For the Cautious": "Pro obezřetné",
     "Professional investment management, investing on behalf of clients using their financial resources": "Profesionální správa investic, investování jménem klientů s využitím jejich finančních zdrojů",
     "Start Investing with Serious Broker": "Začněte investovat se Serious Broker",
-    "Create a Serious Broker account": "Založte si profil na Serious Broker",
+    "Create a Serious.Broker account": "Založte si profil na Serious.Broker",
     "Choose your investment plan": "Nastavte si preference investování",
     "Create a Binance account": "Založte si účet na Binance",
     "Start investing": "Začněte investovat",
@@ -1277,7 +1279,7 @@
         "tuningDescription": "V následující části naleznete detailní přehled toho, jak zvolené parametry strategie BTFD ovlivňují nákupní procesy u konkrétních kryptoměn. Tyto simulace ukazují vliv multiplikátoru a časových period na celkovou efektivitu nákupů v porovnání s tržním vývojem."
     },
     "Buy the F*****g Dip Investing Strategy": "Investiční strategie Buy the F*****g Dip",
-    "Dashboard": "Přehled",
+    "My Dashboard": "Můj přehled",
     "Active Portfolios": "Aktivní portfolia",
     "Active Investment Plans": "Aktivní investiční plány",
     "Total Invested": "Celkem investováno",
@@ -1304,6 +1306,50 @@
     "Saving traffic light...": "Ukládání tržního semaforu...",
     "Error while saving. Please try again.": "Nastala chyba při ukládání. Zkuste to znovu.",
     "Traffic light saved successfully!": "Tržní semafor úspešně uložen!",
-    "estimatedTotalInvestment": "Celkové odhadované vklady vypočítané od data zahájení každého plánu. Upozornění: Jedná se o simulaci založenou na vašem nastavení, která se může mírně lišit od skutečně provedených obchodů."
-
+    "estimatedTotalInvestment": "Celkové odhadované vklady vypočítané od data zahájení každého plánu. Upozornění: Jedná se o simulaci založenou na vašem nastavení, která se může mírně lišit od skutečně provedených obchodů.",
+    "Tools for the right decisions": "Nástroje pro správná rozhodnutí",
+    "Stop guessing where the market will go. Our analytical tools will show you the exact historical development and simulations of popular strategies.": "Přestaňte hádat, kam trh půjde. Naše analytické nástroje vám ukážou přesný historický vývoj a simulace populárních strategií.",
+    "Investment Autopilot": "Investiční autopilot",
+    "Create a tailored investment plan and let technology watch the market for you. Emotion-free and stress-free.": "Vytvořte si investiční plán na míru a nechte technologii, aby hlídala trh za vás. Bez emocí a bez stresu.",
+    "Cryptocurrencies Made Simple": "Kryptoměny srozumitelně",
+    "You don't have to be an expert to get started. Our easy-to-understand articles and guides will safely walk you through the world of cryptocurrencies step by step.": "Nemusíte být expert, abyste mohli začít. Naše srozumitelné články a návody vás bezpečně provedou světem kryptoměn krok za krokem.",
+    "ABOUT PRODUCT": "O PRODUKTU",
+    "REGISTER": "REGISTRACE",
+    "Invest With Us": "Investujte s námi",
+    "Začněte ještě dnes": "Get started today",
+    "Register and take control of your finances": "Registrujte se a převezměte kontrolu nad svými financemi",
+    "footer": {
+        "about_project": "Serious Broker vznikl jako nezávislý studentský projekt v rámci bakalářské práce. Pomáháme lidem zorientovat se v investování a bezpečně objevovat svět kryptoměn. ",
+        "cooperation_info": "Informace o spolupráci",
+        "disclaimer": "Nejsme finanční poradenství."
+    },
+    "Whoops": "Ups",
+    "Page Not Found": "Stránka nenalezena",
+    "Get Started Today": "Začněte ještě dnes",
+    "Enter your e-mail": "Zadejte svůj e-mail",
+    "Enter your password": "Zadejte své heslo",
+    "basics": {
+        "card1": {
+            "title": "Ochrana před inflací",
+            "desc": "Kryptoměny dlouhodobě slouží jako digitální zlato a uchovatel hodnoty."
+        },
+        "card2": {
+            "title": "Síla složeného úročení",
+            "desc": "Budujte majetek pravidelným investováním od 50 € měsíčně."
+        },
+        "card3": {
+            "title": "Technologie budoucnosti",
+            "desc": "Kryptoměny jsou pevnou součástí globálního finančního systému."
+        }
+    },
+    "Why Cryptocurrencies?": "Proč kryptoměny?",
+    "Growth Potential": "Potenciál růstu",
+    "HISTORICAL INSIGHT": "HISTORICKÝ PŘEHLED",
+    "BASICS": "ZÁKLADY",
+    "Want to see other cryptocurrencies?": "Chcete vidět další kryptoměny?",
+    "Try calculator": "Vyzkoušejet kalkulačku",
+    "invested_text": "Kdybyste {{when}} investovali <0>{{amount}}</0> ...",
+    "Today you would have": "Dnes byste měli",
+    "Deposit": "Vklad",
+    "Calculator": "Kalkulačka"
 }

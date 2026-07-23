@@ -7,10 +7,11 @@
 
 body {
   background-color: $primary-color;
-  color: $text-color;
+  color: $gray-6-color;
   font-size: 1.1rem;
   line-height: 1.625;
-  font-family: 'PT Sans', sans-serif !important;
+  font-family: 'Inter', sans-serif !important;
+  //margin-top: 56px;
 }
 
 h1,
@@ -19,19 +20,15 @@ h3,
 h4,
 h5,
 h6 {
-  color: $title-color;
-
-  //line-height: 1.25;
-  font-weight: 500;
+  font-family: "Sora", sans-serif !important;
+  font-weight: 600;
   padding-bottom: 20px;
+  letter-spacing: 2%;
+
   a{
     color: inherit;
     font-family: inherit;
   }
-}
-
-h1, h2, h3, h4, h5, h6 {
-  font-family: "PT Serif Caption", sans-serif !important;
 }
 
 h1{
@@ -63,7 +60,7 @@ h6 {
 }
 
 .secondary-title {
-  font-family: 'PT Sans Caption', sans-serif !important;
+  font-family: 'Inter', sans-serif !important;
   font-size: 24px;
   color: $sandy-color !important;
 }
@@ -98,7 +95,7 @@ ol {
 }
 
 .swal2-title {
-  font-family: "Raleway", sans-serif !important;
+  font-family: "Inter", sans-serif !important;
 }
 
 .accordion-button:not(.collapsed) {
@@ -164,7 +161,7 @@ button {
   height: 100%;
   background-color: transparent;
   color: var(--gray-light-color);
-  font-family: "PT Sans", sans-serif;
+  font-family: "Inter", sans-serif;
   font-size: 16px;
   font-weight: 400;
   cursor: pointer;
@@ -188,7 +185,7 @@ button {
 .season-button.active {
   background-color: var(--secondary-color);
   color: var(--black-color);
-  font-family: "PT Sans", sans-serif;
+  font-family: "Inter", sans-serif;
   font-weight: 500;
   border-radius: 50px;
   width: auto;
@@ -291,7 +288,7 @@ button {
 }
 
 .accent-number {
-  font-family: "PT Serif Caption";
+  font-family: "Sora";
   color: var(--secondary-color);
   font-size: 20px;
 }

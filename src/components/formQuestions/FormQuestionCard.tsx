@@ -169,7 +169,7 @@ export const FormQuestionCard: FC<Props> = ({ question, onSave, deleteQuestion, 
 
                     <div className="d-flex gap-2 mt-3">
                         <Button type="submit" color={ButtonColor.green}>{t("Save")}</Button>
-                        <Button type="button" color={ButtonColor.gray} onClick={() => {
+                        <Button type="button" color={ButtonColor.gray2} onClick={() => {
                             reset(question);
                             setIsEditing(false);
                         }}>{t("Cancel")}</Button>

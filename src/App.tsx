@@ -11,6 +11,7 @@ import {Header} from "./components/navbar/Header.tsx";
 import {Footer} from "./components/navbar/Footer.tsx";
 import {Router} from "./Router.tsx";
 import { ToastProvider } from "./utils/providers/ToastProvider.tsx";
+import VantaBackground from "./components/index/VantaBackground.tsx";
 
 // Disable automatic CSS addition for Font Awesome
 config.autoAddCss = false;
@@ -27,10 +28,8 @@ function App() {
                     <ThemeProvider>
                         <ProviderUser>
                             <AchievementsProvider>
-                                <UnverifiedHeaderInfo />
-                                <Header />
+                                <VantaBackground />
                                 <Router />
-                                <Footer />
                             </AchievementsProvider>
                         </ProviderUser>
                     </ThemeProvider>

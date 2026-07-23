@@ -1,7 +1,7 @@
 .form-control {
     border-color: $form-border;
     padding: 10px 15px;
-    border-radius: 8px;
+    border-radius: 5px;
     background-color: $primary-color;
     color: $title-color;
     caret-color: var(--white-color);
@@ -9,7 +9,7 @@
   &:focus {
       box-shadow: none;
       border-color: $brand-color;
-      background-color: #FFFFFF20;
+      background-color: $primary-color;
       color: $title-color;
     }
 
@@ -36,16 +36,29 @@
   }
 }
 
+.form-control--light {
+  padding: 10px 15px;
+  border-radius: 5px;
+  background-color: $white-color;
+  color: $primary-color;
+  border: none;
+
+  &:focus {
+    box-shadow: none;
+    border: 1px solid $secondary-color !important;
+  }
+}
+
 .form-select {
   background-color: $primary-color;
   border-color: $form-border;
-  border-radius: 2px;
+  border-radius: 5px;
   color: $title-color;
+  padding: 10px 15px;
 
   &:focus {
     box-shadow: none;
     border-color: $brand-color;
-    background-color: var(--tertiary-color-light);
     color: $title-color;
   }
 }

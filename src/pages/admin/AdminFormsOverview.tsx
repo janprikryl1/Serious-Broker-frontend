@@ -123,7 +123,7 @@ export const AdminFormsOverview: FC = () => {
                     >
                         <h3 className="admin-section-title">{t("Forms")}</h3>
                         <Link to={adminURLS.formResponses} style={{ marginBottom: 20 }}>
-                            <Button color={ButtonColor.gray}>{t("Responses")}</Button>
+                            <Button color={ButtonColor.gray2}>{t("Responses")}</Button>
                         </Link>
                         <Link to={adminURLS.formEvaulationSettings} style={{ marginBottom: 20, marginLeft: 10 }}>
                             <Button color={ButtonColor.gold}>{t("Evaulation settings")}</Button>

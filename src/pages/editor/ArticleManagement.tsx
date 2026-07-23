@@ -57,8 +57,8 @@ export const ArticleManagement: FC = () => {
                         <Link to={editorURLS.articleNew}>
                             <Button style={{ fontSize: 20 }}>{t("New article")}</Button>
                         </Link>
-                        <Link to={editorURLS.index}><Button color={ButtonColor.gray} className="article-management-link">{t("Help")}</Button></Link>
-                        <Link to={editorURLS.highlights}><Button color={ButtonColor.gray} className="article-management-link">{t("Highlights")}</Button></Link>
+                        <Link to={editorURLS.index}><Button color={ButtonColor.gray2} className="article-management-link">{t("Help")}</Button></Link>
+                        <Link to={editorURLS.highlights}><Button color={ButtonColor.gray2} className="article-management-link">{t("Highlights")}</Button></Link>
                         <div className="padding-top padding-bottom">
                             <div className="blog__wrapper">
                                 <div className="row g-4">

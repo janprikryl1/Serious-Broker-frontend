@@ -2,13 +2,13 @@
   @extend %p-rel;
   width: 100%;
   z-index: 99;
-  //font-weight: bold;
-  margin-top: -20px;
+  top: 0;
+  left: 0;
+  //position: fixed;
 
   &--style1 {
     @extend %p-rel;
     width: 100%;
-    background-color: $bg-color-3;
 
     &.header-fixed {
       @extend %w-100;
@@ -44,9 +44,14 @@
   @extend %d-flex,
   %justify-between,
   %align-i-center;
-  background: $primary-color;
-  padding-block: 6px;
   min-height: 56px;
+  background: rgba($primary-color, 0.6);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-bottom: 1px solid rgba($gray-1-color, 0.2);
+  box-shadow:
+          0px 12px 40px 0 rgba(0, 0, 0, 0.3),
+          inset 0px 0px 2px 0px rgba(255, 255, 255, 0.1);
 
   @include breakpoint(sm) {
     position: relative;
@@ -74,7 +79,7 @@
 
       .wordmark {
         width: 220px;
-        @include breakpoint(lg) { width: 300px; }
+        @include breakpoint(lg) { width: 250px; }
       }
     }
 
@@ -87,6 +92,16 @@
   .menu-area {
     @extend %d-flex;
     margin-left: 8px;
+
+    .dropdown-item,
+    .dropdown-toggle {
+      @include font-size(16px);
+    }
+
+    ul, li {
+      display: flex !important;
+      align-items: center !important;
+    }
 
     ul {
       display: flex;
@@ -424,8 +439,11 @@
   }
 }
 
-
 .vr {
   margin: 70px -10px 70px 10px;
   color: white;
+}
+
+.logo-dark {
+  filter: brightness(0) invert(100%);
 }

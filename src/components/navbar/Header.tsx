@@ -15,6 +15,7 @@ export const Header: FC = () => {
   const {user} = useUserContext();
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
+  const isFixedPage = location.pathname === "/" || location.pathname === routes.home;
   const isMobile = useMediaQuery("(max-width: 820px)");
   const isTablet = useMediaQuery("(max-width: 1457px)");
 
@@ -23,9 +24,9 @@ export const Header: FC = () => {
   useEffect(() => setMobileMenuOpen(false), [location.pathname]);
 
   return (
-    <header className="header-section header-section--style1">
+    <header className={`header-section header-section--style1 ${isFixedPage ? '!tw-fixed' : '!tw-sticky'}`}>
       <div className="header-wrapper">
-        <div className="container mt-4">
+        <div className="container">
           <div className="d-flex align-items-center justify-content-between">
             <div className="d-flex align-items-center">
               <div className="logo">
@@ -46,7 +47,7 @@ export const Header: FC = () => {
             <div className="d-flex align-items-center flex-nowrap">
 
               {!user && !isMobile && (
-                <div className="px-3 fw-bold" style={{color: "var(--white-color)"}}>
+                <div className="px-3">
                   <SignUpIcon/>
                 </div>
               )}

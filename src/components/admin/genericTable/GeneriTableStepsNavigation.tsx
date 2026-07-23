@@ -27,7 +27,7 @@ export const GeneriTableStepsNavigation:FC = () => {
     return (
         <div className="admin-generic-table-stepper-buttons mt-5">
             {step > 0 && (
-                <Button color={ButtonColor.gray} onClick={handleGoBack}>{t("Back")}</Button>
+                <Button color={ButtonColor.gray2} onClick={handleGoBack}>{t("Back")}</Button>
             )}
             {step < GenericTablesSteps.SUMMARY && (
                 <Button type="button" style={{marginLeft:5}} onClick={handleGoNext}>{t("Next")}</Button>

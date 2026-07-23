@@ -1,5 +1,5 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
+import {StrictMode} from 'react'
+import {createRoot} from 'react-dom/client'
 import App from './App.tsx'
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
@@ -12,14 +12,14 @@ import {ErrorBoundary} from "react-error-boundary";
 import {ErrorFallback} from "./pages/ErrorFallback.tsx";
 
 createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-      <ErrorBoundary
-          FallbackComponent={ErrorFallback}
-          onError={(error, info) => {
-              console.error(error, info);
-          }}
-      >
-        <App />
-      </ErrorBoundary>
-  </StrictMode>,
+    <StrictMode>
+        <ErrorBoundary
+            FallbackComponent={ErrorFallback}
+            onError={(error, info) => {
+                console.error(error, info);
+            }}
+        >
+            <App/>
+        </ErrorBoundary>
+    </StrictMode>,
 )

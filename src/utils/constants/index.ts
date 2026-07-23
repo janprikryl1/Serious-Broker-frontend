@@ -46,6 +46,7 @@ export const routes = {
     cryptocurrencyDetail: "/cryptocurrency_detail/:id",
     graphsRecommendationDetailURL: "/graphs/recommendation/detail/",
     graphsRecommendationDetail: "/graphs/recommendation/detail/:asset_label",
+    cryptoCalculator: "/calculator",
     BTFD: "/graphs/BTFD",
     signIn: "/sign_in",
     register: "/register",
@@ -177,6 +178,7 @@ export const registeredUserNavbarURLs: NavbarURLs = {
             indices: { title: "Indices", link: routes.assets },
             // cryptocurrencies: { title: "Cryptocurrencies", link: routes.cryptocurrenciesList },
             cryptocurrencies: { title: "Cryptocurrencies", link: routes.recommendation },
+            cryptoCalculator: { title: "Calculator", link: routes.cryptoCalculator},
             BTFD: { title: "Strategies", link: routes.BTFD },
         }
     },
@@ -197,5 +199,6 @@ export const notRegisteredUserNavbarURLs: Record<string, NavLink> = {
     aboutLogin: { title: "Analyses & Strategies", link:  routes.register},
     indices: { title: "Indices", link: routes.assets },
     cryptocurrencies: { title: "Cryptocurrencies", link: routes.cryptocurrenciesList },
+    cryptoCalculator: { title: "Calculator", link: routes.cryptoCalculator},
     education: {title: "Education", link: routes.articles},
 };

@@ -118,7 +118,7 @@ export const FormEvaulationSettings: FC = () => {
             ))}
 
             <div className="d-flex gap-2">
-                <Button onClick={handleAddCategory} color={ButtonColor.gray}>
+                <Button onClick={handleAddCategory} color={ButtonColor.gray2}>
                     <FaPlus className="me-1"/>
                     Přidat záznam
                 </Button>

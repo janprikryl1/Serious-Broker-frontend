@@ -43,6 +43,9 @@
 }
 
 .asset-table {
+  border-radius: 5px;
+  border: 1px solid var(--table-border-color);
+
   --table-border-color: color-mix(in srgb, var(--secondary-color), transparent 50%);;
   --header-underline-color: color-mix(in srgb, var(--secondary-color), transparent 50%);;
   --first-col-bg: var(--quaternary-color-transparent-50);
@@ -71,9 +74,6 @@
     --other-cols-color: var(--tertiary-color);
     --active-row-bg-color: var(--secondary-color);
   }
-
-  border-radius: 5px;
-  border: 1px solid var(--table-border-color);
 
   @media (min-width: 991px) {
     overflow: hidden;

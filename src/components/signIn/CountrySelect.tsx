@@ -11,8 +11,8 @@ export const CountrySelect:FC<Props> = ({value, setCountry}) => {
     const {t} = useTranslation();
 
     return (
-        <div className="form-outline mb-4">
-            <label htmlFor="name" className="form-label">{t("Country")}</label>
+        <div className="form-outline">
+            <label htmlFor="name" className="form-label mb-3">{t("Country")}</label>
             <select className="form-select" aria-label={t("Country")} value={value} onChange={(e) => setCountry(e.target.value)}>
                 {countries.map((country, index) => (
                     <option key={index} value={country.id}>{t(country.name)}</option>)

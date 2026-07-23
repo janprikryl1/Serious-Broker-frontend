@@ -225,7 +225,7 @@ export const UserFormFillModal: FC = () => {
                         {!isLoading && questions.length > 0 && (
                             <div className="d-flex justify-content-end w-100 gap-2">
                                 {currentQuestionIndex > 0 && (
-                                    <Button color={ButtonColor.gray} onClick={handlePrevious}>
+                                    <Button color={ButtonColor.gray2} onClick={handlePrevious}>
                                         {t("Previous")}
                                     </Button>
                                 )}

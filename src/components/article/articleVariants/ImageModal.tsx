@@ -28,7 +28,7 @@ export const ImageModal: FC<Props> = ({ isModalOpen, selectedImage, closeModal }
                 />
             </Modal.Body>
             <Modal.Footer>
-                <Button color={ButtonColor.gray} onClick={closeModal}>
+                <Button color={ButtonColor.gray2} onClick={closeModal}>
                     {t("Close")}
                 </Button>
             </Modal.Footer>

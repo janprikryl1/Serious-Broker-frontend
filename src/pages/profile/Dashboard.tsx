@@ -8,8 +8,10 @@ import {InvestmentPlanList} from '../../components/profile/dashboard/InvestmentP
 import {TrafficLightsList} from '../../components/profile/dashboard/TrafficLightsList.tsx';
 import {getMyPortfolios} from '../../utils/api/myPortfolioService.ts';
 import {MyPortfolioType} from "../../utils/types/myPortfolio/MyPortfolioType.ts";
+import {useTranslation} from "react-i18next";
 
 export const Dashboard = () => {
+  const {t} = useTranslation();
   const [portfolioSum, setPortfolioSum] = useState(0);
   const [investmentPlanSum, setInvestmentPlanSum] = useState(0);
   const [totalInvested, setTotalInvested] = useState(0);
@@ -62,8 +64,9 @@ export const Dashboard = () => {
 
   return (
     <>
-      <TitleHeader title="Dashboard" />
+      <TitleHeader title="My Dashboard" />
       <div className="container mt-5">
+        <h3 className="tw-my-6 tw-pt-8 ">{t("My Dashboard")}</h3>
         <div className="d-flex flex-column gap-4">
           <InfoRow portfolioSum={portfolioSum} totalInvested={totalInvested} investmentPlanSum={investmentPlanSum} buyTrafficLightSum={buyTrafficLights} sellTrafficLightSum={sellTrafficLights}/>
           <div className="row g-4">

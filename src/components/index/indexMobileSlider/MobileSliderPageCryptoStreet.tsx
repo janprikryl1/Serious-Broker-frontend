@@ -9,12 +9,12 @@ export const MobileSliderPageCryptoStreet: FC = () => {
     const { t } = useTranslation();
 
     return (
-      <SharedSlideLayout
+      /*<SharedSlideLayout
         imageUrl={CryptoStreet}
         backgroundSize={"cover"}
         backgroundPosition={"center center"}
         className="shared-slide-layout--crypto-street"
-      >
+      >*/
         <div
           className="container d-flex flex-column align-items-start text-start"
           style={{
@@ -23,12 +23,12 @@ export const MobileSliderPageCryptoStreet: FC = () => {
           }}
         >
           <h1 className="slide-title-automatization--mobile mb-4">
-            {t("Seriousness • Safety • Trust")}
+            {t("Tools for the right decisions")}
           </h1>
           <p className="slide-tagline-automatization--mobile" style={{ maxWidth: "90%" }}>
-            {t("Set up an investment plan that suits you and get buy and sell recommendations for carefree investing.")}
+            {t("Stop guessing where the market will go. Our analytical tools will show you the exact historical development and simulations of popular strategies.")}
           </p>
         </div>
-      </SharedSlideLayout>
+      // </SharedSlideLayout>
     );
-};
+}

@@ -338,5 +338,27 @@
     },
     "BuyTL": "Buy",
     "SellTL": "Sell",
-    "estimatedTotalInvestment": "Total estimated contributions calculated from the start date of each plan. Please note: This is a simulation based on your settings and may slightly differ from actual executed trades."
+    "estimatedTotalInvestment": "Total estimated contributions calculated from the start date of each plan. Please note: This is a simulation based on your settings and may slightly differ from actual executed trades.",
+    "footer": {
+        "about_project": "Serious Broker started as an independent student project for a bachelor's thesis. We help people navigate the world of investing and safely explore the world of cryptocurrencies. ",
+        "cooperation_info": "Information about cooperation",
+        "disclaimer": "We do not provide financial advice."
+    },
+    "title-placeholder": "E.g., Dr.",
+    "suffix-placeholder": "E.g., MSc, PhD, MBA",
+    "basics": {
+        "card1": {
+            "title": "Inflation Protection",
+            "desc": "Cryptocurrencies serve long-term as digital gold and a store of value."
+        },
+        "card2": {
+            "title": "Power of Compounding",
+            "desc": "Build your wealth with regular investing starting from €50 per month."
+        },
+        "card3": {
+            "title": "Technology of the Future",
+            "desc": "Cryptocurrencies are a solid part of the global financial system."
+        }
+    },
+    "invested_text": "If you had invested <0>{{amount}}</0> {{when}} ..."
 }

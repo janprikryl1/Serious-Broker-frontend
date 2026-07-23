@@ -1,5 +1,5 @@
 import {Dispatch, FC, SetStateAction} from "react";
-import {Button} from "../reusable/Button.tsx";
+import {Button, ButtonColor} from "../reusable/Button.tsx";
 import {RegisterUserSchemaType} from "../../utils/formSchemas/registerUserSchema.ts";
 import {useTranslation} from "react-i18next";
 import {UseFormTrigger} from "react-hook-form";
@@ -13,8 +13,11 @@ type Props = {
 
 export const RegisterStepsPagiation:FC<Props> = ({trigger, setCurrentStep, currentStep, sending}) => {
     const {t} = useTranslation();
+    const maxSteps = 2;
 
-    const handleNextStep = async () => {
+    const handleNextStep = async (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault();
+
         let fieldsToValidate: (keyof RegisterUserSchemaType)[] = [];
 
         if (currentStep === 1) {
@@ -29,18 +32,21 @@ export const RegisterStepsPagiation:FC<Props> = ({trigger, setCurrentStep, curre
             setCurrentStep((prev) => prev + 1);
         }
     };
-    
+
     return (
         <div className="d-flex justify-content-between mt-4">
-            <Button type="button" onClick={() => setCurrentStep(currentStep - 1)} disabled={currentStep === 1}>
-                {t("Back")}
-            </Button>
-            {currentStep < 4 ? (
+            {currentStep === 1 ? <span></span> :
+                <Button type="button" color={ButtonColor.gray2} onClick={() => setCurrentStep(currentStep - 1)} disabled={currentStep === 1}>
+                    {t("Back")}
+                </Button>
+            }
+
+            {currentStep < maxSteps ? (
                 <Button type="button" onClick={handleNextStep}>
                     {t("Next")}
                 </Button>
             ) : (
-                <Button type="submit" className="btn btn-block btn-lg" disabled={sending}>
+                <Button type="submit" className="btn btn-block" disabled={sending}>
                     {t("Register")}
                 </Button>
             )}

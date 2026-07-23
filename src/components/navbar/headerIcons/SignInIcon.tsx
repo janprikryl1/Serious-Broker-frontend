@@ -69,7 +69,7 @@ export const SignInIcon: FC = () => {
                 </Dropdown.Menu>
             </Dropdown>
         ) : (
-            <Button type="link" to={routes.signIn} style={{padding: "10px"}}>
+            <Button type="link" to={routes.signIn} style={{padding: "10px", fontSize: "16px"}}>
                 {t("Sign in")}
             </Button>
         )
