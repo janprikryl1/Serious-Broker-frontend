@@ -4,23 +4,59 @@ import {useTranslation} from "react-i18next";
 
 export const GdprInfo:FC = () => {
     const {t} = useTranslation();
-    
+
     return (
-        <>
-            <TitleHeader title="GDPR"/>
-            <div className="container">
-                <div className="cta-dark">
-                    <h1>{t("Information about GDPR")}</h1>
-                    <p>{t("Based on the EU Regulation 2016/679 (hereinafter referred to as GDPR), we inform you that we process your personal data in connection with marketing activities and the sale of our goods.")}</p>
-                    <p>{t("This includes contact information about customers and individuals with whom we communicate in various ways - by email, printed correspondence, telephone and in person.")}</p>
-                    <p>{t("This is data that we need for marketing purposes, to ensure the preparation and execution of contracts or orders and subsequent invoicing, including the resolution of complaints. We also work with contact information of persons we need in a legitimate interest for the organisation of deliveries.")}</p>
-                    <p>{t("Invoicing data must be kept on record for 10 years due to a legal obligation under the VAT Act.")}</p>
-                    <p>{t("We also use the contact data for the purpose of sending e-mail offers, invitations, printed and other promotional materials due to legitimate interest in accordance with the law. The option to refuse this is included in each message. You have the right to extract, correct, delete, restrict processing, object, withdraw consent and lodge a complaint.")}</p>
-                    <p>{t("The data controller is Serious Investment s.r.o. with registered office at Stanislavského 355, 72100 Ostrava - Svinov")}</p>
-                    <p>{t("Contact person responsible for data protection: Marie Fasugová (Mobile: 603 242 708) fasugova@serious-investment.cz")}</p>
-                    <p>{t("You can unsubscribe from email offers at the bottom of the email.")}</p>
-                </div>
-            </div>
-        </>
-    )
+      <>
+          <TitleHeader title={t("GDPR")} />
+          <div className="container tw-py-8">
+              <div className="tw-mx-auto tw-flex tw-flex-col tw-gap-6 tw-text-sm tw-text-stone-200 sm:tw-text-base lg:tw-text-lg">
+                  <p className="tw-text-sm sm:tw-text-base lg:tw-text-lg">
+                      {t("Based on EU Regulation 2016/679 (GDPR), we inform you that we process your personal data in connection with marketing activities and the sale of our goods.")}
+                  </p>
+
+                  <div>
+                      <h5 className="tw-mb-3 tw-text-base tw-font-semibold tw-text-white sm:tw-text-lg lg:tw-text-xl">
+                          {t("What data we process and why")}
+                      </h5>
+                      <ul className="tw-flex tw-list-disc tw-flex-col tw-gap-2 tw-pl-6">
+                          <li className="tw-text-sm sm:tw-text-base lg:tw-text-lg">
+                              <strong>{t("Contract fulfillment and invoicing:")} </strong>
+                              {t("We process contact and identification data (obtained via email, post, phone, or in person) to prepare and fulfill orders, handle deliveries, issue invoices, and manage potential complaints.")}
+                          </li>
+                          <li className="tw-text-sm sm:tw-text-base lg:tw-text-lg">
+                              <strong>{t("Legal obligation:")} </strong>
+                              {t("Invoicing data must be kept on record for 10 years due to a legal obligation under the VAT Act.")}
+                          </li>
+                          <li className="tw-text-sm sm:tw-text-base lg:tw-text-lg">
+                              <strong>{t("Legitimate interest (Marketing):")} </strong>
+                              {t("We also use contact data to send email offers, invitations, printed, and other promotional materials. You can opt out of these communications at any time via the link at the bottom of each message.")}
+                          </li>
+                      </ul>
+                  </div>
+
+                  <div>
+                      <h5 className="tw-mb-2 tw-text-base tw-font-semibold tw-text-white sm:tw-text-lg lg:tw-text-xl">
+                          {t("Your Rights")}
+                      </h5>
+                      <p className="tw-text-sm sm:tw-text-base lg:tw-text-lg">
+                          {t("You have the right to request access to, correction, deletion, or restriction of processing of your personal data, object to processing, withdraw consent, and lodge a complaint with a supervisory authority.")}
+                      </p>
+                  </div>
+
+                  <hr className="tw-text-stone-300" />
+
+                  <div>
+                      <p className="tw-text-sm sm:tw-text-base lg:tw-text-lg">
+                          <strong>{t("Data Controller:")} </strong>
+                          {t("Serious Investment s.r.o., with registered office at Stanislavského 355, 72100 Ostrava - Svinov")}
+                      </p>
+                      <p className="tw-text-sm sm:tw-text-base lg:tw-text-lg">
+                          <strong>{t("Contact person for data protection:")} </strong>
+                          Marie Fasugová ({t("Mobile")}: +420 603 242 708, fasugova@serious-investment.cz)
+                      </p>
+                  </div>
+              </div>
+          </div>
+      </>
+    );
 }

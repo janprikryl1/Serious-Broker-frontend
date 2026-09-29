@@ -303,9 +303,9 @@
         "rankingInitialText": "This chart illustrates the historical success of purchasing a selected asset at specific days and hours. To utilize the data effectively, it is important to understand how our algorithm processes time intervals.",
         "rankDefinitionTitle": "1. What does the Rank value represent?",
         "rankDefinitionText": "For each hour in the week (168 unique records in total), we calculate the potential profit compared to the previous hour. Based on this result, we determine the order (Rank):",
-        "rank1": "Rank 1:",
+        "rank1": "Highest Rank:",
         "rank1Desc": "statistically the most profitable time for purchase.",
-        "rank168": "Rank 168:",
+        "rank168": "Lowest Rank:",
         "rank168Desc": "time with the lowest historical yield.",
         "intervalsTitle": "2. Difference in interval display",
         "intervalsText": "The appearance of the chart changes according to the length of the monitored period, which is caused by the data processing method:",
@@ -317,8 +317,8 @@
         "whyImportantDesc": "Monitoring longer intervals will help you identify long-term trends – times that are consistently favorable for purchase regardless of random fluctuations in a specific week."
     },
     "btfdInfo": {
-        "title": "BTFD – Buy The F*****g Dip",
-        "initialText": "BTFD is an enhanced, intelligent evolution of the classic DCA strategy. While standard DCA buys blindly regardless of market conditions, BTFD leverages volatility to your advantage.",
+        "title": "BTD – Buy The Dip",
+        "initialText": "BTD is an enhanced, intelligent evolution of the classic DCA strategy. While standard DCA buys blindly regardless of market conditions, BTD leverages volatility to your advantage.",
         "dynamicVsPassiveTitle": "Dynamic vs. Passive Investing",
         "dynamicVsPassiveText": "It is a dynamic strategy, meaning your investment amount directly responds to current asset prices. Unlike traditional methods, it doesn't treat every market day the same way.",
         "mechanicsTitle": "How it works: Mechanics",
@@ -329,14 +329,64 @@
         "multiplierDesc": "A coefficient calculated based on the percentage drop from the All-Time High (ATH). The deeper the dip, the higher the multiplier.",
         "whyBetterTitle": "Why is it more effective than DCA?",
         "whyBetterDesc": "It allows you to accumulate more assets precisely when they are 'on sale', effectively lowering your average purchase price and maximizing potential returns.",
-        "tuningDescription": "The following section provides a detailed overview of how the selected BTFD strategy parameters influence the purchasing process for specific cryptocurrencies. These simulations demonstrate the impact of the multiplier and time periods on overall purchasing efficiency compared to market trends."
+        "tuningDescription": "The following section provides a detailed overview of how the selected BTD strategy parameters influence the purchasing process for specific cryptocurrencies. These simulations demonstrate the impact of the multiplier and time periods on overall purchasing efficiency compared to market trends."
     },
     "activeTrafficLights": "Buy {{buy}}, Sell {{sell}}",
     "defineTrafficLight": "Define {{type}} Traffic Light",
     "trafficLight": {
-        "triggerDescription": "Within a traffic light you can define a trigger, which will ensure that a buy action will occur when certain requirements are fulfilled."
+        "triggerDescription": "Within a traffic light you can define a trigger, which will ensure that a buy action will occur when certain requirements are fulfilled.",
+        "planSetupDescription": "You can set triggers to dynamically adapt your base investment price to the current market trend. With this tool you can invest more or less money based on certain events. You can also keep your assets protected from unwanted losses due to market drop.",
+        "action": {
+            "buy": {
+                "more": "Buy more by",
+                "less": "Buy less by",
+                "normally": "Buy normally",
+                "none": "Don't buy"
+            },
+            "sell": {
+                "more": "Sell more by",
+                "less": "Sell less by",
+                "normally": "Sell normally",
+                "none": "Don't sell"
+            }
+        }
     },
     "BuyTL": "Buy",
     "SellTL": "Sell",
-    "estimatedTotalInvestment": "Total estimated contributions calculated from the start date of each plan. Please note: This is a simulation based on your settings and may slightly differ from actual executed trades."
+    "estimatedTotalInvestment": "Total estimated contributions calculated from the start date of each plan. Please note: This is a simulation based on your settings and may slightly differ from actual executed trades.",
+    "footer": {
+        "about_project": "Serious Broker started as an independent student project for a bachelor's thesis. We help people navigate the world of investing and safely explore the world of cryptocurrencies. ",
+        "cooperation_info": "Information about cooperation",
+        "disclaimer": "We do not provide financial advice."
+    },
+    "title-placeholder": "E.g., Dr.",
+    "suffix-placeholder": "E.g., MSc, PhD, MBA",
+    "basics": {
+        "card1": {
+            "title": "Inflation Protection",
+            "desc": "Cryptocurrencies serve long-term as digital gold and a store of value."
+        },
+        "card2": {
+            "title": "Power of Compounding",
+            "desc": "Build your wealth with regular investing starting from €50 per month."
+        },
+        "card3": {
+            "title": "Technology of the Future",
+            "desc": "Cryptocurrencies are a solid part of the global financial system."
+        }
+    },
+    "period": {
+        "week": "a week ago",
+        "month": "a month ago",
+        "year": "a year ago"
+    },
+    "invested_text": "If you had invested <0>€{{amount}}</0> {{when}} ...",
+    "invested_text_profit": "Today you would have €{{profit}}",
+    "invested_profit": "+ €{{profit}}",
+    "marketCapitalization": "Market capitalization {{val}} EUR",
+    "athMultiplierDescription": "Determines the multiple of the base amount to be bought at the largest drop from ATH.",
+    "stepProgress": "Step {{current}} of {{total}}",
+    "tutorial": "Tutorial",
+    "Price rise": "Price rise up to",
+    "Price drop": "Price drop up to"
 }

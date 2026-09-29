@@ -4,11 +4,10 @@ import {useTranslation} from "react-i18next";
 import {UserType} from "../../types/user/userTypes.ts";
 import {getAllUsers} from "../../api/adminService.ts";
 import {giveAchievmentsForLongPeriod} from "../../api/achievementService.ts";
-import {ToastColor, useToast} from "../../providers/ToastProvider.tsx";
+import {showToast} from "../../../components/toast/toastHelper.tsx";
 
 export const useAdminAchievements = () => {
     const {t} = useTranslation();
-    const { showToast } = useToast();
     const [users, setUsers] = useState<UserType[]>([]);
     const [selectedUser, setSelectedUser] = useState<UserType>();
     const [searchTerm, setSearchTerm] = useState('');
@@ -57,11 +56,11 @@ export const useAdminAchievements = () => {
         try {
             const response = await giveAchievmentsForLongPeriod();
             if (response.status === 200) {
-                showToast(t("Activity checked"), ToastColor.green);
+                showToast.success(t("Activity checked"));
             }
         } catch (error) {
             console.error(error);
-            showToast(t("Error"), ToastColor.red);
+            showToast.error(t("Error"));
         }
     };
     

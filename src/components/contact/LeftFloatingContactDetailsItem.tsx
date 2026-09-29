@@ -1,18 +1,15 @@
 import {FC} from "react";
 
 type Props = {
+  className?: string;
   href?: string;
   title: string;
 };
 
-export const LeftFloatingContactDetailsItem:FC<Props> = ({href, title}) => {
+export const LeftFloatingContactDetailsItem:FC<Props> = ({href, title, className=""}) => {
   return (
-      <div className="contact__item-inner mb-2">
-        <div className="contact__item-content">
-            <p>
-              {href ? <a href={href} className="link-underline-none">{title}</a> : title}
-            </p>
-        </div>
-      </div>
+    <div className={className}>
+      {href ? <a href={href} className="link-underline-none">{title}</a> : title}
+    </div>
   );
 }

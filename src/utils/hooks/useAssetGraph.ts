@@ -1,5 +1,5 @@
 import {useParams} from "react-router-dom";
-import {useEffect, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import {AssetDetailType} from "../types/asset/AssetDetailType.ts";
 import {QuotedCurrenciesPeriod} from "../options/QuotedCurrenciesPeriod.ts";
 import {Currencies} from "../enums/CurrenciesEnum.ts";
@@ -9,8 +9,10 @@ import {addToWatchList, removeFromWatchList} from "../api/watchListService.ts";
 import {WatchListEnum} from "../enums/WatchListEnum.ts";
 import {formatCurrency} from "../functions/functions.ts";
 import {MissingCurrencyType} from "../types/graphs/MissingCurrencyType.ts";
+import {useTranslation} from "react-i18next";
 
 export const useAssetGraph = (propName?: string) => {
+    const { i18n } = useTranslation();
     const { name } = useParams();
     const assetName = propName || name;
     const [asset, setAsset] = useState<AssetDetailType | null>(null);
@@ -21,6 +23,7 @@ export const useAssetGraph = (propName?: string) => {
     const [graphData, setGraphData] = useState<AssetAnalysisGraphData>();
     const [missingCurrencies, setMissingCurrencies] = useState<MissingCurrencyType[]>();
     const [isInWatchList, setIsInWatchList] = useState<boolean>(false);
+    const isWatchlistToggleRef = useRef(false);
 
     useEffect(() => {
         if (!assetName) return;
@@ -34,32 +37,47 @@ export const useAssetGraph = (propName?: string) => {
 
     const handleToggleWatchList = async () => {
         if (!asset) return;
-        if (asset.in_watchlist) {
-            try {
+
+        isWatchlistToggleRef.current = true;
+
+        const nextWatchState = !isInWatchList;
+        setIsInWatchList(nextWatchState);
+        setAsset({ ...asset, in_watchlist: nextWatchState });
+
+        try {
+            if (isInWatchList) {
                 const response = await removeFromWatchList(asset.id);
                 if (response?.status === 200) {
                     setAsset({...asset, in_watchlist: false});
                 }
-            } catch (e) {
-                console.error(e);
+            } else {
+                const response = await addToWatchList(asset.id, WatchListEnum.Asset);
+                if (response?.status === 200) {
+                    setAsset({...asset, in_watchlist: true});
+                }
             }
-        } else {
-            const response = await addToWatchList(asset.id, WatchListEnum.Asset);
-            if (response?.status === 200) {
-                setAsset({...asset, in_watchlist: true});
-            }
+        } catch (e) {
+            console.error(e);
+            setIsInWatchList(isInWatchList);
+            setAsset({ ...asset, in_watchlist: isInWatchList });
         }
     };
 
     useEffect(() => {
-        if (!asset || !assetName) return;
+        if (!assetName) return;
+
+        if (isWatchlistToggleRef.current) {
+            isWatchlistToggleRef.current = false;
+            return;
+        }
+
         const getGraphData = async () => {
             try {
                 setGraphData(undefined);
                 const response = await getAssetGraphDataPreparedAssets(assetName, selectedPeriod);
                 if (!response) return;
                 setGraphData(response.data);
-                setCurrencyPrice(formatCurrency(response.data.price));
+                setCurrencyPrice(formatCurrency(response.data.price, i18n.language, Currencies.EUR));
                 setCurrency(Currencies.EUR);
                 if ("missing_assets" in response.data) {
                     setMissingCurrencies(response.data.missing_assets as MissingCurrencyType[]);
@@ -72,8 +90,8 @@ export const useAssetGraph = (propName?: string) => {
             }
         };
         getGraphData();
-    }, [selectedPeriod, asset]);
-    
+    }, [selectedPeriod, assetName]);
+
     return {
         asset,
         handleToggleWatchList,

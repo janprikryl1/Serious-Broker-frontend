@@ -10,8 +10,6 @@ import { QuotedCurrenciesPeriod } from "../../../utils/options/QuotedCurrenciesP
 import { AssetAnalysisGraphData } from "../../../utils/types/graphs/AssetAnalysisGraphData.ts";
 import { QuotedCurrency } from "../../../utils/types/graphs/QuotedCurrency.ts";
 import { MyPortfolioType } from "../../../utils/types/myPortfolio/MyPortfolioType.ts";
-import {CardContainer} from "../../reusable/CardContainer.tsx";
-import {OutlineContainer} from "../../reusable/OutlineContainer.tsx";
 
 type Props = {
   isLoading: boolean;
@@ -34,7 +32,7 @@ type PortfolioStats = {
 };
 
 export const BestPortfolio = ({isLoading, myPortfolios}: Props) => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [portfolioStats, setPortfolioStats] = useState<PortfolioStats[]>([]);
   const [bestPortfolioDetails, setBestPortfolioDetails] = useState<PortfolioGraphDetails | null>(null);
   const [selectedPeriod, setSelectedPeriod] = useState(QuotedCurrenciesPeriod.month);
@@ -135,7 +133,7 @@ export const BestPortfolio = ({isLoading, myPortfolios}: Props) => {
         if (!response) return;
 
         setGraphData(response.data);
-        setCurrencyPrice(formatCurrency(response.data.price));
+        setCurrencyPrice(formatCurrency(response.data.price, i18n.language, Currencies.EUR));
         setCurrency(Currencies.EUR);
         setCurrencyValue(1);
       } catch {
@@ -148,45 +146,44 @@ export const BestPortfolio = ({isLoading, myPortfolios}: Props) => {
 
   if (isLoading || isBestLoading) {
     return (
-      <OutlineContainer className="dashboard-container mt-4">
-        <p className="mb-0">{t("Loading best portfolio...")}</p>
-      </OutlineContainer>
+      <div className="tw-bg-stone-950 tw-bg-opacity-5 tw-border tw-border-solid tw-border-stone-400 tw-border-opacity-20 tw-rounded-2xl tw-p-3 sm:tw-p-4 lg:tw-p-6" >
+        <p className="tw-mb-0 tw-text-xs sm:tw-text-sm">{t("Loading best portfolio...")}</p>
+      </div>
     );
   }
 
   if (!bestPerformer) {
     return (
-      <OutlineContainer className="dashboard-container mt-4">
-        <p className="mb-0">{t("No portfolio data available.")}</p>
-      </OutlineContainer>
+      <div className="tw-bg-stone-950 tw-bg-opacity-5 tw-border tw-border-solid tw-border-stone-400 tw-border-opacity-20 tw-rounded-2xl tw-p-3 sm:tw-p-4 lg:tw-p-6" >
+        <p className="tw-mb-0 tw-text-xs sm:tw-text-sm">{t("No portfolio data available.")}</p>
+      </div>
     );
   }
 
   return (
-    <OutlineContainer className="dashboard-container mt-5">
-    <div className="mt-1">
-        <div className={'card-header mb-3'}>
-          <p className="mb-3">
-            {t("Top-performing portfolio of the past month")}:{" "}
-            <Link to={`/profile/my_portfolio_details/${bestPerformer.id}`} className="text-decoration-underline gold-color-text fs-4">
-              {bestPerformer.name}
-            </Link>
-          </p>
-        </div>
+    <div className="tw-bg-stone-950 tw-bg-opacity-5 tw-border tw-border-solid tw-border-stone-400 tw-border-opacity-20 tw-rounded-2xl tw-p-3 sm:tw-p-4 lg:tw-p-6" >
+      <div className="tw-mt-1 tw-min-w-0">
+          <div className="card-header tw-mb-2 sm:tw-mb-3">
+            <p className="tw-mb-2 sm:tw-mb-3 tw-text-xs sm:tw-text-sm lg:tw-text-base tw-leading-snug">
+              {t("Top-performing portfolio of the past month")}:{" "}
+              <Link to={`/profile/my_portfolio_details/${bestPerformer.id}`} className="text-decoration-underline gold-color-text tw-text-sm sm:tw-text-base lg:tw-text-lg tw-break-words">
+                {bestPerformer.name}
+              </Link>
+            </p>
+          </div>
 
-      <AssetAnalysisGraph
-        selectedPeriod={selectedPeriod}
-        setSelectedPeriod={setSelectedPeriod}
-        graphData={graphData}
-        currency={currency}
-        setCurrency={setCurrency}
-        currencyPrice={currencyPrice}
-        setCurrencyPrice={setCurrencyPrice}
-        currencyValue={currencyValue}
-        setCurrencyValue={setCurrencyValue}
-      />
+        <AssetAnalysisGraph
+          selectedPeriod={selectedPeriod}
+          setSelectedPeriod={setSelectedPeriod}
+          graphData={graphData}
+          currency={currency}
+          setCurrency={setCurrency}
+          currencyPrice={currencyPrice}
+          setCurrencyPrice={setCurrencyPrice}
+          currencyValue={currencyValue}
+          setCurrencyValue={setCurrencyValue}
+        />
+      </div>
     </div>
-    </OutlineContainer>
   );
 };
-

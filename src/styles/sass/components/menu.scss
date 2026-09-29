@@ -3,8 +3,9 @@
 
   position: fixed;
   right: 0;
-  width: 350px;
-  max-width: 80%;
+  width: fit-content;
+  min-width: min(280px, 85vw);
+  max-width: min(420px, 90vw);
   height: 100vh;
   display: flex !important;
   flex-direction: column;
@@ -13,6 +14,8 @@
   z-index: 2000;
   transform: translateX(100%);
   transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow-y: auto;
+  overflow-x: hidden;
 
   &.is-open {
     transform: translateX(0);
@@ -52,6 +55,7 @@
   align-items: center;
   box-sizing: border-box;
   padding: 15px 20px 15px 20px;
+  white-space: nowrap;
 }
 
 .mobile-menu-list li a {
@@ -66,13 +70,7 @@
   }
 
   .mobile-menu {
-    display: block;
-  }
-}
-
-@media (max-width: 768px) {
-  .mobile-hide {
-    display: none !important;
+    display: flex !important;
   }
 }
 
@@ -113,6 +111,7 @@
       text-decoration: none;
       color: $gray-2-color;
       font-size: 1.2rem;
+      white-space: nowrap;
     }
   }
 }

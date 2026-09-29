@@ -1,0 +1,63 @@
+@keyframes bouncePop {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.35) rotate(-8deg); }
+  70% { transform: scale(0.9); }
+  100% { transform: scale(1); }
+}
+
+.animate-bounce-pop {
+  animation: bouncePop 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Particles Burst */
+.watchlist-burst {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+
+  .particle {
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background-color: var(--secondary-color);
+    opacity: 0;
+    animation: particleFly 0.45s ease-out forwards;
+  }
+
+  /* Burst points */
+  .p1 { --x: -18px; --y: -18px; animation-delay: 0.02s; }
+  .p2 { --x: 18px;  --y: -18px; animation-delay: 0.04s; }
+  .p3 { --x: 22px;  --y: 0px;    animation-delay: 0.01s; }
+  .p4 { --x: 16px;  --y: 18px;  animation-delay: 0.03s; }
+  .p5 { --x: -16px; --y: 18px;  animation-delay: 0.05s; }
+  .p6 { --x: -22px; --y: 0px;    animation-delay: 0.02s; }
+}
+
+@keyframes particleFly {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(calc(-50% + var(--x)), calc(-50% + var(--y))) scale(0);
+    opacity: 0;
+  }
+}
+
+@keyframes toastProgress {
+  from {
+    width: 100%;
+  }
+  to {
+    width: 0%;
+  }
+}
+
+/* ⏸️ Pri hoveri na .toast-container sa .toast-progress-bar pozastaví */
+.toast-container:hover .toast-progress-bar {
+  animation-play-state: paused;
+}

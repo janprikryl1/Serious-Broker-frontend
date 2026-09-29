@@ -46,7 +46,6 @@
 'components/about',
 'components/table',
 'components/card',
-'components/header',
 'components/menu',
 'components/stepper',
 'components/search-bar',
@@ -62,7 +61,8 @@
 'components/collapsible-info-box',
 'components/recommendation',
 'components/tuning-BTFD',
-'components/dashboard';
+'components/dashboard',
+'components/watchlist-button';
 
 
 // 8. Themes
@@ -70,3 +70,8 @@
 
 // Custom components
 @import 'components/chart';
+
+// Tailwind
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";

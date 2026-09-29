@@ -10,7 +10,7 @@ export const ChangeLanguageIcon:FC = () => {
     const [showGoogleTranslation, setShowGoogleTranslation] = useState(false);
     
     return (
-        <div style={{marginRight: "1vw"}}>
+        <div style={{marginRight: "1vw", fontSize: "16px"}} >
             <NavDropdown title={i18n.language === "cs" ? "CZ" : "EN"}>
                 <LanguageFlagComponent languageId="cs" languageName="Čeština" setShowGoogleTranslation={setShowGoogleTranslation}/>
                 <LanguageFlagComponent languageId="en" languageName="English" setShowGoogleTranslation={setShowGoogleTranslation}/>

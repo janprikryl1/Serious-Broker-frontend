@@ -10,10 +10,6 @@
         gap: 15px;
     }
 
-    &--style2 {
-        gap: 25px;
-    }
-
     &__item {
         h6 {
             @include font-size(18px);
@@ -63,56 +59,6 @@
 
                 svg,
                 i {
-                    color: $brand-color;
-                }
-            }
-        }
-
-        &.active,
-        &:hover {
-
-            &.social__link--style1 {
-                background-color: $brand-color;
-                border-color: $brand-color;
-
-                svg, i {
-                    color: $thm-wh-color-dark;
-                }
-            }
-
-
-            &.social__link--style2 {
-                border-color: $brand-color;
-                svg, i {
-                    color: $brand-color;
-                }
-            }
-            &.social__link--style22 {
-                border-color: $brand-color;
-
-                svg, i {
-                    color: $brand-color;
-                }
-            }
-            &.social__link--style222 {
-                border-color: $bg-color-10;
-
-                svg, i {
-                    color: $bg-color-10;
-                }
-            }
-
-            &.social__link--style3 {
-                background-color: $brand-color;
-                border-color: $brand-color;
-
-                svg, i {
-                    color: $thm-title-color;
-                }
-            }
-
-            &.social__link--style5 {
-                svg, i {
                     color: $brand-color;
                 }
             }

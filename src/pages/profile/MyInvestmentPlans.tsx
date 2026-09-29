@@ -7,20 +7,23 @@ import {Button} from "../../components/reusable/Button.tsx";
 import {CustomTooltip} from "../../components/reusable/CustomTooltip.tsx";
 import {routes} from "../../utils/constants";
 import {TitleHeader} from "../../components/about/TitleHeader.tsx";
-import {ChartContainer, ChartsTooltip, ChartsXAxis, ChartsYAxis, LinePlot} from "@mui/x-charts";
 import {getAssetSpotKlines} from "../../utils/api/GraphsService.ts";
 import {GraphDataSkeleton} from "../../components/graphs/asset/GraphDataSkeleton.tsx";
 import {GoPlus} from "react-icons/go";
 import {IoOpenOutline, IoWalletOutline} from "react-icons/io5";
-import {FiDollarSign} from "react-icons/fi";
-import {LuClock, LuTrendingUp, LuTrendingDown, LuTrash} from "react-icons/lu";
+import {FiDollarSign, FiEdit3} from "react-icons/fi";
+import {LuClock, LuTrendingUp, LuTrendingDown, LuTrash, LuPencil} from "react-icons/lu";
 import {IoIosArrowDown, IoIosArrowUp} from "react-icons/io";
 import {TbMoneybag} from "react-icons/tb";
 import {MdNumbers} from "react-icons/md";
 import {SlOptions} from "react-icons/sl";
 import {Link} from "react-router-dom";
-import {ToastColor, useToast} from "../../utils/providers/ToastProvider.tsx";
 import {SpinnerLoader} from "../../components/reusable/SpinnerLoader.tsx";
+import {ColorType, createChart, IChartApi} from "lightweight-charts";
+import {transparentChartTheme} from "../../utils/options/chartThemes.ts";
+import {CHART_COLORS} from "../../utils/constants/customColors.ts";
+import {InfoIconTooltip} from "../../components/reusable/InfoIconTooltip.tsx";
+import {useMediaQuery} from "@mui/material";
 
 type KlinePoint = {
   datetime: string;
@@ -64,7 +67,7 @@ class SimulationDataError extends Error {
   }
 }
 
-const chartHeight = 260;
+const chartHeight = 350;
 
 const parseDatetime = (datetime: string) => {
   const normalized = datetime.includes("T") ? datetime : datetime.replace(" ", "T");
@@ -106,9 +109,8 @@ const normalizeAssetLabel = (value: unknown) => {
   return raw;
 };
 
-
 const normalizeAssetKlines = (rows: any[]): KlinePoint[] => {
-  return rows
+  const points = rows
     .map((row) => {
       const datetime = String(row.datetime ?? "");
       const parsedDate = parseDatetime(datetime);
@@ -124,8 +126,14 @@ const normalizeAssetKlines = (rows: any[]): KlinePoint[] => {
     })
     .filter((p) => p.datetime && p.closeEur > 0)
     .sort((a, b) => parseDatetime(a.datetime).getTime() - parseDatetime(b.datetime).getTime());
-};
 
+  const seen = new Set<string>();
+  return points.filter((p) => {
+    if (seen.has(p.datetime)) return false;
+    seen.add(p.datetime);
+    return true;
+  });
+};
 
 const shouldInvestOnPoint = (point: KlinePoint, plan: InvestmentPlanType) => {
   const hour = toValidNumber(plan.investment_hour, -1);
@@ -234,137 +242,181 @@ const simulatePortfolioDca = (
   return {points: result, investmentCount};
 };
 
-const MiniProfitChart: FC<{ points: ProfitPoint[] }> = ({points}) => {
-  const {t} = useTranslation();
+const MiniProfitChart: FC<{ points: ProfitPoint[] }> = ({ points }) => {
+  const { t, i18n } = useTranslation();
+  const currentLocale = i18n.resolvedLanguage || i18n.language || undefined;
+  const chartContainerRef = useRef<HTMLDivElement>(null);
 
-  const chartMargins = useMemo(() => ({left: 0, right: 0, top: 0, bottom: 0}), []);
-  const chartData = useMemo(() => ({
-    xValues: points.map((p) => p.datetime),
-    invested: points.map((p) => p.invested),
-    values: points.map((p) => p.value),
-    returns: points.map((p) => p.returnPct)
-  }), [points]);
+  // Legend and description
+  const legendItems = [
+    {
+      label: t("Portfolio value"),
+      color: CHART_COLORS.gray,
+      axis: "EUR",
+      description: t("Current total value of assets in the portfolio"),
+    },
+    {
+      label: t("Total invested"),
+      color: CHART_COLORS.blue,
+      axis: "EUR",
+      description: t("Cumulative amount of money invested over time"),
+    },
+    {
+      label: t("Return"),
+      color: CHART_COLORS.gold,
+      axis: "%",
+      description: t("Percentage return of investment (Right axis)"),
+    },
+  ];
 
-  const {xValues, invested, values, returns} = chartData;
+  // Filter out invalid points and sort by time
+  const validPoints = useMemo(() => {
+    const sorted = (points ?? [])
+      .filter(
+        (p) =>
+          p &&
+          p.datetime &&
+          Number.isFinite(p.invested) &&
+          Number.isFinite(p.value) &&
+          Number.isFinite(p.returnPct)
+      )
+      .map((p) => ({
+        ...p,
+        time: Math.floor(parseDatetime(p.datetime).getTime() / 1000),
+      }))
+      .sort((a, b) => a.time - b.time);
 
-  const minPrice = useMemo(() => 
-    invested.length > 0 ? Math.min(...invested, ...values) * 0.9 : 0,
-    [invested, values]
-  );
-  const maxPrice = useMemo(() => 
-    invested.length > 0 ? Math.max(...invested, ...values) * 1.1 : 1,
-    [invested, values]
-  );
+    // Remove duplicates
+    const uniquePoints: typeof sorted = [];
+    let lastTime = -Infinity;
 
-  if (points.length === 0) {
-    return <div className="gray-2-color-text">{t("No simulation data for selected schedule.")}</div>;
+    for (const pt of sorted) {
+      if (pt.time > lastTime) {
+        uniquePoints.push(pt);
+        lastTime = pt.time;
+      } else if (uniquePoints.length > 0) {
+        // Ak má rovnaký timestamp, prepíšeme ho najnovšou hodnotou
+        uniquePoints[uniquePoints.length - 1] = pt;
+      }
+    }
+
+    return uniquePoints;
+  }, [points]);
+
+  useEffect(() => {
+    if (!chartContainerRef.current || validPoints.length < 2) return;
+
+    const container = chartContainerRef.current;
+    container.innerHTML = "";
+
+    const chart: IChartApi = createChart(container, {
+      ...transparentChartTheme,
+      width: container.clientWidth,
+      height: chartHeight,
+    });
+
+    const valueSeries = chart.addLineSeries({
+      color: CHART_COLORS.gray,
+      lineWidth: 2,
+      priceScaleId: "left",
+      title: t("Value"),
+      priceFormat: {
+        type: "custom",
+        formatter: (val: number) =>
+          `${Math.round(val).toLocaleString(currentLocale)} EUR`,
+      },
+    });
+
+    const investedSeries = chart.addLineSeries({
+      color: CHART_COLORS.blue,
+      lineWidth: 2,
+      priceScaleId: "left",
+      title: t("Invested"),
+      priceFormat: {
+        type: "custom",
+        formatter: (val: number) =>
+          `${Math.round(val).toLocaleString(currentLocale)} EUR`,
+      },
+    });
+
+    const returnSeries = chart.addLineSeries({
+      color: CHART_COLORS.gold,
+      lineWidth: 2,
+      priceScaleId: "right",
+      title: t("Return"),
+      priceFormat: {
+        type: "custom",
+        formatter: (val: number) =>
+          `${val.toLocaleString(currentLocale, {
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 2,
+          })} %`,
+      },
+    });
+
+    const valueData: any[] = [];
+    const investedData: any[] = [];
+    const returnData: any[] = [];
+
+    validPoints.forEach((p) => {
+      valueData.push({ time: p.time, value: p.value });
+      investedData.push({ time: p.time, value: p.invested });
+      returnData.push({ time: p.time, value: p.returnPct });
+    });
+
+    valueSeries.setData(valueData);
+    investedSeries.setData(investedData);
+    returnSeries.setData(returnData);
+
+    chart.timeScale().fitContent();
+
+    const handleResize = () => {
+      if (chartContainerRef.current) {
+        chart.applyOptions({ width: chartContainerRef.current.clientWidth });
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      chart.remove();
+    };
+  }, [validPoints, t]);
+
+  if (validPoints.length < 2) {
+    return (
+      <div className="gray-2-color-text py-4 text-center">
+        {t("No simulation data for selected schedule.")}
+      </div>
+    );
   }
 
   return (
     <div
-      className="col-sm service-details__content"
-      style={{
-        position: "relative",
-        border: "0.5px solid #3e3a32",
-        borderRadius: "5px",
-        padding: "20px",
-        backgroundColor: "var(--cream-color)",
-      }}
+      className="col-sm tw-bg-stone-500 tw-bg-opacity-25 tw-rounded-lg tw-my-6 tw-py-3"
     >
-      <div style={{width: "100%", height: `${chartHeight}px`, position: "relative"}}>
-        <ChartContainer
-          height={chartHeight}
-          margin={chartMargins}
-          series={[
-            {
-              id: "value",
-              yAxisId: "amount",
-              type: "line",
-              label: "Portfolio value",
-              data: values,
-              color: "#4C4033",
-            },
-            {
-              id: "invested",
-              yAxisId: "amount",
-              type: "line",
-              label: "Total invested",
-              data: invested,
-              color: "#76B4FF",
-            },
-            {
-              id: "returnPct",
-              yAxisId: "return",
-              type: "line",
-              label: "Return %",
-              data: returns,
-              color: "#B1974E",
-            },
-          ]}
-          xAxis={[
-            {
-              scaleType: "band",
-              data: xValues,
-              valueFormatter: (value, context) => {
-                if (context.location === "tooltip") {
-                  const weekIndex = xValues.indexOf(value);
-                  return `week ${weekIndex + 1}`;
-                }
-                return String(value).slice(0, 10);
-              },
-              tickInterval: (value, index) => {
-                const step = Math.ceil(xValues.length / 12);
-                return index % step === 0;
-              },
-              tickLabelStyle: {
-                fontSize: 10,
-                fontFamily: "PT Sans, sans-serif",
-                fill: "#444",
-              },
-            },
-          ]}
-          yAxis={[
-            {
-              id: "amount",
-              min: minPrice,
-              max: maxPrice,
-              position: "left",
-              tickNumber: 5,
-              width: 60,
-              valueFormatter: (value: number | null) => (value !== null ? `${value.toFixed(0)} EUR` : ""),
-              tickLabelStyle: {
-                fontSize: 10,
-                fontFamily: "PT Sans, sans-serif",
-                fill: "#444",
-              },
-            },
-            {
-              id: "return",
-              position: "right",
-              tickNumber: 5,
-              width: 60,
-              valueFormatter: (value: number | null) => (value !== null ? `${value.toFixed(2)} %` : ""),
-              tickLabelStyle: {
-                fontSize: 10,
-                fontFamily: "PT Sans, sans-serif",
-                fill: "#444",
-              },
-            },
-          ]}
-          sx={{
-            backgroundColor: "transparent",
-            "& .MuiChartsAxis-line": {stroke: "#888"},
-            "& .MuiLineElement-series-value": {strokeWidth: 1.5},
-            "& .MuiLineElement-series-invested": {strokeWidth: 1.5},
-            "& .MuiLineElement-series-returnPct": {strokeWidth: 1.5},
-          }}
-        >
-          <ChartsTooltip trigger="axis"/>
-          <LinePlot/>
-          <ChartsXAxis/>
-          <ChartsYAxis axisId="amount"/>
-          <ChartsYAxis axisId="return"/>
-        </ChartContainer>
+      <div
+        ref={chartContainerRef}
+        style={{ width: "100%", height: `${chartHeight}px`, position: "relative" }}
+      />
+      <div className="tw-flex tw-flex-wrap tw-justify-center tw-items-center tw-gap-4 tw-mt-4 tw-pt-3 tw-border-t tw-border-stone-500/25">
+        {legendItems.map((item, idx) => (
+          <CustomTooltip key={idx} title={item.description} placement="top">
+            <div className="tw-flex tw-items-center tw-gap-2 tw-cursor-pointer tw-text-sm tw-select-none hover:tw-opacity-80 tw-transition-opacity">
+              <span
+                className="tw-w-2.5 tw-h-2.5 tw-rounded-full tw-shrink-0"
+                style={{ backgroundColor: item.color }}
+              />
+              <span className="tw-font-medium tw-text-stone-200">
+                {item.label}
+              </span>
+              <span className="tw-text-xs tw-text-stone-400">
+                ({item.axis})
+              </span>
+            </div>
+          </CustomTooltip>
+        ))}
       </div>
     </div>
   );
@@ -552,12 +604,14 @@ export const MyInvestmentPlans: FC = () => {
       <TitleHeader title={t("My Investment Plans")}/>
       <div className="container mt-1">
 
-        <p>{t("Investment plan defines your trading personality. Whether you are a cautious newbie or aggressive professional.")}</p>
+        <p className="tw-text-sm tw-leading-relaxed sm:tw-text-base">
+          {t("Investment plan defines your trading personality. Whether you are a cautious newbie or aggressive professional.")}
+        </p>
 
-        <Button className="d-inline-flex align-items-center gap-2 mb-5" type="link"
+        <Button className="d-inline-flex align-items-center gap-2 mb-5 tw-p-2 tw-text-sm sm:tw-text-base" type="link"
                 to={routes.profile.newInvestmentPlanIntro}>
-          <GoPlus size={25} style={{margin: "2px"}}/>
-          {t("New investment plan")}
+          <GoPlus size={25} />
+          <span className="tw-mr-1">{t("New investment plan")}</span>
         </Button>
 
         <div>
@@ -565,8 +619,8 @@ export const MyInvestmentPlans: FC = () => {
             <SpinnerLoader />
           ) : investmentPlans.length === 0 ? (
             <div className="text-center mt-5">
-              <h4>{t("You have no investment plans created yet.")}</h4>
-              <p>{t("Click the button above to create your first plan.")}</p>
+              <h4 className="tw-text-lg sm:tw-text-xl">{t("You have no investment plans created yet.")}</h4>
+              <p className="tw-text-sm sm:tw-text-base">{t("Click the button above to create your first plan.")}</p>
             </div>
           ) : (
             <div className="row g-4">
@@ -589,8 +643,8 @@ export const MyInvestmentPlans: FC = () => {
                 const trend = totalProfit ? {
                   isPositive: totalProfit.amount >= 0,
                   containerClass: `color-container--${totalProfit.amount >= 0 ? 'green' : 'red'}`,
-                  textClass: totalProfit.amount >= 0 ? "green-on-primary-color-text" : "red-on-primary-color-text",
-                  iconColor: totalProfit.amount >= 0 ? 'var(--green-on-primary-color)' : 'var(--red-on-primary-color)',
+                  textClass: totalProfit.amount >= 0 ? "green-color-text" : "red-color-text",
+                  iconColor: totalProfit.amount >= 0 ? 'var(--green-color)' : 'var(--red-color)',
                   Icon: totalProfit.amount >= 0 ? LuTrendingUp : LuTrendingDown,
                 } : null;
 
@@ -631,12 +685,12 @@ export const MyInvestmentPlans: FC = () => {
                   {
                     label: t("Buy Traffic Light"),
                     name: plan.buy_traffic_light_name,
-                    color: 'var(--green-on-primary-color)',
+                    color: 'var(--green-color)',
                   },
                   {
                     label: t("Sell Traffic Light"),
                     name: plan.sell_traffic_light_name,
-                    color: 'var(--red-on-primary-color)',
+                    color: 'var(--red-color)',
                   }
                 ];
 
@@ -698,6 +752,14 @@ export const MyInvestmentPlans: FC = () => {
 
                         {openActionsMenuPlanKey === planKey && (
                           <div className="my-portfolio-card__actions-menu" style={{right: 0, top: '100%'}}>
+                            <Link
+                              to={planId ? routes.profile.editInvestmentPlan.replace(":id", String(planId)) : "#"}
+                              className="my-portfolio-card__actions-item"
+                              onClick={() => setOpenActionsMenuPlanKey(null)}
+                            >
+                              <FiEdit3 />
+                              <span>{t('Edit')}</span>
+                            </Link>
                             <button
                               type="button"
                               className="my-portfolio-card__actions-item my-portfolio-card__actions-item--danger"
@@ -718,8 +780,8 @@ export const MyInvestmentPlans: FC = () => {
                       <div className="mb-4">
                         <div className="plan-card__header">
                           <div className="plan-card__title-group">
-                            <div className={"name"} style={{marginBottom: 0}}>{plan.name}</div>
-                              <div className={`color-container--gold gold-color-text plan-card__badge`}>
+                            <div className="name tw-mb-0 tw-text-lg sm:tw-text-xl">{plan.name}</div>
+                              <div className={`color-container--gold gold-color-text tw-text-xs`}>
                                 {plan.is_custom_portfolio ? (t("Custom Portfolio")) : (t("Binance Portfolio"))}
                               </div>
                           </div>
@@ -732,10 +794,10 @@ export const MyInvestmentPlans: FC = () => {
                                     title={`${t("Holdings value")}: ${totalProfit.value.toFixed(2)} ${plan.currency}`}
                                     placement={"top"}
                                   >
-                                    <div style={{display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer'}}>
-                                      <strong className="plan-card__profit-value">
+                                    <div className="tw-flex tw-cursor-pointer tw-items-center tw-gap-2">
+                                      <div className="tw-text-lg md:tw-text-2xl tw-font-semibold">
                                         {`${formatNumber(Math.round(totalProfit.value * 100) / 100)} ${plan.currency}`}
-                                      </strong>
+                                      </div>
                                     </div>
                                   </CustomTooltip>
                                 )}
@@ -744,12 +806,12 @@ export const MyInvestmentPlans: FC = () => {
                                     title={`${totalProfit ? (totalProfit?.amount >= 0 ? t('Profit') + ': ' : t('Loss') + ': ') : ""}${totalProfit?.amount.toFixed(2)} ${plan.currency}`}
                                     placement={"top"}
                                   >
-                                    <div className={`${trend.containerClass} plan-card__trend d-flex align-items-center gap-3`}>
-                                      <trend.Icon size={20} style={{color: trend.iconColor}}/>
+                                    <div className={`${trend.containerClass} d-flex align-items-center gap-2`}>
+                                      <trend.Icon size={16} style={{color: trend.iconColor}}/>
                                       <span className={trend.textClass}>
-                                        <strong>
+                                        <div className="tw-text-base md:tw-text-lg">
                                             {`${trend.isPositive ? '+' : ''}${formatNumber(Math.round((totalProfit?.amount ?? 0) * 100) / 100)} ${plan.currency}`}
-                                        </strong>
+                                        </div>
                                       </span>
                                     </div>
                                   </CustomTooltip>
@@ -768,10 +830,10 @@ export const MyInvestmentPlans: FC = () => {
                               <item.Icon size={20}/>
                             </div>
                             <div>
-                              <div className="gray-2-color-text" style={{fontSize: '0.9rem'}}>
+                              <div className="gray-2-color-text tw-text-xs sm:tw-text-sm">
                                 {item.label}
                               </div>
-                              <div style={{fontSize: "1.1rem", fontWeight: 500}}>
+                              <div className="tw-text-sm tw-font-medium sm:tw-text-base lg:tw-text-[1.05rem]">
                                 {item.value}
                               </div>
                             </div>
@@ -788,15 +850,15 @@ export const MyInvestmentPlans: FC = () => {
                               <div className="plan-card__details-grid">
 
                                 {/* Schedule Details Section */}
-                                <div>
-                                  <h5>{t("Schedule Details")}</h5>
-                                  <div className={"d-flex flex-column gap-3"} style={{maxWidth: "200px"}}>
+                                <div className="plan-card__detail-section">
+                                  <h5 className="tw-text-base sm:tw-text-lg">{t("Schedule Details")}</h5>
+                                  <div className="plan-card__detail-list tw-max-w-[200px]">
                                     {scheduleDetails.map((item, index) => (
-                                      <div key={index} className={"d-flex justify-content-between align-items-center"}>
-                                        <div className="gray-2-color-text" style={{fontSize: '0.9rem'}}>
+                                      <div key={index} className="plan-card__detail-row">
+                                        <div className="gray-2-color-text tw-text-xs sm:tw-text-sm">
                                           {item.label}
                                         </div>
-                                        <div style={{fontSize: '1rem', fontWeight: 500}}>
+                                        <div className="plan-card__detail-value">
                                           {item.value}
                                         </div>
                                       </div>
@@ -805,17 +867,16 @@ export const MyInvestmentPlans: FC = () => {
                                 </div>
 
                                 {/* Traffic Lights Section */}
-                                <div>
-                                  <h5 className="mb-3">{t("Traffic Lights")}</h5>
-                                  <div className={"d-flex flex-column gap-3"} style={{maxWidth: "300px"}}>
+                                <div className="plan-card__detail-section">
+                                  <h5 className="mb-3 tw-text-base sm:tw-text-lg">{t("Traffic Lights")}</h5>
+                                  <div className="plan-card__detail-list plan-card__detail-list tw-max-w-sm ">
                                     {trafficLights.map((signal, sIndex) => (
-                                      <div key={sIndex} className={"d-flex justify-content-between align-items-center"}>
-                                        <div className="gray-2-color-text" style={{fontSize: '0.9rem'}}>
+                                      <div key={sIndex} className="plan-card__detail-row">
+                                        <div className="gray-2-color-text tw-text-xs sm:tw-text-sm">
                                           {signal.label}
                                         </div>
 
-                                        <div className={"d-flex align-items-center gap-3"}
-                                             style={{fontSize: '1rem', fontWeight: 500}}>
+                                        <div className="plan-card__detail-value plan-card__detail-value--traffic">
                                           {signal.name ? (
                                             <>
                                               <span style={{
@@ -882,4 +943,3 @@ export const MyInvestmentPlans: FC = () => {
     </>
   );
 };
-

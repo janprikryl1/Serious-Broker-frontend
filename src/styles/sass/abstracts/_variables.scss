@@ -1,38 +1,44 @@
 // Theme colors
 
-$primary-color: #231F1B;
-$thm-brown-dark-color-dark: #231F1B;
+$primary-color: #2C2523;
+$thm-brown-dark-color-dark: #2C2523;
 
-$secondary-color: #B1974E;
+$secondary-color: #C5A657;
 $secondary-color-transparent-50: color-mix(in srgb, var(--secondary-color) 50%, transparent);
 $secondary-color-transparent-30: color-mix(in srgb, var(--secondary-color) 30%, transparent);
 
-$tertiary-color: #494036;
+$tertiary-color: #4A3E3B;
 $tertiary-color-light: #625950;
-$thm-brown-light-color-dark: #494036;
+$thm-brown-light-color-dark: #4A3E3B;
 
 $quaternary-color: #3E362E;
 $quaternary-color-transparent-50: color-mix(in srgb, var(--quaternary-color) 50%, transparent);
 $quaternary-color-transparent-30: color-mix(in srgb, var(--quaternary-color) 30%, transparent);
+
+$quinary-color: #F9F8F6;
+$quinary-color-transparent-50: color-mix(in srgb, var(--quinary-color) 50%, transparent);
+$quinary-color-transparent-30: color-mix(in srgb, var(--quinary-color) 30%, transparent);
 
 // Basic colors
 
 $cream-color: #FEF2E6;
 $thm-cream-dark: #FEF2E6;
 
-$white-color: #FDFAF5;
-$black-color: #0A0704;
+$white-color: #F9F8F6;
+$black-color: #2C2523;
+$true-black: #000000;
 
 $gray-1-color: #76746F;
 $gray-2-color: #A8A6A3;
 $gray-3-color: #C1BFBD;
 $gray-4-color: #44403B;
 $gray-5-color: #808080;
+$gray-6-color: #DCD6CF;
 $sandy-color: #AD9D8D;
 
 // Red and green
-$green-on-primary-color: #2eb26d;
-$red-on-primary-color: #c32d2e;
+//$green-color: #26a675;
+//$red-color: #ef5350;
 
 $green-toast-color: #528D49;
 $red-toast-color: #8D4949;
@@ -52,12 +58,12 @@ $traffic-light-safe4-light-color: #5CAB7D;
 
 // Charts
 
-$chart-red: #D15B5B;
-$chart-orange: #D48352;
-$chart-yellow: #D9B34D;
-$chart-green: #6DB388;
-$chart-blue: #5B89AD;
-$chart-purple: #9275A3;
+$red-color:    #ef5350; // Červená
+$orange-color: #ffa726; // Oranžová
+$yellow-color: #ffee58; // Žltá
+$green-color: #29b27e; // Zelená
+$blue-color:   #42a5f5; // Modrá
+$purple-color: #b95bcb; // Fialová
 
 //
 $thm-brand-color-dark: $secondary-color;
@@ -168,11 +174,14 @@ $thm-danger-dark: #FF0000;
     /* Theme colors */
     --secondary-color: #{$secondary-color};
     --secondary-color-transparent-50: #{$secondary-color-transparent-50};
+    --secondary-color-transparent-30: #{$secondary-color-transparent-30};
     --primary-color: #{$primary-color};
     --tertiary-color: #{$tertiary-color};
     --tertiary-color-light: #{$tertiary-color-light};
     --quaternary-color: #{$quaternary-color};
     --quaternary-color-transparent-50: #{$quaternary-color-transparent-50};
+    --quinary-color: #{$quinary-color};
+    --quinary-color-transparent-50: #{$quinary-color-transparent-50};
 
     /* Basic colors */
     --cream-color: #{$cream-color};
@@ -181,13 +190,15 @@ $thm-danger-dark: #FF0000;
     --gray-3-color: #{$gray-3-color};
     --gray-4-color: #{$gray-4-color};
     --gray-5-color: #{$gray-5-color};
+    --gray-6-color: #{$gray-6-color};
     --white-color: #{$white-color};
     --black-color: #{$black-color};
     --sandy-color: #{$sandy-color};
+    --true-black: #{$true-black};
 
     /* Reds and greens */
-    --green-on-primary-color: #{$green-on-primary-color};
-    --red-on-primary-color: #{$red-on-primary-color};
+    //--green-color: #{$green-color};
+    //--red-color: #{$red-color};
 
     --green-toast-color: #{$green-toast-color};
     --red-toast-color: #{$red-toast-color};
@@ -217,12 +228,12 @@ $thm-danger-dark: #FF0000;
 
     /* Charts */
 
-    --chart-red: #{$chart-red};
-    --chart-orange: #{$chart-orange};
-    --chart-yellow: #{$chart-yellow};
-    --chart-green: #{$chart-green};
-    --chart-blue: #{$chart-blue};
-    --chart-purple: #{$chart-purple};
+    --red-color: #{$red-color};
+    --orange-color: #{$orange-color};
+    --yellow-color: #{$yellow-color};
+    --green-color: #{$green-color};
+    --blue-color: #{$blue-color};
+    --purple-color: #{$purple-color};
 
     //
 
@@ -650,10 +661,10 @@ $text-font: 'Raleway', sans-serif;
 $fs-base: 16px !default;
 $fs-small:14px;
 
-$fs-h1: 60px;
-$fs-h2: 48px;
-$fs-h3: 32px;
-$fs-h4: 28px;
+$fs-h1: 72px;
+$fs-h2: 58px;
+$fs-h3: 42px;
+$fs-h4: 32px;
 $fs-h5: 24px;
 $fs-h6: 20px;
 

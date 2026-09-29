@@ -5,8 +5,8 @@ import { Button, ButtonColor } from "../reusable/Button.tsx";
 import { useTranslation } from "react-i18next";
 import { FaRegTrashCan } from "react-icons/fa6";
 import { saveQuestion } from "../../utils/api/formsService.ts";
-import {ToastColor, useToast} from "../../utils/providers/ToastProvider.tsx";
 import {formImagesURL} from "../../utils/constants";
+import {showToast} from "../toast/toastHelper.tsx";
 
 type Props = {
     question: Question;
@@ -18,7 +18,6 @@ type Props = {
 
 export const FormQuestionCard: FC<Props> = ({ question, onSave, deleteQuestion, updateId, category }) => {
     const { t } = useTranslation();
-    const { showToast } = useToast();
     const [isEditing, setIsEditing] = useState(false);
     const [imageFile, setImageFile] = useState<File | null>(null);
 
@@ -67,7 +66,7 @@ export const FormQuestionCard: FC<Props> = ({ question, onSave, deleteQuestion, 
             onSave?.(updated);
             updateId(question.id, response.data.id ?? question.id);
             setIsEditing(false);
-            showToast(t("Saved successfully"), ToastColor.green);
+            showToast.success(t("Saved successfully"));
         }
     };
 
@@ -169,7 +168,7 @@ export const FormQuestionCard: FC<Props> = ({ question, onSave, deleteQuestion, 
 
                     <div className="d-flex gap-2 mt-3">
                         <Button type="submit" color={ButtonColor.green}>{t("Save")}</Button>
-                        <Button type="button" color={ButtonColor.gray} onClick={() => {
+                        <Button type="button" color={ButtonColor.gray2} onClick={() => {
                             reset(question);
                             setIsEditing(false);
                         }}>{t("Cancel")}</Button>

@@ -12,7 +12,7 @@ export const RegisterStepThree:FC<Props> = ({formRegister}) => {
     const {t} = useTranslation();
     return (
         <>
-            <LoginRegisterInput register={formRegister} name="firm_name" placeholder={t("Firm name")} />
+            <LoginRegisterInput register={formRegister} name="firm_name" placeholder={t("Company Name")} />
             <LoginRegisterInput register={formRegister} name="firm_id" placeholder={t("Firm id")} />
             <LoginRegisterInput register={formRegister} name="firm_vat" placeholder={t("Firm VAT")} />
         </>

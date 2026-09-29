@@ -46,41 +46,43 @@ export const TrafficLightWrapper: FC<TrafficLightProps> = (props) => {
           </>
         ) : (
           <div>
-            <h3>{t("Traffic Light Summary")}</h3>
+            <h3 className="tw-text-lg sm:tw-text-xl lg:tw-text-2xl">{t("Traffic Light Summary")}</h3>
             <div className={"static-name"}>{props.name}</div>
           </div>
         )}
       </div>
-      <div className={"gray-2-color-text"}>{t("Name")}</div>
+      <div className="tw-flex tw-flex-col-reverse sm:tw-flex-row sm:tw-items-center sm:tw-justify-between sm:tw-gap-8 tw-gap-1 tw-mt-1">
+        <div className="tw-text-stone-400 tw-text-xs sm:tw-text-sm">{t("Name")}</div>
+      </div>
 
       {/* Reference Section */}
-      <div className={"d-flex flex-column flex-sm-row align-items-sm-center mt-4 mb-5 gap-2 gap-sm-5"}>
-        <span className={"white-color-text"} style={{ fontSize: "20px", whiteSpace: "nowrap" }}>
+      <div className="tw-flex tw-flex-col-reverse tw-max-w-md sm:tw-flex-row sm:tw-items-center sm:tw-justify-between sm:tw-gap-8 tw-gap-1 tw-mt-4 tw-mb-5">
+        <span className="tw-text-stone-400 tw-text-xs sm:tw-text-sm" style={{ whiteSpace: "nowrap" }}>
           {t("Watch over")}
         </span>
         {isEditable ? (
           <Form.Select
             value={props.reference}
             onChange={(e) => props.onReferenceChange?.(e.target.value as TrafficLightReference)}
-            className="select-box-outline"
-            style={{ width: "100%", maxWidth: "230px" }} // Na mobile zaberie plnú šírku (max 230px)
+            className="select-box-outline tw-text-sm sm:tw-text-base"
+            style={{ width: "100%", maxWidth: "230px" }}
           >
             {Object.values(TrafficLightReference).map((v) => (
               <option key={v} value={v}>{t(v)}</option>
             ))}
           </Form.Select>
         ) : (
-          <div className={"static-text"}>{t(props.reference)}</div>
+          <div className="static-text tw-text-sm sm:tw-text-base tw-text-white">{t(props.reference)}</div>
         )}
       </div>
 
       {/* Base Price Info (Details only) */}
       {props.variant === 'details' && props.basePrice && (
-        <div className={"d-flex flex-column flex-sm-row align-items-sm-center mt-2 gap-2 gap-sm-5"}>
-          <span className={"white-color-text"} style={{ fontSize: "20px" }}>
+        <div className="tw-flex tw-flex-col-reverse tw-mb-10 tw-max-w-md sm:tw-flex-row sm:tw-items-center sm:tw-justify-between sm:tw-gap-8 tw-gap-1 tw-mt-2">
+          <span className="tw-text-stone-400 tw-text-xs sm:tw-text-sm">
             {t("Base investment amount for this investment plan")}
           </span>
-          <div className={"static-text"}>{props.basePrice} {props.currency}</div>
+          <div className="static-text tw-text-sm tw-whitespace-nowrap sm:tw-text-base">{props.basePrice} {props.currency}</div>
         </div>
       )}
 
@@ -98,7 +100,7 @@ export const TrafficLightWrapper: FC<TrafficLightProps> = (props) => {
       {/* Edit Actions: Add and Save */}
       {isEditable && (
         <>
-          <div className="mt-3">
+          <div className="mt-3 tw-text-sm sm:tw-text-base">
             <CustomTooltip title={props.triggers.length >= 9 ? t("Maximum number of triggers reached") : ""}>
               <button
                 className={`d-flex align-items-center justify-content-center gap-2 btn-raw ${props.triggers.length >= 9 ? "disabled" : ""}`}

@@ -45,9 +45,8 @@ export const RegisterStepOne:FC<Props> = ({formRegister, errors, watch}) => {
     return (
         <>
             <LoginRegisterInput register={formRegister} name="nickname" placeholder={t("Nickname")} required error={errors.nickname} />
-            <LoginRegisterInput register={formRegister} name="firstname" placeholder={t("Name")} required error={errors.firstname} />
-            <LoginRegisterInput register={formRegister} name="midlename" placeholder={t("Middle name")} error={errors.midlename} />
-            <LoginRegisterInput register={formRegister} name="surname" placeholder={t("Surname")} required error={errors.surname} />
+            <LoginRegisterInput register={formRegister} name="firstname" placeholder={t("First name")} required error={errors.firstname} />
+            <LoginRegisterInput register={formRegister} name="surname" placeholder={t("Last name")} required error={errors.surname} />
             <div className="position-relative">
                 <LoginRegisterInput
                     register={formRegister}

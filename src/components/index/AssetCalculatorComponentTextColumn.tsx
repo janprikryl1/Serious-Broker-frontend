@@ -5,25 +5,25 @@ export const AssetCalculatorComponentTextColumn:FC = () => {
     const { t } = useTranslation();
 
     return (
-        <div className="calculator-info-panel info-panel mt-4">
+        <div className="calculator-info-panel info-panel">
             <div className="step">
-                <div className="index-step-number" style={{backgroundColor: "#ad9747", color: "black", boxShadow:"0px 2px 4px 1px rgba(173, 151, 71, 0.3)"}}>1</div>
+                <div className="index-step-number">1</div>
                 <p className="step-text">{t("Enter or choose a cryptocurrency, e.g. Bitcoin.")}</p>
             </div>
             <div className="step">
-                <div className="index-step-number" style={{backgroundColor: "#ad9747", color: "black", boxShadow:"0px 2px 4px 1px rgba(173, 151, 71, 0.3)"}}>2</div>
+                <div className="index-step-number">2</div>
                 <p className="step-text">{t("Enter the amount you would buy the cryptocurrency for.")}</p>
             </div>
             <div className="step">
-                <div className="index-step-number" style={{backgroundColor: "#ad9747", color: "black", boxShadow:"0px 2px 4px 1px rgba(173, 151, 71, 0.3)"}}>3</div>
+                <div className="index-step-number">3</div>
                 <p className="step-text">{t("Choose the currency in which the result should be displayed.")}</p>
             </div>
             <div className="step">
-                <div className="index-step-number" style={{backgroundColor: "#ad9747", color: "black", boxShadow:"0px 2px 4px 1px rgba(173, 151, 71, 0.3)"}}>4</div>
+                <div className="index-step-number">4</div>
                 <p className="step-text">{t("Select the period for which you would hold the investment.")}</p>
             </div>
             <div className="step">
-                <div className="index-step-number" style={{backgroundColor: "#ad9747", color: "black", boxShadow:"0px 2px 4px 1px rgba(173, 151, 71, 0.3)"}}>5</div>
+                <div className="index-step-number">5</div>
                 <p className="step-text">{t("Click the 'Calculate' button.")}</p>
             </div>
 

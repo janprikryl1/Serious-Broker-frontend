@@ -17,7 +17,7 @@ export const MembershipComponent: FC<Props> = ({ membership, onEdit }) => {
         <div className="mb-5 mt-3 text-light">
             <Typography>{t("Price")}: {membership.price}</Typography>
             <Typography>{toCzechDate(membership.created)} - {toCzechDate(membership.datetime_end)}</Typography>
-            <Button color={ButtonColor.gray} className="mt-2" onClick={onEdit}>
+            <Button color={ButtonColor.gray2} className="mt-2" onClick={onEdit}>
                 {t("Edit")}
             </Button>
         </div>

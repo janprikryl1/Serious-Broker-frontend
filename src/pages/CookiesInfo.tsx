@@ -1,60 +1,187 @@
-import {FC} from "react";
-import {TitleHeader} from "../components/about/TitleHeader.tsx";
-import {useTranslation} from "react-i18next";
+import { FC } from "react";
+import { TitleHeader } from "../components/about/TitleHeader.tsx";
+import { useTranslation } from "react-i18next";
 
-export const CookiesInfo:FC = () => {
-    const {t} = useTranslation();
-    
+export const CookiesInfo: FC = () => {
+    const { t } = useTranslation();
+
     return (
-        <>
-            <TitleHeader title="Cookies"/>
-            <div className="container">
-                <div className="cta-dark">
-                <h1>{t("Information about Cookies")}</h1>
-                <p>1. {t("What are the cookies?")}</p>
-                <span>{t("Cookies are small text files that are stored on your computer or device when you visit our website.")}</span>
+      <>
+          <TitleHeader title={t("Cookies Policy")} />
+          <div className="container tw-py-8">
+              <div className="tw-mx-auto tw-flex tw-flex-col tw-gap-8 tw-text-sm tw-text-stone-200 sm:tw-text-base lg:tw-text-lg">
+                  {/* Sekcia 1 */}
+                  <div>
+                      <h5 className="tw-mb-2 tw-text-base tw-font-semibold tw-text-white sm:tw-text-lg lg:tw-text-xl">
+                          1. {t("What are cookies?")}
+                      </h5>
+                      <p className="tw-text-sm sm:tw-text-base lg:tw-text-lg">
+                          {t(
+                            "Cookies are small text files that are stored on your computer or device when you visit our website."
+                          )}
+                      </p>
+                  </div>
 
-                <p>2. {t("Purpose of using cookies")}</p>
-                <span>{t("We use cookies to ensure the effectiveness of your visits and purchases on our website. We also use them to make it easier for you to use our website and to understand your purchasing behaviour.")}</span>
+                  {/* Sekcia 2 */}
+                  <div>
+                      <h5 className="tw-mb-2 tw-text-base tw-font-semibold tw-text-white sm:tw-text-lg lg:tw-text-xl">
+                          2. {t("Purpose of using cookies")}
+                      </h5>
+                      <p className="tw-text-sm sm:tw-text-base lg:tw-text-lg">
+                          {t(
+                            "We use cookies to ensure the effectiveness of your visits and purchases on our website. We also use them to make it easier for you to use our website and to understand your purchasing behaviour."
+                          )}
+                      </p>
+                  </div>
 
-                <p>3. {t("How we use cookies We use cookies for the following purposes")}:</p>
-                <ul>
-                    <li>a. {t("Retention of your login details.")}</li>
-                    <li>b. {t("Your identification when you log in to our website.")}</li>
-                    <li>c. {t("Information on offers and inquiries for companies and users.")}</li>
-                    <li>d. {t("Save the products placed in your shopping cart in case you navigate to another site during your browsing session, navigate to checkout, or end your browsing session before completing your purchase.")}</li>
-                    <li>e. {t("Collecting information to enable us to send you promotional communications relevant to your interests.")}</li>
-                    <li>f. {t("Save viewing preferences, such as preferred language, text size, page layout, or preferred colours. This makes it faster and easier to navigate through our site.")}</li>
-                    <li>g. {t("Obtaining analytical information, such as the number of visitors to our site and the most frequently visited pages on our site. We use the analytical information we obtain for marketing and resource planning purposes.")}</li>
-                    <li>h. {t("Determining whether our customers and visitors easily adapt to changes on our website.")}</li>
-                </ul>
+                  {/* Sekcia 3 */}
+                  <div>
+                      <h5 className="tw-mb-3 tw-text-base tw-font-semibold tw-text-white sm:tw-text-lg lg:tw-text-xl">
+                          3. {t("How we use cookies")}
+                      </h5>
+                      <p className="tw-mb-2 tw-text-sm sm:tw-text-base lg:tw-text-lg">
+                          {t("We use cookies for the following purposes:")}
+                      </p>
+                      <ul className="tw-flex tw-list-disc tw-flex-col tw-gap-2 tw-pl-6">
+                          <li className="tw-text-sm sm:tw-text-base lg:tw-text-lg">{t("Retention of your login details.")}</li>
+                          <li className="tw-text-sm sm:tw-text-base lg:tw-text-lg">{t("Your identification when you log in to our website.")}</li>
+                          <li className="tw-text-sm sm:tw-text-base lg:tw-text-lg">
+                              {t("Information on offers and inquiries for companies and users.")}
+                          </li>
+                          <li className="tw-text-sm sm:tw-text-base lg:tw-text-lg">
+                              {t(
+                                "Saving products placed in your shopping cart if you navigate between pages or end your session before completing a purchase."
+                              )}
+                          </li>
+                          <li className="tw-text-sm sm:tw-text-base lg:tw-text-lg">
+                              {t(
+                                "Collecting information to send you promotional communications relevant to your interests."
+                              )}
+                          </li>
+                          <li className="tw-text-sm sm:tw-text-base lg:tw-text-lg">
+                              {t(
+                                "Saving viewing preferences, such as preferred language, text size, page layout, or preferred colors."
+                              )}
+                          </li>
+                          <li className="tw-text-sm sm:tw-text-base lg:tw-text-lg">
+                              {t(
+                                "Obtaining analytical information (e.g. number of visitors, most visited pages) for marketing and planning purposes."
+                              )}
+                          </li>
+                          <li className="tw-text-sm sm:tw-text-base lg:tw-text-lg">
+                              {t(
+                                "Determining whether visitors easily adapt to changes on our website."
+                              )}
+                          </li>
+                      </ul>
+                  </div>
 
-                <p>4. {t("Information collected through cookies")}</p>
-                <span>{t("Although cookies help us to collect information about how you use our website, we do not store any personal information in them. We only store a unique session identifier that helps us retrieve your preferences and user profile the next time you visit our website.")}</span>
+                  {/* Sekcia 4 */}
+                  <div>
+                      <h5 className="tw-mb-2 tw-text-base tw-font-semibold tw-text-white sm:tw-text-lg lg:tw-text-xl">
+                          4. {t("Information collected through cookies")}
+                      </h5>
+                      <p className="tw-text-sm sm:tw-text-base lg:tw-text-lg">
+                          {t(
+                            "Although cookies help us to collect information about how you use our website, we do not store any personal information in them. We only store a unique session identifier that helps us retrieve your preferences and user profile the next time you visit."
+                          )}
+                      </p>
+                  </div>
 
-                <p>5. {t("Types of cookies")}</p>
-                <span>a. {t("Session cookies - these types of cookies are stored temporarily on your computer or device during a browsing session, and are removed from your computer or device when the browsing session ends.")}</span>
-                <span>b. {t("Persistent cookies - these types of cookies are stored on your computer for a longer period of time. Persistent cookies are used when we need to identify you across more than one browsing session.")}</span>
+                  {/* Sekcia 5 */}
+                  <div>
+                      <h5 className="tw-mb-3 tw-text-base tw-font-semibold tw-text-white sm:tw-text-lg lg:tw-text-xl">
+                          5. {t("Types of cookies")}
+                      </h5>
+                      <ul className="tw-flex tw-list-disc tw-flex-col tw-gap-2 tw-pl-6">
+                          <li className="tw-text-sm sm:tw-text-base lg:tw-text-lg">
+                              <strong>{t("Session cookies:")} </strong>
+                              {t(
+                                "Stored temporarily on your device during a browsing session and removed when the browser is closed."
+                              )}
+                          </li>
+                          <li className="tw-text-sm sm:tw-text-base lg:tw-text-lg">
+                              <strong>{t("Persistent cookies:")} </strong>
+                              {t(
+                                "Stored on your device for a longer period to identify you across multiple browsing sessions."
+                              )}
+                          </li>
+                      </ul>
+                  </div>
 
-                <p>6. {t("Cookie management The user menus of most browsers offer the possibility to manage cookies by editing or configuring the settings related to these files. The browser typically offers the following options:")}</p>
-                <span>a. {t("View cookies.")}</span>
-                <span>b. {t("Enable cookies.")}</span>
-                <span>c. {t("Disable all or specific cookies.")}</span>
-                <span>d. {t("Disable all cookies when you close your browser.")}</span>
-                <span>e. {t("Block cookies.")}</span>
-                <span>f. {t("Show notification if you accept a cookie.")}</span>
+                  {/* Sekcia 6 */}
+                  <div>
+                      <h5 className="tw-mb-3 tw-text-base tw-font-semibold tw-text-white sm:tw-text-lg lg:tw-text-xl">
+                          6. {t("Cookie management")}
+                      </h5>
+                      <p className="tw-mb-2 tw-text-sm sm:tw-text-base lg:tw-text-lg">
+                          {t(
+                            "Most browsers offer the possibility to manage cookies in their settings, including options to:"
+                          )}
+                      </p>
+                      <ul className="tw-mb-4 tw-flex tw-list-disc tw-flex-col tw-gap-1 tw-pl-6">
+                          <li className="tw-text-sm sm:tw-text-base lg:tw-text-lg">{t("View stored cookies.")}</li>
+                          <li className="tw-text-sm sm:tw-text-base lg:tw-text-lg">{t("Enable or block cookies.")}</li>
+                          <li className="tw-text-sm sm:tw-text-base lg:tw-text-lg">{t("Disable all or specific cookies.")}</li>
+                          <li className="tw-text-sm sm:tw-text-base lg:tw-text-lg">{t("Clear all cookies when you close your browser.")}</li>
+                          <li className="tw-text-sm sm:tw-text-base lg:tw-text-lg">
+                              {t("Show a notification when accepting a cookie.")}
+                          </li>
+                      </ul>
+                      <p className="tw-text-sm tw-text-stone-300 sm:tw-text-base lg:tw-text-lg">
+                          {t(
+                            "Please note that if you block our cookies, some features (like the shopping cart or order management) may not function properly. If you clear all cookies, your saved preferences will be removed."
+                          )}
+                      </p>
+                  </div>
 
-                <p>{t("Please note that if you block our cookies in your browser settings, you may not be able to access certain features on our website, such as the shopping cart, order management or customization, and your overall experience on our website may also be affected. If you choose to delete all cookies in your browser, the preferences associated with your browser will be removed when you close your browser.Please note that unless you have adjusted your browser settings to reject cookies, our system will send cookies as soon as you visit one of our websites.")}</p>
-                <p>{t("Learn more about cookies")}</p>
-                <a href="www.allaboutcookies.org">www.allaboutcookies.org</a>
-                <br/>
-                <a href="www.youronlinechoices.eu">www.youronlinechoices.eu</a>
-                <br/>
-                <a href="www.international-chamber.co.uk/our-expertise/digitaleconomy">www.international-chamber.co.uk/our-expertise/digitaleconomy</a>
-                <br/>
-                <a href="http://www.cnil.fr/vos-libertes/vos-traces/les-cookies/">http://www.cnil.fr/vos-libertes/vos-traces/les-cookies/</a>
-            </div>
-            </div>
-        </>
-    )
-}
+                  <hr className="tw-text-stone-300" />
+
+                  {/* Odkazy */}
+                  <div>
+                      <h6 className="tw-mb-3 tw-text-base tw-font-semibold tw-text-white sm:tw-text-lg lg:tw-text-xl">
+                          {t("Learn more about cookies")}
+                      </h6>
+                      <div className="tw-text-sm sm:tw-text-base lg:tw-text-lg">
+                          <a
+                            href="https://www.allaboutcookies.org"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="tw-text-secondary hover:tw-underline"
+                          >
+                              www.allaboutcookies.org
+                          </a>
+                          <br />
+                          <a
+                            href="https://www.youronlinechoices.eu"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="tw-text-secondary hover:tw-underline"
+                          >
+                              www.youronlinechoices.eu
+                          </a>
+                          <br />
+                          <a
+                            href="https://www.international-chamber.co.uk"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="tw-text-secondary hover:tw-underline"
+                          >
+                              www.international-chamber.co.uk
+                          </a>
+                          <br />
+                          <a
+                            href="https://www.cnil.fr/fr/cookies-et-autres-traceurs"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="tw-text-secondary hover:tw-underline"
+                          >
+                              www.cnil.fr
+                          </a>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </>
+    );
+};

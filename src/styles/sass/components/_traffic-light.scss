@@ -72,7 +72,7 @@
 }
 
 .traffic-light-compact {
-  color: var(--black-color);
+  color: var(--gray-2-color);
   font-size: 1.3rem;
   width: 100%;
   cursor: pointer;
@@ -97,7 +97,7 @@
     padding: 3px 0 3px 0;
     display: flex;
     width: 89.5%;
-    border-bottom: 1px solid color-mix(in srgb, var(--gray-4-color), transparent 60%);
+    border-bottom: 1px solid color-mix(in srgb, var(--gray-2-color), transparent 60%);
   }
 
   .traffic-light-triggers-preview {
@@ -114,7 +114,7 @@
   }
 
   &.selected-traffic-light {
-    background-color: var(--tertiary-color) !important;
+    background-color: var(--secondary-color-transparent-50) !important;
     color: var(--white-color) !important;
     cursor: default;
 
@@ -131,7 +131,7 @@
 
   .selection-checkmark {
     margin-left: 10px;
-    color: var(--secondary-color);
+    color: var(--white-color);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -170,6 +170,31 @@
   width: fit-content;
 }
 
+.traffic-light-accordion-item {
+  margin-bottom: 1rem !important;
+}
+
+.traffic-light-accordion-item__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 20px 25px;
+}
+
+.traffic-light-accordion-item__body {
+  padding: 20px 25px;
+}
+
+.traffic-light-triggers-preview--static {
+  position: static;
+  transform: none;
+  opacity: 1;
+  display: flex;
+  gap: 8px;
+  margin-right: 15px;
+}
+
 @media (max-width: 992px) {
   .traffic-light-trigger-wrapper {
     padding: 20px;
@@ -195,6 +220,41 @@
       height: 1px;
       margin: 10px 0;
     }
+  }
+
+  .traffic-light-accordion-item__header {
+    padding: 16px 18px;
+    align-items: flex-start;
+  }
+
+  .traffic-light-accordion-item__body {
+    padding: 16px 18px;
+  }
+
+  .traffic-light-accordion-item__title {
+    font-size: 1.1rem;
+  }
+
+  .traffic-light-triggers-preview--static {
+    gap: 6px;
+    margin-right: 8px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+}
+
+@media (max-width: 576px) {
+  .traffic-light-circle-small {
+    width: 14px;
+    height: 14px;
+  }
+
+  .static-name {
+    font-size: 20px;
+  }
+
+  .traffic-light-accordion-item__title {
+    font-size: 1rem;
   }
 }
 

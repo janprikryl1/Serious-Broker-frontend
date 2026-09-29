@@ -224,12 +224,12 @@
         }
     }
 
-    &__social {
+/*    &__social {
         @extend %p-25;
         background-color: $wh-color;
         box-shadow: 0px -16px 48px rgba(6, 35, 63, 0.03), 0px 16px 48px rgba(6, 35, 63, 0.03);
         border-radius: 4px;
-    }
+    }*/
 
     &__tags {
         @extend %p-25;
@@ -377,7 +377,7 @@
   top: 15px;
   left: 15px;
   z-index: 1100;
-  background-color: #B1974E;
+  background-color: $secondary-color;
   color: #0A0704;
   border: none;
   border-radius: 50%;

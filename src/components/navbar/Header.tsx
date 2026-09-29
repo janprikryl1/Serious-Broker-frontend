@@ -1,7 +1,7 @@
 import {FC, useEffect, useState} from "react";
 import {Link, useLocation} from "react-router-dom";
 import {NavbarDesktopMenu} from "./NavbarDesktopMenu.tsx";
-import SeriousBrokerHandWriting from "../../utils/icons/logo/SB-handwritten-white.svg";
+import SeriousBrokerHandWriting from "../../utils/icons/logo/SB-logo-handwritten-white.svg";
 import {MobileMenu} from "./MobileMenu.tsx";
 import {useMediaQuery} from "@mui/material";
 import {useUserContext} from "../../utils/providers/providerUser.tsx";
@@ -15,6 +15,7 @@ export const Header: FC = () => {
   const {user} = useUserContext();
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
+  const isFixedPage = location.pathname === "/" || location.pathname === routes.home;
   const isMobile = useMediaQuery("(max-width: 820px)");
   const isTablet = useMediaQuery("(max-width: 1457px)");
 
@@ -23,9 +24,9 @@ export const Header: FC = () => {
   useEffect(() => setMobileMenuOpen(false), [location.pathname]);
 
   return (
-    <header className="header-section header-section--style1">
+    <header className={`header-section header-section--style1 ${isFixedPage ? '!tw-fixed' : '!tw-sticky'}`}>
       <div className="header-wrapper">
-        <div className="container mt-4">
+        <div className="container">
           <div className="d-flex align-items-center justify-content-between">
             <div className="d-flex align-items-center">
               <div className="logo">
@@ -46,7 +47,7 @@ export const Header: FC = () => {
             <div className="d-flex align-items-center flex-nowrap">
 
               {!user && !isMobile && (
-                <div className="px-3 fw-bold" style={{color: "var(--white-color)"}}>
+                <div className="px-3">
                   <SignUpIcon/>
                 </div>
               )}
@@ -63,10 +64,9 @@ export const Header: FC = () => {
                   </div>
               )}
 
-
               {isTablet || isMobile ?
                 <div onClick={toggleMobileMenu} aria-label="Toggle menu">
-                  <FiMenu size={38} style={{color: menuColor, marginLeft: "15px"}}/>
+                  <FiMenu size={30} style={{color: menuColor, marginLeft: "15px"}}/>
                 </div> :
                 null
               }

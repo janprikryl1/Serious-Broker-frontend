@@ -77,18 +77,18 @@
 
         &--style1 {
             @extend %py-10,
-            %px-20;
+            %px-15;
             border-top-left-radius: 8px;
             border-bottom-left-radius: 8px;
 
             @include breakpoint(sm) {
-                padding: 16px 20px;
+                padding: 16px 15px;
             }
         }
 
         &--style2 {
             @extend %py-10,
-            %px-20,
+            %px-15,
             %me-10;
             border-radius: 3px;
             background-color: $bg-white;
@@ -101,12 +101,12 @@
 
             @include breakpoint(sm) {
                 max-width: 60%;
-                padding: 11px 20px;
+                padding: 11px 15px;
             }
 
             @include breakpoint(lg) {
                 max-width: 60%;
-                padding: 16px 20px;
+                padding: 16px 15px;
             }
 
             @include breakpoint(lg) {
@@ -116,7 +116,7 @@
 
         &--style3 {
             @extend %py-10,
-            %px-20,
+            %px-15,
             %me-10;
             background-color: $bg-white;
             border-color: $bg-white;
@@ -133,12 +133,12 @@
 
             @include breakpoint(sm) {
                 max-width: 60%;
-                padding: 11px 20px;
+                padding: 11px 15px;
             }
 
             @include breakpoint(lg) {
                 max-width: 60%;
-                padding: 16px 20px;
+                padding: 16px 15px;
             }
 
             @include breakpoint(lg) {
@@ -246,9 +246,9 @@
 }
 
 .glass-effect {
-    background: color-mix(in srgb, var(--tertiary-color, #1a1a1a) 40%, transparent);
-    backdrop-filter: blur(14px) saturate(140%);
-    -webkit-backdrop-filter: blur(14px) saturate(140%);
+    background: color-mix(in srgb, var(--tertiary-color) 40%, transparent);
+    backdrop-filter: blur(14px);
+    //-webkit-backdrop-filter: blur(14px) saturate(140%) !important;
     border: 0.5px solid rgba(255, 255, 255, 0.15);
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
     overflow: hidden;
@@ -258,7 +258,7 @@
     transition: all 0.2s ease;
 
     &:hover {
-        background: color-mix(in srgb, var(--secondary-color, #B1974E) 20%, transparent);
+        background: color-mix(in srgb, var(--secondary-color) 15%, transparent);
         backdrop-filter: blur(18px) saturate(160%);
         //border: 0.5px solid rgba(255, 255, 255, 0.25);
     }
@@ -270,16 +270,57 @@
 
     &--red {
         @extend .color-container;
-        background-color: color-mix(in srgb, var(--red-on-primary-color) 20%, transparent);
+        background-color: color-mix(in srgb, var(--red-color) 15%, transparent);
     }
 
     &--green {
         @extend .color-container;
-        background-color: color-mix(in srgb, var(--green-on-primary-color) 20%, transparent);
+        background-color: color-mix(in srgb, var(--green-color) 15%, transparent);
     }
 
     &--gold {
         @extend .color-container;
-        background-color: color-mix(in srgb, var(--secondary-color) 20%, transparent);
+        background-color: color-mix(in srgb, var(--secondary-color) 15%, transparent);
+    }
+
+    &--white {
+        @extend .color-container;
+        background-color: color-mix(in srgb, var(--white-color) 15%, transparent);
+    }
+
+    &--chart-red {
+        @extend .color-container;
+        background-color: color-mix(in srgb, var(--red-color) 15%, transparent);
+        color: var(--red-color);
+    }
+
+    &--chart-orange {
+        @extend .color-container;
+        background-color: color-mix(in srgb, var(--orange-color) 15%, transparent);
+        color: var(--orange-color);
+    }
+
+    &--chart-yellow {
+        @extend .color-container;
+        background-color: color-mix(in srgb, var(--yellow-color) 15%, transparent);
+        color: var(--yellow-color);
+    }
+
+    &--chart-green {
+        @extend .color-container;
+        background-color: color-mix(in srgb, var(--green-color) 15%, transparent);
+        color: var(--green-color);
+    }
+
+    &--chart-blue {
+        @extend .color-container;
+        background-color: color-mix(in srgb, var(--blue-color) 15%, transparent);
+        color: var(--blue-color);
+    }
+
+    &--chart-purple {
+        @extend .color-container;
+        background-color: color-mix(in srgb, var(--purple-color) 15%, transparent);
+        color: var(--purple-color);
     }
 }

@@ -1,7 +1,7 @@
 .form-control {
     border-color: $form-border;
     padding: 10px 15px;
-    border-radius: 8px;
+    border-radius: 5px;
     background-color: $primary-color;
     color: $title-color;
     caret-color: var(--white-color);
@@ -9,7 +9,7 @@
   &:focus {
       box-shadow: none;
       border-color: $brand-color;
-      background-color: #FFFFFF20;
+      background-color: $primary-color;
       color: $title-color;
     }
 
@@ -36,16 +36,29 @@
   }
 }
 
+.form-control--light {
+  padding: 10px 15px;
+  border-radius: 5px;
+  background-color: $white-color;
+  color: $primary-color;
+  border: none;
+
+  &:focus {
+    box-shadow: none;
+    border: 1px solid $secondary-color !important;
+  }
+}
+
 .form-select {
   background-color: $primary-color;
   border-color: $form-border;
-  border-radius: 2px;
+  border-radius: 5px;
   color: $title-color;
+  padding: 10px 15px;
 
   &:focus {
     box-shadow: none;
     border-color: $brand-color;
-    background-color: var(--tertiary-color-light);
     color: $title-color;
   }
 }
@@ -102,7 +115,7 @@
 
     @include font-size(18px);
     & {
-        font-family: 'PT Sans', sans-serif;
+        font-family: 'Inter', sans-serif;
         font-weight: 400;
         color: $title-color;
     }
@@ -140,10 +153,9 @@
 
   // Collapsed field
   background-color: transparent;
-  border: 1px solid var(--secondary-color);
-  border-radius: 2px;
+  border: 1px solid var(--gray-4-color);
+  border-radius: 5px;
   padding: 7px 20px 7px 12px;
-  font-family: "PT Sans", sans-serif;
   font-size: 16px;
   color: var(--white-color);
   cursor: pointer;
@@ -156,8 +168,9 @@
   background-size: 20px 16px;
 
   &:focus {
+    border-color: var(--secondary-color);
     outline: none;
-    box-shadow: 0 0 15px 5px color-mix(in srgb, var(--secondary-color), transparent 90%);
+    box-shadow: var(--golden-glow-shadow);
   }
 
   &:hover {
@@ -168,6 +181,7 @@
   // Options
   option {
     color: var(--white-color);
+    background-color: $primary-color;
     padding: 10px;
     font-size: 16px;
   }
@@ -188,12 +202,13 @@
 
 .outline-input {
   background-color: transparent;
-  border-radius: 2px !important;
-  outline: var(--secondary-color) solid 1px;
+  border-radius: 5px !important;
+  outline: 1px solid var(--gray-4-color);
   border: none;
   padding: 7px 12px 7px 12px;
   color: var(--white-color);
   height: 33px;
+  transition: all 0.3s ease;
 
   &::placeholder {
     color: var(--gray-1-color);
@@ -203,10 +218,21 @@
   &:focus {
     outline: var(--secondary-color) solid 1px;
     box-shadow: var(--golden-glow-shadow);
-    background-color: var(--tertiary-color-light);
+    background-color: transparent;
   }
 
   &:hover {
+    outline: var(--secondary-color) solid 1px;
     box-shadow: var(--golden-glow-shadow);
+  }
+}
+
+// autofill input color
+@layer base {
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0 1000px #121212 inset !important;
+    -webkit-text-fill-color: #ffffff !important;
   }
 }

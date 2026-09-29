@@ -1,14 +1,14 @@
 .header-section {
   @extend %p-rel;
   width: 100%;
-  z-index: 99;
-  //font-weight: bold;
-  margin-top: -20px;
+  z-index: 101;
+  top: 0;
+  left: 0;
+  //position: fixed;
 
   &--style1 {
     @extend %p-rel;
     width: 100%;
-    background-color: $bg-color-3;
 
     &.header-fixed {
       @extend %w-100;
@@ -44,9 +44,10 @@
   @extend %d-flex,
   %justify-between,
   %align-i-center;
-  background: $primary-color;
-  padding-block: 6px;
   min-height: 56px;
+  box-shadow:
+          0px 12px 40px 0 rgba(0, 0, 0, 0.3),
+          inset 0px 0px 2px 0px rgba(255, 255, 255, 0.1);
 
   @include breakpoint(sm) {
     position: relative;
@@ -73,8 +74,9 @@
       }
 
       .wordmark {
-        width: 220px;
-        @include breakpoint(lg) { width: 300px; }
+        width: 180px;
+        @include breakpoint(md) { width: 220px; }
+        @include breakpoint(lg) { width: 250px; }
       }
     }
 
@@ -87,6 +89,16 @@
   .menu-area {
     @extend %d-flex;
     margin-left: 8px;
+
+    .dropdown-item,
+    .dropdown-toggle {
+      @include font-size(16px);
+    }
+
+    ul, li {
+      display: flex !important;
+      align-items: center !important;
+    }
 
     ul {
       display: flex;
@@ -111,6 +123,17 @@
   &--style2 {
     border-bottom: 1px solid $border-color-9;
   }
+}
+
+.header-wrapper::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: rgba(44, 37, 35, 0.6);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(118, 116, 111, 0.2);
 }
 
 .menu {
@@ -423,7 +446,6 @@
     }
   }
 }
-
 
 .vr {
   margin: 70px -10px 70px 10px;

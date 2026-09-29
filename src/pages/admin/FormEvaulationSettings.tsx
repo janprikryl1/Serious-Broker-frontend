@@ -4,13 +4,12 @@ import { Button, ButtonColor } from "../../components/reusable/Button";
 import { FaSave, FaPlus } from "react-icons/fa";
 import { EvaluationCategory } from "../../utils/types/admin/EvaluationCategory.ts";
 import { FaRegTrashCan } from "react-icons/fa6";
-import {ToastColor, useToast} from "../../utils/providers/ToastProvider.tsx";
+import {showToast} from "../../components/toast/toastHelper.tsx";
 
 
 export const FormEvaulationSettings: FC = () => {
     const [categories, setCategories] = useState<EvaluationCategory[]>([]);
     const [isSaving, setIsSaving] = useState(false);
-    const { showToast } = useToast();
 
     useEffect(() => {
         (async () => {
@@ -21,7 +20,7 @@ export const FormEvaulationSettings: FC = () => {
                 }
             } catch (error) {
                 console.error("Error fetching evaluation settings:", error);
-                showToast("Nepodařilo se načíst data.", ToastColor.red);
+                showToast.error("Nepodařilo se načíst data.");
             }
         })();
     }, []);
@@ -60,13 +59,13 @@ export const FormEvaulationSettings: FC = () => {
             setIsSaving(true);
             const response = await saveFormSettings(categories);
             if (response?.status === 200) {
-                showToast("Uloženo.", ToastColor.green);
+                showToast.success("Uloženo.");
             } else {
-                showToast("Chyba při ukládání.", ToastColor.red);
+                showToast.error("Chyba při ukládání.");
             }
         } catch (err) {
             console.error("Save error", err);
-            showToast("Chyba při ukládání.", ToastColor.red);
+            showToast.error("Chyba při ukládání.");
         } finally {
             setIsSaving(false);
         }
@@ -118,7 +117,7 @@ export const FormEvaulationSettings: FC = () => {
             ))}
 
             <div className="d-flex gap-2">
-                <Button onClick={handleAddCategory} color={ButtonColor.gray}>
+                <Button onClick={handleAddCategory} color={ButtonColor.gray2}>
                     <FaPlus className="me-1"/>
                     Přidat záznam
                 </Button>

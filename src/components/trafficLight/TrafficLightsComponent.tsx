@@ -1,13 +1,13 @@
 import React, {ChangeEvent, FC, useCallback, useEffect, useRef, useState} from "react";
-import {useTranslation} from "react-i18next";
+import {Trans, useTranslation} from "react-i18next";
 import {InvestmentPlanLayout} from "../profile/myPortfolio/InvestmentPlanLayout.tsx";
 import {CardContainer} from "../reusable/CardContainer.tsx";
 import {Form, Modal, OverlayTrigger} from "react-bootstrap";
 import {NextStepButton} from "../reusable/NextStepButton.tsx";
 import {routes} from "../../utils/constants";
 import {Button, ButtonColor} from "../reusable/Button.tsx";
-import BuyCryptoImg from "../../assets/buy-crypto.svg";
-import SellCryptoImg from "../../assets/sell-crypto.svg";
+import BuyCryptoImg from "../../utils/icons/coins/buy-crypto.svg";
+import SellCryptoImg from "../../utils/icons/coins/sell-crypto.svg";
 import {TriggerType} from "../../utils/types/trafficLight/TriggerType.ts";
 import {getTrafficLights, saveTrafficLight} from "../../utils/api/trafficLightsService.ts";
 import {TrafficLightType} from "../../utils/types/trafficLight/TrafficLightType.ts";
@@ -17,6 +17,8 @@ import {useInvestmentPlanContext} from "../../utils/providers/InvestmentPlanProv
 import {FaCheck} from "react-icons/fa6";
 import {TrafficLightWrapper} from "./TrafficLightWrapper.tsx";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import {GlassCard} from "../reusable/GlassCard.tsx";
+import {TrafficLightsSection} from "./TrafficLightsSection.tsx";
 
 enum Currency {
     CZK = "CZK",
@@ -332,116 +334,24 @@ export const TrafficLightsComponent = () => {
 
     return (
         <InvestmentPlanLayout title="New Investment Plan" currentStep={currentStep} currentStepFinished={false}>
-            <h3>{t("Market Traffic Lights")}</h3>
-            <div className="gray-3-color-text mb-5">
-                {t("You can set triggers to dynamically adapt your base investment price to the current market trend. With this tool you can invest more or less money based on certain events. You can also keep your assets protected from unwanted losses due to market drop.")}
+            <h5 className="tw-text-base sm:tw-text-lg">{t("Market Traffic Lights")}</h5>
+            <div className="tw-mb-5 tw-text-sm sm:tw-text-base tw-text-[var(--gray-3-color)]">
+                {t("trafficLight.planSetupDescription")}
             </div>
 
-            <div className={"row g-4"}>
+            <TrafficLightsSection
+              selectedBuyId={buyTrafficLightId}
+              selectedSellId={sellTrafficLightId}
+              onSelectBuy={setBuyTrafficLightId}
+              onSelectSell={setSellTrafficLightId}
+              onOpenCreateModal={(type) => {
+                  setContextType(type);
+                  setShowCreateTrafficLightModal(true);
+              }}
+              currency={currency}
+            />
 
-                {/* LEFT COLUMN - Buy Traffic Lights */}
-                <div className={"col-lg-6 d-flex flex-column mb-4 mb-lg-0"}>
-                    <div className={"white-color-text"}
-                         style={{ fontSize: "1.4rem", fontFamily: "PT Sans Caption" }}>
-                        {t("Select from Your")}{" "}
-                        <span style={{ color: "var(--secondary-color)" }}>{t("Buy")}</span>{" "}
-                        {t("Traffic Lights")}
-                    </div>
-
-                    <CardContainer color="var(--secondary-color)" className="px-0 mx-0 w-100" style={{ flexGrow: 1, marginBottom: "5px", borderRadius: "10px", overflow: "hidden" }}>
-                        <div className={"blur-bg-image-container h-100"}>
-                            <img src={BuyCryptoImg} className={"blur-bg-image"} alt={""} />
-
-                            <div className={"content d-flex flex-column"}>
-                                {userBuyTrafficLights.length < 1 ? (
-                                  <div className="p-4 text-center my-auto">
-                                      <div className={"gray-4-color-text mb-4"}>{t("You have no buy traffic lights defined")}</div>
-                                      <Button color={ButtonColor.lightBrown} shadow={true}
-                                              style={{ marginBottom: 0, fontWeight: "normal" }}
-                                              onClick={newBuyTrafficLight}>{t("Define buy traffic light")}</Button>
-                                  </div>
-                                ) : (
-                                  <div className="w-100">
-                                      {userBuyTrafficLights.map(trafficLight => {
-                                          const isSelected = buyTrafficLightId === trafficLight.id;
-                                          return (
-                                            <div className={`traffic-light-compact mt-2 ${isSelected ? "selected-traffic-light" : ""}`} key={trafficLight.id} onClick={() => handleRowClick(trafficLight)}>
-                                                <div className="content">
-                                                    {trafficLight.name}
-                                                    {isSelected && (
-                                                      <div className="selection-checkmark">
-                                                          <FaCheck size={20} />
-                                                      </div>
-                                                    )}
-                                                    <div className={"traffic-light-triggers-preview"}>
-                                                        {trafficLight.triggers.map((trigger, idx) => (
-                                                          <div key={idx} style={{ backgroundColor: trigger.color }} className={"traffic-light-circle-small"}></div>
-                                                        ))}
-                                                    </div>
-                                                </div>
-                                            </div>
-                                          )
-                                      })}
-                                  </div>
-                                )}
-                            </div>
-                        </div>
-                    </CardContainer>
-                </div>
-
-                {/* RIGHT COLUMN - Sell Traffic Lights */}
-                <div className={"col-lg-6 d-flex flex-column"}>
-                    <div className={"white-color-text"}
-                         style={{ fontSize: "1.4rem", fontFamily: "PT Sans Caption" }}>
-                        {t("Select from Your")}{" "}
-                        <span style={{ color: "var(--secondary-color)" }}>{t("Sell")}</span>{" "}
-                        {t("Traffic Lights")}
-                    </div>
-
-                    <CardContainer color="var(--secondary-color)" className="px-0 mx-0 w-100" style={{ flexGrow: 1, borderRadius: "10px", overflow: "hidden" }}>
-                        <div className={"blur-bg-image-container h-100"}>
-                            <img src={SellCryptoImg} className={"blur-bg-image"} alt={""} />
-
-                            <div className={"content d-flex flex-column"}>
-                                {userSellTrafficLights.length < 1 ? (
-                                  <div className="p-4 text-center my-auto">
-                                      <div className={"gray-4-color-text mb-4"}>{t("You have no sell traffic lights defined")}</div>
-                                      <Button color={ButtonColor.lightBrown} shadow={true}
-                                              style={{ marginBottom: 0, fontWeight: "normal" }}
-                                              onClick={newSellTrafficLight}>{t("Define sell traffic light")}</Button>
-                                  </div>
-                                ) : (
-                                  <div className="w-100">
-                                      {userSellTrafficLights.map(trafficLight => {
-                                          const isSelected = sellTrafficLightId === trafficLight.id;
-                                          return (
-                                            <div className={`traffic-light-compact mt-2 ${isSelected ? "selected-traffic-light" : ""}`} key={trafficLight.id} onClick={() => handleRowClick(trafficLight)}>
-                                                <div className="content">
-                                                    {trafficLight.name}
-                                                    {isSelected && (
-                                                      <div className="selection-checkmark">
-                                                          <FaCheck size={20} />
-                                                      </div>
-                                                    )}
-                                                    <div className={"traffic-light-triggers-preview"}>
-                                                        {trafficLight.triggers.map((trigger, idx) => (
-                                                          <div key={idx} style={{ backgroundColor: trigger.color }} className={"traffic-light-circle-small"}></div>
-                                                        ))}
-                                                    </div>
-                                                </div>
-                                            </div>
-                                          )
-                                      })}
-                                  </div>
-                                )}
-                            </div>
-                        </div>
-                    </CardContainer>
-                </div>
-
-            </div>
-
-            <div className={`d-flex ${isMobile ? "flex-column" : "flex-row gap-3"} justify-content-between mt-4`}>
+            <div className={`tw-flex ${isMobile ? "tw-flex-col" : "tw-flex-row tw-gap-3"} tw-justify-between tw-mt-4`}>
                 <NextStepButton currentStep={currentStep} currentStepFinished={selectedAmount != null && selectedAmount > 0}  link={routes.profile.newInvestmentPlanInvestedAmount} variant={"previous"} color={"var(--sandy-color)"} />
                 <NextStepButton currentStep={currentStep}
                                 currentStepFinished={selectedAmount != null && selectedAmount > 0}
@@ -459,10 +369,11 @@ export const TrafficLightsComponent = () => {
                 size={"xl"}
                 contentClassName="custom-modal"
             >
-                <Modal.Body>
+                <Modal.Header closeButton className="tw-border-0 tw-p-0 tw-m-0" />
+                <Modal.Body className="tw-pt-0">
                     <div>
-                        <h3>{t('defineTrafficLight', { type: typeCamelCase })}</h3>
-                        <div className={"mb-4"}>
+                        <h5 className="tw-text-base sm:tw-text-lg">{t('defineTrafficLight', { type: typeCamelCase })}</h5>
+                        <div className="tw-mb-4 tw-text-sm sm:tw-text-base">
                             {t('trafficLight.triggerDescription')}
                         </div>
 
@@ -492,7 +403,8 @@ export const TrafficLightsComponent = () => {
                 size={"xl"}
                 contentClassName="custom-modal"
             >
-                <Modal.Body>
+                <Modal.Header closeButton className="tw-border-0 tw-p-0 tw-m-0" />
+                <Modal.Body className="tw-p-0 lg:tw-px-5">
                     <TrafficLightWrapper
                         triggers={triggers}
                         variant={"details"}
@@ -502,11 +414,15 @@ export const TrafficLightsComponent = () => {
                         basePrice={100}
                         currency={currency}
                     />
-                    <Button color={ButtonColor.gold} onClick={confirmSelection}>
-                        {buyTrafficLightId === trafficLightClicked?.id || sellTrafficLightId === trafficLightClicked?.id
-                            ? t("Deselect this Traffic Light")
-                            : t("Select this Traffic Light")}
-                    </Button>
+                    <div className="tw-text-center">
+                        <Button color={ButtonColor.gold} onClick={confirmSelection}>
+                            <span className="tw-text-base sm:tw-text-md">
+                                {buyTrafficLightId === trafficLightClicked?.id || sellTrafficLightId === trafficLightClicked?.id
+                                    ? t("Deselect this Traffic Light")
+                                    : t("Select this Traffic Light")}
+                            </span>
+                        </Button>
+                    </div>
                 </Modal.Body>
             </Modal>
 

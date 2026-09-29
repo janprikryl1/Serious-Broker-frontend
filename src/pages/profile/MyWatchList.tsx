@@ -1,6 +1,6 @@
 import {FC, useEffect, useState} from "react";
-import {WatchListType} from "../../utils/types/watchList/WatchListType.ts";
 import {useTranslation} from "react-i18next";
+import {WatchListType} from "../../utils/types/watchList/WatchListType.ts";
 import {getMyWatchList} from "../../utils/api/watchListService.ts";
 import {WatchListSkeleton} from "../../components/profile/watchList/WatchListSkeleton.tsx";
 import {NoItemsInWatchList} from "../../components/profile/watchList/NoItemsInWatchList.tsx";
@@ -28,11 +28,7 @@ export const MyWatchList: FC = () => {
     <>
       <TitleHeader title={t("Watchlist")}/>
       <div className="container">
-        <div
-          className="service-details__content"
-          data-aos="fade-up"
-          data-aos-duration="900"
-        >
+        <div data-aos="fade-up" data-aos-duration="900">
           {watchList === undefined ? <WatchListSkeleton/> :
             watchList.length === 0 ? <NoItemsInWatchList/> :
               <WatchListTable watchList={watchList} setWatchList={setWatchList}/>

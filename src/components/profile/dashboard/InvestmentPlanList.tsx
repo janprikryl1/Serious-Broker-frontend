@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { OutlineContainer } from '../../reusable/OutlineContainer.tsx';
 import { getInvestmentPlansDetails } from '../../../utils/api/investmentPlanService.ts';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { routes } from '../../../utils/constants';
 import { FiClock, FiDollarSign, FiTag } from 'react-icons/fi';
-import { LuLayers } from 'react-icons/lu';
 
 export const InvestmentPlanList = () => {
   const { t } = useTranslation();
@@ -71,31 +69,29 @@ export const InvestmentPlanList = () => {
   }, []);
 
   if (isLoading) {
-    return <div className="mt-4">Načítavam investičné plány...</div>;
+    return <div className="tw-mt-3 sm:tw-mt-4 tw-text-xs sm:tw-text-sm">Načítavam investičné plány...</div>;
   }
 
   if (!plans.length) {
-    return <div className="mt-4">Žiadne investičné plány sa nenašli.</div>;
+    return <div className="tw-mt-3 sm:tw-mt-4 tw-text-xs sm:tw-text-sm">Žiadne investičné plány sa nenašli.</div>;
   }
 
   return (
-    <OutlineContainer className="dashboard-container ">
-      <div className={'card-header'}>
-        <p className="mb-3">
-          <Link to={routes.profile.myInvestmentPlans} className="text-decoration-none">
-            {t('Investment plans')}
-          </Link>
-        </p>
+    <div className="tw-bg-stone-950 tw-bg-opacity-5 tw-border tw-border-solid tw-border-stone-400 tw-border-opacity-20 tw-rounded-2xl tw-p-3 sm:tw-p-4 lg:tw-p-6 tw-min-w-0" >
+      <div className="card-header">
+        <Link to={routes.profile.myInvestmentPlans} className="text-decoration-none">
+          <h6 className="tw-mb-0 tw-text-sm sm:tw-text-base">{t('Investment plans')}</h6>
+        </Link>
       </div>
-      <div className="d-flex flex-column gap-3 mt-4">
+      <div className="d-flex flex-column gap-3 tw-mt-3 sm:tw-mt-4">
         {plans.map((plan) => (
-          <div className="d-flex flex-column gap-2 fs-4" key={plan.id ?? plan.name}>
-            <div className="mb-0">
+          <div className="d-flex flex-column gap-2 tw-text-xs sm:tw-text-sm lg:tw-text-base" key={plan.id ?? plan.name}>
+            <div className="tw-mb-0 tw-break-words tw-font-medium">
                 {plan.name || '-'}
             </div>
-            <div className="row mb-2 border-bottom">
+            <div className="row tw-mb-2 tw-border-b tw-border-stone-400 tw-border-opacity-20">
               {getPlanFields(plan).map((item, index) => (
-                <div key={index} className="d-flex align-items-center gap-3 col-12 col-sm-4 mb-3">
+                <div key={index} className="d-flex align-items-center gap-2 sm:gap-3 col-12 col-lg-4 tw-mb-2 sm:tw-mb-3 tw-min-w-0">
 
                   {/* Icon */}
                   <div className="color-container--gold icon-container">
@@ -103,13 +99,13 @@ export const InvestmentPlanList = () => {
                   </div>
 
                   {/* Label + Value */}
-                  <div>
-                    <div className="gray-2-color-text" style={{ fontSize: '0.9rem' }}>
+                  <div className="tw-min-w-0">
+                    <div className="gray-2-color-text tw-text-[11px] sm:tw-text-xs tw-leading-tight">
                       {t(item.label)}
                     </div>
-                    <div style={{ fontSize: '1.1rem', fontWeight: 500 }}>
+                    <div className="tw-text-xs sm:tw-text-sm lg:tw-text-base tw-font-medium tw-leading-snug tw-break-words">
                       {item.link ? (
-                        <Link to={item.link} className="text-decoration-underline">
+                        <Link to={item.link} className="text-decoration-underline tw-break-words">
                           {t(item.value)}
                         </Link>
                       ) : (
@@ -123,6 +119,6 @@ export const InvestmentPlanList = () => {
           </div>
         ))}
       </div>
-    </OutlineContainer>
+    </div>
   );
 };

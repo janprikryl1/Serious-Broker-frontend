@@ -32,7 +32,7 @@ export const SearchBar: FC<SearchFieldProps> = ({
 
         <input
           type="text"
-          className="search-input flex-grow-1 pe-5"
+          className="search-input flex-grow-1"
           placeholder={t(placeholder)}
           value={value}
           onChange={onChange}

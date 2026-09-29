@@ -5,6 +5,8 @@ import {addArticleComment} from "../../utils/api/commentsService.ts";
 import {useAchievementsContext} from "../../utils/providers/AchievementsProvider.tsx";
 import {routes} from "../../utils/constants";
 import {CommentType} from "../../utils/types/article/CommentType.ts";
+import {GlassCard} from "../reusable/GlassCard.tsx";
+import {Button} from "../reusable/Button.tsx";
 
 type Props = {
     articleId: number;
@@ -36,18 +38,14 @@ export const CommentForm: FC<Props> = ({articleId, setComments}) => {
     };
 
     return (
-        <div className="sidebar__comment" data-aos="fade-up" data-aos-duration="1000">
-            <div className="sidebar">
-                <div className="sidebar__head">
-                    <h3>{t("Leave a comment")}</h3>
-                </div>
+        <GlassCard  data-aos="fade-up" data-aos-duration="1000" className="tw-mt-10" bgColor="var(--secondary-color)" opacity={0.1}>
+            <div className="">
+                    <h5 className="tw-pb-">{t("Leave a comment")}</h5>
+
                 <form action={routes.home} className="pt-25">
-                    <div className="row g-4">
+                    <div className="row g-4 tw-mb-4">
                         <div className="col-md-12">
                             <div>
-                                <label htmlFor="textarea" className="form-label">
-                                    {t("Message")}
-                                </label>
                                 <textarea
                                     cols={30}
                                     rows={5}
@@ -60,15 +58,18 @@ export const CommentForm: FC<Props> = ({articleId, setComments}) => {
                             </div>
                         </div>
                     </div>
-                    <button
+                    {/*<button
                         type="submit"
                         className="trk-btn trk-btn--border trk-btn--primary mt-4"
                         onClick={handleClick}
                     >
                         {t("Send")}
-                    </button>
+                    </button>*/}
+                    <Button onClick={handleClick}>
+                        {t("Send")}
+                    </Button>
                 </form>
             </div>
-        </div>
+        </GlassCard>
     );
 };

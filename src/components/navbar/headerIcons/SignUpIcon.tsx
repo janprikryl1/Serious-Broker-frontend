@@ -8,7 +8,7 @@ export const SignUpIcon:FC = () => {
     const { t } = useTranslation();
     
     return (
-        <Button type="link" to={routes.register} style={{padding: "10px"}} className={"outline"} color={ButtonColor.transparent} fontColor={"white"}>
+        <Button type="link" to={routes.register} style={{padding: "10px", fontSize: "16px"}} className={"outline"} color={ButtonColor.transparent} fontColor={"white"}>
             {t("Register")}
         </Button>
     );

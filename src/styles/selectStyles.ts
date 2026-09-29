@@ -2,10 +2,10 @@ export const selectStyles = {
     control: (base: any, state: any) => ({
         ...base,
         backgroundColor: 'transparent',
-        border: '1px solid var(--secondary-color)',
-        borderRadius: '2px',
+        border: '1px solid var(--gray-4-color)',
+        borderRadius: '5px',
         padding: '7px 0 7px 8px',
-        fontFamily: '"PT Sans", sans-serif',
+        fontFamily: '"Inter", sans-serif',
         fontSize: '16px',
         color: 'var(--white-color)',
         cursor: 'pointer',
@@ -27,7 +27,7 @@ export const selectStyles = {
     input: (base: any) => ({
         ...base,
         color: 'var(--white-color)',
-        fontFamily: '"PT Sans", sans-serif',
+        fontFamily: '"Inter", sans-serif',
         margin: '0px',
         padding: '0px',
     }),

@@ -2,6 +2,7 @@ import {Dispatch, FC, SetStateAction} from "react";
 import {useTranslation} from "react-i18next";
 import {ContentType} from "../../../utils/types/article/ContentType.ts";
 import {Button, ButtonColor} from "../../reusable/Button.tsx";
+import {NextStepButton} from "../../reusable/NextStepButton.tsx";
 
 type Props = {
     category: number;
@@ -25,25 +26,38 @@ export const IncreaseDecreaseCategory:FC<Props> = ({category, setCategory, setTa
             setTask(0);
         }
     };
+
+  const hasPrevious = category > 0;
+  const hasNext = category + 1 < content.length;
+
+  const prevCategoryTitle = hasPrevious ? content[category - 1]?.title : undefined;
+  const nextCategoryTitle = hasNext ? content[category + 1]?.title : undefined;
     
     return (
-        <>
-            <Button
-                color={ButtonColor.red}
-                onClick={handleDecreaseCategory}
-                disabled={category === 0}
-                style={{fontSize: "20px"}}
-            >
-                {t("Previous")}
-            </Button>{' '}
-            <Button
-                color={ButtonColor.gold}
-                onClick={handleIncreaseCategory}
-                disabled={category === content.length - 1}
-                style={{fontSize: "20px"}}
-            >
-                {t("Next")}
-            </Button>
-        </>
+        <div className="tw-flex tw-justify-between">
+          {hasPrevious ? (
+            <NextStepButton
+              variant="previous"
+              currentStep={category}
+              currentStepFinished={true}
+              onClick={handleDecreaseCategory}
+              buttonLabel={prevCategoryTitle || t("Previous")}
+              buttonDescription={t("Previous page")}
+            />
+          ) : (
+            <div />
+          )}
+
+          {hasNext && (
+            <NextStepButton
+              variant="next"
+              currentStep={category}
+              currentStepFinished={true}
+              onClick={handleIncreaseCategory}
+              buttonLabel={nextCategoryTitle || t("Next")}
+              buttonDescription={t("Next page")}
+            />
+          )}
+        </div>
     )
 }

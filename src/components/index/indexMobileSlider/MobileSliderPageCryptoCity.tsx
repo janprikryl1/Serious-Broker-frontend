@@ -12,12 +12,12 @@ export const MobileSliderPageCryptoCity: FC = () => {
     const { t } = useTranslation();
 
     return (
-      <SharedSlideLayout
+/*      <SharedSlideLayout
         imageUrl={CryptoCity}
         backgroundSize={"cover"}
         backgroundPosition={"center center"}
         className="shared-slide-layout--crypto-street"
-      >
+      >*/
         <div
           className="container d-flex flex-column align-items-start text-start"
           style={{
@@ -28,6 +28,6 @@ export const MobileSliderPageCryptoCity: FC = () => {
           <h1 className="slide-title-your-money-your-rules--mobile ms-0">{`${t("Your Rules")}...`}</h1>
           <p className="slide-description-your-money-your-rules--mobile ms-0">{t("Savings in crypto.")}</p>
         </div>
-      </SharedSlideLayout>
+      // </SharedSlideLayout>
     );
 };

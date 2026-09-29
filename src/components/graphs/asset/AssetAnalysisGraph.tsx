@@ -1,22 +1,22 @@
-import {ChangeEvent, Dispatch, FC, SetStateAction, useEffect, useMemo} from "react";
-import {GraphDataSkeleton} from "./GraphDataSkeleton.tsx";
-import {QuotedCurrenciesPeriod} from "../../../utils/options/QuotedCurrenciesPeriod.ts";
-import {FaBookmark, FaRegBookmark} from "react-icons/fa";
-import {AssetAnalyticsGraphPeriodSelection} from "./AssetAnalyticsGraphPeriodSelection.tsx";
+import { ChangeEvent, Dispatch, FC, SetStateAction, useEffect, useRef } from "react";
+import { GraphDataSkeleton } from "./GraphDataSkeleton.tsx";
+import { QuotedCurrenciesPeriod } from "../../../utils/options/QuotedCurrenciesPeriod.ts";
+import { AssetAnalyticsGraphPeriodSelection } from "./AssetAnalyticsGraphPeriodSelection.tsx";
 import Skeleton from "react-loading-skeleton";
-import {AreaPlot, ChartContainer, ChartsGrid, ChartsTooltip, ChartsXAxis, ChartsYAxis, LinePlot} from "@mui/x-charts";
-import {formatCurrency} from "../../../utils/functions/functions.ts";
-import {useTranslation} from "react-i18next";
-import {freecurrencyapi} from "../../../utils/constants";
-import {Currencies} from "../../../utils/enums/CurrenciesEnum.ts";
-import {AssetAnalysisGraphData} from "../../../utils/types/graphs/AssetAnalysisGraphData.ts";
-import {MissingCurrencyType} from "../../../utils/types/graphs/MissingCurrencyType.ts";
-import {LuTrendingDown, LuTrendingUp} from "react-icons/lu";
-import {BsBookmark, BsBookmarkFill} from "react-icons/bs";
+import { formatCurrency } from "../../../utils/functions/functions.ts";
+import { useTranslation } from "react-i18next";
+import { freecurrencyapi } from "../../../utils/constants";
+import { Currencies } from "../../../utils/enums/CurrenciesEnum.ts";
+import { AssetAnalysisGraphData } from "../../../utils/types/graphs/AssetAnalysisGraphData.ts";
+import { MissingCurrencyType } from "../../../utils/types/graphs/MissingCurrencyType.ts";
+import { LuTrendingDown, LuTrendingUp } from "react-icons/lu";
+import { BsBookmark, BsBookmarkFill } from "react-icons/bs";
+import { createChart, ColorType, IChartApi, Time } from "lightweight-charts";
+import {CHART_COLORS} from "../../../utils/constants/customColors.ts";
 
 type Props = {
-  isInWatchList?: boolean;
-  handleToggleWatchList?: () => void;
+  // isInWatchList?: boolean;
+  // handleToggleWatchList?: () => void;
   selectedPeriod: QuotedCurrenciesPeriod;
   setSelectedPeriod: Dispatch<SetStateAction<QuotedCurrenciesPeriod>>;
   graphData: AssetAnalysisGraphData | undefined;
@@ -30,8 +30,6 @@ type Props = {
 };
 
 export const AssetAnalysisGraph: FC<Props> = ({
-                                                isInWatchList,
-                                                handleToggleWatchList,
                                                 selectedPeriod,
                                                 setSelectedPeriod,
                                                 graphData,
@@ -43,29 +41,38 @@ export const AssetAnalysisGraph: FC<Props> = ({
                                                 currency,
                                                 missingCurrencies
                                               }) => {
-  const {t} = useTranslation();
+  const { t, i18n } = useTranslation();
+  const chartContainerRef = useRef<HTMLDivElement>(null);
+  const chartRef = useRef<IChartApi | null>(null);
 
-  // Determine trend: uptrend (green) or downtrend (red)
+  // Determine trend color
   const getTrendColor = () => {
-    if (!graphData?.data) return "var(--green-on-primary-color)";
+    if (!graphData?.data) return CHART_COLORS.green;
 
     const prices = Object.values(graphData.data);
-    if (prices.length < 2) return "var(--green-on-primary-color)";
+    if (prices.length < 2) return CHART_COLORS.green;
 
     const firstPrice = prices[0];
     const lastPrice = prices[prices.length - 1];
 
-    return lastPrice >= firstPrice ? "var(--green-on-primary-color)" : "var(--red-on-primary-color)";
+    return lastPrice >= firstPrice ? CHART_COLORS.green : CHART_COLORS.red;
   };
 
   const trendColor = getTrendColor();
+
+  const getChartHeight = () => {
+    if (typeof window === "undefined") return 400;
+    if (window.innerWidth < 640) return 260;
+    if (window.innerWidth < 1024) return 320;
+    return 400;
+  };
 
   const handleSwitchCurrency = async (e: ChangeEvent<HTMLSelectElement>) => {
     if (!graphData) return;
 
     const newCurrency = e.target.value as Currencies;
     if (newCurrency === Currencies.EUR) {
-      setCurrencyPrice(formatCurrency(graphData.price));
+      setCurrencyPrice(formatCurrency(graphData.price, i18n.language, newCurrency));
       setCurrency(newCurrency);
       setCurrencyValue(1);
       return;
@@ -78,7 +85,7 @@ export const AssetAnalysisGraph: FC<Props> = ({
       });
 
       if (graphData && response.data[newCurrency]) {
-        setCurrencyPrice(formatCurrency(response.data[newCurrency] * graphData.price));
+        setCurrencyPrice(formatCurrency(response.data[newCurrency] * graphData.price, i18n.language, newCurrency));
         setCurrency(newCurrency);
         setCurrencyValue(response.data[newCurrency]);
       }
@@ -87,20 +94,18 @@ export const AssetAnalysisGraph: FC<Props> = ({
     }
   };
 
-  const isUptrend = trendColor === "var(--green-on-primary-color)";
-  const TrendIcon = isUptrend ? LuTrendingUp : LuTrendingDown;
-  const containerColor = isUptrend ? "green" : "red";
+  const isUptrend = trendColor === CHART_COLORS.green;
 
-  // Výpočet zisku - zmena medzi prvou a poslednou cenou
+  // Calculate profit
   const calculateProfit = () => {
     if (!graphData?.data || Object.keys(graphData.data).length < 2) return null;
-    
+
     const prices = Object.values(graphData.data);
     const firstPrice = prices[0];
     const lastPrice = prices[prices.length - 1];
     const priceChange = lastPrice - firstPrice;
     const profitInCurrency = priceChange * currencyValue;
-    
+
     return {
       profitValue: Math.abs(profitInCurrency),
       isProfit: profitInCurrency >= 0
@@ -109,145 +114,114 @@ export const AssetAnalysisGraph: FC<Props> = ({
 
   const profit = calculateProfit();
 
-  // Memorize graph data
-  const chartConfig = useMemo(() => {
-    if (!graphData?.data || Object.keys(graphData.data).length === 0) return null;
+  // Render TradingView Chart
+  useEffect(() => {
+    if (!chartContainerRef.current || !graphData?.data || Object.keys(graphData.data).length === 0) return;
 
-    const values = Object.values(graphData.data);
-    const minVal = Math.min(...values);
-    const maxVal = Math.max(...values);
-    const padding = (maxVal - minVal) * 0.15;
+    // Destroy existing chart instance
+    if (chartRef.current) {
+      chartRef.current.remove();
+      chartRef.current = null;
+    }
 
-    const gradientId = `asset-analysis-gradient-${selectedPeriod}-${currency}`;
-    
-    const xAxisData = Object.keys(graphData.data).map((dateStr) => new Date(dateStr));
-
-    const maxLabelLength = Math.max(
-      ...values.map((v) => {
-        const convertedValue = (v ?? 0) * currencyValue;
-        const formatted = new Intl.NumberFormat(undefined, {
-          minimumFractionDigits: 2,
-          maximumFractionDigits: 2
-        }).format(convertedValue);
-        return formatted.length + 1 + currency.length;
-      })
-    );
-    const dynamicWidth = Math.max(50, (maxLabelLength) * 9);
-
-    return { values, minVal, maxVal, padding, gradientId, xAxisData, dynamicWidth };
-  }, [graphData, currencyValue, currency, selectedPeriod]);
-
-  const chartSeries = useMemo(() => {
-    if (!chartConfig) return [];
-    return [
-      {
-        id: 'asset',
-        type: 'line' as const,
-        data: chartConfig.values,
-        color: trendColor,
-        area: true,
-        baseline: chartConfig.minVal - chartConfig.padding,
-        showMark: false,
-        curve: 'catmullRom' as const,
-        valueFormatter: (value: number | null) =>
-          value == null ? '' : `${formatCurrency((value ?? 0) * currencyValue)} ${currency}`
-      }
-    ];
-  }, [chartConfig, trendColor, currencyValue, currency]);
-
-  // Memorize X axis
-  const chartXAxis = useMemo(() => {
-    if (!chartConfig) return [];
-    return [
-      {
-        scaleType: 'time' as const,
-        data: chartConfig.xAxisData,
-        tickNumber: 8,
-        valueFormatter: (date: Date, context: { location?: string }) => {
-          const isTooltip = context?.location === 'tooltip';
-          const noYearPeriods = [
-            QuotedCurrenciesPeriod.day,
-            QuotedCurrenciesPeriod.week,
-            QuotedCurrenciesPeriod.month
-          ];
-
-          if (noYearPeriods.includes(selectedPeriod)) {
-            if (isTooltip) {
-              return date.toLocaleString(undefined, {
-                day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit'
-              });
-            } else {
-              return date.toLocaleString(undefined, { day: '2-digit', month: '2-digit' });
-            }
-          }
-          return date.toLocaleString();
-        }
-      }
-    ];
-  }, [chartConfig, selectedPeriod]);
-
-  // Memorize Y axis
-  const chartYAxis = useMemo(() => {
-    if (!chartConfig) return [];
-    return [
-      {
-        min: chartConfig.minVal - chartConfig.padding,
-        max: chartConfig.maxVal + chartConfig.padding,
-        valueFormatter: (value: number | null) => {
-          const convertedValue = (value ?? 0) * currencyValue;
-          const sformatovaneCislo = new Intl.NumberFormat(undefined, {
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2
-          }).format(convertedValue);
-          return `${sformatovaneCislo} ${currency}`;
-        },
-        width: chartConfig.dynamicWidth,
-      }
-    ];
-  }, [chartConfig, currencyValue, currency]);
-
-  const chartSx = useMemo(() => {
-    if (!chartConfig) return {};
-    return {
-      width: '100%',
-      '& .MuiLineElement-root': {strokeWidth: 2},
-      '& .MuiAreaElement-series-asset': {
-        fill: `url(#${chartConfig.gradientId})`,
-        fillOpacity: 1
+    const chart = createChart(chartContainerRef.current, {
+      width: chartContainerRef.current.clientWidth,
+      height: getChartHeight(),
+      layout: {
+        background: { type: ColorType.Solid, color: "transparent" },
+        textColor: "#D9D9D9",
       },
-      '& .MuiChartsAxis-line': { stroke: '#000' },
-      '& .MuiChartsAxis-tick': { stroke: '#000' },
-      '& .MuiChartsAxis-tickLabel': { fill: '#000' }
+      grid: {
+        vertLines: { color: "rgba(255, 255, 255, 0.08)" },
+        horzLines: { color: "rgba(255, 255, 255, 0.08)" },
+      },
+      timeScale: {
+        timeVisible: true,
+        secondsVisible: false,
+        borderColor: "rgba(255, 255, 255, 0.2)",
+      },
+      rightPriceScale: {
+        borderColor: "rgba(255, 255, 255, 0.2)",
+      },
+    });
+
+    // Add Area Series with dynamic colors
+    const areaSeries = chart.addAreaSeries({
+      lineColor: trendColor,
+      topColor: isUptrend ? "rgba(38, 166, 154, 0.4)" : "rgba(239, 83, 80, 0.4)",
+      bottomColor: isUptrend ? "rgba(38, 166, 154, 0.0)" : "rgba(239, 83, 80, 0.0)",
+      lineWidth: 2,
+      priceFormat: {
+        type: 'custom',
+        formatter: (price: number) => formatCurrency(price * currencyValue, i18n.language, currency),
+      },
+    });
+
+    // Format graph data for TradingView
+    const formattedData = Object.entries(graphData.data)
+      .map(([dateStr, val]) => ({
+        time: (Math.floor(new Date(dateStr).getTime() / 1000)) as Time,
+        value: val,
+      }))
+      .sort((a, b) => (a.time as number) - (b.time as number));
+
+    areaSeries.setData(formattedData);
+    chart.timeScale().fitContent();
+
+    chartRef.current = chart;
+
+    // Handle responsiveness
+    const handleResize = () => {
+      if (chartContainerRef.current && chartRef.current) {
+        chartRef.current.applyOptions({
+          width: chartContainerRef.current.clientWidth,
+          height: getChartHeight(),
+        });
+      }
     };
-  }, [chartConfig?.gradientId]);
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      if (chartRef.current) {
+        chartRef.current.remove();
+        chartRef.current = null;
+      }
+    };
+  }, [graphData, currencyValue, currency, selectedPeriod, trendColor, isUptrend]);
 
   return (
-    <div className="text-dark mb-5 asset-analysis-graph-wrapper">
-      <div className="row mb-4">
-        <div className="col-auto me-auto"
-             style={{display: 'flex', alignItems: 'center', gap: '8px'}}>
+    <div className="tw-mb-3 tw-w-full tw-p-2 sm:tw-mb-5 sm:tw-p-3 lg:tw-p-5">
+      <div className="tw-mb-3 tw-flex tw-flex-wrap tw-items-center tw-gap-3 md:tw-justify-between">
+        <div className="tw-inline-flex tw-w-auto tw-max-w-full tw-flex-col tw-items-start tw-self-start md:tw-flex-row md:tw-items-center md:tw-gap-3">
           {graphData ? (
             <>
-              <span style={{fontSize: "30px", fontFamily: "PT Sans Caption", color: "var(--secondary-color)"}}>
-                {currencyPrice} {currency}
+              <span className="tw-text-xl tw-font-bold tw-text-white sm:tw-text-2xl lg:tw-text-3xl">
+                {currencyPrice}
               </span>
               {profit && (
-                <div className={`d-flex align-items-center gap-3 color-container--${profit.isProfit ? "green" : "red"}`}>
-                <span style={{fontSize: "23px", fontFamily: "PT Sans Caption", color: trendColor}}>
-                  {profit.isProfit ? "+" : "-"}{formatCurrency(profit.profitValue)} {currency}
-                </span>
+                <div className="tw-flex tw-items-center tw-gap-2 tw-whitespace-nowrap">
+                  <span className="tw-text-base tw-font-semibold sm:tw-text-lg lg:tw-text-[23px]" style={{ color: trendColor }}>
+                    {profit.isProfit ? "+" : "-"}{formatCurrency(profit.profitValue, i18n.language, currency)}
+                  </span>
                 </div>
               )}
             </>
           ) : (
-            <Skeleton width={100} height={35} baseColor={"var(--cream-color)"}/>
+            <div className="tw-flex tw-flex-col tw-gap-2 sm:tw-flex-row">
+              <Skeleton width={180} height={30} />
+              <Skeleton width={110} height={30} />
+            </div>
           )}
         </div>
-        <AssetAnalyticsGraphPeriodSelection season={selectedPeriod} handleSelect={setSelectedPeriod}/>
-        <div className="col-auto">
+
+        <div className="tw-flex tw-items-center tw-gap-2 tw-ml-auto">
+          <div className="tw-flex-1 md:tw-flex-none">
+            <AssetAnalyticsGraphPeriodSelection season={selectedPeriod} handleSelect={setSelectedPeriod} />
+          </div>
           <select
-            className="form-select select-box-outline select-box-outline--dark-text season-button-group"
-            style={{width: "80px"}}
+            className="tw-w-[72px] tw-rounded-lg tw-border tw-border-stone-500/40 tw-bg-stone-900/60 tw-px-2 tw-py-2 tw-text-xs tw-text-stone-100 tw-outline-none tw-transition focus:tw-border-yellow-400 focus:tw-ring-1 focus:tw-ring-yellow-400 sm:tw-w-[80px] sm:tw-text-sm"
             value={currency}
             onChange={handleSwitchCurrency}
           >
@@ -256,41 +230,16 @@ export const AssetAnalysisGraph: FC<Props> = ({
             ))}
           </select>
         </div>
-        <div className="col-auto">
-            {isInWatchList !== undefined && handleToggleWatchList !== undefined && (!isInWatchList ?
-                <BsBookmark style={{ color: 'var(--secondary-color)' }} onClick={handleToggleWatchList}/> :
-                <BsBookmarkFill style={{ color: 'var(--secondary-color)' }} onClick={handleToggleWatchList}/>)}
-        </div>
       </div>
+
       {graphData ? (
-        <div style={{width: "100%", overflowX: "auto"}}>
-          {chartConfig ? (
-            <ChartContainer
-              key={`chart-container-stable`}
-              series={chartSeries}
-              xAxis={chartXAxis}
-              yAxis={chartYAxis}
-              height={400}
-              margin={{left: 0, right: 0, top: 0, bottom: 0}}
-              sx={chartSx}
-            >
-              <defs>
-                <linearGradient id={chartConfig.gradientId} x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stopColor={trendColor} stopOpacity={0.3}/>
-                  <stop offset="100%" stopColor={trendColor} stopOpacity={0}/>
-                </linearGradient>
-              </defs>
-              <AreaPlot/>
-              <LinePlot/>
-              <ChartsXAxis/>
-              <ChartsYAxis/>
-              <ChartsGrid horizontal/>
-              <ChartsTooltip trigger="axis"/>
-            </ChartContainer>
+        <div className="tw-w-full tw-overflow-x-auto">
+          {Object.keys(graphData.data || {}).length > 0 ? (
+            <div ref={chartContainerRef} className="tw-w-full tw-overflow-hidden tw-rounded-xl tw-bg-stone-950/20" style={{ height: `${getChartHeight()}px`, minHeight: `${getChartHeight()}px` }} />
           ) : (
-            <div className="no-data">
+            <div className="tw-rounded-xl tw-border tw-border-stone-500/20 tw-bg-stone-950/20 tw-p-4 tw-text-sm tw-text-stone-300 sm:tw-text-base">
               {missingCurrencies && missingCurrencies.length > 0 ? (
-                <div style={{marginTop: 20}}>
+                <div className="tw-mt-2 tw-space-y-4">
                   {(() => {
                     const inactiveCurrencies = missingCurrencies.filter(m => m.reason === 'inactive');
                     const noPeriodDataCurrencies = missingCurrencies.filter(m => m.reason === 'no_period_data');
@@ -298,27 +247,37 @@ export const AssetAnalysisGraph: FC<Props> = ({
                     return (
                       <>
                         {inactiveCurrencies.length > 0 && (
-                          <div style={{marginBottom: '1rem'}}>
-                            <p>{t("These coins are no longer traded")}:</p>
-                            <small>{inactiveCurrencies.map(m => m.asset_label).join(', ')}</small>
+                          <div>
+                            <p className="tw-mb-1 tw-text-sm tw-font-medium tw-text-stone-200 sm:tw-text-base">
+                              {t("These coins are no longer traded")}:
+                            </p>
+                            <small className="tw-text-xs tw-text-stone-400 sm:tw-text-sm">
+                              {inactiveCurrencies.map(m => m.asset_label).join(', ')}
+                            </small>
                           </div>
                         )}
                         {noPeriodDataCurrencies.length > 0 && (
                           <div>
-                            <p>{t("No graph data available for this period")}:</p>
-                            <small>{noPeriodDataCurrencies.map(m => m.asset_label).join(', ')}</small>
+                            <p className="tw-mb-1 tw-text-sm tw-font-medium tw-text-stone-200 sm:tw-text-base">
+                              {t("No graph data available for this period")}:
+                            </p>
+                            <small className="tw-text-xs tw-text-stone-400 sm:tw-text-sm">
+                              {noPeriodDataCurrencies.map(m => m.asset_label).join(', ')}
+                            </small>
                           </div>
                         )}
                       </>
                     );
                   })()}
                 </div>
-              ) : <p>{t("No data")}</p>}
+              ) : <p className="tw-mb-0 tw-text-sm sm:tw-text-base">{t("No data")}</p>}
             </div>
           )}
         </div>
       ) : (
-        <GraphDataSkeleton baseColor={"var(--cream-color)"}/>
+        <div className="tw-w-full">
+          <GraphDataSkeleton />
+        </div>
       )}
     </div>
   );

@@ -143,7 +143,7 @@ export const ControlImageModal:FC<Props> = ({controlImage, isControlImageModalOp
                 </div>
             </DialogContent>
             <DialogActions>
-                <Button color={ButtonColor.gray} onClick={closeModal}>{t("Close")}</Button>
+                <Button color={ButtonColor.gray2} onClick={closeModal}>{t("Close")}</Button>
                 <Button color={ButtonColor.red} onClick={handleResetCoordinates}>{t("Reset coordinates")}</Button>
                 <Button onClick={handleSaveChanges}>{t("Save")}</Button>
             </DialogActions>

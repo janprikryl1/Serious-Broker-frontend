@@ -4,7 +4,8 @@ export type CryptoCurrencyType = {
     symbol: string;
 };
 
-export type CryptoCurrencyDetailType = CryptoCurrencyType & { 
+export type CryptoCurrencyDetailType = CryptoCurrencyType & {
+    id: number;
     price: number;
     marketcap: string;
     category: string;

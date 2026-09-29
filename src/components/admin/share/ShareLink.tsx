@@ -5,7 +5,7 @@ import {useTranslation} from "react-i18next";
 import {ArticleSendEmailComponent} from "./ArticleSendEmailComponent.tsx";
 import {domain} from "../../../utils/constants";
 import {Button} from "../../reusable/Button.tsx";
-import {ToastColor, useToast} from "../../../utils/providers/ToastProvider.tsx";
+import {showToast} from "../../toast/toastHelper.tsx";
 
 type Props = {
     id: string;
@@ -14,13 +14,13 @@ type Props = {
 
 export const ShareLink:FC<Props> = ({id, languages}) => {
     const {t} = useTranslation();
-    const { showToast } = useToast();
     const [url, setUrl] = useState(`${domain}/article/${id}`);
     const [selectedLanguage, setSelectedLanguage] = useState(languages[0]);
     
     const copyLink = () => {
         navigator.clipboard.writeText(url);    
-        showToast(t("Link copied to clipboard"), ToastColor.green);
+        showToast.success(t("Link copied to clipboard"));
+
     }
     
     const handleLanguageChange = (e: ChangeEvent<HTMLSelectElement>) => {

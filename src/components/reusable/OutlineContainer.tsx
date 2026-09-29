@@ -18,10 +18,9 @@ export const OutlineContainer: FC<OutlineCointainerProps> = ({children, classNam
             onClick={onClick}
             style={{
                 backgroundColor: bgColor,
-                borderRadius: "5px",
+                borderRadius: "24px",
                 padding: "2em",
                 color: fontColor,
-                margin: "30px",
                 marginBottom: "50px",
                 outline: `1px solid color-mix(in srgb, ${outlineColor}, transparent 50%)`,
                 ...style,

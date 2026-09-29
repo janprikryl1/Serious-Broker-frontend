@@ -4,24 +4,22 @@ import {IoIosAddCircleOutline} from "react-icons/io";
 import {CustomTooltip} from "./CustomTooltip.tsx";
 import {RxInfoCircled} from "react-icons/rx";
 
-type TooltipPosition = "top" | "bottom" | "left" | "right";
-
 type Props = {
     text: string;
     color?: string;
-    position?: TooltipPosition;
+    placement?: "top" | "bottom" | "left" | "right" | "top-start" | "top-end" | "bottom-start" | "bottom-end" | "left-start" | "left-end" | "right-start" | "right-end";
     size?: number;
 };
 
 export const InfoIconTooltip: FC<Props> = ({
                                            text,
                                            color = "var(--secondary-color)",
-                                           position = "top",
+                                           placement = "top",
                                            size = 20
                                        }) => {
     return (
         <div className="custom-tooltip-wrapper">
-            <CustomTooltip title={text}>
+            <CustomTooltip title={text} placement={placement}>
                 <span>
                     <RxInfoCircled
                         size={size}

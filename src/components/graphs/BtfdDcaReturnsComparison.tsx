@@ -10,7 +10,7 @@ import {timeZoneOptions} from "../../utils/functions/dateFunctions.ts";
 import Typography from "@mui/material/Typography";
 import Slider from "@mui/material/Slider";
 import {CardContainer} from "../reusable/CardContainer.tsx";
-import {Day} from "../../pages/graphs/RecommendationDetails.tsx";
+import {Day} from "../../pages/graphs/CryptocurrencyDetails.tsx";
 
 type Props = {
     asset_label: string;
@@ -121,12 +121,12 @@ export const BtfdDcaReturnsComparison: FC<Props> = ({
                                     ],
                                     labelStyle: {
                                         fontSize: 13,
-                                        fontFamily: 'PT Sans Caption, sans-serif',
+                                        fontFamily: 'Inter, sans-serif',
                                         fontWeight: "bold",
                                     },
                                     tickLabelStyle: {
                                         fontSize: 11,
-                                        fontFamily: 'PT Sans, sans-serif',
+                                        fontFamily: 'Inter, sans-serif',
                                         fill: '#444',
                                         transform: 'translateY(5px)',
                                     },
@@ -142,13 +142,13 @@ export const BtfdDcaReturnsComparison: FC<Props> = ({
                                         value !== null ? `${value} %` : "",
                                     tickLabelStyle: {
                                         fontSize: 11,
-                                        fontFamily: 'PT Sans, sans-serif',
+                                        fontFamily: 'Inter, sans-serif',
                                         fill: '#444',
                                         transform: 'translateX(5px)'
                                     },
                                     labelStyle: {
                                         fontSize: 14,
-                                        fontFamily: 'PT Sans Caption, sans-serif',
+                                        fontFamily: 'Inter, sans-serif',
                                         fontWeight: "bold"
                                     },
                                 }

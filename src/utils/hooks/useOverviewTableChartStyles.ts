@@ -14,10 +14,10 @@ export const useOverviewTableChartStyles = (data?: number[]) => {
         const lastValue = dataArray[dataArray.length - 1];
         
         if (lastValue > firstValue) {
-            return "var(--green-on-primary-color)";
+            return "var(--green-color)";
         }
         else if (lastValue < firstValue) {
-            return "var(--red-on-primary-color)";
+            return "var(--red-color)";
         }
         else {
             return "var(--secondary-color)";

@@ -1,8 +1,8 @@
 import {Dispatch, FC, SetStateAction, useState} from 'react';
-import { Comments } from "./Comments";
-import { CommentForm } from "./CommentForm";
-import { useTranslation } from "react-i18next";
-import { v4 as uuidv4 } from 'uuid';
+import {Comments} from "./Comments";
+import {CommentForm} from "./CommentForm";
+import {useTranslation} from "react-i18next";
+import {v4 as uuidv4} from 'uuid';
 import {ArticleVariant0} from "./articleVariants/ArticleVariant0.tsx";
 import {ArticleVariant1} from "./articleVariants/ArticleVariant1.tsx";
 import {ArticleVariant2} from "./articleVariants/ArticleVariant2.tsx";
@@ -17,55 +17,58 @@ import {TranslationsOverview} from "../../utils/types/article/translate/Translat
 import {CommentType} from "../../utils/types/article/CommentType.ts";
 
 type Props = {
-    article: ArticleDetailProps;
-    translations: TranslationsOverview[];
-    language: string;
-    setLanguage: Dispatch<SetStateAction<string>>;
+  article: ArticleDetailProps;
+  translations: TranslationsOverview[];
+  language: string;
+  setLanguage: Dispatch<SetStateAction<string>>;
 };
 
-export const ArticleDetails: FC<Props> = ({ article, translations, language, setLanguage }) => {
-    const { t } = useTranslation();
-    const { user } = useUserContext();
-    const [category, setCategory] = useState(0);
-    const [task, setTask] = useState(0);
-    const [comments, setComments] = useState<CommentType[]>();
+export const ArticleDetails: FC<Props> = ({article, translations, language, setLanguage}) => {
+  const {t} = useTranslation();
+  const {user} = useUserContext();
+  const [category, setCategory] = useState(0);
+  const [task, setTask] = useState(0);
+  const [comments, setComments] = useState<CommentType[]>();
 
-    return (
-        <div className="blog-details__item">
-            {article.content && (
-                <div className="blog-details__item-inner">
-                    <div key={uuidv4()}>
-                        <ArticleBanner banner={article.banner} title={article.title} />
-                        <ArticleLanguagesSelect translations={translations} language={language}
-                                                setLanguage={setLanguage}/>
-                        <p>{article.description}</p>
-                        <i>{toCzechDateFormat(article.changed)}</i>
-                        <br/><br/>
-                        {article.templateId === 0 ?
-                            <ArticleVariant0 setTask={setTask} content={article.content} task={task} subjects={article.subjects}
-                                             category={category} setCategory={setCategory}/> :
-                         article.templateId === 1 ?
-                            <ArticleVariant1 setTask={setTask} content={article.content} task={task} subjects={article.subjects}
-                                             category={category} setCategory={setCategory}/> :
-                         article.templateId === 2 ?
-                            <ArticleVariant2 setTask={setTask} content={article.content} task={task} subjects={article.subjects}
-                                             category={category} setCategory={setCategory} image={article.titleImage}/> :
-                         article.templateId === 3 ?
-                            <ArticleVariant3 subjects={article.subjects}/> :
-                         article.templateId === 4 ?
-                            <ArticleVariant4 image={article.titleImage}/> :
-                         null}
-                    </div>
-                    {article?.allowComments ? (
-                        <>
-                            <Comments articleId={article.id} setComments={setComments} comments={comments}/>
-                            {user && <CommentForm articleId={article.id} setComments={setComments}/>}
-                        </>
-                    ) : (
-                        <p>{t("Comments are not allowed")}</p>
-                    )}
-                </div>
-            )}
+  return (
+    <div className="">
+      {article.content && (
+        <div className="">
+          <div key={uuidv4()}>
+            <ArticleBanner banner={article.banner} title={article.title}/>
+            <div className="tw-flex tw-justify-between mt-2 tw-pb-14 tw-mb-5">
+              <ArticleLanguagesSelect translations={translations} language={language}
+                                      setLanguage={setLanguage}/>
+              {/*<p>{article.description}</p>*/}
+              <div className="tw-italic tw-text-sm tw-text-gray-2">{t("Created: ")}{toCzechDateFormat(article.changed)}</div>
+            </div>
+
+            {article.templateId === 0 ?
+              <ArticleVariant0 setTask={setTask} content={article.content} task={task} subjects={article.subjects}
+                               category={category} setCategory={setCategory}/> :
+              article.templateId === 1 ?
+                <ArticleVariant1 setTask={setTask} content={article.content} task={task} subjects={article.subjects}
+                                 category={category} setCategory={setCategory}/> :
+                article.templateId === 2 ?
+                  <ArticleVariant2 setTask={setTask} content={article.content} task={task} subjects={article.subjects}
+                                   category={category} setCategory={setCategory} image={article.titleImage}/> :
+                  article.templateId === 3 ?
+                    <ArticleVariant3 subjects={article.subjects}/> :
+                    article.templateId === 4 ?
+                      <ArticleVariant4 image={article.titleImage}/> :
+                      null}
+          </div>
+
+          {article?.allowComments ? (
+            <>
+              <Comments articleId={article.id} setComments={setComments} comments={comments}/>
+              {user && <CommentForm articleId={article.id} setComments={setComments}/>}
+            </>
+          ) : (
+            <p>{t("Comments are not allowed")}</p>
+          )}
         </div>
-    );
+      )}
+    </div>
+  );
 };

@@ -4,10 +4,13 @@ import {WatchListType} from "../../../utils/types/watchList/WatchListType.ts";
 import {renderTable} from "../../../utils/functions/renderTable.tsx";
 import {IoWalletOutline} from "react-icons/io5";
 import {BsFileText} from "react-icons/bs";
-import {LuCoins} from "react-icons/lu";
+import coinsGroupOutline from "../../../utils/icons/coins/coins_group_outline.svg";
+import singleCoinOutline from "../../../utils/icons/coins/coins_single-outline.svg";
 import {getAllCryptocurrencies} from "../../../utils/api/adminCryptocurrencyService.ts";
 import {CryptoCurrencyAdminType} from "../../../utils/types/asset/CryptoCurrencyType.ts";
 import {getBinanceIndexAssetRecomBestPreviousDetail} from "../../../utils/api/GraphsService.ts";
+import {getAssetByIndexLabel} from "../../../utils/api/binanceIndexAssets.ts";
+import {AssetDetailType} from "../../../utils/types/asset/AssetDetailType.ts";
 import {
   BinanceIndexAssetRecomBestPreviousDetails
 } from "../../../utils/types/graphs/BinanceIndexAssetRecomBestPreviousDetails.ts";
@@ -20,7 +23,7 @@ type Props = {
 export const WatchListTable: FC<Props> = ({watchList, setWatchList}) => {
   const {t} = useTranslation();
   const [cryptocurrencies, setCryptocurrencies] = useState<CryptoCurrencyAdminType[]>([]);
-  const [recommendationData, setRecommendationData] = useState<Map<string, BinanceIndexAssetRecomBestPreviousDetails>>(new Map());
+  const [recommendationData, setRecommendationData] = useState<Map<string, AssetDetailType | BinanceIndexAssetRecomBestPreviousDetails>>(new Map());
 
   useEffect(() => {
     const loadData = async () => {
@@ -38,31 +41,38 @@ export const WatchListTable: FC<Props> = ({watchList, setWatchList}) => {
   }, []);
 
   useEffect(() => {
-    const loadCoinDetails = async () => {
-      const coinsToLoad = watchList.filter((item) => item.type === "coin");
+    const loadRecommendationDetails = async () => {
+      const itemsToLoad = watchList.filter((item) => item.type === "coin" || item.type === "asset");
 
-      if (coinsToLoad.length === 0) {
+      if (itemsToLoad.length === 0) {
         setRecommendationData(new Map());
         return;
       }
 
-      const dataMap = new Map<string, BinanceIndexAssetRecomBestPreviousDetails>();
+      const dataMap = new Map<string, AssetDetailType | BinanceIndexAssetRecomBestPreviousDetails>();
 
-      for (const coin of coinsToLoad) {
+      for (const item of itemsToLoad) {
         try {
-          const response = await getBinanceIndexAssetRecomBestPreviousDetail(coin.title || "");
+          let response;
+
+          if (item.type === "asset") {
+            response = await getAssetByIndexLabel(item.title || "");
+          } else {
+            response = await getBinanceIndexAssetRecomBestPreviousDetail(item.title || "");
+          }
+
           if (response?.data) {
-            dataMap.set(coin.title || "", response.data);
+            dataMap.set(item.title || "", response.data);
           }
         } catch (e) {
-          console.error(`Error loading data for coin ${coin.title}:`, e);
+          console.error(`Error loading recommendation data for ${item.title}:`, e);
         }
       }
 
       setRecommendationData(dataMap);
     };
 
-    loadCoinDetails();
+    loadRecommendationDetails();
   }, [watchList]);
 
   const assets = watchList.filter((item) => item.type === "asset");
@@ -70,14 +80,14 @@ export const WatchListTable: FC<Props> = ({watchList, setWatchList}) => {
   const articles = watchList.filter((item) => item.type === "article");
 
   return (
-    <div className="row g-5">
-      <div className="col-xl-6 col-lg-12">
+    <div className="row g-4 tw-w-full tw-max-w-full tw-overflow-x-hidden">
+      <div className="col-12 col-xl-6 order-1 order-xl-1 tw-min-w-0">
         {renderTable(
           <div className="d-flex align-items-center gap-3">
             <div className="color-container--gold icon-container">
-              <IoWalletOutline size={30}/>
+              <img src={coinsGroupOutline} alt="Cryptocurrencies" className="tw-h-[25px] tw-w-[25px] tw-object-contain" />
             </div>
-            <span>{t("Market Indices")}</span>
+            <span>{t("Indices")}</span>
           </div>,
           assets,
           watchList,
@@ -85,29 +95,33 @@ export const WatchListTable: FC<Props> = ({watchList, setWatchList}) => {
           cryptocurrencies,
           recommendationData
         )}
+      </div>
+
+      <div className="col-12 col-xl-6 order-2 order-xl-2 tw-min-w-0">
         {renderTable(
           <div className="d-flex align-items-center gap-3">
             <div className="color-container--gold icon-container">
-              <BsFileText size={28}/>
+              <img src={singleCoinOutline} alt="Cryptocurrencies" className="tw-h-[25px] tw-w-[25px] tw-object-contain" />
             </div>
-            <span>{t("Articles")}</span>
+            <span>{t("Cryptocurrencies")}</span>
           </div>,
-          articles,
+          coins,
           watchList,
           setWatchList,
           cryptocurrencies,
           recommendationData
         )}
       </div>
-      <div className="col-xl-6">
+
+      <div className="col-12 col-xl-6 order-3 order-xl-3 tw-min-w-0">
         {renderTable(
           <div className="d-flex align-items-center gap-3">
             <div className="color-container--gold icon-container">
-              <LuCoins size={30}/>
+              <BsFileText size={18}/>
             </div>
-            <span>{t("Cryptocurrencies")}</span>
+            <span>{t("Articles")}</span>
           </div>,
-          coins,
+          articles,
           watchList,
           setWatchList,
           cryptocurrencies,

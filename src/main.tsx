@@ -1,5 +1,5 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
+import {StrictMode} from 'react'
+import {createRoot} from 'react-dom/client'
 import App from './App.tsx'
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
@@ -10,16 +10,21 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 import './styles/sass/style.scss';
 import {ErrorBoundary} from "react-error-boundary";
 import {ErrorFallback} from "./pages/ErrorFallback.tsx";
+import {BrowserRouter} from "react-router-dom";
+import AutoScrollToTop from "./components/reusable/AutoScrollToTop.tsx";
 
 createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-      <ErrorBoundary
-          FallbackComponent={ErrorFallback}
-          onError={(error, info) => {
-              console.error(error, info);
-          }}
-      >
-        <App />
-      </ErrorBoundary>
-  </StrictMode>,
+    <StrictMode>
+      <BrowserRouter>
+        <AutoScrollToTop />
+        <ErrorBoundary
+            FallbackComponent={ErrorFallback}
+            onError={(error, info) => {
+                console.error(error, info);
+            }}
+        >
+            <App/>
+        </ErrorBoundary>
+      </BrowserRouter>
+    </StrictMode>,
 )

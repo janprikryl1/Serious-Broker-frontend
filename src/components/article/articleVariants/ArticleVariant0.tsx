@@ -24,16 +24,14 @@ export const ArticleVariant0:FC<Props> = ({content, category, setCategory, task,
             <ArticleSubjects subjects={subjects} />
             {content && content.length ? (
                 <>
-                    <h2>{content[category].title}</h2>
-                    <div className="container">
-                        <div className="row">
-                            <ArticleImageColumn task={task} category={category} content={content} />
-                            <ArticleTaskTextColumn task={task} category={category} content={content} setTask={setTask} />
-                        </div>
+                    <h5>{content[category].title}</h5>
+                    <div className="row tw-pb-8">
+                        <ArticleImageColumn task={task} category={category} content={content} />
+                        <ArticleTaskTextColumn task={task} category={category} content={content} setTask={setTask} />
                     </div>
-                    <br /><br />
-                    <IncreaseDecreaseCategory category={category} setCategory={setCategory} setTask={setTask} content={content} />
-                    <br /><br />
+                    <div className="tw-pb-16 tw-mb-10">
+                        <IncreaseDecreaseCategory category={category} setCategory={setCategory} setTask={setTask} content={content} />
+                    </div>
                 </>
             ) : (
                 <p>{t("We are working on guide")}</p>

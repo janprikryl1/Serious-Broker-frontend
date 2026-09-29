@@ -5,7 +5,6 @@
 
 .shared-slide-layout {
   position: relative;
-  height: 93vh;
   background-size: 70%;
   background-repeat: no-repeat;
   background-position: calc(100% - 60vh) calc(100% + 30vh);
@@ -16,7 +15,7 @@
     width: 100%;
     height: 100%;
     z-index: 1;
-    background-color: rgba(35, 30, 16, 0.6);
+    background-color: rgba(44, 39, 35, 0.6);
   }
 
   .content {
@@ -28,10 +27,6 @@
     .logo-container {
       text-align: right;
       margin-bottom: 3vh;
-    }
-
-    .logo-dark {
-      max-width: 400px;
     }
 
     .slide-title {
@@ -60,6 +55,50 @@
     width: 100%;
   }
 
+  .slide-text-title {
+
+    &--mobile {
+      font-size: 3rem;
+    }
+  }
+
+  .slide-text-tagline {
+    color: $gray-6-color;
+    backdrop-filter: blur(2px);
+    background-color: rgba($primary-color, 0.1);
+    max-width: 80%;
+
+    &--mobile {
+      @extend .slide-text-tagline;
+      font-size: 1.5em !important;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .content {
+      max-width: 100%;
+      padding: 1.25rem 1rem 0;
+    }
+
+    .slide-text-title {
+      &--mobile {
+        font-size: 2.1rem;
+        line-height: 1.1;
+      }
+    }
+
+    .slide-text-tagline {
+      max-width: 100%;
+      font-size: 1rem !important;
+      line-height: 1.6;
+
+      &--mobile {
+        font-size: 1rem !important;
+        line-height: 1.6;
+      }
+    }
+  }
+
   .slide-title-automatization,
   .slide-tagline-automatization {
     margin-left: 0;
@@ -67,7 +106,7 @@
 
   .slide-title-automatization,
   .slide-title-your-money-your-rules {
-    font-size: 5rem;
+    font-size: 46px;
     letter-spacing: 3px;
   }
 
@@ -87,22 +126,24 @@
   }
 }
 
+.main-slider-container {
+  padding-bottom: 40px !important;
+}
+
+.main-slider-container .swiper-pagination {
+  width: auto !important;
+}
+
 .main-slider-container .swiper-pagination-bullet {
-  width: 50px !important;
-  height: 4px !important;
-  border-radius: 10px !important;
-  opacity: 1 !important;
-  margin: 0 10px 15px !important;
-  display: inline-block !important;
+  width: 10px !important;
+  height: 10px !important;
+  background-color: $white-color !important;
+  opacity: 0.4;
   transition: background-color 0.3s ease;
 }
 
-:root {
-  --swiper-theme-color: #ffffff;
-  --swiper-pagination-bullet-inactive-color: rgba(255, 255, 255, 0.2);
-}
 .main-slider-container .swiper-pagination-bullet-active {
-  background-color: #FFFDFA !important;
+  opacity: 1 !important;
 }
 
 .min-w-30-min-h-30 {
@@ -115,11 +156,6 @@
   box-shadow: none !important;
   color: #fff !important;
   font-size: 30px !important;
-}
-
-.font-footer {
-  font-size: 16px;
-  color: $gray-3-color;
 }
 
 @media (max-width: 767px) {
@@ -145,52 +181,21 @@
   color: $secondary-color !important;
 }
 
-.img-start-investing-with-serious-broker {
-  width: 150px;
-  display: block;
-  margin: 0 auto;
-}
-
-.step-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: 100%;
-  min-height: 300px;
-  justify-content: flex-start;
-}
-
 .step-content {
   margin-top: auto;
   text-align: center;
 }
 
-.index-step-number {
-  font-size: 25px;
-  background-color: #5f5448;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transform: translateY(2px);
-  margin: 10px auto;
-  color: #FFFDFA;
-}
-
-
-
 .step-description {
-  font-size: 25px;
-  height: 50px;
+  color: $black-color !important;
+  font-size: 1.4rem !important;
   max-width: 250px;
-  letter-spacing: -0.5px;
+  line-height: 1.5;
 }
 
 .step-title {
   font-size: 25px;
-  color: #FFFDFA;
+  color: $white-color;
   font-weight: bold;
 }
 
@@ -237,7 +242,7 @@
 .index-short-expressive-text button {
   border-radius: 0;
   border: none;
-  background-color: #B1974E;
+  background-color: $secondary-color;
   color: #fff;
   font-size: 1.25rem;
   font-weight: 700;
@@ -263,7 +268,7 @@
 }
 
 .index-section-title {
-  color: #B1974E;
+  color: $secondary-color;
   @media (max-width: 768px) {
     font-size: 30px;
   }
@@ -275,7 +280,7 @@
 }
 
 .index-section-content {
-  color: #FFFDFA;
+  color: $white-color;
   font-size: 20px;
   
   @media (max-width: 768px) {
@@ -287,67 +292,15 @@
   font-weight: 700;
 }
 
-.index-guided-dotted-image {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  width: 50%;
-  display: flex;
-  justify-content: center;
-  overflow: hidden;
-}
-
 .index-guided-dotted-bg-image {
   transform: rotate(90deg) scale(4);
   max-width: 100%;
   max-height: 100%;
 }
 
-.index-guided-dotted-square {
-  position: absolute;
-  top: 50%;
-  left: 20%;
-  transform: translate(-35%, -50%);
-  width: 350px;
-  height: 350px;
-  border: 2px solid #FFFDFA;
-}
-
-.why-to-invest-container {
-  padding: 5rem 0;
-  text-align: left;
-}
-
-.why-to-invest-container .heading {
-  padding-bottom: 1rem;
-}
-
-.invest-items-wrapper {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 3rem;
-}
-
-.invest-item {
-  max-width: 300px;
-}
-
-.invest-img {
-  transform: scale(0.5);
-  transform-origin: center center;
-  display: block;
-  margin: 0 auto;
-}
-
 .step-title {
   font-weight: bold;
   margin: 1rem 0;
-}
-
-.with-min-height {
-  min-height: 80px;
 }
 
 .description {
@@ -356,10 +309,6 @@
 
 
 @media (max-width: 575.98px) {
-  .step-wrapper {
-    min-height: auto;
-    margin-bottom: 2rem;
-  }
   .step-description {
     font-size: 20px;
     height: auto;
@@ -368,58 +317,14 @@
 }
 
 @media (max-width: 768px) {
-  .index-section-head-title {
-    max-width: 300px;
-    margin-left: 20px;
+  .container, .container-xxl {
+    padding-left: 20px;
+    padding-right: 20px;
+    //margin: 0 0 0 0;
+    margin-left: auto;
+    margin-right: auto;
   }
 }
-
-.serious-broker-correct-layout .shared-slide-layout {
-  background-size: cover;
-  background-position: center center;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-}
-
-.serious-broker-correct-layout .shared-slide-layout .content {
-  margin-left: 15vw;
-  max-width: 500px;
-  text-align: left;
-  scale: 0.8;
-  margin-right: 0;
-  position: relative;
-  z-index: 2;
-}
-
-.serious-broker-correct-layout .logo-dark {
-  max-width: 200px;
-  margin-bottom: 2.5rem;
-}
-
-.serious-broker-correct-layout .slide-title,
-.serious-broker-correct-layout .slide-tagline {
-  text-align: left;
-  line-height: 1.4;
-  margin: 0;
-}
-
-.serious-broker-correct-layout .slide-title {
-  font-size: 3.5rem;
-  margin-bottom: 1rem;
-  letter-spacing: 5px;
-}
-
-.serious-broker-correct-layout .slide-tagline {
-  font-size: 3.5rem;
-  letter-spacing: 12px;
-}
-
-.serious-broker-correct-layout {
-  position: relative;
-  overflow: visible;
-}
-
 
 .result-box {
   position: relative;
@@ -530,15 +435,9 @@
 
 .sticky-header-active {
   position: fixed;
-  top: 0;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.sticky-header-active {
-  position: fixed;
-  top: 0;
+  top: 64px;
   z-index: 100;
-  background-color: var(--tertiary-color);
+  background-color: $quaternary-color;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   left: 0;
   right: 0;
@@ -557,7 +456,6 @@
 .slide-title-automatization {
   font-size: 3rem;
   line-height: 1.2;
-  margin-left: -35vw;
   letter-spacing: 0.5px;
 
   &--mobile {
@@ -571,7 +469,6 @@
   max-width: 600px;
   line-height: 1.5;
   margin-top: 1rem;
-  margin-left: -35vw;
   letter-spacing: 0.5px;
 
   &--mobile {

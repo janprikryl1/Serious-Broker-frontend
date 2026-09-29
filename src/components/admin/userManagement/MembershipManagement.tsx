@@ -104,7 +104,7 @@ export const MembershipManagement: FC<Props> = ({ userId }) => {
             )}
 
             {editingMembershipId !== null && (
-                <Button color={ButtonColor.gray} className="mb-5" onClick={handleCancelEdit}>
+                <Button color={ButtonColor.gray2} className="mb-5" onClick={handleCancelEdit}>
                     {t("Cancel Edit")}
                 </Button>
             )}

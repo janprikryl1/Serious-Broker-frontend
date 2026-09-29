@@ -21,7 +21,7 @@ export const ArticlePostSend:FC = () => {
                     <Button color={ButtonColor.red} onClick={goBack}>{t("Back")}</Button>
                 </>
             ) : (
-                <Button color={ButtonColor.gray} onClick={goBack}>{t("Back")}</Button>
+                <Button color={ButtonColor.gray2} onClick={goBack}>{t("Back")}</Button>
             )}
         </>
     );

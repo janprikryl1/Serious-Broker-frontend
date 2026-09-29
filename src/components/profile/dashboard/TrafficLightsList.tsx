@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { OutlineContainer } from '../../reusable/OutlineContainer.tsx';
 import { getTrafficLights } from '../../../utils/api/trafficLightsService.ts';
 import { Link } from 'react-router-dom';
 import { routes } from '../../../utils/constants';
@@ -66,13 +65,13 @@ export const TrafficLightsList = () => {
 
   const renderTrafficLights = (lights) => {
     if (!lights.length) {
-      return <div className="gray-2-color-text">{t('No traffic lights defined')}</div>;
+      return <div className="gray-2-color-text tw-text-xs sm:tw-text-sm">{t('No traffic lights defined')}</div>;
     }
 
     return lights.map((trafficLight) => (
-      <div key={trafficLight.id ?? trafficLight.name} className="d-flex align-items-center justify-content-between gap-3 py-2 border-bottom">
-        {trafficLight.name}
-        <div className="d-flex align-items-center gap-2">
+      <div key={trafficLight.id ?? trafficLight.name} className="d-flex align-items-start sm:align-items-center justify-content-between gap-2 sm:gap-3 tw-py-2 tw-border-b tw-border-stone-400 tw-border-opacity-20 tw-min-w-0">
+        <span className="tw-text-xs sm:tw-text-sm tw-leading-snug tw-break-words tw-min-w-0">{trafficLight.name}</span>
+        <div className="d-flex align-items-center gap-2 tw-shrink-0">
           {(trafficLight.triggers ?? []).map((trigger, index) => (
             <span
               key={index}
@@ -88,31 +87,31 @@ export const TrafficLightsList = () => {
   return (
     <div className="row g-4">
       <div className="col-12 col-lg-6">
-        <OutlineContainer className="dashboard-container mb-0 h-100">
-          <div className="card-header mb-3">
+        <div className="tw-bg-stone-950 tw-bg-opacity-5 tw-border tw-border-solid tw-border-stone-400 tw-border-opacity-20 tw-rounded-2xl tw-p-3 sm:tw-p-4 lg:tw-p-6 tw-h-full tw-min-w-0" >
+
+          <div className="card-header tw-mb-2 sm:tw-mb-3">
             <Link to={routes.profile.myTrafficLights} className="text-decoration-none">
-              <p className="mb-3">{t('Buy Traffic Lights')}</p>
+              <h6 className="tw-mb-0 tw-text-sm sm:tw-text-base">{t('Buy Traffic Lights')}</h6>
             </Link>
           </div>
           <div className="d-flex flex-column">
             {renderTrafficLights(buyTrafficLights)}
           </div>
-        </OutlineContainer>
+        </div>
       </div>
 
       <div className="col-12 col-lg-6">
-        <OutlineContainer className="dashboard-container mb-0 h-100">
-          <div className="card-header mb-3">
+        <div className="tw-bg-stone-950 tw-bg-opacity-5 tw-border tw-border-solid tw-border-stone-400 tw-border-opacity-20 tw-rounded-2xl tw-p-3 sm:tw-p-4 lg:tw-p-6 tw-h-full tw-min-w-0" >
+          <div className="card-header tw-mb-2 sm:tw-mb-3">
             <Link to={routes.profile.myTrafficLights} className="text-decoration-none">
-              <p className="mb-3">{t('Sell Traffic Lights')}</p>
+              <h6 className="tw-mb-0 tw-text-sm sm:tw-text-base">{t('Sell Traffic Lights')}</h6>
             </Link>
           </div>
           <div className="d-flex flex-column">
             {renderTrafficLights(sellTrafficLights)}
           </div>
-        </OutlineContainer>
+        </div>
       </div>
     </div>
   );
 };
-

@@ -24,12 +24,29 @@ export const TrafficLightTriggers: FC<TriggersProps> = ({
   const { t } = useTranslation();
   const isEditable = variant === 'edit';
 
+
+  const getActionTranslationKey = (actionValue: Action | string) => {
+    const val = (actionValue || "").toLowerCase();
+
+    let cleanKey = "normally";
+    if (val.includes("more")) {
+      cleanKey = "more";
+    } else if (val.includes("less")) {
+      cleanKey = "less";
+    } else if (val.includes("none") || val.includes("don't") || val.includes("dont")) {
+      cleanKey = "none";
+    } else if (val.includes("normal")) {
+      cleanKey = "normally";
+    }
+
+    return `trafficLight.action.${type}.${cleanKey}`;
+  };
+
   return (
-    <div className="d-flex flex-column mb-3 gap-5">
+    <div className="d-flex flex-column mb-3 gap-4 sm:tw-gap-5">
       {triggers.map((trigger, index) => (
         <div key={trigger.id || index} className="d-flex flex-column gap-2">
 
-          {/* HLAVIČKA RIADKA: Gulička a Delete tlačidlo */}
           <div className="d-flex justify-content-between align-items-center px-1">
             <div
               className="flex-shrink-0"
@@ -47,7 +64,7 @@ export const TrafficLightTriggers: FC<TriggersProps> = ({
               <div
                 className="d-flex align-items-center justify-content-center"
                 style={{
-                  backgroundColor: "var(--red-on-primary-color)",
+                  backgroundColor: "var(--red-color)",
                   borderRadius: "50%",
                   width: "30px",
                   height: "30px",
@@ -77,7 +94,7 @@ export const TrafficLightTriggers: FC<TriggersProps> = ({
                         {Object.values(Event).map((v) => <option key={v} value={v}>{t(v)}</option>)}
                       </Form.Select>
                     ) : (
-                      <div className="fw-bold">{t(trigger.event)}</div>
+                      <div className="fw-bold tw-text-sm sm:tw-text-base">{t(trigger.event)}</div>
                     )}
                   </div>
                   <div className="text-end">
@@ -93,7 +110,7 @@ export const TrafficLightTriggers: FC<TriggersProps> = ({
                         <span className="ms-1">%</span>
                       </div>
                     ) : (
-                      <div style={{ color: "var(--secondary-color)", fontWeight: "bold", fontSize: "1.4rem" }}>
+                      <div className="tw-text-lg tw-font-bold sm:tw-text-2xl" style={{ color: "var(--secondary-color)" }}>
                         {trigger.eventByPercentage}%
                       </div>
                     )}
@@ -101,7 +118,6 @@ export const TrafficLightTriggers: FC<TriggersProps> = ({
                 </div>
                 <div className="d-flex justify-content-between w-100 mt-1">
                   <div className="gray-2-color-text small">{t("Event")}</div>
-                  <div className="gray-2-color-text small">{t("Up to")}</div>
                 </div>
               </div>
             </div>
@@ -120,12 +136,14 @@ export const TrafficLightTriggers: FC<TriggersProps> = ({
                       >
                         {Object.values(Action).map((v) => (
                           <option key={v} value={v}>
-                            {v !== Action.none ? t(`${type} ${v}`) : t(`${v} ${type}`)}
+                            {t(getActionTranslationKey(v))}
                           </option>
                         ))}
                       </Form.Select>
                     ) : (
-                      <div className="fw-bold">{t(trigger.action)}</div>
+                      <div className="fw-bold tw-text-sm sm:tw-text-base">
+                        {t(getActionTranslationKey(trigger.action))}
+                      </div>
                     )}
                   </div>
                   <div className="text-end">
@@ -142,7 +160,7 @@ export const TrafficLightTriggers: FC<TriggersProps> = ({
                         <span className="ms-1">%</span>
                       </div>
                     ) : (
-                      <div style={{ color: "var(--secondary-color)", fontWeight: "bold", fontSize: "1.4rem" }}>
+                      <div className="tw-text-lg tw-font-bold sm:tw-text-2xl" style={{ color: "var(--secondary-color)" }}>
                         {trigger.actionByPercentage}%
                       </div>
                     )}
@@ -150,7 +168,6 @@ export const TrafficLightTriggers: FC<TriggersProps> = ({
                 </div>
                 <div className="d-flex justify-content-between w-100 mt-1">
                   <div className="gray-2-color-text small">{t("Action")}</div>
-                  <div className="gray-2-color-text small">{t("By percent")}</div>
                 </div>
               </div>
             </div>

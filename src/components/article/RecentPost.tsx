@@ -4,6 +4,7 @@ import {useTranslation} from "react-i18next";
 import {RecentArticleProps} from "../../utils/types/article/RecentArticleProps.ts";
 import {getRecentArticles} from "../../utils/api/articleService.ts";
 import {routes} from "../../utils/constants";
+import { GlassCard } from "../reusable/GlassCard.tsx";
 
 export const RecentPost:FC = () => {
     const {t} = useTranslation();
@@ -23,25 +24,17 @@ export const RecentPost:FC = () => {
     }, []);
     
     return (
-        <div className="sidebar__recentpost">
-            <div className="sidebar__head">
-                <h6>{t("Recent Post")}</h6>
-            </div>
-            <div className="sidebar__recentpost-body">
+        <GlassCard bgColor="var(--secondary-color)" opacity={0.1}>
+            <h6>{t("Recent Posts")}</h6>
+            <div className="tw-text-base">
                 <ul>
                     {recentPost && recentPost.map((data) => (
-                    <li key={data.id}>
-                        <div className="sidebar__recentpost-item">
-                            <div className="sidebar__recentpost-inner">
-                                <div className="sidebar__recentpost-content">
-                                    <p><Link to={`${routes.articleURL}${data.id}`} className="link-underline-none">{data.title}</Link></p>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
+                        <li key={data.id}>
+                            <p><Link to={`${routes.articleURL}${data.id}`} className="link-underline-none">{data.title}</Link></p>
+                        </li>
                     ))}
                 </ul>
             </div>
-        </div>
+        </GlassCard>
     );
 };

@@ -1,6 +1,6 @@
 import {FC} from "react";
 import { FiMail } from 'react-icons/fi';
-import Logo from "../../utils/icons/logo/SB_only.svg";
+import Logo from "../../utils/icons/logo/SB-old-sb-only.svg";
 import {SplitText} from "../../components/reusable/SplitText.tsx";
 import {routes} from "../../utils/constants";
 import {Link} from "react-router-dom";

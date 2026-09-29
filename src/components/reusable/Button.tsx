@@ -6,9 +6,10 @@ export enum ButtonColor {
     white = "var(--white-color)",
     cream = "var(--cream-color)",
     sandy = "var(--sandy-color)",
-    green = "var(--green-on-primary-color)",
-    red = "var(--red-on-tertiary-color)",
-    gray = "var(--gray-2-color)",
+    green = "var(--green-color)",
+    red = "var(--red-color)",
+    gray1 = "var(--gray-1-color)",
+    gray2 = "var(--gray-2-color)",
     lightBrown = "var(--tertiary-color)",
     darkBrown = "var(--primary-color)",
     transparent = "transparent"
@@ -16,7 +17,7 @@ export enum ButtonColor {
 
 type ButtonProps = {
     children: ReactNode;
-    onClick?: () => void;
+    onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
     className?: string;
     type?: "button" | "submit" | "reset" | "link";
     to?: string;
@@ -27,21 +28,35 @@ type ButtonProps = {
     shadow?: boolean;
 };
 
-export const Button: FC<ButtonProps> = ({children, onClick, className = "primary", type = "button", to, style, color = ButtonColor.gold, disabled = false, shadow = true, fontColor}) => {
-  const fontColorFinal = fontColor ?? [ButtonColor.red, ButtonColor.green, ButtonColor.darkBrown, ButtonColor.lightBrown].includes(color)
-    ? "var(--white-color)" : "var(--black-color)";
+export const Button: FC<ButtonProps> = ({
+    children,
+    onClick,
+    className = "primary",
+    type = "button",
+    to,
+    style,
+    color = ButtonColor.gold,
+    disabled = false,
+    shadow = true,
+    fontColor
+}) => {
+    const fontColorFinal = fontColor ?? (
+        [ButtonColor.red, ButtonColor.green, ButtonColor.darkBrown, ButtonColor.lightBrown].includes(color)
+            ? "var(--white-color)"
+            : "var(--black-color)"
+    );
 
-  if (type === "link" && to) {
+    if (type === "link" && to) {
         return (
             <Link
                 to={to}
-                className={`btn trk-btn trk-btn--border trk-btn--${className}`}
+                className={`btn trk-btn trk-btn--border trk-btn--primary trk-btn--${className}`}
                 style={{
                     color: fontColorFinal,
                     backgroundColor: color,
                     boxShadow: shadow ? `0 0 15px 5px color-mix(in srgb, ${color}, transparent 90%)` : "none",
                     letterSpacing: 1,
-                    fontWeight: 400,
+                    fontWeight: 500,
                     ...style
                 }}
             >
@@ -61,7 +76,8 @@ export const Button: FC<ButtonProps> = ({children, onClick, className = "primary
                 color: fontColorFinal,
                 boxShadow: shadow ? `0 0 15px 5px color-mix(in srgb, ${color}, transparent 90%)` : "none",
                 letterSpacing: 1,
-                ...style}}
+                ...style
+            }}
             disabled={disabled}
         >
             {children}

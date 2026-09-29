@@ -21,7 +21,7 @@ const excludedPaths = [
   'Demo',
   'demo',
   'PostEdit',
-  'Recommendation',
+  'CryptocurrenciesList',
   'Register',
   'TranslateEdit'
 ];
