@@ -20,4 +20,5 @@ export type AssetProfitList = {
     to_date: string;
     in_watchlist: boolean;
     daily_change: number;
+    profit_change: number;
 };

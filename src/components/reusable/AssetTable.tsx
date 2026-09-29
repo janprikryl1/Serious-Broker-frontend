@@ -76,7 +76,7 @@ export function AssetTable<T>({ data, columns, rowLink, className, useAccordion,
                     {data.map((row, index) => {
                         const eventKey = index.toString();
                         const currentRowId = getRowId ? getRowId(row) : ((row as any).id ?? index);
-                        const isActive = isRowActive(currentRowId, activeRowIds);
+                        const isActive = isRowActive(currentRowId, activeRowIds!);
 
                         const content = (
                             <div>

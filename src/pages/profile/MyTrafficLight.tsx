@@ -143,7 +143,7 @@ const MyTrafficLightsContent: FC = () => {
 
   const createTrafficLight = async () => {
     setShowCreateModal(false);
-    await saveChanges(type);
+    await saveChanges(); //await saveChanges(type);
     fetchData();
   };
 

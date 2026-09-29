@@ -22,5 +22,6 @@
 
     "noImplicitAny": false
   },
-  "include": ["src"]
+  "include": ["src"],
+  "exclude": ["src/pages/not used"]
 }

@@ -18,8 +18,8 @@ export const StyledTabs = styled((props: StyledTabsProps) => (
     variant="scrollable"
     scrollButtons="auto"
     allowScrollButtonsMobile
-    slotProps={{
-      indicator: { children: <span className="MuiTabs-indicatorSpan" /> },
+    TabIndicatorProps={{
+      children: <span className="MuiTabs-indicatorSpan" />,
     }}
   />
 ))({

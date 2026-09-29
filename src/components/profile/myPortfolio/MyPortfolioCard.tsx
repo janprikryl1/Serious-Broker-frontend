@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { AreaPlot, ChartsTooltip, LinePlot, ResponsiveChartContainer } from '@mui/x-charts';
+import { AreaPlot, ChartsTooltip, LinePlot, ChartContainer } from '@mui/x-charts';
 import { GraphDataSkeleton } from '../../graphs/asset/GraphDataSkeleton.tsx';
 import { useTranslation } from 'react-i18next';
 import { FiEdit3 } from 'react-icons/fi';
@@ -136,7 +136,7 @@ export const MyPortfolioCard = ({ data, onDelete, isRemoving = false, isLoading,
               style={{ width: '100%', height: '100%' }}
             />
           ) : hasChartData ? (
-            <ResponsiveChartContainer
+            <ChartContainer
               series={[
                 {
                   id: 'portfolio',
@@ -188,7 +188,7 @@ export const MyPortfolioCard = ({ data, onDelete, isRemoving = false, isLoading,
               <AreaPlot />
               <LinePlot />
               <ChartsTooltip trigger="axis" />
-            </ResponsiveChartContainer>
+            </ChartContainer>
           ) : (
             <div className="no-data-wrapper">
               <div className="gray-2-color-text tw-text-xs sm:tw-text-sm">{t('No data')}</div>
