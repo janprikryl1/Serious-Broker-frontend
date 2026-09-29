@@ -29,10 +29,12 @@ export const CustomModal = ({showModal, closeModal, title, type, children = null
             contentClassName="custom-modal"
             backdropClassName="custom-backdrop"
         >
-            <Modal.Body>
-                <div className="d-flex flex-column align-items-center justify-content-center">
-                    <h4>{t(title)}</h4>
-                    <div className={lottieClass} style={{ width: "30%" }}>
+            <Modal.Body className="tw-px-4 tw-py-5 sm:tw-px-6 sm:tw-py-6 lg:tw-px-8 lg:tw-py-8">
+                <div className="d-flex flex-column align-items-center justify-content-center tw-text-center tw-gap-3 sm:tw-gap-4">
+                    <h4 className="tw-mb-0 tw-text-lg sm:tw-text-xl lg:tw-text-2xl tw-leading-tight">
+                        {t(title)}
+                    </h4>
+                    <div className={`${lottieClass} tw-w-[20%] tw-min-w-[100px] tw-max-w-[150px]`}>
                         <Lottie
                             animationData={type === 'success' ? successAnim : errorAnim }
                             loop={false}
@@ -41,7 +43,9 @@ export const CustomModal = ({showModal, closeModal, title, type, children = null
                         />
                     </div>
                     {children ? (
-                        children
+                        <div className="tw-w-full tw-flex tw-justify-center tw-text-xs sm:tw-text-sm lg:tw-text-base">
+                            {children}
+                        </div>
                     ) : (
                         <Button onClick={closeModal}>
                             {buttonText ? (buttonText) : (t("OK"))}
@@ -52,4 +56,3 @@ export const CustomModal = ({showModal, closeModal, title, type, children = null
         </Modal>
     )
 }
-

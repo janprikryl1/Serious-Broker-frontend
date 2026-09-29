@@ -9,6 +9,10 @@ import {TrafficLightsList} from '../../components/profile/dashboard/TrafficLight
 import {getMyPortfolios} from '../../utils/api/myPortfolioService.ts';
 import {MyPortfolioType} from "../../utils/types/myPortfolio/MyPortfolioType.ts";
 import {useTranslation} from "react-i18next";
+import {WatchListType} from "../../utils/types/watchList/WatchListType.ts";
+import {getMyWatchList} from "../../utils/api/watchListService.ts";
+import {WatchListEnum} from "../../utils/enums/WatchListEnum.ts";
+import {WatchListTable} from "../../components/profile/watchList/WatchListTable.tsx";
 
 export const Dashboard = () => {
   const {t} = useTranslation();
@@ -19,6 +23,7 @@ export const Dashboard = () => {
   const [sellTrafficLights, setSellTrafficLights] = useState(0);
   const [portfolios, setPortfolios] = useState<MyPortfolioType[]>([]);
   const [arePortfoliosLoading, setArePortfoliosLoading] = useState(true);
+  const [watchList, setWatchList] = useState<WatchListType[] | undefined>(undefined);
 
   useEffect(() => {
     let mounted = true;
@@ -55,7 +60,18 @@ export const Dashboard = () => {
       }
     };
 
+    const loadWatchList = async () => {
+      try {
+        const response = await getMyWatchList();
+        if (!mounted) return;
+        setWatchList(Array.isArray(response?.data) ? response.data : []);
+      } catch {
+        if (mounted) setWatchList([]);
+      }
+    };
+
     loadPortfolios();
+    loadWatchList();
 
     return () => {
       mounted = false;
@@ -65,11 +81,16 @@ export const Dashboard = () => {
   return (
     <>
       <TitleHeader title="My Dashboard" />
-      <div className="container mt-5">
-        <h3 className="tw-my-6 tw-pt-8 ">{t("My Dashboard")}</h3>
-        <div className="d-flex flex-column gap-4">
+      <div className="container tw-mt-4 md:tw-mt-5 tw-px-3 sm:tw-px-4 lg:tw-px-0">
+        <div className="tw-flex tw-flex-col tw-gap-4 lg:tw-gap-5">
+          {watchList !== undefined && watchList.filter((item) => item.type === WatchListEnum.Asset || item.type === WatchListEnum.Coin).length > 0 && (
+            <WatchListTable
+              watchList={watchList.filter((item) => item.type === WatchListEnum.Asset || item.type === WatchListEnum.Coin)}
+              setWatchList={setWatchList}
+            />
+          )}
           <InfoRow portfolioSum={portfolioSum} totalInvested={totalInvested} investmentPlanSum={investmentPlanSum} buyTrafficLightSum={buyTrafficLights} sellTrafficLightSum={sellTrafficLights}/>
-          <div className="row g-4">
+          <div className="row g-3 lg:g-4">
             <div className="col-12 col-xl-7">
               <BestPortfolio isLoading={arePortfoliosLoading} myPortfolios={portfolios} />
             </div>

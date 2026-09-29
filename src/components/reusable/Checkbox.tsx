@@ -22,7 +22,7 @@ export const Checkbox: FC<Props> = ({checked, onChange, label, style}) => {
                     onChange={(e) => onChange(e.target.checked)}
                 />
                 <span className="checkbox-box"></span>
-                <span className="ms-2">{t(label)} </span>
+                <span className="ms-2 tw-text-base">{t(label)} </span>
             </label>
         </>
     )

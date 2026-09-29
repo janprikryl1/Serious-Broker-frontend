@@ -9,7 +9,7 @@ import { RegisterStepFour } from "../components/register/RegisterStepFour.tsx";
 import { RegisterStepsPagiation } from "../components/register/RegisterStepsPagiation.tsx";
 import { useRegister } from "../utils/hooks/useRegister.ts";
 import { GlassCard } from "../components/reusable/GlassCard.tsx";
-import SeriousBrokerHandWriting from "../utils/icons/logo/SB-handwritten-white.svg";
+import SeriousBrokerHandWriting from "../utils/icons/logo/SB-logo-handwritten-white.svg";
 
 export const Register: FC = () => {
     const { t } = useTranslation();
@@ -42,7 +42,7 @@ export const Register: FC = () => {
             <div className="logo tw-mb-6 tw-flex tw-justify-center tw-absolute tw-top-0 sm:tw-mb-0">
                 <Link to={routes.home} aria-label="Serious Broker - home">
                     <img
-                        className="tw-max-w-[270px]"
+                        className="tw-max-w-[180px] sm:tw-max-w-[270px]"
                         src={SeriousBrokerHandWriting}
                         alt="Serious.Broker"
                     />
@@ -56,10 +56,10 @@ export const Register: FC = () => {
             >
                 <GlassCard bgColor="var(--true-black)" opacity={0.1}>
                     <div className="tw-mb-6 tw-text-center sm:tw-mb-8">
-                        <h2 className="tw-text-2xl tw-font-bold tw-tracking-tight tw-text-white sm:tw-text-3xl tw-pb-1 sm:tw-pb-3">
+                        <h2 className="tw-pb-1 tw-text-xl tw-font-bold tw-tracking-tight tw-text-white sm:tw-text-3xl sm:tw-pb-3">
                             {t("Create an account")}
                         </h2>
-                        <p className="tw-mt-2 tw-text-sm tw-text-gray-2">
+                        <p className="tw-mt-2 tw-text-xs tw-text-gray-2 sm:tw-text-sm">
                             {t("We just need a few details to set up your profile")}
                         </p>
                     </div>
@@ -79,7 +79,7 @@ export const Register: FC = () => {
                         />
                     </form>
 
-                    <div className="tw-mt-6 tw-flex tw-flex-col tw-items-center tw-gap-2 tw-text-sm sm:tw-mt-8">
+                    <div className="tw-mt-6 tw-flex tw-flex-col tw-items-center tw-gap-2 tw-text-xs sm:tw-mt-8 sm:tw-text-sm">
                         <p className="tw-m-0">
                             {t("Already have an account? ")}
                             <Link
@@ -93,7 +93,7 @@ export const Register: FC = () => {
                 </GlassCard>
             </div>
 
-            <nav className="tw-flex tw-text-sm tw-gap-5 tw-no-underline tw-text-gray-2">
+            <nav className="tw-flex tw-gap-3 tw-text-xs tw-no-underline tw-text-gray-2 sm:tw-gap-5 sm:tw-text-sm">
                 <Link className="hover:tw-text-secondary hover:tw-underline" to={routes.gdprInfo}>GDPR</Link>
                 <Link className="hover:tw-text-secondary hover:tw-underline" to={routes.cookiesInfo}>Cookies</Link>
                 <Link className="hover:tw-text-secondary hover:tw-underline" to={routes.about}>{t("About us")}</Link>

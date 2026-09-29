@@ -6,11 +6,11 @@ import { LoginRegisterInput } from "../components/signIn/LoginRegisterInput.tsx"
 import { Button, ButtonColor } from "../components/reusable/Button.tsx";
 import {useSignIn} from "../utils/hooks/useSignIn.ts";
 import {GlassCard} from "../components/reusable/GlassCard.tsx";
-import SeriousBrokerHandWriting from "../utils/icons/logo/SB-handwritten-white.svg";
+import SeriousBrokerHandWriting from "../utils/icons/logo/SB-logo-handwritten-white.svg";
 
 export const SignIn: FC = () => {
     const { t } = useTranslation();
-    const {handleSubmit, onSubmit, register, isSubmitting} = useSignIn();
+    const {handleSubmit, onSubmit, register, isSubmitting, errorMessage} = useSignIn();
 
     return (
         <section className="tw-relative tw-flex tw-min-h-screen tw-w-full tw-flex-col tw-items-center tw-justify-center tw-gap-4 tw-px-4 tw-py-1">
@@ -18,7 +18,7 @@ export const SignIn: FC = () => {
             <div className="logo tw-mb-6 tw-flex tw-justify-center tw-absolute tw-top-0 sm:tw-mb-0">
                 <Link to={routes.home} aria-label="Serious Broker - home">
                     <img
-                        className="tw-max-w-[270px]"
+                        className="tw-max-w-[180px] sm:tw-max-w-[270px]"
                         src={SeriousBrokerHandWriting}
                         alt="Serious.Broker"
                     />
@@ -33,10 +33,10 @@ export const SignIn: FC = () => {
             >
                 <GlassCard bgColor="var(--true-black)" opacity={0.1}>
                     <div className="tw-mb-6 tw-text-center sm:tw-mb-8">
-                        <h2 className="tw-text-2xl tw-font-bold tw-tracking-tight tw-text-white sm:tw-text-3xl tw-pb-1 sm:tw-pb-3">
+                        <h2 className="tw-pb-1 tw-text-xl tw-font-bold tw-tracking-tight tw-text-white sm:tw-text-3xl sm:tw-pb-3">
                             {t("Welcome back!")}
                         </h2>
-                        <p className="tw-mt-2 tw-text-sm tw-text-gray-2">
+                        <p className="tw-mt-2 tw-text-xs tw-text-gray-2 sm:tw-text-sm">
                             {t("Fill in your details to log in")}
                         </p>
                     </div>
@@ -64,10 +64,17 @@ export const SignIn: FC = () => {
 
                         <Link
                             to={routes.forgottenPassword}
-                            className="tw-m-0 tw-text-end tw-text-sm tw-text-secondary tw-no-underline hover:tw-underline"
+                            className="tw-m-0 tw-text-end tw-text-xs tw-text-secondary tw-no-underline hover:tw-underline sm:tw-text-sm"
                         >
                             {t("Forgotten password?")}
                         </Link>
+
+                        {errorMessage && (
+                            <div className="tw-text-red tw-text-sm tw-font-bold tw-border tw-border-solid tw-border-rose-500 tw-border-opacity-35 tw-rounded-lg tw-px-2 tw-py-3 tw-bg-rose-500 tw-bg-opacity-10 tw-mt-4">
+                                {/*{t("Invalid email or password. Please try again.")}*/}
+                                {errorMessage}
+                            </div>
+                        )}
 
                         <div className="tw-mt-4 tw-flex tw-justify-center">
                             <Button
@@ -81,7 +88,7 @@ export const SignIn: FC = () => {
                         </div>
                     </form>
 
-                    <div className="tw-mt-6 tw-flex tw-flex-col tw-items-center tw-gap-2 tw-text-sm sm:tw-mt-8">
+                    <div className="tw-mt-6 tw-flex tw-flex-col tw-items-center tw-gap-2 tw-text-xs sm:tw-mt-8 sm:tw-text-sm">
                         <p className="tw-m-0">
                             {t("Don’t have an account yet? ")}
                             <Link
@@ -95,7 +102,7 @@ export const SignIn: FC = () => {
                 </GlassCard>
             </div>
 
-            <nav className="tw-flex tw-text-sm tw-gap-5 tw-no-underline tw-text-gray-2">
+            <nav className="tw-flex tw-gap-3 tw-text-xs tw-no-underline tw-text-gray-2 sm:tw-gap-5 sm:tw-text-sm">
                 <Link className="hover:tw-text-secondary hover:tw-underline" to={routes.gdprInfo}>GDPR</Link>
                 <Link className="hover:tw-text-secondary hover:tw-underline" to={routes.cookiesInfo}>Cookies</Link>
                 <Link className="hover:tw-text-secondary hover:tw-underline" to={routes.about}>{t("About us")}</Link>

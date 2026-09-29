@@ -1,73 +1,65 @@
-import { FC, useEffect, useState } from "react";
+import {FC, useEffect, useState} from "react";
 import glossaryOfTermsImage from "../utils/icons/glossaryOfTerms/glossary_of_terms.webp";
-import { useTranslation } from "react-i18next";
+import {useTranslation} from "react-i18next";
 import {getGlossary} from "../utils/api/glossaryService.ts";
 import {TitleHeader} from "../components/about/TitleHeader.tsx";
 import {GlossaryItem} from "../components/articles/dictionary/GlossaryItem.tsx";
-import {Faq} from "../components/articles/dictionary/Faq.tsx";
 import {GlossaryType} from "../utils/types/article/GlossaryType.ts";
+import {Link} from "react-router-dom";
+import {routes} from "../utils/constants";
+import {IoIosArrowBack} from "react-icons/io";
 
 export const Glossary: FC = () => {
-    const { t } = useTranslation();
-    const [glossaries, setGlossaries] = useState<GlossaryType[]>([]);
+  const {t} = useTranslation();
+  const [glossaries, setGlossaries] = useState<GlossaryType[]>([]);
 
-    useEffect(() => {
-        const loadGlossary = async () => {
-            try {
-                const res = await getGlossary();
-                setGlossaries(res.data);
-                navigateToGlossary();
-            } catch (error) {
-                console.error(error);
-            }
-        };
-        loadGlossary();
-    }, []);
-    
-    const navigateToGlossary = () => {
-        const hash = window.location.hash.substring(1);
-        if (hash) {
-            const element = document.getElementById(hash);
-            if (element) {
-                const yOffset = -(window.innerHeight * 0.4);
-                const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
-                window.scrollTo({ top: y, behavior: 'smooth' });
-            }
-        }
+  useEffect(() => {
+    const loadGlossary = async () => {
+      try {
+        const res = await getGlossary();
+        setGlossaries(res.data);
+        navigateToGlossary();
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    loadGlossary();
+  }, []);
+
+  const navigateToGlossary = () => {
+    const hash = window.location.hash.substring(1);
+    if (hash) {
+      const element = document.getElementById(hash);
+      if (element) {
+        const yOffset = -(window.innerHeight * 0.4);
+        const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+        window.scrollTo({top: y, behavior: 'smooth'});
+      }
     }
+  }
 
-    return (
-        <>
-            <TitleHeader title="Glossary of terms" />
-            <div className="container padding-bottom">
-                    <div className="service-details__item">
-                        <div className="service-details__item-inner">
-                            <div
-                                className="service-details__thumb mb-40"
-                                data-aos="fade-up"
-                                data-aos-duration="800"
-                            >
-                                <div className="service-details__thumb-inner">
-                                    <img src={glossaryOfTermsImage} alt="service-icon" />
-                                </div>
-                            </div>
-                            <div
-                                className="service-details__content"
-                                data-aos="fade-up"
-                                data-aos-duration="900"
-                            >
-                                <h3 className="mb-15">
-                                    {t("About Crypto")}
-                                </h3>
-                                <p className="mb-0">{t("We are here to help you learn about cryptocurrencies and how they work. Whether you're a beginner or an experienced trader, we've got you covered. Our articles cover a wide range of topics, from the basics of cryptocurrencies to more advanced topics.")}</p>
-                                {glossaries.map((glossary) => (
-                                    <GlossaryItem glossary={glossary} key={glossary.id} />
-                                ))}
-                            </div>
-                            <Faq />
-                        </div>
-                    </div>
-            </div>
-        </>
-    );
+  return (
+    <>
+      <div className="container tw-pt-8">
+        <Link to={routes.articles} className="tw-inline-block">
+          <div className="tw-flex tw-items-center tw-text-gray-2 hover:tw-underline">
+            <IoIosArrowBack/>
+            {t("Back to articles")}
+          </div>
+        </Link>
+      </div>
+      <TitleHeader title="Glossary of terms"/>
+      <div className="container">
+        <div className=" mb-40" data-aos="fade-up" data-aos-duration="800"
+        >
+        </div>
+        <div data-aos="fade-up" data-aos-duration="900">
+          {glossaries.map((glossary) => (
+            <GlossaryItem glossary={glossary} key={glossary.id}/>
+          ))}
+        </div>
+        {/*<Faq/>*/}
+      </div>
+    </>
+  );
 };

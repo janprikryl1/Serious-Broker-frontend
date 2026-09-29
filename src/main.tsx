@@ -10,9 +10,13 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 import './styles/sass/style.scss';
 import {ErrorBoundary} from "react-error-boundary";
 import {ErrorFallback} from "./pages/ErrorFallback.tsx";
+import {BrowserRouter} from "react-router-dom";
+import AutoScrollToTop from "./components/reusable/AutoScrollToTop.tsx";
 
 createRoot(document.getElementById('root')!).render(
     <StrictMode>
+      <BrowserRouter>
+        <AutoScrollToTop />
         <ErrorBoundary
             FallbackComponent={ErrorFallback}
             onError={(error, info) => {
@@ -21,5 +25,6 @@ createRoot(document.getElementById('root')!).render(
         >
             <App/>
         </ErrorBoundary>
+      </BrowserRouter>
     </StrictMode>,
 )

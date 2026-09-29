@@ -37,8 +37,8 @@ $gray-6-color: #DCD6CF;
 $sandy-color: #AD9D8D;
 
 // Red and green
-$green-on-primary-color: #2eb26d;
-$red-on-primary-color: #c32d2e;
+//$green-color: #26a675;
+//$red-color: #ef5350;
 
 $green-toast-color: #528D49;
 $red-toast-color: #8D4949;
@@ -58,12 +58,12 @@ $traffic-light-safe4-light-color: #5CAB7D;
 
 // Charts
 
-$chart-red: #D15B5B;
-$chart-orange: #D48352;
-$chart-yellow: #D9B34D;
-$chart-green: #6DB388;
-$chart-blue: #5B89AD;
-$chart-purple: #9275A3;
+$red-color:    #ef5350; // Červená
+$orange-color: #ffa726; // Oranžová
+$yellow-color: #ffee58; // Žltá
+$green-color: #29b27e; // Zelená
+$blue-color:   #42a5f5; // Modrá
+$purple-color: #b95bcb; // Fialová
 
 //
 $thm-brand-color-dark: $secondary-color;
@@ -174,6 +174,7 @@ $thm-danger-dark: #FF0000;
     /* Theme colors */
     --secondary-color: #{$secondary-color};
     --secondary-color-transparent-50: #{$secondary-color-transparent-50};
+    --secondary-color-transparent-30: #{$secondary-color-transparent-30};
     --primary-color: #{$primary-color};
     --tertiary-color: #{$tertiary-color};
     --tertiary-color-light: #{$tertiary-color-light};
@@ -196,8 +197,8 @@ $thm-danger-dark: #FF0000;
     --true-black: #{$true-black};
 
     /* Reds and greens */
-    --green-on-primary-color: #{$green-on-primary-color};
-    --red-on-primary-color: #{$red-on-primary-color};
+    //--green-color: #{$green-color};
+    //--red-color: #{$red-color};
 
     --green-toast-color: #{$green-toast-color};
     --red-toast-color: #{$red-toast-color};
@@ -227,12 +228,12 @@ $thm-danger-dark: #FF0000;
 
     /* Charts */
 
-    --chart-red: #{$chart-red};
-    --chart-orange: #{$chart-orange};
-    --chart-yellow: #{$chart-yellow};
-    --chart-green: #{$chart-green};
-    --chart-blue: #{$chart-blue};
-    --chart-purple: #{$chart-purple};
+    --red-color: #{$red-color};
+    --orange-color: #{$orange-color};
+    --yellow-color: #{$yellow-color};
+    --green-color: #{$green-color};
+    --blue-color: #{$blue-color};
+    --purple-color: #{$purple-color};
 
     //
 

@@ -5,9 +5,9 @@ import "../../styles/sass/components/admin.scss";
 
 export const Admin: FC = () => {
     return (
-        <div style={{ display: 'flex' }}>
+        <div>
             <AdminSidebar />
-            <main className="container" style={{ flex: 1 }}>
+            <main className="container">
                 <Outlet />
             </main>
         </div>

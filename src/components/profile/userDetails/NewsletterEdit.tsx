@@ -29,14 +29,15 @@ export const NewsletterEdit: FC = () => {
     };
 
     return (
-        <Form className="padding-bottom">
-            <h3>{t("Newsletter")}</h3>
+        <Form className="padding-bottom tw-pb-4">
+            <h3 className="tw-mb-4 tw-text-lg sm:tw-text-xl lg:tw-text-2xl">{t("Newsletter")}</h3>
             <Form.Check
                 checked={userDetails!.newsletter_subscription}
                 type="switch"
                 label={t("Subscribe to newsletter")}
                 name="newsletter_subscription"
                 onChange={handleChange}
+                className="tw-mb-3 tw-text-sm sm:tw-text-base"
             />
             <Form.Check
                 checked={userDetails!.receive_messages}
@@ -44,6 +45,7 @@ export const NewsletterEdit: FC = () => {
                 label={t("I don't want any messages")}
                 name="receive_messages"
                 onChange={handleChange}
+                className="tw-text-sm sm:tw-text-base"
             />
         </Form>
     );

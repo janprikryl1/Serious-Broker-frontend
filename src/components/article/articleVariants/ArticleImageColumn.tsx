@@ -106,30 +106,36 @@ export const ArticleImageColumn: FC<Props> = ({ task, category, content }) => {
     };
 
     return (
-        <div className="col-sm-4 d-flex flex-column align-items-center">
-            <div className="article-image-column-container">
+      <div className="col-sm-4 tw-flex tw-justify-center tw-items-start">
+          <div className="article-image-column-container">
+              {imageUrl ? (
                 <img
-                    ref={imageRef}
-                    src={imageUrl}
-                    alt={imageUrl ? `Task ${task + 1}` : 'Loading task image'}
-                    onClick={() => imageUrl && handleImageClick(imageUrl)}
-                    style={{cursor: imageUrl ? 'pointer' : 'default'}}
-                    className="article-image-column-img"
+                  ref={imageRef}
+                  src={imageUrl}
+                  alt={`Task ${task + 1}`}
+                  onClick={() => handleImageClick(imageUrl)}
+                  className="tw-max-h-full tw-w-auto tw-object-contain tw-rounded-lg tw-cursor-pointer hover:tw-scale-105 tw-transition-transform"
                 />
-                {animateData && (animateData.to?.x !== 0 || animateData.to?.y !== 0) && (
-                    <animated.div
-                        className="article-image-column-animation"
-                        style={{
-                            opacity: springs.left.to(l => (l === -9999 ? 0 : 1)),
-                            left: springs.left,
-                            top: springs.top
-                        }}
-                    >
-                        <TbHandFinger size={24} />
-                    </animated.div>
-                )}
-            </div>
-            {imageUrl && <ImageModal isModalOpen={isModalOpen} selectedImage={selectedImage} closeModal={closeModal} />}
-        </div>
+              ) : (
+                <div className="tw-text-stone-200 tw-text-sm">{"No image"}</div>
+              )}
+
+              {animateData && (animateData.to?.x !== 0 || animateData.to?.y !== 0) && (
+                <animated.div
+                  className="article-image-column-animation tw-pointer-events-none"
+                  style={{
+                      opacity: springs.left.to(l => (l === -9999 ? 0 : 1)),
+                      left: springs.left,
+                      top: springs.top,
+                      position: "absolute"
+                  }}
+                >
+                    <TbHandFinger size={28} className="tw-text-red-500 tw-drop-shadow-lg" />
+                </animated.div>
+              )}
+          </div>
+
+          {imageUrl && <ImageModal isModalOpen={isModalOpen} selectedImage={selectedImage} closeModal={closeModal} />}
+      </div>
     );
 }

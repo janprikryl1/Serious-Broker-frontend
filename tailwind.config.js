@@ -29,10 +29,14 @@ export default {
         white: "var(--white-color)",
         black: "var(--black-color)",
         sandy: "var(--sandy-color)",
+        'red': 'var(--red-color)',
+        'orange': 'var(--orange-color)',
+        'yellow': 'var(--yellow-color)',
+        'green': 'var(--green-color)',
+        'blue': 'var(--blue-color)',
+        'purple': 'var(--purple-color)',
 
         // Reds and greens
-        "green-on-primary": "var(--green-on-primary-color)",
-        "red-on-primary": "var(--red-on-primary-color)",
         "green-toast": "var(--green-toast-color)",
         "red-toast": "var(--red-toast-color)",
         "neutral-toast": "var(--neutral-toast-color)",
@@ -62,7 +66,7 @@ export default {
         "gray-1-glow": "var(--gray-1-glow-shadow)",
         "gray-2-glow": "var(--gray-2-glow-shadow)",
         "dark-basic": "var(--dark-basic-shadow)",
-      }
+      },
     },
   },
   corePlugins: {

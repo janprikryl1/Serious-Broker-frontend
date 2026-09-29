@@ -11,7 +11,6 @@ body {
   font-size: 1.1rem;
   line-height: 1.625;
   font-family: 'Inter', sans-serif !important;
-  //margin-top: 56px;
 }
 
 h1,
@@ -226,8 +225,8 @@ button {
   .container {
     max-width: 90% !important;
     width: 90% !important;
-    padding-left: 0 !important;
-    padding-right: 0 !important;    
+    //padding-left: 0 !important;
+    //padding-right: 0 !important;
   }
   
   .title-serious-broker {
@@ -325,10 +324,10 @@ button {
   color: var(--black-color);
 }
 
-.red-on-primary-color-text {
-  color: var(--red-on-primary-color);
+.red-color-text {
+  color: var(--red-color);
 }
 
-.green-on-primary-color-text {
-  color: var(--green-on-primary-color);
+.green-color-text {
+  color: var(--green-color);
 }

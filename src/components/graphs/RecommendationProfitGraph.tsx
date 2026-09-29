@@ -6,7 +6,7 @@ import { RecommendationDetailSeasonEnum } from "../../utils/enums/Recommendation
 import {createDateFormatters, parseBackendUtc} from "../../utils/functions/dateFunctions.ts";
 
 /*
-* Recommendation graph
+* CryptocurrenciesList graph
 * URL: https://serious.broker/graphs/recommendation/detail/BTC
 * Shown on the top of the page
 * */

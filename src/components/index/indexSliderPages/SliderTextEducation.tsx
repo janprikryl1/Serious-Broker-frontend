@@ -9,13 +9,16 @@ export const SliderTextEducation: FC = () => {
     const isMobile = useMediaQuery('(max-width:768px)');
 
     return (
-        <>
+        <div data-aos="fade-up"
+             data-aos-duration="1200"
+             data-aos-easing="ease-out-cubic"
+        >
             <h1 className={`slide-text-title${isMobile ? '--mobile mb-4' : ''}`}>
                 {t("Kryptoměny srozumitelně")}
             </h1>
             <p className={`slide-text-tagline${isMobile ? '--mobile mb-4' : ''} tw-text-2xl`}>
                 {t("You don't have to be an expert to get started. Our easy-to-understand articles and guides will safely walk you through the world of cryptocurrencies step by step.")}
             </p>
-        </>
+        </div>
     );
 }

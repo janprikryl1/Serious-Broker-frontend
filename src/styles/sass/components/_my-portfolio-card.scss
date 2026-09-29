@@ -39,12 +39,6 @@
   transition: transform 0.28s ease, opacity 0.28s ease;
   position: relative;
 
-  .name {
-    font-size: 1.7rem;
-    padding-bottom: 0;
-    margin-bottom: 0;
-  }
-
   &:hover {
     outline: 0.5px solid var(--secondary-color) !important;
     //box-shadow:  0 0 15px 5px color-mix(in srgb, var(--secondary-color), transparent 90%) !important;
@@ -123,5 +117,5 @@
 }
 
 .my-portfolio-card__actions-item--danger {
-  color: var(--red-on-primary-color);
+  color: var(--red-color);
 }

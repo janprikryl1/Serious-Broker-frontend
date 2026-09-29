@@ -1,8 +1,14 @@
 .btn {
   border-radius: 5px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  padding: 0.6rem 0.6rem;
+  margin-top: 6px;
+  margin-bottom: 6px;
+  padding: 0.45rem 0.6rem;
+
+  @include breakpoint(sm) {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 0.6rem 0.6rem;
+  }
 
   &.btn-no-outline:focus,
   &.btn-no-outline:active,
@@ -19,18 +25,31 @@
   %of-hidden,
   %text-center,
   %text-semibold;
-  @include font-size(18px);
+  font-size: 0.875rem;
+  padding: 0.45rem 0.75rem;
+
+  @include breakpoint(sm) {
+    @include font-size(16px);
+    padding: 0.7rem 0.8rem;
+  }
+
+  @include breakpoint(md) {
+    @include font-size(18px);
+  }
+
+  @include breakpoint(lg) {
+    padding: 0.5rem 1rem;
+  }
 
   & {
     border: transparent;
     color: $black-color;
-    //padding: 0.75rem 1rem;
     text-decoration: none;
     font-weight: 500 !important;
   }
   @include add-prefix(transition, $transition);
   & {
-    line-height: 1;
+    line-height: 1.2;
     border-radius: 5px;
   }
 
@@ -56,19 +75,19 @@
     z-index: -10;
   }
 
-  @include breakpoint(sm) {
-    padding: 0.7rem 0.8rem;
-  }
-
-  @include breakpoint(lg) {
-    padding: 0.8rem 1.1rem;
-  }
-
   &--small {
-    padding: 0.75rem 1rem;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.8rem;
+
+    @include breakpoint(sm) {
+      padding: 0.75rem 1rem;
+      font-size: 0.875rem;
+    }
   }
 
   &--large {
+    padding: 0.75rem 1rem;
+
     @include breakpoint(sm) {
       padding: 0.95rem 1.25rem;
     }
@@ -110,7 +129,7 @@
     & {
       gap: 5px;
       color: $title-color;
-      padding: 0.53rem 1rem;
+      padding: 0.45rem 0.75rem;
     }
 
     @include breakpoint(sm) {
@@ -151,7 +170,7 @@
     %align-i-center;
     gap: 5px;
 
-    padding: 0.53rem 1rem;
+    padding: 0.45rem 0.75rem;
 
     @include breakpoint(sm) {
       padding: 0.8rem 1.25rem;
@@ -169,7 +188,11 @@
 
       i,
       svg {
-        @include font-size(20px);
+        @include font-size(18px);
+
+        @include breakpoint(sm) {
+          @include font-size(20px);
+        }
       }
 
 
@@ -249,8 +272,11 @@
   }
 
   &.search-btn {
-    @include font-size(20px);
-    & {
+    @include font-size(16px);
+    padding: 0.8rem 1.2rem;
+
+    @include breakpoint(sm) {
+      @include font-size(20px);
       padding: 1.2rem 1.85rem;
     }
   }
@@ -368,7 +394,11 @@
   border: none;
   padding: 0;
   margin: 0 auto;
-  font-size: 16px;
+  font-size: 14px;
+
+  @include breakpoint(sm) {
+    font-size: 16px;
+  }
 
   width: fit-content;
   cursor: pointer;

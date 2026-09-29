@@ -65,3 +65,13 @@ export const getAssetSpotKlines = async (assetLabel: string, numberOfYears?: num
         }
     })
 }
+
+/* Used in recommendations for index */
+export const getBinanceIndexAverageGraphData = async (indexLabel: string, numberOfWeeks: number) => {
+    return await axios.get(`${backendUrl}graphs/binance_index_assets/get_index_average_graph_data.php`, {
+        params: {
+            index_label: indexLabel,
+            number_of_weeks: numberOfWeeks
+        }
+    });
+};

@@ -1,12 +1,19 @@
 .asset-graph-currency-card-link {
-  width: auto;
-  flex: 0 0 auto;
+  width: 100%;
+  flex: 1 1 100%;
   color: inherit;
   display: block;
-  margin: 8px;
+  margin: 0 0 12px;
 }
 
-.asset-graph-currency-card {
+.asset-graph-currency-card-graph {
+  font-size: 15px;
+  text-align: center;
+  line-height: 1.4;
+}
+
+
+/*.asset-graph-currency-card {
   background-color: var(--cream-color);
   border-radius: 16px;
   margin: 0;
@@ -37,11 +44,6 @@
   font-weight: bold;
 }
 
-.asset-graph-currency-card-graph {
-  font-size: 15px;
-  text-align: center;
-  line-height: 1.4;
-}
 
 .asset-graph-currency-card-price-container {
   font-size: 15px;
@@ -52,18 +54,18 @@
 .asset-graph-currency-card-price-container-text {
   font-size: 20px;
   font-weight: bold;
-}
+}*/
 
 @media (max-width: 768px) {
   .asset-graph-currency-card-link {
-    margin: 8px 0;
+    margin: 0 0 12px;
   }
 
-  .asset-graph-currency-card {
+/*  .asset-graph-currency-card {
     font-size: 15px;
     margin: 0;
     padding: 15px;
     max-width: 90%;
     min-height: 100px;
-  }
+  }*/
 }

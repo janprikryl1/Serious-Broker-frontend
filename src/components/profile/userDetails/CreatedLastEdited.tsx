@@ -9,9 +9,9 @@ export const CreatedLastEdited = () => {
     if (userDetails !== undefined) {
         return (
             <>
-                <h3>{t("Created and last changes")}</h3>
-                <p>{t("Created")}: {toCzechDateFormat(userDetails.created)}</p>
-                <p>{t("Last changes at profile")}: {toCzechDateFormat(userDetails.changed)}</p>
+                <h3 className="tw-mb-4 tw-text-lg sm:tw-text-xl lg:tw-text-2xl">{t("Created and last changes")}</h3>
+                <p className="tw-mb-2 tw-text-sm sm:tw-text-base">{t("Created")}: {toCzechDateFormat(userDetails.created)}</p>
+                <p className="tw-text-sm sm:tw-text-base">{t("Last changes at profile")}: {toCzechDateFormat(userDetails.changed)}</p>
             </>
         );
     }

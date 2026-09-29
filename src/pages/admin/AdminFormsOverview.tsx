@@ -30,13 +30,12 @@ import {
     saveOrder
 } from "../../utils/api/formsService.ts";
 import { FormQuestionCard } from "../../components/formQuestions/FormQuestionCard.tsx";
-import {ToastColor, useToast} from "../../utils/providers/ToastProvider.tsx";
 import { Link } from "react-router-dom";
 import { adminURLS } from "../../utils/constants";
+import {showToast} from "../../components/toast/toastHelper.tsx";
 
 export const AdminFormsOverview: FC = () => {
     const { t } = useTranslation();
-    const { showToast } = useToast();
     const [questions, setQuestions] = useState<CategorizedQuestions>({
         "Jaký jsem investor": [],
         "Jak znám krypto": [],
@@ -90,7 +89,7 @@ export const AdminFormsOverview: FC = () => {
                 }))
             );
 
-            showToast(t("Order saved successfully"), ToastColor.green);
+            showToast.success(t("Order saved successfully"));
         }
     };
 

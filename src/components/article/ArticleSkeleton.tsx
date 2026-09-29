@@ -4,7 +4,7 @@ import "../../styles/sass/components/recommendation-details-skeleton.scss";
 
 export const ArticleSkeleton: FC = () => {
     return (
-        <div className="container blog-details__item-inner">
+        <div className="container">
             <Skeleton height={40} width="50%" className="recommendation-details-skeleton-mb-big" />
             <Skeleton height={20} width="80%" className="recommendation-details-skeleton-mb-small" />
             <Skeleton height={20} width="75%" className="recommendation-details-skeleton-mb-small" />

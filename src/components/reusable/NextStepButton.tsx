@@ -36,9 +36,9 @@ export const NextStepButton: FC<Props> = ({
         <div style={{ display: "flex", alignItems: "center" }}>
             {!isNext && <IoIosArrowBack style={{ marginRight: "10px", marginLeft: "-7px" }} />}
 
-            {buttonLabel || (isNext
+            {t(buttonLabel || (isNext
                 ? INVESTMENT_PLAN_STEPS[currentStep + 1]
-                : INVESTMENT_PLAN_STEPS[currentStep - 1])}
+                : INVESTMENT_PLAN_STEPS[currentStep - 1]))}
 
             {isNext && <IoIosArrowForward style={{ marginLeft: "10px", marginRight: "-7px" }} />}
         </div>
@@ -58,36 +58,39 @@ export const NextStepButton: FC<Props> = ({
         display: "flex",
         flexDirection: "column",
         alignItems: isNext ? "flex-end" : "flex-start",
-        marginTop: "35px"
+        width: "100%"
     };
 
+    const buttonColor = color ?? (isNext ? "var(--secondary-color)" : "transparent");
+
     const buttonStyle: React.CSSProperties = isNext
-        ? { marginTop: 0, marginBottom: 0, backgroundColor: color }
+        ? { marginTop: 0, marginBottom: 0, backgroundColor: buttonColor }
         : {
             marginTop: 0,
             marginBottom: 0,
             color: "var(--white-color)",
             backgroundColor: "transparent",
             outline: "1px solid var(--secondary-color)",
-            fontWeight: 400
+            fontWeight: 400,
         };
 
     return (
         <div style={alignmentStyle}>
             {showLabel && (
-                <p style={{ color: "var(--gray-2-color)", marginBottom: "5px" }}>
+                <p className="tw-text-xs sm:tw-text-sm" style={{ color: "var(--gray-2-color)", marginBottom: "5px" }}>
                     {buttonDescription ?? (isNext ? t("Next Step") : t("Previous Step"))}
                 </p>
             )}
 
             {link && (isNext ? currentStepFinished : true) ? (
                 <Link to={link} style={{ textDecoration: "none" }}>
-                    <Button style={buttonStyle}>
+                    <Button className="tw-w-full sm:tw-w-auto tw-text-sm sm:tw-text-base" style={buttonStyle}>
                         {renderButtonContent()}
                     </Button>
                 </Link>
             ) : (
                 <Button
+                    className="tw-w-full sm:tw-w-auto tw-text-sm sm:tw-text-base"
                     style={buttonStyle}
                     disabled={isNext && !currentStepFinished}
                     onClick={handleButtonClick}

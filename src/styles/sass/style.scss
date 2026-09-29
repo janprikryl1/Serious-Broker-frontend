@@ -61,7 +61,8 @@
 'components/collapsible-info-box',
 'components/recommendation',
 'components/tuning-BTFD',
-'components/dashboard';
+'components/dashboard',
+'components/watchlist-button';
 
 
 // 8. Themes
@@ -74,12 +75,3 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
-
-@layer base {
-  input:-webkit-autofill,
-  input:-webkit-autofill:hover,
-  input:-webkit-autofill:focus {
-    -webkit-box-shadow: 0 0 0 1000px #121212 inset !important;
-    -webkit-text-fill-color: #ffffff !important;
-  }
-}

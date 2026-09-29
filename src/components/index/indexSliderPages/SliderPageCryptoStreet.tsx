@@ -15,7 +15,7 @@ export const SliderPageCryptoStreet: FC = () => {
       className="shared-slide-layout--crypto-street"
     >
       <div
-        className="container-xxl h-100 d-flex flex-column"
+        className="container h-100 d-flex flex-column"
         style={{
           paddingTop: "30vh"
         }}

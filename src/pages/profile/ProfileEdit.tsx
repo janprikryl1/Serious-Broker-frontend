@@ -9,17 +9,17 @@ import {UploadChangesButton} from "../../components/profile/userDetails/UploadCh
 
 export const ProfileEdit:FC = () => {
     return (
-        <div className="padding-bottom service-details__item">
-            <div className="container service-details__item-inner">
+        <div className="padding-bottom  tw-pb-6">
+            <div className="container ">
                 <div
-                    className="service-details__content"
+                    className=" tw-px-0 sm:tw-px-2"
                     data-aos="fade-up"
                     data-aos-duration="900"
                 >
                     <UserDetailsProvider>
                         <div className="admin-container mt-4">
                             <div className="row justify-content">
-                                <div className="col-md-6">
+                                <div className="col-12 col-lg-8 col-xl-6">
                                     <PersonalDataEdit/>
                                     <LocationData/>
                                     <FirmData/>

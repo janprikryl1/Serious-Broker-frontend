@@ -45,7 +45,6 @@ export const ProfileSessionsList: FC = () => {
 
     return (
         <div className="padding-bottom">
-            <h2 className="asset-title">{t("Profile Sessions")}</h2>
             <p>{t("List of your active and past login sessions.")}</p>
             <Table sx={{
                 '& th, & td': {

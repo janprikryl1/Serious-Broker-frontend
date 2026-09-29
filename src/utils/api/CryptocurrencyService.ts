@@ -26,8 +26,8 @@ export const getAllCategories = async () => {
     return await axios.get(backendUrl + "/cryptocurrency_list/get_all_categories.php");
 }
 
-export const getCryptocurrencyById = async (id: string) => {
-    return await axios.get<CryptoCurrencyDetailType>(backendUrl + `cryptocurrency_list/get_cryptocurrency_by_id.php?id=${id}`);
+export const getCryptocurrencyById = async (id: string, name: string) => {
+    return await axios.get<CryptoCurrencyDetailType>(backendUrl + `cryptocurrency_list/get_cryptocurrency_by_id.php?id=${id}&name=${name}`);
 }
 
 export const getSearchCryptocurrencies = async (searchValue: string, page: number, pageSize: number) => {

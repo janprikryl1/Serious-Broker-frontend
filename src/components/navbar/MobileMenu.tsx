@@ -3,7 +3,6 @@ import {Link} from "react-router-dom";
 import {useTranslation} from "react-i18next";
 import {useUserContext} from "../../utils/providers/providerUser.tsx";
 import {notRegisteredUserNavbarURLs, registeredUserNavbarURLs} from "../../utils/constants";
-import {NavDropdown} from "react-bootstrap";
 import {AccordionToggleIcon} from "../reusable/AccordionToggleIcon.tsx";
 import {SignUpIcon} from "./headerIcons/SignUpIcon.tsx";
 import {SignInIcon} from "./headerIcons/SignInIcon.tsx";
@@ -48,8 +47,8 @@ export const MobileMenu: FC<Props> = ({ toggleMobileMenu, isOpen }) => {
           </div>
 
           {isMobile && (
-            <div className={"d-flex justify-content-between w-100"}>
-              {t("Language")}
+            <div className={"tw-flex tw-justify-between tw-items-center tw-w-full tw-text-sm sm:tw-text-base tw-text-stone-300"}>
+              <span>{t("Language")}</span>
               <div className="">
                 <ChangeLanguageIcon />
               </div>
@@ -69,10 +68,10 @@ export const MobileMenu: FC<Props> = ({ toggleMobileMenu, isOpen }) => {
             return (
               <li className="mobile-dropdown-item" key={key}>
                 <div
-                  className={`dropdown-trigger ${isDropdownActive ? "active-yellow" : ""}`}
+                  className={`dropdown-trigger !tw-text-base sm:!tw-text-lg md:!tw-text-xl ${isDropdownActive ? "active-yellow" : ""}`}
                   onClick={() => handleDropdownClick(key)}
                 >
-                  {t(item.title)}
+                  <span>{t(item.title)}</span>
                   <AccordionToggleIcon isOpen={isOpen} size={18} />
                 </div>
 
@@ -83,7 +82,7 @@ export const MobileMenu: FC<Props> = ({ toggleMobileMenu, isOpen }) => {
                       to={item.subLinks[subKey].link}
                       key={subKey}
                       onClick={toggleMobileMenu}
-                      className={`submenu-link ${isActive(item.subLinks[subKey].link) ? "active-yellow" : ""}`}
+                      className={`submenu-link !tw-text-sm sm:!tw-text-base md:!tw-text-lg ${isActive(item.subLinks[subKey].link) ? "active-yellow" : ""}`}
                     >
                       {t(item.subLinks[subKey].title)}
                     </Link>
@@ -98,7 +97,7 @@ export const MobileMenu: FC<Props> = ({ toggleMobileMenu, isOpen }) => {
               <Link
                 to={item.link}
                 onClick={toggleMobileMenu}
-                className={`link-underline-none ${isActive(item.link) ? "active-yellow" : ""}`}
+                className={`link-underline-none !tw-text-base sm:!tw-text-lg md:!tw-text-xl ${isActive(item.link) ? "active-yellow" : ""}`}
               >
                 {t(item.title)}
               </Link>

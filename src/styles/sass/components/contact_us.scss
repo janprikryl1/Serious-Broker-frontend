@@ -1,4 +1,4 @@
-.contact-input {
+/*.contact-input {
   background-color: rgba(218, 205, 168, 0.7);
   color: #4a463a;
   border-radius: 3px;
@@ -7,6 +7,33 @@
   margin-bottom: 30px;
   width: 100%;
   border: 1px solid #4a463a;
+}*/
+
+.contact-input {
+  background-color: color-mix(in srgb, var(--quaternary-color) 2%, transparent);
+  border-radius: 5px !important;
+  outline: 1px solid var(--gray-3-color);
+  border: none;
+  padding: 7px 12px 7px 12px;
+  color: var(--black-color);
+  width: 100%;
+  transition: all 0.3s ease;
+
+  &::placeholder {
+    color: var(--gray-1-color);
+    opacity: 1;
+  }
+
+  &:focus {
+    outline: var(--secondary-color) solid 1px;
+    box-shadow: var(--golden-glow-shadow);
+    background-color: color-mix(in srgb, var(--quaternary-color) 5%, transparent);
+  }
+
+  &:hover {
+    outline: var(--secondary-color) solid 1px;
+    box-shadow: var(--golden-glow-shadow);
+  }
 }
 
 .contact-button-wrapper {

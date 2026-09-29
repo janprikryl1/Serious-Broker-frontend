@@ -20,9 +20,9 @@ export const SliderPage: FC = () => {
             imageUrl={CryptoStreet}
             backgroundSize="cover"
             backgroundPosition="center center"
-            className="shared-slide-layout--crypto-street tw-h-[88vh]"
+            className="shared-slide-layout--crypto-street tw-h-[60vh] sm:tw-h-[72vh] lg:tw-h-[88vh]"
         >
-            <div className="container-xxl tw-relative tw-mt-[30vh] tw-h-full">
+            <div className="container tw-relative tw-mt-[18vh] sm:tw-mt-[22vh] lg:tw-mt-[30vh] tw-h-full tw-px-4 sm:tw-px-6">
                 <Swiper
                     modules={[Pagination, Autoplay, EffectFade]}
                     spaceBetween={0}

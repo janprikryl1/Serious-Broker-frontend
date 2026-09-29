@@ -1,14 +1,11 @@
 import {FC, useEffect, useState} from "react";
-import { NavLink } from "react-router-dom";
-import { useTranslation } from "react-i18next";
-import { Sidebar as ProSidebar, Menu, MenuItem } from "react-pro-sidebar";
-import { CiLogout } from "react-icons/ci";
-import {FaBars, FaRegBookmark, FaUserEdit} from "react-icons/fa";
-import { FaTrafficLight } from "react-icons/fa6";
-import {MdDevicesOther, MdOutlineSubscriptions} from "react-icons/md";
-import { GrAchievement } from "react-icons/gr";
-import { RiCoinsLine } from "react-icons/ri";
-import { useUserContext } from "../../utils/providers/providerUser";
+import {NavLink} from "react-router-dom";
+import {useTranslation} from "react-i18next";
+import {Menu, MenuItem, Sidebar as ProSidebar} from "react-pro-sidebar";
+import {FaBars, FaRegBookmark} from "react-icons/fa";
+import {FaTrafficLight} from "react-icons/fa6";
+import {IoFileTrayOutline} from "react-icons/io5";
+import {useUserContext} from "../../utils/providers/providerUser";
 import {routes} from "../../utils/constants";
 import {AiOutlineFundProjectionScreen} from "react-icons/ai";
 import {IoIosArrowBack} from "react-icons/io";
@@ -68,7 +65,7 @@ export const ProfileSidebar: FC = () => {
                     >
                         <b>{!collapsed ? t("Investment Profile") : ""}</b>
                     </MenuItem>
-                    <MenuItem icon={<RiCoinsLine />} component={<NavLink to={routes.profile.myPortfolio} />} className="sidebar-item">
+                    <MenuItem icon={<IoFileTrayOutline />} component={<NavLink to={routes.profile.myPortfolio} />} className="sidebar-item">
                         {t("Portfolios")}
                     </MenuItem>
                     <MenuItem icon={<AiOutlineFundProjectionScreen />} component={<NavLink to={routes.profile.myInvestmentPlans} />} className="sidebar-item">

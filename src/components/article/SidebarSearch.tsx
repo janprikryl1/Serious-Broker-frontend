@@ -2,6 +2,8 @@ import {CSSProperties, FC, FormEvent, useState} from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import {routes} from "../../utils/constants";
+import {SearchBar} from "../reusable/SearchBar.tsx";
+import {GlassCard} from "../reusable/GlassCard.tsx";
 
 type Props = {
     param?: string;
@@ -22,25 +24,15 @@ export const SidebarSearch: FC<Props> = ({ param = "", showTitle = true, style }
     };
 
     return (
-        <div className="sidebar__search" style={style}>
-            {showTitle && <h6 className="mb-10">{t("Search Here")}</h6>}
-            <div className="sidebar__search-body">
-                <form onSubmit={handleSearch}>
-                    <div className="input">
-                        <input
-                            type="text"
-                            className="form-control"
-                            style={{borderRadius: 4}}
-                            placeholder={t("Search articles")}
-                            value={searchText}
-                            onChange={(e) => setSearchText(e.target.value)}
-                        />
-                        <button type="submit" className="search-btn">
-                            <i className="fa-solid fa-magnifying-glass"></i>
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
+        <GlassCard bgColor="var(--secondary-color)" opacity={0.1}>
+            {showTitle && <h6 className="mb-10">{t("Search articles")}</h6>}
+            {/*<SearchBar value={searchText} onChange={(e) => setSearchText(e.target.value)} />*/}
+            <form onSubmit={handleSearch}>
+                <SearchBar
+                  value={searchText}
+                  onChange={(e) => setSearchText(e.target.value)}
+                />
+            </form>
+        </GlassCard>
     );
 };

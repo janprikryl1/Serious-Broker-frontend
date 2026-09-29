@@ -3,9 +3,9 @@ import {useTranslation} from "react-i18next";
 import {useLocation, useNavigate, useParams} from "react-router-dom";
 import {getInvestmentPlan, saveInvestmentPlan} from "../api/investmentPlanService.ts";
 import {InvestmentPlanType} from "../types/investmentPlan/InvestmentPlanType.ts";
-import {InvestmentFrequency} from "../../pages/profile/investment-plan/RecurringInvestment.tsx";
+import {InvestmentFrequency} from "../../pages/profile/investmentPlan/RecurringInvestment.tsx";
 import {routes} from "../constants";
-import {ToastColor, useToast} from "./ToastProvider.tsx";
+import {showToast} from "../../components/toast/toastHelper.tsx";
 
 type Props = {
     children: ReactNode;
@@ -27,7 +27,7 @@ type InvestmentPlanProps = {
     day: number | null;
     setDay: Dispatch<SetStateAction<number | null>>;
     hour: number | null;
-    setHour: Dispatch<SetStateAction<number>>;
+    setHour: Dispatch<SetStateAction<number | null>>;
     startDate: string | null;
     setStartDate: Dispatch<SetStateAction<string | null>>;
     investmentAmount: number | null;
@@ -49,8 +49,6 @@ export const InvestmentPlanProvider = ({ children }: Props) => {
     const { t } = useTranslation();
     const navigate = useNavigate();
     const [isLoading, setIsLoading] = useState(false);
-    const { showToast } = useToast();
-
     const [name, setName] = useState<string>("");
     const [description, setDescription] = useState<string>("");
     const [isCustomPortfolio, setIsCustomPortfolio] = useState<boolean>(false);
@@ -62,7 +60,7 @@ export const InvestmentPlanProvider = ({ children }: Props) => {
     const [sellTrafficLightId, setSellTrafficLightId] = useState<number | null>(null);
     const [frequency, setFrequency] = useState<InvestmentFrequency>(InvestmentFrequency.week); // alebo InvestmentFrequency.week
     const [day, setDay] = useState<number | null>(null);
-    const [hour, setHour] = useState<number>(0);
+    const [hour, setHour] = useState<number | null>(0);
     const [startDate, setStartDate] = useState<string | null>(null);
     const location = useLocation();
 
@@ -84,7 +82,10 @@ export const InvestmentPlanProvider = ({ children }: Props) => {
                 setCurrency(plan.currency);
                 setBuyTrafficLightId(plan.buy_traffic_light_id ?? null);
                 setSellTrafficLightId(plan.sell_traffic_light_id ?? null);
-                setStartDate((plan as any).start_date ?? null);
+                setFrequency((plan.frequency as InvestmentFrequency) ?? InvestmentFrequency.week);
+                setDay(plan.day_of_period ?? null);
+                setHour(plan.investment_hour ?? 0);
+                setStartDate(plan.start_date ?? null);
             } catch (error) {
                 console.error("Error fetching investment plan:", error);
             } finally {
@@ -99,31 +100,32 @@ export const InvestmentPlanProvider = ({ children }: Props) => {
     useEffect(() => {
         const isIntroPage = location.pathname.includes(routes.profile.newInvestmentPlanIntro);
         const isNamePage = location.pathname.includes(routes.profile.newInvestmentPlanName);
+        const isEditPage = location.pathname.includes("/profile/edit_investment_plan/");
 
-        if (!isIntroPage && !isNamePage && !name) {
+        if (!isIntroPage && !isNamePage && !isEditPage && !name) {
             navigate(routes.profile.newInvestmentPlanIntro, { replace: true });
         }
     }, [location.pathname, name, navigate]);
 
     const saveChanges = async () => {
         if (!name.trim()) {
-            showToast(t('Name is required'), ToastColor.red);
+            showToast.error(t('Name is required'));
             return;
         }
         if (!investmentAmount || investmentAmount <= 0) {
-            showToast(t('Invalid investment amount'), ToastColor.red);
+            showToast.error(t('Invalid investment amount'));
             return;
         }
         if (isCustomPortfolio && !userPortfolioId) {
-            showToast(t('Please select a portfolio'), ToastColor.red);
+            showToast.error(t('Please select a portfolio'));
             return;
         }
         if (!isCustomPortfolio && !binanceAssetId) {
-            showToast(t('Please select an asset'), ToastColor.red);
+            showToast.error(t('Please select an asset'));
             return;
         }
 
-        showToast(t('Saving investment plan...'), ToastColor.gold);
+        showToast.info(t('Saving investment plan...'));
 
         try {
             setIsLoading(true);
@@ -137,7 +139,7 @@ export const InvestmentPlanProvider = ({ children }: Props) => {
                 binance_asset_id: !isCustomPortfolio ? binanceAssetId : null,
                 frequency: frequency,
                 day_of_period: day,
-                investment_hour: hour,
+                investment_hour: hour ?? 0,
                 investment_amount: investmentAmount,
                 start_date: startDate,
                 currency: currency,
@@ -149,14 +151,14 @@ export const InvestmentPlanProvider = ({ children }: Props) => {
 
             await saveInvestmentPlan(planData);
 
-            showToast(t('Investment plan saved successfully'), ToastColor.green);
+            showToast.success(t('Investment plan saved successfully'));
 
             if (!id) {
                 navigate("/profile/my_investment_plans");
             }
         } catch (e) {
             console.error('Error saving investment plan', e);
-            showToast(t('Error while saving plan, please try again'), ToastColor.red, 5000);
+            showToast.error(t('Error while saving plan, please try again'), 5000);
         } finally {
             setIsLoading(false);
         }
@@ -183,7 +185,7 @@ export const InvestmentPlanProvider = ({ children }: Props) => {
     return (
         <InvestmentPlanContext.Provider value={value}>{children}</InvestmentPlanContext.Provider>
     );
-}
+};
 
 export const useInvestmentPlanContext = () => {
     const context = useContext(InvestmentPlanContext);

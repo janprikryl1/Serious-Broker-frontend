@@ -2,11 +2,37 @@
   background-color: var(--secondary-color) !important;
   border: none !important;
   color: var(--black-color) !important;
-  border-radius: 2px !important;
+  border-radius: 5px !important;
+  padding-top: 13px !important;
+  padding-bottom: 13px !important;
 
   &:hover {
     color: var(--black-color) !important;
     box-shadow: var(--golden-glow-shadow);
+  }
+
+  &--mobile {
+    background: transparent !important;
+    border: none !important;
+    color: var(--white-color) !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    border-radius: 0 !important;
+    cursor: pointer;
+
+    &::after {
+      display: none !important;
+      content: none !important;
+    }
+
+    &:hover,
+    &:focus,
+    &:active,
+    &.show {
+      background: transparent !important;
+      color: var(--secondary-color) !important;
+      box-shadow: none !important;
+    }
   }
 }
 

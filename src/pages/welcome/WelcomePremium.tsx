@@ -1,6 +1,6 @@
 import {FC} from "react";
 import { FiAward } from 'react-icons/fi';
-import Logo from "../../utils/icons/logo/SB_only.svg";
+import Logo from "../../utils/icons/logo/SB-old-sb-only.svg";
 import {SplitText} from "../../components/reusable/SplitText.tsx";
 import {routes} from "../../utils/constants";
 import {LuCrown} from "react-icons/lu";

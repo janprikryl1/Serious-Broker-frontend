@@ -1,8 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import PropTypes from 'prop-types';
-import { getMyPortfolioDetailsGraph } from '../../../utils/api/myPortfolioService.ts';
-import { AreaPlot, ChartContainer, ChartsTooltip, LinePlot } from '@mui/x-charts';
+import { AreaPlot, ChartsTooltip, LinePlot, ResponsiveChartContainer } from '@mui/x-charts';
 import { GraphDataSkeleton } from '../../graphs/asset/GraphDataSkeleton.tsx';
 import { useTranslation } from 'react-i18next';
 import { FiEdit3 } from 'react-icons/fi';
@@ -10,19 +8,20 @@ import { LuTrash } from 'react-icons/lu';
 import { SlOptions } from 'react-icons/sl';
 import { LuTrendingDown, LuTrendingUp } from 'react-icons/lu';
 import { OutlineContainer } from '../../reusable/OutlineContainer.tsx';
-import {MyPortfolioType} from "../../../utils/types/myPortfolio/MyPortfolioType.ts";
-import {PortfolioGraphData} from "../../../utils/types/asset/MyPortfolioType.ts";
-import {Assets} from "../../../utils/types/asset/AssetDetailType.ts";
+import { MyPortfolioType } from "../../../utils/types/myPortfolio/MyPortfolioType.ts";
+import { PortfolioGraphData } from "../../../utils/types/asset/MyPortfolioType.ts";
+import { Assets } from "../../../utils/types/asset/AssetDetailType.ts";
+import { CHART_COLORS } from "../../../utils/constants/customColors.ts";
 
 type Props = {
   data: MyPortfolioType;
-  onDelete: () => void;
-  isRemoving: boolean;
+  onDelete: (id: number) => void;
+  isRemoving?: boolean;
   isLoading: boolean;
-  graphData: PortfolioGraphData;
-}
+  graphData?: PortfolioGraphData;
+};
 
-export const MyPortfolioCard = ({ data, onDelete, isRemoving = false, isLoading, graphData }) => {
+export const MyPortfolioCard = ({ data, onDelete, isRemoving = false, isLoading, graphData }: Props) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const [assetsCount, setAssetsCount] = useState(0);
@@ -32,7 +31,7 @@ export const MyPortfolioCard = ({ data, onDelete, isRemoving = false, isLoading,
   const profitEur = graphData?.profitEur ?? Number.NaN;
   const profitPct = graphData?.profitPct ?? Number.NaN;
   const chartValues = graphData?.chartValues ?? [0];
-  const hasChartData = !!graphData?.chartValues && graphData.chartValues.length > 0;
+  const hasChartData = !isLoading && !!graphData?.chartValues && graphData.chartValues.length > 0;
 
   const minVal = Math.min(...chartValues);
   const maxVal = Math.max(...chartValues);
@@ -57,12 +56,11 @@ export const MyPortfolioCard = ({ data, onDelete, isRemoving = false, isLoading,
 
     const activeAssetsCount = assetsArray.filter((assetDetail) => assetDetail.status).length;
     setAssetsCount(activeAssetsCount);
-
   }, [data.asset]);
 
   const profitClassName = useMemo(() => {
     if (!Number.isFinite(profitEur)) return 'gray-2-color-text';
-    return profitEur >= 0 ? 'green-on-primary-color-text' : 'red-on-primary-color-text';
+    return profitEur >= 0 ? 'green-color-text' : 'red-color-text';
   }, [profitEur]);
 
   const isPositiveTrend = useMemo(() => {
@@ -70,7 +68,7 @@ export const MyPortfolioCard = ({ data, onDelete, isRemoving = false, isLoading,
     return chartValues[chartValues.length - 1] >= chartValues[0];
   }, [chartValues]);
 
-  const strokeColor = isPositiveTrend ? 'var(--green-on-primary-color)' : 'var(--red-on-primary-color)';
+  const strokeColor = isPositiveTrend ? CHART_COLORS.green : CHART_COLORS.red;
   const gradientId = useMemo(() => `portfolio-area-gradient-${data.id ?? 'new'}`, [data.id]);
 
   return (
@@ -127,8 +125,8 @@ export const MyPortfolioCard = ({ data, onDelete, isRemoving = false, isLoading,
       </div>
 
       <div>
-        <div className={'name'}>{data.name}</div>
-        <div style={{ fontSize: '1.0rem' }} className="gray-5-color-text">{assetsCount} {t('Active holdings')}</div>
+        <div className="tw-text-lg sm:tw-text-xl md:tw-text-2xl tw-font-bold">{data.name}</div>
+        <div className="gray-5-color-text tw-text-xs sm:tw-text-sm">{assetsCount} {t('Active holdings')}</div>
 
         <div className="my-portfolio-card__graph-wrapper">
           {isLoading ? (
@@ -138,7 +136,7 @@ export const MyPortfolioCard = ({ data, onDelete, isRemoving = false, isLoading,
               style={{ width: '100%', height: '100%' }}
             />
           ) : hasChartData ? (
-            <ChartContainer
+            <ResponsiveChartContainer
               series={[
                 {
                   id: 'portfolio',
@@ -149,74 +147,77 @@ export const MyPortfolioCard = ({ data, onDelete, isRemoving = false, isLoading,
                   baseline: minVal - padding,
                   showMark: false,
                   curve: 'monotoneX',
-                  valueFormatter: (value) => value == null ? '' : `${value.toFixed(2)} EUR`
-                }
+                  valueFormatter: (value) => (value == null ? '' : `${value.toFixed(2)} EUR`),
+                },
               ]}
               xAxis={[
                 {
                   scaleType: 'point',
                   data: chartValues.map((_, index) => index),
-                  position: 'none'
-                }
+                  disableLine: true,
+                  disableTicks: true,
+                },
               ]}
               yAxis={[
                 {
-                  position: 'none',
                   min: minVal - padding,
-                  max: maxVal + padding
-                }
+                  max: maxVal + padding,
+                  disableLine: true,
+                  disableTicks: true,
+                },
               ]}
               height={96}
               margin={{ left: 0, right: 0, top: 0, bottom: 0 }}
               sx={{
                 width: '100%',
+                height: '100%',
                 '& .MuiChartsAxis-root': { display: 'none' },
                 '& .MuiLineElement-root': { strokeWidth: 1.8 },
                 '& .MuiAreaElement-series-portfolio': {
                   fill: `url(#${gradientId})`,
-                  fillOpacity: 1
-                }
+                  fillOpacity: 1,
+                },
               }}
             >
               <defs>
                 <linearGradient id={gradientId} x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stopColor={strokeColor} stopOpacity={0.3}/>
-                  <stop offset="100%" stopColor={strokeColor} stopOpacity={0}/>
+                  <stop offset="0%" stopColor={strokeColor} stopOpacity={0.3} />
+                  <stop offset="100%" stopColor={strokeColor} stopOpacity={0} />
                 </linearGradient>
               </defs>
               <AreaPlot />
               <LinePlot />
               <ChartsTooltip trigger="axis" />
-            </ChartContainer>
+            </ResponsiveChartContainer>
           ) : (
             <div className="no-data-wrapper">
-              <div className="gray-2-color-text">{t('No data')}</div>
+              <div className="gray-2-color-text tw-text-xs sm:tw-text-sm">{t('No data')}</div>
             </div>
           )}
         </div>
       </div>
 
-      <div className="mt-4" style={{ minHeight: '60px' }}>
+      <div className="mt-3 sm:mt-4" style={{ minHeight: '52px' }}>
         {Number.isFinite(profitEur) ? (
           <div className="flex flex-column">
-            <div style={{ fontSize: '1.1rem' }}>
+            <div className="tw-text-sm sm:tw-text-base d-flex align-items-center flex-wrap">
               {profitPct > 0 ? (
-                <LuTrendingUp style={{ marginRight: '10px', color: 'var(--green-on-primary-color)', display: 'inline-block' }}/>
+                <LuTrendingUp style={{ marginRight: '8px', color: 'var(--green-color)', display: 'inline-block' }} />
               ) : (
-                <LuTrendingDown style={{ marginRight: '10px', color: 'var(--red-on-primary-color)', display: 'inline-block' }}/>
+                <LuTrendingDown style={{ marginRight: '8px', color: 'var(--red-color)', display: 'inline-block' }} />
               )}
 
-              <span className={profitClassName} style={{ fontSize: '22px' }}>
+              <span className={`${profitClassName} tw-text-base sm:tw-text-lg md:tw-text-xl tw-font-semibold`}>
                 {(profitEur >= 0 ? '+' : '') + profitEur.toFixed(2) + ' EUR'}
               </span>
 
               {Number.isFinite(profitPct) && (
-                <span className="gray-5-color-text" style={{ marginLeft: '5px' }}>
+                <span className="gray-5-color-text tw-text-xs sm:tw-text-sm" style={{ marginLeft: '5px' }}>
                   {' (' + (profitEur >= 0 ? '+' : '') + profitPct.toFixed(2) + ' %)'}
                 </span>
               )}
             </div>
-            <div className="small gray-2-color-text">{t('Monthly return')}</div>
+            <div className="gray-2-color-text tw-text-xs sm:tw-text-sm mt-1">{t('Monthly return')}</div>
           </div>
         ) : (
           ''
@@ -224,19 +225,4 @@ export const MyPortfolioCard = ({ data, onDelete, isRemoving = false, isLoading,
       </div>
     </OutlineContainer>
   );
-};
-
-MyPortfolioCard.propTypes = {
-  data: PropTypes.shape({
-    id: PropTypes.number,
-    name: PropTypes.string.isRequired,
-    description: PropTypes.string
-  }).isRequired,
-  onDelete: PropTypes.func.isRequired,
-  isRemoving: PropTypes.bool,
-  graphData: PropTypes.shape({
-    chartValues: PropTypes.arrayOf(PropTypes.number),
-    profitEur: PropTypes.number,
-    profitPct: PropTypes.number
-  })
 };

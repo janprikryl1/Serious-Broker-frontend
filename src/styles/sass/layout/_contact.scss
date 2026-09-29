@@ -1,4 +1,4 @@
- .contact {
+ /*.contact {
      @extend %p-rel,
      %of-hidden;
 
@@ -54,15 +54,9 @@
                  @extend %mb-0;
              }
          }
-     }
+     }*/
 
-     &__form {
-         textarea {
-             min-height: 250px;
-         }
-     }
-
-     &__shape {
+    /* &__shape {
          &-item {
              @extend %p-abs;
 
@@ -199,5 +193,5 @@
                  }
              }
          }
-     }
- }
+     }*/
+ //}

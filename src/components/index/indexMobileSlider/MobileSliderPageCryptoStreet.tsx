@@ -1,5 +1,5 @@
 import { FC } from "react";
-import Logo from "../../../utils/icons/logo/SB-handwritten-white.svg";
+import Logo from "../../../utils/icons/logo/SB-logo-handwritten-white.svg";
 import { useTranslation } from "react-i18next";
 import CryptoStreet from "../../../utils/icons/index/crypto_street.png";
 import {SharedSlideLayout} from "../indexSliderPages/SharedSlideLayout.tsx";

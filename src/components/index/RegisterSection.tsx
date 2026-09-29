@@ -20,19 +20,24 @@ export const RegisterSection: FC = () => {
 
     return (
         <div>
-            <div className="container tw-py-16 tw-bg-quintary">
-                <h6 className="tw-text-secondary tw-font-normal tw-text-base tw-tracking-normal tw-pb-0 tw-pt-12">{t("REGISTER")}</h6>
-                <h2 className="mb-5 index-section-head-title">{t("Get Started Today")}</h2>
+            <div className="container tw-bg-quintary tw-px-4 tw-py-10 sm:tw-px-6 sm:tw-py-12 lg:tw-py-16">
+                <h6 className="tw-pb-0 tw-pt-8 tw-text-xs tw-font-normal tw-tracking-normal tw-text-secondary sm:tw-text-base lg:tw-pt-12">{t("REGISTER")}</h6>
+                <h2 className="tw-mb-5 tw-text-2xl index-section-head-title sm:tw-text-3xl md:tw-text-5xl lg:tw-text-6xl">{t("Get Started Today")}</h2>
 
-                <div data-aos="fade-up" data-aos-duration="1000" className="tw-mb-4">
+                <div className="tw-mb-4"
+                     data-aos="fade-up"
+                     data-aos-duration="1200"
+                     data-aos-offset="300"
+                     data-aos-easing="ease-out-cubic"
+                >
                     <GlassCard bgColor="var(--secondary-color)" opacity={0.2}>
-                        <div className="tw-grid tw-grid-cols-1 xl:tw-grid-cols-12 tw-items-center tw-pt-4 tw-pb-4 tw-gap-10 xl:tw-gap-0 tw-w-full">
-                            <div className="tw-col-span-1 xl:tw-col-span-5 xxl:tw-col-span-6 tw-flex tw-items-center tw-justify-center">
-                                <div className="tw-flex tw-m-0 tw-p-0 tw-max-w-none xl:tw-max-w-[400px] tw-text-center xl:tw-text-start tw-text-4xl tw-font-bold tw-text-white">
+                        <div className="tw-grid tw-w-full tw-grid-cols-1 tw-items-center tw-gap-6 tw-py-5 sm:tw-gap-8 sm:tw-py-6 xl:tw-grid-cols-12 xl:tw-gap-0 xl:tw-py-4">
+                            <div className="tw-flex tw-items-center tw-justify-center xl:tw-col-span-5 xl:tw-col-start-1 xxl:tw-col-span-6">
+                                <div className="tw-m-0 tw-max-w-none tw-p-0 tw-text-center tw-text-2xl tw-font-bold tw-text-white sm:tw-text-3xl xl:tw-max-w-[400px] xl:tw-text-start xl:tw-text-4xl">
                                     {t("Register and take control of your finances")}
                                 </div>
                             </div>
-                            <div className="tw-col-span-1 xl:tw-col-span-7 xxl:tw-col-span-6 sm:tw-h-12 tw-flex tw-flex-col tw-gap-5 sm:tw-gap-0 sm:tw-flex-row tw-items-stretch tw-justify-center">
+                            <div className="tw-flex tw-flex-col tw-items-stretch tw-justify-center tw-gap-4 tw-mx-2 sm:tw-h-12 sm:tw-flex-row sm:tw-gap-0 xl:tw-col-span-7 xxl:tw-col-span-6">
                                 <input
                                     className="form-control--light tw-h-12 sm:tw-h-full sm:tw-shadow-[inset_-10px_0_12px_0px_rgba(0,0,0,0.2)]"
                                     type="email"
@@ -42,7 +47,7 @@ export const RegisterSection: FC = () => {
                                     onKeyDown={(e) => e.key === "Enter" && handleRegister()}
                                 />
                                 <Button
-                                    className="tw-h-12 sm:tw-h-full tw-leading-normal sm:tw-leading-none tw-m-0 sm:tw--ml-2"
+                                    className="tw-h-12 tw-m-0 tw-leading-normal sm:tw-h-full sm:tw--ml-2 sm:tw-leading-none"
                                     onClick={handleRegister}
                                 >
                                     {t("Register")}

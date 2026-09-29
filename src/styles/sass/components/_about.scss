@@ -1,7 +1,7 @@
 .about {
     @extend %p-rel, %of-hidden;
 
-    &__thumb {
+    /*&__thumb {
         &-image {
             @extend %p-rel;
 
@@ -21,12 +21,5 @@
                 z-index: -1;
             }
         }
-    }
-}
-
-.about-team-member {
-    display: flex;
-    gap: 40px;
-    flex-wrap: wrap;
-    justify-content: center;
+    }*/
 }

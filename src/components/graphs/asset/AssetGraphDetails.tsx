@@ -22,36 +22,27 @@ export const AssetGraphDetails: FC<Props> = ({ asset, selectedPeriod, currency, 
     const {profitType, setProfitType, renderProfitDetails} = useRenderProfitDetails(selectedPeriod, asset);
 
     return (
-      <OutlineContainer style={{margin: 0, padding: "20px"}}>
-        <div className={"mb-2"} style={{fontSize: "25px"}}>{t("Statistics")}</div>
+      <OutlineContainer className="tw-h-full" style={{margin: 0, padding: "16px"}}>
+        <div className="tw-mb-2 tw-text-xl tw-font-semibold sm:tw-text-2xl">{t("Statistics")}</div>
+        <p className="tw-mb-3 tw-text-xs tw-text-stone-400 sm:tw-text-sm">{t("Last update: ")} {toCzechDate(asset.last_update)}</p>
 
-        {/*<div className="service-details__content mb-5 text-light" style={{*/}
-        {/*    border: "0.5px solid #3e3a32",*/}
-        {/*    borderRadius: "16px",*/}
-        {/*    padding: "20px",*/}
-        {/*    height: "90%"*/}
-        {/*}}>*/}
-        {/*    <h5>{t("Statistics")}</h5>*/}
-        {/*    <p style={{fontSize: "15px", marginBottom: "5px"}}>{t("Last update: ")} {toCzechDate(asset.last_update)}</p>*/}
-
-            <div className="d-flex gap-3">
+            <div className="tw-flex tw-flex-col tw-gap-3 sm:tw-flex-row sm:tw-items-center">
                 <select
                     id="profitType"
                     className="form-select select-box-outline"
                     value={profitType}
                     onChange={(e) => setProfitType(e.target.value)}
-                    style={{width: "180px"}}
+                    style={{width: "100%", maxWidth: "220px", fontSize: "14px"}}
                 >
                     <option value="Profit">{t("Profit")}</option>
                     <option value="Sell Profit">{t("Sell profit")}</option>
                 </select>
             </div>
 
-            <div className="mt-4" style={{fontSize: "18px"}}>
+            <div className="tw-mt-4">
                 {renderProfitDetails()}
             </div>
             {showPriceDetails && <AssetGraphPriceDetails currency={currency} currencyValue={currencyValue} />}
-        {/*</div>*/}
       </OutlineContainer>
     );
 };

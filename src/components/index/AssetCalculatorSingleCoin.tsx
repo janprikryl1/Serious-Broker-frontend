@@ -81,11 +81,10 @@ export const AssetCalculatorSingleCoin: FC = () => {
 
     return (
         <div className="calculator-form-container">
-            {/* 1) Výběr coinu */}
             <div className="form-step">
                 <label className="calculator-label">{t("Choose asset name:")}</label>
-                <div className="select-wrapper" style={{marginBottom:2}}>
-                    <select value={selectedCoin} onChange={(e) => setSelectedCoin(e.target.value)}>
+                <div className="select-wrapper tw-mb-1">
+                    <select value={selectedCoin} onChange={(e) => setSelectedCoin(e.target.value)} className="calculator-select">
                         <option value="" disabled>{t("Start typing or select...")}</option>
                         {assetCoins.map((coin) => (
                             <option key={coin.asset_label} value={coin.asset_label}>{coin.asset_label}</option>
@@ -94,10 +93,9 @@ export const AssetCalculatorSingleCoin: FC = () => {
                 </div>
             </div>
 
-            {/* 2) Částka + měna */}
             <div className="form-step">
                 <label className="calculator-label mt-2">{t("Invested amount")}</label>
-                <div className="amount-group" style={{marginBottom:20}}>
+                <div className="amount-group">
                     <input
                         type="number"
                         placeholder={t("e.g. 500")}
@@ -106,21 +104,20 @@ export const AssetCalculatorSingleCoin: FC = () => {
                         onChange={(e) => setAmount(e.target.value)}
                     />
                     <div className="select-wrapper calculator-currency">
-                        <select value={selectedCurrency} onChange={(e) => setSelectedCurrency(e.target.value)}>
+                        <select value={selectedCurrency} onChange={(e) => setSelectedCurrency(e.target.value)} className="calculator-select">
                             <option>EUR</option>
                         </select>
                     </div>
                 </div>
             </div>
 
-            {/* 3) Období držení */}
             <div className="form-step">
-                <div style={{ display: "flex" }}>
-                    <label className="calculator-label" style={{ width: "60%", marginRight: 60, height:50 }}>
+                <div className="period-group">
+                    <label className="calculator-label calculator-label--period">
                         {t("Choose investment holding period")}
                     </label>
-                    <div className="select-wrapper calculator-period" style={{ width: "25%", marginTop: 5 }}>
-                        <select value={selectedPeriod} onChange={(e) => setSelectedPeriod(e.target.value)}>
+                    <div className="select-wrapper calculator-period">
+                        <select value={selectedPeriod} onChange={(e) => setSelectedPeriod(e.target.value)} className="calculator-select">
                             <option value="Day">{t("Day")}</option>
                             <option value="Hour">{t("Hour")}</option>
                         </select>
@@ -146,9 +143,9 @@ export const AssetCalculatorSingleCoin: FC = () => {
                         />
                     </div>
                     <div className="result-text-content">
-            <span className="result-value" style={{ color: calculationResult.final_profit >= 0 ? 'green' : 'red' }}>
-              {formatCurrency(calculationResult.final_profit)}
-            </span>
+                        <span className="result-value" style={{ color: calculationResult.final_profit >= 0 ? 'var(--green-color)' : 'var(--red-color)' }}>
+                            {formatCurrency(calculationResult.final_profit)}
+                        </span>
                         <small className="result-label">{t("Profit")}</small>
                     </div>
                 </div>

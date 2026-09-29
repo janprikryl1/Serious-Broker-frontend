@@ -9,6 +9,9 @@ const PUBLIC_ROUTES = [
   "/contact",
   "/register",
   "/sign_in",
+  "/gdpr_info",
+  "/cookies_info",
+  "/cooperation_info"
 ];
 
 export default function VantaBackground() {

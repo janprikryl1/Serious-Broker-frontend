@@ -30,7 +30,7 @@ export const AssetCalculatorSetOfCoins:FC = () => {
                   assets.map((asset) => (
                     <AssetCard index={asset.id} label={asset.name} details={asset.label} key={asset.id}
                                data={asset.profit_list} inWatchList={asset.in_watchlist}
-                               dailyChange={asset.daily_change}/>
+                               dailyChange={asset.profit_change}/>
                 ))}
         </div>
     )

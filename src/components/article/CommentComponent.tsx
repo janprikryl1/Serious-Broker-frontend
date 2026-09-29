@@ -8,24 +8,12 @@ type Props = {
 
 export const CommentComponent:FC<Props> = ({comment}) => {
     return (
-        <li className="sidebar__comment-item">
-            <div className="comment">
-                <div className="comment__inner">
-                    <div className="comment__head">
-                        <div className="comment__author">
-                            <div className="comment__author-info">
-                                <h6 className="mb-0">
-                                    {comment.user} <span>{toCzechDateFormat(comment.created)}</span></h6>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="comment__body">
-                        <div className="comment__body-inner">
-                            <p className="mb-0">{comment.text}</p>
-                        </div>
-                    </div>
-                </div>
+        <li>
+            <div className="tw-mb-0 tw-text-white tw-flex tw-justify-between">
+                <span className="tw-font-bold">{comment.user}</span>
+                <span className="tw-italic tw-text-stone-300 tw-text-sm">{toCzechDateFormat(comment.created)}</span>
             </div>
+            <p className="tw-pl-8">{comment.text}</p>
         </li>
     )
 }

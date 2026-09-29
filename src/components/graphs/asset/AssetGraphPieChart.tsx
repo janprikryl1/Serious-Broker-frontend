@@ -1,6 +1,5 @@
 import {FC, useEffect, useState} from "react";
 import {pieArcLabelClasses, PieChart} from "@mui/x-charts";
-import { LegendItem } from "./LegendItem.tsx";
 import {Assets} from "../../../utils/types/asset/AssetDetailType.ts";
 import {getAssetByIndexLabel} from "../../../utils/api/binanceIndexAssets.ts";
 
@@ -12,12 +11,8 @@ type Props = {
 export const AssetGraphPieChart: FC<Props> = ({ assets, assetName }) => {
     const [fetchedAssets, setFetchedAssets] = useState<Assets[]>([]);
     const dataToDisplay = assets ?? fetchedAssets;
-
-/*    const getAssetData = async (assetName: string) => {
-        const response = await getAssetByIndexLabel(assetName);
-        if (!response) return;
-        setFetchedAssets(response.data.assets);
-    };*/
+    const chartWidth = typeof window !== "undefined" && window.innerWidth < 768 ? 280 : 320;
+    const chartHeight = typeof window !== "undefined" && window.innerWidth < 768 ? 280 : 320;
 
     useEffect(() => {
         if (assets) return;
@@ -41,7 +36,7 @@ export const AssetGraphPieChart: FC<Props> = ({ assets, assetName }) => {
 
     return (
         dataToDisplay?.length <= 10 ?
-        <div style={{ display: "flex", alignItems: "center"}}>
+        <div className="tw-flex tw-w-full tw-justify-center tw-overflow-visible tw-px-2 tw-text-center">
             <PieChart
                 series={[
                     {
@@ -64,6 +59,12 @@ export const AssetGraphPieChart: FC<Props> = ({ assets, assetName }) => {
                     },
                 ]}
                 sx={{
+                    "&": {
+                        overflow: "visible !important",
+                    },
+                    "& svg": {
+                        overflow: "visible !important",
+                    },
                     "& text": {
                         fill: "var(--white-color) !important",
                     },
@@ -72,7 +73,8 @@ export const AssetGraphPieChart: FC<Props> = ({ assets, assetName }) => {
                         strokeWidth: "0 !important",
                     },
                     [`& .${pieArcLabelClasses.root}`]: {
-                        fontSize: '18px',
+                        fontSize: '13px',
+                        fontWeight: 600,
                     },
                 }}
                 slotProps={{
@@ -80,8 +82,9 @@ export const AssetGraphPieChart: FC<Props> = ({ assets, assetName }) => {
                         hidden: true,
                     } as any
                 }}
-                width={400}
-                height={240}
+                margin={{ top: 20, bottom: 20, left: 45, right: 45 }}
+                width={chartWidth}
+                height={chartHeight}
                 colors={[
                     '#C5A059', // 1. Ušľachtilá stredná zlatá
                     '#8B6D1B', // 2. Tmavý antický bronz

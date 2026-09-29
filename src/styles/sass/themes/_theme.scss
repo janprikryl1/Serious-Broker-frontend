@@ -130,21 +130,21 @@ html[data-bs-theme='dark'] {
   }
 
   .account {
-    &__social {
+/*    &__social {
       &-btn {
         border-color: $thm-bg-color-4-dark;
       }
-    }
-    &__divider {
+    }*/
+    /*&__divider {
       &--style1 {
         &::before {
           background-color: $thm-bg-color-4-dark;
         }
       }
-    }
+    }*/
   }
 
-  .contact {
+  /*.contact {
     &__form {
       @include breakpoint(md) {
         &::before {
@@ -152,7 +152,7 @@ html[data-bs-theme='dark'] {
         }
       }
     }
-  }
+  }*/
 
   .nav {
     &--feature {

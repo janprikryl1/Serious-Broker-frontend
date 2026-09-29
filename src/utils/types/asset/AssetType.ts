@@ -7,7 +7,7 @@ export type AssetType = {
     coins: string;
     to_date: string;
     in_watchlist: boolean;
-    daily_change: number;
+    profit_change: number;
 }
 
 export type AssetProfitList = {

@@ -1,19 +1,20 @@
-import {useCallback, useEffect, useLayoutEffect, useRef, useState, useMemo} from "react";
-import {useTranslation} from "react-i18next";
-import {deleteMyPortfolio, getMyPortfolios, getMyPortfolioDetailsGraph} from "../../utils/api/myPortfolioService.ts";
-import {getAssetGraphData} from "../../utils/api/binanceIndexAssets.ts";
-import {QuotedCurrenciesPeriod} from "../../utils/options/QuotedCurrenciesPeriod.ts";
-import {MyPortfolioCard} from "../../components/profile/myPortfolio/MyPortfolioCard.tsx";
-import {Button} from "../../components/reusable/Button.tsx";
-import {routes} from "../../utils/constants";
-import {TitleHeader} from "../../components/about/TitleHeader.tsx";
-import {MyPortfolioType} from "../../utils/types/myPortfolio/MyPortfolioType.ts";
-import {CardContainer} from "../../components/reusable/CardContainer.tsx";
-import {GoPlus} from "react-icons/go";
-import {PortfolioGraphData} from "../../utils/types/asset/MyPortfolioType.ts";
+import React, { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { deleteMyPortfolio, getMyPortfolios, getMyPortfolioDetailsGraph } from "../../utils/api/myPortfolioService.ts";
+import { getAssetGraphData } from "../../utils/api/binanceIndexAssets.ts";
+import { QuotedCurrenciesPeriod } from "../../utils/options/QuotedCurrenciesPeriod.ts";
+import { MyPortfolioCard } from "../../components/profile/myPortfolio/MyPortfolioCard.tsx";
+import { Button } from "../../components/reusable/Button.tsx";
+import { routes } from "../../utils/constants";
+import { TitleHeader } from "../../components/about/TitleHeader.tsx";
+import { MyPortfolioType } from "../../utils/types/myPortfolio/MyPortfolioType.ts";
+import { GoPlus } from "react-icons/go";
+import { PortfolioGraphData } from "../../utils/types/asset/MyPortfolioType.ts";
+import { SpinnerLoader } from "../../components/reusable/SpinnerLoader.tsx";
+import Skeleton from "react-loading-skeleton";
 
 export const MyPortfolio = () => {
-  const {t} = useTranslation();
+  const { t } = useTranslation();
   const [myPortfolios, setMyPortfolios] = useState<MyPortfolioType[]>([]);
   const [removingPortfolioIds, setRemovingPortfolioIds] = useState<number[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -81,6 +82,7 @@ export const MyPortfolio = () => {
     } catch {
       setMyPortfolios([]);
       setPortfolioGraphData(new Map());
+      setIsLoading(false);
     }
   }, []);
 
@@ -142,40 +144,62 @@ export const MyPortfolio = () => {
 
   return (
     <>
-      <TitleHeader title={t("My Portfolios")}/>
+      <TitleHeader title={t("My Portfolios")} />
       <div className="container mt-1">
-        <p>{t("Pick your favorite coins to create a custom portfolio and track your potential profits in one place.")}</p>
-        <Button className="d-inline-flex align-items-center gap-2 mb-5" type="link" to={routes.profile.newMyPortfolio}>
-          <GoPlus size={25} style={{marginBottom: "2px"}} />
-          {t("New portfolio")}
+        <p className="tw-text-xs sm:tw-text-sm md:tw-text-base">
+          {t("Pick your favorite coins to create a custom portfolio and track your potential profits in one place.")}
+        </p>
+
+        <Button className="d-inline-flex align-items-center gap-2 mb-5 tw-p-2 tw-text-sm sm:tw-text-base" type="link"
+                to={routes.profile.newMyPortfolio}>
+          <GoPlus size={25} />
+          <span className="tw-mr-1">{t("New portfolio")}</span>
         </Button>
 
         {/* My Portfolios Section */}
         <div className="my-portfolios-section">
-
-          <div className="row g-4 align-items-stretch">
-            {myPortfolios.map((portfolio) => (
-              <div
-                className={`col-12 col-sm-6 col-lg-4 my-portfolio-grid-item ${removingPortfolioIds.includes(portfolio.id!) ? "my-portfolio-grid-item--removing" : ""}`}
-                key={portfolio.id}
-                ref={(node) => {
-                  if (!node) {
-                    itemRefs.current.delete(portfolio.id!);
-                    return;
-                  }
-                  itemRefs.current.set(portfolio.id!, node);
-                }}
-              >
-                <MyPortfolioCard
-                  data={portfolio}
-                  isRemoving={removingPortfolioIds.includes(portfolio.id!)}
-                  isLoading={isLoading}
-                  onDelete={handleDeletePortfolio}
-                  graphData={portfolioGraphData.get(portfolio.id!)}
-                />
-              </div>
-            ))}
-          </div>
+          {isLoading ? (
+            <div className="row g-4 align-items-stretch">
+              {Array.from({ length: 6 }).map((_, index) => (
+                <div className="col-12 col-sm-6 col-lg-4" key={index}>
+                  <Skeleton
+                    height={290}
+                    borderRadius={16}
+                    className="tw-w-full"
+                  />
+                </div>
+              ))}
+            </div>
+          ) : myPortfolios.length === 0 ? (
+            <div className="text-center mt-5">
+              <h4 className="tw-text-base sm:tw-text-lg">{t("You have no portfolios created yet.")}</h4>
+              <p className="tw-text-xs sm:tw-text-sm text-muted">{t("Click the button above to create your first portfolio.")}</p>
+            </div>
+          ) : (
+            <div className="row g-4 align-items-stretch">
+              {myPortfolios.map((portfolio) => (
+                <div
+                  className={`col-12 col-sm-6 col-lg-4 my-portfolio-grid-item ${removingPortfolioIds.includes(portfolio.id!) ? "my-portfolio-grid-item--removing" : ""}`}
+                  key={portfolio.id}
+                  ref={(node) => {
+                    if (!node) {
+                      itemRefs.current.delete(portfolio.id!);
+                      return;
+                    }
+                    itemRefs.current.set(portfolio.id!, node);
+                  }}
+                >
+                  <MyPortfolioCard
+                    data={portfolio}
+                    isRemoving={removingPortfolioIds.includes(portfolio.id!)}
+                    isLoading={isLoading}
+                    onDelete={handleDeletePortfolio}
+                    graphData={portfolioGraphData.get(portfolio.id!)}
+                  />
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </>

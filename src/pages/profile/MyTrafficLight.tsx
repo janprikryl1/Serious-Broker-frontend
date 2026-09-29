@@ -11,12 +11,13 @@ import {TrafficLightProvider, useTrafficLightContext} from "../../utils/provider
 import {InvestmentPlanType} from "../../utils/types/investmentPlan/InvestmentPlanType.ts";
 import {getInvestmentPlans} from "../../utils/api/investmentPlanService.ts";
 import {Button} from "../../components/reusable/Button.tsx";
-import {useToast, ToastColor} from "../../utils/providers/ToastProvider.tsx";
 import {EditDeleteButtons} from "../../components/reusable/EditDeleteButtons.tsx";
 import {GoPlus} from "react-icons/go";
 import {useTrafficLightForm} from "../../utils/hooks/useTrafficLightForm.ts";
 import {TrafficLightFormModal} from "../../components/trafficLight/TrafficLightFormModal.tsx";
 import {AccordionToggleIcon} from "../../components/reusable/AccordionToggleIcon.tsx";
+import {showToast} from "../../components/toast/toastHelper.tsx";
+import {routes} from "../../utils/constants";
 
 const MyTrafficLightsContent: FC = () => {
   const [loading, setLoading] = useState(true);
@@ -30,7 +31,6 @@ const MyTrafficLightsContent: FC = () => {
     name, triggers: contextTriggers, reference, type, setId
   } = useTrafficLightContext();
 
-  const { showToast } = useToast();
   const {t} = useTranslation();
 
   const initialTriggers = [
@@ -120,17 +120,17 @@ const MyTrafficLightsContent: FC = () => {
     const usage = getUsageCount(light.id);
 
     if (usage > 0) {
-      showToast(t("Cannot delete: This traffic light is active in investment plans"), ToastColor.red);
+      showToast.error(t("Cannot delete: This traffic light is active in investment plans"));
       return;
     }
 
     if (window.confirm(t("Are you sure you want to delete this traffic light?"))) {
       try {
         await deleteTrafficLight(light.id!);
-        showToast(t("Traffic light deleted successfully"), ToastColor.green);
+        showToast.success(t("Traffic light deleted successfully"));
         fetchData();
       } catch (err) {
-        showToast(t("Error while deleting. Please try again."), ToastColor.red);
+        showToast.error(t("Error while deleting. Please try again."));
         console.error(err);
       }
     }
@@ -143,7 +143,7 @@ const MyTrafficLightsContent: FC = () => {
 
   const createTrafficLight = async () => {
     setShowCreateModal(false);
-    await saveChanges();
+    await saveChanges(type);
     fetchData();
   };
 
@@ -154,13 +154,14 @@ const MyTrafficLightsContent: FC = () => {
     return (
       <OutlineContainer
         bgColor="var(--quaternary-color-transparent-50)"
-        style={{ padding: "0", cursor: "pointer", margin: 0, marginBottom: "15px", borderRadius: "10px" }}
+        className="traffic-light-accordion-item"
+        style={{ padding: "0", cursor: "pointer", margin: 0, marginBottom: "0", borderRadius: "10px" }}
         onClick={() => setOpen(!open)}
       >
-        <div className="d-flex justify-content-between align-items-center" style={{ padding: "20px 25px" }}>
-          <div style={{ fontSize: "1.4rem" }}>{tl.name}</div>
-          <div className="d-flex align-items-center">
-            <div className="traffic-light-triggers-preview" style={{ position: 'static', transform: 'none', opacity: 1, display: 'flex', gap: '8px', marginRight: '15px' }}>
+        <div className="traffic-light-accordion-item__header">
+          <div className="tw-text-md sm:tw-text-lg">{tl.name}</div>
+          <div className="d-flex align-items-center tw-gap-2 sm:tw-gap-3">
+            <div className="traffic-light-triggers-preview traffic-light-triggers-preview--static">
               {tl.triggers.map((trigger, idx) => (
                 <div key={idx} style={{ backgroundColor: trigger.color }} className="traffic-light-circle-small"></div>
               ))}
@@ -170,13 +171,13 @@ const MyTrafficLightsContent: FC = () => {
         </div>
 
         <Collapse in={open}>
-          <div style={{ padding: "20px 25px" }}>
+          <div className="traffic-light-accordion-item__body">
             <TrafficLightTriggers triggers={tl.triggers} variant="basic" type={tl.type} />
             <div
               className="mt-4 pt-3 d-flex flex-column flex-md-row align-items-start align-items-md-center justify-content-between gap-3"
               style={{ borderTop: "1px solid var(--gray-4-color)" }}
             >
-              <div>
+              <div className="tw-text-sm sm:tw-text-base">
                 <span className="gray-3-color-text">{t("Used in ")}</span>
                 <span className="gold-color-text"><strong>{usageCount}</strong></span>
                 <span className="gray-3-color-text">{t(" investment plans")}</span>
@@ -202,36 +203,41 @@ const MyTrafficLightsContent: FC = () => {
     <>
       <TitleHeader title={t("Market Traffic Lights")}/>
       <div className={"container"}>
-        <Button className="d-inline-flex align-items-center gap-2 mb-5" 
+        <p className="tw-text-sm tw-leading-relaxed sm:tw-text-base">
+          {t("Market traffic lights automatically evaluate your investment rules in real time. Through clear visual signals, they show whether your assets meet the criteria to buy, sell, or hold. This makes disciplined, timely decision-making simple and straightforward.")}
+        </p>
+
+        <Button className="d-inline-flex align-items-center gap-2 mb-5 tw-p-2 tw-text-sm sm:tw-text-base"
                 onClick={() => {
                   setName("General Traffic Light");
+                  setType("buy");
                   setShowCreateModal(true);
                 }}>
-          <GoPlus size={25} style={{margin: "2px"}}/>
-          {t("New Market Traffic Light")}
+          <GoPlus size={25} />
+          <span className="tw-mr-1">{t("New Market Traffic Light")}</span>
         </Button>
 
-          <div className="row">
-            <div className="col-12 custom-col mb-4">
-              <h3 className="mb-4">{t("Buy Traffic Lights")}</h3>
+          <div className="row g-4">
+            <div className="col-12 col-lg-6 custom-col">
+              <h3 className="mb-4 tw-text-lg sm:tw-text-xl lg:tw-text-2xl">{t("Buy Traffic Lights")}</h3>
               {trafficLights.filter(l => l.type === "buy").length > 0 ? (
                 trafficLights.filter(l => l.type === "buy").map((tl, i) => (
                   <TrafficLightAccordionItem key={tl.id || i} tl={tl} />
                 ))
               ) : (
-                <div className="text-center gray-3-color-text p-4">
+                <div className="text-center gray-3-color-text p-4 tw-text-sm sm:tw-text-base">
                   {t("No buy market traffic lights defined. Click the button above to add your first market traffic light.")}
                 </div>
               )}
             </div>
-            <div className="col-12 custom-col">
-              <h3 className="mb-4">{t("Sell Traffic Lights")}</h3>
+            <div className="col-12 col-lg-6 custom-col">
+              <h3 className="mb-4 tw-text-lg sm:tw-text-xl lg:tw-text-2xl">{t("Sell Traffic Lights")}</h3>
               {trafficLights.filter(l => l.type === "sell").length > 0 ? (
                 trafficLights.filter(l => l.type === "sell").map((tl, i) => (
                   <TrafficLightAccordionItem key={tl.id || i} tl={tl} />
                 ))
               ) : (
-                <div className="text-center gray-3-color-text p-4">
+                <div className="text-center gray-3-color-text p-4 tw-text-sm sm:tw-text-base">
                   {t("No sell market traffic lights defined. Click the button above to add your first market traffic light.")}
                 </div>
               )}
@@ -254,6 +260,7 @@ const MyTrafficLightsContent: FC = () => {
         onTriggerAdd={addTrigger}
         onNameChange={setName}
         onReferenceChange={setReference}
+        onTypeChange={setType}
         onSave={createTrafficLight}
       />
 

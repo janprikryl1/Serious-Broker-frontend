@@ -9,11 +9,19 @@
 
 .day-select-grid {
   display: grid;
-  grid-template-columns: repeat(7, 1fr);
+  grid-template-columns: repeat(7, 1fr) !important;
+  gap: 4px;
   max-width: 400px;
-  border: 1px solid var(--secondary-color);
   border-right: none;
   border-bottom: none;
+
+  @media (max-width: 576px) {
+    max-width: 280px;
+  }
+
+  @media (max-width: 407px) {
+    grid-template-columns: repeat(4, 0.2fr) !important;
+  }
 }
 
 .day-select-grid-item {
@@ -42,7 +50,11 @@
   }
 
   &:hover {
-    background-color: var(--secondary-color-opaque);
+    background-color: var(--secondary-color-transparent-30);
+  }
+
+  @media (max-width: 576px) {
+    font-size: 13px;
   }
 }
 
@@ -70,6 +82,6 @@
   }
 
   &:hover {
-    background-color: var(--secondary-color-opaque);
+    background-color: var(--secondary-color-transparent-30);
   }
 }

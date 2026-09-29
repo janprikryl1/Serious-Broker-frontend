@@ -5,7 +5,7 @@ import {useNavigate, useParams} from "react-router-dom";
 import {getTrafficLight, saveTrafficLight} from "../api/trafficLightsService.ts";
 import {TrafficLightType} from "../types/trafficLight/TrafficLightType.ts";
 import {TrafficLightReference} from "../enums/TrafficLight.ts";
-import {ToastColor, useToast} from "./ToastProvider.tsx";
+import {showToast} from "../../components/toast/toastHelper.tsx";
 
 type Props = {
     children: ReactNode;
@@ -37,7 +37,6 @@ export const TrafficLightProvider = ({ children }: Props) => {
     const [type, setType] = useState<"buy" | "sell">("buy");
     const [reference, setReference] = useState<TrafficLightReference>(TrafficLightReference.ATH);
     const [idState, setIdState] = useState<number | undefined>(id ? parseInt(id) : undefined);
-    const { showToast } = useToast();
 
     useEffect(() => {
         if (!idState) return;
@@ -64,16 +63,16 @@ export const TrafficLightProvider = ({ children }: Props) => {
 
     const saveChanges = async () => {
         if (!name.trim()) {
-            showToast(t('Traffic light name is required'), ToastColor.red);
+            showToast.error(t('Traffic light name is required'));
             return;
         }
 
         if (!triggers.length) {
-            showToast(t('Please add at least one trigger'), ToastColor.red);
+            showToast.error(t('Please add at least one trigger'));
             return;
         }
 
-        showToast(t("Saving traffic light..."), ToastColor.gold);
+        showToast.info(t("Saving traffic light..."));
 
         try {
             setIsLoading(true);
@@ -88,11 +87,11 @@ export const TrafficLightProvider = ({ children }: Props) => {
 
             await saveTrafficLight(trafficLightData);
 
-            showToast(t('Traffic light saved successfully!'), ToastColor.green);
+            showToast.success(t('Traffic light saved successfully!'));
 
         } catch (e) {
             console.error('Error while saving traffic light', e);
-            showToast(t('Error while saving. Please try again.'), ToastColor.red, 5000);
+            showToast.error(t('Error while saving. Please try again.'), 5000);
         } finally {
             setIsLoading(false);
         }

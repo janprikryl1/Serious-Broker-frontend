@@ -16,15 +16,11 @@ export const GlossaryItem: FC<Props> = ({ glossary }) => {
     const answer = currentLang === 'cs' ? glossary.answer_cs : glossary.answer;
 
     return (
-        <div className="blog__writer" style={{ marginTop: 50 }} id={glossary.title}>
-            <div className="blog__writer-designation">
-                <TypographyWithPopover popover={glossary.image ? <img src={`${glossaryImagesURL}${glossary.image}`} alt={title} style={{width:"300px"}}/> : title}>
-                    <p>
-                        {title}
-                        <span style={{ marginLeft: 10 }}>{answer}</span>
-                    </p>
-                </TypographyWithPopover>
-            </div>
+        <div className="" id={glossary.title}>
+            <p>
+                <span className="tw-text-secondary tw-text-bold tw-text-xl">{title}</span>
+                <span className="tw-ml-6">{answer}</span>
+            </p>
         </div>
     );
 };

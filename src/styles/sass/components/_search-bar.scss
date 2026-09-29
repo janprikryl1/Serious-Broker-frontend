@@ -1,13 +1,18 @@
 .outline-searchbar {
   position: relative;
-  border: 1px solid var(--secondary-color);
-  border-radius: 2px;
-  box-shadow: 0px 0px 1px rgba(10, 7, 4, 0.01),
-  0px 0px 4px rgba(10, 7, 4, 0.03),
-  0px 0px 10px rgba(10, 7, 4, 0.04),
-  0px 0px 18px rgba(10, 7, 4, 0.05),
-  0px 0px 28px rgba(10, 7, 4, 0.07),
-  0px 0px 40px rgba(10, 7, 4, 0.08);
+  border: 1px solid var(--gray-4-color);
+  border-radius: 5px;
+  transition: all 0.3s ease;
+
+  &:focus {
+    border-color: var(--secondary-color);
+    box-shadow: var(--golden-glow-shadow);
+  }
+
+  &:hover {
+    border-color: var(--secondary-color);
+    box-shadow: var(--golden-glow-shadow);
+  }
 }
 
 .outline-searchbar .search-input {

@@ -11,34 +11,37 @@ export const FirmData:FC = () => {
         return (
             <Accordion className="mb-4">
                 <Accordion.Item eventKey="0">
-                    <Accordion.Header className="custom-accordion-header">{t("Firm")}</Accordion.Header>
+                    <Accordion.Header className="custom-accordion-header tw-text-sm sm:tw-text-base">{t("Firm")}</Accordion.Header>
                     <Accordion.Body>
                         <Form>
                             <Form.Group controlId="firmName" className="mb-4">
-                                <Form.Label>{t("Firm name")}</Form.Label>
+                                <Form.Label className="tw-mb-2 tw-text-sm tw-font-medium tw-text-stone-200 sm:tw-text-base">{t("Firm name")}</Form.Label>
                                 <Form.Control
                                     type="text"
                                     name="firm_name"
                                     value={userDetails.firm_name}
                                     onChange={handleChange}
+                                    className="tw-min-h-[44px] tw-text-sm sm:tw-text-base"
                                 />
                             </Form.Group>
                             <Form.Group controlId="firmId" className="mb-4">
-                                <Form.Label>{t("Firm id")}</Form.Label>
+                                <Form.Label className="tw-mb-2 tw-text-sm tw-font-medium tw-text-stone-200 sm:tw-text-base">{t("Firm id")}</Form.Label>
                                 <Form.Control
                                     type="text"
                                     name="firm_id"
                                     value={userDetails.firm_id}
                                     onChange={handleChange}
+                                    className="tw-min-h-[44px] tw-text-sm sm:tw-text-base"
                                 />
                             </Form.Group>
                             <Form.Group controlId="firmVat" className="mb-4">
-                                <Form.Label>{t("Firm VAT")}</Form.Label>
+                                <Form.Label className="tw-mb-2 tw-text-sm tw-font-medium tw-text-stone-200 sm:tw-text-base">{t("Firm VAT")}</Form.Label>
                                 <Form.Control
                                     type="text"
                                     name="firm_vat"
                                     value={userDetails.firm_vat}
                                     onChange={handleChange}
+                                    className="tw-min-h-[44px] tw-text-sm sm:tw-text-base"
                                 />
                             </Form.Group>
                         </Form>

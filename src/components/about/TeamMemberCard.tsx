@@ -1,7 +1,6 @@
 import { FC } from "react";
-import userProfile from "../../utils/icons/about/user-profile.svg";
 import {useTranslation} from "react-i18next";
-import "../../styles/sass/components/team-member-card.scss";
+import {GlassCard} from "../reusable/GlassCard.tsx";
 
 type Props = {
     name: string;
@@ -14,17 +13,14 @@ export const TeamMemberCard: FC<Props> = ({ name, position, image, description }
     const {t} = useTranslation();
     
     return (
-        <section className="padding-top padding-bottom bg-color team-member-card-section">
-            <img
-                src={image ?? userProfile}
-                alt={`Team Member ${name}`}
-                width={120}
-                height={120}
-                className="team-member-card-img"
-            />
-            <p className="team-member-card-name">{name}</p>
-            <p className="team-member-card-position">{t(position)}</p>
-            {description && <p className="team-member-card-description">{t(description)}</p>}
-        </section>
+      <GlassCard bgColor={"var(--true-black)"} className="tw-h-full tw-pb-6">
+        <div className="tw-flex tw-flex-col tw-justify-center tw-items-center tw-text-center tw-h-full tw-text-white tw-p-4">
+          <p className="tw-font-bold tw-text-2xl">{name}</p>
+          <span className="tw-text-stone-300">
+            <p>{t(position)}</p>
+            {description && <p>{t(description)}</p>}
+          </span>
+        </div>
+      </GlassCard>
     );
 };

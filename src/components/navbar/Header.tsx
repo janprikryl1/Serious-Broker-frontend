@@ -1,7 +1,7 @@
 import {FC, useEffect, useState} from "react";
 import {Link, useLocation} from "react-router-dom";
 import {NavbarDesktopMenu} from "./NavbarDesktopMenu.tsx";
-import SeriousBrokerHandWriting from "../../utils/icons/logo/SB-handwritten-white.svg";
+import SeriousBrokerHandWriting from "../../utils/icons/logo/SB-logo-handwritten-white.svg";
 import {MobileMenu} from "./MobileMenu.tsx";
 import {useMediaQuery} from "@mui/material";
 import {useUserContext} from "../../utils/providers/providerUser.tsx";
@@ -64,10 +64,9 @@ export const Header: FC = () => {
                   </div>
               )}
 
-
               {isTablet || isMobile ?
                 <div onClick={toggleMobileMenu} aria-label="Toggle menu">
-                  <FiMenu size={38} style={{color: menuColor, marginLeft: "15px"}}/>
+                  <FiMenu size={30} style={{color: menuColor, marginLeft: "15px"}}/>
                 </div> :
                 null
               }
