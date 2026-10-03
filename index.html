@@ -2,10 +2,72 @@
 <html lang="cs">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="SB-badge.ico" />
+    <link rel="icon" type="image/x-icon" href="/SB-badge.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Serious Broker is a student project that is being developed as part of a bachelor thesis. It focuses on assisting in investing and spreading awareness about cryptocurrencies." />
-    <title>Serious.Broker</title>
+    <title>Serious Broker - Chytré investice do kryptoměn</title>
+    <meta name="description" content="Serious Broker – webová platforma pro analýzu a asistenci při investování do kryptoměn, semafory trhu, investiční plány a vzdělávací články." />
+    <meta name="keywords" content="kryptoměny, bitcoin, investování, krypto analýza, investiční plán, semafor trhu, serious broker" />
+    <meta name="author" content="Serious Broker" />
+    <link rel="canonical" href="https://serious.broker/" />
+
+    <!-- Open Graph / Facebook / WhatsApp -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://serious.broker/" />
+    <meta property="og:title" content="Serious Broker - Chytré investice do kryptoměn" />
+    <meta property="og:description" content="Platforma pro analýzu a asistenci při investování do kryptoměn, semafory trhu, investiční plány a vzdělávací články." />
+    <meta property="og:image" content="https://serious.broker/SB-badge.ico" />
+    <meta property="og:site_name" content="Serious Broker" />
+
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@SeriousBroker" />
+    <meta name="twitter:url" content="https://serious.broker/" />
+    <meta name="twitter:title" content="Serious Broker - Chytré investice do kryptoměn" />
+    <meta name="twitter:description" content="Platforma pro analýzu a asistenci při investování do kryptoměn, semafory trhu, investiční plány a vzdělávací články." />
+    <meta name="twitter:image" content="https://serious.broker/SB-badge.ico" />
+
+    <!-- Base JSON-LD Structured Data for crawlers -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "https://serious.broker/#organization",
+            "name": "Serious Broker",
+            "url": "https://serious.broker",
+            "logo": "https://serious.broker/SB-badge.ico",
+            "email": "info@serious.broker",
+            "telephone": "+420735838972",
+            "sameAs": [
+              "https://www.facebook.com/profile.php?id=61566158057883",
+              "https://www.instagram.com/serious_broker/",
+              "https://www.linkedin.com/in/serious-broker-07283b331/",
+              "http://www.youtube.com/@SeriousBroker",
+              "https://x.com/SeriousBroker"
+            ]
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://serious.broker/#website",
+            "url": "https://serious.broker",
+            "name": "Serious Broker",
+            "description": "Platforma pro analýzu a investice do kryptoměn, semafory trhu a vzdělávání.",
+            "publisher": {
+              "@id": "https://serious.broker/#organization"
+            },
+            "potentialAction": {
+              "@type": "SearchAction",
+              "target": {
+                "@type": "EntryPoint",
+                "urlTemplate": "https://serious.broker/articles/search/{search_term_string}"
+              },
+              "query-input": "required name=search_term_string"
+            }
+          }
+        ]
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>

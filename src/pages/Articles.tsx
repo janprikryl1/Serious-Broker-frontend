@@ -13,6 +13,9 @@ import { SidebarSearch } from "../components/article/SidebarSearch.tsx";
 import {useUserContext} from "../utils/providers/providerUser.tsx";
 import {OutlineContainer} from "../components/reusable/OutlineContainer.tsx";
 import {SearchBar} from "../components/reusable/SearchBar.tsx";
+import {SEO} from "../components/reusable/SEO.tsx";
+import {getBreadcrumbSchema} from "../utils/functions/seoSchemas.ts";
+import {routes} from "../utils/constants";
 
 export const Articles: FC = () => {
     const { t } = useTranslation();
@@ -103,6 +106,15 @@ export const Articles: FC = () => {
 
     return (
         <>
+            <SEO
+                title={t("Articles") || "Články"}
+                description="Odborné i vzdělávací články, novinky a analýzy ze světa kryptoměn a investování od týmu Serious Broker."
+                canonicalPath={routes.articles}
+                schema={getBreadcrumbSchema([
+                    { name: "Domů", url: routes.home },
+                    { name: t("Articles") || "Články", url: routes.articles },
+                ])}
+            />
             <TitleHeader title="Articles" />
             <div className="mt-4 padding-bottom">
                 <div className="container">

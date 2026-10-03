@@ -8,9 +8,11 @@ import {GlossaryType} from "../utils/types/article/GlossaryType.ts";
 import {Link} from "react-router-dom";
 import {routes} from "../utils/constants";
 import {IoIosArrowBack} from "react-icons/io";
+import {SEO} from "../components/reusable/SEO.tsx";
+import {getGlossaryFAQSchema, getBreadcrumbSchema} from "../utils/functions/seoSchemas.ts";
 
 export const Glossary: FC = () => {
-  const {t} = useTranslation();
+  const {t, i18n} = useTranslation();
   const [glossaries, setGlossaries] = useState<GlossaryType[]>([]);
 
   useEffect(() => {
@@ -38,8 +40,22 @@ export const Glossary: FC = () => {
     }
   }
 
+  const glossarySchemas = [
+    getGlossaryFAQSchema(glossaries, i18n.language),
+    getBreadcrumbSchema([
+      { name: "Domů", url: routes.home },
+      { name: t("Glossary of terms") || "Slovník pojmů", url: routes.dictionary },
+    ]),
+  ];
+
   return (
     <>
+      <SEO
+        title={t("Glossary of terms") || "Slovník pojmů"}
+        description="Kompletní slovník kryptoměnových a investičních pojmů – Bitcoin, blockchain, DCA, halving a další termíny přehledně vysvětlené."
+        canonicalPath={routes.dictionary}
+        schema={glossaries.length > 0 ? glossarySchemas : undefined}
+      />
       <div className="container tw-pt-8">
         <Link to={routes.articles} className="tw-inline-block">
           <div className="tw-flex tw-items-center tw-text-gray-2 hover:tw-underline">

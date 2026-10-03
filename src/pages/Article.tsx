@@ -14,6 +14,9 @@ import {Highlight} from "../components/editor/highlights/Highlight.tsx";
 import {CustomSwal} from "../utils/functions/customSwal.ts";
 import {TranslationsOverview} from "../utils/types/article/translate/TranslationsOverview.ts";
 import {IoIosArrowBack} from "react-icons/io";
+import {SEO} from "../components/reusable/SEO.tsx";
+import {getArticleSchema, getBreadcrumbSchema} from "../utils/functions/seoSchemas.ts";
+import {domain, imageURL} from "../utils/constants";
 
 export const Article: FC = () => {
   const {id, language} = useParams();
@@ -84,8 +87,36 @@ export const Article: FC = () => {
     loadTranslation();
   }, [id, selectedLanguage, initialLoad]);
 
+  const currentUrl = `${domain}${routes.articleURL}${id}${selectedLanguage && selectedLanguage !== "cs" ? `/${selectedLanguage}` : ""}`;
+  const articleImageUrl = article?.titleImage
+    ? (article.titleImage.startsWith("http") ? article.titleImage : `${imageURL}${article.titleImage}`)
+    : (article?.banner ? (article.banner.startsWith("http") ? article.banner : `${imageURL}${article.banner}`) : `${domain}/SB-badge.ico`);
+  const authorName = article ? [article.user_firstname, article.user_surname].filter(Boolean).join(" ") : undefined;
+
+  const articleSchemas = article ? [
+    getArticleSchema(article, currentUrl),
+    getBreadcrumbSchema([
+      { name: "Domů", url: routes.home },
+      { name: "Články", url: routes.articles },
+      { name: article.title, url: currentUrl },
+    ]),
+  ] : undefined;
+
   return (
     <>
+      {article && (
+        <SEO
+          title={article.title}
+          description={article.description || article.title}
+          canonicalPath={`${routes.articleURL}${id}`}
+          ogImage={articleImageUrl}
+          ogType="article"
+          author={authorName}
+          publishedTime={article.created}
+          modifiedTime={article.changed || article.created}
+          schema={articleSchemas}
+        />
+      )}
       <div className="container tw-pt-8">
         <Link to={routes.articles} className="tw-inline-block">
           <div className="tw-flex tw-items-center tw-text-gray-2 hover:tw-underline">

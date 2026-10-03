@@ -1,65 +1,76 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-    <!-- Main Pages -->
+    <!-- Main Public Pages -->
     <url>
         <loc>https://serious.broker/</loc>
-    </url>
-    <url>
-        <loc>https://serious.broker/about</loc>
-    </url>
-    <url>
-        <loc>https://serious.broker/contact</loc>
+        <lastmod>2026-10-01</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>1.0</priority>
     </url>
     <url>
         <loc>https://serious.broker/articles</loc>
-    </url>
-    <url>
-        <loc>https://serious.broker/search/</loc>
-    </url>
-    <url>
-        <loc>https://serious.broker/asset_list</loc>
-    </url>
-    <url>
-        <loc>https://serious.broker/most_profitable_assets</loc>
-    </url>
-    <url>
-        <loc>https://serious.broker/recommendation</loc>
+        <lastmod>2026-10-01</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.9</priority>
     </url>
     <url>
         <loc>https://serious.broker/dictionary</loc>
+        <lastmod>2026-10-01</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
     </url>
     <url>
         <loc>https://serious.broker/cryptocurrencies_list</loc>
+        <lastmod>2026-10-01</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.9</priority>
     </url>
     <url>
-        <loc>https://serious.broker/sign_in</loc>
+        <loc>https://serious.broker/calculator</loc>
+        <lastmod>2026-10-01</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://serious.broker/register</loc>
+        <loc>https://serious.broker/asset_list</loc>
+        <lastmod>2026-10-01</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://serious.broker/profile</loc>
-    </url>
-
-    <!-- Dynamic Article and Crypto Pages -->
-    <url>
-        <loc>https://serious.broker/article/</loc>
+        <loc>https://serious.broker/graphs/recommendation</loc>
+        <lastmod>2026-10-01</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://serious.broker/cryptocurrency_detail/</loc>
+        <loc>https://serious.broker/about</loc>
+        <lastmod>2026-10-01</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
     </url>
     <url>
-        <loc>https://serious.broker/asset_graph/</loc>
+        <loc>https://serious.broker/contact</loc>
+        <lastmod>2026-10-01</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
     </url>
     <url>
-        <loc>https://serious.broker/asset_graph_detail/</loc>
+        <loc>https://serious.broker/cooperation_info</loc>
+        <lastmod>2026-10-01</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.4</priority>
     </url>
     <url>
-        <loc>https://serious.broker/graphs/recommendation/detail/</loc>
+        <loc>https://serious.broker/gdpr_info</loc>
+        <lastmod>2026-10-01</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.3</priority>
     </url>
-
-    <!-- Error SliderPage -->
     <url>
-        <loc>https://serious.broker/404</loc>
+        <loc>https://serious.broker/cookies_info</loc>
+        <lastmod>2026-10-01</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.3</priority>
     </url>
 </urlset>

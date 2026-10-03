@@ -9,11 +9,20 @@ import {WhyToInvestInCryptocurrencies} from "../components/index/WhyToInvestInCr
 import {Link} from "react-router-dom";
 import {routes} from "../utils/constants";
 
+import {SEO} from "../components/reusable/SEO.tsx";
+import {getWebsiteSchema} from "../utils/functions/seoSchemas.ts";
+
 export const Index: FC = () => {
     const {user} = useUserContext();
 
     return (
         <>
+            <SEO
+                title="Serious Broker - Chytré investice do kryptoměn"
+                description="Serious Broker – webová platforma pro analýzu a asistenci při investování do kryptoměn, semafory trhu, investiční plány a vzdělávací články."
+                canonicalPath="/"
+                schema={getWebsiteSchema()}
+            />
             <SliderPage />
             <SloganSection />
             <GrowthPotentialSlider />
