@@ -48,7 +48,7 @@ export const AchievementsProvider: React.FC<{ children: ReactNode }> = ({ childr
 
     useEffect(() => {
         if (!achievements || achievements.length === 0 || !user?.id) return;
-        const newUnread = achievements.filter((achievement) => achievement.read == 0);
+        const newUnread = achievements.filter((achievement) => achievement.read === 0);
         setUnreadAchievements(newUnread);
         if (newUnread.length > prevUnreadCount) {
             setShowAnimation(true);
@@ -63,7 +63,7 @@ export const AchievementsProvider: React.FC<{ children: ReactNode }> = ({ childr
             const result = await markReadAchievment(id);
             if (!result) return;
             setAchievements(result.data);
-            setUnreadAchievements(result.data.filter((achievement) => achievement.read == 0));
+            setUnreadAchievements(result.data.filter((achievement) => achievement.read === 0));
             } catch (e) {
                 CustomSwal.fire({
                     icon: 'error',

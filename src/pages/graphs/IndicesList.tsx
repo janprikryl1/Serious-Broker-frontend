@@ -212,7 +212,7 @@ export const IndicesList: FC = () => {
     };
 
     const resizeObserver = new ResizeObserver((entries) => {
-      for (let entry of entries) {
+      for (const entry of entries) {
         const {width} = entry.contentRect;
         if (stickyHeaderRef.current) {
           stickyHeaderRef.current.style.width = `${width}px`;
@@ -231,7 +231,7 @@ export const IndicesList: FC = () => {
 
   const handleSort = (column: AssetOrder) => {
     let newDirection: 'asc' | 'desc' = 'asc';
-    let newOrderType = column;
+    const newOrderType = column;
 
     if (column === orderType) {
       newDirection = sortDirection === 'asc' ? 'desc' : 'asc';

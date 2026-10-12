@@ -159,15 +159,15 @@ export const BtfdDcaComparison: FC<Props> = ({asset_label}) => {
       let totalAssetUnitsOwned = 0;
       let ret = 0;
 
-      let data: number[] = [];
+      const data: number[] = [];
 
       for (const p of points) {
         totalInvested += baseInvestment;
         totalAssetUnitsOwned += baseInvestment / p.closeEur;
 
-        let holdingsValue = p.closeEur * totalAssetUnitsOwned;
+        const holdingsValue = p.closeEur * totalAssetUnitsOwned;
 
-        let profit = holdingsValue - totalInvested;
+        const profit = holdingsValue - totalInvested;
         ret = profit / totalInvested;
 
         data.push(ret * 100);
@@ -200,9 +200,9 @@ export const BtfdDcaComparison: FC<Props> = ({asset_label}) => {
       let totalAssetUnitsOwned = 0;
       let ret = 0;
 
-      let data: number[] = [];
+      const data: number[] = [];
 
-      let aths: number[] = [];
+      const aths: number[] = [];
 
       for (const p of points) {
 
@@ -212,18 +212,18 @@ export const BtfdDcaComparison: FC<Props> = ({asset_label}) => {
 
         aths.push(currentATH);
 
-        let priceDecrease = currentATH > 0
+        const priceDecrease = currentATH > 0
           ? Math.min((currentATH - p.closeEur) / currentATH, maxDecrease)
           : 0;
         const multiplier = 1 + ((maxMultiplier - 1) / maxDecrease * priceDecrease);
 
-        let actualInvestment = multiplier * baseInvestment;
+        const actualInvestment = multiplier * baseInvestment;
 
         totalInvested += actualInvestment;
         totalAssetUnitsOwned += actualInvestment / p.closeEur;
 
-        let holdingsValue = p.closeEur * totalAssetUnitsOwned;
-        let profit = holdingsValue - totalInvested;
+        const holdingsValue = p.closeEur * totalAssetUnitsOwned;
+        const profit = holdingsValue - totalInvested;
         ret = profit / totalInvested;
 
         data.push(ret * 100);

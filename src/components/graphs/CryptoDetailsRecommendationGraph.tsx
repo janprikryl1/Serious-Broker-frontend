@@ -114,7 +114,7 @@ export const CryptoDetailsRecommendationGraph: FC<Props> = ({asset_label, select
     }
 
     const getHour = (data: String) => {
-        let h = parseInt(data.split(" - ")[1], 10);
+        const h = parseInt(data.split(" - ")[1], 10);
         if (h % 2 === 1) {
             return h - 1;
         }
@@ -360,7 +360,7 @@ export const CryptoDetailsRecommendationGraph: FC<Props> = ({asset_label, select
                     value={numOfWeeks}
                     onChange={(e) => setNumOfWeeks(parseInt(e.target.value))}
                     onBlur={() => {
-                        let val = numOfWeeks || 30;
+                        const val = numOfWeeks || 30;
                         setNumOfWeeks(val);
                     }}
                     disabled={!customEnabled}

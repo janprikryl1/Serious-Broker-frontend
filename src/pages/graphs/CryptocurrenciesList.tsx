@@ -245,7 +245,7 @@ export const CryptocurrenciesList: FC = () => {
     };
 
     const resizeObserver = new ResizeObserver((entries) => {
-      for (let entry of entries) {
+      for (const entry of entries) {
         const { width, left } = entry.contentRect;
         if (stickyHeaderRef.current) {
           stickyHeaderRef.current.style.width = `${width}px`;

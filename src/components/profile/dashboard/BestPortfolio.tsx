@@ -57,6 +57,7 @@ export const BestPortfolio = ({isLoading, myPortfolios}: Props) => {
             const profitPct = details.month_0_profit;
             stats.push({id: portfolio.id, profitPct: profitPct});
           } catch {
+            // Portfolio bez dostupného detailu do statistik nepočítáme.
           }
         }
 

@@ -71,7 +71,7 @@ export const Articles: FC = () => {
     const filteredArticles = useMemo(() => {
         const query = searchQuery.trim().toLowerCase();
 
-        let filtered = articles.filter(article => {
+        const filtered = articles.filter(article => {
             // Live vyhľadávanie: Ak používateľ napísal 3 a viac znakov, hľadá sa v názve a popise
             if (query.length >= 3) {
                 const titleMatch = article.title?.toLowerCase().includes(query);

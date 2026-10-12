@@ -1,0 +1,77 @@
+{
+  "$schema": "https://biomejs.dev/schemas/2.5.15/schema.json",
+  "vcs": { "enabled": false },
+  "files": {
+    "includes": [
+      "**/*.ts",
+      "**/*.tsx",
+      "**/*.js",
+      "**/*.jsx",
+      "**/*.json",
+      "!dist/**",
+      "!public/**",
+      "!package-lock.json",
+      "!src/pages/not used/**"
+    ]
+  },
+  "javascript": {
+    "jsxRuntime": "transparent"
+  },
+  "formatter": { "enabled": false },
+  "assist": { "enabled": false },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "preset": "none",
+      "correctness": {
+        // Záměrně vypnuto: v kódu zůstávají nepoužité importy a proměnné a nelze
+        // do něj zasahovat. Navazuje na původní .eslintrc.json (commit 2a2447e
+        // "allow unused variables and imports").
+        "noUnusedImports": "off",
+        "noUnusedVariables": "off",
+        "noUnusedFunctionParameters": "off",
+        "noUnusedLabels": "error",
+        "noChildrenProp": "error",
+        "useJsxKeyInIterable": "error",
+        "useHookAtTopLevel": "error",
+        "noConstantCondition": "error",
+        "useValidTypeof": "error",
+        "noUnsafeOptionalChaining": "error",
+        "useExhaustiveDependencies": "warn"
+      },
+      "suspicious": {
+        "noVar": "error",
+        "noDoubleEquals": "error",
+        "noDuplicateObjectKeys": "error",
+        "noDuplicateParameters": "error",
+        "noDuplicateCase": "error",
+        "noFallthroughSwitchClause": "error",
+        "noSelfCompare": "error",
+        // Jen warn: oprava by znamenala buď Object.hasOwn (vyžaduje lib ES2022,
+        // projekt cílí na ES2020), nebo zásah do kódu, který se měnit nemá.
+        "noPrototypeBuiltins": "warn",
+        "noEmptyBlockStatements": "error",
+        "noArrayIndexKey": "warn",
+        "noExplicitAny": "warn"
+      },
+      "complexity": {
+        "noUselessTypeConstraint": "error",
+        "noUselessFragments": "warn"
+      },
+      "style": {
+        "useConst": "error",
+        "useComponentExportOnlyModules": "warn"
+      }
+    }
+  },
+  "overrides": [
+    {
+      "includes": ["vite.config.ts", "tailwind.config.js", "postcss.config.js"],
+      "linter": {
+        "rules": {
+          "correctness": { "noUnusedVariables": "off" }
+        }
+      }
+    }
+  ]
+}

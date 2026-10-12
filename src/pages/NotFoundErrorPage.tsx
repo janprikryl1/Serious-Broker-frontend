@@ -23,7 +23,7 @@ export const NotFoundErrorPage: FC = () => {
                 <p className="tw-text-sm md:tw-text-base tw-text-gray-300 tw-mb-8 tw-max-w-md tw-mx-auto">
                     {t("The page you are looking for does not exist. Or it was moved.")}
                 </p>
-                <Button type={"link"} to={routes.home} children={t("Back to home")}/>
+                <Button type={"link"} to={routes.home}>{t("Back to home")}</Button>
             </div>
         </div>
     );

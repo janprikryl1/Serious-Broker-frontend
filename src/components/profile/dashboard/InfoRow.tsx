@@ -30,8 +30,8 @@ export const InfoRow: FC<Props> = ({ portfolioSum, investmentPlanSum, totalInves
     return (
         <div className="row g-3 lg:g-4">
             {cards.map((card, idx) => (
-                <CustomTooltip title={`${card.label === 'Total Invested' ? t('estimatedTotalInvestment') : ''}`} placement={'top'}>
-                    <div key={idx} className="col-12 col-sm-6 col-lg-3">
+                <CustomTooltip key={idx} title={`${card.label === 'Total Invested' ? t('estimatedTotalInvestment') : ''}`} placement={'top'}>
+                    <div className="col-12 col-sm-6 col-lg-3">
                         <div className="tw-bg-stone-950 tw-bg-opacity-5 tw-border tw-border-solid tw-border-stone-400 tw-border-opacity-20 tw-rounded-2xl tw-p-3 sm:tw-p-4">
                             <div className={"d-flex align-items-center gap-3 tw-min-w-0"}>
                                 <div className="color-container--gold icon-container">

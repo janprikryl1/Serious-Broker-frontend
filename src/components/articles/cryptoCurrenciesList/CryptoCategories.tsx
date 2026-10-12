@@ -21,7 +21,7 @@ export const CryptoCategories:FC = () => {
     return (
         categories ? (
             categories.map((category) => (
-                <div className="blog__writer mt-5">
+                <div key={category.id} className="blog__writer mt-5">
                     <div className="blog__writer-designation">
                         <div>
                             <strong>{category.name}</strong>

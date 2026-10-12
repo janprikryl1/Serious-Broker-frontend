@@ -43,13 +43,13 @@ export const HighlightCard:FC<Props> = ({highlightData, fetchHighlights}) => {
             <div className="blog__item" data-aos="fade-up" data-aos-duration="1000">
                 <div className="blog__item-inner" style={{margin: "20px"}}>
                     <Link to={`${editorURLS.highlitsEditor}/${highlightData.id}`} className="link-underline-none">
-                        <h2 style={{fontSize: "35px"}}>{i18n.language == "cs" ? highlightData.title_cs : highlightData.title}</h2>
+                        <h2 style={{fontSize: "35px"}}>{i18n.language === "cs" ? highlightData.title_cs : highlightData.title}</h2>
                         <div className="row">
                             <div className="col-2">
                                 <IoIosInformationCircleOutline/>
                             </div>
                             <div className="col-sm">
-                                <p style={{fontSize: "15px"}}>{i18n.language == "cs" ? highlightData.description_cs : highlightData.description}</p>
+                                <p style={{fontSize: "15px"}}>{i18n.language === "cs" ? highlightData.description_cs : highlightData.description}</p>
                             </div>
                         </div>
                     </Link>

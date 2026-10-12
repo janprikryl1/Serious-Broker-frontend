@@ -43,7 +43,7 @@ export const DemoItem: FC<Props> = ({ widgets, time_of_replace }) => {
                 <DemoCoinGraph index_label={currentWidget.propertyId} />
                 : currentWidget.type === WidgetsType.GLOSSARY ?
                 <DemoWidgetGlossary title={currentWidget.propertyId} /> 
-                : currentWidget.type == WidgetsType.COINMARKETCUP_TOP_10 ?
+                : currentWidget.type === WidgetsType.COINMARKETCUP_TOP_10 ?
                 <DemoCoinmarektcupTop10 />
                 : <CurrentWidgetSkeleton />
             }

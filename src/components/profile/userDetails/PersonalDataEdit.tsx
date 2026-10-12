@@ -20,7 +20,7 @@ export const PersonalDataEdit:FC = () => {
             <Form className="tw-mb-6">
                 <h3 className="tw-mb-4 tw-text-lg sm:tw-text-xl lg:tw-text-2xl">{t("Profile")}</h3>
                 <Form.Group controlId="titleBefore" className="mb-4">
-                    <Form.Label className="tw-mb-2 tw-text-sm tw-font-medium tw-text-stone-200 sm:tw-text-base">{t("Title")}</Form.Label>
+                    <Form.Label className="tw-mb-2 tw-text-sm tw-font-medium tw-text-stone-200 sm:tw-text-base">{t("title_before")}</Form.Label>
                     <Form.Control
                         type="text"
                         name="title_before"

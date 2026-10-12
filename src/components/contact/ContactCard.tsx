@@ -6,6 +6,11 @@ import {CustomSwal} from "../../utils/functions/customSwal.ts";
 import {FaBuilding, FaEnvelope} from "react-icons/fa6";
 import {FaPhoneAlt} from "react-icons/fa";
 import {GlassCard} from "../reusable/GlassCard.tsx";
+import {Button} from "../reusable/Button.tsx";
+
+const contactInputClass =
+  "tw-w-full tw-bg-stone-900/60 tw-border tw-border-stone-700 tw-rounded-lg tw-px-3 tw-py-2.5 " +
+  "tw-text-sm tw-text-stone-100 placeholder:tw-text-stone-500 focus:tw-border-secondary focus:tw-outline-none tw-transition-colors";
 
 export const ContactCard: FC = () => {
   const {t} = useTranslation();
@@ -113,6 +118,35 @@ export const ContactCard: FC = () => {
               </a>
             </div>
           </div>
+
+          <form onSubmit={handleSendMessage} className="tw-flex tw-flex-col tw-gap-3">
+            <input
+              type="text"
+              name="name"
+              className={contactInputClass}
+              placeholder={t("Name")}
+              autoComplete="name"
+              required
+            />
+            <input
+              type="email"
+              name="email"
+              className={contactInputClass}
+              placeholder={t("E-mail")}
+              autoComplete="email"
+              required
+            />
+            <textarea
+              name="message"
+              rows={4}
+              className={`${contactInputClass} tw-resize-y`}
+              placeholder={t("Leave a message...")}
+              required
+            />
+            <div>
+              <Button type="submit">{t("Send")}</Button>
+            </div>
+          </form>
         </div>
 
       </div>

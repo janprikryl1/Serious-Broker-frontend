@@ -57,7 +57,7 @@ export const BTFDTuningParameters: FC = () => {
 
       try {
         // First, load ATH values from backend
-        let loadedATHs: number[] = [];
+        const loadedATHs: number[] = [];
         for (const coin of coinsLabels) {
           try {
             const response = await getBinanceAssetATH(coin);
@@ -73,10 +73,10 @@ export const BTFDTuningParameters: FC = () => {
         setATHs(loadedATHs);
 
         // Then process data with loaded ATHs
-        let tempResults: Result[] = [];
+        const tempResults: Result[] = [];
 
         for (let i = 0; i < coinsLabels.length; i++) {
-          let resultsForAsset: number[][] = [];
+          const resultsForAsset: number[][] = [];
           let tempDatetime: string[] = [];
 
           for (let j = 0; j < settings.length; j++) {
@@ -98,7 +98,7 @@ export const BTFDTuningParameters: FC = () => {
                   tempDatetime = tempFilteredData.map((p: any) => p.datetime);
                 }
 
-                let result = computeBTFD(coinsLabels[i], tempFilteredData, loadedATHs[i], settings[j].multiplier, settings[j].maxDrop);
+                const result = computeBTFD(coinsLabels[i], tempFilteredData, loadedATHs[i], settings[j].multiplier, settings[j].maxDrop);
                 resultsForAsset.push(result);
 
                 if (j === settings.length - 1) {
@@ -134,29 +134,29 @@ export const BTFDTuningParameters: FC = () => {
   function computeBTFD(assetName: String, inputData: ProcessedDataPoint[], ATH: number, maxMultiplier: number, maxDecrease: number): number[] {
     const points = inputData.map((p) => p);
 
-    let baseInvestment = 100;
+    const baseInvestment = 100;
     let currentATH = ATH;
 
     let totalInvested = 0;
     let totalAssetUnitsOwned = 0;
     let ret = 0;
-    let data: number[] = [];
+    const data: number[] = [];
 
     for (const p of points) {
       if (p.closeEur > currentATH) {
         currentATH = p.closeEur;
       }
 
-      let priceDecrease = Math.min((currentATH - p.closeEur) / currentATH, maxDecrease);
+      const priceDecrease = Math.min((currentATH - p.closeEur) / currentATH, maxDecrease);
       const multiplier = 1 + ((maxMultiplier - 1) / maxDecrease * priceDecrease);
 
-      let actualInvestment = multiplier * baseInvestment;
+      const actualInvestment = multiplier * baseInvestment;
 
       totalInvested += actualInvestment;
       totalAssetUnitsOwned += actualInvestment / p.closeEur;
 
-      let holdingsValue = p.closeEur * totalAssetUnitsOwned;
-      let profit = holdingsValue - totalInvested;
+      const holdingsValue = p.closeEur * totalAssetUnitsOwned;
+      const profit = holdingsValue - totalInvested;
       ret = profit / totalInvested;
 
       data.push(ret * 100);

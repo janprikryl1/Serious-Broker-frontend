@@ -23,13 +23,13 @@ export const Highlight:FC = () => {
     if (highlightData) {
         return (
             <div className="cta-dark">
-                <h2 style={{fontSize: "35px"}}>{i18n.language == "cs" ? highlightData.title_cs : highlightData.title}</h2>
+                <h2 style={{fontSize: "35px"}}>{i18n.language === "cs" ? highlightData.title_cs : highlightData.title}</h2>
                 <div className="row">
                     <div className="col-2">
                         <IoIosInformationCircleOutline />
                     </div>
                     <div className="col-sm">
-                        <p style={{fontSize: "15px"}}>{i18n.language == "cs" ? highlightData.description_cs : highlightData.description}</p>
+                        <p style={{fontSize: "15px"}}>{i18n.language === "cs" ? highlightData.description_cs : highlightData.description}</p>
                     </div>
                 </div>
             </div>
