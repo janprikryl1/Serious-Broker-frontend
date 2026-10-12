@@ -1,30 +1,12 @@
 import {FC, lazy} from "react";
 import {Outlet, Route, Routes} from "react-router-dom";
-import {adminURLS, editorURLS, guideURLS, routes} from "./utils/constants";
+import {adminURLS, editorURLS, routes} from "./utils/constants";
 import {PageLoader} from "./components/reusable/PageLoader.tsx";
-import {EditorOverview} from "./pages/editor/EditorOverview.tsx";
-import {BTFDTuningParameters} from "./components/graphs/BTFDTuningParameters.tsx";
-import {NewInvestmentPlan} from "./pages/profile/investmentPlan/NewInvestmentPlan.tsx";
-import {NewPortfolio} from "./pages/profile/investmentPlan/NewPortfolio.tsx";
-import {ChooseExistingPortfolio} from "./pages/profile/investmentPlan/ChooseExistingPortfolio.tsx";
-import {RecurringInvestment} from "./pages/profile/investmentPlan/RecurringInvestment.tsx";
-import {InvestedAmount} from "./pages/profile/investmentPlan/InvestedAmount.tsx";
-import {TrafficLightsComponent} from "./components/trafficLight/TrafficLightsComponent.tsx";
-import {TrafficLights} from "./pages/profile/investmentPlan/TrafficLights.tsx";
-import {EditInvestmentPlan} from "./pages/profile/investmentPlan/EditInvestmentPlan.tsx";
-import {InvestmentPlanProvider} from "./utils/providers/InvestmentPlanProvider.tsx";
-import {NewInvestmentPlanIntro} from "./pages/profile/investmentPlan/NewInvestmentPlanIntro.tsx";
-import {MyInvestmentPlans} from "./pages/profile/MyInvestmentPlans.tsx";
-import {NewInvestmentPlanName} from "./pages/profile/investmentPlan/NewInvestmentPlanName.tsx";
-import {MyTrafficLights} from "./pages/profile/MyTrafficLight.tsx";
-import {CryptocurrencyDetails} from "./pages/graphs/CryptocurrencyDetails.tsx";
-import {Dashboard} from "./pages/profile/Dashboard.tsx";
-import {ErrorFallback} from "./pages/ErrorFallback.tsx";
+// Header, footer a UnverifiedHeaderInfo se renderují na každé stránce v MainLayout,
+// takže zůstávají staticky v entry chunku — lazy by u nich způsobilo jen bliknutí.
 import {UnverifiedHeaderInfo} from "./components/navbar/UnverifiedHeaderInfo.tsx";
 import {Header} from "./components/navbar/Header.tsx";
 import {Footer} from "./components/navbar/Footer.tsx";
-import {BitcoinProfitCalculator} from "./components/index/BitcoinProfitCalculator.tsx";
-import {AssetCalculatorComponent} from "./components/index/AssetCalculatorComponent.tsx";
 const Index = lazy(() => import("./pages/Index.tsx").then(module => ({ default: module.Index })));
 const About = lazy(() => import("./pages/About.tsx").then(module => ({ default: module.About })));
 const Contact = lazy(() => import("./pages/Contact.tsx").then(module => ({ default: module.Contact })));
@@ -37,7 +19,7 @@ const AssetGraph = lazy(() => import("./pages/graphs/IndexDetails.tsx").then(mod
 const Recommendation = lazy(() => import("./pages/graphs/CryptocurrenciesList.tsx").then(module => ({ default: module.CryptocurrenciesList })));
 const Glossary = lazy(() => import("./pages/Glossary.tsx").then(module => ({ default: module.Glossary })));
 const CryptoCurrenciesList = lazy(() => import("./pages/CryptoCurrenciesList.tsx").then(module => ({ default: module.CryptoCurrenciesList })));
-const RecommendationDetails_new = lazy(() => import("./pages/graphs/CryptocurrencyDetails.tsx").then(module => ({ default: module.CryptocurrencyDetails })));
+const CryptocurrencyDetails = lazy(() => import("./pages/graphs/CryptocurrencyDetails.tsx").then(module => ({ default: module.CryptocurrencyDetails })));
 const VerifyAccount = lazy(() => import("./pages/VerifyAccount.tsx").then(module => ({ default: module.VerifyAccount })));
 const ForgottenPassword = lazy(() => import("./pages/ForgottenPassword.tsx").then(module => ({ default: module.ForgottenPassword })));
 const RecoverPassword = lazy(() => import("./pages/RecoverPassword.tsx").then(module => ({ default: module.RecoverPassword })));
@@ -97,6 +79,25 @@ const Welcome = lazy(() => import ("./pages/welcome/Welcome.tsx").then(module =>
 const WelcomePremium = lazy(() => import ("./pages/welcome/WelcomePremium.tsx").then(module => ({ default: module.WelcomePremium })));
 const FormEvaulationSettings = lazy(() => import ("./pages/admin/FormEvaulationSettings.tsx").then(module => ({ default: module.FormEvaulationSettings })));
 
+// Dříve staticky importované — tím pádem skončily v entry chunku, i když je většina
+// uživatelů nikdy neotevře. Teď mají vlastní chunk jako zbytek routingu.
+const Dashboard = lazy(() => import("./pages/profile/Dashboard.tsx").then(module => ({ default: module.Dashboard })));
+const EditorOverview = lazy(() => import("./pages/editor/EditorOverview.tsx").then(module => ({ default: module.EditorOverview })));
+const BTFDTuningParameters = lazy(() => import("./components/graphs/BTFDTuningParameters.tsx").then(module => ({ default: module.BTFDTuningParameters })));
+const AssetCalculatorComponent = lazy(() => import("./components/index/AssetCalculatorComponent.tsx").then(module => ({ default: module.AssetCalculatorComponent })));
+const MyInvestmentPlans = lazy(() => import("./pages/profile/MyInvestmentPlans.tsx").then(module => ({ default: module.MyInvestmentPlans })));
+const MyTrafficLights = lazy(() => import("./pages/profile/MyTrafficLight.tsx").then(module => ({ default: module.MyTrafficLights })));
+const InvestmentPlanProvider = lazy(() => import("./utils/providers/InvestmentPlanProvider.tsx").then(module => ({ default: module.InvestmentPlanProvider })));
+const NewInvestmentPlanIntro = lazy(() => import("./pages/profile/investmentPlan/NewInvestmentPlanIntro.tsx").then(module => ({ default: module.NewInvestmentPlanIntro })));
+const NewInvestmentPlanName = lazy(() => import("./pages/profile/investmentPlan/NewInvestmentPlanName.tsx").then(module => ({ default: module.NewInvestmentPlanName })));
+const NewInvestmentPlan = lazy(() => import("./pages/profile/investmentPlan/NewInvestmentPlan.tsx").then(module => ({ default: module.NewInvestmentPlan })));
+const NewPortfolio = lazy(() => import("./pages/profile/investmentPlan/NewPortfolio.tsx").then(module => ({ default: module.NewPortfolio })));
+const ChooseExistingPortfolio = lazy(() => import("./pages/profile/investmentPlan/ChooseExistingPortfolio.tsx").then(module => ({ default: module.ChooseExistingPortfolio })));
+const RecurringInvestment = lazy(() => import("./pages/profile/investmentPlan/RecurringInvestment.tsx").then(module => ({ default: module.RecurringInvestment })));
+const InvestedAmount = lazy(() => import("./pages/profile/investmentPlan/InvestedAmount.tsx").then(module => ({ default: module.InvestedAmount })));
+const TrafficLights = lazy(() => import("./pages/profile/investmentPlan/TrafficLights.tsx").then(module => ({ default: module.TrafficLights })));
+const EditInvestmentPlan = lazy(() => import("./pages/profile/investmentPlan/EditInvestmentPlan.tsx").then(module => ({ default: module.EditInvestmentPlan })));
+
 const MainLayout: FC = () => {
     return (
         <>
@@ -148,7 +149,7 @@ export const Router:FC = () => {
                     <Route path={routes.profile.newMyPortfolio} element={<PageLoader><EditMyPortfolio/></PageLoader>} />
                     <Route path={routes.profile.newInvestmentPlanIntro} element={<PageLoader><NewInvestmentPlanIntro/></PageLoader>} />
                     <Route path={routes.profile.dashboard} element={<PageLoader><Dashboard/></PageLoader>} />
-                    <Route element={<InvestmentPlanProvider><Outlet /></InvestmentPlanProvider>}>
+                    <Route element={<PageLoader><InvestmentPlanProvider><Outlet /></InvestmentPlanProvider></PageLoader>}>
                         <Route path={routes.profile.newInvestmentPlanName} element={<PageLoader><NewInvestmentPlanName/></PageLoader>} />
                         <Route path={routes.profile.newInvestmentPlan} element={<PageLoader><NewInvestmentPlan/></PageLoader>} />
                         <Route path={routes.profile.newInvestmentPlanNewPortfolio} element={<PageLoader><NewPortfolio/></PageLoader>} />
@@ -163,7 +164,7 @@ export const Router:FC = () => {
                     <Route path={routes.profile.myTrafficLights} element={<PageLoader><MyTrafficLights/></PageLoader>} />
                     <Route path={routes.profile.myWatchList} element={<PageLoader><MyWatchList/></PageLoader>} />
                 </Route>
-                <Route path={editorURLS.index} element={<EditorOverview />}>
+                <Route path={editorURLS.index} element={<PageLoader><EditorOverview /></PageLoader>}>
                     <Route path={routes.editor.index} element={<PageLoader><EditorIndex /></PageLoader>} />
                     <Route path={routes.editor.articles} element={<PageLoader><ArticleManagement /></PageLoader>} />
                     <Route path={routes.editor.articleNew} element={<PageLoader><EditArticle /></PageLoader>} />

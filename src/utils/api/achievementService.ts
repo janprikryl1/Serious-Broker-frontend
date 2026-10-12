@@ -1,15 +1,10 @@
-import axios from "axios";
-import {backendUrl} from "../../env.ts";
+import { api } from "./axiosInstance.ts";
 import {AchievementType} from "../types/user/AchievementType.ts";
 
 export const getAchievements = async () => {
     const token = localStorage.getItem("token");
     if (!token) return;
-    const response = axios.get<AchievementType[]>(backendUrl + "/achievement/achievements.php", {
-        headers: {
-            Authorization: `Bearer ${token}`,
-        },
-    });
+    const response = api.get<AchievementType[]>("/achievement/achievements.php");
     return await response;
 };
 
@@ -18,16 +13,10 @@ export const markReadAchievment = async (id: number) => {
     if (!token) return;
 
     try {
-        const response = await axios.post<AchievementType[]>(backendUrl + "achievement/mark-read.php",
+        const response = await api.post<AchievementType[]>("achievement/mark-read.php",
             {
                 id: id,
-            },
-            {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            }
-        );
+            });
         return response;
     } catch (error) {
         console.error("Failed to mark achievement as read", error);
@@ -39,11 +28,9 @@ export const adminUserAchievements = async (userId: number) => {
     const token = localStorage.getItem("token");
     if (!token) return;
 
-    const response = axios.get<AchievementType[]>(backendUrl + "achievement/achivments-list.php",
+    const response = api.get<AchievementType[]>("achievement/achivments-list.php",
         {
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
+            
             params: {
                 user_id: userId,
             },
@@ -56,20 +43,14 @@ export const adminAddAchievement = async (userId: number, achievmentText: string
     const token = localStorage.getItem("token");
     if (!token) return;
     
-    const response = await axios.post<AchievementType>(backendUrl + "achievement/achivments-list.php", 
+    const response = await api.post<AchievementType>("achievement/achivments-list.php", 
         {
                 user_id: userId,
                 text: achievmentText,
-            },
-            {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            }
-        );
+            });
     return response;
 };
 
 export const giveAchievmentsForLongPeriod = async () => {
-    return await axios.get(backendUrl + "achievement/give_achievments.php");
+    return await api.get("achievement/give_achievments.php");
 }

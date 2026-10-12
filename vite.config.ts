@@ -23,7 +23,26 @@ const excludedPaths = [
   'PostEdit',
   'CryptocurrenciesList',
   'Register',
-  'TranslateEdit'
+  'TranslateEdit',
+
+  // Dekorativní pozadí (three.js, ~160 kB gzip). Je záměrně lazy — bez téhle
+  // výjimky by ho modulepreload stahoval na každé stránce a lazy by nemělo
+  // žádný efekt.
+  'VantaFog',
+
+  // Chunky odštěpené z Routeru. Všechny jsou za přihlášením, takže je nemá
+  // smysl předstahovat při první návštěvě.
+  'Dashboard',
+  'BTFDTuningParameters',
+  'AssetCalculatorComponent',
+  'CryptocurrencyDetails',
+  'InvestmentPlan',
+  'InvestedAmount',
+  'NewPortfolio',
+  'ChooseExistingPortfolio',
+  'RecurringInvestment',
+  'TrafficLight',
+  'WatchList'
 ];
 
 export default defineConfig({

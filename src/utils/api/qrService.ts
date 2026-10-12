@@ -1,15 +1,10 @@
-import axios from "axios";
-import {backendUrl} from "../../env.ts";
+import { api } from "./axiosInstance.ts";
 import {QRCodeType} from "../types/admin/QRCodeType.ts";
 
 export const getQR = async () => {
     const token = localStorage.getItem("token");
     if (!token) return;
-    return await axios.get(backendUrl + "qr_codes/get_qr_code.php", {
-        headers: {
-            Authorization: "Bearer " + token 
-        }
-    });
+    return await api.get("qr_codes/get_qr_code.php");
 }
 
 export const saveQRCode = async (formData: Partial<QRCodeType>, image: File | null) => {
@@ -24,9 +19,5 @@ export const saveQRCode = async (formData: Partial<QRCodeType>, image: File | nu
         formImageData.append("image", image);
     }
 
-    return await axios.post(backendUrl + "qr_codes/update_qr_code.php", formImageData, {
-        headers: {
-            Authorization: `Bearer ${token}`,
-        },
-    });
+    return await api.post("qr_codes/update_qr_code.php", formImageData);
 };

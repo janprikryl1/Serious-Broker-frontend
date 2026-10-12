@@ -1,9 +1,8 @@
-import axios from "axios";
-import {backendUrl} from "../../env.ts";
+import { api } from "./axiosInstance.ts";
 import {GlossaryType} from "../types/article/GlossaryType.ts";
 
 export const getGlossary = async () => {
-    const res = axios.get<GlossaryType[]>(backendUrl+"glossary/get_all_glossaries.php");
+    const res = api.get<GlossaryType[]>("glossary/get_all_glossaries.php");
     return await res;
 };
 
@@ -25,11 +24,7 @@ export const editGlossary = async (glossary: GlossaryType, file: File | null) =>
     }
 
     try {
-        return await axios.post(`${backendUrl}glossary/glossary_edit.php`, formData, {
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
-        });
+        return await api.post(`glossary/glossary_edit.php`, formData);
     } catch (error) {
         console.error("Error updating glossary:", error);
         throw error;
@@ -42,14 +37,10 @@ export const deleteGlossary = async (id: number) => {
     const token = localStorage.getItem("token");
     if (!token) return;
     
-    const response = axios.delete(`${backendUrl}glossary/glossary_edit.php`, {
+    const response = api.delete(`glossary/glossary_edit.php`, {
         params: {
             id: id,
-        },
-        headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-        },
+        }
     });
     return await response;
 };
@@ -67,15 +58,11 @@ export const addGlossary = async (glossary: Partial<GlossaryType & { imageFile?:
         formData.append("image", glossary.imageFile);
     }
 
-    return await axios.post(`${backendUrl}glossary/glossary_add.php`, formData, {
-        headers: {
-            Authorization: `Bearer ${token}`,
-        },
-    });
+    return await api.post(`glossary/glossary_add.php`, formData);
 };
 
 export const getGlossaryByName = async (title: string) => {
-    return await axios.get<GlossaryType>(backendUrl + "glossary/get_glossary_by_name.php", {
+    return await api.get<GlossaryType>("glossary/get_glossary_by_name.php", {
         params: {
             title: title,
         }

@@ -1,11 +1,10 @@
-import axios from "axios";
+import { api } from "./axiosInstance.ts";
 import {BinanceIndexAssetRecomBestPreviousType} from "../types/graphs/BinanceIndexAssetRecomBestPreviousType.ts";
-import {backendUrl} from "../../env.ts";
 import {BinanceIndexAssetRecomBestPreviousDetails} from "../types/graphs/BinanceIndexAssetRecomBestPreviousDetails.ts";
 import {RecommendationDetailSeasonEnum} from "../enums/RecommendationDetailSeasonEnum.ts";
 
 export const getBinanceIndexAssetRecomBestPrevious = async (orderBy: string, page: number, sortDirection: "asc" | "desc", filters: { includeCurrencies: string[]; searchQuery: string }) => {
-    const res  = axios.get<{totalPages: number; data: BinanceIndexAssetRecomBestPreviousType[]}>(`${backendUrl}/graphs/binance_index_asset_recom_best_previous.php`, {
+    const res  = api.get<{totalPages: number; data: BinanceIndexAssetRecomBestPreviousType[]}>(`graphs/binance_index_asset_recom_best_previous.php`, {
         params: {
             order_by: orderBy,
             page: page,
@@ -18,7 +17,7 @@ export const getBinanceIndexAssetRecomBestPrevious = async (orderBy: string, pag
 }
 
 export const getBinanceIndexAssetRecomBestPreviousDetail = async (assetLabel: string) => {
-    const res = axios.get<BinanceIndexAssetRecomBestPreviousDetails>(backendUrl + "graphs/binance_index_asset_recom_best_previous_detail.php", {
+    const res = api.get<BinanceIndexAssetRecomBestPreviousDetails>("graphs/binance_index_asset_recom_best_previous_detail.php", {
         params: {
             asset_label: assetLabel
         }
@@ -27,7 +26,7 @@ export const getBinanceIndexAssetRecomBestPreviousDetail = async (assetLabel: st
 }
 
 export const getBinanceIndexAssetRecomBestPreviousGraphData = async (assetLabel: string, selectedPeriod: RecommendationDetailSeasonEnum) => {
-    return await axios.get(`${backendUrl}graphs/binance_index_asset_recom_best_graph_data.php`, {
+    return await api.get(`graphs/binance_index_asset_recom_best_graph_data.php`, {
         params: {
             asset_label: assetLabel,
             selected_period: selectedPeriod
@@ -36,7 +35,7 @@ export const getBinanceIndexAssetRecomBestPreviousGraphData = async (assetLabel:
 }
 
 export const getBinanceIndexAssetPriceGraphData = async (assetLabel: string, selectedPeriod: RecommendationDetailSeasonEnum) => {
-    return await axios.get(`${backendUrl}graphs/binance_index_asset_recom_best_graph_price_data.php`, {
+    return await api.get(`graphs/binance_index_asset_recom_best_graph_price_data.php`, {
         params: {
             asset_label: assetLabel,
             selected_period: selectedPeriod
@@ -46,7 +45,7 @@ export const getBinanceIndexAssetPriceGraphData = async (assetLabel: string, sel
 
 /* Used in RecommendedDetailsPriceGraph_new */
 export const getBinanceIndexAssetAverageGraphData = async (assetLabel: string, numberOfWeeks: number) => {
-    return await axios.get(`${backendUrl}graphs/binance_index_assets/get_average_asset_buy_hourly.php`, {
+    return await api.get(`graphs/binance_index_assets/get_average_asset_buy_hourly.php`, {
         params: {
             asset_label: assetLabel,
             number_of_weeks: numberOfWeeks
@@ -56,7 +55,7 @@ export const getBinanceIndexAssetAverageGraphData = async (assetLabel: string, n
 
 /* Used in BtfdDcaComparison */
 export const getAssetSpotKlines = async (assetLabel: string, numberOfYears?: number, startDate?: string, endDate?: string) => {
-    return await axios.get(`${backendUrl}graphs/asset_klines.php`, {
+    return await api.get(`graphs/asset_klines.php`, {
         params: {
             asset_label: assetLabel,
             num_of_years: numberOfYears,
@@ -68,7 +67,7 @@ export const getAssetSpotKlines = async (assetLabel: string, numberOfYears?: num
 
 /* Used in recommendations for index */
 export const getBinanceIndexAverageGraphData = async (indexLabel: string, numberOfWeeks: number) => {
-    return await axios.get(`${backendUrl}graphs/binance_index_assets/get_index_average_graph_data.php`, {
+    return await api.get(`graphs/binance_index_assets/get_index_average_graph_data.php`, {
         params: {
             index_label: indexLabel,
             number_of_weeks: numberOfWeeks

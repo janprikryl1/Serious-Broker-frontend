@@ -1,8 +1,7 @@
-import axios from "axios";
-import {backendUrl} from "../../env.ts";
+import { api } from "./axiosInstance.ts";
 
 export const getAssetGraphPreviewDate = async (coin: string) => {
-    return await axios.get(`${backendUrl}graphs/binance_index_assets/get_asset_by_label_preview.php`, {
+    return await api.get(`graphs/binance_index_assets/get_asset_by_label_preview.php`, {
         params: {
             coin: coin
         }

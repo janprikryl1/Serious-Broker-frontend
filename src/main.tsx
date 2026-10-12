@@ -1,8 +1,10 @@
 import {StrictMode} from 'react'
 import {createRoot} from 'react-dom/client'
 import App from './App.tsx'
+// Pouze CSS. Bootstrapí JS bundle není potřeba — veškerá interaktivita jde přes
+// react-bootstrap, které si vlastní logiku nese samo. V kódu nezůstalo žádné
+// deklarativní data-bs-toggle ani globální bootstrap.* API.
 import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import 'react-loading-skeleton/dist/skeleton.css';
 import 'aos/dist/aos.css';
 import '@fortawesome/fontawesome-svg-core/styles.css';

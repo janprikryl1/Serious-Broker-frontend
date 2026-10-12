@@ -1,9 +1,8 @@
-import axios from "axios";
-import {backendUrl} from "../../env.ts";
+import { api } from "./axiosInstance.ts";
 import {KlineData} from "../types/asset/KlineData.ts";
 
 export const getBinanceAssetGraphData = async (coin: string, interval: string, startTime: number, endTime: number) => {
-    const response = await axios.get<KlineData[]>(`${backendUrl}binance/get_asset_data.php`, {
+    const response = await api.get<KlineData[]>(`binance/get_asset_data.php`, {
         params: {
             symbol: coin,
             interval: interval,
@@ -20,7 +19,7 @@ export const getAllHourlyBinanceKlinesData = async (symbol: string) => {
       ? symbol.toUpperCase()
       : `${symbol.toUpperCase()}USDT`;
 
-    const response = await axios.get<KlineData[]>(`${backendUrl}binance/get_asset_data.php`, {
+    const response = await api.get<KlineData[]>(`binance/get_asset_data.php`, {
         params: {
             symbol: formattedSymbol,
             interval: "1d",

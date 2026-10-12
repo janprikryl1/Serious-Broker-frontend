@@ -1,48 +1,22 @@
-import axios from "axios";
-import {backendUrl} from "../../env.ts";
+import { api } from "./axiosInstance.ts";
 import {InvestmentPlanType, InvestmentPlanTypeDetails} from "../types/investmentPlan/InvestmentPlanType.ts";
 
 export const getInvestmentPlans = async () => {
-    const token = localStorage.getItem('token');
-    return await axios.get<InvestmentPlanType[]>(`${backendUrl}/investment_plan/investment_plan.php`, {
-        headers: {
-            Authorization: `Bearer ${token}`
-        }
-    });
+    return await api.get<InvestmentPlanType[]>(`investment_plan/investment_plan.php`);
 }
 
 export const getInvestmentPlansDetails = async () => {
-    const token = localStorage.getItem('token');
-    return await axios.get<InvestmentPlanTypeDetails[]>(`${backendUrl}/investment_plan/get_investment_plan_details.php`, {
-        headers: {
-            Authorization: `Bearer ${token}`
-        }
-    });
+    return await api.get<InvestmentPlanTypeDetails[]>(`investment_plan/get_investment_plan_details.php`);
 }
 
 export const getInvestmentPlan = async (id: number) => {
-    const token = localStorage.getItem('token');
-    return await axios.get<InvestmentPlanType>(`${backendUrl}/investment_plan/investment_plan.php?id=${id}`, {
-        headers: {
-            Authorization: `Bearer ${token}`
-        }
-    });
+    return await api.get<InvestmentPlanType>(`investment_plan/investment_plan.php?id=${id}`);
 }
 
 export const saveInvestmentPlan = async (data: InvestmentPlanType) => {
-    const token = localStorage.getItem('token');
-    return await axios.post(`${backendUrl}/investment_plan/investment_plan.php`, data, {
-        headers: {
-            Authorization: `Bearer ${token}`
-        }
-    });
+    return await api.post(`investment_plan/investment_plan.php`, data);
 }
 
 export const deleteInvestmentPlan = async (id: number) => {
-    const token = localStorage.getItem('token');
-    return await axios.delete(`${backendUrl}/investment_plan/investment_plan.php?id=${id}`, {
-        headers: {
-            Authorization: `Bearer ${token}`
-        }
-    });
+    return await api.delete(`investment_plan/investment_plan.php?id=${id}`);
 }

@@ -1,16 +1,11 @@
-import axios from "axios";
-import {backendUrl} from "../../env.ts";
+import { api } from "./axiosInstance.ts";
 import {CryptoCurrencyAdminType, CryptoCurrencyNewType} from "../types/asset/CryptoCurrencyType.ts";
 
 export const getAllCryptocurrencies = async () => {
     const token = localStorage.getItem("token");
     if (!token) return;
     
-    return await axios.get<CryptoCurrencyAdminType[]>(backendUrl + "cryptocurrency_list/admin_get_all_currencies.php", {
-        headers: {
-            Authorization: `Bearer ${token}`,
-        },
-    });
+    return await api.get<CryptoCurrencyAdminType[]>("cryptocurrency_list/admin_get_all_currencies.php");
 }
 
 export const cryptoCurrencyUpdate = async (post: CryptoCurrencyAdminType) => {
@@ -24,12 +19,7 @@ export const cryptoCurrencyUpdate = async (post: CryptoCurrencyAdminType) => {
     if (post.photo) {
         formData.append('photo', post.photo);
     }
-    return await axios.post(backendUrl + "cryptocurrency_list/upload_image.php", formData, {
-        headers: {
-            Authorization: `Bearer ${token}`,
-            'Content-Type': 'multipart/form-data'
-        }
-    });
+    return await api.post("cryptocurrency_list/upload_image.php", formData);
 };
 
 export const stylizedImageUpdate = async (id: number, name: string, symbol: string, file: File) => {
@@ -42,12 +32,7 @@ export const stylizedImageUpdate = async (id: number, name: string, symbol: stri
     formData.append('symbol', symbol);
     formData.append('stylized_image', file);
 
-    return await axios.post(backendUrl + "cryptocurrency_list/upload_stylized_image.php", formData, {
-        headers: {
-            Authorization: `Bearer ${token}`,
-            'Content-Type': 'multipart/form-data'
-        }
-    });
+    return await api.post("cryptocurrency_list/upload_stylized_image.php", formData);
 };
 
 export const cryptoCurrencyAdd = async (post: CryptoCurrencyNewType) => {
@@ -76,22 +61,15 @@ export const cryptoCurrencyAdd = async (post: CryptoCurrencyNewType) => {
         formData.append('stylized_image', post.stylized_image_file);
     }
 
-    return await axios.post(backendUrl + "cryptocurrency_list/new_cryptocurrency.php", formData, {
-        headers: {
-            Authorization: `Bearer ${token}`,
-            'Content-Type': 'multipart/form-data'
-        }
-    });
+    return await api.post("cryptocurrency_list/new_cryptocurrency.php", formData);
 };
 
 export const deleteCryptocurrency = async (id: number) => {
     const token = localStorage.getItem("token");
     if (!token) return;
 
-    return await axios.delete(backendUrl + "cryptocurrency_list/delete_cryptocurrency.php", {
-        headers: {
-            Authorization: `Bearer ${token}`,
-        },
+    return await api.delete("cryptocurrency_list/delete_cryptocurrency.php", {
+        
         params: {
             id: id
         }

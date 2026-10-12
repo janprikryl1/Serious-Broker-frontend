@@ -1,86 +1,57 @@
 import {CategorizedQuestions} from "../types/admin/Question.ts";
-import axios from "axios";
-import {backendUrl} from "../../env.ts";
+import { api } from "./axiosInstance.ts";
 import {UserLiteType} from "../types/user/UserLiteType.ts";
 import {QuestionEvaluationType} from "../types/admin/QuestionResponseUserType.ts";
 
 export const getAllQuestions = async () => {
     const token = localStorage.getItem("token");
     if (!token) return;
-    return axios.get<CategorizedQuestions>(`${backendUrl}/form_questions/get_questions.php`, {
-        headers: {
-            Authorization: `Bearer ${token}`,
-        }
-    });
+    return api.get<CategorizedQuestions>(`form_questions/get_questions.php`);
 }
 
 export const saveQuestion = async (formData: FormData) => {
     const token = localStorage.getItem("token");
     if (!token) return;
-    return axios.post(`${backendUrl}/form_questions/save_question.php`, formData, {
-        headers: {
-            Authorization: `Bearer ${token}`,
-        },
-    });
+    return api.post(`form_questions/save_question.php`, formData);
 };
 
 export const deleteQuestion = async (id: number) => {
     const token = localStorage.getItem("token");
     if (!token) return;
-    return axios.post(`${backendUrl}/form_questions/delete_question.php`, {
+    return api.post(`form_questions/delete_question.php`, {
         id: id
-    }, {
-        headers: {
-            Authorization: `Bearer ${token}`,
-        }
     });
 }
 
 export const resetUserResponses = async (userId: string) => {
     const token = localStorage.getItem("token");
     if (!token) return;
-    return axios.post(`${backendUrl}/form_questions/reset_user_answers.php`, {
+    return api.post(`form_questions/reset_user_answers.php`, {
         user_id: userId
-    }, {
-        headers: {
-            Authorization: `Bearer ${token}`,
-        }
     });
 }
 
 export const resetOldResponses = async () => {
     const token = localStorage.getItem("token");
     if (!token) return;
-    return axios.post(`${backendUrl}/form_questions/reset_one_year_answers.php`, {}, {
-        headers: {
-            Authorization: `Bearer ${token}`,
-        }
-    });
+    return api.post(`form_questions/reset_one_year_answers.php`, {});
 }
 
 export const saveOrder = async (newOrder: { id: number; order: number; category: string }[]) => {
     const token = localStorage.getItem("token");
     if (!token) return;
 
-    return axios.post(`${backendUrl}/form_questions/save_order.php`, newOrder, {
-        headers: {
-            Authorization: `Bearer ${token}`,
-        }
-    });
+    return api.post(`form_questions/save_order.php`, newOrder);
 };
 
 export const getUserLites = async () => {
     const token = localStorage.getItem("token");
     if (!token) return;
-    return axios.get<UserLiteType[]>(`${backendUrl}/form_questions/get_users.php`, {
-        headers: {
-            Authorization: `Bearer ${token}`,
-        }
-    });
+    return api.get<UserLiteType[]>(`form_questions/get_users.php`);
 }
 
 export const getUserQuestions = async (userId: string) => {
-    return axios.get<QuestionEvaluationType>(`${backendUrl}/form_questions/get_user_responses.php`, {
+    return api.get<QuestionEvaluationType>(`form_questions/get_user_responses.php`, {
         params: {
             user_id: userId
         }
@@ -90,39 +61,23 @@ export const getUserQuestions = async (userId: string) => {
 export const saveUserResponses = async (responses: any) => {
     const token = localStorage.getItem("token");
     if (!token) return;
-    return axios.post(`${backendUrl}/form_questions/submit_user_response.php`, responses, {
-        headers: {
-            Authorization: `Bearer ${token}`,
-        }
-    });
+    return api.post(`form_questions/submit_user_response.php`, responses);
 }
 
 export const getFormSettings = async () => {
     const token = localStorage.getItem("token");
     if (!token) return;
-    return axios.get(`${backendUrl}/form_questions/get_evaluation_categories.php`, {
-        headers: {
-            Authorization: `Bearer ${token}`,
-        }
-    });
+    return api.get(`form_questions/get_evaluation_categories.php`);
 }
 
 export const saveFormSettings = async (settings: any) => {
     const token = localStorage.getItem("token");
     if (!token) return;
-    return axios.post(`${backendUrl}/form_questions/save_evaluation_category.php`, settings, {
-        headers: {
-            Authorization: `Bearer ${token}`,
-        }
-    });
+    return api.post(`form_questions/save_evaluation_category.php`, settings);
 }
 
 export const deleteFormSetting = async (id: number) => {
     const token = localStorage.getItem("token");
     if (!token) return;
-    return axios.post(`${backendUrl}/form_questions/delete_evaluation_category.php`, { id }, {
-        headers: {
-            Authorization: `Bearer ${token}`,
-        }
-    });
+    return api.post(`form_questions/delete_evaluation_category.php`, { id });
 };
