@@ -1,0 +1,72 @@
+.custom-modal {
+  border-radius: 20px;
+  padding: 15px 20px 15px 20px;
+  border: none;
+  background-color: var(--tertiary-color);
+  max-height: calc(100vh - 2rem);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0px 0px 1px rgba(10, 7, 4, 0.01),
+  0px 0px 4px rgba(10, 7, 4, 0.03),
+  0px 0px 10px rgba(10, 7, 4, 0.04),
+  0px 0px 18px rgba(10, 7, 4, 0.05),
+  0px 0px 28px rgba(10, 7, 4, 0.07),
+  0px 0px 40px rgba(10, 7, 4, 0.08);
+}
+
+.custom-modal .modal-body {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: visible;
+  max-height: none;
+}
+
+@media (max-width: 576px) {
+  .custom-modal {
+    padding: 15px 20px;
+    max-height: calc(100vh - 1rem);
+  }
+}
+
+.custom-modal-footer {
+  border: none;
+  position: sticky;
+  bottom: 0;
+  background-color: var(--tertiary-color);
+  z-index: 10;
+}
+
+.lottie-custom-color-secondary {
+  path {
+    stroke: var(--secondary-color) !important;
+    fill: var(--secondary-color) !important;
+  }
+
+  path[fill="none"] {
+    fill: none !important;
+    stroke: var(--secondary-color) !important;
+  }
+
+  path[stroke="none"], path:not([stroke]) {
+    stroke: none !important;
+    fill: var(--secondary-color) !important;
+  }
+}
+
+.lottie-custom-color-red {
+  path {
+    stroke: var(--red-color) !important;
+    fill: var(--red-color) !important;
+  }
+
+  path[fill="none"] {
+    fill: none !important;
+    stroke: var(--red-color) !important;
+  }
+
+  path[stroke="none"], path:not([stroke]) {
+    stroke: none !important;
+    fill: var(--red-color) !important;
+  }
+}
