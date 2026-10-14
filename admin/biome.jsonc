@@ -1,0 +1,55 @@
+{
+  "$schema": "https://biomejs.dev/schemas/2.5.15/schema.json",
+  "vcs": { "enabled": false },
+  "files": {
+    "includes": [
+      "**/*.ts",
+      "**/*.tsx",
+      "**/*.js",
+      "**/*.json",
+      "!dist",
+      "!public",
+      "!package-lock.json",
+      // Vendorovaný shadcn kód generovaný CLI. Ruční opravy by se při dalším
+      // "shadcn add" přepsaly, takže se nelintuje.
+      "!src/components/ui"
+    ]
+  },
+  "javascript": {
+    "jsxRuntime": "transparent"
+  },
+  /*
+   * Formátování ZÁMĚRNĚ zůstává na prettieru. Biome formatter neumí to, co
+   * prettier-plugin-tailwindcss — tedy řadit tailwind classy. Kdyby tu byl
+   * zapnutý, oba nástroje by si přepisovaly soubory navzájem.
+   */
+  "formatter": { "enabled": false },
+  "assist": { "enabled": false },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      /*
+       * Na rozdíl od `web` tady jede preset "recommended" celý. Web má
+       * preset "none" a pravidla vypnutá kvůli legacy kódu, do kterého se
+       * nesmí zasahovat — tenhle projekt se píše od nuly, takže se drží
+       * striktně.
+       */
+      "preset": "recommended",
+      "correctness": {
+        "useExhaustiveDependencies": "error",
+        "useHookAtTopLevel": "error",
+        "noUnusedImports": "error",
+        "noUnusedVariables": "error",
+        "noUnusedFunctionParameters": "error"
+      },
+      "suspicious": {
+        "noExplicitAny": "error",
+        "noArrayIndexKey": "warn"
+      },
+      "style": {
+        "useConst": "error",
+        "useComponentExportOnlyModules": "error"
+      }
+    }
+  }
+}
