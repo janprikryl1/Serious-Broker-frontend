@@ -1,4 +1,4 @@
-name: Build and deploy frontend
+name: Build check (deploy on main)
 
 on:
   pull_request:
@@ -56,7 +56,11 @@ jobs:
 
   build-and-deploy:
     needs: changes
-    if: needs.changes.outputs.matrix != '' && fromJSON(needs.changes.outputs.matrix).include[0] != null
+    # PRs targeting main build changed projects; only pushes to main may deploy.
+    if: >-
+      (github.event_name == 'pull_request' && github.event.pull_request.base.ref == 'main' ||
+       github.event_name == 'push' && github.ref == 'refs/heads/main') &&
+      needs.changes.outputs.matrix != '' && fromJSON(needs.changes.outputs.matrix).include[0] != null
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -67,8 +71,6 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-          cache: npm
-          cache-dependency-path: ${{ matrix.directory }}/package-lock.json
 
       - name: Install dependencies
         working-directory: ${{ matrix.directory }}
@@ -84,7 +86,7 @@ jobs:
         run: cp ../.htaccess dist/.htaccess
 
       - name: Deploy over FTP
-        if: github.event_name == 'push' && matrix.deploy
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main' && matrix.deploy
         uses: SamKirkland/FTP-Deploy-Action@v4.3.6
         with:
           server: ${{ secrets.FTP_SERVER }}
