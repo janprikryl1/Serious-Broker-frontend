@@ -1,0 +1,94 @@
+name: Build and deploy frontend
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  changes:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.matrix.outputs.value }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: dorny/paths-filter@v3
+        id: filter
+        with:
+          filters: |
+            web:
+              - 'web/**'
+              - '.htaccess'
+            admin:
+              - 'admin/**'
+            editor:
+              - 'editor/**'
+            internal-tools:
+              - 'internal-tools/**'
+
+      - name: Create project matrix
+        id: matrix
+        env:
+          WEB: ${{ steps.filter.outputs.web }}
+          ADMIN: ${{ steps.filter.outputs.admin }}
+          EDITOR: ${{ steps.filter.outputs.editor }}
+          INTERNAL_TOOLS: ${{ steps.filter.outputs.internal-tools }}
+        run: |
+          node <<'NODE'
+          const projects = [];
+          if (process.env.WEB === 'true') projects.push({ name: 'web', directory: 'web', remote: './', deploy: true });
+          if (process.env.ADMIN === 'true') projects.push({ name: 'admin', directory: 'admin', remote: 'admin/', deploy: true });
+          // Editor deployment stays disabled until its migration is complete.
+          if (process.env.EDITOR === 'true') projects.push({ name: 'editor', directory: 'editor', remote: 'editor/', deploy: false });
+          if (process.env.INTERNAL_TOOLS === 'true') projects.push({ name: 'internal-tools', directory: 'internal-tools', remote: 'internal/', deploy: true });
+          const value = JSON.stringify({ include: projects });
+          console.log(`Detected projects: ${projects.map(project => project.name).join(', ') || 'none'}`);
+          require('fs').appendFileSync(process.env.GITHUB_OUTPUT, `value=${value}\n`);
+          NODE
+
+  build-and-deploy:
+    needs: changes
+    if: needs.changes.outputs.matrix != '' && fromJSON(needs.changes.outputs.matrix).include[0] != null
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJSON(needs.changes.outputs.matrix) }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: ${{ matrix.directory }}/package-lock.json
+
+      - name: Install dependencies
+        working-directory: ${{ matrix.directory }}
+        run: npm ci
+
+      - name: Build
+        working-directory: ${{ matrix.directory }}
+        run: npm run build
+
+      - name: Include root web routing rules
+        if: matrix.name == 'web'
+        working-directory: web
+        run: cp ../.htaccess dist/.htaccess
+
+      - name: Deploy over FTP
+        if: github.event_name == 'push' && matrix.deploy
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.6
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          server-dir: ${{ secrets.FTP_SERVER_DIR }}${{ matrix.remote }}
+          local-dir: ${{ matrix.directory }}/dist/
