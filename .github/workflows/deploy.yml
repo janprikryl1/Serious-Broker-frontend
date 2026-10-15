@@ -32,6 +32,7 @@ jobs:
             editor:
               - 'editor/**'
             internal-tools:
+              - 'internal-tools'
               - 'internal-tools/**'
 
       - name: Create project matrix
@@ -94,3 +95,9 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           server-dir: ${{ secrets.FTP_SERVER_DIR }}${{ matrix.remote }}
           local-dir: ${{ matrix.directory }}/dist/
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/node_modules/**
+            **/api
+            **/api/**
