@@ -7,6 +7,7 @@ import {FaBuilding, FaEnvelope} from "react-icons/fa6";
 import {FaPhoneAlt} from "react-icons/fa";
 import {GlassCard} from "../reusable/GlassCard.tsx";
 import {Button} from "../reusable/Button.tsx";
+import {captureEvent} from "../../utils/posthog.ts";
 
 const contactInputClass =
   "tw-w-full tw-bg-stone-900/60 tw-border tw-border-stone-700 tw-rounded-lg tw-px-3 tw-py-2.5 " +
@@ -25,6 +26,7 @@ export const ContactCard: FC = () => {
     try {
       const response = await addFeedback({name, email, message});
       if (response.data.message === "Message created") {
+        captureEvent('contact_form_submitted', { email });
         CustomSwal.fire({
           icon: "success",
           title: t("Success"),

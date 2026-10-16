@@ -1,6 +1,7 @@
 import {FC} from "react";
 import {QuotedCurrenciesPeriod} from "../../../utils/options/QuotedCurrenciesPeriod.ts";
 import {SeasonButton} from "../../overview/SeasonButton.tsx";
+import {captureEvent} from "../../../utils/posthog.ts";
 
 type Props = {
     season: QuotedCurrenciesPeriod;
@@ -16,7 +17,10 @@ export const AssetAnalyticsGraphPeriodSelection:FC<Props> = ({season, handleSele
                         key={seasonValue}
                         seasonValue={seasonValue}
                         isActive={season === seasonValue}
-                        onSelect={() => handleSelect(seasonValue as QuotedCurrenciesPeriod)}
+                        onSelect={() => {
+                            captureEvent('chart_period_changed', { period: seasonValue });
+                            handleSelect(seasonValue as QuotedCurrenciesPeriod);
+                        }}
                     />
                 ))}
             </div>

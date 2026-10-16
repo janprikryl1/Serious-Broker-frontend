@@ -1,5 +1,6 @@
 import {createContext, useContext, useState, useEffect, ReactNode, useCallback, FC} from 'react';
 import {SkeletonTheme} from "react-loading-skeleton";
+import {captureEvent} from "../posthog.ts";
 
 type ThemeContextType = {
     theme: string | null;
@@ -27,11 +28,9 @@ export const ThemeProvider: FC<{ children: ReactNode }> = ({ children }) => {
 
     const toggleTheme = () => {
         const theme = localStorage.getItem('theme');
-        if (theme && theme === 'dark') {
-            updateThemeColor('light');
-        } else {
-            updateThemeColor('dark');
-        }
+        const nextTheme = theme && theme === 'dark' ? 'light' : 'dark';
+        updateThemeColor(nextTheme);
+        captureEvent('theme_toggled', { theme: nextTheme });
     };
 
     return (

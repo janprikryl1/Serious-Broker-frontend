@@ -4,6 +4,7 @@ import type { WatchListEnum } from "../../utils/enums/WatchListEnum.ts";
 import { useTranslation } from "react-i18next";
 import { BsBookmark, BsBookmarkFill } from "react-icons/bs";
 import { showToast } from "../toast/toastHelper.tsx";
+import { captureEvent } from "../../utils/posthog.ts";
 
 type Props = {
   itemId?: number;
@@ -61,6 +62,10 @@ export const WatchlistButton: FC<Props> = ({
       }
 
       showToast.success(t(activeIsInWatchList ? "Removed from watchlist" : "Added to watchlist"));
+      captureEvent(activeIsInWatchList ? "watchlist_item_removed" : "watchlist_item_added", {
+        item_id: itemId,
+        item_type: itemType,
+      });
     } catch (error) {
       console.error("Error toggling watchlist:", error);
       setInternalIsInWatchList((prev) => !prev);

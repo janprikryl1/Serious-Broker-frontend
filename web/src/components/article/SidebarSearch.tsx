@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import {routes} from "../../utils/constants";
 import {SearchBar} from "../reusable/SearchBar.tsx";
 import {GlassCard} from "../reusable/GlassCard.tsx";
+import {captureEvent} from "../../utils/posthog.ts";
 
 type Props = {
     param?: string;
@@ -18,8 +19,10 @@ export const SidebarSearch: FC<Props> = ({ param = "", showTitle = true, style }
 
     const handleSearch = (e: FormEvent) => {
         e.preventDefault();
-        if (searchText.trim()) {
-            navigate(`${routes.searchURL}${encodeURIComponent(searchText.trim())}`);
+        const trimmed = searchText.trim();
+        if (trimmed) {
+            captureEvent('articles_searched', { query: trimmed });
+            navigate(`${routes.searchURL}${encodeURIComponent(trimmed)}`);
         }
     };
 

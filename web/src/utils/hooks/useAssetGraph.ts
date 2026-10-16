@@ -10,6 +10,7 @@ import {WatchListEnum} from "../enums/WatchListEnum.ts";
 import {formatCurrency} from "../functions/functions.ts";
 import {MissingCurrencyType} from "../types/graphs/MissingCurrencyType.ts";
 import {useTranslation} from "react-i18next";
+import {captureEvent} from "../posthog.ts";
 
 export const useAssetGraph = (propName?: string) => {
     const { i18n } = useTranslation();
@@ -31,6 +32,10 @@ export const useAssetGraph = (propName?: string) => {
             const response = await getAssetByIndexLabel(assetName);
             if (!response) return;
             setAsset(response.data);
+            captureEvent('index_details_viewed', {
+                index_name: assetName,
+                label: response.data?.index_label,
+            });
         };
         getGraphData();
     }, [assetName]);

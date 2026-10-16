@@ -5,6 +5,7 @@ import {getQR} from "../../../utils/api/qrService.ts";
 import {qrCodeImagesURL} from "../../../utils/constants";
 import {QRCodeType} from "../../../utils/types/admin/QRCodeType.ts";
 import {useModal} from "../../../utils/hooks/useModal.tsx";
+import {captureEvent} from "../../../utils/posthog.ts";
 
 export const QRPayment:FC = () => {
     const {t} = useTranslation();
@@ -16,6 +17,10 @@ export const QRPayment:FC = () => {
             const response = await getQR();
             if (!response) return;
             setQrData(response.data);
+            captureEvent('membership_payment_qr_viewed', {
+                network: response.data.network,
+                address: response.data.address_of_deposit,
+            });
         };
         fetchQR();
     }, []);

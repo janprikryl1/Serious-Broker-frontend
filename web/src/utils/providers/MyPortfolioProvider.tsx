@@ -6,6 +6,7 @@ import {MyPortfolioType} from "../types/myPortfolio/MyPortfolioType.ts";
 import {Assets} from "../types/asset/AssetDetailType.ts";
 import {getAvailableCoins, getMyPortfolioDetailsGraph, saveMyPortfolio} from "../api/myPortfolioService.ts";
 import {showToast} from "../../components/toast/toastHelper.tsx";
+import {captureEvent} from "../posthog.ts";
 
 type Props = {
     children: ReactNode;
@@ -121,6 +122,13 @@ export const MyPortfolioProvider = ({ children }: Props) => {
             };
 
             const response = await saveMyPortfolio(portfolioData);
+
+            captureEvent(id ? 'portfolio_updated' : 'portfolio_created', {
+                portfolio_id: id ? parseInt(id) : response?.data?.id,
+                portfolio_name: name.trim(),
+                asset_count: asset.length,
+                invested_amount: investedAmount,
+            });
 
             showToast.success(t('Portfolio saved successfully'));
 

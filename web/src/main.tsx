@@ -14,19 +14,27 @@ import {ErrorBoundary} from "react-error-boundary";
 import {ErrorFallback} from "./pages/ErrorFallback.tsx";
 import {BrowserRouter} from "react-router-dom";
 import AutoScrollToTop from "./components/reusable/AutoScrollToTop.tsx";
+import { PostHogProvider } from '@posthog/react'
+
+const options = {
+    api_host: import.meta.env.VITE_POSTHOG_HOST,
+    defaults: '2026-05-30',
+} as const
 
 createRoot(document.getElementById('root')!).render(
     <StrictMode>
-      <BrowserRouter>
-        <AutoScrollToTop />
-        <ErrorBoundary
-            FallbackComponent={ErrorFallback}
-            onError={(error, info) => {
-                console.error(error, info);
-            }}
-        >
-            <App/>
-        </ErrorBoundary>
-      </BrowserRouter>
+        <PostHogProvider apiKey={import.meta.env.VITE_POSTHOG_PROJECT_TOKEN || ''} options={options}>
+            <BrowserRouter>
+                <AutoScrollToTop />
+                <ErrorBoundary
+                    FallbackComponent={ErrorFallback}
+                    onError={(error, info) => {
+                        console.error(error, info);
+                    }}
+                >
+                    <App/>
+                </ErrorBoundary>
+            </BrowserRouter>
+        </PostHogProvider>
     </StrictMode>,
 )

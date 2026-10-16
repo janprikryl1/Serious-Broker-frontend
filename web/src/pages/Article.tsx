@@ -17,6 +17,7 @@ import {IoIosArrowBack} from "react-icons/io";
 import {SEO} from "../components/reusable/SEO.tsx";
 import {getArticleSchema, getBreadcrumbSchema} from "../utils/functions/seoSchemas.ts";
 import {domain, imageURL} from "../utils/constants";
+import {captureEvent} from "../utils/posthog.ts";
 
 export const Article: FC = () => {
   const {id, language} = useParams();
@@ -41,6 +42,11 @@ export const Article: FC = () => {
         setLanguage(articleLanguage);
         setArticle(response.data.article);
       }
+      captureEvent('article_viewed', {
+        article_id: id,
+        title: response.data?.article?.title,
+        language: articleLanguage,
+      });
       setInitialLoad(false);
     } catch (error: any) {
       if (error.response.status === 403) {

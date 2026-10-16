@@ -5,6 +5,7 @@ import { getAllAssetCoins, getAssetCoinDetails } from "../../utils/api/assetCalc
 import { CustomSwal } from "../../utils/functions/customSwal.ts";
 import { OverviewTableChart } from "../overview/overviewTableData/overviewTableChart/OverviewTableChart.tsx";
 import {routes} from "../../utils/constants";
+import {captureEvent} from "../../utils/posthog.ts";
 
 type ICalculationResult = {
     final_profit: number;
@@ -65,6 +66,12 @@ export const AssetCalculatorSingleCoin: FC = () => {
             const response = await getAssetCoinDetails(selectedCoin, selectedPeriod, Number(amount));
             if (response?.data) {
                 setCalculationResult(response.data);
+                captureEvent('calculator_simulation_run', {
+                    coin: selectedCoin,
+                    period: selectedPeriod,
+                    amount: Number(amount),
+                    final_profit: response.data.final_profit,
+                });
             }
         } catch (error) {
             console.error("Calculation error:", error);

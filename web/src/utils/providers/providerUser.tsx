@@ -5,6 +5,7 @@ import {PROTECTED_ROUTES, routes} from "../constants";
 import {Preloader} from "../../Preloader.tsx";
 import {isAuthenticated} from "../api/authenticateService.ts";
 import {UserFormFillModal} from "../../components/formQuestions/UserFormFillModal.tsx";
+import {identifyUser, resetUser} from "../posthog.ts";
 
 type Props = {
     children: ReactNode 
@@ -33,6 +34,11 @@ export const ProviderUser: FC<Props> = ({ children }) => {
                 if (result) {
                     setUser(result.data.user);
                     setFilledForm(result.data.user.has_filled_form !== true);
+                    identifyUser(result.data.user.id, {
+                        email: result.data.user.email,
+                        nickname: result.data.user.nickname,
+                        role: result.data.user.role,
+                    });
                 }
             } catch (error) {
                 console.error(error);
@@ -57,6 +63,7 @@ export const ProviderUser: FC<Props> = ({ children }) => {
     const logout = () => {
         setUser(undefined);
         localStorage.removeItem('token');
+        resetUser();
         navigate(routes.home);
     };
 

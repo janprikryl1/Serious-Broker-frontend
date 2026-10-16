@@ -6,6 +6,7 @@ import {getTrafficLight, saveTrafficLight} from "../api/trafficLightsService.ts"
 import {TrafficLightType} from "../types/trafficLight/TrafficLightType.ts";
 import {TrafficLightReference} from "../enums/TrafficLight.ts";
 import {showToast} from "../../components/toast/toastHelper.tsx";
+import {captureEvent} from "../posthog.ts";
 
 type Props = {
     children: ReactNode;
@@ -86,6 +87,13 @@ export const TrafficLightProvider = ({ children }: Props) => {
             };
 
             await saveTrafficLight(trafficLightData);
+
+            captureEvent('traffic_light_saved', {
+                traffic_light_id: idState,
+                name: name.trim(),
+                reference,
+                type,
+            });
 
             showToast.success(t('Traffic light saved successfully!'));
 

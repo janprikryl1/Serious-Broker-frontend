@@ -23,6 +23,7 @@ import {WatchlistButton} from "../../components/reusable/WatchlistButton.tsx";
 import {WatchListEnum} from "../../utils/enums/WatchListEnum.ts";
 import {addToWatchList, removeFromWatchList} from "../../utils/api/watchListService.ts";
 import FallbackCoin from "../../utils/icons/coins/base_gold.png";
+import {captureEvent} from "../../utils/posthog.ts";
 
 export enum Day {
   Sunday = 1,
@@ -53,6 +54,10 @@ export const CryptocurrencyDetails: FC = () => {
 
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
     setValue(newValue);
+    captureEvent('crypto_details_tab_changed', {
+      asset_label,
+      tab: newValue,
+    });
   };
 
   const formatMarketCap = (num: number, language: string) => {
@@ -105,6 +110,12 @@ export const CryptocurrencyDetails: FC = () => {
 
         const cryptoRes = await getCryptocurrencyById(asset_label, res.data?.name);
         setCryptoDetails(cryptoRes.data);
+
+        captureEvent('crypto_details_viewed', {
+          asset_label,
+          name: res.data?.name,
+          category: cryptoRes.data?.category,
+        });
 
         setIsKlinesLoading(true);
         const klinesResponse = await getAllHourlyBinanceKlinesData(asset_label);

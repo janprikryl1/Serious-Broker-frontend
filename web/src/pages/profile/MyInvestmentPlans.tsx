@@ -7,6 +7,7 @@ import {Button} from "../../components/reusable/Button.tsx";
 import {CustomTooltip} from "../../components/reusable/CustomTooltip.tsx";
 import {routes} from "../../utils/constants";
 import {TitleHeader} from "../../components/about/TitleHeader.tsx";
+import {captureEvent} from "../../utils/posthog.ts";
 import {getAssetSpotKlines} from "../../utils/api/GraphsService.ts";
 import {GraphDataSkeleton} from "../../components/graphs/asset/GraphDataSkeleton.tsx";
 import {GoPlus} from "react-icons/go";
@@ -458,6 +459,7 @@ export const MyInvestmentPlans: FC = () => {
 
     try {
       await deleteInvestmentPlan(id);
+      captureEvent('investment_plan_deleted', { plan_id: id });
       setInvestmentPlans((prev) => prev.filter((plan) => plan.id !== id));
       setSimulations((prev) => {
         const next = {...prev};

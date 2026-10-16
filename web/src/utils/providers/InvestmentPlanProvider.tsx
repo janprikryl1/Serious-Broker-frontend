@@ -6,6 +6,7 @@ import {InvestmentPlanType} from "../types/investmentPlan/InvestmentPlanType.ts"
 import {InvestmentFrequency} from "../../pages/profile/investmentPlan/RecurringInvestment.tsx";
 import {routes} from "../constants";
 import {showToast} from "../../components/toast/toastHelper.tsx";
+import {captureEvent} from "../posthog.ts";
 
 type Props = {
     children: ReactNode;
@@ -150,6 +151,14 @@ export const InvestmentPlanProvider = ({ children }: Props) => {
             console.log(planData);
 
             await saveInvestmentPlan(planData);
+
+            captureEvent(id ? 'investment_plan_updated' : 'investment_plan_created', {
+                plan_name: name.trim(),
+                is_custom_portfolio: isCustomPortfolio,
+                frequency: frequency,
+                currency: currency,
+                investment_amount: investmentAmount,
+            });
 
             showToast.success(t('Investment plan saved successfully'));
 

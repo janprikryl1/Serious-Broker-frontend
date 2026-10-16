@@ -1,6 +1,7 @@
 import {Dispatch, FC, SetStateAction} from "react";
 import {NavDropdown} from "react-bootstrap";
 import {useTranslation} from "react-i18next";
+import {captureEvent} from "../../../../utils/posthog.ts";
 
 type Props = {
     languageId: string;
@@ -12,6 +13,7 @@ export const LanguageFlagComponent:FC<Props> = ({languageId, languageName, setSh
     
     const handleLanguageChange = () => {
         i18n.changeLanguage(languageId);
+        captureEvent('language_changed', { language: languageId });
         setShowGoogleTranslation(false);
     };
 

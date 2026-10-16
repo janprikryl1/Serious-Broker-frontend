@@ -9,6 +9,7 @@ import {registerUserType} from "../types/user/registerUserType.ts";
 import {CustomSwal} from "../functions/customSwal.ts";
 import {register} from "../api/authenticateService.ts";
 import {useTranslation} from "react-i18next";
+import {captureEvent, identifyUser} from "../posthog.ts";
 
 export const useRegister = () => {
     const { t } = useTranslation();
@@ -66,6 +67,18 @@ export const useRegister = () => {
             const response = await register(payload);
 
             if (response.status === "success") {
+                captureEvent('user_registered', {
+                    country: payload.country,
+                    language: payload.language,
+                    newsletter_subscription: payload.newsletter_subscription,
+                });
+                if (response.user) {
+                    identifyUser(response.user.id, {
+                        email: response.user.email,
+                        nickname: response.user.nickname,
+                        role: response.user.role,
+                    });
+                }
                 CustomSwal.fire({
                     icon: "success",
                     title: t("Registration Successful"),

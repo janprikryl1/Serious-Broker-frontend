@@ -7,6 +7,7 @@ import {routes} from "../constants";
 import {login} from "../api/authenticateService.ts";
 import {showToast} from "../../components/toast/toastHelper.tsx";
 import {getSafeRedirect} from "../functions/safeRedirect.ts";
+import {captureEvent, identifyUser} from "../posthog.ts";
 
 type LoginFormInputs = {
     email: string;
@@ -56,6 +57,12 @@ export const useSignIn = () => {
 
             if (resData.status === "success") {
                 setUser(resData.user);
+                identifyUser(resData.user.id, {
+                    email: resData.user.email,
+                    nickname: resData.user.nickname,
+                    role: resData.user.role,
+                });
+                captureEvent('user_logged_in', { email: resData.user.email });
                 goToRedirect(routes.profile.dashboard);
                 showToast.success(t("Welcome back!") );
 

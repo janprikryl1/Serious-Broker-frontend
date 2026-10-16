@@ -12,6 +12,7 @@ import { GoPlus } from "react-icons/go";
 import { PortfolioGraphData } from "../../utils/types/asset/MyPortfolioType.ts";
 import { SpinnerLoader } from "../../components/reusable/SpinnerLoader.tsx";
 import Skeleton from "react-loading-skeleton";
+import { captureEvent } from "../../utils/posthog.ts";
 
 export const MyPortfolio = () => {
   const { t } = useTranslation();
@@ -98,6 +99,7 @@ export const MyPortfolio = () => {
 
     try {
       await deleteMyPortfolio(id);
+      captureEvent('portfolio_deleted', { portfolio_id: id });
       setMyPortfolios((prev) => prev.filter((portfolio) => portfolio.id !== id));
       setPortfolioGraphData((prev) => {
         const newGraphData = new Map(prev);

@@ -4,6 +4,7 @@ import {useTranslation} from "react-i18next";
 import {useUserContext} from "./providerUser.tsx";
 import {updateUserDetails} from "../api/authenticateService.ts";
 import {CustomSwal} from "../functions/customSwal.ts";
+import {captureEvent, identifyUser} from "../posthog.ts";
 
 type Props = {
     children: ReactNode;
@@ -39,6 +40,16 @@ export const UserDetailsProvider = ({children}: Props) => {
             if (response.data.status === "success") {
                 setUserDetails(response.data.user);
                 setUser(response.data.user);
+                identifyUser(response.data.user.id, {
+                    email: response.data.user.email,
+                    nickname: response.data.user.nickname,
+                    role: response.data.user.role,
+                });
+                captureEvent('profile_updated', {
+                    language: response.data.user.language,
+                    country: response.data.user.country,
+                    newsletter_subscription: response.data.user.newsletter_subscription,
+                });
                 CustomSwal.fire({
                     icon: "success",
                     title: t("Updated"),
