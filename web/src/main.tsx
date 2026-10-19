@@ -15,11 +15,15 @@ import {ErrorFallback} from "./pages/ErrorFallback.tsx";
 import {BrowserRouter} from "react-router-dom";
 import AutoScrollToTop from "./components/reusable/AutoScrollToTop.tsx";
 import { PostHogProvider } from '@posthog/react'
+import { syncCookieConsent } from './utils/posthog.ts'
 
 const options = {
     api_host: import.meta.env.VITE_POSTHOG_HOST,
     defaults: '2026-05-30',
+    opt_out_capturing_by_default: true,
 } as const
+
+syncCookieConsent();
 
 createRoot(document.getElementById('root')!).render(
     <StrictMode>

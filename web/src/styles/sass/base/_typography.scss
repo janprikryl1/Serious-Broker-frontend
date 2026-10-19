@@ -128,9 +128,20 @@ button {
   font-size: 14px;
 }
 
+.custom-switch .form-check-input {
+  cursor: pointer;
+}
+
 .custom-switch .form-check-input:checked {
   background-color: #ffca2c !important;
   border-color: #ffca2c !important;
+}
+
+.custom-switch .form-check-input:disabled:checked {
+  background-color: #10b981 !important;
+  border-color: #10b981 !important;
+  opacity: 0.9 !important;
+  cursor: not-allowed;
 }
 
 .season-button-group {
