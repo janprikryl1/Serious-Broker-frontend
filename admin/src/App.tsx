@@ -21,7 +21,6 @@ export default function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
-        {/* basename odpovídá `base` ve vite.config.ts */}
         <BrowserRouter basename="/admin">
           <RequireRole allowed={[UserRole.Admin, UserRole.Manager]}>
             <Router />

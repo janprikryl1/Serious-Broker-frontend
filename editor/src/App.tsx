@@ -19,11 +19,7 @@ export default function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
-        {/* basename odpovídá `base` ve vite.config.ts */}
         <BrowserRouter basename="/editor">
-          {/* Admin a manager mají do editoru přístup taky — kopíruje to
-              původní chování ve webu, kde editor sekce nebyla omezená jen
-              na roli Editor. */}
           <RequireRole
             allowed={[UserRole.Editor, UserRole.Admin, UserRole.Manager]}
           >
