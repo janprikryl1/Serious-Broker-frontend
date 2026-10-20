@@ -97,6 +97,9 @@ jobs:
           protocol: ${{ vars.FTP_PROTOCOL || 'ftp' }}
           port: ${{ vars.FTP_PORT || 21 }}
           timeout: 120000
+          # Docasne: getServerFiles() polyka skutecnou chybu a hlasi misto ni
+          # "first publish". Verbose ukaze, na kterem prikazu spojeni umira.
+          log-level: verbose
           server-dir: ${{ secrets.FTP_SERVER_DIR }}${{ matrix.remote }}
           local-dir: ${{ matrix.directory }}/dist/
           exclude: |
