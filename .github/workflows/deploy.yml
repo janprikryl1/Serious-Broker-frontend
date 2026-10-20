@@ -45,10 +45,9 @@ jobs:
         run: |
           node <<'NODE'
           const projects = [];
-          if (process.env.WEB === 'true') projects.push({ name: 'web', directory: 'web', remote: './', deploy: true });
+          if (process.env.WEB === 'true') projects.push({ name: 'web', directory: 'web', remote: '', deploy: true });
           if (process.env.ADMIN === 'true') projects.push({ name: 'admin', directory: 'admin', remote: 'admin/', deploy: true });
-          // Editor deployment stays disabled until its migration is complete.
-          if (process.env.EDITOR === 'true') projects.push({ name: 'editor', directory: 'editor', remote: 'editor/', deploy: false });
+          if (process.env.EDITOR === 'true') projects.push({ name: 'editor', directory: 'editor', remote: 'editor/', deploy: true });
           if (process.env.INTERNAL_TOOLS === 'true') projects.push({ name: 'internal-tools', directory: 'internal-tools', remote: 'internal/', deploy: true });
           const value = JSON.stringify({ include: projects });
           console.log(`Detected projects: ${projects.map(project => project.name).join(', ') || 'none'}`);
@@ -65,6 +64,8 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
+      # One FTP session at a time - shared hosting drops concurrent logins.
+      max-parallel: 1
       matrix: ${{ fromJSON(needs.changes.outputs.matrix) }}
     steps:
       - uses: actions/checkout@v4
@@ -93,6 +94,9 @@ jobs:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ${{ vars.FTP_PROTOCOL || 'ftp' }}
+          port: ${{ vars.FTP_PORT || 21 }}
+          timeout: 120000
           server-dir: ${{ secrets.FTP_SERVER_DIR }}${{ matrix.remote }}
           local-dir: ${{ matrix.directory }}/dist/
           exclude: |
