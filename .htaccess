@@ -1,0 +1,17 @@
+RewriteEngine On
+
+RewriteCond %{HTTPS} off [OR]
+RewriteCond %{HTTP_HOST} ^www\. [NC]
+RewriteCond %{HTTP_HOST} ^(?:www\.)?(.+)$ [NC]
+RewriteRule ^ https://%1%{REQUEST_URI} [L,NE,R=301]
+
+# Výjimka pro samostatné podaplikace (/admin, /editor, /internal)
+# Každá má vlastní .htaccess ve své složce a obsluhuje vlastní SPA routing.
+RewriteCond %{REQUEST_URI} ^/(admin|editor|internal) [NC]
+RewriteRule ^ - [L]
+
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -l [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^.*$ - [NC,L]
+RewriteRule ^(.*) /index.html [NC,L]
