@@ -91,6 +91,14 @@ const FormEvaluationSettings = lazy(() =>
     default: m.FormEvaluationSettings,
   }))
 )
+const ServerInfo = lazy(() =>
+  import("@/pages/ServerInfo.tsx").then((m) => ({ default: m.ServerInfo }))
+)
+const ServerErrorLog = lazy(() =>
+  import("@/pages/ServerErrorLog.tsx").then((m) => ({
+    default: m.ServerErrorLog,
+  }))
+)
 const NotFound = lazy(() =>
   import("@/pages/NotFound.tsx").then((m) => ({ default: m.NotFound }))
 )
@@ -271,6 +279,22 @@ export const Router: FC = () => {
           element={
             <Suspense fallback={<PageLoader />}>
               <FormEvaluationSettings />
+            </Suspense>
+          }
+        />
+        <Route
+          path={`/${routes.serverInfo}`}
+          element={
+            <Suspense fallback={<PageLoader />}>
+              <ServerInfo />
+            </Suspense>
+          }
+        />
+        <Route
+          path={`/${routes.serverLog}`}
+          element={
+            <Suspense fallback={<PageLoader />}>
+              <ServerErrorLog />
             </Suspense>
           }
         />

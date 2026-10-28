@@ -1,9 +1,24 @@
 import { api } from "@/utils/api/axiosInstance.ts"
-import type { BinanceIndexType } from "@/utils/types/binanceIndex.ts"
+import type {
+  BinanceIndexListParams,
+  BinanceIndexListResponse,
+} from "@/utils/types/binanceIndex.ts"
 
-export const getBinanceIndexAbouts = async (): Promise<BinanceIndexType[]> => {
-  const res = await api.get<BinanceIndexType[]>(
-    "binance_index_about/index_abouts.php"
+export const getBinanceIndexAbouts = async ({
+  page = 1,
+  limit = 25,
+  search = "",
+}: BinanceIndexListParams = {}): Promise<BinanceIndexListResponse> => {
+  const res = await api.get<BinanceIndexListResponse>(
+    "binance_index_about/index_abouts.php",
+    {
+      params: {
+        page,
+        limit,
+        // Prázdný filtr se neposílá, ať se requesty cachují podle URL.
+        ...(search ? { search } : {}),
+      },
+    }
   )
   return res.data
 }

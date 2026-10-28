@@ -125,6 +125,21 @@ Cesty v `src/utils/constants/routes.ts` jsou ZÁMĚRNĚ shodné s původními, t
 | `AdminGenericTableData.tsx` ×3  | `generic_table_data`, …       | ✅   | Dynamické tabulky, SQL builder, výsledky |
 | `AdminFormsOverview.tsx` ×3     | `forms`, `form_responses`, …  | ✅   | Formuláře s `@dnd-kit` drag-and-drop, odpovědi, hodnocení |
 
+### Stránky vzniklé až tady (nemají předchůdce ve `web`)
+
+Sekce **Server** v postranním panelu. Vznikla pro případ, kdy je k hostingu
+jen FTP přístup — všechno, co by se jinak zjišťovalo přes `phpinfo()` nebo
+stažením `error.log`, je vidět přímo v administraci.
+
+| stránka                 | cesta         | backend | poznámka |
+| ----------------------- | ------------- | ------- | -------- |
+| `ServerInfo.tsx`        | `server_info` | `server/get_info.php` | Verze PHP a konfigurace, rozšíření, databáze, disk, oprávnění složek |
+| `ServerErrorLog.tsx`    | `server_log`  | `server/get_error_log.php`, `server/clear_error_log.php` | Výpis `error.log` po záznamech, filtr podle severity, fulltext, export, vyprázdnění |
+
+Oba endpointy vyžadují roli `admin` nebo `manager` a hodnoty z `.env`
+nevracejí — v logu navíc maskují hesla a tokeny, které se do stack trace
+dostanou jako argumenty funkcí.
+
 ### Vzhled: Light / Dark Mode
 
 V administraci je zabudovaný přepínač motivu (ThemeToggle):

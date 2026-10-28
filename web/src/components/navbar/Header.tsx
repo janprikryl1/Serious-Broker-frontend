@@ -65,9 +65,15 @@ export const Header: FC = () => {
               )}
 
               {isTablet || isMobile ?
-                <div onClick={toggleMobileMenu} aria-label="Toggle menu">
+                <button
+                  type="button"
+                  onClick={toggleMobileMenu}
+                  aria-label="Toggle menu"
+                  aria-expanded={isMobileMenuOpen}
+                  className="tw-bg-transparent tw-border-0 tw-p-0 tw-flex tw-items-center tw-cursor-pointer"
+                >
                   <FiMenu size={30} style={{color: menuColor, marginLeft: "15px"}}/>
-                </div> :
+                </button> :
                 null
               }
             </div>

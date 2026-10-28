@@ -1,6 +1,6 @@
 import {FC} from "react";
 import {SharedSlideLayout} from "./SharedSlideLayout.tsx";
-import CryptoStreet from "../../../utils/icons/index/crypto_street.png"
+import CryptoStreet from "../../../utils/icons/index/crypto_street.webp"
 import {useTranslation} from "react-i18next";
 import {useMediaQuery} from "@mui/material";
 

@@ -41,9 +41,9 @@ export const CookieIntroStep: FC<CookieIntroStepProps> = ({
         </button>
       </div>
 
-      <h4 className="tw-mb-0 tw-text-lg sm:tw-text-xl tw-font-bold tw-text-white tw-leading-tight">
+      <h2 id="cookie-consent-title" className="tw-mb-0 tw-text-lg sm:tw-text-xl tw-font-bold tw-text-white tw-leading-tight">
         {t("Cookies & Analytics")}
-      </h4>
+      </h2>
 
       <p className="tw-text-xs sm:tw-text-sm tw-text-stone-300 tw-leading-relaxed tw-mb-2">
         {t("We use cookies and PostHog to analyze traffic and enhance your browsing experience.")}{" "}
@@ -51,7 +51,7 @@ export const CookieIntroStep: FC<CookieIntroStepProps> = ({
           to={routes.cookiesInfo}
           target="_blank"
           rel="noopener noreferrer"
-          className="tw-text-[var(--secondary-color)] hover:tw-underline tw-font-medium tw-whitespace-nowrap"
+          className="tw-text-secondary-on-dark hover:tw-underline tw-font-medium tw-whitespace-nowrap"
         >
           {t("Cookies Policy")} ↗
         </Link>

@@ -1,10 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Playfair:ital,opsz,wght@0,5..1200,300..900;1,5..1200,300..900&display=swap');
-
-@import url('https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;600&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=PT+Sans+Caption:wght@400&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=PT+Serif:wght@400;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=PT+Serif+Caption:wght@400&display=swap');
-
-@import url('https://fonts.googleapis.com/css2?family=Sora:wght@100..800&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+/*
+ * Písma se načítají jedním <link> v index.html, ne přes @import.
+ *
+ * @import uvnitř CSS je řetězený požadavek — prohlížeč musí nejdřív stáhnout
+ * a naparsovat index-*.css, teprve pak zjistí, že má jít na fonts.googleapis.com.
+ * PageSpeed to měřil jako ~4,8 s blokování vykreslení u osmi samostatných
+ * @importů. V <head> se stylopis fontů stahuje paralelně s hlavním CSS.
+ *
+ * Rodiny PT Sans, PT Sans Caption, PT Serif a PT Serif Caption se nikde
+ * nepoužívaly — byly odstraněny.
+ */

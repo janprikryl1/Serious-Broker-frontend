@@ -1,12 +1,25 @@
 import { useState, type FC, type FormEvent } from "react"
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
+import {
+  keepPreviousData,
+  useMutation,
+  useQuery,
+  useQueryClient,
+} from "@tanstack/react-query"
 import { toast } from "sonner"
-import { Info, Pencil, Save, Search } from "lucide-react"
+import {
+  ChevronLeft,
+  ChevronRight,
+  Info,
+  Pencil,
+  Save,
+  Search,
+} from "lucide-react"
 import {
   getBinanceIndexAbouts,
   updateBinanceIndexAbout,
 } from "@/utils/api/binanceIndexService.ts"
 import type { BinanceIndexType } from "@/utils/types/binanceIndex.ts"
+import { useDebouncedValue } from "@/utils/hooks/useDebouncedValue.ts"
 import { Button } from "@/components/ui/button.tsx"
 import { Input } from "@/components/ui/input.tsx"
 import { Textarea } from "@/components/ui/textarea.tsx"
@@ -30,20 +43,37 @@ import { Skeleton } from "@/components/ui/skeleton.tsx"
 
 const BINANCE_INDEX_QUERY_KEY = ["admin", "binanceIndexAbout"]
 
+/**
+ * Indexů je v databázi přes třicet tisíc (generované varianty pro zpětné
+ * testy), takže se stránkuje i filtruje na serveru. Dřív se načítala celá
+ * tabulka a vykreslovala do DOM naráz, což stránku zaseklo.
+ */
+const PAGE_SIZE = 25
+
 export const BinanceIndexAbout: FC = () => {
   const queryClient = useQueryClient()
   const [searchTerm, setSearchTerm] = useState("")
+  const [page, setPage] = useState(1)
   const [editingItem, setEditingItem] = useState<BinanceIndexType | null>(null)
   const [editAboutText, setEditAboutText] = useState("")
 
-  const {
-    data: indexes = [],
-    isPending,
-    isError,
-  } = useQuery({
-    queryKey: BINANCE_INDEX_QUERY_KEY,
-    queryFn: getBinanceIndexAbouts,
+  const debouncedSearch = useDebouncedValue(searchTerm)
+
+  const { data, isPending, isFetching, isError } = useQuery({
+    queryKey: [...BINANCE_INDEX_QUERY_KEY, page, PAGE_SIZE, debouncedSearch],
+    queryFn: () =>
+      getBinanceIndexAbouts({
+        page,
+        limit: PAGE_SIZE,
+        search: debouncedSearch,
+      }),
+    // Při psaní zůstane viditelná předchozí stránka místo skeletonu.
+    placeholderData: keepPreviousData,
   })
+
+  const indexes = data?.data ?? []
+  const total = data?.total ?? 0
+  const totalPages = data?.totalPages ?? 1
 
   const updateMutation = useMutation({
     mutationFn: ({ id, about }: { id: number; about: string }) =>
@@ -56,16 +86,6 @@ export const BinanceIndexAbout: FC = () => {
       setEditingItem(null)
     },
     onError: () => toast.error("Nepodařilo se uložit popis indexu"),
-  })
-
-  const filtered = indexes.filter((item) => {
-    if (!searchTerm.trim()) return true
-    const term = searchTerm.toLowerCase()
-    return (
-      item.name.toLowerCase().includes(term) ||
-      item.label.toLowerCase().includes(term) ||
-      String(item.id).includes(term)
-    )
   })
 
   const handleEditClick = (item: BinanceIndexType) => {
@@ -94,16 +114,28 @@ export const BinanceIndexAbout: FC = () => {
         </p>
       )}
 
-      <div className="flex items-center gap-3">
+      <div className="flex flex-wrap items-center justify-between gap-3">
         <div className="relative max-w-sm flex-1">
           <Search className="absolute top-2.5 left-2.5 size-4 text-muted-foreground" />
           <Input
-            placeholder="Hledat index podle názvu nebo štítku..."
+            placeholder="Hledat index podle názvu, štítku nebo ID..."
             className="pl-9"
             value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
+            onChange={(e) => {
+              setSearchTerm(e.target.value)
+              // Nový filtr vždy začíná od první stránky, jinak by uživatel
+              // skončil na stránce, která ve zúženém výsledku neexistuje.
+              setPage(1)
+            }}
           />
         </div>
+        <p className="text-sm text-muted-foreground">
+          {isPending
+            ? "Načítání..."
+            : `${total.toLocaleString("cs-CZ")} indexů${
+                debouncedSearch ? " odpovídá filtru" : ""
+              }`}
+        </p>
       </div>
 
       <div className="rounded-lg border border-border bg-card">
@@ -139,7 +171,7 @@ export const BinanceIndexAbout: FC = () => {
                   </TableCell>
                 </TableRow>
               ))
-            ) : filtered.length === 0 ? (
+            ) : indexes.length === 0 ? (
               <TableRow>
                 <TableCell
                   colSpan={5}
@@ -149,7 +181,7 @@ export const BinanceIndexAbout: FC = () => {
                 </TableCell>
               </TableRow>
             ) : (
-              filtered.map((item) => (
+              indexes.map((item) => (
                 <TableRow key={item.id}>
                   <TableCell className="font-mono text-xs">{item.id}</TableCell>
                   <TableCell className="font-medium">{item.name}</TableCell>
@@ -180,6 +212,33 @@ export const BinanceIndexAbout: FC = () => {
             )}
           </TableBody>
         </Table>
+      </div>
+
+      {/* Pagination */}
+      <div className="flex items-center justify-between">
+        <p className="text-sm text-muted-foreground">
+          Stránka {page} z {totalPages}
+        </p>
+        <div className="flex items-center gap-2">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => setPage((p) => Math.max(1, p - 1))}
+            disabled={page <= 1 || isFetching}
+          >
+            <ChevronLeft className="size-4" />
+            Předchozí
+          </Button>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+            disabled={page >= totalPages || isFetching}
+          >
+            Další
+            <ChevronRight className="size-4" />
+          </Button>
+        </div>
       </div>
 
       {/* Edit Dialog */}

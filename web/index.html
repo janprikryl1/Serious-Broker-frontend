@@ -10,6 +10,26 @@
     <meta name="author" content="Serious Broker" />
     <link rel="canonical" href="https://serious.broker/" />
 
+    <!--
+      Písma jedním požadavkem. Dřív se načítala osmi @importy ze SCSS, které
+      se řetězily až za hlavní CSS a blokovaly vykreslení o ~4,8 s.
+
+      Oproti původnímu stavu je vypuštěná osa opsz (optical size) u Inter
+      a Playfair — u variabilního fontu zhruba zdvojnásobuje velikost souboru
+      (Inter 72 KiB -> 10 KiB) a při velikostech textu, které web používá, není
+      rozdíl poznat. Rozsahy vah zůstávají plné schválně: u variabilního fontu
+      je soubor pro 300..700 i 100..900 bajt po bajtu stejný, jen užší rozsah
+      ořízne váhy mimo něj (web používá 100 u čísla na 404 a 800 u čísel kroků
+      investičního plánu). Kurzíva se stahuje jen tehdy, když ji stránka
+      skutečně vykreslí, takže u Raleway i Inter nic nestojí.
+    -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,100..900;1,100..900&family=Playfair:wght@300..900&family=Raleway:ital,wght@0,100..900;1,100..900&family=Sora:wght@100..800&display=swap"
+    />
+
     <!-- Open Graph / Facebook / WhatsApp -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://serious.broker/" />

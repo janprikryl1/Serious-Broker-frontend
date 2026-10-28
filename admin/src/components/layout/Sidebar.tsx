@@ -46,10 +46,11 @@ export const Sidebar: FC<Props> = ({ isCollapsed, onToggleCollapsed }) => {
   const isGroupActive = (group: NavGroup) =>
     isNavGroupActive(location.pathname, group)
 
-  // Výchozí stav otevření skupin: Uživatelé i Databáze jsou otevřené
+  // Výchozí stav otevření skupin: Uživatelé, Databáze i Server jsou otevřené
   const [openGroups, setOpenGroups] = useState<Record<string, boolean>>({
     users: true,
     database: true,
+    server: true,
   })
 
   // Pokud uživatel naviguje na stránku uvnitř skupiny, skupina se automaticky otevře

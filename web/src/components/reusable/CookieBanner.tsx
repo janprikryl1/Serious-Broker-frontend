@@ -65,6 +65,7 @@ export const CookieBanner: FC = () => {
     <Modal
       show={show}
       onHide={handleClose}
+      aria-labelledby="cookie-consent-title"
       centered
       backdrop={true}
       keyboard={true}

@@ -31,9 +31,9 @@ export const WhyToInvestInCryptocurrencies: FC = () => {
 
   return (
     <div className="container tw-mt-8 tw-mb-12 tw-px-4 tw-py-10 sm:tw-mb-16 sm:tw-px-6 sm:tw-py-14 lg:tw-py-16">
-      <h6 className="tw-pb-0 tw-pt-5 tw-text-xs tw-font-normal tw-tracking-normal tw-text-secondary sm:tw-text-base">
+      <p className="tw-mb-2 tw-pb-0 tw-pt-5 tw-text-xs tw-font-normal tw-tracking-normal tw-text-secondary tw-font-['Sora'] sm:tw-text-base">
         {t("BASICS")}
-      </h6>
+      </p>
       <h2 className="index-section-head-title tw-mb-5 tw-text-2xl sm:tw-text-3xl md:tw-text-5xl lg:tw-text-6xl">
         {t("Why Cryptocurrencies?")}
       </h2>

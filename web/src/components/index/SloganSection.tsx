@@ -17,8 +17,8 @@ export const SloganSection:FC = () => {
                  data-aos-offset="0"
                  data-aos-easing="ease-out-cubic"
             >
-                <h4 className="tw-m-0 tw-pb-2 tw-text-center tw-text-sm tw-font-semibold tw-text-primary sm:tw-text-base md:tw-text-xl lg:tw-text-3xl">{t("Seriousness • Safety • Trust")}</h4>
-                <h6 className="tw-m-0 tw-p-0 tw-text-center tw-text-[10px] tw-font-normal tw-tracking-normal tw-text-secondary sm:tw-text-xs md:tw-text-base lg:tw-text-lg">SERIOUS.BROKER</h6>
+                <p className="tw-m-0 tw-pb-2 tw-text-center tw-text-sm tw-font-semibold tw-text-primary tw-font-['Sora'] sm:tw-text-base md:tw-text-xl lg:tw-text-3xl">{t("Seriousness • Safety • Trust")}</p>
+                <p className="tw-m-0 tw-p-0 tw-text-center tw-text-[10px] tw-font-normal tw-tracking-normal tw-text-secondary-on-light tw-font-['Sora'] sm:tw-text-xs md:tw-text-base lg:tw-text-lg">SERIOUS.BROKER</p>
             </div>
         </div>
     );

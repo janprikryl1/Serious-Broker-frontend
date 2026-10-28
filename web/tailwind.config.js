@@ -9,6 +9,9 @@ export default {
       colors: {
         // Theme colors
         secondary: "var(--secondary-color)",
+        // Kontrastní varianty zlaté pro text (viz _variables.scss)
+        "secondary-on-light": "var(--secondary-color-on-light)",
+        "secondary-on-dark": "var(--secondary-color-on-dark)",
         "secondary-transparent-50": "var(--secondary-color-transparent-50)",
         primary: "var(--primary-color)",
         tertiary: "var(--tertiary-color)",

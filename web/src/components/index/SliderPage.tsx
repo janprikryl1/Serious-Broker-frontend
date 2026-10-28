@@ -9,7 +9,7 @@ import {useMediaQuery} from "@mui/material";
 import {SliderTextTools} from "./indexSliderPages/SliderTextTools.tsx";
 import {SliderTextAutopilot} from "./indexSliderPages/SliderTextAutopilot.tsx";
 import {SliderTextEducation} from "./indexSliderPages/SliderTextEducation.tsx";
-import CryptoStreet from "../../utils/icons/index/crypto_street.png";
+import CryptoStreet from "../../utils/icons/index/crypto_street.webp";
 import {SharedSlideLayout} from "./indexSliderPages/SharedSlideLayout.tsx";
 
 export const SliderPage: FC = () => {

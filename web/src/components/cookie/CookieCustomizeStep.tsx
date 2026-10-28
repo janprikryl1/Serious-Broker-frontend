@@ -52,9 +52,9 @@ export const CookieCustomizeStep: FC<CookieCustomizeStepProps> = ({
         </button>
       </div>
 
-      <h4 className="tw-mb-0 tw-text-lg sm:tw-text-xl tw-font-bold tw-text-white tw-leading-tight">
+      <h2 id="cookie-consent-title" className="tw-mb-0 tw-text-lg sm:tw-text-xl tw-font-bold tw-text-white tw-leading-tight">
         {t("Customize cookies")}
-      </h4>
+      </h2>
 
       <p className="tw-text-xs sm:tw-text-sm tw-text-stone-300 tw-leading-relaxed tw-mb-1">
         {t("Select which cookies you want to allow.")}

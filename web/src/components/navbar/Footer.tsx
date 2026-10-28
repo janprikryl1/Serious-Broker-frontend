@@ -56,7 +56,9 @@ export const Footer: FC = () => {
                     </div>
                 </div>
 
-                <h4 className="tw-text-center tw-mt-8 sm:tw-mt-10 lg:tw-mt-8 tw-text-sm sm:tw-text-base lg:tw-text-xl tw-leading-snug">{t("Seriousness • Safety • Trust")}</h4>
+                {/* tw-text-[var(--title-color)] nahrazuje barvu, kterou prvek
+                    dostával z pravidla pro nadpisy v _helpers.scss. */}
+                <p className="tw-text-center tw-mt-8 tw-mb-2 tw-pb-5 tw-font-semibold tw-font-['Sora'] tw-text-[var(--title-color)] sm:tw-mt-10 lg:tw-mt-8 tw-text-sm sm:tw-text-base lg:tw-text-xl tw-leading-snug">{t("Seriousness • Safety • Trust")}</p>
             </div>
         </footer>
     );

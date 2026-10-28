@@ -4,6 +4,18 @@ $primary-color: #2C2523;
 $thm-brown-dark-color-dark: #2C2523;
 
 $secondary-color: #C5A657;
+
+/*
+ * Zlatá #C5A657 nesplňuje WCAG AA (4,5:1) jako barva textu:
+ *   - na světlém --quinary-color (#F9F8F6) má 2,2:1
+ *   - na --tertiary-color (#4A3E3B, pozadí modálů) má 4,4:1
+ * Lighthouse obojí hlásí v auditu kontrastu. Tyhle dvě varianty se proto
+ * používají jen pro TEXT na daném pozadí; ikony, rámečky a tlačítka zůstávají
+ * na původní zlaté (na ty se kontrastní limit pro text nevztahuje).
+ */
+$secondary-color-on-light: #7A6428; // 5,4:1 na #F9F8F6
+$secondary-color-on-dark: #CFB36B;  // 5,1:1 na #4A3E3B
+
 $secondary-color-transparent-50: color-mix(in srgb, var(--secondary-color) 50%, transparent);
 $secondary-color-transparent-30: color-mix(in srgb, var(--secondary-color) 30%, transparent);
 
@@ -173,6 +185,8 @@ $thm-danger-dark: #FF0000;
 :root {
     /* Theme colors */
     --secondary-color: #{$secondary-color};
+    --secondary-color-on-light: #{$secondary-color-on-light};
+    --secondary-color-on-dark: #{$secondary-color-on-dark};
     --secondary-color-transparent-50: #{$secondary-color-transparent-50};
     --secondary-color-transparent-30: #{$secondary-color-transparent-30};
     --primary-color: #{$primary-color};
@@ -648,12 +662,9 @@ $warning: var(--warning-color);
 $success: var(--success-color);
 $danger: var(--danger-color);
 
-@font-face {
-    font-family: 'Raleway';
-    src: url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
-    font-weight: 900;
-    font-style: normal;
-}
+// Raleway se načítá <link>em v index.html. Dřív tu stál @font-face, jehož src
+// mířil na CSS soubor z Google Fonts místo na .woff2 — prohlížeč ho nedokázal
+// načíst jako font a požadavek vždy skončil chybou.
 
 $title-font: 'Raleway', sans-serif;
 $text-font: 'Raleway', sans-serif;

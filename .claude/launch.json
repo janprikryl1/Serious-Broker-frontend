@@ -12,6 +12,16 @@
       "port": 5173
     },
     {
+      "name": "web-preview",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "run",
+        "preview"
+      ],
+      "cwd": "web",
+      "port": 4173
+    },
+    {
       "name": "admin",
       "runtimeExecutable": "npm",
       "runtimeArgs": [

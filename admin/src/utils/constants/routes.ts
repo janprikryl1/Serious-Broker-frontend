@@ -14,6 +14,8 @@ import {
   Info,
   LayoutTemplate,
   HardDrive,
+  ServerCog,
+  Activity,
 } from "lucide-react"
 import type { NavigationEntry, NavRoute } from "@/utils/types/Route.ts"
 
@@ -44,12 +46,15 @@ export const routes = {
   forms: "forms",
   formResponses: "form_responses",
   formEvaulationSettings: "form_evaulation_settings",
+  serverInfo: "server_info",
+  serverLog: "server_log",
 } as const
 
 /*
  * Struktura menu:
  * - Uživatelé: Přehled uživatelských dat, Achievementy, Newsletter
  * - Databáze: Nastavení coinů, Binance index, Generická data, Cache, Log
+ * - Server: Info o serveru, Error log
  * - Zbytek samostatně: Přehled, Slovník, Dema, Formuláře, Feedback, QR kódy
  */
 export const navigationStructure: NavigationEntry[] = [
@@ -118,6 +123,26 @@ export const navigationStructure: NavigationEntry[] = [
       {
         path: routes.logTable,
         label: "Log",
+        icon: ScrollText,
+        migrated: true,
+      },
+    ],
+  },
+  {
+    type: "group",
+    id: "server",
+    label: "Server",
+    icon: ServerCog,
+    children: [
+      {
+        path: routes.serverInfo,
+        label: "Info o serveru",
+        icon: Activity,
+        migrated: true,
+      },
+      {
+        path: routes.serverLog,
+        label: "Error log",
         icon: ScrollText,
         migrated: true,
       },

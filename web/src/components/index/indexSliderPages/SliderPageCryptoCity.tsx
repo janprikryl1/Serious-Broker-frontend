@@ -1,6 +1,6 @@
 import {FC} from "react";
 import {SharedSlideLayout} from "./SharedSlideLayout.tsx";
-import CryptoCity from "../../../utils/icons/index/crypto_city.png"
+import CryptoCity from "../../../utils/icons/index/crypto_city.webp"
 import {useTranslation} from "react-i18next";
 
 export const SliderPageCryptoCity: FC = () => {

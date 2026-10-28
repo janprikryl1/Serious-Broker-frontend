@@ -45,9 +45,9 @@ export const InvestWithUs: FC = () => {
     return (
       <div className="tw-bg-quinary">
           <div className="container tw-py-16">
-              <h6 className="tw-text-secondary tw-font-normal tw-text-base tw-tracking-normal tw-pb-0 tw-pt-12">
+              <p className="tw-text-secondary-on-light tw-font-normal tw-text-base tw-tracking-normal tw-mb-2 tw-pb-0 tw-pt-12 tw-font-['Sora']">
                   {t("ABOUT PRODUCT")}
-              </h6>
+              </p>
               <h2 className="mb-5 tw-text-black index-section-head-title">
                   {t("Invest With Us")}
               </h2>

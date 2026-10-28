@@ -5,8 +5,8 @@ import { routes } from "../../../utils/constants";
 import { useTranslation } from "react-i18next";
 import BitcoinBg from "../../../utils/icons/index/bitcoin_close_up3_enhanced_no_bg_darker.webp";
 import {SharedSlideLayout} from "../indexSliderPages/SharedSlideLayout.tsx";
-import CryptoStreet from "../../../utils/icons/index/crypto_street.png";
-import CryptoCity from "../../../utils/icons/index/crypto_city.png";
+import CryptoStreet from "../../../utils/icons/index/crypto_street.webp";
+import CryptoCity from "../../../utils/icons/index/crypto_city.webp";
 
 export const MobileSliderPageCryptoCity: FC = () => {
     const { t } = useTranslation();

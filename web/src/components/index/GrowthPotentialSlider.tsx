@@ -64,9 +64,9 @@ export const GrowthPotentialSlider: FC = () => {
     return (
         <section className="tw-relative tw-w-full tw-overflow-hidden tw-pt-10 sm:tw-pt-14 lg:tw-pt-16">
             <div className="container tw-mb-6 tw-mt-6 tw-px-4 sm:tw-mb-8 sm:tw-mt-8 sm:tw-px-6">
-                <h6 className="tw-pb-0 tw-pt-3 tw-text-xs tw-font-normal tw-tracking-normal tw-text-secondary sm:tw-text-base">
+                <p className="tw-mb-2 tw-pb-0 tw-pt-3 tw-text-xs tw-font-normal tw-tracking-normal tw-text-secondary tw-font-['Sora'] sm:tw-text-base">
                     {t("HISTORICAL INSIGHT")}
-                </h6>
+                </p>
                 <h2 className="index-section-head-title tw-text-2xl sm:tw-text-3xl md:tw-text-5xl lg:tw-text-6xl">
                     {t("Growth Potential")}
                 </h2>

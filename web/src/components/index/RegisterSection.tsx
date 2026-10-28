@@ -21,7 +21,7 @@ export const RegisterSection: FC = () => {
     return (
         <div>
             <div className="container tw-bg-quintary tw-px-4 tw-py-10 sm:tw-px-6 sm:tw-py-12 lg:tw-py-16">
-                <h6 className="tw-pb-0 tw-pt-8 tw-text-xs tw-font-normal tw-tracking-normal tw-text-secondary sm:tw-text-base lg:tw-pt-12">{t("REGISTER")}</h6>
+                <p className="tw-mb-2 tw-pb-0 tw-pt-8 tw-text-xs tw-font-normal tw-tracking-normal tw-text-secondary tw-font-['Sora'] sm:tw-text-base lg:tw-pt-12">{t("REGISTER")}</p>
                 <h2 className="tw-mb-5 tw-text-2xl index-section-head-title sm:tw-text-3xl md:tw-text-5xl lg:tw-text-6xl">{t("Get Started Today")}</h2>
 
                 <div className="tw-mb-4"
