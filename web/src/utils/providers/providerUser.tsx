@@ -6,6 +6,7 @@ import {Preloader} from "../../Preloader.tsx";
 import {isAuthenticated} from "../api/authenticateService.ts";
 import {UserFormFillModal} from "../../components/formQuestions/UserFormFillModal.tsx";
 import {identifyUser, resetUser} from "../posthog.ts";
+import {queryClient} from "../queryClient.ts";
 
 type Props = {
     children: ReactNode 
@@ -63,6 +64,7 @@ export const ProviderUser: FC<Props> = ({ children }) => {
     const logout = () => {
         setUser(undefined);
         localStorage.removeItem('token');
+        queryClient.clear();
         resetUser();
         navigate(routes.home);
     };

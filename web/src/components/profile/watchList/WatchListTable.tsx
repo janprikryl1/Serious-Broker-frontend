@@ -1,4 +1,5 @@
 import {Dispatch, FC, SetStateAction, useEffect, useState} from "react";
+import {useQueries} from "@tanstack/react-query";
 import {useTranslation} from "react-i18next";
 import {WatchListType} from "../../../utils/types/watchList/WatchListType.ts";
 import {renderTable} from "../../../utils/functions/renderTable.tsx";
@@ -9,7 +10,7 @@ import singleCoinOutline from "../../../utils/icons/coins/coins_single-outline.s
 import {getAllCryptocurrencies} from "../../../utils/api/adminCryptocurrencyService.ts";
 import {CryptoCurrencyAdminType} from "../../../utils/types/asset/CryptoCurrencyType.ts";
 import {getBinanceIndexAssetRecomBestPreviousDetail} from "../../../utils/api/GraphsService.ts";
-import {getAssetByIndexLabel} from "../../../utils/api/binanceIndexAssets.ts";
+import {assetByNameQueryOptions} from "../../../utils/hooks/queries/useAssetByName.ts";
 import {AssetDetailType} from "../../../utils/types/asset/AssetDetailType.ts";
 import {
   BinanceIndexAssetRecomBestPreviousDetails
@@ -23,7 +24,6 @@ type Props = {
 export const WatchListTable: FC<Props> = ({watchList, setWatchList}) => {
   const {t} = useTranslation();
   const [cryptocurrencies, setCryptocurrencies] = useState<CryptoCurrencyAdminType[]>([]);
-  const [recommendationData, setRecommendationData] = useState<Map<string, AssetDetailType | BinanceIndexAssetRecomBestPreviousDetails>>(new Map());
 
   useEffect(() => {
     const loadData = async () => {
@@ -40,40 +40,30 @@ export const WatchListTable: FC<Props> = ({watchList, setWatchList}) => {
     loadData();
   }, []);
 
-  useEffect(() => {
-    const loadRecommendationDetails = async () => {
-      const itemsToLoad = watchList.filter((item) => item.type === "coin" || item.type === "asset");
+  // Indexy i coiny se načítají paralelně a sdílí cache s detailem indexu,
+  // takže se při návratu na stránku nebo překreslení nestahují znovu.
+  const assetTitles = watchList.filter((item) => item.type === "asset").map((item) => item.title || "");
+  const coinTitles = watchList.filter((item) => item.type === "coin").map((item) => item.title || "");
 
-      if (itemsToLoad.length === 0) {
-        setRecommendationData(new Map());
-        return;
-      }
+  const assetQueries = useQueries({
+    queries: assetTitles.map((title) => assetByNameQueryOptions(title)),
+  });
+  const coinQueries = useQueries({
+    queries: coinTitles.map((title) => ({
+      queryKey: ["recom-best-previous-detail", title],
+      queryFn: async () => (await getBinanceIndexAssetRecomBestPreviousDetail(title))?.data ?? null,
+    })),
+  });
 
-      const dataMap = new Map<string, AssetDetailType | BinanceIndexAssetRecomBestPreviousDetails>();
-
-      for (const item of itemsToLoad) {
-        try {
-          let response;
-
-          if (item.type === "asset") {
-            response = await getAssetByIndexLabel(item.title || "");
-          } else {
-            response = await getBinanceIndexAssetRecomBestPreviousDetail(item.title || "");
-          }
-
-          if (response?.data) {
-            dataMap.set(item.title || "", response.data);
-          }
-        } catch (e) {
-          console.error(`Error loading recommendation data for ${item.title}:`, e);
-        }
-      }
-
-      setRecommendationData(dataMap);
-    };
-
-    loadRecommendationDetails();
-  }, [watchList]);
+  const recommendationData = new Map<string, AssetDetailType | BinanceIndexAssetRecomBestPreviousDetails>();
+  assetTitles.forEach((title, index) => {
+    const data = assetQueries[index]?.data;
+    if (data) recommendationData.set(title, data);
+  });
+  coinTitles.forEach((title, index) => {
+    const data = coinQueries[index]?.data;
+    if (data) recommendationData.set(title, data);
+  });
 
   const assets = watchList.filter((item) => item.type === "asset");
   const coins = watchList.filter((item) => item.type === "coin");

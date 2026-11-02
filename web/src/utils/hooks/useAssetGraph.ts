@@ -4,19 +4,20 @@ import {AssetDetailType} from "../types/asset/AssetDetailType.ts";
 import {QuotedCurrenciesPeriod} from "../options/QuotedCurrenciesPeriod.ts";
 import {Currencies} from "../enums/CurrenciesEnum.ts";
 import {AssetAnalysisGraphData} from "../types/graphs/AssetAnalysisGraphData.ts";
-import {getAssetByIndexLabel, getAssetGraphDataPreparedAssets} from "../api/binanceIndexAssets.ts";
+import {getAssetGraphDataPreparedAssets} from "../api/binanceIndexAssets.ts";
 import {addToWatchList, removeFromWatchList} from "../api/watchListService.ts";
 import {WatchListEnum} from "../enums/WatchListEnum.ts";
 import {formatCurrency} from "../functions/functions.ts";
 import {MissingCurrencyType} from "../types/graphs/MissingCurrencyType.ts";
 import {useTranslation} from "react-i18next";
 import {captureEvent} from "../posthog.ts";
+import {useQueryClient} from "@tanstack/react-query";
+import {assetByNameQueryKey, useAssetByName} from "./queries/useAssetByName.ts";
 
 export const useAssetGraph = (propName?: string) => {
     const { i18n } = useTranslation();
     const { name } = useParams();
     const assetName = propName || name;
-    const [asset, setAsset] = useState<AssetDetailType | null>(null);
     const [selectedPeriod, setSelectedPeriod] = useState(QuotedCurrenciesPeriod.month);
     const [currency, setCurrency] = useState<Currencies>(Currencies.EUR);
     const [currencyPrice, setCurrencyPrice] = useState<string>();
@@ -26,19 +27,25 @@ export const useAssetGraph = (propName?: string) => {
     const [isInWatchList, setIsInWatchList] = useState<boolean>(false);
     const isWatchlistToggleRef = useRef(false);
 
-    useEffect(() => {
+    const queryClient = useQueryClient();
+    const {data: assetData} = useAssetByName(assetName);
+    const asset = assetData ?? null;
+    const capturedAssetRef = useRef<string>();
+
+    // Index sdílí cache napříč komponentami; pro watchlist toggle se mění přímo v ní.
+    const setAsset = (next: AssetDetailType) => {
         if (!assetName) return;
-        const getGraphData = async () => {
-            const response = await getAssetByIndexLabel(assetName);
-            if (!response) return;
-            setAsset(response.data);
-            captureEvent('index_details_viewed', {
-                index_name: assetName,
-                label: response.data?.index_label,
-            });
-        };
-        getGraphData();
-    }, [assetName]);
+        queryClient.setQueryData(assetByNameQueryKey(assetName), next);
+    };
+
+    useEffect(() => {
+        if (!assetName || !asset || capturedAssetRef.current === assetName) return;
+        capturedAssetRef.current = assetName;
+        captureEvent('index_details_viewed', {
+            index_name: assetName,
+            label: asset.label,
+        });
+    }, [assetName, asset]);
 
     const handleToggleWatchList = async () => {
         if (!asset) return;

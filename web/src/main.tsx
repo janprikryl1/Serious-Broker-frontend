@@ -16,6 +16,8 @@ import {BrowserRouter} from "react-router-dom";
 import AutoScrollToTop from "./components/reusable/AutoScrollToTop.tsx";
 import { PostHogProvider } from '@posthog/react'
 import { syncCookieConsent } from './utils/posthog.ts'
+import { QueryClientProvider } from '@tanstack/react-query'
+import { queryClient } from './utils/queryClient.ts'
 
 const options = {
     api_host: import.meta.env.VITE_POSTHOG_HOST,
@@ -28,17 +30,19 @@ syncCookieConsent();
 createRoot(document.getElementById('root')!).render(
     <StrictMode>
         <PostHogProvider apiKey={import.meta.env.VITE_POSTHOG_PROJECT_TOKEN || ''} options={options}>
-            <BrowserRouter>
-                <AutoScrollToTop />
-                <ErrorBoundary
-                    FallbackComponent={ErrorFallback}
-                    onError={(error, info) => {
-                        console.error(error, info);
-                    }}
-                >
-                    <App/>
-                </ErrorBoundary>
-            </BrowserRouter>
+            <QueryClientProvider client={queryClient}>
+                <BrowserRouter>
+                    <AutoScrollToTop />
+                    <ErrorBoundary
+                        FallbackComponent={ErrorFallback}
+                        onError={(error, info) => {
+                            console.error(error, info);
+                        }}
+                    >
+                        <App/>
+                    </ErrorBoundary>
+                </BrowserRouter>
+            </QueryClientProvider>
         </PostHogProvider>
     </StrictMode>,
 )

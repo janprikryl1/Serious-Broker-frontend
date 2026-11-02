@@ -1,7 +1,7 @@
-import {FC, useEffect, useState} from "react";
+import {FC} from "react";
 import {pieArcLabelClasses, PieChart} from "@mui/x-charts";
 import {Assets} from "../../../utils/types/asset/AssetDetailType.ts";
-import {getAssetByIndexLabel} from "../../../utils/api/binanceIndexAssets.ts";
+import {useAssetByName} from "../../../utils/hooks/queries/useAssetByName.ts";
 
 type Props = {
     assets?: Assets[];
@@ -9,30 +9,11 @@ type Props = {
 };
 
 export const AssetGraphPieChart: FC<Props> = ({ assets, assetName }) => {
-    const [fetchedAssets, setFetchedAssets] = useState<Assets[]>([]);
-    const dataToDisplay = assets ?? fetchedAssets;
+    // Data se stahují jen když je rodič nepředá; sdílí cache s detailem indexu.
+    const {data: fetchedAsset} = useAssetByName(assets ? undefined : assetName);
+    const dataToDisplay = assets ?? fetchedAsset?.assets ?? [];
     const chartWidth = typeof window !== "undefined" && window.innerWidth < 768 ? 280 : 320;
     const chartHeight = typeof window !== "undefined" && window.innerWidth < 768 ? 280 : 320;
-
-    useEffect(() => {
-        if (assets) return;
-        if (!assetName) return;
-
-        const fetchData = async () => {
-            try {
-                const response = await getAssetByIndexLabel(assetName);
-
-                if (response) {
-                    setFetchedAssets(response.data.assets);
-                }
-            } catch {
-                console.error("AssetGraphPieChart: Failed to fetch asset graph data");
-            }
-        }
-
-        fetchData();
-
-    }, [assetName, assets]);
 
     return (
         dataToDisplay?.length <= 10 ?

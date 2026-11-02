@@ -353,7 +353,7 @@ export const ExistingPortfoliosTable: FC<ExistingPortfoliosTableProps> = ({
                         </div>
 
                         {showDetailGraph && (
-                          <Accordion.Collapse eventKey={eventKey}>
+                          <Accordion.Collapse eventKey={eventKey} mountOnEnter>
                             <div>{renderDetail(asset)}</div>
                           </Accordion.Collapse>
                         )}

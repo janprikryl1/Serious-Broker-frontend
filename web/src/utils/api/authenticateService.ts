@@ -1,4 +1,5 @@
 import { api } from "./axiosInstance.ts";
+import {queryClient} from "../queryClient.ts";
 import {UserType} from "../types/user/userTypes.ts";
 import {loginType} from "../types/user/loginType.ts";
 import {registerUserType, registerUserTypeResponse} from "../types/user/registerUserType.ts";
@@ -14,8 +15,10 @@ export const isAuthenticated = async () => {
 export const login = async (formData: loginType) => {
     const response = await api.post<registerUserTypeResponse>("user/login.php", formData);
     const token = response.data.token;
-    if (token)
+    if (token) {
         localStorage.setItem("token", token);
+        queryClient.clear();
+    }
     return response;
 }
 
@@ -23,6 +26,7 @@ export const register = async (formData: registerUserType) => {
     const response = await api.post<registerUserTypeResponse>("user/register.php", formData);
     const token = response.data.token;
     localStorage.setItem("token", token);
+    queryClient.clear();
 
     return response.data;
 }

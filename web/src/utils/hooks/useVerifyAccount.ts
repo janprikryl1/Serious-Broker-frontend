@@ -4,6 +4,7 @@ import {useEffect, useState} from "react";
 import {verifyAccount} from "../api/verifyAccountService.ts";
 import {CustomSwal} from "../functions/customSwal.ts";
 import {useTranslation} from "react-i18next";
+import {queryClient} from "../queryClient.ts";
 
 export const useVerifyAccount = () => {
     const { t } = useTranslation();
@@ -30,6 +31,7 @@ export const useVerifyAccount = () => {
                         setVerified(true);
                         setUser(response.data.user);
                         localStorage.setItem("token", response.data.token);
+                        queryClient.clear();
                     });
                 }
             } catch (e) {

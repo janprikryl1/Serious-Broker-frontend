@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useMemo, useState} from 'react';
 import {TitleHeader} from '../../components/about/TitleHeader.tsx';
 import {InfoRow} from '../../components/profile/dashboard/InfoRow';
 import {BestPortfolio} from '../../components/profile/dashboard/BestPortfolio.tsx';
@@ -78,14 +78,20 @@ export const Dashboard = () => {
     };
   }, []);
 
+  // Memoized: WatchListTable refetches whenever this array changes identity.
+  const recommendationWatchList = useMemo(
+    () => (watchList ?? []).filter((item) => item.type === WatchListEnum.Asset || item.type === WatchListEnum.Coin),
+    [watchList]
+  );
+
   return (
     <>
       <TitleHeader title="My Dashboard" />
       <div className="container tw-mt-4 md:tw-mt-5 tw-px-3 sm:tw-px-4 lg:tw-px-0">
         <div className="tw-flex tw-flex-col tw-gap-4 lg:tw-gap-5">
-          {watchList !== undefined && watchList.filter((item) => item.type === WatchListEnum.Asset || item.type === WatchListEnum.Coin).length > 0 && (
+          {recommendationWatchList.length > 0 && (
             <WatchListTable
-              watchList={watchList.filter((item) => item.type === WatchListEnum.Asset || item.type === WatchListEnum.Coin)}
+              watchList={recommendationWatchList}
               setWatchList={setWatchList}
             />
           )}

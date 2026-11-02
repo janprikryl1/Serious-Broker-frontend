@@ -100,8 +100,8 @@ export function AssetTable<T>({ data, columns, rowLink, className, useAccordion,
                                         ))}
                                 </Accordion.Item>
 
-                                {/* Collapsed content */}
-                                <Accordion.Collapse eventKey={eventKey}>
+                                {/* Collapsed content - mounted on first expand, so details that fetch data do not load for every row up front */}
+                                <Accordion.Collapse eventKey={eventKey} mountOnEnter>
                                     <div className={"accordion-content"}>
                                         {renderDetail ? renderDetail(row) : null}
                                     </div>

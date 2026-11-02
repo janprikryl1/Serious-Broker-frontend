@@ -1,10 +1,10 @@
-import {FC, useEffect, useState} from "react";
+import {FC} from "react";
 import {AssetGraphCurrencyCard} from "../../graphs/asset/AssetGraphCurrencyCard.tsx";
 import {AssetGraphPieChart} from "../../graphs/asset/AssetGraphPieChart.tsx";
 import {AssetDetailSkeleton} from "../../graphs/asset/AssetDetailSkeleton.tsx";
 import {useTranslation} from "react-i18next";
-import {AssetDetailType, Assets} from "../../../utils/types/asset/AssetDetailType.ts";
-import {getAssetByIndexLabel} from "../../../utils/api/binanceIndexAssets.ts";
+import {Assets} from "../../../utils/types/asset/AssetDetailType.ts";
+import {useAssetByName} from "../../../utils/hooks/queries/useAssetByName.ts";
 
 type Props = {
     index_label: string;
@@ -12,21 +12,8 @@ type Props = {
 
 export const DemoAssetGraphs:FC<Props> = ({index_label}) => {
     const {t} = useTranslation();
-    const [asset, setAsset] = useState<AssetDetailType | null>(null);
-    const [details, setDetails] = useState<Assets[]>();
-
-    useEffect(() => {
-        if (index_label === undefined) return;
-
-        const getGraphData = async () => {
-            const response = await getAssetByIndexLabel(index_label);
-            if (!response) return;
-            setDetails(response.data.assets);
-            setAsset(response.data);
-        };
-
-        getGraphData();
-    }, [index_label]);
+    const {data: asset} = useAssetByName(index_label);
+    const details = asset?.assets ?? undefined;
     
     return (
         <>
