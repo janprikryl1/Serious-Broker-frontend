@@ -6,7 +6,7 @@ import {renderTable} from "../../../utils/functions/renderTable.tsx";
 import {IoWalletOutline} from "react-icons/io5";
 import {BsFileText} from "react-icons/bs";
 import coinsGroupOutline from "../../../utils/icons/coins/coins_group_outline.svg";
-import singleCoinOutline from "../../../utils/icons/coins/coins_single-outline.svg";
+import singleCoinOutline from "../../../utils/icons/coins/coins_single_outline.svg";
 import {getAllCryptocurrencies} from "../../../utils/api/adminCryptocurrencyService.ts";
 import {CryptoCurrencyAdminType} from "../../../utils/types/asset/CryptoCurrencyType.ts";
 import {getBinanceIndexAssetRecomBestPreviousDetail} from "../../../utils/api/GraphsService.ts";

@@ -4,7 +4,6 @@ import {useLocation} from "react-router-dom";
 import {CiWarning} from "react-icons/ci";
 import {useUserContext} from "../../utils/providers/providerUser.tsx";
 import {sendVerificationEmailAgain} from "../../utils/api/verifyAccountService.ts";
-import "../../styles/sass/components/unverified_header.scss";
 
 export const UnverifiedHeaderInfo:FC = () => {
     const {t} = useTranslation();
@@ -40,18 +39,20 @@ export const UnverifiedHeaderInfo:FC = () => {
 
     if (user?.verified == false && !isVerifyAccountPage) {
         return (
-            <header className="header-section" style={{backgroundColor:"black"}}>
-                <div className="header-bottom" style={{marginTop:20, paddingTop:5, paddingBottom:10}}>
-                    <div className="container">
-                        <div className="header-wrapper d-flex" style={{backgroundColor:"black"}}>
-                            <div className="menu-area d-flex">
-                                <CiWarning size={30} style={{marginBottom:20}} />
-                            </div>
-                            <div className="menu-area d-flex">
-                                <h3>{t("Your email is not verified yet.")}</h3>
-                                <h3 className="unverified-header-send-again-button" onClick={handleSendVerificationAgain}>{t("Send again")}</h3>
-                            </div>
-                        </div>
+            <header className="tw-w-full tw-bg-zinc-950 tw-text-white">
+                <div className="tw-mx-auto tw-flex tw-w-full tw-max-w-screen-xl tw-items-center tw-justify-center tw-gap-3 tw-px-4 tw-py-3 sm:tw-gap-4 sm:tw-px-6 sm:tw-py-4 lg:tw-px-8">
+                    <CiWarning className="tw-h-7 tw-w-7 tw-shrink-0 sm:tw-h-8 sm:tw-w-8" />
+                    <div className="tw-flex tw-min-w-0 tw-flex-col tw-items-center tw-gap-1 sm:tw-flex-row sm:tw-gap-4">
+                        <p className="tw-m-0 tw-text-center tw-text-sm tw-leading-snug sm:tw-text-left sm:tw-text-base">
+                            {t("Your email is not verified yet.")}
+                        </p>
+                        <button
+                            type="button"
+                            className="tw-cursor-pointer tw-whitespace-nowrap tw-border-0 tw-bg-transparent tw-p-0 tw-text-sm tw-font-semibold tw-text-secondary hover:tw-underline focus-visible:tw-outline focus-visible:tw-outline-2 focus-visible:tw-outline-offset-2 focus-visible:tw-outline-secondary sm:tw-text-base"
+                            onClick={handleSendVerificationAgain}
+                        >
+                            {t("Send again")}
+                        </button>
                     </div>
                 </div>
             </header>

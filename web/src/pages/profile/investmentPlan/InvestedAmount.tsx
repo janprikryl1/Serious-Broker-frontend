@@ -79,7 +79,7 @@ export const InvestedAmount = () => {
         {renderContent()}
       </div>
 
-      <div className={`d-flex ${isMobile ? "flex-column" : "flex-row gap-3"} justify-content-between mt-4`}>
+      <div className={`d-flex ${isMobile ? "flex-column" : "flex-row gap-3"} justify-content-between mt-10`}>
         <NextStepButton
           currentStep={currentStep}
           currentStepFinished={selectedAmount != null && selectedAmount > 0}

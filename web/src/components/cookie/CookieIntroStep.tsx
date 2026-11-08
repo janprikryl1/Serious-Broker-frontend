@@ -62,7 +62,7 @@ export const CookieIntroStep: FC<CookieIntroStepProps> = ({
         <Button
           color={ButtonColor.transparent}
           style={{
-            border: "1px solid #52525b",
+            border: "1px solid var(--secondary-color)",
             color: "var(--white-color)",
             fontSize: "0.875rem",
             padding: "0.55rem 0.75rem",

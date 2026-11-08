@@ -55,7 +55,6 @@ export const ChooseExistingPortfolio: FC = () => {
         {t("Create new portfolio instead")}
       </Link>
 
-      {/* Znovupoužiteľná tabuľka: vyhľadávanie, filtre, desktop AssetTable aj mobilný Accordion */}
       <ExistingPortfoliosTable
         selectedAssetId={selectedRowId}
         onSelectAsset={handleSelectAsset}
@@ -63,7 +62,7 @@ export const ChooseExistingPortfolio: FC = () => {
       />
 
       <div
-        className={`tw-mt-4 tw-flex tw-justify-between ${
+        className={`tw-mt-10 tw-flex tw-justify-between ${
           isMobile ? "tw-flex-col tw-gap-3" : "tw-flex-row tw-gap-3"
         }`}
       >

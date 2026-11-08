@@ -25,8 +25,11 @@ export const TrafficLightsSection: FC<TrafficLightsSectionProps> = ({
   const [userBuyTrafficLights, setUserBuyTrafficLights] = useState<TrafficLightType[]>([]);
   const [userSellTrafficLights, setUserSellTrafficLights] = useState<TrafficLightType[]>([]);
   const [activeReviewItem, setActiveReviewItem] = useState<TrafficLightType | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   const fetchTrafficLights = async () => {
+    setIsLoading(true);
+
     try {
       const response = await getTrafficLights();
       if (response?.data) {
@@ -44,6 +47,8 @@ export const TrafficLightsSection: FC<TrafficLightsSectionProps> = ({
       }
     } catch (error) {
       console.error("Failed to fetch traffic lights", error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -86,6 +91,7 @@ export const TrafficLightsSection: FC<TrafficLightsSectionProps> = ({
             selectedId={selectedBuyId}
             onItemClick={(item) => setActiveReviewItem(item)}
             onDefineClick={onOpenCreateModal ? () => onOpenCreateModal("buy") : undefined}
+            isLoading={isLoading}
           />
         </div>
 
@@ -103,6 +109,7 @@ export const TrafficLightsSection: FC<TrafficLightsSectionProps> = ({
             selectedId={selectedSellId}
             onItemClick={(item) => setActiveReviewItem(item)}
             onDefineClick={onOpenCreateModal ? () => onOpenCreateModal("sell") : undefined}
+            isLoading={isLoading}
           />
         </div>
       </div>

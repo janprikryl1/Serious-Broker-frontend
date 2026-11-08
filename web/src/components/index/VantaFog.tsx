@@ -26,7 +26,7 @@ export default function VantaFog() {
       lowlightColor: 0x2C2523,
       baseColor: 0x2C2523,
       blurFactor: 0.9,
-      speed: 2,
+      speed: 1,
       zoom: 0.50
     });
 

@@ -24,7 +24,6 @@ export const TrafficLightTriggers: FC<TriggersProps> = ({
   const { t } = useTranslation();
   const isEditable = variant === 'edit';
 
-
   const getActionTranslationKey = (actionValue: Action | string) => {
     const val = (actionValue || "").toLowerCase();
 
@@ -40,6 +39,33 @@ export const TrafficLightTriggers: FC<TriggersProps> = ({
     }
 
     return `trafficLight.action.${type}.${cleanKey}`;
+  };
+
+  const [percentageErrors, setPercentageErrors] =
+      React.useState<Record<string, string>>({});
+
+  const validatePercentage = (
+      index: number,
+      field: "eventByPercentage" | "actionByPercentage",
+      value: string
+  ) => {
+    const key = `${index}-${field}`;
+    const number = Number(value);
+    const hasError =
+        value.trim() !== "" &&
+        (!Number.isFinite(number) || number < 0);
+
+    setPercentageErrors((previous) => {
+      const updated = { ...previous };
+
+      if (hasError) {
+        updated[key] = t("Please enter a non-negative number.");
+      } else {
+        delete updated[key];
+      }
+
+      return updated;
+    });
   };
 
   return (
@@ -77,18 +103,25 @@ export const TrafficLightTriggers: FC<TriggersProps> = ({
             )}
           </div>
 
-          <div className="d-flex flex-column flex-md-row gap-3 align-items-stretch">
+          <div className="d-flex flex-column flex-lg-row gap-3 align-items-stretch">
 
             {/* Event Container */}
             <div className="traffic-light-trigger-wrapper flex-grow-1 p-3">
               <div className="d-flex flex-column w-100">
+                <div className="tw-text-end">
+                  {percentageErrors[`${index}-eventByPercentage`] && (
+                      <div className="tw-mt-1 tw-text-xs tw-text-red">
+                        {percentageErrors[`${index}-eventByPercentage`]}
+                      </div>
+                  )}
+                </div>
                 <div className="d-flex justify-content-between align-items-center w-100 gap-2">
                   <div className="flex-grow-1">
                     {isEditable ? (
                       <Form.Select
                         value={trigger.event}
                         onChange={(e) => onTriggerChange?.(index, "event", e.target.value)}
-                        className="select-box-bottom-border w-100"
+                        className="select-box-outline w-100"
                         style={{ maxWidth: "200px" }}
                       >
                         {Object.values(Event).map((v) => <option key={v} value={v}>{t(v)}</option>)}
@@ -99,13 +132,23 @@ export const TrafficLightTriggers: FC<TriggersProps> = ({
                   </div>
                   <div className="text-end">
                     {isEditable ? (
-                      <div className="d-flex align-items-center justify-content-end" style={{width: "70px"}}>
+                      <div className="d-flex align-items-center justify-content-end" style={{maxWidth: "120px"}}>
                         <input
                           type="number"
-                          className="form-control borderless text-end p-0"
+                          className={`form-control outline-input text-end ${
+                              percentageErrors[`${index}-eventByPercentage`]
+                                  ? "tw-outline !tw-outline-red"
+                                  : ""
+                          }`}
+                          min={0}
                           value={trigger.eventByPercentage}
-                          onChange={(e) => onTriggerChange?.(index, "eventByPercentage", e.target.value)}
-                          style={{ color: "var(--gold-color)", width: "45px" }}
+                          onChange={(e) =>
+                              onTriggerChange?.(index, "eventByPercentage", e.target.value)
+                          }
+                          onBlur={(e) =>
+                              validatePercentage(index, "eventByPercentage", e.currentTarget.value)
+                          }
+                          style={{ color: "var(--gold-color)" }}
                         />
                         <span className="ms-1">%</span>
                       </div>
@@ -125,13 +168,20 @@ export const TrafficLightTriggers: FC<TriggersProps> = ({
             {/* Action Container */}
             <div className="traffic-light-trigger-wrapper flex-grow-1 p-3">
               <div className="d-flex flex-column w-100">
+                <div className="tw-text-end">
+                  {percentageErrors[`${index}-actionByPercentage`] && (
+                      <div className="tw-mt-1 tw-text-xs tw-text-red">
+                        {percentageErrors[`${index}-actionByPercentage`]}
+                      </div>
+                  )}
+                </div>
                 <div className="d-flex justify-content-between align-items-center w-100 gap-2">
                   <div className="flex-grow-1">
                     {isEditable ? (
                       <Form.Select
                         value={trigger.action}
                         onChange={(e) => onTriggerChange?.(index, "action", e.target.value)}
-                        className="select-box-bottom-border w-100"
+                        className="select-box-outline w-100"
                         style={{ maxWidth: "200px" }}
                       >
                         {Object.values(Action).map((v) => (
@@ -148,14 +198,23 @@ export const TrafficLightTriggers: FC<TriggersProps> = ({
                   </div>
                   <div className="text-end">
                     {isEditable ? (
-                      <div className="d-flex align-items-center justify-content-end" style={{width: "70px"}}>
+                      <div className="d-flex align-items-center justify-content-end" style={{maxWidth: "120px"}}>
                         <input
                           type="number"
-                          className="form-control borderless text-end p-0"
-                          disabled={trigger.action === Action.none}
+                          className={`form-control outline-input text-end${
+                              percentageErrors[`${index}-actionByPercentage`]
+                                  ? "tw-outline !tw-outline-red"
+                                  : ""
+                          }`}
+                          min={0}
                           value={trigger.actionByPercentage}
-                          onChange={(e) => onTriggerChange?.(index, "actionByPercentage", e.target.value)}
-                          style={{ color: "var(--gold-color)", width: "45px" }}
+                          onChange={(e) =>
+                              onTriggerChange?.(index, "actionByPercentage", e.target.value)
+                          }
+                          onBlur={(e) =>
+                              validatePercentage(index, "actionByPercentage", e.currentTarget.value)
+                          }
+                          style={{ color: "var(--gold-color)" }}
                         />
                         <span className="ms-1">%</span>
                       </div>
@@ -171,7 +230,6 @@ export const TrafficLightTriggers: FC<TriggersProps> = ({
                 </div>
               </div>
             </div>
-
           </div>
         </div>
       ))}

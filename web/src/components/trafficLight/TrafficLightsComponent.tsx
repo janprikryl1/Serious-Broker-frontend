@@ -157,7 +157,7 @@ export const TrafficLightsComponent = () => {
     useEffect(() => {
         const sorted = sortTriggers(initialTriggers);
         reassignColors(sorted);
-        setContextName("General Traffic Light");
+        setContextName(t("My Traffic Light"));
     }, [showCreateTrafficLightModal]);
 
     useEffect(() => {
@@ -328,6 +328,11 @@ export const TrafficLightsComponent = () => {
         await saveChanges();
     }
 
+    const isCurrentSelection =
+      trafficLightClicked?.type === "buy"
+        ? buyTrafficLightId === trafficLightClicked?.id
+        : sellTrafficLightId === trafficLightClicked?.id;
+
     useEffect(() => {
         console.log(currency)
     }, [currency]);
@@ -351,7 +356,7 @@ export const TrafficLightsComponent = () => {
               currency={currency}
             />
 
-            <div className={`tw-flex ${isMobile ? "tw-flex-col" : "tw-flex-row tw-gap-3"} tw-justify-between tw-mt-4`}>
+            <div className={`tw-flex ${isMobile ? "tw-flex-col" : "tw-flex-row tw-gap-3"} tw-justify-between tw-mt-10`}>
                 <NextStepButton currentStep={currentStep} currentStepFinished={selectedAmount != null && selectedAmount > 0}  link={routes.profile.newInvestmentPlanInvestedAmount} variant={"previous"} color={"var(--sandy-color)"} />
                 <NextStepButton currentStep={currentStep}
                                 currentStepFinished={selectedAmount != null && selectedAmount > 0}
@@ -366,11 +371,12 @@ export const TrafficLightsComponent = () => {
                 show={showCreateTrafficLightModal}
                 onHide={handleCloseCreateTrafficLightModal}
                 centered
+                scrollable
                 size={"xl"}
                 contentClassName="custom-modal"
             >
                 <Modal.Header closeButton className="tw-border-0 tw-p-0 tw-m-0" />
-                <Modal.Body className="tw-pt-0">
+                <Modal.Body className="tw-pt-0 tw-min-h-0 !tw-overflow-y-auto">
                     <div>
                         <h5 className="tw-text-base sm:tw-text-lg">{t('defineTrafficLight', { type: typeCamelCase })}</h5>
                         <div className="tw-mb-4 tw-text-sm sm:tw-text-base">
@@ -397,32 +403,49 @@ export const TrafficLightsComponent = () => {
 
             {/* Review traffic light modal */}
             <Modal
-                show={showReviewTrafficLightModal}
-                onHide={handleCloseReviewTrafficLightModal}
-                centered
-                size={"xl"}
-                contentClassName="custom-modal"
+              show={showReviewTrafficLightModal}
+              onHide={handleCloseReviewTrafficLightModal}
+              centered
+              scrollable
+              size="xl"
+              contentClassName="custom-modal"
             >
-                <Modal.Header closeButton className="tw-border-0 tw-p-0 tw-m-0" />
-                <Modal.Body className="tw-p-0 lg:tw-px-5">
-                    <TrafficLightWrapper
-                        triggers={triggers}
-                        variant={"details"}
-                        type={type}
-                        name={name}
-                        reference={reference}
-                        basePrice={100}
-                        currency={currency}
-                    />
-                    <div className="tw-text-center">
-                        <Button color={ButtonColor.gold} onClick={confirmSelection}>
-                            <span className="tw-text-base sm:tw-text-md">
-                                {buyTrafficLightId === trafficLightClicked?.id || sellTrafficLightId === trafficLightClicked?.id
-                                    ? t("Deselect this Traffic Light")
-                                    : t("Select this Traffic Light")}
-                            </span>
-                        </Button>
+                <Modal.Header closeButton className="tw-border-white/10 tw-px-4 sm:tw-px-6">
+                    <div>
+                        <Modal.Title className="tw-text-lg tw-font-semibold sm:tw-text-xl">
+                            {t("Traffic Light details")}
+                        </Modal.Title>
+                        {trafficLightClicked && (
+                          <div className="tw-mt-1 tw-text-sm tw-text-stone-400">
+                              {t(trafficLightClicked.type === "buy" ? "Buy Traffic Light" : "Sell Traffic Light")}
+                          </div>
+                        )}
                     </div>
+                </Modal.Header>
+
+                <Modal.Body className="tw-px-4 tw-py-5 sm:tw-px-6 !tw-overflow-y-auto tw-overflow-x-hidden">
+                    {trafficLightClicked && (
+                      <>
+                          <TrafficLightWrapper
+                            triggers={trafficLightClicked.triggers}
+                            variant="details"
+                            type={trafficLightClicked.type}
+                            name={trafficLightClicked.name}
+                            reference={trafficLightClicked.reference}
+                            currency={currency}
+                          />
+
+                          <div className="tw-mt-6 tw-flex tw-justify-center">
+                              <Button color={ButtonColor.gold} onClick={confirmSelection}>
+                        <span className="tw-text-base">
+                            {isCurrentSelection
+                              ? t("Deselect this Traffic Light")
+                              : t("Select this Traffic Light")}
+                        </span>
+                              </Button>
+                          </div>
+                      </>
+                    )}
                 </Modal.Body>
             </Modal>
 

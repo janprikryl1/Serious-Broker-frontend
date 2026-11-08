@@ -17,4 +17,13 @@ const resources = {
 i18next
     .use(initReactI18next)
     .use(LanguageDetector)
-    .init({resources})
+    .init({
+        resources,
+        supportedLngs: ["cs", "en"],
+        fallbackLng: "en",
+        load: "languageOnly",
+        defaultNS: "translation",
+        interpolation: {
+            escapeValue: false,
+        },
+    });

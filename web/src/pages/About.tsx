@@ -7,6 +7,8 @@ import {SEO} from "../components/reusable/SEO.tsx";
 import {getAboutPageSchema, getBreadcrumbSchema} from "../utils/functions/seoSchemas.ts";
 import {routes} from "../utils/constants";
 import {useTranslation} from "react-i18next";
+import {Link} from "react-router-dom";
+import {GlassCard} from "../components/reusable/GlassCard.tsx";
 
 export const About:FC = () => {
     const {t} = useTranslation();
@@ -31,6 +33,24 @@ export const About:FC = () => {
             <div className="container">
                 <AboutUs />
             </div>
+            <section className="container tw-mt-10">
+                <GlassCard bgColor="var(--true-black)" shrinkPadding={true}>
+                    <div className="tw-flex tw-flex-col tw-items-start tw-gap-4 tw-p-5 sm:tw-p-7">
+                        <h2 className="tw-m-0 tw-p-0 tw-text-xl tw-font-bold tw-text-white sm:tw-text-2xl">
+                            {t("About the project")}
+                        </h2>
+                        <p className="tw-m-0 tw-text-sm tw-leading-relaxed tw-text-stone-300 sm:tw-text-base">
+                            {t("about.project_description")}
+                        </p>
+                        <Link
+                            to={routes.cooperationInfo}
+                            className="tw-font-semibold tw-text-secondary tw-underline hover:tw-text-white"
+                        >
+                            {t("about.cooperation_info")}
+                        </Link>
+                    </div>
+                </GlassCard>
+            </section>
             <ContactUs />
             <WarningOfRisks />
         </>

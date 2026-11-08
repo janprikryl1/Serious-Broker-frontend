@@ -6,7 +6,7 @@ import {useMediaQuery} from "@mui/material";
 
 export const SliderTextTools: FC = () => {
     const { t } = useTranslation();
-    const isMobile = useMediaQuery('(max-width:768px)');
+    const isMobile = useMediaQuery('(max-width:767px)');
 
     return (
         <div data-aos="fade-up"
@@ -16,7 +16,7 @@ export const SliderTextTools: FC = () => {
             <h1 className={`slide-text-title${isMobile ? '--mobile mb-4' : ''}`}>
                 {t("Tools for the right decisions")}
             </h1>
-            <p className={`slide-text-tagline${isMobile ? '--mobile mb-4' : ''} tw-text-2xl`}>
+            <p className={`slide-text-tagline${isMobile ? '--mobile mb-4' : ''} tw-text-xl`}>
                 {t("Stop guessing where the market will go. Our analytical tools will show you the exact historical development and simulations of popular strategies.")}
             </p>
         </div>

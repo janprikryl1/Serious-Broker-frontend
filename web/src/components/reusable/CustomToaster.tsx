@@ -14,7 +14,7 @@ export const CustomToaster: FC = () => {
         left: 0,
         right: 0,
         bottom: "auto",
-        zIndex: 99999,
+        zIndex: 2999,
       }}
     />
   );

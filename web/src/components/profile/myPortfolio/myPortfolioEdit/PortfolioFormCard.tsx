@@ -1,4 +1,4 @@
-import React, { FC, useMemo } from "react";
+import React, {FC, useMemo, useState} from "react";
 import { useTranslation } from "react-i18next";
 import { coinURL } from "../../../../utils/constants";
 import { Assets } from "../../../../utils/types/asset/AssetDetailType.ts";
@@ -30,6 +30,11 @@ export const PortfolioFormCard: FC<PortfolioFormCardProps> = ({
                                                                 hasSubmitted,
                                                               }) => {
   const { t } = useTranslation();
+  const MAX_NAME_LENGTH = 50;
+  const [allocationDrafts, setAllocationDrafts] = useState<Record<number, string>>({});
+  const [hasEditedAllocation, setHasEditedAllocation] = useState(false);
+
+  const shouldShowAllocationError = hasSubmitted || hasEditedAllocation;
 
   const getMarketCapValue = (item: any) => {
     const rawValue = item?.marketCap ?? item?.marketcap ?? 0;
@@ -49,7 +54,9 @@ export const PortfolioFormCard: FC<PortfolioFormCardProps> = ({
   const isAllocationInvalid =
     assets.length === 0 || Math.abs(sumAllocations - 1.0) >= 0.001;
 
-  const showValidationErrors = hasSubmitted && (isNameEmpty || isAllocationInvalid);
+  const showValidationErrors =
+    (hasSubmitted && isNameEmpty) ||
+    (shouldShowAllocationError && isAllocationInvalid);
 
   return (
     <div className="tw-flex tw-flex-col tw-items-center lg:tw-items-start tw-w-full">
@@ -59,14 +66,18 @@ export const PortfolioFormCard: FC<PortfolioFormCardProps> = ({
         opacity={showValidationErrors ? 0.2 : 0.1}
       >
         <div className="tw-text-xs sm:tw-text-sm tw-text-stone-400 tw-mb-1">{t("Name")}</div>
-        <div style={{ display: "flex", alignItems: "center" }}>
+        <div className="tw-flex tw-items-center tw-gap-2">
           <input
             type="text"
-            placeholder={t("Enter portfolio name...")}
+            maxLength={MAX_NAME_LENGTH}
+            placeholder={t("Enter portfolio name")}
             className="form-control outline-input tw-outline tw-outline-[rgba(168,162,158,0.2)]"
             value={name}
-            onChange={(e) => onNameChange(e.target.value)}
+            onChange={(e) => onNameChange(e.target.value.slice(0, MAX_NAME_LENGTH))}
           />
+          <div className="tw-mt-1 tw-text-right tw-text-xs tw-text-stone-400">
+            {name.length}/{MAX_NAME_LENGTH}
+          </div>
         </div>
 
         {/* Selected assets */}
@@ -107,10 +118,33 @@ export const PortfolioFormCard: FC<PortfolioFormCardProps> = ({
                           step="1"
                           min="0"
                           max="100"
-                          value={Math.round((Number(assetItem.allocation) || 0) * 100)}
-                          onChange={(e) =>
-                            onAllocationChange(assetItem.id, e.target.value)
+                          value={
+                            allocationDrafts[assetItem.id] ??
+                            String(Math.round((Number(assetItem.allocation) || 0) * 100))
                           }
+                          onChange={(e) => {
+                            setHasEditedAllocation(true);
+
+                            const value = e.target.value;
+
+                            if (value === "") {
+                              setAllocationDrafts((previous) => ({
+                                ...previous,
+                                [assetItem.id]: "",
+                              }));
+                              return;
+                            }
+
+                            if (/^\d{1,3}$/.test(value) && Number(value) <= 100) {
+                              setAllocationDrafts((previous) => {
+                                const updated = { ...previous };
+                                delete updated[assetItem.id];
+                                return updated;
+                              });
+
+                              onAllocationChange(assetItem.id, value);
+                            }
+                          }}
                           className="form-control outline-input tw-outline tw-outline-1 tw-outline-[rgba(168,162,158,0.2)] tw-w-14 sm:tw-w-16 tw-h-8 sm:tw-h-9 tw-px-1.5 tw-text-right tw-text-xs sm:tw-text-sm !tw-bg-transparent"
                         />
                         <span className="tw-text-xs sm:tw-text-sm tw-text-stone-400">%</span>
@@ -137,7 +171,7 @@ export const PortfolioFormCard: FC<PortfolioFormCardProps> = ({
         </div>
 
         {/* Action buttons */}
-        <div className="d-flex justify-content-center align-items-center gap-3 mt-4 tw-flex-wrap">
+        <div className="d-flex justify-content-center align-items-center gap-2 mt-4 tw-flex-wrap">
           <Button
             onClick={onOpenAddModal}
             color={ButtonColor.transparent}
@@ -154,16 +188,19 @@ export const PortfolioFormCard: FC<PortfolioFormCardProps> = ({
 
           {assets.length > 0 && (
             <Button
-              onClick={onRecompute}
+              onClick={() => {
+                setAllocationDrafts({});
+                onRecompute();
+              }}
               color={ButtonColor.transparent}
               style={{
                 padding: "5px 12px",
-                border: "1px solid color-mix(in srgb, var(--secondary-color), transparent 40%)"
+                border: "1px solid color-mix(in srgb, var(--secondary-color), transparent 40%)",
               }}
             >
               <div className="d-flex align-items-center gap-2 tw-text-stone-300">
                 <FiRefreshCw size={16} />
-                <span className="tw-text-xs sm:tw-text-sm">{t("Recompute allocations")}</span>
+                <span className="tw-text-xs sm:tw-text-sm">{t("Evenly distribute allocations")}</span>
               </div>
             </Button>
           )}
@@ -171,19 +208,21 @@ export const PortfolioFormCard: FC<PortfolioFormCardProps> = ({
       </GlassCard>
 
       {/* Chybové správy pod kartou */}
-      {hasSubmitted && isNameEmpty && (
-        <div className="tw-text-rose-500 tw-mt-2 tw-text-sm sm:tw-text-base">
-          {t("Portfolio name is required.")}
-        </div>
-      )}
+      <div className="tw-justify-center tw-w-full">
+        {hasSubmitted && isNameEmpty && (
+          <div className="tw-text-rose-500 tw-text-center tw-mt-2 tw-text-sm sm:tw-text-base">
+            {t("Portfolio name is required.")}
+          </div>
+        )}
 
-      {hasSubmitted && isAllocationInvalid && (
-        <div className="tw-text-rose-500 tw-mt-2 tw-text-sm sm:tw-text-base">
-          {assets.length === 0
-            ? t("Please select at least one cryptocurrency.")
-            : t("Allocation must be 100% in total.")}
-        </div>
-      )}
+        {shouldShowAllocationError && isAllocationInvalid && (
+          <div className="tw-mt-2 tw-text-center tw-text-sm tw-text-rose-500 sm:tw-text-base">
+            {assets.length === 0
+              ? t("Please select at least one cryptocurrency.")
+              : t("Allocation must be 100% in total.")}
+          </div>
+        )}
+      </div>
     </div>
   );
 };

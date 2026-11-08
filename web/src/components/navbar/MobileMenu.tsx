@@ -8,6 +8,7 @@ import {SignUpIcon} from "./headerIcons/SignUpIcon.tsx";
 import {SignInIcon} from "./headerIcons/SignInIcon.tsx";
 import {ChangeLanguageIcon} from "./headerIcons/languageSwitchIcon/ChangeLanguageIcon.tsx";
 import {useMediaQuery} from "@mui/material";
+import {useRequireAuthModal} from "../../utils/hooks/useRequireAuthModal.ts";
 
 type Props = {
   toggleMobileMenu: () => void;
@@ -20,6 +21,7 @@ export const MobileMenu: FC<Props> = ({ toggleMobileMenu, isOpen }) => {
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const isMobile = useMediaQuery("(max-width: 820px)");
   const isTablet = useMediaQuery("(max-width: 1457px)");
+  const {promptRegistration} = useRequireAuthModal();
 
   const menuLinks = user ? registeredUserNavbarURLs : notRegisteredUserNavbarURLs;
   const isActive = (path: string) => location.pathname.startsWith(path);
@@ -61,6 +63,8 @@ export const MobileMenu: FC<Props> = ({ toggleMobileMenu, isOpen }) => {
         {Object.keys(menuLinks).map((key) => {
           const item = menuLinks[key];
 
+
+
           if ("subLinks" in item) {
             const isOpen = openDropdown === key;
             const isDropdownActive = Object.values(item.subLinks).some((sub) => isActive(sub.link));
@@ -84,6 +88,11 @@ export const MobileMenu: FC<Props> = ({ toggleMobileMenu, isOpen }) => {
                       onClick={toggleMobileMenu}
                       className={`submenu-link !tw-text-sm sm:!tw-text-base md:!tw-text-lg ${isActive(item.subLinks[subKey].link) ? "active-yellow" : ""}`}
                     >
+                      {item.subLinks[subKey].icon && (
+                        <span className="tw-mr-2 tw-inline-flex tw-align-middle" aria-hidden="true">
+                          {item.subLinks[subKey].icon}
+                        </span>
+                      )}
                       {t(item.subLinks[subKey].title)}
                     </Link>
                   ))}
@@ -96,7 +105,14 @@ export const MobileMenu: FC<Props> = ({ toggleMobileMenu, isOpen }) => {
             <li key={key}>
               <Link
                 to={item.link}
-                onClick={toggleMobileMenu}
+                onClick={(event) => {
+                  if (key === "aboutLogin") {
+                    promptRegistration(event); // zabráni okamžitému presmerovaniu a otvorí modal
+                  }
+
+                  toggleMobileMenu();
+                }}
+                // onClick={toggleMobileMenu}
                 className={`link-underline-none !tw-text-base sm:!tw-text-lg md:!tw-text-xl ${isActive(item.link) ? "active-yellow" : ""}`}
               >
                 {t(item.title)}

@@ -4,16 +4,18 @@ import { useTranslation } from "react-i18next";
 import { useUserContext } from "../../utils/providers/providerUser.tsx";
 import { notRegisteredUserNavbarURLs, registeredUserNavbarURLs } from "../../utils/constants";
 import { NavDropdown } from "react-bootstrap";
+import {useRequireAuthModal} from "../../utils/hooks/useRequireAuthModal.ts";
 
 export const NavbarDesktopMenu: FC = () => {
     const { t } = useTranslation();
     const { user } = useUserContext();
     const location = useLocation();
+    const { promptRegistration } = useRequireAuthModal();
 
     const isActive = (path: string) => location.pathname.startsWith(path);
 
     return (
-        <div className="menu-area ml-4">
+        <div className="menu-area">
             <ul className="menu menu--style1 d-flex align-items-center">
                 {user
                     ? Object.keys(registeredUserNavbarURLs).map((key) => {
@@ -29,7 +31,7 @@ export const NavbarDesktopMenu: FC = () => {
                                     <NavDropdown
                                         title={t(item.title)}
                                         id={`nav-dropdown-${key}`}
-                                        className={`custom-nav-dropdown ${isDropdownActive ? "active-yellow" : ""}`}
+                                        className={`${isDropdownActive ? "active-yellow" : ""}`}
                                     >
                                         {Object.keys(item.subLinks).map((subKey) => (
                                             <NavDropdown.Item
@@ -38,6 +40,11 @@ export const NavbarDesktopMenu: FC = () => {
                                                 key={subKey}
                                                 className={isActive(item.subLinks[subKey].link) ? "active-yellow" : ""}
                                             >
+                                                {item.subLinks[subKey].icon && (
+                                                    <span className="me-2" aria-hidden="true">
+                                                        {item.subLinks[subKey].icon}
+                                                    </span>
+                                                )}
                                                 {t(item.subLinks[subKey].title)}
                                             </NavDropdown.Item>
                                         ))}
@@ -63,6 +70,7 @@ export const NavbarDesktopMenu: FC = () => {
                             <li className="mr-2" key={key}>
                                 <Link
                                     to={item.link}
+                                    onClick={key === "aboutLogin" ? promptRegistration : undefined}
                                     className={`link-underline-none ${isActive(item.link) ? "active-yellow" : ""}`}
                                 >
                                     {t(item.title)}

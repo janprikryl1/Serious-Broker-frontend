@@ -49,10 +49,10 @@ export const SignInIcon: FC = () => {
             <RiIdCardLine/>
             {t("Membership")}
           </Dropdown.Item>*/}
-          <Dropdown.Item as={Link} to={routes.profile.achievements} className={"d-flex gap-2 align-items-center"}>
+          {/*<Dropdown.Item as={Link} to={routes.profile.achievements} className={"d-flex gap-2 align-items-center"}>
             <FaTrophy/>
             {t("Achievements")}
-          </Dropdown.Item>
+          </Dropdown.Item>*/}
           <Dropdown.Item as={Link} to={routes.profile.sessions} className={"d-flex gap-2 align-items-center"}>
             <FaHistory/>
             {t("Sessions")}

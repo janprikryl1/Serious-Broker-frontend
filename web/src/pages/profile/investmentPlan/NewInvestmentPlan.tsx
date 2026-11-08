@@ -18,7 +18,7 @@ export const NewInvestmentPlan = () => {
       currentStep={currentStep}
       currentStepFinished={false}
     >
-      <div className="investment-plan-choice">
+      <div className="investment-plan-choice tw-mb-10">
         <Link
           to={routes.profile.newInvestmentPlanExistingPortfolio}
           className="investment-plan-choice__link"

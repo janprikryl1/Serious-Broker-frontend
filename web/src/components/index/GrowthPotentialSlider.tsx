@@ -45,14 +45,13 @@ export const GrowthPotentialSlider: FC = () => {
                 if (resData && resData.performers) {
                     setDuplicatedData({
                         ...resData,
-                        // performers: [...resData.performers, ...resData.performers]
                         performers: ensureMinSlides(resData.performers, 10)
                     });
                 }
 
             } catch (err) {
-                console.error("Chyba pri načítavaní growth potential:", err);
-                setError("Nepodarilo sa načítať dáta.");
+                console.error("Error loading growth potential:", err);
+                setError("Unable to load data.");
             } finally {
                 setLoading(false);
             }
@@ -61,13 +60,20 @@ export const GrowthPotentialSlider: FC = () => {
         fetchData();
     }, []);
 
+    useEffect(() => {
+        if (!duplicatedData) return;
+
+        console.log("Počet performerov v duplicatedData:", duplicatedData.performers?.length ?? 0);
+        console.log("Obsah duplicatedData:", duplicatedData);
+    }, [duplicatedData]);
+
     return (
         <section className="tw-relative tw-w-full tw-overflow-hidden tw-pt-10 sm:tw-pt-14 lg:tw-pt-16">
             <div className="container tw-mb-6 tw-mt-6 tw-px-4 sm:tw-mb-8 sm:tw-mt-8 sm:tw-px-6">
-                <p className="tw-mb-2 tw-pb-0 tw-pt-3 tw-text-xs tw-font-normal tw-tracking-normal tw-text-secondary tw-font-['Sora'] sm:tw-text-base">
+                <p className="tw-mb-2 tw-pb-0 tw-pt-3 tw-text-xs tw-font-normal tw-tracking-normal tw-text-secondary tw-font-['Sora'] sm:tw-text-sm">
                     {t("HISTORICAL INSIGHT")}
                 </p>
-                <h2 className="index-section-head-title tw-text-2xl sm:tw-text-3xl md:tw-text-5xl lg:tw-text-6xl">
+                <h2 className="index-section-head-title tw-text-2xl sm:tw-text-3xl md:tw-text-4xl lg:tw-text-5xl">
                     {t("Growth Potential")}
                 </h2>
             </div>
@@ -102,7 +108,7 @@ export const GrowthPotentialSlider: FC = () => {
                     </button>
                 </div>
 
-                {duplicatedData?.performers && duplicatedData.performers.length > 0 ? (
+                {!loading && (duplicatedData?.performers?.length ?? 0) > 0 ? (
                 <Swiper
                     onBeforeInit={(swiper) => {
                         swiperRef.current = swiper;
@@ -130,11 +136,11 @@ export const GrowthPotentialSlider: FC = () => {
                             <GlassCard bgColor="var(--true-black)" opacity={0.2} shrinkPadding={true}>
                                 <div className="tw-flex tw-flex-col tw-gap-3 tw-p-4 sm:tw-gap-4 sm:tw-p-6">
                                     <div className="tw-flex tw-items-baseline tw-gap-2">
-                                        <span className="tw-text-xl tw-font-bold tw-text-white sm:tw-text-3xl">{asset.name}</span>
-                                        <span className="tw-text-sm tw-font-medium tw-text-secondary sm:tw-text-xl">{asset.symbol}</span>
+                                        <span className="tw-text-xl tw-font-bold tw-text-white sm:tw-text-2xl">{asset.name}</span>
+                                        <span className="tw-text-sm tw-font-medium tw-text-secondary sm:tw-text-base">{asset.symbol}</span>
                                     </div>
 
-                                    <p className="tw-m-0 tw-text-sm tw-text-gray-2 sm:tw-text-base lg:tw-text-xl">
+                                    <p className="tw-m-0 tw-text-sm tw-text-gray-2 sm:tw-text-base lg:tw-text-lg">
                                         <Trans
                                             i18nKey="invested_text"
                                             values={{ amount: formatNumber(asset.investment_eur), when: t(`period.${asset.period}`) }}
@@ -143,13 +149,13 @@ export const GrowthPotentialSlider: FC = () => {
                                     </p>
 
                                     <div className="tw-py-2 tw-text-center">
-                                        <div className="tw-text-2xl tw-font-bold tw-text-secondary sm:tw-text-4xl lg:tw-text-6xl">
+                                        <div className="tw-text-2xl tw-font-bold tw-text-secondary sm:tw-text-3xl lg:tw-text-5xl">
                                             <Trans
                                               i18nKey="invested_profit"
                                               values={{ profit: formatNumber(asset.profit_eur) }}
                                             />
                                         </div>
-                                        <div className="tw-mt-1 tw-text-sm tw-text-gray-2 sm:tw-text-base lg:tw-text-xl">
+                                        <div className="tw-mt-1 tw-text-sm tw-text-gray-2 sm:tw-text-base lg:tw-text-lg">
                                             <Trans
                                               i18nKey="invested_text_profit"
                                               values={{ profit: formatNumber(asset.profit_eur + asset.investment_eur) }}
@@ -162,16 +168,15 @@ export const GrowthPotentialSlider: FC = () => {
                     ))}
                 </Swiper>
                 ) : (
-                  // TODO: loading skeleton
-                  // <div className="tw-h-[260px]" />
-                  <GlassCard bgColor="var(--true-black)" opacity={0.2}>
-                      <Skeleton height={200} />
-                      ahoj
-                  </GlassCard>
+                  <div className="!tw-w-[280px] sm:!tw-w-[420px] lg:!tw-w-[550px]">
+                      <GlassCard bgColor="var(--true-black)" opacity={0.2}>
+                        <Skeleton height={200} />
+                      </GlassCard>
+                  </div>
                 )}
             </div>
             <div className="container tw-text-center tw-pt-14 tw-mt-3">
-                <p className="tw-text-xl">{t("Want to see other cryptocurrencies?")}</p>
+                <p className="tw-text-base sm:tw-text-lg">{t("Want to see other cryptocurrencies?")}</p>
                 <Button type="link" to={routes.cryptoCalculator}>
                     {t("Try calculator")}
                 </Button>

@@ -31,10 +31,10 @@ export const WhyToInvestInCryptocurrencies: FC = () => {
 
   return (
     <div className="container tw-mt-8 tw-mb-12 tw-px-4 tw-py-10 sm:tw-mb-16 sm:tw-px-6 sm:tw-py-14 lg:tw-py-16">
-      <p className="tw-mb-2 tw-pb-0 tw-pt-5 tw-text-xs tw-font-normal tw-tracking-normal tw-text-secondary tw-font-['Sora'] sm:tw-text-base">
+      <p className="tw-mb-2 tw-pb-0 tw-pt-5 tw-text-xs tw-font-normal tw-tracking-normal tw-text-secondary tw-font-['Sora'] sm:tw-text-sm">
         {t("BASICS")}
       </p>
-      <h2 className="index-section-head-title tw-mb-5 tw-text-2xl sm:tw-text-3xl md:tw-text-5xl lg:tw-text-6xl">
+      <h2 className="index-section-head-title tw-mb-5 tw-text-2xl sm:tw-text-3xl md:tw-text-4xl lg:tw-text-5xl">
         {t("Why Cryptocurrencies?")}
       </h2>
 
@@ -44,8 +44,8 @@ export const WhyToInvestInCryptocurrencies: FC = () => {
             key={idx}
             className="tw-flex tw-h-full tw-w-full tw-justify-center"
             data-aos="fade-up"
-            data-aos-duration="1200"
-            data-aos-offset="250"
+            data-aos-duration="1000"
+            data-aos-delay={(idx + 1) * 100}
             data-aos-easing="ease-out-cubic"
             style={{ height: "100%" }}
           >
@@ -62,11 +62,11 @@ export const WhyToInvestInCryptocurrencies: FC = () => {
                   {card.icon}
                 </div>
 
-                <h3 className="tw-pt-4 tw-text-lg tw-font-bold tw-text-white sm:tw-text-xl lg:tw-text-2xl">
+                <h3 className="tw-pt-4 tw-text-lg tw-font-bold tw-text-white sm:tw-text-xl">
                   {card.title}
                 </h3>
 
-                <p className="tw-m-0 tw-leading-relaxed tw-text-sm tw-text-gray-2 sm:tw-text-base lg:tw-text-xl">
+                <p className="tw-m-0 tw-leading-relaxed tw-text-sm tw-text-gray-2 sm:tw-text-base lg:tw-text-lg">
                   {card.description}
                 </p>
               </div>
