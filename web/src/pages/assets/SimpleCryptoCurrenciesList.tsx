@@ -6,7 +6,7 @@ import {getBreadcrumbSchema} from "../../utils/functions/seoSchemas.ts";
 import {routes} from "../../utils/constants";
 import {useTranslation} from "react-i18next";
 
-export const CryptoCurrenciesList:FC = () => {
+export const SimpleCryptoCurrenciesList:FC = () => {
     const {t} = useTranslation();
 
     const schemas = [

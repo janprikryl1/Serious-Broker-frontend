@@ -8,7 +8,7 @@ import {CryptoCurrencyAdminType} from "../../utils/types/asset/CryptoCurrencyTyp
 import {addToWatchList, removeFromWatchList} from "../../utils/api/watchListService.ts";
 import {WatchListEnum} from "../../utils/enums/WatchListEnum.ts";
 import {WatchListType} from "../../utils/types/watchList/WatchListType.ts";
-import {AssetCoinID} from "../../pages/assets/CryptocurrenciesList.tsx";
+import {AssetCoinID} from "../../pages/assets/CryptocurrenciesListTable.tsx";
 import {useTranslation} from "react-i18next";
 import {WatchlistButton} from "../reusable/WatchlistButton.tsx";
 import baseGoldIcon from "../../utils/icons/coins/base_gold.png";

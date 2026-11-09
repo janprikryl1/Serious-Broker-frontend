@@ -16,9 +16,9 @@ const SearchArticles = lazy(() => import("./pages/content/SearchArticles.tsx").t
 const Assets = lazy(() => import("./pages/assets/IndicesList.tsx").then(module => ({ default: module.IndicesList })));
 const AssetGraph = lazy(() => import("./pages/assets/IndexDetails.tsx").then(module => ({ default: module.IndexDetails })));
 // const AssetGraphCurrencyDetail = lazy(() => import("./pages/assets/AssetGraphCurrencyDetail.tsx").then(module => ({ default: module.AssetGraphCurrencyDetail })));
-const Recommendation = lazy(() => import("./pages/assets/CryptocurrenciesList.tsx").then(module => ({ default: module.CryptocurrenciesList })));
+const Recommendation = lazy(() => import("./pages/assets/CryptocurrenciesListTable.tsx").then(module => ({ default: module.CryptocurrenciesListTable })));
 const Glossary = lazy(() => import("./pages/content/Glossary.tsx").then(module => ({ default: module.Glossary })));
-const CryptoCurrenciesList = lazy(() => import("./pages/assets/CryptoCurrenciesList.tsx").then(module => ({ default: module.CryptoCurrenciesList })));
+const CryptoCurrenciesList = lazy(() => import("./pages/assets/SimpleCryptoCurrenciesList.tsx").then(module => ({ default: module.SimpleCryptoCurrenciesList })));
 const CryptocurrencyDetails = lazy(() => import("./pages/assets/CryptocurrencyDetails.tsx").then(module => ({ default: module.CryptocurrencyDetails })));
 const VerifyAccount = lazy(() => import("./pages/auth/VerifyAccount.tsx").then(module => ({ default: module.VerifyAccount })));
 const ForgottenPassword = lazy(() => import("./pages/auth/ForgottenPassword.tsx").then(module => ({ default: module.ForgottenPassword })));

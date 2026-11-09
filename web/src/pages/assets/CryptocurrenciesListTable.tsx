@@ -55,7 +55,7 @@ export type AssetCoinID = {
 
 const animatedComponents = makeAnimated();
 
-export const CryptocurrenciesList: FC = () => {
+export const CryptocurrenciesListTable: FC = () => {
   const { t } = useTranslation();
   const [searchParams, setSearchParams] = useSearchParams();
   const initialOrderType = (searchParams.get("orderBy") as RecommendationGraphEnum) || RecommendationGraphEnum.CMC_RANK;
