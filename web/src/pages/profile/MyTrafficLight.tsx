@@ -18,6 +18,7 @@ import {TrafficLightFormModal} from "../../components/trafficLight/TrafficLightF
 import {AccordionToggleIcon} from "../../components/reusable/AccordionToggleIcon.tsx";
 import {showToast} from "../../components/toast/toastHelper.tsx";
 import {routes} from "../../utils/constants";
+import Skeleton from "react-loading-skeleton";
 
 const MyTrafficLightsContent: FC = () => {
   const [loading, setLoading] = useState(true);
@@ -197,7 +198,9 @@ const MyTrafficLightsContent: FC = () => {
     );
   };
 
-  if (loading) return <div>{t("Loading...")}</div>;
+  const insertTrafficLightSkeletons = (count: number) => {
+    return <Skeleton count={count} height={75} className="tw-rounded-xl tw-mb-1"/>
+  }
 
   return (
     <>
@@ -217,29 +220,41 @@ const MyTrafficLightsContent: FC = () => {
           <span className="tw-mr-1">{t("New Market Traffic Light")}</span>
         </Button>
 
+          {/* Buy traffic lights section */}
           <div className="row g-4">
             <div className="col-12 col-lg-6 custom-col">
               <h3 className="mb-4 tw-text-lg sm:tw-text-xl lg:tw-text-2xl">{t("Buy Traffic Lights")}</h3>
-              {trafficLights.filter(l => l.type === "buy").length > 0 ? (
-                trafficLights.filter(l => l.type === "buy").map((tl, i) => (
-                  <TrafficLightAccordionItem key={tl.id || i} tl={tl} />
-                ))
+              {loading ? (
+                insertTrafficLightSkeletons(3)
               ) : (
-                <div className="text-center gray-3-color-text p-4 tw-text-sm sm:tw-text-base">
-                  {t("No buy market traffic lights defined. Click the button above to add your first market traffic light.")}
-                </div>
+                trafficLights.filter(l => l.type === "buy").length > 0 ? (
+                    trafficLights.filter(l => l.type === "buy").map((tl, i) => (
+                      <TrafficLightAccordionItem key={tl.id || i} tl={tl} />
+                    ))
+                  ) : (
+                    <div className="text-center gray-3-color-text p-4 tw-text-sm sm:tw-text-base">
+                      {t("No buy market traffic lights defined. Click the button above to add your first market traffic light.")}
+                    </div>
+                  )
               )}
             </div>
+
+            {/* Sell traffic lights section */}
             <div className="col-12 col-lg-6 custom-col">
               <h3 className="mb-4 tw-text-lg sm:tw-text-xl lg:tw-text-2xl">{t("Sell Traffic Lights")}</h3>
-              {trafficLights.filter(l => l.type === "sell").length > 0 ? (
-                trafficLights.filter(l => l.type === "sell").map((tl, i) => (
-                  <TrafficLightAccordionItem key={tl.id || i} tl={tl} />
-                ))
+
+              {loading ? (
+                insertTrafficLightSkeletons(3)
               ) : (
-                <div className="text-center gray-3-color-text p-4 tw-text-sm sm:tw-text-base">
-                  {t("No sell market traffic lights defined. Click the button above to add your first market traffic light.")}
-                </div>
+                trafficLights.filter(l => l.type === "sell").length > 0 ? (
+                  trafficLights.filter(l => l.type === "sell").map((tl, i) => (
+                    <TrafficLightAccordionItem key={tl.id || i} tl={tl} />
+                  ))
+                ) : (
+                  <div className="text-center gray-3-color-text p-4 tw-text-sm sm:tw-text-base">
+                    {t("No sell market traffic lights defined. Click the button above to add your first market traffic light.")}
+                  </div>
+                )
               )}
             </div>
           </div>

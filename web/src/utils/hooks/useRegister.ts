@@ -21,8 +21,10 @@ export const useRegister = () => {
         register: formRegister,
         handleSubmit,
         watch,
+        getValues,
         setValue,
         setError,
+        getFieldState,
         formState: { errors },
         trigger,
         clearErrors
@@ -42,23 +44,45 @@ export const useRegister = () => {
 
     useEffect(() => {
         const subscription = watch((_, { name }) => {
+            if (
+                (name === "password" || name === "passwordAgain") &&
+                getFieldState("passwordAgain").error?.type === "passwordMismatch"
+            ) {
+                clearErrors("passwordAgain");
+            }
             if (name && errors[name as keyof RegisterUserSchemaType]) {
                 clearErrors(name as keyof RegisterUserSchemaType);
             }
         });
 
         return () => subscription.unsubscribe();
-    }, [watch, clearErrors, errors]);
+    }, [watch, clearErrors, errors, getFieldState]);
 
+    const validatePasswordsMatch = (
+        password = getValues("password"),
+        passwordAgain = getValues("passwordAgain")
+    ) => {
+        if (password !== passwordAgain) {
+            setError("passwordAgain", {
+                type: "passwordMismatch",
+                message: t("Passwords do not match")
+            });
+            return false;
+        }
+
+        if (getFieldState("passwordAgain").error?.type === "passwordMismatch") {
+            clearErrors("passwordAgain");
+        }
+        return true;
+    };
 
     const onSubmit = async (data: registerUserType & { passwordAgain: string }) => {
-        if (data.password !== data.passwordAgain) {
+        if (!validatePasswordsMatch(data.password, data.passwordAgain)) {
             CustomSwal.fire({
                 icon: "error",
                 title: t("Error"),
                 text: t("Passwords do not match")
             });
-            setError("passwordAgain", { message: t("Passwords do not match") });
             return;
         }
         setSending(true);
@@ -112,9 +136,11 @@ export const useRegister = () => {
         formRegister,
         errors,
         watch,
+        getValues,
         setCurrentStep,
         sending,
         setValue,
-        trigger
+        trigger,
+        validatePasswordsMatch
     }
 }

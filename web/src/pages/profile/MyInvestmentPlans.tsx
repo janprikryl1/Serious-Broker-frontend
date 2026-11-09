@@ -20,11 +20,12 @@ import {MdNumbers} from "react-icons/md";
 import {SlOptions} from "react-icons/sl";
 import {Link} from "react-router-dom";
 import {SpinnerLoader} from "../../components/reusable/SpinnerLoader.tsx";
-import {ColorType, createChart, IChartApi} from "lightweight-charts";
+import {ColorType, createChart, IChartApi, ISeriesApi} from "lightweight-charts";
 import {transparentChartTheme} from "../../utils/options/chartThemes.ts";
 import {CHART_COLORS} from "../../utils/constants/customColors.ts";
 import {InfoIconTooltip} from "../../components/reusable/InfoIconTooltip.tsx";
 import {useMediaQuery} from "@mui/material";
+import Skeleton from "react-loading-skeleton";
 
 type KlinePoint = {
   datetime: string;
@@ -247,23 +248,35 @@ const MiniProfitChart: FC<{ points: ProfitPoint[] }> = ({ points }) => {
   const { t, i18n } = useTranslation();
   const currentLocale = i18n.resolvedLanguage || i18n.language || undefined;
   const chartContainerRef = useRef<HTMLDivElement>(null);
+  const [visibleSeries, setVisibleSeries] = useState({
+    value: true,
+    invested: true,
+    return: true,
+  });
+
+  const valueSeriesRef = useRef<ISeriesApi<"Line"> | null>(null);
+  const investedSeriesRef = useRef<ISeriesApi<"Line"> | null>(null);
+  const returnSeriesRef = useRef<ISeriesApi<"Line"> | null>(null);
 
   // Legend and description
   const legendItems = [
     {
       label: t("Portfolio value"),
+      seriesKey: "value",
       color: CHART_COLORS.gray,
       axis: "EUR",
       description: t("Current total value of assets in the portfolio"),
     },
     {
       label: t("Total invested"),
+      seriesKey: "invested",
       color: CHART_COLORS.blue,
       axis: "EUR",
       description: t("Cumulative amount of money invested over time"),
     },
     {
       label: t("Return"),
+      seriesKey: "return",
       color: CHART_COLORS.gold,
       axis: "%",
       description: t("Percentage return of investment (Right axis)"),
@@ -296,13 +309,19 @@ const MiniProfitChart: FC<{ points: ProfitPoint[] }> = ({ points }) => {
         uniquePoints.push(pt);
         lastTime = pt.time;
       } else if (uniquePoints.length > 0) {
-        // Ak má rovnaký timestamp, prepíšeme ho najnovšou hodnotou
         uniquePoints[uniquePoints.length - 1] = pt;
       }
     }
 
     return uniquePoints;
   }, [points]);
+
+  // Change series visibility
+  useEffect(() => {
+    valueSeriesRef.current?.applyOptions({ visible: visibleSeries.value });
+    investedSeriesRef.current?.applyOptions({ visible: visibleSeries.invested });
+    returnSeriesRef.current?.applyOptions({ visible: visibleSeries.return });
+  }, [visibleSeries]);
 
   useEffect(() => {
     if (!chartContainerRef.current || validPoints.length < 2) return;
@@ -355,6 +374,10 @@ const MiniProfitChart: FC<{ points: ProfitPoint[] }> = ({ points }) => {
       },
     });
 
+    valueSeriesRef.current = valueSeries;
+    investedSeriesRef.current = investedSeries;
+    returnSeriesRef.current = returnSeries;
+
     const valueData: any[] = [];
     const investedData: any[] = [];
     const returnData: any[] = [];
@@ -402,20 +425,28 @@ const MiniProfitChart: FC<{ points: ProfitPoint[] }> = ({ points }) => {
         style={{ width: "100%", height: `${chartHeight}px`, position: "relative" }}
       />
       <div className="tw-flex tw-flex-wrap tw-justify-center tw-items-center tw-gap-4 tw-mt-4 tw-pt-3 tw-border-t tw-border-stone-500/25">
-        {legendItems.map((item, idx) => (
-          <CustomTooltip key={idx} title={item.description} placement="top">
-            <div className="tw-flex tw-items-center tw-gap-2 tw-cursor-pointer tw-text-sm tw-select-none hover:tw-opacity-80 tw-transition-opacity">
-              <span
-                className="tw-w-2.5 tw-h-2.5 tw-rounded-full tw-shrink-0"
-                style={{ backgroundColor: item.color }}
+        {legendItems.map((item) => (
+          <CustomTooltip key={item.seriesKey} title={item.description} placement="top">
+            <label className="tw-flex tw-cursor-pointer tw-select-none tw-items-center tw-gap-2 tw-text-sm hover:tw-opacity-80">
+              <input
+                type="checkbox"
+                checked={visibleSeries[item.seriesKey]}
+                onChange={() =>
+                  setVisibleSeries((previous) => ({
+                    ...previous,
+                    [item.seriesKey]: !previous[item.seriesKey],
+                  }))
+                }
+                style={{ accentColor: item.color }}
               />
+
               <span className="tw-font-medium tw-text-stone-200">
                 {item.label}
-              </span>
+            </span>
               <span className="tw-text-xs tw-text-stone-400">
                 ({item.axis})
-              </span>
-            </div>
+            </span>
+            </label>
           </CustomTooltip>
         ))}
       </div>
@@ -618,7 +649,7 @@ export const MyInvestmentPlans: FC = () => {
 
         <div>
           {isLoading ? (
-            <SpinnerLoader />
+            <Skeleton count={3} height={250} className="tw-rounded-xl tw-mb-16"/>
           ) : investmentPlans.length === 0 ? (
             <div className="text-center mt-5">
               <h4 className="tw-text-lg sm:tw-text-xl">{t("You have no investment plans created yet.")}</h4>
@@ -791,7 +822,7 @@ export const MyInvestmentPlans: FC = () => {
                             {/* Change value */}
                             <div className="plan-card__profit">
                               <div  className="plan-card__profit-row">
-                                {totalProfit && (
+                                {totalProfit ? (
                                   <CustomTooltip
                                     title={`${t("Holdings value")}: ${totalProfit.value.toFixed(2)} ${plan.currency}`}
                                     placement={"top"}
@@ -802,8 +833,12 @@ export const MyInvestmentPlans: FC = () => {
                                       </div>
                                     </div>
                                   </CustomTooltip>
+                                ) : (
+                                  isLoading ? (
+                                    <Skeleton width={120} height={30} className="tw-rounded-md" />
+                                  ) : null
                                 )}
-                                {trend && (
+                                {trend ? (
                                   <CustomTooltip
                                     title={`${totalProfit ? (totalProfit?.amount >= 0 ? t('Profit') + ': ' : t('Loss') + ': ') : ""}${totalProfit?.amount.toFixed(2)} ${plan.currency}`}
                                     placement={"top"}
@@ -817,6 +852,10 @@ export const MyInvestmentPlans: FC = () => {
                                       </span>
                                     </div>
                                   </CustomTooltip>
+                                ) : (
+                                  isLoading ? (
+                                    <Skeleton width={100} height={30} className="tw-rounded-md" />
+                                  ) : null
                                 )}
                               </div>
                             </div>
@@ -902,11 +941,7 @@ export const MyInvestmentPlans: FC = () => {
                               {/* Chart Section */}
                               <div className="plan-card__chart">
                                 {simulation?.loading && (
-                                  <GraphDataSkeleton
-                                    baseColor={"var(--cream-color)"}
-                                    highlightColor={"var(--secondary-color)"}
-                                    style={{width: "100%", height: "220px"}}
-                                  />
+                                  <Skeleton height={300} />
                                 )}
                                 {simulation?.error && <div className="gray-2-color-text">{simulation.error}</div>}
                                 {!simulation?.loading && !simulation?.error && (

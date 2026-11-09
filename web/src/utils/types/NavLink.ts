@@ -1,6 +1,9 @@
+import type {ReactNode} from "react";
+
 export type NavLink = {
     title: string;
     link: string;
+    icon?: ReactNode;
 }
 
 type SubNavLink = {

@@ -10,9 +10,8 @@ export const Profile: FC = () => {
 
     if (user) {
         return (
-            <div /*style={{display: 'flex'}}*/>
-                {!isTablet && <ProfileSidebar/>}
-                <main /*style={{flex: 1}}*/>
+            <div>
+                <main>
                     <Outlet/>
                 </main>
             </div>

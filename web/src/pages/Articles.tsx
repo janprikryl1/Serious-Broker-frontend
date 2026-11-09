@@ -107,15 +107,15 @@ export const Articles: FC = () => {
     return (
         <>
             <SEO
-                title={t("Articles") || "Články"}
+                title={t("Education") || "Vzdělávání"}
                 description="Odborné i vzdělávací články, novinky a analýzy ze světa kryptoměn a investování od týmu Serious Broker."
                 canonicalPath={routes.articles}
                 schema={getBreadcrumbSchema([
                     { name: "Domů", url: routes.home },
-                    { name: t("Articles") || "Články", url: routes.articles },
+                    { name: t("Education") || "Vzdělávání", url: routes.articles },
                 ])}
             />
-            <TitleHeader title="Articles" />
+            <TitleHeader title="Education" />
             <div className="mt-4 padding-bottom">
                 <div className="container">
                     <div className="">

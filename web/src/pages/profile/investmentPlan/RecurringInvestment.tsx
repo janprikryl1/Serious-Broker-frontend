@@ -184,7 +184,7 @@ export const RecurringInvestment = () => {
         </div>
         <div className="d-flex flex-column w-100">
                     <span className="gray-3-color-text mb-3 tw-text-sm sm:tw-text-base">
-                        {t("Choose a past start date to see how much you could have earned by starting your investment then:")}
+                        {t("Choose a past start date to see how much you could have earned by starting your investment then (optional):")}
                     </span>
           <input
             type="date"
@@ -207,7 +207,7 @@ export const RecurringInvestment = () => {
         {renderContent()}
       </div>
 
-      <div className="d-flex flex-column flex-sm-row justify-content-between gap-3 mt-4">
+      <div className="d-flex flex-column flex-sm-row justify-content-between gap-3 mt-10">
         <NextStepButton currentStep={currentStep} currentStepFinished={isStepFinished()}
                         link={routes.profile.newInvestmentPlan} variant="previous" color="var(--sandy-color)"/>
         <NextStepButton currentStep={currentStep} currentStepFinished={isStepFinished()}

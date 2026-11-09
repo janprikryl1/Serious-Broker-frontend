@@ -28,11 +28,21 @@ export const TrafficLightFormModal: FC<any> = ({
       onHide={onHide}
       centered
       size={"xl"}
+      scrollable
       contentClassName="custom-modal"
     >
-      <Modal.Body>
+      <Modal.Header closeButton className="tw-border-0">
+        <Modal.Title as="h3" className="tw-text-lg sm:tw-text-xl lg:tw-text-2xl">
+          {t(title, {
+            type: t(type === "buy" ? "BuyTL" : "SellTL"),
+          })}
+        </Modal.Title>
+      </Modal.Header>
+      <Modal.Body className="!tw-overflow-y-auto tw-overflow-x-hidden">
         <div>
-          <h3 className="tw-text-lg sm:tw-text-xl lg:tw-text-2xl">{t(title, { type: t(type === "buy" ? "BuyTL" : "SellTL") })}</h3>
+          <div className="mb-4 tw-text-sm sm:tw-text-base">
+            {t('trafficLight.triggerDescription')}
+          </div>
 
           {variant === "create" && onTypeChange && (
             <div className="mb-4 tw-flex tw-flex-wrap tw-gap-3 tw-items-center">
@@ -56,10 +66,6 @@ export const TrafficLightFormModal: FC<any> = ({
               />
             </div>
           )}
-
-          <div className="mb-4 tw-text-sm sm:tw-text-base">
-            {t('trafficLight.triggerDescription')}
-          </div>
 
           {/* Triggers */}
           <TrafficLightWrapper

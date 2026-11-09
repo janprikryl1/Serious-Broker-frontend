@@ -12,7 +12,7 @@ export const DictionaryLinkCard: FC = () => {
     <div className="col-sm-6 col-lg-6" data-aos="fade-up" data-aos-duration="1000">
       <Link to={routes.dictionary} className="link-underline-none tw-text-white tw-h-full">
         <GlassCard bgColor="var(--secondary-color)" isHoverable={true} className="tw-h-full">
-          <div className="color-container--chart-blue tw-text-xs tw-text-blue tw-inline-block tw-mb-3">
+          <div className="color-container--chart-blue tw-text-xs sm:tw-text-sm tw-text-blue tw-inline-block tw-mb-3">
             {t("Dictionary")}
           </div>
 

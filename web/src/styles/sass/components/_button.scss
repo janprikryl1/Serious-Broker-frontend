@@ -50,7 +50,7 @@
   @include add-prefix(transition, $transition);
   & {
     line-height: 1.2;
-    border-radius: 5px;
+    border-radius: 8px;
   }
 
   &:disabled {

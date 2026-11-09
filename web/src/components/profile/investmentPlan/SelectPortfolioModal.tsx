@@ -40,7 +40,7 @@ export const SelectPortfolioModal: FC<SelectPortfolioModalProps> = ({
             onClose();
           }}
           maxContainerHeight="tw-max-h-[min(65vh,580px)]"
-          showDetailGraph={false} // v modale grafy netreba, aby bol výber svižný
+          showDetailGraph={false}
         />
       </Modal.Body>
     </Modal>

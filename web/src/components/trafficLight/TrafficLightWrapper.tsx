@@ -1,13 +1,13 @@
-import { FC } from "react";
-import { Form } from "react-bootstrap";
-import { IoIosAddCircleOutline } from "react-icons/io";
-import { FiEdit3 } from "react-icons/fi";
-import { useTranslation } from "react-i18next";
-import { TrafficLightTriggers } from "./TrafficLightTriggers.tsx";
-import { CustomTooltip } from "../reusable/CustomTooltip.tsx";
-import { Button } from "../reusable/Button.tsx";
-import { TriggerType } from "../../utils/types/trafficLight/TriggerType.ts";
-import { TrafficLightReference } from "../../utils/enums/TrafficLight.ts";
+import {FC} from "react";
+import {Form} from "react-bootstrap";
+import {IoIosAddCircleOutline} from "react-icons/io";
+import {FiEdit3} from "react-icons/fi";
+import {useTranslation} from "react-i18next";
+import {TrafficLightTriggers} from "./TrafficLightTriggers.tsx";
+import {CustomTooltip} from "../reusable/CustomTooltip.tsx";
+import {Button} from "../reusable/Button.tsx";
+import {TriggerType} from "../../utils/types/trafficLight/TriggerType.ts";
+import {TrafficLightReference} from "../../utils/enums/TrafficLight.ts";
 
 type TrafficLightProps = {
   triggers: TriggerType[];
@@ -26,46 +26,69 @@ type TrafficLightProps = {
 };
 
 export const TrafficLightWrapper: FC<TrafficLightProps> = (props) => {
-  const { t } = useTranslation();
+  const {t} = useTranslation();
   const isEditable = props.variant === 'edit';
+
+  const hasInvalidPercentage = props.triggers.some((trigger) =>
+    [trigger.eventByPercentage, trigger.actionByPercentage].some((value) => {
+      const text = String(value).trim();
+      return text !== "" && (!Number.isFinite(Number(text)) || Number(text) < 0);
+    })
+  );
 
   return (
     <>
       {/* Header: Name and Label */}
-      <div className="d-flex align-items-center">
+
+      <div
+        className="tw-flex tw-flex-col tw-max-w-md sm:tw-flex-row sm:tw-items-center sm:tw-justify-between sm:tw-gap-8 tw-gap-1 tw-mt-4 tw-mb-5">
+        {/*<div className="">*/}
+        {/*  <div className="tw-text-stone-300 tw-text-xs sm:tw-text-sm">{t("Name")}</div>*/}
+        {/*</div>*/}
         {isEditable ? (
           <>
             <input
               type="text"
-              className="form-control borderless"
+              className="form-control outline-input tw-outline-1 tw-outline-stone-300/20"
               value={props.name}
               onChange={(e) => props.onNameChange?.(e.target.value)}
-              style={{ fontSize: "24px", width: "70%", color: "var(--secondary-color)" }}
             />
-            <FiEdit3 style={{ marginLeft: "15px" }} size={25} color={"var(--secondary-color)"} />
           </>
         ) : (
-          <div>
-            <h3 className="tw-text-lg sm:tw-text-xl lg:tw-text-2xl">{t("Traffic Light Summary")}</h3>
-            <div className={"static-name"}>{props.name}</div>
+          <div className="tw-mb-5 tw-grid tw-grid-cols-1 tw-gap-3 sm:tw-grid-cols-2">
+            <div className="tw-rounded-xl tw-border tw-border-white/10 tw-bg-white/[0.04] tw-p-4">
+              <div className="tw-mb-1 tw-text-xs tw-uppercase tw-tracking-wide tw-text-stone-400">
+                {t("Name")}
+              </div>
+              <div className="tw-font-medium tw-text-white">
+                {props.name}
+              </div>
+            </div>
+
+            <div className="tw-rounded-xl tw-border tw-border-white/10 tw-bg-white/[0.04] tw-p-4">
+              <div className="tw-mb-1 tw-text-xs tw-uppercase tw-tracking-wide tw-text-stone-400">
+                {t("Watch over")}
+              </div>
+              <div className="tw-font-medium tw-text-white">
+                {t(props.reference)}
+              </div>
+            </div>
           </div>
         )}
       </div>
-      <div className="tw-flex tw-flex-col-reverse sm:tw-flex-row sm:tw-items-center sm:tw-justify-between sm:tw-gap-8 tw-gap-1 tw-mt-1">
-        <div className="tw-text-stone-400 tw-text-xs sm:tw-text-sm">{t("Name")}</div>
-      </div>
 
       {/* Reference Section */}
-      <div className="tw-flex tw-flex-col-reverse tw-max-w-md sm:tw-flex-row sm:tw-items-center sm:tw-justify-between sm:tw-gap-8 tw-gap-1 tw-mt-4 tw-mb-5">
-        <span className="tw-text-stone-400 tw-text-xs sm:tw-text-sm" style={{ whiteSpace: "nowrap" }}>
+      <div
+        className="tw-flex tw-flex-col tw-max-w-md sm:tw-flex-row sm:tw-items-center sm:tw-justify-between sm:tw-gap-8 tw-gap-1 tw-mt-4 tw-mb-5">
+            <span className="tw-text-stone-300 tw-text-xs sm:tw-text-sm" style={{whiteSpace: "nowrap"}}>
           {t("Watch over")}
         </span>
         {isEditable ? (
           <Form.Select
             value={props.reference}
             onChange={(e) => props.onReferenceChange?.(e.target.value as TrafficLightReference)}
-            className="select-box-outline tw-text-sm sm:tw-text-base"
-            style={{ width: "100%", maxWidth: "230px" }}
+            className="select-box-outline tw-border tw-border-solid tw-border-stone-300/20 tw-text-sm sm:tw-text-base"
+            style={{width: "100%", maxWidth: "260px"}}
           >
             {Object.values(TrafficLightReference).map((v) => (
               <option key={v} value={v}>{t(v)}</option>
@@ -78,11 +101,13 @@ export const TrafficLightWrapper: FC<TrafficLightProps> = (props) => {
 
       {/* Base Price Info (Details only) */}
       {props.variant === 'details' && props.basePrice && (
-        <div className="tw-flex tw-flex-col-reverse tw-mb-10 tw-max-w-md sm:tw-flex-row sm:tw-items-center sm:tw-justify-between sm:tw-gap-8 tw-gap-1 tw-mt-2">
+        <div
+          className="tw-flex tw-flex-col-reverse tw-mb-10 tw-max-w-md sm:tw-flex-row sm:tw-items-center sm:tw-justify-between sm:tw-gap-8 tw-gap-1 tw-mt-2">
           <span className="tw-text-stone-400 tw-text-xs sm:tw-text-sm">
             {t("Base investment amount for this investment plan")}
           </span>
-          <div className="static-text tw-text-sm tw-whitespace-nowrap sm:tw-text-base">{props.basePrice} {props.currency}</div>
+          <div
+            className="static-text tw-text-sm tw-whitespace-nowrap sm:tw-text-base">{props.basePrice} {props.currency}</div>
         </div>
       )}
 
@@ -114,7 +139,7 @@ export const TrafficLightWrapper: FC<TrafficLightProps> = (props) => {
           </div>
 
           <div className={"d-flex align-items-center justify-content-center mt-4"}>
-            <Button onClick={() => props.onTrafficLightCreate?.()}>
+            <Button disabled={hasInvalidPercentage} onClick={() => props.onTrafficLightCreate?.()}>
               {t("Save settings")}
             </Button>
           </div>

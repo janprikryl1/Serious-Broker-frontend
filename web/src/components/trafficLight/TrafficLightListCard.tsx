@@ -41,8 +41,6 @@ export const TrafficLightListCard: FC<TrafficLightListCardProps> = ({
                     width={140}
                     height={20}
                     borderRadius={4}
-                    baseColor="rgba(255, 255, 255, 0.05)"
-                    highlightColor="rgba(255, 255, 255, 0.1)"
                   />
                   <div className="tw-flex tw-items-center tw-gap-[5px]">
                     {Array.from({ length: 3 }).map((_, dotIdx) => (
@@ -51,15 +49,13 @@ export const TrafficLightListCard: FC<TrafficLightListCardProps> = ({
                         circle
                         width={16}
                         height={16}
-                        baseColor="rgba(255, 255, 255, 0.05)"
-                        highlightColor="rgba(255, 255, 255, 0.1)"
                       />
                     ))}
                   </div>
                 </div>
               ))}
             </div>
-          ) : trafficLights.length < 1 ? (
+          ) : trafficLights.length <= 0 ? (
             <div className="tw-p-4 tw-text-center tw-my-auto">
               <div className="tw-mb-4 tw-text-sm sm:tw-text-base tw-text-stone-400">
                 {isBuy
@@ -99,11 +95,7 @@ export const TrafficLightListCard: FC<TrafficLightListCardProps> = ({
                         </div>
                       )}
                       <div
-                        className={`tw-absolute tw-right-0 tw-top-1/2 tw-flex tw-items-center tw-gap-[5px] tw-pointer-events-none tw-transition-all tw-duration-300 tw-ease-in-out ${
-                          isSelected
-                            ? "tw-opacity-100 -tw-translate-y-1/2 tw-translate-x-0"
-                            : "tw-opacity-0 -tw-translate-y-1/2 tw-translate-x-[10px] group-hover:tw-opacity-100 group-hover:tw-translate-x-0"
-                        }`}
+                        className={`tw-absolute tw-right-0 tw-top-1/2 tw-flex tw-items-center tw-gap-[5px] tw-pointer-events-none tw-opacity-100 -tw-translate-y-1/2 tw-translate-x-0`}
                       >
                         {trafficLight.triggers.map((trigger, idx) => (
                           <div

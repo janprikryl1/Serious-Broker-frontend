@@ -1,5 +1,5 @@
 import {FC, lazy} from "react";
-import {Outlet, Route, Routes} from "react-router-dom";
+import {Navigate, Outlet, Route, Routes} from "react-router-dom";
 import {routes} from "./utils/constants";
 import {PageLoader} from "./components/reusable/PageLoader.tsx";
 // Header, footer a UnverifiedHeaderInfo se renderují na každé stránce v MainLayout,
@@ -105,7 +105,7 @@ export const Router:FC = () => {
                 <Route path={routes.recommendation} element={<PageLoader><Recommendation /></PageLoader>} />
                 <Route path={routes.dictionary} element={<PageLoader><Glossary /></PageLoader>} />
                 <Route path={routes.cryptocurrenciesList} element={<PageLoader><CryptoCurrenciesList /></PageLoader>} />
-                <Route path={routes.graphsRecommendationDetail} element={<PageLoader><CryptocurrencyDetails /></PageLoader>} />                                                   {/**/}
+                <Route path={routes.graphsRecommendationDetail} element={<PageLoader><CryptocurrencyDetails /></PageLoader>} />
                 <Route path={routes.verifyAccount} element={<PageLoader><VerifyAccount /></PageLoader>} />
                 <Route path={routes.forgottenPassword} element={<PageLoader><ForgottenPassword /></PageLoader>} />
                 <Route path={routes.recoverPassword} element={<PageLoader><RecoverPassword /></PageLoader>} />
@@ -121,7 +121,19 @@ export const Router:FC = () => {
                     <Route path={routes.profile.editMyPortfolio} element={<PageLoader><EditMyPortfolio/></PageLoader>} />
                     <Route path={routes.profile.myPortfolioDetails} element={<PageLoader><MyPortfolioDetails/></PageLoader>} />
                     <Route path={routes.profile.newMyPortfolio} element={<PageLoader><EditMyPortfolio/></PageLoader>} />
-                    <Route path={routes.profile.newInvestmentPlanIntro} element={<PageLoader><NewInvestmentPlanIntro/></PageLoader>} />
+                    {/*<Route path={routes.profile.newInvestmentPlanIntro} element={<PageLoader><NewInvestmentPlanIntro/></PageLoader>} />*/}
+                    <Route
+                      path={routes.profile.newInvestmentPlanIntro}
+                      element={
+                          localStorage.getItem("skipNewInvestmentPlanIntro") === "true" ? (
+                            <Navigate to={routes.profile.newInvestmentPlanName} replace />
+                          ) : (
+                            <PageLoader>
+                                <NewInvestmentPlanIntro />
+                            </PageLoader>
+                          )
+                      }
+                    />
                     <Route path={routes.profile.dashboard} element={<PageLoader><Dashboard/></PageLoader>} />
                     <Route element={<PageLoader><InvestmentPlanProvider><Outlet /></InvestmentPlanProvider></PageLoader>}>
                         <Route path={routes.profile.newInvestmentPlanName} element={<PageLoader><NewInvestmentPlanName/></PageLoader>} />

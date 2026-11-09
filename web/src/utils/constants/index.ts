@@ -1,4 +1,14 @@
+import {createElement} from "react";
 import {NavbarURLs, NavLink} from "../types/NavLink.ts";
+import {FaRegBookmark} from "react-icons/fa";
+import {FaTrafficLight} from "react-icons/fa6";
+import {IoFileTrayOutline} from "react-icons/io5";
+import {AiOutlineFundProjectionScreen} from "react-icons/ai";
+import { RxDashboard } from "react-icons/rx";
+import { CiCalculator1 } from "react-icons/ci";
+import { TbRepeat } from "react-icons/tb";
+import coinsGroupOutline from "../icons/coins/coins_group_outline.svg";
+import coinsSingleOutline from "../icons/coins/coins_single_outline.svg";
 // @ts-ignore
 import Freecurrencyapi from '@everapi/freecurrencyapi-js';
 
@@ -11,18 +21,14 @@ export const glossaryImagesURL = "https://api.serious.broker/glossary/images/";
 export const qrCodeImagesURL = "https://api.serious.broker/qr_codes/qr/";
 export const formImagesURL = "https://api.serious.broker/form_questions/";
 export const logURL = `https://api.serious.broker/table_log/coinmarketcup_coin_save_name_photo.php`;
-
 export const facebookURL = "https://www.facebook.com/profile.php?id=61566158057883";
 export const instagramURL = "https://www.instagram.com/serious_broker/?igsh=MTVsM3NqMmFxaTNsaQ%3D%3D&utm_source=qr";
 export const linkedinURL = "https://www.linkedin.com/in/serious-broker-07283b331/";
 export const youtubeURL = "http://www.youtube.com/@SeriousBroker";
 export const twitterURL = "https://x.com/SeriousBroker";
-
 export const phoneNumber = "+420 735 838 972";
 export const contactEmail = "info@serious.broker";
-
 export const freecurrencyapi = new Freecurrencyapi('fca_live_tMDn3hFf3kZtFQuBrCmsqlLwAEmgSJUtXoNJEASX');
-
 
 export const routes = {
     home: "/",
@@ -175,33 +181,62 @@ export const guideURLS = {
     guidedInvestControl: "/guide/guided_invest_control",
     personalStrategy: "/guide/personal_strategy",
 }
-
 export const registeredUserNavbarURLs: NavbarURLs = {
     analysesStrategies: {
         title: "Analyses & Strategies",
         subLinks: {
-            indices: { title: "Indices", link: routes.assets },
-            // cryptocurrencies: { title: "Cryptocurrencies", link: routes.cryptocurrenciesList },
-            cryptocurrencies: { title: "Cryptocurrencies", link: routes.recommendation },
-            cryptoCalculator: { title: "Calculator", link: routes.cryptoCalculator},
-            BTFD: { title: "Strategies", link: routes.BTFD },
+            indices: {
+                title: "Indices",
+                link: routes.assets,
+                icon: createElement("span", {
+                    className: "tw-inline-block tw-h-4 tw-w-4 tw-items-center tw-align-middle tw-bg-current",
+                    style: {
+                        maskImage: `url(${coinsGroupOutline})`,
+                        WebkitMaskImage: `url(${coinsGroupOutline})`,
+                        maskRepeat: "no-repeat",
+                        WebkitMaskRepeat: "no-repeat",
+                        maskPosition: "center",
+                        WebkitMaskPosition: "center",
+                        maskSize: "contain",
+                        WebkitMaskSize: "contain",
+                    },
+                }),
+            },
+            cryptocurrencies: { title: "Cryptocurrencies",
+                link: routes.recommendation,
+                icon: createElement("span", {
+                    className: "tw-inline-block tw-h-4 tw-w-4 tw-items-center tw-align-middle tw-bg-current",
+                    style: {
+                        maskImage: `url(${coinsSingleOutline})`,
+                        WebkitMaskImage: `url(${coinsSingleOutline})`,
+                        maskRepeat: "no-repeat",
+                        WebkitMaskRepeat: "no-repeat",
+                        maskPosition: "center",
+                        WebkitMaskPosition: "center",
+                        maskSize: "contain",
+                        WebkitMaskSize: "contain",
+                    },
+                }),
+            },
+            cryptoCalculator: { title: "Calculator", link: routes.cryptoCalculator, icon: createElement(CiCalculator1) },
+            BTFD: { title: "Strategies", link: routes.BTFD, icon: createElement(TbRepeat) },
         }
     },
     investmentProfile: {
         title: "Investment Profile",
         subLinks: {
-            dashboard: { title: "Dashboard", link: routes.profile.dashboard },
-            portfolios: { title: "My Portfolios", link: routes.profile.myPortfolio },
-            investmentPlans: { title: "My Investment Plans", link: routes.profile.myInvestmentPlans },
-            marketTrafficLights: { title: "My Market Traffic Lights", link: routes.profile.myTrafficLights },
-            watchlist: { title: "Watchlist", link: routes.profile.myWatchList },
+            dashboard: { title: "Dashboard", link: routes.profile.dashboard, icon: createElement(RxDashboard) },
+            portfolios: { title: "My Portfolios", link: routes.profile.myPortfolio, icon: createElement(IoFileTrayOutline) },
+            investmentPlans: { title: "My Investment Plans", link: routes.profile.myInvestmentPlans, icon: createElement(AiOutlineFundProjectionScreen), },
+            marketTrafficLights: { title: "My Market Traffic Lights", link: routes.profile.myTrafficLights, icon: createElement(FaTrafficLight) },
+            watchlist: { title: "Watchlist", link: routes.profile.myWatchList, icon: createElement(FaRegBookmark) },
         }
     },
     education: {title: "Education", link: routes.articles},
 };
 
 export const notRegisteredUserNavbarURLs: Record<string, NavLink> = {
-    aboutLogin: { title: "Analyses & Strategies", link:  routes.register},
+    aboutLogin: { title: "Analyses & Strategies", link:  routes.register },
     indices: { title: "Indices", link: routes.assets },
     cryptocurrencies: { title: "Cryptocurrencies", link: routes.cryptocurrenciesList },
     cryptoCalculator: { title: "Calculator", link: routes.cryptoCalculator},

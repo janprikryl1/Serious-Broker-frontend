@@ -16,7 +16,7 @@ export const ChangeLanguageIcon:FC = () => {
                 <LanguageFlagComponent languageId="en" languageName="English" setShowGoogleTranslation={setShowGoogleTranslation}/>
                 <Dropdown.Divider />
                 <NavDropdown.Item key="another" onClick={() => setShowGoogleTranslation(true)}>
-                    <SiGoogletranslate /> <span className="ml-2">{t("Another languages")}</span>
+                    <SiGoogletranslate /> <span className="ml-2">{t("Other languages")}</span>
                 </NavDropdown.Item>
             </NavDropdown>
             {showGoogleTranslation && <GoogleTranslation/>}

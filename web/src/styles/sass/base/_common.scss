@@ -246,7 +246,7 @@
 }
 
 .glass-effect {
-    background: color-mix(in srgb, var(--tertiary-color) 40%, transparent);
+    background: color-mix(in srgb, var(--tertiary-color) 60%, transparent);
     backdrop-filter: blur(14px);
     //-webkit-backdrop-filter: blur(14px) saturate(140%) !important;
     border: 0.5px solid rgba(255, 255, 255, 0.15);
@@ -260,7 +260,6 @@
     &:hover {
         background: color-mix(in srgb, var(--secondary-color) 15%, transparent);
         backdrop-filter: blur(18px) saturate(160%);
-        //border: 0.5px solid rgba(255, 255, 255, 0.25);
     }
 }
 

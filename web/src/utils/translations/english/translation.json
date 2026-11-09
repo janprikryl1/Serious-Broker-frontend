@@ -355,10 +355,13 @@
     "SellTL": "Sell",
     "estimatedTotalInvestment": "Total estimated contributions calculated from the start date of each plan. Please note: This is a simulation based on your settings and may slightly differ from actual executed trades.",
     "footer": {
-        "about_project": "Serious Broker started as an independent student project for a bachelor's thesis. We help people navigate the world of investing and safely explore the world of cryptocurrencies. ",
-        "cooperation_info": "Information about cooperation",
         "disclaimer": "We do not provide financial advice."
     },
+    "about": {
+        "project_description": "Serious Broker started as an independent student project for a bachelor's thesis. We help people navigate the world of investing and safely explore the world of cryptocurrencies.",
+        "cooperation_info": "Information about cooperation"
+    },
+    "About the project": "About the project",
     "title_before": "Title",
     "title-placeholder": "E.g., Dr.",
     "suffix-placeholder": "E.g., MSc, PhD, MBA",

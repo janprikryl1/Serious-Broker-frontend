@@ -25,7 +25,8 @@ export const Register: FC = () => {
         setCurrentStep,
         sending,
         setValue,
-        trigger
+        trigger,
+        validatePasswordsMatch
     } = useRegister();
 
     useEffect(() => {
@@ -74,6 +75,8 @@ export const Register: FC = () => {
                         <RegisterStepsPagiation
                             currentStep={currentStep}
                             trigger={trigger}
+                            errors={errors}
+                            validatePasswordsMatch={validatePasswordsMatch}
                             setCurrentStep={setCurrentStep}
                             sending={sending}
                         />

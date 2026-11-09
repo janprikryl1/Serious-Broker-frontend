@@ -1,7 +1,7 @@
 .header-section {
   @extend %p-rel;
   width: 100%;
-  z-index: 101;
+  z-index: 3000;
   top: 0;
   left: 0;
   //position: fixed;
@@ -88,7 +88,7 @@
 
   .menu-area {
     @extend %d-flex;
-    margin-left: 8px;
+    //margin-left: 8px;
 
     .dropdown-item,
     .dropdown-toggle {
@@ -130,7 +130,7 @@
   position: absolute;
   inset: 0;
   z-index: -1;
-  background: rgba(44, 37, 35, 0.6);
+  background: rgba(44, 37, 35, 0.8);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border-bottom: 1px solid rgba(118, 116, 111, 0.2);

@@ -66,7 +66,7 @@ export const NewInvestmentPlanName = () => {
         />
       </div>
 
-      <div className="d-flex justify-content-center mt-4 w-100">
+      <div className="d-flex justify-content-start mt-4 w-100">
         <Button
           className="mt-4 tw-w-full sm:tw-w-auto tw-text-sm sm:tw-text-base"
           onClick={() => navigate(routes.profile.newInvestmentPlan)}

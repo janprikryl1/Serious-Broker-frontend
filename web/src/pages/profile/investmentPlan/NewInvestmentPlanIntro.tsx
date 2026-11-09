@@ -7,11 +7,25 @@ import {OutlineContainer} from "../../../components/reusable/OutlineContainer.ts
 import {Button} from "../../../components/reusable/Button.tsx";
 import {useMediaQuery} from "@mui/material";
 import {GlassCard} from "../../../components/reusable/GlassCard.tsx";
+import {useNavigate} from "react-router-dom";
+import {Checkbox} from "../../../components/reusable/Checkbox.tsx";
 
 export const NewInvestmentPlanIntro = () => {
 
   const {t} = useTranslation();
   const isMobile = useMediaQuery('(max-width: 767px)');
+  const navigate = useNavigate();
+  const skipIntroKey = "skipNewInvestmentPlanIntro";
+
+  const [dontShowAgain, setDontShowAgain] = React.useState(
+    () => localStorage.getItem(skipIntroKey) === "true"
+  );
+
+// Hodnota sa načíta iba pri otvorení stránky, aby zaškrtnutie
+// checkboxu nespôsobilo okamžité presmerovanie.
+  const [skipIntroOnMount] = React.useState(
+    () => localStorage.getItem(skipIntroKey) === "true"
+  );
 
   const content = (
     <div className="tw-w-full">
@@ -63,6 +77,15 @@ export const NewInvestmentPlanIntro = () => {
           </div>
         ))}
       </div>
+
+      <Checkbox
+        checked={dontShowAgain}
+        onChange={(checked) => {
+          setDontShowAgain(checked);
+          localStorage.setItem(skipIntroKey, String(checked));
+        }}
+        label={t("Don't show this page again")}
+      />
 
       <div className="tw-flex tw-justify-center tw-mt-10">
         <Button className="tw-mt-4 tw-px-8" type={"link"} to={routes.profile.newInvestmentPlanName}>

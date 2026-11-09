@@ -45,10 +45,10 @@ export const InvestWithUs: FC = () => {
     return (
       <div className="tw-bg-quinary">
           <div className="container tw-py-16">
-              <p className="tw-text-secondary-on-light tw-font-normal tw-text-base tw-tracking-normal tw-mb-2 tw-pb-0 tw-pt-12 tw-font-['Sora']">
+              <p className="tw-text-secondary-on-light tw-font-normal tw-text-xs sm:tw-text-sm tw-tracking-normal tw-mb-2 tw-pb-0 tw-pt-12 tw-font-['Sora']">
                   {t("ABOUT PRODUCT")}
               </p>
-              <h2 className="mb-5 tw-text-black index-section-head-title">
+              <h2 className="mb-5 tw-text-black index-section-head-title tw-text-2xl sm:tw-text-3xl md:tw-text-4xl lg:tw-text-5xl">
                   {t("Invest With Us")}
               </h2>
 
@@ -60,7 +60,6 @@ export const InvestWithUs: FC = () => {
                       data-aos="fade-up"
                       data-aos-duration="1000"
                       data-aos-delay={(index + 1) * 100}
-                      data-aos-offset="150"
                       data-aos-easing="ease-out-cubic"
                     >
                         <div className="tw-flex tw-justify-center tw-items-end tw-h-40 lg:tw-h-48 xl:tw-h-52">
