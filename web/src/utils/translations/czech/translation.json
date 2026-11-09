@@ -1556,5 +1556,7 @@
     "My Traffic Light": "Můj semafor",
     "Start typing or select...": "Začněte psát nebo vyberte...",
     "e.g. 500": "např. 500",
-    "Enter portfolio name": "Zadejte název portfolia"
+    "Enter portfolio name": "Zadejte název portfolia",
+    "We’re carrying out scheduled maintenance": "Právě probíhá plánovaná údržba",
+    "The application is temporarily unavailable while we carry out maintenance. Please try again shortly.": "Aplikace je během údržby dočasně nedostupná. Zkuste to prosím znovu za chvíli."
 }
