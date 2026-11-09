@@ -49,7 +49,7 @@ export const TrafficLightWrapper: FC<TrafficLightProps> = (props) => {
           <>
             <input
               type="text"
-              className="form-control outline-input tw-outline-1 tw-outline-stone-300/20"
+              className="form-control outline-input tw-outline-1 tw-outline-stone-300/20 tw-text-xs sm:tw-text-sm"
               value={props.name}
               onChange={(e) => props.onNameChange?.(e.target.value)}
             />
@@ -87,7 +87,7 @@ export const TrafficLightWrapper: FC<TrafficLightProps> = (props) => {
           <Form.Select
             value={props.reference}
             onChange={(e) => props.onReferenceChange?.(e.target.value as TrafficLightReference)}
-            className="select-box-outline tw-border tw-border-solid tw-border-stone-300/20 tw-text-sm sm:tw-text-base"
+            className="select-box-outline tw-border tw-border-solid tw-border-stone-300/20 tw-text-xs sm:tw-text-sm"
             style={{width: "100%", maxWidth: "260px"}}
           >
             {Object.values(TrafficLightReference).map((v) => (

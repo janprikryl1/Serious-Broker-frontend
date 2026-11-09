@@ -11,7 +11,7 @@ import '@fortawesome/fontawesome-svg-core/styles.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import './styles/sass/style.scss';
 import {ErrorBoundary} from "react-error-boundary";
-import {ErrorFallback} from "./pages/ErrorFallback.tsx";
+import {ErrorFallback} from "./pages/errors/ErrorFallback.tsx";
 import {BrowserRouter} from "react-router-dom";
 import AutoScrollToTop from "./components/reusable/AutoScrollToTop.tsx";
 import { PostHogProvider } from '@posthog/react'

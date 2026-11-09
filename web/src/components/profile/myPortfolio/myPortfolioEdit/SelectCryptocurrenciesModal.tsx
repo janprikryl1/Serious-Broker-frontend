@@ -53,7 +53,6 @@ export const SelectCryptocurrenciesModal: FC<SelectCryptocurrenciesModalProps> =
     root: scrollContainer,
   });
 
-  // Načítanie fotografií a obchodovateľných mincí
   useEffect(() => {
     (async () => {
       try {
@@ -204,7 +203,10 @@ export const SelectCryptocurrenciesModal: FC<SelectCryptocurrenciesModalProps> =
       contentClassName="custom-modal"
       backdropClassName="custom-backdrop"
     >
-      <Modal.Header className="tw-flex tw-flex-col tw-items-start tw-border-0">
+      <Modal.Header
+        closeButton
+        className="tw-relative tw-flex tw-flex-col tw-items-start tw-border-0 tw-pr-10 [&_.btn-close]:!tw-absolute [&_.btn-close]:!tw-right-4 [&_.btn-close]:!tw-top-4 [&_.btn-close]:!tw-m-0"
+      >
         <Modal.Title>{t("Select multiple cryptocurrencies")}</Modal.Title>
         <div className="tw-mt-10 tw-flex tw-flex-col lg:tw-flex-row tw-gap-4 lg:tw-gap-16 tw-items-start lg:tw-items-center tw-w-full">
           <div className="tw-w-full sm:tw-max-w-xs">

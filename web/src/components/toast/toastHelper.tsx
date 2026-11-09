@@ -93,10 +93,10 @@ const ToastComponent = ({
       } ${config.bg} ${config.text}`}
     >
       {/* Toast content */}
-      <div className="tw-flex tw-items-center tw-justify-between tw-px-6 tw-py-2 tw-w-full">
-        <div className="tw-flex tw-items-center tw-gap-3 tw-mx-auto">
+      <div className="tw-flex tw-items-center tw-justify-between tw-px-3 sm:tw-px-6 tw-py-1 sm:tw-py-2 tw-w-full">
+        <div className="tw-flex tw-items-center tw-gap-2 sm:tw-gap-3 tw-mx-auto">
           {config.icon}
-          <span className="tw-font-medium tw-text-sm md:tw-text-base">
+          <span className="tw-font-medium tw-text-xs sm:tw-text-sm md:tw-text-base">
             {message}
           </span>
         </div>
@@ -107,7 +107,7 @@ const ToastComponent = ({
           onClick={() => toast.dismiss(t.id)}
           className="tw-bg-transparent tw-border-0 tw-text-current tw-opacity-100 hover:tw-opacity-70 tw-cursor-pointer tw-p-0"
         >
-          <BsX className="tw-text-3xl" />
+          <BsX className="tw-text-2xl sm:tw-text-3xl" />
         </button>
       </div>
 

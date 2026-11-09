@@ -29,6 +29,7 @@ export const TrafficLightFormModal: FC<any> = ({
       centered
       size={"xl"}
       scrollable
+      style={{ zIndex: 3001 }}
       contentClassName="custom-modal"
     >
       <Modal.Header closeButton className="tw-border-0">
@@ -86,5 +87,3 @@ export const TrafficLightFormModal: FC<any> = ({
     </Modal>
   );
 };
-
-
