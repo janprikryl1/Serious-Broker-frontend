@@ -17,9 +17,9 @@ type StackedSeries = { label: string; color: string; description: string; data: 
 
 const seriesMeta = [
     { label: "Base model", color: "#D15B5B", description: "Default parameters (Multiplier x3, Period 1y, Max drop 75%)" },
-    { label: "Multiplier: x10", color: "#6DB388", description: "Aggressive buying multiplier x10 during dips" },
-    { label: "Period: 3 years", color: "#5B89AD", description: "Extended observation period of 3 years" },
-    { label: "Max drop: 50%", color: "#9275A3", description: "Lower dip threshold for max investment (50%)" },
+    { label: "Multiplier x10", color: "#6DB388", description: "Aggressive buying multiplier x10 during dips" },
+    { label: "Period 3 years", color: "#5B89AD", description: "Extended observation period of 3 years" },
+    { label: "Max Drop 50%", color: "#9275A3", description: "Lower dip threshold for max investment (50%)" },
 ];
 
 export const BTFDGraph: FC<Props> = ({ graphData, datetimes }) => {
@@ -38,9 +38,9 @@ export const BTFDGraph: FC<Props> = ({ graphData, datetimes }) => {
         const toTime = (dt: string) => Math.floor(parseBackendUtc(dt).getTime() / 1000) as UTCTimestamp;
 
         return seriesMeta.map((meta, seriesIndex) => ({
-            label: meta.label,
+            label: t(meta.label),
             color: meta.color,
-            description: meta.description,
+            description: t(meta.description),
             data: datetimes.map((dt, pointIndex) => {
                 const hasValue = normalized.slice(0, seriesIndex + 1).some((s) => s[pointIndex] !== null && s[pointIndex] !== undefined);
                 if (!hasValue) return { time: toTime(dt) };
@@ -49,7 +49,7 @@ export const BTFDGraph: FC<Props> = ({ graphData, datetimes }) => {
                 return { time: toTime(dt), value };
             }),
         }));
-    }, [graphData, datetimes]);
+    }, [graphData, datetimes, t]);
 
     useEffect(() => {
         const container = chartHostRef.current;

@@ -15,7 +15,7 @@ Tento dokument mapuje strukturu a zodpovědnost jednotlivých stránek a kompone
 - `Article.tsx` — Detail konkrétního článku s komentáři a vícejazyčnou podporou.
 - `SearchArticles.tsx` — Výsledky vyhledávání v článcích.
 - `Glossary.tsx` — Slovník pojmů (kryptoměnová encyklopedie).
-- `CryptoCurrenciesList.tsx` — Tabulka a seznam kryptoměn s řazením a živými daty.
+- `SimpleCryptoCurrenciesList.tsx` — Tabulka a seznam kryptoměn s řazením a živými daty.
 - `CryptoCurrencyDetail.tsx` — Detail vybrané kryptoměny s grafy, statistikami a sentimentem.
 - `Demos.tsx`, `Demo.tsx` — Interaktivní simulace a dema strategií.
 - `CookiesInfo.tsx`, `GDPRInfo.tsx`, `CooperationInfo.tsx` — Informační a právní stránky.

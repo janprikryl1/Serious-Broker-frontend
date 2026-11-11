@@ -249,6 +249,43 @@
   min-width: 20px;
 }
 
+.indices-list-table {
+  .table-cell-name__index, .table-header-cell-name__index {
+    flex: 0 0 350px;
+    min-width: 350px;
+  }
+
+  .table-cell-coins__index, .table-header-cell-coins__index {
+    flex: 0 0 320px;
+    min-width: 320px;
+  }
+
+  .table-cell-change__index, .table-header-cell-change__index {
+    flex: 0 0 120px;
+    min-width: 120px;
+  }
+
+  .table-cell-created__index, .table-header-cell-created__index {
+    flex: 0 0 140px;
+    min-width: 140px;
+  }
+
+  .table-cell-to-date__index, .table-header-cell-to-date__index {
+    flex: 0 0 130px;
+    min-width: 130px;
+  }
+
+  .table-cell-status__index, .table-header-cell-status__index {
+    flex: 0 0 120px;
+    min-width: 120px;
+  }
+
+  .table-cell-watchlist__index, .table-header-cell-watchlist__index {
+    flex: 0 0 42px;
+    min-width: 42px;
+  }
+}
+
 .table-header-row,
 .table-row {
   min-width: max-content;
@@ -286,8 +323,10 @@
     margin-left: -7px;
     flex-shrink: 0;
     overflow: hidden;
+    border-radius: 50%;
     position: relative;
     outline: solid 1px var(--primary-color);
+    background-color: var(--white-color);
 
     @media (min-width: 576px) {
       width: 30px;
@@ -304,6 +343,7 @@
       height: 100%;
       object-fit: contain;
       display: block;
+      border-radius: 50%;
     }
 
     &::after {
@@ -476,6 +516,31 @@
 
   .table-cell-watchlist__index, .table-header-cell-watchlist__index {
     min-width: 42px;
+  }
+
+  .indices-list-table {
+    .table-cell-name__index, .table-header-cell-name__index {
+      flex-basis: 180px;
+      min-width: 180px;
+    }
+
+    .table-cell-coins__index, .table-header-cell-coins__index {
+      flex-basis: 240px;
+      min-width: 240px;
+    }
+
+    .table-cell-change__index, .table-header-cell-change__index,
+    .table-cell-created__index, .table-header-cell-created__index,
+    .table-cell-to-date__index, .table-header-cell-to-date__index,
+    .table-cell-status__index, .table-header-cell-status__index {
+      flex-basis: 105px;
+      min-width: 105px;
+    }
+
+    .table-cell-watchlist__index, .table-header-cell-watchlist__index {
+      flex-basis: 42px;
+      min-width: 42px;
+    }
   }
 
   .asset-table-expand-section {

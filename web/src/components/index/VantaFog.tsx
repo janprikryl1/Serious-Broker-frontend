@@ -21,7 +21,7 @@ export default function VantaFog() {
       gyroControls: false,
       minHeight: 200.00,
       minWidth: 200.00,
-      highlightColor: 0x695838, //C5A657
+      highlightColor: 0x514533,
       midtoneColor: 0x2C2523,
       lowlightColor: 0x2C2523,
       baseColor: 0x2C2523,

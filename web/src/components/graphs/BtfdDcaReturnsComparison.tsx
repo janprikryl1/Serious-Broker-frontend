@@ -10,7 +10,7 @@ import {timeZoneOptions} from "../../utils/functions/dateFunctions.ts";
 import Typography from "@mui/material/Typography";
 import Slider from "@mui/material/Slider";
 import {CardContainer} from "../reusable/CardContainer.tsx";
-import {Day} from "../../pages/graphs/CryptocurrencyDetails.tsx";
+import {Day} from "../../pages/assets/CryptocurrencyDetails.tsx";
 
 type Props = {
     asset_label: string;

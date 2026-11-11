@@ -31,7 +31,6 @@ export const SelectPortfolioModal: FC<SelectPortfolioModalProps> = ({
       <Modal.Header closeButton className="tw-border-0">
         <Modal.Title>{t("Select portfolio")}</Modal.Title>
       </Modal.Header>
-
       <Modal.Body className="tw-pb-4">
         <ExistingPortfoliosTable
           selectedAssetId={selectedAssetId}

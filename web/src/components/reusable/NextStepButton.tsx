@@ -75,7 +75,7 @@ export const NextStepButton: FC<Props> = ({
         };
 
     return (
-        <div style={alignmentStyle}>
+        <div className="tw-my-2 sm:tw-my-0" style={alignmentStyle}>
             {showLabel && (
                 <p className="tw-text-xs sm:tw-text-sm" style={{ color: "var(--gray-2-color)", marginBottom: "5px" }}>
                     {buttonDescription ?? (isNext ? t("Next Step") : t("Previous Step"))}

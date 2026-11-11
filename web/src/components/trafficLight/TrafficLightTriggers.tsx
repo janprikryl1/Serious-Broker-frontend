@@ -121,7 +121,7 @@ export const TrafficLightTriggers: FC<TriggersProps> = ({
                       <Form.Select
                         value={trigger.event}
                         onChange={(e) => onTriggerChange?.(index, "event", e.target.value)}
-                        className="select-box-outline w-100"
+                        className="select-box-outline w-100 tw-text-xs sm:tw-text-sm"
                         style={{ maxWidth: "200px" }}
                       >
                         {Object.values(Event).map((v) => <option key={v} value={v}>{t(v)}</option>)}
@@ -135,7 +135,7 @@ export const TrafficLightTriggers: FC<TriggersProps> = ({
                       <div className="d-flex align-items-center justify-content-end" style={{maxWidth: "120px"}}>
                         <input
                           type="number"
-                          className={`form-control outline-input text-end ${
+                          className={`form-control outline-input text-end tw-text-xs sm:tw-text-sm ${
                               percentageErrors[`${index}-eventByPercentage`]
                                   ? "tw-outline !tw-outline-red"
                                   : ""
@@ -160,7 +160,7 @@ export const TrafficLightTriggers: FC<TriggersProps> = ({
                   </div>
                 </div>
                 <div className="d-flex justify-content-between w-100 mt-1">
-                  <div className="gray-2-color-text small">{t("Event")}</div>
+                  <div className="gray-2-color-text small tw-text-xs sm:tw-text-sm">{t("Event")}</div>
                 </div>
               </div>
             </div>
@@ -181,7 +181,7 @@ export const TrafficLightTriggers: FC<TriggersProps> = ({
                       <Form.Select
                         value={trigger.action}
                         onChange={(e) => onTriggerChange?.(index, "action", e.target.value)}
-                        className="select-box-outline w-100"
+                        className="select-box-outline w-100 tw-text-xs sm:tw-text-sm"
                         style={{ maxWidth: "200px" }}
                       >
                         {Object.values(Action).map((v) => (
@@ -201,7 +201,7 @@ export const TrafficLightTriggers: FC<TriggersProps> = ({
                       <div className="d-flex align-items-center justify-content-end" style={{maxWidth: "120px"}}>
                         <input
                           type="number"
-                          className={`form-control outline-input text-end${
+                          className={`form-control outline-input text-end tw-text-xs sm:tw-text-sm${
                               percentageErrors[`${index}-actionByPercentage`]
                                   ? "tw-outline !tw-outline-red"
                                   : ""
@@ -226,7 +226,7 @@ export const TrafficLightTriggers: FC<TriggersProps> = ({
                   </div>
                 </div>
                 <div className="d-flex justify-content-between w-100 mt-1">
-                  <div className="gray-2-color-text small">{t("Action")}</div>
+                  <div className="gray-2-color-text small tw-text-xs sm:tw-text-sm">{t("Action")}</div>
                 </div>
               </div>
             </div>

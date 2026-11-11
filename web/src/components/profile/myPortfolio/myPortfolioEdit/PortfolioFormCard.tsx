@@ -61,7 +61,7 @@ export const PortfolioFormCard: FC<PortfolioFormCardProps> = ({
   return (
     <div className="tw-flex tw-flex-col tw-items-center lg:tw-items-start tw-w-full">
       <GlassCard
-        className="tw-mt-6 tw-mx-auto !tw-px-5 sm:!tw-p-6 tw-max-w-xl tw-min-w-[30rem]"
+        className="tw-mt-6 tw-mx-auto tw-w-full tw-min-w-0 sm:tw-min-w-[30rem] !tw-px-5 sm:!tw-p-6 tw-max-w-xl"
         bgColor={showValidationErrors ? "var(--red-color)" : "var(--true-black)"}
         opacity={showValidationErrors ? 0.2 : 0.1}
       >

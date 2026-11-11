@@ -13,7 +13,7 @@ import coinsSingleOutline from "../icons/coins/coins_single_outline.svg";
 import Freecurrencyapi from '@everapi/freecurrencyapi-js';
 
 export const domain = "https://serious.broker";
-export const PROTECTED_ROUTES = ['/admin', '/profile', '/graphs', '/editor'];
+export const PROTECTED_ROUTES = ['/admin', '/profile', '/assets', '/editor'];
 export const pageLimit = 9;
 export const imageURL = "https://api.serious.broker/article/images/";
 export const coinURL = "https://api.serious.broker/cryptocurrency_list/images/";
@@ -45,15 +45,15 @@ export const routes = {
     assetGraphDetail: "assetGraphCurrencyDetail/asset_graph/detail",
     // : "/asset_graph/detail/:index_label",
     assetGraph: "/asset_graph/:name",
-    recommendation: "/graphs/recommendation",
+    recommendation: "/assets/recommendation",
     dictionary: "/dictionary",
     cryptocurrenciesList: "/cryptocurrencies_list",
     cryptocurrencyDetailURL: "/cryptocurrency_detail/",
     cryptocurrencyDetail: "/cryptocurrency_detail/:id",
-    graphsRecommendationDetailURL: "/graphs/recommendation/detail/",
-    graphsRecommendationDetail: "/graphs/recommendation/detail/:asset_label",
+    graphsRecommendationDetailURL: "/assets/recommendation/detail/",
+    graphsRecommendationDetail: "/assets/recommendation/detail/:asset_label",
     cryptoCalculator: "/calculator",
-    BTFD: "/graphs/BTFD",
+    BTFD: "/assets/BTFD",
     signIn: "/sign_in",
     register: "/register",
     profile: {
@@ -205,7 +205,7 @@ export const registeredUserNavbarURLs: NavbarURLs = {
             cryptocurrencies: { title: "Cryptocurrencies",
                 link: routes.recommendation,
                 icon: createElement("span", {
-                    className: "tw-inline-block tw-h-4 tw-w-4 tw-items-center tw-align-middle tw-bg-current",
+                    className: "tw-inline-block tw-w-3.5 tw-h-3.5 tw-items-center tw-align-middle tw-bg-current",
                     style: {
                         maskImage: `url(${coinsSingleOutline})`,
                         WebkitMaskImage: `url(${coinsSingleOutline})`,

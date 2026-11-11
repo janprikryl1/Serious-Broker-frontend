@@ -60,13 +60,6 @@ export const GrowthPotentialSlider: FC = () => {
         fetchData();
     }, []);
 
-    useEffect(() => {
-        if (!duplicatedData) return;
-
-        console.log("Počet performerov v duplicatedData:", duplicatedData.performers?.length ?? 0);
-        console.log("Obsah duplicatedData:", duplicatedData);
-    }, [duplicatedData]);
-
     return (
         <section className="tw-relative tw-w-full tw-overflow-hidden tw-pt-10 sm:tw-pt-14 lg:tw-pt-16">
             <div className="container tw-mb-6 tw-mt-6 tw-px-4 sm:tw-mb-8 sm:tw-mt-8 sm:tw-px-6">
