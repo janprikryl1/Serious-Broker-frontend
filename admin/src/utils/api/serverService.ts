@@ -1,5 +1,7 @@
 import { api } from "@/utils/api/axiosInstance.ts"
 import type {
+  DataValidationParams,
+  DataValidationResponse,
   ErrorLogParams,
   ErrorLogResponse,
   ServerInfoResponse,
@@ -27,5 +29,15 @@ export const getErrorLog = async (
 
 export const clearErrorLog = async (): Promise<{ message: string }> => {
   const res = await api.post<{ message: string }>("server/clear_error_log.php")
+  return res.data
+}
+
+export const getDataValidation = async (
+  params: DataValidationParams = {}
+): Promise<DataValidationResponse> => {
+  const res = await api.get<DataValidationResponse>(
+    "server/get_data_validation.php",
+    { params: { days: params.days ?? 30, status: params.status ?? "all" } }
+  )
   return res.data
 }

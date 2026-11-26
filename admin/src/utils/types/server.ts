@@ -172,3 +172,65 @@ export type ServerInfoResponse = {
   paths: PathEntry[]
   errorLog: ErrorLogSummary
 }
+
+/** Druh kontroly ve validaci dat (viz server/data_validation_config.php). */
+export type DataValidationCheckType =
+  "sync_log" | "freshness" | "daily_coverage" | "min_rows" | "connection"
+
+export type DataValidationCheck = {
+  type: DataValidationCheckType
+  name: string
+  ok: boolean
+  message: string
+}
+
+export type DataValidationRun = {
+  id: number
+  /** Čas v časové zóně serveru. */
+  checkedAt: string
+  ageHours: number
+  status: "ok" | "error"
+  failed: number
+  total: number
+  /** null = e-mail nebyl potřeba, false = odeslání selhalo. */
+  emailSent: boolean | null
+  testEmail: boolean
+  source: "cli" | "http"
+  durationMs: number | null
+  checks: DataValidationCheck[]
+}
+
+export type DataValidationCheckStat = {
+  name: string
+  type: DataValidationCheckType
+  runs: number
+  failed: number
+  lastFailedAt: string | null
+}
+
+export type DataValidationResponse = {
+  generatedAt: string
+  /** false = migrace tabulek z docs/migrations ještě neproběhla. */
+  tableExists: boolean
+  days: number
+  latest: DataValidationRun | null
+  latestAgeHours: number | null
+  /** Validace sama neběžela déle než staleAfterHours. */
+  stale: boolean
+  staleAfterHours: number
+  summary: {
+    runs: number
+    ok: number
+    error: number
+    emailsSent: number
+    emailsFailed: number
+  }
+  checkNames: string[]
+  checkStats: DataValidationCheckStat[]
+  runs: DataValidationRun[]
+}
+
+export type DataValidationParams = {
+  days?: number
+  status?: "all" | "ok" | "error"
+}

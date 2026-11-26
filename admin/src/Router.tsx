@@ -99,6 +99,11 @@ const ServerErrorLog = lazy(() =>
     default: m.ServerErrorLog,
   }))
 )
+const ServerDataValidation = lazy(() =>
+  import("@/pages/ServerDataValidation.tsx").then((m) => ({
+    default: m.ServerDataValidation,
+  }))
+)
 const NotFound = lazy(() =>
   import("@/pages/NotFound.tsx").then((m) => ({ default: m.NotFound }))
 )
@@ -295,6 +300,14 @@ export const Router: FC = () => {
           element={
             <Suspense fallback={<PageLoader />}>
               <ServerErrorLog />
+            </Suspense>
+          }
+        />
+        <Route
+          path={`/${routes.serverDataValidation}`}
+          element={
+            <Suspense fallback={<PageLoader />}>
+              <ServerDataValidation />
             </Suspense>
           }
         />

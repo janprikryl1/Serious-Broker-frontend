@@ -16,6 +16,7 @@ import {
   HardDrive,
   ServerCog,
   Activity,
+  ShieldCheck,
 } from "lucide-react"
 import type { NavigationEntry, NavRoute } from "@/utils/types/Route.ts"
 
@@ -48,13 +49,14 @@ export const routes = {
   formEvaulationSettings: "form_evaulation_settings",
   serverInfo: "server_info",
   serverLog: "server_log",
+  serverDataValidation: "server_data_validation",
 } as const
 
 /*
  * Struktura menu:
  * - Uživatelé: Přehled uživatelských dat, Achievementy, Newsletter
  * - Databáze: Nastavení coinů, Binance index, Generická data, Cache, Log
- * - Server: Info o serveru, Error log
+ * - Server: Info o serveru, Error log, Kontrola dat
  * - Zbytek samostatně: Přehled, Slovník, Dema, Formuláře, Feedback, QR kódy
  */
 export const navigationStructure: NavigationEntry[] = [
@@ -144,6 +146,12 @@ export const navigationStructure: NavigationEntry[] = [
         path: routes.serverLog,
         label: "Error log",
         icon: ScrollText,
+        migrated: true,
+      },
+      {
+        path: routes.serverDataValidation,
+        label: "Kontrola dat",
+        icon: ShieldCheck,
         migrated: true,
       },
     ],
