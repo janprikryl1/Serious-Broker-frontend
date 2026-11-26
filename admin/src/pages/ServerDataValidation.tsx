@@ -1,4 +1,4 @@
-import { useMemo, useState, type FC } from "react"
+import { useLayoutEffect, useMemo, useRef, useState, type FC } from "react"
 import { useQuery } from "@tanstack/react-query"
 import {
   AlertTriangle,
@@ -46,6 +46,14 @@ type StatusFilter = (typeof STATUS_OPTIONS)[number]["value"]
 /** Maximum sloupců v matici — víc se na šířku stránky rozumně nevejde. */
 const MATRIX_MAX_RUNS = 45
 
+/**
+ * Token `--destructive` je v dark modu tmavě červený (pozadí tlačítek), jako
+ * barva textu na tmavém pozadí skoro není čitelný. Chybové texty proto v dark
+ * modu zesvětlujeme stejně jako barevné úrovně v ServerErrorLog.
+ */
+const ERROR_TEXT = "text-destructive dark:text-red-400"
+const ERROR_FILL = "bg-destructive dark:bg-red-500"
+
 const TYPE_LABELS: Record<DataValidationCheckType, string> = {
   sync_log: "Migrace",
   freshness: "Aktuálnost",
@@ -85,7 +93,10 @@ const StatusBadge: FC<{ status: DataValidationRun["status"] }> = ({
       OK
     </Badge>
   ) : (
-    <Badge variant="ghost" className="h-5 bg-destructive/10 text-destructive">
+    <Badge
+      variant="ghost"
+      className={cn("h-5 bg-destructive/10 dark:bg-red-400/10", ERROR_TEXT)}
+    >
       Chyba
     </Badge>
   )
@@ -98,7 +109,7 @@ const EmailState: FC<{ run: DataValidationRun }> = ({ run }) => {
       {run.testEmail ? "Testovací e-mail" : "E-mail odeslán"}
     </span>
   ) : (
-    <span className="flex items-center gap-1 text-xs text-destructive">
+    <span className={cn("flex items-center gap-1 text-xs", ERROR_TEXT)}>
       <MailX className="size-3.5" />
       E-mail se nepodařilo odeslat
     </span>
@@ -110,13 +121,19 @@ const CheckLine: FC<{ check: DataValidationCheck }> = ({ check }) => (
     {check.ok ? (
       <CheckCircle2 className="mt-0.5 size-4 shrink-0 text-emerald-600 dark:text-emerald-400" />
     ) : (
-      <XCircle className="mt-0.5 size-4 shrink-0 text-destructive" />
+      <XCircle className={cn("mt-0.5 size-4 shrink-0", ERROR_TEXT)} />
     )}
     <div className="min-w-0">
-      <p className={cn("text-sm font-medium", !check.ok && "text-destructive")}>
+      {/* Názvy tabulek nemají mezery — bez wrap-anywhere by na mobilu přetekly. */}
+      <p
+        className={cn(
+          "text-sm font-medium wrap-anywhere",
+          !check.ok && ERROR_TEXT
+        )}
+      >
         {check.name}
       </p>
-      <p className="text-xs break-words text-muted-foreground">
+      <p className="text-xs wrap-anywhere text-muted-foreground">
         {check.message}
       </p>
     </div>
@@ -169,7 +186,7 @@ const RunRow: FC<{ run: DataValidationRun; defaultOpen?: boolean }> = ({
             </div>
           )}
           {passedChecks.length > 0 && (
-            <div className="grid gap-x-6 px-3 md:grid-cols-2">
+            <div className="grid grid-cols-1 gap-x-6 px-3 md:grid-cols-2">
               {passedChecks.map((check) => (
                 <CheckLine key={check.name} check={check} />
               ))}
@@ -203,14 +220,27 @@ const CheckMatrix: FC<{ data: DataValidationResponse }> = ({ data }) => {
     return map
   }, [runs])
 
+  // Nejnovější dny jsou vpravo — když matice přeteče, musí být vidět ony,
+  // ne začátek okna před měsícem.
+  const scrollRef = useRef<HTMLDivElement>(null)
+  useLayoutEffect(() => {
+    const el = scrollRef.current
+    if (el && runs.length > 0) el.scrollLeft = el.scrollWidth
+  }, [runs])
+
   if (runs.length === 0) return null
 
   return (
-    <div className="overflow-x-auto rounded-lg border border-border bg-card">
-      <table className="w-max min-w-full border-collapse text-xs">
+    <div
+      ref={scrollRef}
+      className="overflow-x-auto rounded-lg border border-border bg-card"
+    >
+      {/* border-separate: u border-collapse patří okraje tabulce, ne buňce,
+          a okraj sticky sloupce by při scrollu ujížděl s ostatními. */}
+      <table className="w-max min-w-full border-separate border-spacing-0 text-xs">
         <thead>
           <tr>
-            <th className="sticky left-0 z-10 bg-card px-3 py-2 text-left font-medium text-muted-foreground">
+            <th className="sticky left-0 z-10 border-r border-border/60 bg-card px-3 py-2 text-left align-bottom font-medium text-muted-foreground">
               Kontrola
             </th>
             {runs.map((run) => (
@@ -227,8 +257,11 @@ const CheckMatrix: FC<{ data: DataValidationResponse }> = ({ data }) => {
         </thead>
         <tbody>
           {data.checkNames.map((name) => (
-            <tr key={name} className="border-t border-border/60">
-              <td className="sticky left-0 z-10 max-w-[22rem] truncate bg-card px-3 py-1.5 font-mono">
+            <tr key={name}>
+              <td
+                title={name}
+                className="sticky left-0 z-10 max-w-[9rem] truncate border-t border-r border-border/60 bg-card px-3 py-1.5 font-mono sm:max-w-[22rem]"
+              >
                 {name}
               </td>
               {runs.map((run) => {
@@ -239,12 +272,15 @@ const CheckMatrix: FC<{ data: DataValidationResponse }> = ({ data }) => {
                       "mx-auto size-5 rounded-sm",
                       !check && "bg-muted",
                       check?.ok && "bg-emerald-500/70 dark:bg-emerald-400/60",
-                      check && !check.ok && "bg-destructive"
+                      check && !check.ok && ERROR_FILL
                     )}
                   />
                 )
                 return (
-                  <td key={run.id} className="px-0.5 py-1">
+                  <td
+                    key={run.id}
+                    className="border-t border-border/60 px-0.5 py-1"
+                  >
                     {check ? (
                       <Tooltip
                         content={`${formatDateTime(run.checkedAt)} — ${check.message}`}
@@ -315,7 +351,7 @@ export const ServerDataValidation: FC = () => {
             value={String(days)}
             onValueChange={(value) => setDays(Number(value))}
           >
-            <SelectTrigger className="w-36">
+            <SelectTrigger className="w-44">
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
@@ -339,7 +375,7 @@ export const ServerDataValidation: FC = () => {
       </header>
 
       {isError && (
-        <p className="text-sm text-destructive">
+        <p className={cn("text-sm", ERROR_TEXT)}>
           Historii kontrol se nepodařilo načíst.
         </p>
       )}
@@ -363,15 +399,17 @@ export const ServerDataValidation: FC = () => {
 
       {data?.tableExists && data.stale && (
         <div className="flex gap-3 rounded-lg border border-destructive/40 bg-destructive/5 p-4 text-sm">
-          <AlertTriangle className="mt-0.5 size-5 shrink-0 text-destructive" />
+          <AlertTriangle className={cn("mt-0.5 size-5 shrink-0", ERROR_TEXT)} />
           <div>
-            <p className="font-medium text-destructive">
-              Validace neběžela víc než {data.staleAfterHours} h
+            <p className={cn("font-medium", ERROR_TEXT)}>
+              {latest
+                ? `Validace neběžela víc než ${data.staleAfterHours} h`
+                : "Validace zatím neuložila žádný běh"}
             </p>
             <p className="text-muted-foreground">
               {latest
                 ? `Poslední běh ${latest.checkedAt}. Zkontroluj cron, který volá validate_data.php.`
-                : "Zatím se neuložil žádný běh. Zkontroluj, že cron volá validate_data.php (bez dry_run)."}
+                : "Zkontroluj, že cron volá validate_data.php (bez dry_run)."}
             </p>
           </div>
         </div>
@@ -416,7 +454,9 @@ export const ServerDataValidation: FC = () => {
                 {successRate === null ? "—" : `${successRate} %`}
               </p>
               <p className="text-xs text-muted-foreground">
-                {summary?.ok ?? 0} z {summary?.runs ?? 0} běhů za {days} dní
+                {summary?.runs
+                  ? `${summary.ok} z ${summary.runs} běhů za ${days} dní`
+                  : `Za ${days} dní žádný běh`}
               </p>
             </>
           )}
@@ -425,7 +465,7 @@ export const ServerDataValidation: FC = () => {
         <div className="rounded-lg border border-border bg-card p-4">
           <div className="flex items-center justify-between gap-2">
             <p className="text-sm text-muted-foreground">Běhy s chybou</p>
-            <XCircle className="size-4 text-destructive" />
+            <XCircle className={cn("size-4", ERROR_TEXT)} />
           </div>
           {isPending ? (
             <Skeleton className="mt-2 h-7 w-16" />
@@ -447,7 +487,7 @@ export const ServerDataValidation: FC = () => {
                 {summary?.emailsSent ?? 0}
               </p>
               {(summary?.emailsFailed ?? 0) > 0 && (
-                <p className="text-xs text-destructive">
+                <p className={cn("text-xs", ERROR_TEXT)}>
                   {summary?.emailsFailed} se nepodařilo odeslat
                 </p>
               )}
@@ -467,7 +507,7 @@ export const ServerDataValidation: FC = () => {
                 OK
               </span>
               <span className="flex items-center gap-1">
-                <span className="size-3 rounded-sm bg-destructive" />
+                <span className={cn("size-3 rounded-sm", ERROR_FILL)} />
                 Selhalo
               </span>
               <span className="flex items-center gap-1">
@@ -486,24 +526,31 @@ export const ServerDataValidation: FC = () => {
           <h2 className="text-lg font-semibold">Nejčastější problémy</h2>
           <div className="rounded-lg border border-border bg-card">
             {failingChecks.map((stat) => (
+              // Desktop: pevné sloupce typ | název | počet | datum, ať se čte
+              // odshora dolů. Mobil: typ a počet nahoře, název přes celou šířku.
               <div
                 key={stat.name}
-                className="flex flex-wrap items-center gap-x-4 gap-y-1 border-b border-border px-4 py-2.5 last:border-b-0"
+                className="grid grid-cols-[1fr_auto] items-center gap-x-4 gap-y-1 border-b border-border px-4 py-2.5 last:border-b-0 sm:grid-cols-[6rem_1fr_auto_9rem]"
               >
-                <Badge variant="ghost" className="h-5 bg-muted">
+                <Badge
+                  variant="ghost"
+                  className="col-start-1 row-start-1 h-5 bg-muted sm:w-full sm:justify-center"
+                >
                   {TYPE_LABELS[stat.type] ?? stat.type}
                 </Badge>
-                <span className="font-mono text-sm">{stat.name}</span>
-                <span className="ml-auto text-sm">
-                  <span className="font-semibold text-destructive">
+                <p className="col-span-2 font-mono text-sm wrap-anywhere sm:col-span-1 sm:col-start-2 sm:row-start-1">
+                  {stat.name}
+                </p>
+                <p className="col-start-2 row-start-1 text-right text-sm tabular-nums sm:col-start-3">
+                  <span className={cn("font-semibold", ERROR_TEXT)}>
                     {stat.failed}×
                   </span>
                   <span className="text-muted-foreground"> z {stat.runs}</span>
-                </span>
+                </p>
                 {stat.lastFailedAt && (
-                  <span className="text-xs text-muted-foreground">
+                  <p className="col-span-2 text-xs text-muted-foreground tabular-nums sm:col-span-1 sm:col-start-4 sm:row-start-1 sm:text-right">
                     naposledy {formatDateTime(stat.lastFailedAt)}
-                  </span>
+                  </p>
                 )}
               </div>
             ))}
